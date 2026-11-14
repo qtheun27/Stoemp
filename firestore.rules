@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function household(hid) { return get(/databases/$(database)/documents/households/$(hid)).data; }
+    function isMember(hid) { return signedIn() && household(hid).members[request.auth.uid] in ['admin', 'member']; }
+    function isAdmin(hid) { return signedIn() && household(hid).members[request.auth.uid] == 'admin'; }
+
+    // Catalogue, prix et recettes de base : partagés, lecture seule côté client (écrits par les Functions et le robot).
+    match /items/{id} { allow read: if signedIn(); allow write: if false; }
+    match /prices/{id} { allow read: if signedIn(); allow write: if false; }
+    match /priceHistory/{id} { allow read: if signedIn(); allow write: if false; }
+
+    // Recettes : base (householdId nul) en lecture ; plats perso et IA lisibles/modifiables par les membres du foyer.
+    match /recipes/{id} {
+      allow read: if signedIn() && (resource.data.get('householdId', null) == null || isMember(resource.data.householdId));
+      allow create: if signedIn() && request.resource.data.source == 'perso' && isMember(request.resource.data.householdId);
+      allow update: if signedIn() && resource.data.get('householdId', null) != null && isMember(resource.data.householdId)
+                    && request.resource.data.householdId == resource.data.householdId;
+      allow delete: if false;
+    }
+
+    match /users/{uid} { allow read, write: if signedIn() && request.auth.uid == uid; }
+
+    match /households/{hid} {
+      allow read: if isMember(hid);
+      // Création : le créateur est le seul membre, en tant qu'admin.
+      allow create: if signedIn() && request.resource.data.members.keys().hasOnly([request.auth.uid])
+                    && request.resource.data.members[request.auth.uid] == 'admin';
+      // L'admin gère membres et nom ; un membre peut seulement se retirer lui-même.
+      allow update: if isAdmin(hid) || (isMember(hid)
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['members', 'memberNames'])
+                    && !(request.auth.uid in request.resource.data.members));
+      allow delete: if isAdmin(hid);
+
+      // Réglages : l'admin modifie tout ; les membres, les options de génération et le nombre de personnes.
+      match /meta/settings {
+        allow read: if isMember(hid);
+        allow create: if isAdmin(hid);
+        allow update: if isAdmin(hid) || (isMember(hid)
+                      && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['options', 'persons', 'mealsPerDay', 'mineN']));
+      }
+      match /{sub}/{doc} {
+        allow read, write: if isMember(hid) && !(sub == 'meta' && doc == 'settings');
+      }
+    }
+    // Invitations, cache IA, files d'attente du robot : réservés aux Functions.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

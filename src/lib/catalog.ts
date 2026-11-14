@@ -1,0 +1,101 @@
+import { CATALOG_RAW } from "../data/catalog-raw";
+import { RECIPES_RAW } from "../data/recipes-raw";
+import type { Allergen, Cat, Ingredient, Item, Recipe, Season, Unit } from "./types";
+import { keyOf, norm, slug } from "./text";
+
+function months(s: string): number[] {
+  if (!s) return [];
+  const out = new Set<number>();
+  for (const part of s.split(",")) {
+    const [a, b] = part.split("-").map(Number);
+    if (!b) { out.add(a); continue; }
+    for (let m = a; ; m = (m % 12) + 1) { out.add(m); if (m === b) break; }
+  }
+  return [...out].sort((x, y) => x - y);
+}
+
+export function parseCatalog(raw = CATALOG_RAW): Item[] {
+  return raw.trim().split("\n").filter((l) => l.includes("|")).map((line) => {
+    const [name, cat, unit, pack, price, flags, shelf, alg, aliases, mon] = line.split("|");
+    return {
+      id: slug(name),
+      name,
+      aliases: aliases ? aliases.split(",").map((a) => a.trim()).filter(Boolean) : [],
+      category: cat as Cat,
+      unit: unit as Unit,
+      packSize: Number(pack),
+      demoPrice: Number(price),
+      local: flags.includes("L"),
+      organicAvailable: flags.includes("B"),
+      perishable: flags.includes("P"),
+      staple: flags.includes("S"),
+      common: flags.includes("C"),
+      shelfLifeDays: Number(shelf) || (flags.includes("P") ? 7 : 365),
+      allergens: (alg ? alg.split(",") : []) as Allergen[],
+      seasonMonths: months(mon || ""),
+      source: "base" as const,
+    };
+  });
+}
+
+/** Index de recherche nom/alias → article. */
+export class ItemIndex {
+  byId = new Map<string, Item>();
+  byKey = new Map<string, Item>();
+  constructor(items: Item[]) { items.forEach((i) => this.add(i)); }
+  add(i: Item) {
+    this.byId.set(i.id, i);
+    for (const n of [i.name, ...i.aliases]) { const k = keyOf(n); if (!this.byKey.has(k)) this.byKey.set(k, i); }
+  }
+  get(id: string) { return this.byId.get(id); }
+  /** Correspondance exacte (nom ou alias, pluriels tolérés), puis inclusion d'un nom connu. */
+  find(text: string): Item | undefined {
+    const k = keyOf(text);
+    const exact = this.byKey.get(k);
+    if (exact) return exact;
+    let best: Item | undefined, bestLen = 0;
+    for (const [key, item] of this.byKey) {
+      if (key.length >= 4 && key.length > bestLen && (` ${k} `).includes(` ${key} `)) { best = item; bestLen = key.length; }
+    }
+    return best;
+  }
+  all() { return [...this.byId.values()]; }
+}
+
+const SEASON_CODES: Season[] = ["P", "E", "A", "H"];
+
+function parseIng(s: string, idx: ItemIndex): Ingredient {
+  const [name, q] = s.split(":");
+  const item = idx.find(name);
+  if (!item) throw new Error(`Article inconnu dans une recette : ${name}`);
+  const m = q.match(/^([\d.]+)([a-z]*)$/)!;
+  const qty = Number(m[1]);
+  const u = m[2];
+  if (u === "cs" || u === "cc") return { itemId: item.id, qtyPerPerson: qty, spoon: u };
+  return { itemId: item.id, qtyPerPerson: qty };
+}
+
+export function parseBaseRecipes(idx: ItemIndex): Recipe[] {
+  return RECIPES_RAW.map(([name, s, t, ing, meat, veg, vegName, steps]) => ({
+    id: "base-" + slug(name),
+    name,
+    vegName: meat.length ? vegName : null,
+    seasons: s === "T" ? SEASON_CODES : (s.split("") as Season[]),
+    prepMin: t,
+    ingredients: ing.map((x) => parseIng(x, idx)),
+    meat: meat.map((x) => parseIng(x, idx)),
+    vegSwap: veg.map((x) => parseIng(x, idx)),
+    steps: steps.split("|"),
+    source: "base" as const,
+  }));
+}
+
+export const BASE_ITEMS = parseCatalog();
+export const BASE_INDEX = new ItemIndex(BASE_ITEMS);
+export const BASE_RECIPES = parseBaseRecipes(BASE_INDEX);
+
+export const isVegRecipe = (r: Recipe) => r.meat.length === 0;
+export const ingredientsOf = (r: Recipe, veg: boolean): Ingredient[] =>
+  r.ingredients.concat(isVegRecipe(r) ? [] : veg ? r.vegSwap : r.meat);
+export const nameOf = (r: Recipe, veg: boolean) => (veg && !isVegRecipe(r) && r.vegName ? r.vegName : r.name);
+export const matchesWord = (text: string, word: string) => norm(text).includes(norm(word));
