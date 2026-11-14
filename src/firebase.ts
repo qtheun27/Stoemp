@@ -4,13 +4,16 @@ import { connectFirestoreEmulator, initializeFirestore, memoryLocalCache, persis
 import { connectFunctionsEmulator, getFunctions, httpsCallable } from "firebase/functions";
 
 // Configuration web Firebase : publique par nature (la sécurité repose sur les règles Firestore).
+const AUTH_HOST = "stoemp-app.firebaseapp.com";
 const host = typeof location !== "undefined" ? location.hostname : "";
-const onFirebaseHosting = /\.(web\.app|firebaseapp\.com)$/.test(host);
+// Adresse unique : stoemp-app.web.app renvoie vers stoemp-app.firebaseapp.com, le domaine autorisé par la connexion Google.
+if (host === "stoemp-app.web.app") location.replace(`https://${AUTH_HOST}${location.pathname}${location.search}${location.hash}`);
+/** Même domaine que la connexion : la redirection Google fonctionne aussi dans la PWA installée sur iPhone. */
+const onFirebaseHosting = host === AUTH_HOST;
 
 export const app = initializeApp({
   apiKey: "AIzaSyCsDYee9NACugZSH5U-YsIbyxAFuesennM",
-  // Sur Firebase Hosting, même domaine que l'appli : la connexion par redirection fonctionne aussi dans la PWA iPhone.
-  authDomain: onFirebaseHosting ? host : "stoemp-app.firebaseapp.com",
+  authDomain: AUTH_HOST,
   projectId: "stoemp-app",
   storageBucket: "stoemp-app.firebasestorage.app",
   messagingSenderId: "187935869834",

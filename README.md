@@ -2,7 +2,7 @@
 
 Repas de saison de la semaine, liste de courses avec les prix réels des magasins, stock de la maison et prédiction des rachats — pour plusieurs foyers.
 
-- **Appli** : https://stoemp-app.web.app (recommandé pour l'installer sur iPhone) · GitHub Pages : https://qtheun27.github.io/Stoemp/
+- **Appli** : https://stoemp-app.firebaseapp.com (recommandé pour l'installer sur iPhone ; stoemp-app.web.app y renvoie) · GitHub Pages : https://qtheun27.github.io/Stoemp/
 - PWA installable, hors ligne avec les dernières données, mode sombre, mise en page mobile / tablette / ordinateur.
 
 ## Fonctionnalités
