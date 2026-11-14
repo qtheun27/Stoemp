@@ -1,4 +1,4 @@
-import { newPage, pause } from "../browser.js";
+import { donePage, newPage, pause } from "../browser.js";
 import { isOrganic, norm, parsePack, perKilo, parsePrice } from "../parse.js";
 import type { Connector, Product } from "../types.js";
 
@@ -48,7 +48,7 @@ export function renmans(): Connector {
       const seen = new Set<string>();
       catalog = out.filter((p) => !seen.has(p.name + p.price) && seen.add(p.name + p.price));
       return out;
-    } finally { await page.context().close(); }
+    } finally { await donePage(page); }
   }
   return {
     store: "renmans",

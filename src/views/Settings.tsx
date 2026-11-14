@@ -102,7 +102,7 @@ export default function Settings() {
                   <li>Dans Safari, ajoute cette page aux signets, puis modifie le signet : nom « Envoyer à Stoemp », et colle le code à la place de l'adresse.</li>
                   <li>Sur colruyt.be, ouvre les signets et touche « Envoyer à Stoemp ».</li>
                 </ol></details>
-              <p className="small muted">Autres sources : photo des tickets de caisse (onglet Courses ou Stock) et base ouverte Open Prices. Les prix ne sont jamais publiés.</p>
+              <p className="small muted">Autres sources : photo des tickets de caisse (onglet Courses ou Stock) et robot Colruyt sur ton ordinateur, chaque dimanche. Les prix ne sont jamais publiés.</p>
             </div>
 
             <div className="card">
