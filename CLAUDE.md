@@ -31,3 +31,10 @@ Appli PWA « Stoemp » : repas de saison de la semaine, liste de courses avec pr
 - `VITE_EMULATORS=1 npm run dev` + `firebase emulators:start --only auth,firestore` pour tester sans toucher aux données réelles.
 - `firebase deploy --only functions` (après `firebase functions:secrets:set ANTHROPIC_API_KEY`).
 - `npm --prefix scraper run prix -- renmans colruyt` : robot de prix en local.
+
+## Console d'administration (`#/admin`)
+- Réservée aux comptes portant la marque `superAdmin` (jamais d'adresse e-mail dans le code : le dépôt est public).
+  Donner l'accès : `npx tsx scripts/super-admin.mts <e-mail>` (le compte doit s'être connecté une fois), ou depuis l'onglet Utilisateurs.
+- `config/app` : modules activables, maintenance, annonce, part IA de la semaine, fraîcheur des prix, réglages d'un nouveau foyer (lu en direct par l'appli).
+- `config/ai` : modèle, effort, jetons max et activation par fonction IA, budget mensuel ; liste des modèles lue en direct via l'API Models d'Anthropic. Les Functions relisent ce document toutes les 30 s.
+- `aiLogs` : journal des appels IA (jetons, coût estimé, durée, erreurs) pour le tableau de bord et le plafond de budget.

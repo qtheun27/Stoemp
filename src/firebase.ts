@@ -26,5 +26,16 @@ if (EMU) {
   connectFirestoreEmulator(db, "127.0.0.1", 8080);
   connectFunctionsEmulator(functions, "127.0.0.1", 5001);
 }
-export const call = <I, O>(name: string) => async (data: I): Promise<O> => (await httpsCallable<I, O>(functions, name, { timeout: 300_000 })(data)).data;
+/** Appel d'une Cloud Function, avec des messages d'erreur lisibles. */
+export const call = <I, O>(name: string) => async (data: I): Promise<O> => {
+  try { return (await httpsCallable<I, O>(functions, name, { timeout: 300_000 })(data)).data; }
+  catch (e) {
+    const err = e as { code?: string; message?: string };
+    const code = (err.code || "").replace("functions/", "");
+    if (code === "internal" && (!err.message || err.message === "internal")) throw new Error("Service momentanément indisponible. Réessaie dans un instant.");
+    if (code === "not-found" && err.message === "not-found") throw new Error("Fonction pas encore déployée.");
+    if (code === "unavailable" || code === "deadline-exceeded") throw new Error("Pas de réponse du serveur : vérifie ta connexion.");
+    throw new Error(err.message || "Une erreur est survenue");
+  }
+};
 export { onFirebaseHosting };

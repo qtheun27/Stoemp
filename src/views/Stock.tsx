@@ -38,7 +38,7 @@ export default function Stock() {
   return (
     <>
       <TopBar title="Stock" sub={`${rows.filter((r) => r.e.qty > 0).length} articles à la maison`}>
-        <button className="ib" onClick={() => setReceipt(true)} aria-label="Scanner un ticket"><Camera size={20} /></button>
+        {s.app.features.receipt && <button className="ib" onClick={() => setReceipt(true)} aria-label="Scanner un ticket"><Camera size={20} /></button>}
         <button className="ib" onClick={() => setAdding(true)} aria-label="Ajouter au stock"><Plus size={20} /></button>
       </TopBar>
       <div className="content wide">

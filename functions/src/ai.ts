@@ -5,40 +5,58 @@ import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { HttpsError } from "firebase-functions/v2/https";
 import { logger } from "firebase-functions";
 import type { z } from "zod";
-
-/** Modèle rapide (rangement, correspondances) et modèle plus capable (recettes, tickets). */
-export const FAST = "claude-haiku-5-5";
-export const SMART = "claude-opus-5-5";
+import { aiConfig, costOf, supportsEffort, supportsFallback, type Task } from "./config";
 
 let client: Anthropic | null = null;
-const anthropic = () => (client ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 2 }));
+export const anthropic = () => (client ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 2 }));
 
 type Content = Anthropic.MessageParam["content"];
 
+/** Dépense IA estimée du mois en cours (somme du journal aiLogs). */
+async function monthSpend(): Promise<number> {
+  const d = new Date();
+  const start = new Date(d.getFullYear(), d.getMonth(), 1).getTime();
+  const snap = await getFirestore().collection("aiLogs").where("at", ">=", start).select("cost").get();
+  return snap.docs.reduce((s, x) => s + (x.get("cost") || 0), 0);
+}
+let spendCache: { at: number; v: number } | null = null;
+
 /**
- * Appel Claude avec sortie JSON contrainte par un schéma zod, puis validée à nouveau côté serveur.
- * Le modèle capable bénéficie du repli automatique côté serveur si une demande est refusée.
+ * Appel Claude pour une tâche : modèle, effort et plafond lus dans la configuration (console d'administration),
+ * sortie JSON contrainte par un schéma zod puis revalidée, journalisation (jetons, coût, durée, erreurs).
  */
-export async function askJson<T extends z.ZodTypeAny>(opts: {
-  model: string; system: string; content: Content; schema: T; maxTokens?: number; effort?: "low" | "medium" | "high";
-}): Promise<z.infer<T>> {
+export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system: string; content: Content; schema: T; uid?: string }): Promise<z.infer<T>> {
+  const cfg = await aiConfig();
+  const tc = cfg.tasks[task];
+  if (!cfg.enabled || !tc.enabled) throw new HttpsError("failed-precondition", "Cette fonction IA est désactivée par l'administrateur.");
+  if (!spendCache || Date.now() - spendCache.at > 60_000) spendCache = { at: Date.now(), v: await monthSpend() };
+  if (cfg.monthlyBudgetUsd > 0 && spendCache.v >= cfg.monthlyBudgetUsd) throw new HttpsError("resource-exhausted", "Budget IA du mois atteint.");
+
   const params: Record<string, unknown> = {
-    model: opts.model,
-    max_tokens: opts.maxTokens ?? 8000,
-    system: opts.system,
+    model: tc.model, max_tokens: tc.maxTokens, system: opts.system,
     messages: [{ role: "user", content: opts.content }],
-    output_config: { format: zodOutputFormat(opts.schema), effort: opts.effort ?? "low" },
+    output_config: { format: zodOutputFormat(opts.schema), ...(supportsEffort(tc.model) ? { effort: tc.effort } : {}) },
   };
-  if (opts.model === SMART) { params.betas = ["server-side-fallback-2026-07-01"]; params.fallbacks = "default"; }
+  if (supportsFallback(tc.model)) { params.betas = ["server-side-fallback-2026-07-01"]; params.fallbacks = "default"; }
+  const t0 = Date.now();
+  const log = (data: Record<string, unknown>) =>
+    getFirestore().collection("aiLogs").add({ task, model: tc.model, uid: opts.uid || null, ms: Date.now() - t0, at: Date.now(), ...data }).catch(() => {});
   try {
     const res = (await anthropic().beta.messages.create(params as never)) as unknown as Anthropic.Message;
-    if (res.stop_reason === "refusal") throw new HttpsError("failed-precondition", "L'IA a refusé cette demande.");
+    const inTok = res.usage?.input_tokens || 0, outTok = res.usage?.output_tokens || 0;
+    const cost = costOf(res.model || tc.model, inTok, outTok);
+    if (spendCache && cost) spendCache.v += cost;
+    if (res.stop_reason === "refusal") { await log({ ok: false, error: "refus", inTok, outTok, cost, served: res.model }); throw new HttpsError("failed-precondition", "L'IA a refusé cette demande."); }
     const text = res.content.map((b) => (b.type === "text" ? b.text : "")).join("");
-    return opts.schema.parse(JSON.parse(text));
+    const parsed = opts.schema.parse(JSON.parse(text));
+    await log({ ok: true, inTok, outTok, cost, served: res.model });
+    return parsed;
   } catch (e) {
     if (e instanceof HttpsError) throw e;
+    await log({ ok: false, error: (e as Error).message?.slice(0, 300) || "erreur" });
     if (e instanceof Anthropic.RateLimitError) throw new HttpsError("resource-exhausted", "IA très sollicitée : réessaie dans un moment.");
     if (e instanceof Anthropic.AuthenticationError) throw new HttpsError("failed-precondition", "Clé API Anthropic manquante ou invalide.");
+    if (e instanceof Anthropic.NotFoundError) throw new HttpsError("failed-precondition", `Modèle « ${tc.model} » indisponible : change-le dans la console d'administration.`);
     logger.error("Appel IA en échec", e);
     throw new HttpsError("internal", "L'IA n'a pas répondu correctement.");
   }

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { BookOpen, CalendarDays, Package, Settings as Cog, ShoppingCart } from "lucide-react";
+import { BookOpen, CalendarDays, Package, Settings as Cog, ShieldCheck, ShoppingCart } from "lucide-react";
+import { lazy, Suspense } from "react";
 import { planSeason } from "./lib/planner";
 import { useRoute } from "./route";
 import { useStore } from "./state/store";
@@ -12,6 +13,9 @@ import Settings from "./views/Settings";
 import Shopping, { useShopping } from "./views/Shopping";
 import Stock from "./views/Stock";
 import Week from "./views/Week";
+
+// La console d'administration est chargée à part : elle ne pèse rien pour les autres utilisateurs.
+const Admin = lazy(() => import("./views/admin/Admin"));
 
 const TABS = [
   { id: "semaine", label: "Semaine", Icon: CalendarDays },
@@ -36,6 +40,8 @@ export default function App() {
   if (!s.user) return <><Login /><Toasts /></>;
   if (page === "rejoindre" && arg) return <><Onboarding token={arg} /><Toasts /></>;
   if (!s.userDoc) return <div className="login"><div className="muted">Chargement…</div></div>;
+  if (s.app.maintenance.on && !s.superAdmin) return <div className="login"><div className="box"><div className="empty"><div className="big">🛠</div>{s.app.maintenance.message}</div></div></div>;
+  if (page === "admin" && s.superAdmin) return <div className="app"><Nav current="admin" /><main className="main"><Suspense fallback={<div className="empty">Chargement…</div>}><Admin /></Suspense></main><Toasts /></div>;
   if (!s.hid) return <><Onboarding /><Toasts /></>;
 
   const current = TABS.some((t) => t.id === page) ? page : page === "capture" ? "capture" : "semaine";
@@ -44,6 +50,7 @@ export default function App() {
       <Nav current={current} />
       <main className="main">
         {!s.online && <div style={{ background: "var(--warn)", color: "#fff", textAlign: "center", fontSize: 13, padding: "calc(var(--sat) + 2px) 8px 2px" }}>Hors ligne : dernières données, modifications synchronisées au retour du réseau</div>}
+        {s.app.banner.text && <div className="content wide" style={{ paddingBottom: 0 }}><div className="notice" style={s.app.banner.tone === "warn" ? { background: "color-mix(in srgb, var(--warn) 18%, var(--card))" } : undefined}>📣 {s.app.banner.text}</div></div>}
         {current === "semaine" && <Week />}
         {current === "courses" && <Shopping />}
         {current === "stock" && <Stock />}
@@ -59,6 +66,7 @@ export default function App() {
 function Nav({ current }: { current: string }) {
   const s = useStore();
   const { lines } = useShopping(s);
+  const admin = s.superAdmin && <a href="#/admin" aria-current={current === "admin" ? "page" : undefined}><ShieldCheck size={22} />Admin</a>;
   const todo = lines.filter((l) => !l.checked).length;
   const link = (t: (typeof TABS)[number]) => (
     <a key={t.id} href={`#/${t.id}`} aria-current={current === t.id ? "page" : undefined}>
@@ -72,6 +80,7 @@ function Nav({ current }: { current: string }) {
         <div className="brand"><img src={`${import.meta.env.BASE_URL}icons/icon-192.png`} alt="" /><span>Stoemp</span></div>
         {TABS.slice(0, 4).map(link)}
         <div className="grow" />
+        {admin}
         {link(TABS[4])}
       </nav>
       <nav className="tabbar" aria-label="Navigation">{TABS.map(link)}</nav>

@@ -56,16 +56,17 @@ export default function Settings() {
                   <button className="btn soft sm" onClick={() => run(() => setRole(s.hid!, id, role === "admin" ? "member" : "admin"))}>{role === "admin" ? "→ membre" : "→ admin"}</button>
                   <button className="btn soft sm" onClick={() => run(() => removeMember(s.hid!, id), "Membre retiré")}>Retirer</button></span>}
               </div>)}
-              {admin && <div style={{ marginTop: 10 }}>
+              {admin && s.app.features.invites && <div style={{ marginTop: 10 }}>
                 {!invite ? <button className="btn" onClick={makeInvite}><UserPlus size={18} />Inviter quelqu'un</button> :
                   <div className="row"><input className="input" readOnly value={invite} onFocus={(e) => e.target.select()} /><button className="ib" onClick={shareInvite} aria-label="Partager"><Share2 size={18} /></button></div>}
                 {invite && <p className="small muted">Lien valable 7 jours.</p>}
               </div>}
+              {s.superAdmin && <a className="btn" href="#/admin" style={{ marginTop: 12 }}>🛠 Console d'administration</a>}
               {s.households.length > 1 && <><label className="field">Changer de foyer</label>
                 <div className="chips">{s.households.map((h) => <button key={h.id} className="chip" aria-pressed={h.id === s.hid} onClick={() => run(() => switchHousehold(h.id))}>{h.name}</button>)}</div></>}
-              <form className="row" style={{ marginTop: 12 }} onSubmit={(e) => { e.preventDefault(); if (newName.trim()) { run(() => createHousehold(newName.trim()), "Foyer créé"); setNewName(""); } }}>
+              {s.app.features.multiHousehold && <form className="row" style={{ marginTop: 12 }} onSubmit={(e) => { e.preventDefault(); if (newName.trim()) { run(() => createHousehold(newName.trim(), false, s.app.defaults), "Foyer créé"); setNewName(""); } }}>
                 <input className="input" value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Créer un autre foyer" /><button className="btn soft">Créer</button>
-              </form>
+              </form>}
               {s.households.length > 1 && <button className="btn soft sm" style={{ marginTop: 10 }} onClick={() => run(() => leaveHousehold(s.hid!, s.households.filter((h) => h.id !== s.hid).map((h) => h.id)), "Foyer quitté")}>Quitter ce foyer</button>}
             </div>
 
@@ -89,7 +90,7 @@ export default function Settings() {
           </div>
 
           <div className="stack">
-            <div className="card">
+            {s.app.features.capture && <div className="card">
               <h3>📥 Capteur de prix</h3>
               <p>Sur le site de Colruyt, Delhaize, Carrefour, Albert Heijn ou Renmans, fais une recherche (ex. « lait »), puis touche ce favori : les prix affichés sont lus et rangés dans Stoemp. Le robot hebdomadaire s'occupe de Renmans tout seul.</p>
               <div className="row wrap">
@@ -103,7 +104,7 @@ export default function Settings() {
                   <li>Sur colruyt.be, ouvre les signets et touche « Envoyer à Stoemp ».</li>
                 </ol></details>
               <p className="small muted">Autres sources : photo des tickets de caisse (onglet Courses ou Stock) et robot Colruyt sur ton ordinateur, chaque dimanche. Les prix ne sont jamais publiés.</p>
-            </div>
+            </div>}
 
             <div className="card">
               <h3>Apparence</h3>

@@ -6,7 +6,7 @@ import { setGlobalOptions, logger } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import { randomBytes } from "node:crypto";
 import { z } from "zod";
-import { askJson, cached, FAST, SMART } from "./ai";
+import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipes, ClassifiedItem, Match, PageProducts, Receipt } from "./schemas";
 
@@ -43,7 +43,7 @@ Unités : g (vendu au poids), ml (liquides), pc (pièces, rouleaux, paquets). Do
 
 async function classify(name: string) {
   return cached("classifyItem", norm(name), () =>
-    askJson({ model: FAST, system: CLASSIFY_SYSTEM, content: `Article : « ${name} »`, schema: ClassifiedItem, maxTokens: 1000 }));
+    askJson("classifyItem", { system: CLASSIFY_SYSTEM, content: `Article : « ${name} »`, schema: ClassifiedItem }));
 }
 const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
 
@@ -103,8 +103,8 @@ export const generateRecipes = onCall(ai, async (req) => {
     o.budgetPerPerson && `économiques (environ ${o.budgetPerPerson.toFixed(2)} € par personne et par repas)`,
     d.stockToUse.length && `qui utilisent si possible : ${d.stockToUse.join(", ")}`,
   ].filter(Boolean).join(" ; ");
-  const res = await askJson({
-    model: SMART, effort: "medium", maxTokens: 16000, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items)),
+  const res = await askJson("generateRecipes", {
+    uid: u, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items)),
     content: `Propose ${d.n} plats NOUVEAUX, variés et tous différents (cuisine belge, française ou du monde) : ${constraints}.
 N'utilise AUCUN de ces plats déjà connus : ${d.knownNames.join(" ; ")}.`,
   });
@@ -139,8 +139,8 @@ export const structureMyDish = onCall(ai, async (req) => {
   }), req.data);
   await requireMember(d.householdId, u);
   const items = await loadItems();
-  const res = await askJson({
-    model: SMART, effort: "low", schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items)),
+  const res = await askJson("structureMyDish", {
+    uid: u, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items)),
     content: `Transforme ce plat familial en fiche recette structurée (renvoie exactement 1 recette).
 Plat : « ${d.name} » pour ${d.persons} personnes, environ ${d.minutes} min.
 Ingrédients donnés (pour ${d.persons} personnes) : ${d.ingredients || "aucun : propose les ingrédients habituels de ce plat"}
@@ -167,8 +167,8 @@ Choisis le produit qui correspond vraiment à l'article (même produit, pas un d
 Entre plusieurs bons candidats, préfère la marque distributeur et le format courant. Réponds null si aucun ne convient.`;
 
 async function matchProductCore(itemName: string, candidates: { name: string; packSize?: number | null; packUnit?: string | null; price?: number }[]) {
-  return cached("matchProduct", { itemName, candidates }, async () => (await askJson({
-    model: FAST, system: MATCH_SYSTEM, schema: Match, maxTokens: 500,
+  return cached("matchProduct", { itemName, candidates }, async () => (await askJson("matchProduct", {
+    system: MATCH_SYSTEM, schema: Match,
     content: `Article : « ${itemName} »\nProduits :\n${candidates.map((c, i) => `${i}. ${c.name}${c.packSize ? ` (${c.packSize} ${c.packUnit || ""})` : ""}${c.price != null ? ` — ${c.price} €` : ""}`).join("\n")}`,
   })).index);
 }
@@ -198,8 +198,8 @@ export const onMatchQueued = onDocumentCreated({ document: "matchQueue/{id}", ..
 export const extractPrices = onCall(ai, async (req) => {
   uid(req);
   const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(60000) }), req.data);
-  const page = await askJson({
-    model: FAST, maxTokens: 8000, schema: PageProducts,
+  const page = await askJson("extractPrices", {
+    uid: req.auth?.uid, schema: PageProducts,
     system: "Tu extrais les produits et prix visibles d'une page de supermarché belge copiée en texte. Ignore menus, publicités et produits sans prix. Prix en euros.",
     content: `Enseigne : ${d.store}\nPage : ${d.url}\n\n${d.text}`,
   });
@@ -235,8 +235,8 @@ export const readReceipt = onCall({ ...ai, memory: "1GiB" }, async (req) => {
   const u = uid(req);
   const d = input(z.object({ householdId: z.string(), image: z.string().max(8_000_000), mediaType: z.enum(["image/jpeg", "image/png", "image/webp"]) }), req.data);
   await requireMember(d.householdId, u);
-  const r = await askJson({
-    model: SMART, effort: "low", maxTokens: 8000, schema: Receipt,
+  const r = await askJson("readReceipt", {
+    uid: u, schema: Receipt,
     system: "Tu lis des tickets de caisse de supermarchés belges (Colruyt, Delhaize, Carrefour, Renmans, Lidl, Aldi…). Une ligne par article acheté ; ignore totaux, TVA, consignes, cartes de fidélité. Décode les abréviations des libellés.",
     content: [
       { type: "image", source: { type: "base64", media_type: d.mediaType, data: d.image } },
@@ -256,6 +256,8 @@ export const createInvite = onCall(async (req) => {
   const u = uid(req);
   const { householdId } = input(z.object({ householdId: z.string() }), req.data);
   const hh = await requireMember(householdId, u, true);
+  const app = (await db().collection("config").doc("app").get()).data();
+  if (app?.features?.invites === false) throw new HttpsError("failed-precondition", "Les invitations sont désactivées par l'administrateur.");
   const token = randomBytes(12).toString("base64url");
   await db().collection("invites").doc(token).set({ householdId, householdName: hh.data()!.name, createdBy: u, expiresAt: Date.now() + 7 * 86400_000 });
   return { token };
@@ -274,3 +276,5 @@ export const joinHousehold = onCall(async (req) => {
   await db().collection("users").doc(u).set({ households: FieldValue.arrayUnion(hid), current: hid }, { merge: true });
   return { householdId: hid, name: inv.data()!.householdName };
 });
+
+export * from "./admin";

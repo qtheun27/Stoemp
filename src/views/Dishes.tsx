@@ -62,7 +62,7 @@ export default function Dishes() {
               <textarea className="input" rows={5} style={{ marginTop: 8 }} value={f.ingredients} onChange={(e) => setF({ ...f, ingredients: e.target.value })} placeholder={"Ingrédients, un par ligne (facultatif avec l'IA)\n400 g de pâtes\n2 pavés de saumon\n20 cl de crème"} />
               <textarea className="input" rows={3} style={{ marginTop: 8 }} value={f.steps} onChange={(e) => setF({ ...f, steps: e.target.value })} placeholder="Étapes, une par ligne (facultatif)" />
               <div className="row wrap" style={{ marginTop: 10 }}>
-                <button className="btn" disabled={!!busy} onClick={withAi}><Sparkles size={18} />{busy === "ai" ? "L'IA rédige…" : "Compléter avec l'IA"}</button>
+                {s.app.features.ai && <button className="btn" disabled={!!busy} onClick={withAi}><Sparkles size={18} />{busy === "ai" ? "L'IA rédige…" : "Compléter avec l'IA"}</button>}
                 <button className="btn ghost" disabled={!!busy} onClick={asIs}>Enregistrer tel quel</button>
               </div>
             </div>

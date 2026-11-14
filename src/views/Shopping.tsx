@@ -89,7 +89,7 @@ export default function Shopping() {
               <div className="progress"><i style={{ width: `${(done / lines.length) * 100}%` }} /></div>
               {view === "rayon" ? <ByCategory lines={lines} priceOf={priceOf} onEdit={setEdit} /> : <ByStore lines={lines} stores={stores} />}
               <div className="row wrap" style={{ marginTop: 18 }}>
-                <button className="btn ghost" onClick={() => setReceipt(true)}><Camera size={18} />Scanner le ticket</button>
+                {s.app.features.receipt && <button className="btn ghost" onClick={() => setReceipt(true)}><Camera size={18} />Scanner le ticket</button>}
                 {done > 0 && <button className="btn ghost" onClick={() => run(() => finishShopping(s), "Courses terminées")}><CheckIcon size={18} />Terminer les courses</button>}
               </div>
               {!!removed.length && <details className="card" style={{ marginTop: 14 }}><summary>Retirés de la liste ({removed.length})</summary>
@@ -158,7 +158,7 @@ function ByStore({ lines, stores }: { lines: ShopLine[]; stores: StoreId[] }) {
 /** Fraîcheur des prix + liens pour les rafraîchir (bouton « Envoyer à Stoemp » sur le site de l'enseigne). */
 function PriceFreshness({ lines, stores }: { lines: ShopLine[]; stores: StoreId[] }) {
   const s = useStore();
-  const old = new Date(today().getTime() - 14 * 864e5).toISOString().slice(0, 10);
+  const old = new Date(today().getTime() - s.app.freshDays * 864e5).toISOString().slice(0, 10);
   const stale = lines.filter((l) => l.itemId && !l.checked).map((l) => {
     const it = s.idx.get(l.itemId!)!;
     const ps = stores.map((st) => priceAt(it, st, s.book)).filter((p): p is NonNullable<typeof p> => !!p);

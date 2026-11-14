@@ -4,6 +4,7 @@ import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { BASE_ITEMS, BASE_RECIPES, ItemIndex } from "../lib/catalog";
 import { DEFAULT_SETTINGS } from "../lib/defaults";
+import { DEFAULT_APP_CONFIG, mergeAppConfig, type AppConfig } from "../lib/appConfig";
 import { emptyBook, priceKey, type PriceBook } from "../lib/pricing";
 import { isoWeek } from "../lib/season";
 import type { Cat, Consumption, Item, PaidPrice, Price, Recipe, Settings, ShoppingDoc, Slot, StockEntry } from "../lib/types";
@@ -35,6 +36,8 @@ export interface StoreState {
   book: PriceBook;
   online: boolean;
   loaded: boolean;
+  app: AppConfig;
+  superAdmin: boolean;
 }
 
 const EMPTY_PREFS: Prefs = { favorites: [], learnedCategories: {}, history: {} };
@@ -52,6 +55,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [prefs, setPrefs] = useState<Prefs>(EMPTY_PREFS);
   const [extraItems, setExtraItems] = useState<Item[]>([]);
   const [hhRecipes, setHhRecipes] = useState<Recipe[]>([]);
+  const [hiddenBase, setHiddenBase] = useState(new Set<string>());
   const [stock, setStock] = useState(new Map<string, StockEntry>());
   const [consumption, setConsumption] = useState(new Map<string, Consumption>());
   const [weekKey, setWeekKey] = useState(isoWeek());
@@ -61,6 +65,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [paid, setPaid] = useState(new Map<string, PaidPrice>());
   const [online, setOnline] = useState(navigator.onLine);
   const [loaded, setLoaded] = useState(false);
+  const [app, setApp] = useState<AppConfig>(DEFAULT_APP_CONFIG);
+  const [superAdmin, setSuperAdmin] = useState(false);
+
+  // Réglages dynamiques (lisibles avant connexion) et marque administrateur du compte.
+  useEffect(() => onSnapshot(doc(db, "config", "app"), (s) => setApp(mergeAppConfig(s.data() as Partial<AppConfig>)), () => {}), []);
+  useEffect(() => {
+    if (!user) { setSuperAdmin(false); return; }
+    user.getIdTokenResult(true).then((r) => setSuperAdmin(r.claims.superAdmin === true)).catch(() => setSuperAdmin(false));
+  }, [user]);
 
   useEffect(() => onAuthStateChanged(auth, (u) => { setUser(u); setAuthReady(true); }), []);
   useEffect(() => {
@@ -93,12 +106,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // Données partagées : articles ajoutés par l'IA, prix relevés
   useEffect(() => {
     if (!user) return;
-    const a = onSnapshot(query(collection(db, "items"), where("source", "==", "ia")), (s) => setExtraItems(s.docs.map((d) => ({ ...(d.data() as Item), id: d.id }))));
+    // Tout le catalogue partagé : articles ajoutés par l'IA et corrections faites dans la console d'administration.
+    const a = onSnapshot(collection(db, "items"), (s) => setExtraItems(s.docs.map((d) => ({ ...(d.data() as Item), id: d.id }))));
+    const hidden = onSnapshot(query(collection(db, "recipes"), where("householdId", "==", null), where("deleted", "==", true)), (s) => setHiddenBase(new Set(s.docs.map((d) => d.id))), () => {});
     const b = onSnapshot(collection(db, "prices"), (s) => setShared(new Map(s.docs.map((d) => {
       const p = d.data() as Price;
       return [priceKey(p.itemId, p.store, p.organic), p];
     }))));
-    return () => { a(); b(); };
+    return () => { a(); b(); hidden(); };
   }, [user]);
 
   // Données du foyer courant
@@ -128,17 +143,17 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, [hid, weekKey]);
 
   const idx = useMemo(() => {
-    const i = new ItemIndex(BASE_ITEMS);
-    extraItems.forEach((x) => { if (!i.get(x.id)) i.add({ ...x, aliases: x.aliases || [], allergens: x.allergens || [], seasonMonths: x.seasonMonths || [], demoPrice: x.demoPrice || 0 }); });
-    return i;
+    const byId = new Map(BASE_ITEMS.map((x) => [x.id, x]));
+    extraItems.forEach((x) => byId.set(x.id, { ...byId.get(x.id), ...x, aliases: x.aliases || [], allergens: x.allergens || [], seasonMonths: x.seasonMonths || [], demoPrice: x.demoPrice || byId.get(x.id)?.demoPrice || 0 }));
+    return new ItemIndex([...byId.values()]);
   }, [extraItems]);
-  const recipes = useMemo(() => new Map([...BASE_RECIPES, ...hhRecipes].map((r) => [r.id, r])), [hhRecipes]);
+  const recipes = useMemo(() => new Map([...BASE_RECIPES.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)), ...hhRecipes].map((r) => [r.id, r])), [hhRecipes, hiddenBase]);
   const book = useMemo(() => ({ ...emptyBook(), shared, paid }), [shared, paid]);
   const household = households.find((h) => h.id === hid) || null;
 
   const value: StoreState = {
     user, authReady, userDoc, households, hid, household, isAdmin: !!(household && user && household.members[user.uid] === "admin"),
-    settings, prefs, idx, recipes, stock, consumption, weekKey, setWeekKey, week, shopping, book, online, loaded,
+    settings, prefs, idx, recipes, stock, consumption, weekKey, setWeekKey, week, shopping, book, online, loaded, app, superAdmin,
   };
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

@@ -19,11 +19,11 @@ export const defaultLocation = (c: Cat): Location =>
   c === "su" ? "congelateur" : c === "dr" ? "salle-de-bain" : c === "bs" ? "cave" : ["fl", "vi", "fr"].includes(c) ? "frigo" : "placard";
 
 // ---------------- Foyers ----------------
-export async function createHousehold(name: string, demo = false) {
+export async function createHousehold(name: string, demo = false, defaults?: Partial<Settings>) {
   const u = auth.currentUser!;
   const ref = doc(collection(db, "households"));
   await setDoc(ref, { name, members: { [u.uid]: "admin" }, memberNames: { [u.uid]: u.displayName || (demo ? "Invité" : "Moi") }, createdAt: Date.now() });
-  await setDoc(hh(ref.id, "meta", "settings"), DEFAULT_SETTINGS);
+  await setDoc(hh(ref.id, "meta", "settings"), clean({ ...DEFAULT_SETTINGS, ...(defaults || {}) }));
   await setDoc(hh(ref.id, "meta", "prefs"), { favorites: [], learnedCategories: {}, history: {} });
   await setDoc(doc(db, "users", u.uid), { households: arrayUnion(ref.id), current: ref.id }, { merge: true });
   return ref.id;
@@ -87,12 +87,12 @@ export async function generateWeek(s: StoreState): Promise<string | undefined> {
   const pool = [...s.recipes.values()];
   let fresh: Recipe[] = [];
   let note: string | undefined;
-  if (s.settings.options.ai) {
+  if (s.settings.options.ai && s.app.features.ai) {
     if (!s.online) note = "Hors ligne : plats de la base utilisés.";
     else {
       try {
         const N = 7 * s.settings.mealsPerDay;
-        fresh = await aiRecipes(s, Math.max(1, Math.min(7, Math.ceil((N - s.settings.mineN) / 2))));
+        fresh = await aiRecipes(s, Math.max(1, Math.min(14, Math.ceil((N - s.settings.mineN) * s.app.aiWeekShare))));
       } catch (e) { note = (e as Error).message || "IA indisponible : plats de la base utilisés."; }
     }
   }
@@ -107,7 +107,7 @@ export const saveSlots = (s: StoreState, slots: Slot[]) => setDoc(hh(s.hid!, "we
 export async function swapSlot(s: StoreState, k: number, useAi: boolean) {
   const slots = [...(s.week?.slots || [])];
   let r: Recipe | null = null;
-  if (useAi && s.online) { try { r = (await aiRecipes(s, 1))[0] || null; } catch { r = null; } }
+  if (useAi && s.online && s.app.features.ai) { try { r = (await aiRecipes(s, 1))[0] || null; } catch { r = null; } }
   if (!r) r = pickOne([...s.recipes.values()], planCtx(s), new Set(slots.map((x) => x.recipeId)));
   if (!r) throw new Error("Aucun autre repas possible avec ces options.");
   slots[k] = { ...slots[k], recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false };

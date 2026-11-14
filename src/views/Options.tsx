@@ -63,7 +63,7 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
       <Opt o={o} set={set} k="favorites" title="Privilégier mes favoris et mes plats" desc={`Ils reviennent plus souvent · ${mine} plat${mine > 1 ? "s" : ""} perso`}>
         <div className="row"><span className="grow small">Plats perso placés par semaine</span><Stepper value={s.settings.mineN} min={0} max={7} onChange={(v) => setS({ mineN: v })} /></div>
       </Opt>
-      <Opt o={o} set={set} k="ai" title="Nouveaux plats inventés par l'IA" desc="La moitié de la semaine en plats inédits ; ils s'ajoutent à ta base" />
+      {s.app.features.ai && <Opt o={o} set={set} k="ai" title="Nouveaux plats inventés par l'IA" desc={`${Math.round(s.app.aiWeekShare * 100)} % de la semaine en plats inédits ; ils s'ajoutent à ta base`} />}
       <Opt o={o} set={set} k="useStock" title="Écouler le stock" desc="Favorise les recettes qui utilisent le stock, surtout ce qui périme bientôt" />
     </Sheet>
   );

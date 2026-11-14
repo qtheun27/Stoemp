@@ -3,14 +3,16 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { createHousehold, joinHousehold } from "../state/actions";
 import { run, toast } from "../ui";
+import { useStore } from "../state/store";
 import { seedDemo } from "./demo";
 
 export default function Onboarding({ token }: { token?: string }) {
+  const s = useStore();
   const [name, setName] = useState(auth.currentUser?.isAnonymous ? "Foyer démo" : "Notre foyer");
   const [busy, setBusy] = useState(false);
   const create = async () => {
     setBusy(true);
-    const id = await run(() => createHousehold(name.trim() || "Notre foyer", auth.currentUser?.isAnonymous));
+    const id = await run(() => createHousehold(name.trim() || "Notre foyer", auth.currentUser?.isAnonymous, s.app.defaults));
     if (id && auth.currentUser?.isAnonymous) await run(() => seedDemo(id));
     setBusy(false);
   };
