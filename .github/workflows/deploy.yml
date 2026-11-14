@@ -1,0 +1,56 @@
+name: Tests et déploiement
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency: { group: deploy, cancel-in-progress: true }
+
+env:
+  WIF_PROVIDER: projects/187935869834/locations/global/workloadIdentityPools/github/providers/github
+  WIF_SA: stoemp-ci@stoemp-app.iam.gserviceaccount.com
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npm --prefix functions ci && npm --prefix functions run build
+      # Version GitHub Pages (sous-dossier /Stoemp/)
+      - run: npm run build
+        env: { BASE: /Stoemp/ }
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+      # Version Firebase Hosting (racine) : recommandée pour installer l'appli sur iPhone
+      - run: rm -rf dist && npm run build
+      - uses: actions/upload-artifact@v4
+        with: { name: firebase-dist, path: dist }
+
+  pages:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: "${{ steps.deploy.outputs.page_url }}" }
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  firebase:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: firebase-dist, path: dist }
+      - uses: google-github-actions/auth@v2
+        with: { workload_identity_provider: "${{ env.WIF_PROVIDER }}", service_account: "${{ env.WIF_SA }}" }
+      - run: npx -y firebase-tools@14 deploy --only hosting,firestore:rules --project stoemp-app --non-interactive
