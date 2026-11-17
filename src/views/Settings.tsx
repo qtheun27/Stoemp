@@ -10,33 +10,39 @@ import { copyText, run, Switch, toast, TopBar } from "../ui";
 
 export const appUrl = () => location.origin + location.pathname;
 /**
- * Favori « Envoyer à Stoemp » : ouvre Stoemp tout de suite (sinon le navigateur bloque la fenêtre),
- * clique lui-même sur « Voir plus » jusqu'à ce que toute la catégorie soit chargée, puis envoie le texte de la page.
+ * Favori « Envoyer à Stoemp » : reste sur la page du magasin (au premier plan, sinon Chrome la met en veille),
+ * clique lui-même sur « Voir plus » jusqu'à ce que toute la catégorie soit chargée, puis propose un bouton
+ * « Envoyer à Stoemp » : ce clic ouvre Stoemp (autorisé par le navigateur) et transmet le texte de la page.
  */
 const BOOKMARKLET_SRC = `(async()=>{
-const w=window.open(APP,"stoemp");
 const z=t=>new Promise(r=>setTimeout(r,t));
 const b=document.createElement("div");
-b.style.cssText="position:fixed;z-index:2147483647;top:12px;right:12px;background:#1d2a22;color:#fff;padding:10px 14px;border-radius:12px;font:600 14px system-ui;box-shadow:0 6px 24px rgba(0,0,0,.3)";
+b.style.cssText="position:fixed;z-index:2147483647;top:12px;right:12px;background:#1d2a22;color:#fff;padding:12px 16px;border-radius:14px;font:600 14px system-ui;box-shadow:0 6px 24px rgba(0,0,0,.3);max-width:320px";
 document.body.appendChild(b);
 const re=/^(voir plus|afficher plus|plus de produits|charger plus|meer laden|toon meer|meer producten)/i;
-let last=0;
-for(let n=1;n<=80;n++){
+let last=document.body.innerText.length,n=0;
+for(;n<80;n++){
 const btn=[...document.querySelectorAll("button,a,[role=button]")].find(e=>e.offsetParent&&re.test((e.innerText||"").trim()));
 if(!btn)break;
-b.textContent="Stoemp : chargement des produits… ("+n+")";
+b.textContent="Stoemp : chargement des produits… ("+(n+1)+") — garde cet onglet ouvert";
 btn.scrollIntoView({block:"center"});btn.click();
-for(let i=0;i<20;i++){await z(300);if(document.body.innerText.length!==last)break}
-await z(700);
-const len=document.body.innerText.length;if(len===last)break;last=len;
+let changed=false;for(let i=0;i<40;i++){await z(250);if(document.body.innerText.length!==last){changed=true;break}}
+if(!changed)break;
+await z(800);last=document.body.innerText.length;
 }
-window.scrollTo(0,document.body.scrollHeight);await z(800);
-b.textContent="Stoemp : envoi de la page…";
 const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:document.body.innerText.slice(0,300000)};
+b.innerHTML="";
+const t=document.createElement("div");t.textContent="Stoemp : tout est chargé ("+n+" « Voir plus »).";
+const go=document.createElement("button");go.textContent="📥 Envoyer à Stoemp";
+go.style.cssText="margin-top:10px;width:100%;padding:10px;border:0;border-radius:10px;background:#68a83c;color:#fff;font:700 15px system-ui;cursor:pointer";
+b.append(t,go);
+go.onclick=()=>{
+const w=window.open(APP,"stoemp");
 const s=()=>w&&w.postMessage(d,"*");
 addEventListener("message",e=>{if(e.data==="stoemp-ready")s()});
-s();setTimeout(s,1500);setTimeout(s,4000);
-setTimeout(()=>{b.textContent="Stoemp : envoyé ✓ (regarde l'onglet Stoemp)";setTimeout(()=>b.remove(),5000)},1500);
+[1000,2500,5000,9000].forEach(x=>setTimeout(s,x));
+t.textContent="Envoyé ✓ — la lecture se poursuit dans l'onglet Stoemp.";go.remove();setTimeout(()=>b.remove(),8000);
+};
 })()`;
 export const bookmarklet = () => "javascript:" + encodeURIComponent(BOOKMARKLET_SRC.replace("APP", JSON.stringify(appUrl() + "#/capture")).replace(/\n/g, ""));
 

@@ -34,7 +34,7 @@ export default function Capture() {
   return <>
     <TopBar title="Capteur de prix" sub={state.store ? STORES[state.store].label : undefined} />
     <div className="content">
-      {state.phase === "wait" && <Empty icon="📥">Le magasin charge tous les produits de la page…<br />Garde cet onglet ouvert : la lecture démarre dès que tout est chargé.</Empty>}
+      {state.phase === "wait" && <Empty icon="📥">En attente de la page du magasin…<br />Sur le site du magasin, touche le favori « Envoyer à Stoemp », attends que tout soit chargé, puis clique « 📥 Envoyer à Stoemp » dans l'encadré.</Empty>}
       {state.phase === "busy" && <Empty icon="🔎">Lecture des prix…<br />Une catégorie entière peut prendre une à deux minutes : garde cette page ouverte.</Empty>}
       {state.phase === "error" && <Empty icon="⚠️">{state.msg}</Empty>}
       {state.phase === "done" && <>
