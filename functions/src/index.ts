@@ -559,7 +559,8 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
     const p = await askJson("planLibrary", {
       schema: LibPlan, minTokens: 8000,
       system: `Tu es un grand chef et historien de la cuisine ${CUISINE_LABEL[cuisine]}. Tu dresses la liste des vrais plats d'une cuisine, pour un livre de recettes familial belge.`,
-      content: `Liste 60 ${LIB_COURSE[course]} RÉELS et distincts de cuisine ${CUISINE_LABEL[cuisine]} : d'abord les grands classiques que tout le monde connaît, puis des spécialités régionales authentiques et reconnues. Uniquement des plats qui existent sous ce nom ; aucune variante déguisée d'un même plat.
+      content: `Liste 60 ${LIB_COURSE[course]} RÉELS et distincts de cuisine ${CUISINE_LABEL[cuisine]}, que des familles cuisinent vraiment à la maison : d'abord les grands classiques que tout le monde connaît, puis des recettes populaires du quotidien. Uniquement des plats qui existent sous ce nom ; aucune variante déguisée d'un même plat.
+Évite les préparations de chef ou de pâtissier professionnel, les spécialités très locales et peu connues, et celles dont les ingrédients principaux sont introuvables en supermarché belge.
 Pour chacun, « keys » : les ingrédients indispensables, la technique qui fait le plat et la durée totale réelle (ex. « bœuf, bière brune, oignons, pain d'épices moutardé ; mijoté ; 2 h 30 »).
 Exclus ceux-ci (déjà présents) : ${[...names, ...plan.map((d) => d.n)].slice(-500).join(" ; ") || "—"}.`,
     });
@@ -588,6 +589,7 @@ Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et
   const byId = new Map(items.map((i) => [i.id, i]));
   const sane = (r: (typeof res.recipes)[number]) => {
     const all = [...r.ingredients, ...r.meat];
+    if ([...all, ...r.vegSwap].some((x) => !x.itemId && !x.newName?.trim())) return false; // ingrédient sans nom
     const parts = Math.max(1, r.servings || 1);
     const qtyOk = r.servings >= 1 && r.servings <= 24 && all.every((x) => { const it = x.itemId ? byId.get(x.itemId) : undefined; const u = it?.unit || x.newUnit; const q = x.qty / parts;
       return x.qty > 0 && (u === "pc" ? q <= 6 : q <= 700); });
@@ -602,7 +604,8 @@ Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et
     system: `Tu es un chef critique exigeant, spécialiste de la cuisine ${CUISINE_LABEL[cuisine]}. On te soumet des recettes pour une appli familiale belge.
 Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour le nombre de parts indiqué, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
 Format de l'appli, à NE PAS reprocher : quantités pour toute la recette (nombre de parts indiqué), sel, poivre et huile volontairement absents de la liste, étapes concises si elles sont justes. « pièce(s) » d'un bouquet d'herbes = fraction du bouquet.
-Accepte les adaptations raisonnables aux supermarchés belges. Refuse franchement ce qui est faux ou inventé ; pour un simple détail, accepte.`,
+Accepte les adaptations raisonnables aux supermarchés belges.
+Décide APRÈS ton analyse : ok = false seulement pour un défaut GRAVE (plat inventé ou confondu, ingrédient clé absent ou faux, quantités ou cuisson qui feraient rater la recette, étape dangereuse). Un écart de tradition mineur ou une imprécision → ok = true.`,
     content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.servings} parts, ${r.prepMin} min)
 Ingrédients : ${[...r.ingredients, ...r.meat].map(line).join(", ")}${r.vegSwap.length ? `
 Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
