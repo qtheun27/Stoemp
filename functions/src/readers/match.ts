@@ -42,3 +42,27 @@ export function matchItem(productName: string, size: number, unit: "g" | "ml" | 
   }
   return best;
 }
+
+/** Ressemblance entre deux noms d'articles (0 à 1) : mots en commun, en tenant compte des pluriels et des marques. */
+/** Racine courte des mots (« apéritif » et « apéritives » → « aperit »), pour comparer des noms d'articles. */
+const stems = (s: string) => new Set(tokens(s).map((w) => w.slice(0, 6)));
+
+export function similarity(a: string, b: string): number {
+  const A = stems(a), B = stems(b);
+  if (!A.size || !B.size) return 0;
+  const inter = [...A].filter((w) => B.has(w)).length;
+  // Inclusion complète (« Cacahuètes apéritif » ⊂ « Cacahuètes et noix apéritives ») : très proche.
+  if (inter === Math.min(A.size, B.size)) return 0.75 + 0.25 * (inter / Math.max(A.size, B.size));
+  return inter / new Set([...A, ...B]).size;
+}
+
+/** Article existant très proche (même unité, même rayon), pour ne pas créer de doublon. */
+export function similarItem(name: string, unit: string, category: string, items: ItemDoc[], threshold = 0.75): ItemDoc | null {
+  let best: ItemDoc | null = null, score = 0;
+  for (const it of items) {
+    if (it.unit !== unit || it.category !== category) continue;
+    const s = Math.max(similarity(name, it.name), ...(it.aliases || []).map((x) => similarity(name, x)));
+    if (s >= threshold && s > score) { best = it; score = s; }
+  }
+  return best;
+}
