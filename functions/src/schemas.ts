@@ -55,7 +55,13 @@ export const LibReview = z.object({ verdicts: z.array(z.object({
 })) });
 /** Recettes de la bibliothèque : avec le type de plat (plat principal, entrée, dessert). */
 export const LIB_COURSES = ["aperitif", "entree", "soupe", "plat", "accompagnement", "dessert", "patisserie", "petitdej"] as const;
-export const LibRecipes = z.object({ recipes: z.array(AiRecipe.extend({ course: z.enum(LIB_COURSES) })) });
+/** Ingrédient de la bibliothèque : quantité pour TOUTE la recette (comme dans un livre), divisée ensuite par le nombre de parts. */
+const LibIngredient = AiIngredient.omit({ qtyPerPerson: true }).extend({ qty: z.number().describe("Quantité pour TOUTE la recette, dans l'unité de l'article (g, ml ou pièces)") });
+export const LibRecipes = z.object({ recipes: z.array(AiRecipe.omit({ ingredients: true, meat: true, vegSwap: true }).extend({
+  course: z.enum(LIB_COURSES),
+  servings: z.number().int().describe("Nombre de parts de la recette (ex. 4 pour un plat, 8 pour un gâteau)"),
+  ingredients: z.array(LibIngredient), meat: z.array(LibIngredient), vegSwap: z.array(LibIngredient),
+})) });
 
 export const Match = z.object({ index: z.number().int().nullable().describe("Indice du produit correspondant, ou null si aucun") });
 
