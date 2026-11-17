@@ -4,27 +4,43 @@ import { db } from "../../firebase";
 import { STORES } from "../../lib/constants";
 import type { Settings } from "../../lib/types";
 import type { Household } from "../../state/store";
-import { Sheet } from "../../ui";
-import { dt } from "./api";
+import { run, Sheet, toast } from "../../ui";
+import { adminCleanOrphanHouseholds, adminDeleteHousehold, dt } from "./api";
 
 type Row = Household & { createdAt?: number };
 
 export default function Households() {
   const [rows, setRows] = useState<Row[] | null>(null);
   const [open, setOpen] = useState<Row | null>(null);
-  useEffect(() => { getDocs(collection(db, "households")).then((s) => setRows(s.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Row, "id">) })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)))).catch(() => setRows([])); }, []);
+  const [busy, setBusy] = useState(false);
+  const load = () => getDocs(collection(db, "households")).then((s) => setRows(s.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Row, "id">) })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)))).catch(() => setRows([]));
+  useEffect(() => { load(); }, []);
   if (!rows) return <div className="empty">Chargement…</div>;
   return <>
+    <div className="card" style={{ marginBottom: 12 }}>
+      <h3>Ménage</h3>
+      <p>Supprime les foyers dont plus aucun membre n'a de compte (par exemple après la suppression des comptes démo), avec tout leur contenu.</p>
+      <button className="btn ghost sm" disabled={busy} onClick={async () => { setBusy(true); const r = await run(() => adminCleanOrphanHouseholds({})); setBusy(false); if (r) { toast(`${r.removed} foyer(s) orphelin(s) supprimé(s)`); load(); } }}>{busy ? "Ménage en cours…" : "Supprimer les foyers orphelins"}</button>
+    </div>
     <div className="list">{rows.map((h) => <button key={h.id} className="li" style={{ width: "100%", border: 0, background: "none", textAlign: "left" }} onClick={() => setOpen(h)}>
       <span className="main-t"><span className="name">🏠 {h.name}</span>
         <span className="meta"><span>{Object.keys(h.members || {}).length} membre(s)</span><span>{Object.values(h.memberNames || {}).join(", ")}</span><span>créé {dt(h.createdAt)}</span></span></span>
     </button>)}</div>
     {!rows.length && <div className="empty">Aucun foyer.</div>}
-    {open && <Detail h={open} onClose={() => setOpen(null)} />}
+    {open && <Detail h={open} onClose={() => setOpen(null)} onDeleted={() => { setOpen(null); load(); }} />}
   </>;
 }
 
-function Detail({ h, onClose }: { h: Row; onClose: () => void }) {
+function Detail({ h, onClose, onDeleted }: { h: Row; onClose: () => void; onDeleted: () => void }) {
+  const [armed, setArmed] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const del = async () => {
+    if (!armed) { setArmed(true); toast("Touche encore pour confirmer : le foyer et tout son contenu seront supprimés"); return; }
+    setBusy(true);
+    const r = await run(() => adminDeleteHousehold({ householdId: h.id }), "Foyer supprimé");
+    setBusy(false);
+    if (r) onDeleted();
+  };
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [settings, setSettings] = useState<Partial<Settings> | null>(null);
   useEffect(() => {
@@ -40,6 +56,7 @@ function Detail({ h, onClose }: { h: Row; onClose: () => void }) {
       <h3 style={{ marginTop: 14 }}>Réglages</h3>
       <p className="small">{settings.persons} pers. · {settings.mealsPerDay === 2 ? "midi + soir" : "soir"} · magasins : {(settings.stores || []).map((s) => STORES[s]?.label).join(", ")} · options : {Object.entries(settings.options || {}).filter(([, v]) => v === true).map(([k]) => k).join(", ") || "aucune"}</p>
     </>}
-    <p className="small muted">Consultation en lecture seule : les données appartiennent au foyer.</p>
+    <p className="small muted">Les données appartiennent au foyer : consulte-les sans les modifier. La suppression est définitive.</p>
+    <button className="btn danger" disabled={busy} onClick={del}>{busy ? "Suppression…" : armed ? "Confirmer la suppression" : "Supprimer ce foyer"}</button>
   </Sheet>;
 }
