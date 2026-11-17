@@ -3,7 +3,7 @@ import type { GenOptions, Settings } from "./types";
 export const DEFAULT_OPTIONS: GenOptions = {
   seasonal: true, season: "auto", local: false, organic: false, veg: false,
   budgetOn: false, budget: 80, timeOn: false, maxTime: 30,
-  allergens: [], avoid: [], favorites: true, ai: false, useStock: true,
+  allergens: [], avoid: [], favorites: true, ai: false, useStock: true, range: "maison",
 };
 
 export const DEFAULT_SETTINGS: Settings = {

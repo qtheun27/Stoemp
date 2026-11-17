@@ -5,7 +5,7 @@ import { DEFAULT_SETTINGS } from "../defaults";
 import { parseLine } from "../parse";
 import { planWeek } from "../planner";
 import { predict, shouldAutoAdd } from "../predict";
-import { emptyBook, priceAt } from "../pricing";
+import { emptyBook, pickOffer, priceAt } from "../pricing";
 import { addDays, isoWeek, nextShoppingDate, ymd } from "../season";
 import { buildShopping, mealNeeds } from "../shopping";
 import type { ConsumptionEvent, Recipe, Slot, StockEntry } from "../types";
@@ -164,5 +164,32 @@ describe("planificateur", () => {
   it("tient le budget quand c'est possible", () => {
     const w = planWeek(BASE_RECIPES, ctx({ seasonal: false, budgetOn: true, budget: 25 }));
     expect(w.costPerPersonWeek * 2).toBeLessThanOrEqual(25 + 0.01);
+  });
+});
+
+describe("variantes de prix selon le foyer", () => {
+  const pates = BASE_INDEX.get("pates")!; // contient du gluten
+  const o = (name: string, tier: "eco" | "maison" | "marque", ppu: number, extra: Partial<{ organic: boolean; tags: string[] }> = {}) =>
+    ({ name, tier, organic: false, tags: [], size: 1000, price: ppu * 1000, ppu, ...extra });
+  const offers = [o("EVERYDAY pâtes", "eco", 0.0008), o("BONI pâtes", "maison", 0.0012), o("BARILLA pâtes", "marque", 0.0025),
+    o("BONI BIO pâtes", "maison", 0.002, { organic: true }), o("BONI pâtes sans gluten", "maison", 0.006, { tags: ["sans-gluten"] })];
+  const sel = (x: object = {}) => ({ organic: false, range: "maison" as const, allergens: [], ...x });
+  it("gamme : premier prix, marque du magasin, grandes marques", () => {
+    expect(pickOffer(pates, offers, sel({ range: "eco" }))?.name).toBe("EVERYDAY pâtes");
+    expect(pickOffer(pates, offers, sel())?.name).toBe("BONI pâtes");
+    expect(pickOffer(pates, offers, sel({ range: "marque" }))?.name).toBe("BARILLA pâtes");
+  });
+  it("bio et allergies priment sur la gamme", () => {
+    expect(pickOffer(pates, offers, sel({ organic: true }))?.name).toBe("BONI BIO pâtes");
+    expect(pickOffer(pates, offers, sel({ allergens: ["gl"] }))?.name).toBe("BONI pâtes sans gluten");
+    // Un article sans gluten n'est pas concerné par l'allergie au gluten.
+    expect(pickOffer(BASE_INDEX.get("lait")!, [o("BONI lait", "maison", 0.001)], sel({ allergens: ["gl"] }))?.name).toBe("BONI lait");
+  });
+  it("le budget suit la variante choisie", () => {
+    const book = emptyBook();
+    book.shared.set("pates_colruyt", { itemId: "pates", store: "colruyt", organic: false, productName: "EVERYDAY pâtes", packSize: 1000, packUnit: "g", packPrice: 0.8, pricePerUnit: 0.0008, fetchedAt: "2026-11-17T00:00:00Z", source: "capture", offers });
+    expect(priceAt(pates, "colruyt", book, sel({ range: "eco" }))?.packPrice).toBeCloseTo(0.8);
+    expect(priceAt(pates, "colruyt", book, sel())?.packPrice).toBeCloseTo(1.2);
+    expect(priceAt(pates, "colruyt", book, sel({ allergens: ["gl"] }))?.packPrice).toBeCloseTo(6);
   });
 });

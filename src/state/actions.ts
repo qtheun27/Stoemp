@@ -6,6 +6,7 @@ import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { parseLine } from "../lib/parse";
 import { planSeason, planWeek, pickOne, daysToExpiry, type PlanCtx } from "../lib/planner";
 import { trimEvents, ev } from "../lib/predict";
+import type { PriceSel } from "../lib/pricing";
 import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
 import type { Cat, Consumption, ConsumptionEvent, EventType, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
@@ -54,10 +55,13 @@ export const toggleFavorite = (hid: string, prefs: Prefs, id: string) =>
 type GenResult = { recipes: Recipe[] };
 const generateRecipesFn = call<unknown, GenResult>("generateRecipes");
 
+/** Préférences de prix du foyer : bio, gamme, allergies. */
+export const priceSel = (s: StoreState): PriceSel => ({ organic: s.settings.options.organic, range: s.settings.options.range || "maison", allergens: s.settings.options.allergens });
+
 export function planCtx(s: StoreState): PlanCtx {
   return {
     idx: s.idx, settings: s.settings, favorites: s.prefs.favorites, stock: s.stock,
-    cost: { idx: s.idx, book: s.book, stores: s.settings.stores, pref: s.settings.preferredStore, organic: s.settings.options.organic },
+    cost: { idx: s.idx, book: s.book, stores: s.settings.stores, pref: s.settings.preferredStore, organic: priceSel(s) },
   };
 }
 

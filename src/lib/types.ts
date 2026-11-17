@@ -47,6 +47,9 @@ export interface Recipe {
   createdAt?: number;
 }
 
+/** Gamme de produits du foyer : premier prix, marque du magasin, ou grandes marques. */
+export type PriceRange = "eco" | "maison" | "marque";
+
 export interface GenOptions {
   seasonal: boolean;
   season: Season | "auto";
@@ -62,6 +65,7 @@ export interface GenOptions {
   favorites: boolean;
   ai: boolean;
   useStock: boolean;
+  range: PriceRange;
 }
 
 export interface Settings {
@@ -136,6 +140,19 @@ export interface Price {
   fetchedAt: string;
   source: "robot" | "capture" | "ticket" | "openprices" | "manuel";
   shop?: string | null;
+  /** Variantes relevées pour cet article dans cette enseigne (gamme, bio, sans gluten…). */
+  offers?: Offer[];
+}
+
+export interface Offer {
+  name: string;
+  tier: PriceRange;
+  organic: boolean;
+  tags: string[]; // "sans-gluten", "sans-lactose", "vegetal"
+  size: number; // dans l'unité de l'article
+  price: number;
+  ppu: number;
+  promo?: string | null;
 }
 
 export interface PaidPrice {

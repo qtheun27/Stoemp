@@ -1,5 +1,5 @@
 import { STORES } from "./constants";
-import type { Item, PaidPrice, Price, StoreId } from "./types";
+import type { Allergen, Item, Offer, PaidPrice, Price, PriceRange, StoreId } from "./types";
 import { packsFor } from "./units";
 
 export interface PriceInfo {
@@ -16,6 +16,37 @@ export interface PriceInfo {
   shop?: string | null;
 }
 
+/** Préférences du foyer qui orientent le choix de la variante (et donc le budget). */
+export interface PriceSel { organic: boolean; range: PriceRange; allergens: Allergen[] }
+export const DEFAULT_SEL: PriceSel = { organic: false, range: "maison", allergens: [] };
+const toSel = (s: PriceSel | boolean | undefined): PriceSel => (typeof s === "object" ? s : { ...DEFAULT_SEL, organic: !!s });
+
+/** Allergène de l'article → étiquette de la variante qui l'évite. */
+const FREE_OF: Partial<Record<Allergen, string>> = { gl: "sans-gluten", la: "sans-lactose" };
+
+/**
+ * Choisit la variante qui correspond au foyer : sans allergène si nécessaire, bio si demandé,
+ * puis la gamme (premier prix = la moins chère ; marque du magasin ; grandes marques). Repli raisonnable si la gamme manque.
+ */
+export function pickOffer(item: Item, offers: Offer[], sel: PriceSel): Offer | null {
+  if (!offers.length) return null;
+  let c = offers;
+  for (const a of sel.allergens) {
+    const tag = FREE_OF[a];
+    if (!tag || !item.allergens.includes(a)) continue;
+    const free = c.filter((o) => o.tags.includes(tag));
+    if (free.length) c = free;
+  }
+  if (sel.organic) { const bio = c.filter((o) => o.organic); if (bio.length) c = bio; }
+  else { const plain = c.filter((o) => !o.organic); if (plain.length) c = plain; }
+  const byPpu = [...c].sort((a, b) => a.ppu - b.ppu);
+  if (sel.range === "eco") return byPpu[0];
+  const tier = byPpu.filter((o) => o.tier === sel.range);
+  if (tier.length) return tier[0];
+  // Repli : marque du magasin → médiane ; grandes marques → la plus chère des variantes connues.
+  return sel.range === "marque" ? byPpu[byPpu.length - 1] : byPpu[Math.floor((byPpu.length - 1) / 2)];
+}
+
 export interface PriceBook {
   shared: Map<string, Price>; // clé itemId_store ou itemId_store_bio
   paid: Map<string, PaidPrice>; // clé itemId_store
@@ -30,12 +61,19 @@ export const storeSells = (store: StoreId, item: Item) => !STORES[store].only ||
  * Meilleur prix connu d'un article dans une enseigne.
  * Priorité : prix payé s'il est plus récent, puis prix relevé (robot, capture, ticket), puis estimation de démo.
  */
-export function priceAt(item: Item, store: StoreId, book: PriceBook, organic = false): PriceInfo | null {
+export function priceAt(item: Item, store: StoreId, book: PriceBook, selection: PriceSel | boolean = false): PriceInfo | null {
   if (!storeSells(store, item)) return null;
+  const sel = toSel(selection);
+  const organic = sel.organic;
   const shared = (organic && book.shared.get(priceKey(item.id, store, true))) || book.shared.get(priceKey(item.id, store));
   const paid = book.paid.get(priceKey(item.id, store));
   if (paid && (!shared || paid.date >= shared.fetchedAt.slice(0, 10))) {
     return { store, pricePerUnit: paid.pricePerUnit, packSize: paid.packSize, packPrice: paid.packPrice, organic: false, source: "payé", date: paid.date };
+  }
+  if (shared?.offers?.length) {
+    const o = pickOffer(item, shared.offers, sel);
+    if (o) return { store, pricePerUnit: o.ppu, packSize: o.size, packPrice: o.price, organic: o.organic, source: shared.source,
+      date: shared.fetchedAt.slice(0, 10), promo: o.promo, productName: o.name, url: shared.url, shop: shared.shop };
   }
   if (shared) {
     return {
@@ -49,7 +87,7 @@ export function priceAt(item: Item, store: StoreId, book: PriceBook, organic = f
 }
 
 /** Prix retenu : magasin préféré, ou le moins cher parmi les magasins fréquentés. */
-export function bestPrice(item: Item, stores: StoreId[], pref: StoreId | "cheapest", book: PriceBook, organic = false): PriceInfo | null {
+export function bestPrice(item: Item, stores: StoreId[], pref: StoreId | "cheapest", book: PriceBook, organic: PriceSel | boolean = false): PriceInfo | null {
   if (pref !== "cheapest") {
     const p = priceAt(item, pref, book, organic);
     if (p) return p;

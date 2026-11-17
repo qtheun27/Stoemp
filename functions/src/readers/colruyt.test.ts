@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { colruytShop, parseColruyt } from "./colruyt";
 import { matchItem } from "./match";
+import { tagsOf, tierOf } from "./tiers";
 
 // Extrait fictif au format d'une page Colruyt (prix inventés).
 const PAGE = `Produits
@@ -95,5 +96,21 @@ describe("lecteur Colruyt sans IA", () => {
     expect(m(3)?.item.id).toBe("oranges");
     expect(m(4)).toBeNull(); // abricots séchés ≠ abricots
     expect(m(7)).toBeNull(); // menthe en plante ≠ menthe
+  });
+});
+
+describe("gammes et particularités", () => {
+  it("classe les produits par gamme d'après la marque", () => {
+    expect(tierOf("colruyt", "EVERYDAY bananes")).toBe("eco");
+    expect(tierOf("colruyt", "BONI bananes")).toBe("maison");
+    expect(tierOf("colruyt", "BONI BIO Orange")).toBe("maison");
+    expect(tierOf("colruyt", "carottes")).toBe("maison");
+    expect(tierOf("colruyt", "PAPILLON bananes")).toBe("marque");
+    expect(tierOf("delhaize", "365 spaghetti")).toBe("eco");
+  });
+  it("repère sans gluten, sans lactose, végétal", () => {
+    expect(tagsOf("BONI spaghetti sans gluten")).toEqual(["sans-gluten"]);
+    expect(tagsOf("ALPRO boisson soja sans lactose vegan")).toEqual(["sans-lactose", "vegetal"]);
+    expect(tagsOf("BONI PLAN'T Lentilles")).toEqual(["vegetal"]);
   });
 });

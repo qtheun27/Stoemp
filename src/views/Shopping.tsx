@@ -8,7 +8,7 @@ import { buildShopping, shareText, type ShopLine } from "../lib/shopping";
 import { eur } from "../lib/text";
 import type { Cat, StoreId } from "../lib/types";
 import { fmtQty } from "../lib/units";
-import { addManual, checkLine, finishShopping, removeLine, restoreLine, setCategory, setPricePaid } from "../state/actions";
+import { addManual, checkLine, finishShopping, priceSel, removeLine, restoreLine, setCategory, setPricePaid } from "../state/actions";
 import { useStore, type StoreState } from "../state/store";
 import { Check, copyText, Empty, run, Sheet, toast, TopBar } from "../ui";
 import ReceiptSheet from "./Receipt";
@@ -42,7 +42,7 @@ export default function Shopping() {
   const [view, setView] = useState<"rayon" | "magasin">("rayon");
   const [edit, setEdit] = useState<ShopLine | null>(null);
   const [receipt, setReceipt] = useState(false);
-  const organic = s.settings.options.organic;
+  const organic = priceSel(s);
   const pref = s.settings.preferredStore;
   const stores = s.settings.stores.length ? s.settings.stores : (["colruyt"] as StoreId[]);
   const done = lines.filter((l) => l.checked).length;
@@ -133,7 +133,7 @@ function ByCategory({ lines, priceOf, onEdit }: { lines: ShopLine[]; priceOf: (l
 function ByStore({ lines, stores }: { lines: ShopLine[]; stores: StoreId[] }) {
   const s = useStore();
   const buy = lines.filter((l) => !l.checked).map((l) => ({ itemId: l.itemId, qty: l.qty, unit: l.unit }));
-  const ctx = { idx: s.idx, book: s.book, organic: s.settings.options.organic };
+  const ctx = { idx: s.idx, book: s.book, organic: priceSel(s) };
   const totals = storeTotals(buy, stores, ctx).sort((a, b) => a.missing.length - b.missing.length || a.total - b.total);
   const pair = stores.length >= 2 ? bestPair(buy, stores, ctx) : null;
   const max = Math.max(...totals.map((t) => t.total), 1);
@@ -161,7 +161,7 @@ function PriceFreshness({ lines, stores }: { lines: ShopLine[]; stores: StoreId[
   const old = new Date(today().getTime() - s.app.freshDays * 864e5).toISOString().slice(0, 10);
   const stale = lines.filter((l) => l.itemId && !l.checked).map((l) => {
     const it = s.idx.get(l.itemId!)!;
-    const ps = stores.map((st) => priceAt(it, st, s.book)).filter((p): p is NonNullable<typeof p> => !!p);
+    const ps = stores.map((st) => priceAt(it, st, s.book, priceSel(s))).filter((p): p is NonNullable<typeof p> => !!p);
     const fresh = ps.some((p) => p.source !== "estimation" && (p.date || "") >= old);
     return { it, fresh, ps };
   }).filter((x) => !x.fresh).slice(0, 12);
@@ -181,7 +181,7 @@ function LineSheet({ line, onClose }: { line: ShopLine; onClose: () => void }) {
   const [price, setPrice] = useState(line.pricePaid ? String(line.pricePaid).replace(".", ",") : "");
   const [store, setStore] = useState<StoreId>((line.store as StoreId) || (s.settings.preferredStore !== "cheapest" ? s.settings.preferredStore : s.settings.stores[0] || "colruyt"));
   const it = line.itemId ? s.idx.get(line.itemId) : undefined;
-  const prices = it ? s.settings.stores.map((st) => priceAt(it, st, s.book, s.settings.options.organic)).filter((p): p is NonNullable<typeof p> => !!p) : [];
+  const prices = it ? s.settings.stores.map((st) => priceAt(it, st, s.book, priceSel(s))).filter((p): p is NonNullable<typeof p> => !!p) : [];
   return <Sheet title={line.name} sub={lineQty(line)} onClose={onClose}>
     {!!prices.length && <div className="list" style={{ marginBottom: 12 }}>{prices.sort((a, b) => a.pricePerUnit - b.pricePerUnit).map((p) => <div key={p.store} className="store-row">
       <span className="store-dot" style={{ background: STORES[p.store].color }} />
