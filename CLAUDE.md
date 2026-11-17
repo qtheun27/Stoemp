@@ -29,7 +29,8 @@ Appli PWA « Stoemp » : repas de saison de la semaine, liste de courses avec pr
 ## Commandes
 - `npm run dev` · `npm test` · `npm run build` (BASE=/Stoemp/ pour GitHub Pages)
 - `VITE_EMULATORS=1 npm run dev` + `firebase emulators:start --only auth,firestore` pour tester sans toucher aux données réelles.
-- `firebase deploy --only functions` (après `firebase functions:secrets:set ANTHROPIC_API_KEY`).
+- Déploiement : chaque fusion dans `main` déploie site, règles, index et Cloud Functions via GitHub Actions (sans clé). Le secret `ANTHROPIC_API_KEY` est dans Secret Manager.
+- Le projet est dans une organisation Google Workspace : une exception « Partage restreint au domaine » (iam.allowedPolicyMemberDomains) est posée sur le seul projet Stoemp pour rendre les fonctions appelables.
 - `npm --prefix scraper run prix -- renmans colruyt` : robot de prix en local.
 
 ## Console d'administration (`#/admin`)
