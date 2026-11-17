@@ -93,6 +93,8 @@ export interface Settings {
   /** Ancien réglage (7 ou 14 repas), lu seulement si lunches/dinners manquent. */
   mealsPerDay?: 1 | 2;
   mineN: number;
+  /** Foyer mixte : nombre de végétariens (le reste mange la version avec viande du même plat). */
+  vegEaters?: number;
   options: GenOptions;
   stores: StoreId[];
   preferredStore: StoreId | "cheapest";

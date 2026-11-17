@@ -46,6 +46,9 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
       <Opt o={o} set={set} k="local" title="Produits de la région" desc="Ingrédients principaux produits en Belgique, substitutions locales proposées" />
       <Opt o={o} set={set} k="organic" title="Bio" desc="Prix bio quand ils existent ; les articles sans version bio sont signalés" />
       <Opt o={o} set={set} k="veg" title="Végétarien" desc="Tous les repas en version végé (chaque repas garde son bouton 🌱)" />
+      {!o.veg && <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Foyer mixte</b>
+        <div className="d">Un seul plat pour tout le monde : pour les végétariens, la viande est remplacée par une protéine végétale (lentilles, pois chiches, œufs…) — même sauce, mêmes accompagnements.</div>
+        <div className="row extra"><span className="grow small">Dont végétariens</span><Stepper value={Math.min(s.settings.vegEaters || 0, headcount(e))} min={0} max={headcount(e)} onChange={(v) => setS({ vegEaters: v })} /></div></div></div>}
       <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Gamme de produits</b><div className="d">Sert au coût des repas et au budget, quand tu n'as pas encore de prix payés</div>
         <div className="chips extra">{([["eco", "Premier prix"], ["maison", "Marque du magasin"], ["marque", "Grandes marques"]] as const).map(([k, l]) =>
           <button key={k} className="chip" aria-pressed={(o.range || "maison") === k} onClick={() => set({ range: k })}>{l}</button>)}</div></div></div>
@@ -55,7 +58,7 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
       <Opt o={o} set={set} k="timeOn" title="Temps max" desc="Préparation et cuisson">
         <div className="chips">{([20, 30, 45] as const).map((t) => <button key={t} className="chip" aria-pressed={o.maxTime === t} onClick={() => set({ maxTime: t })}>{t} min</button>)}</div>
       </Opt>
-      <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Allergies</b><div className="d">Une case par allergène</div>
+      <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Allergies</b><div className="d">Une case par allergène. Elles valent pour tout le repas (un seul plat, aucun risque de contamination), même si une seule personne est concernée.</div>
         <div className="chips extra">{(Object.keys(ALLERGENS) as Allergen[]).map((a) => {
           const on = o.allergens.includes(a);
           return <label key={a} className="chip" style={{ cursor: "pointer" }}><Check checked={on} onChange={() => set({ allergens: on ? o.allergens.filter((x) => x !== a) : [...o.allergens, a] })} label={ALLERGENS[a]} />{ALLERGENS[a]}</label>;

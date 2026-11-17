@@ -77,7 +77,7 @@ async function resolveIngredients(list: { itemId: string | null; newName: string
 const RECIPE_RULES = (catalog: string) => `Tu es un chef de cuisine familiale en Belgique. Recettes simples, en français de Belgique.
 Relie chaque ingrédient au catalogue ci-dessous par son identifiant exact (itemId). Si aucun ne convient, mets itemId à null et donne newName (nom générique simple).
 Quantités POUR 1 PERSONNE dans l'unité du catalogue (g, ml ou pièces ; une cuillère à soupe ≈ 15 g ou ml). Pas de sel, poivre ni huile.
-La protéine animale va dans "meat" et son remplacement végétarien simple dans "vegSwap" avec un nom végé "vegName". Plat déjà végétarien : "meat" et "vegSwap" vides, "vegName" null.
+La protéine animale va dans "meat" et son remplacement végétarien dans "vegSwap" avec un nom végé "vegName" : même base (sauce, accompagnements), et "vegSwap" contient TOUJOURS une protéine végétale (lentilles, pois chiches, haricots, tofu, œufs ou fromage), pour qu'un foyer mixte cuisine un seul plat. Plat déjà végétarien : "meat" et "vegSwap" vides, "vegName" null.
 3 à 5 étapes courtes. Saisons : P printemps, E été, A automne, H hiver.
 Catalogue (itemId | nom | unité) :
 ${catalog}`;

@@ -8,7 +8,7 @@ import { buildShopping, shareText, type ShopLine } from "../lib/shopping";
 import { eur } from "../lib/text";
 import type { Cat, StoreId } from "../lib/types";
 import { fmtQty } from "../lib/units";
-import { addManual, checkLine, finishShopping, priceSel, removeLine, restoreLine, setCategory, setPricePaid } from "../state/actions";
+import { addManual, vegCfg, checkLine, finishShopping, priceSel, removeLine, restoreLine, setCategory, setPricePaid } from "../state/actions";
 import { useStore, type StoreState } from "../state/store";
 import { Check, copyText, Empty, run, Sheet, toast, TopBar } from "../ui";
 import ReceiptSheet from "./Receipt";
@@ -25,7 +25,7 @@ export const searchUrl = (store: StoreId, q: string) => {
 export function useShopping(s: StoreState) {
   return useMemo(() => {
     const next = nextShoppingDate(s.settings.shoppingDays);
-    const r = buildShopping({ slots: s.week?.slots || [], recipes: s.recipes, persons: s.week?.persons || s.settings.persons, idx: s.idx, stock: s.stock, consumption: s.consumption, docs: s.shopping, nextShopping: next });
+    const r = buildShopping({ slots: s.week?.slots || [], recipes: s.recipes, persons: s.week?.persons || s.settings.persons, idx: s.idx, stock: s.stock, consumption: s.consumption, docs: s.shopping, nextShopping: next, vegEaters: vegCfg(s).vegEaters, allergens: s.settings.options.allergens });
     return { ...r, next };
   }, [s.week, s.recipes, s.settings, s.idx, s.stock, s.consumption, s.shopping]);
 }

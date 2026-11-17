@@ -1,15 +1,21 @@
 import { ingredientsOf } from "./catalog";
 import type { ItemIndex } from "./catalog";
 import { bestPrice, lineCost, priceAt, type PriceBook, type PriceSel } from "./pricing";
-import type { Recipe, StoreId, Unit } from "./types";
+import type { Ingredient, Recipe, StoreId, Unit } from "./types";
+import type { MealPart } from "./mixed";
 import { baseQty } from "./units";
 
 export interface CostCtx { idx: ItemIndex; book: PriceBook; stores: StoreId[]; pref: StoreId | "cheapest"; organic: PriceSel | boolean }
 
 /** Coût par personne d'un repas (part réellement utilisée de chaque article). */
 export function mealCostPerPerson(r: Recipe, veg: boolean, ctx: CostCtx): number {
+  return ingredientsCost(ingredientsOf(r, veg), ctx);
+}
+
+/** Coût d'une part pour une liste d'ingrédients. */
+export function ingredientsCost(ings: Ingredient[], ctx: CostCtx): number {
   let sum = 0;
-  for (const ing of ingredientsOf(r, veg)) {
+  for (const ing of ings) {
     const item = ctx.idx.get(ing.itemId);
     if (!item || item.staple) continue;
     const p = bestPrice(item, ctx.stores, ctx.pref, ctx.book, ctx.organic);
@@ -58,3 +64,6 @@ export function bestPair(lines: BuyLine[], stores: StoreId[], ctx: Omit<CostCtx,
   }
   return best;
 }
+
+/** Coût total d'un plat découpé en parts (commun, viande, végé). */
+export const partsCost = (parts: MealPart[], ctx: CostCtx) => parts.reduce((a, p) => a + ingredientsCost(p.ings, ctx) * p.portions, 0);
