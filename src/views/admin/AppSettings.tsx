@@ -46,8 +46,10 @@ export default function AppSettings() {
           <div><label className="field">Personnes</label><Stepper value={d.persons} onChange={(v) => setD({ persons: v })} /></div>
           <div><label className="field">Plats perso / semaine</label><Stepper value={d.mineN} min={0} max={7} onChange={(v) => setD({ mineN: v })} /></div>
         </div>
-        <label className="field">Repas</label>
-        <div className="chips">{([1, 2] as const).map((m) => <button key={m} className="chip" aria-pressed={d.mealsPerDay === m} onClick={() => setD({ mealsPerDay: m })}>{m === 1 ? "7 · soir" : "14 · midi + soir"}</button>)}</div>
+        <div className="row wrap" style={{ gap: 16 }}>
+          <div><label className="field">Midis par semaine</label><Stepper value={d.lunches ?? 0} min={0} max={7} onChange={(v) => setD({ lunches: v })} /></div>
+          <div><label className="field">Soirs par semaine</label><Stepper value={d.dinners ?? 7} min={0} max={7} onChange={(v) => setD({ dinners: v })} /></div>
+        </div>
         <label className="field">Magasins</label>
         <div className="chips">{STORE_ORDER.map((k) => <button key={k} className="chip" aria-pressed={d.stores.includes(k)} onClick={() => setD({ stores: d.stores.includes(k) ? d.stores.filter((x) => x !== k) : [...d.stores, k] })}>{STORES[k].label}</button>)}</div>
         <label className="field">Jours de courses</label>

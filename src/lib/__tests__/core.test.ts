@@ -148,7 +148,7 @@ describe("planificateur", () => {
     favorites: [], stock: new Map(), cost: ctxCost, now: new Date(2026, 10, 14), rand,
   });
   it("7 ou 14 repas, sans doublon quand c'est possible", () => {
-    const w = planWeek(BASE_RECIPES, ctx({ seasonal: false }, { mealsPerDay: 2 }));
+    const w = planWeek(BASE_RECIPES, ctx({ seasonal: false }, { lunches: 7, dinners: 7 }));
     expect(w.slots.length).toBe(14);
     expect(new Set(w.slots.map((s) => s.recipeId)).size).toBe(14);
   });
@@ -205,5 +205,21 @@ describe("doublons du catalogue", () => {
   it("propose de fusionner vers l'article de base ou le nom le plus court", () => {
     const d = findDuplicates([it0("a", "Mélange de fruits secs et noix", "ia"), it0("b", "Mélange de fruits secs", "ia"), it0("c", "Riz", "base"), it0("d", "Riz long", "ia")]);
     expect(d.map((x) => `${x.from.id}→${x.into.id}`)).toEqual(expect.arrayContaining(["a→b", "d→c"]));
+  });
+});
+
+import { mealCounts, spreadDays } from "../planner";
+describe("nombre de repas", () => {
+  it("répartit midis et soirs choisis séparément", () => {
+    expect(spreadDays(7)).toEqual([0, 1, 2, 3, 4, 5, 6]);
+    expect(spreadDays(2)).toEqual([1, 5]);
+    expect(mealCounts({ lunches: 3, dinners: 5 })).toEqual({ lunches: 3, dinners: 5, total: 8 });
+    expect(mealCounts({ mealsPerDay: 2 } as never)).toEqual({ lunches: 7, dinners: 7, total: 14 }); // ancien réglage
+  });
+  it("génère exactement le nombre de repas demandé", () => {
+    const w = planWeek(BASE_RECIPES, { idx: BASE_INDEX, settings: { ...DEFAULT_SETTINGS, lunches: 3, dinners: 5, options: { ...DEFAULT_SETTINGS.options, seasonal: false } },
+      favorites: [], stock: new Map(), cost: ctxCost, now: new Date(2026, 10, 14), rand: Math.random });
+    expect(w.slots.filter((s) => s.meal === "midi").length).toBe(3);
+    expect(w.slots.filter((s) => s.meal === "soir").length).toBe(5);
   });
 });

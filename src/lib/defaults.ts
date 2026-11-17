@@ -7,7 +7,7 @@ export const DEFAULT_OPTIONS: GenOptions = {
 };
 
 export const DEFAULT_SETTINGS: Settings = {
-  persons: 2, mealsPerDay: 1, mineN: 2, options: DEFAULT_OPTIONS,
+  persons: 2, lunches: 0, dinners: 7, mineN: 2, options: DEFAULT_OPTIONS,
   stores: ["colruyt", "renmans"], preferredStore: "cheapest",
-  myColruytStore: "", renmansShop: "", shoppingDays: [6],
+  shops: {}, shoppingDays: [6],
 };

@@ -70,13 +70,19 @@ export interface GenOptions {
 
 export interface Settings {
   persons: number;
-  mealsPerDay: 1 | 2;
+  /** Nombre de repas de midi (0 à 7) et du soir (0 à 7) par semaine. */
+  lunches: number;
+  dinners: number;
+  /** Ancien réglage (7 ou 14 repas), lu seulement si lunches/dinners manquent. */
+  mealsPerDay?: 1 | 2;
   mineN: number;
   options: GenOptions;
   stores: StoreId[];
   preferredStore: StoreId | "cheapest";
-  myColruytStore: string;
-  renmansShop: string;
+  /** Magasin habituel par enseigne (ex. « Colruyt Basecles », « Carrefour Market Mons »). */
+  shops?: Partial<Record<StoreId, string>>;
+  myColruytStore?: string;
+  renmansShop?: string;
   /** jours de courses : 0 = dimanche … 6 = samedi */
   shoppingDays: number[];
 }

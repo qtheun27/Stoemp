@@ -3,6 +3,7 @@ import { collection, getCountFromServer, getDoc, getDocs, doc } from "firebase/f
 import { db } from "../../firebase";
 import { STORES } from "../../lib/constants";
 import type { Settings } from "../../lib/types";
+import { mealCounts } from "../../lib/planner";
 import type { Household } from "../../state/store";
 import { run, Sheet, toast } from "../../ui";
 import { adminCleanOrphanHouseholds, adminDeleteHousehold, dt } from "./api";
@@ -54,7 +55,7 @@ function Detail({ h, onClose, onDeleted }: { h: Row; onClose: () => void; onDele
     <div className="kpis">{[["stock", "Articles en stock"], ["shopping", "Lignes de courses"], ["weeks", "Semaines"], ["consumption", "Articles suivis"], ["paidPrices", "Prix payés"]].map(([k, l]) => <div key={k} className="kpi"><span>{l}</span><b>{counts[k] ?? "…"}</b></div>)}</div>
     {settings && <>
       <h3 style={{ marginTop: 14 }}>Réglages</h3>
-      <p className="small">{settings.persons} pers. · {settings.mealsPerDay === 2 ? "midi + soir" : "soir"} · magasins : {(settings.stores || []).map((s) => STORES[s]?.label).join(", ")} · options : {Object.entries(settings.options || {}).filter(([, v]) => v === true).map(([k]) => k).join(", ") || "aucune"}</p>
+      <p className="small">{settings.persons} pers. · {(() => { const m = mealCounts(settings as Settings); return `${m.lunches} midi(s), ${m.dinners} soir(s)`; })()} · magasins : {(settings.stores || []).map((s) => STORES[s]?.label).join(", ")} · options : {Object.entries(settings.options || {}).filter(([, v]) => v === true).map(([k]) => k).join(", ") || "aucune"}</p>
     </>}
     <p className="small muted">Les données appartiennent au foyer : consulte-les sans les modifier. La suppression est définitive.</p>
     <button className="btn danger" disabled={busy} onClick={del}>{busy ? "Suppression…" : armed ? "Confirmer la suppression" : "Supprimer ce foyer"}</button>

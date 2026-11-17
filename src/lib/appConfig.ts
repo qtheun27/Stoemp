@@ -10,7 +10,7 @@ export interface AppConfig {
   /** Un prix est « récent » pendant ce nombre de jours. */
   freshDays: number;
   /** Réglages de départ d'un nouveau foyer. */
-  defaults: Pick<Settings, "persons" | "mealsPerDay" | "stores" | "shoppingDays" | "mineN">;
+  defaults: Pick<Settings, "persons" | "lunches" | "dinners" | "stores" | "shoppingDays" | "mineN">;
 }
 
 export const DEFAULT_APP_CONFIG: AppConfig = {
@@ -19,7 +19,7 @@ export const DEFAULT_APP_CONFIG: AppConfig = {
   banner: { text: "", tone: "info" },
   aiWeekShare: 0.5,
   freshDays: 14,
-  defaults: { persons: 2, mealsPerDay: 1, stores: ["colruyt", "renmans"], shoppingDays: [6], mineN: 2 },
+  defaults: { persons: 2, lunches: 0, dinners: 7, stores: ["colruyt", "renmans"], shoppingDays: [6], mineN: 2 },
 };
 
 export const mergeAppConfig = (d: Partial<AppConfig> | undefined): AppConfig => ({

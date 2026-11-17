@@ -275,9 +275,9 @@ L'unité doit permettre d'utiliser le prix affiché : produit vendu au kg → un
 
 export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (req) => {
   const u = uid(req);
-  const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(300000) }), req.data);
+  const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(1000000) }), req.data);
   // Copie du texte brut (lecture réservée à l'administrateur) : sert à écrire des lecteurs d'enseigne sans IA.
-  await db().collection("captures").add({ store: d.store, url: d.url, text: d.text, length: d.text.length, uid: u, at: Date.now() }).catch(() => {});
+  await db().collection("captures").add({ store: d.store, url: d.url, text: d.text.slice(0, 900000), length: d.text.length, uid: u, at: Date.now() }).catch(() => {});
   await pruneCaptures().catch(() => {});
   let items = await loadItems();
 
