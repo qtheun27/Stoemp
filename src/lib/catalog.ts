@@ -1,5 +1,6 @@
 import { CATALOG_RAW } from "../data/catalog-raw";
-import { RECIPES_RAW } from "../data/recipes-raw";
+import { RECIPES_RAW, type RawRecipe } from "../data/recipes-raw";
+import { CUISINE_OF, RECIPES_MORE, type Cuisine } from "../data/recipes-more";
 import type { Allergen, Cat, Ingredient, Item, Recipe, Season, Unit } from "./types";
 import { keyOf, norm, slug } from "./text";
 
@@ -76,7 +77,9 @@ function parseIng(s: string, idx: ItemIndex): Ingredient {
 }
 
 export function parseBaseRecipes(idx: ItemIndex): Recipe[] {
-  return RECIPES_RAW.map(([name, s, t, ing, meat, veg, vegName, steps]) => ({
+  const all: [RawRecipe, Cuisine | undefined][] = [...RECIPES_RAW.map((r) => [r, CUISINE_OF[r[0]]] as [RawRecipe, Cuisine | undefined]),
+    ...RECIPES_MORE.map((r) => [r.slice(0, 8) as RawRecipe, r[8]] as [RawRecipe, Cuisine])];
+  return all.map(([[name, s, t, ing, meat, veg, vegName, steps], cuisine]) => ({
     id: "base-" + slug(name),
     name,
     vegName: meat.length ? vegName : null,
@@ -87,6 +90,7 @@ export function parseBaseRecipes(idx: ItemIndex): Recipe[] {
     vegSwap: veg.map((x) => parseIng(x, idx)),
     steps: steps.split("|"),
     source: "base" as const,
+    cuisine,
   }));
 }
 

@@ -1,4 +1,4 @@
-// Catalogue partagé de départ (~250 articles).
+// Catalogue partagé de départ (~280 articles).
 // Format : "Nom|rayon|unité|format|prix démo €|drapeaux|conservation j|allergènes|alias|mois"
 // drapeaux : L = produit en Belgique, B = existe en bio, P = périssable, S = fond de placard, C = courant (mise en place rapide)
 // allergènes : gl gluten, la lait, oe œufs, po poisson, fc fruits à coque, so soja, cr crustacés
@@ -260,4 +260,29 @@ Piles|dr|pc|4|4.99||||piles aa|
 Ampoules|dr|pc|1|3.99||||ampoule led|
 Litière|dr|g|10000|4.99||||litière chat|
 Croquettes pour chat|dr|g|2000|7.99||||nourriture chat|
+Chorizo|vi|g|200|3.29|P|30||chorizo doux|
+Bacon|vi|g|150|2.29|P|10|||
+Crevettes grises|vi|g|100|5.99|LP|3|cr|crevettes de la mer du nord|
+Cuisse de lapin|vi|pc|1|3.49|LP|4||lapin|
+Filet de truite|vi|g|250|5.49|LP|3|po|truite|
+Escalope de veau|vi|g|300|6.99|LP|3||veau|
+Rôti de porc|vi|g|800|7.99|LP|4||roti de porc|
+Nouilles de riz|ep|g|250|1.99||365||vermicelles de riz|
+Pâte de curry rouge|ep|g|100|2.49||365||curry rouge|
+Garam masala|ep|g|40|2.29|S|365|||
+Ras el hanout|ep|g|40|1.99|S|365|||
+Harissa|ep|g|100|1.49||365|||
+Tahini|ep|g|300|3.99||180||crème de sésame|
+Huile de sésame|ep|ml|250|3.49||365|||
+Graines de sésame|ep|g|100|1.49||365||sésame|
+Cacahuètes|ep|g|200|1.79||180|fc|arachides|
+Pruneaux|ep|g|250|2.99|B|180|||
+Abricots secs|ep|g|250|2.99|B|180||abricots séchés|
+Polenta|ep|g|500|1.99||365|||
+Citron vert|fl|pc|1|0.39|P|21||lime|
+Piment|fl|pc|1|0.29|P|10||piment rouge|
+Chou chinois|fl|g|800|1.79|P|10||pak choï|
+Germes de soja|fl|g|200|1.29|P|4||pousses de soja|
+Cheddar|fr|g|200|2.79||30|la||
+Pain hamburger|bo|pc|4|1.99||5|gl|pains burger|
 `;

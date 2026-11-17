@@ -1,3 +1,5 @@
+export type { Cuisine } from "../data/recipes-more";
+import type { Cuisine } from "../data/recipes-more";
 export type Cat = "fl" | "vi" | "fr" | "bo" | "ep" | "bs" | "su" | "dr";
 export type Unit = "g" | "ml" | "pc";
 export type Season = "P" | "E" | "A" | "H";
@@ -45,6 +47,8 @@ export interface Recipe {
   steps: string[];
   /** « pret » : plat préparé du magasin, à réchauffer (créé à partir du catalogue). */
   source: "base" | "ia" | "perso" | "pret";
+  /** Cuisine (belge, italienne, asiatique…). */
+  cuisine?: Cuisine;
   householdId?: string;
   deleted?: boolean;
   createdAt?: number;
@@ -79,6 +83,8 @@ export interface GenOptions {
   promos?: boolean;
   /** Semaine équilibrée (poisson, légumineuses, variété des féculents). */
   balance?: boolean;
+  /** Cuisines préférées : elles reviennent plus souvent (vide = toutes). */
+  cuisines?: Cuisine[];
 }
 
 export interface Settings {

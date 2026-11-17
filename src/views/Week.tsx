@@ -1,14 +1,14 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ChefHat, ChevronLeft, ChevronRight, Heart, Leaf, RefreshCw, SlidersHorizontal, Sparkles, Check as CheckIcon } from "lucide-react";
 import { cookable, isVegRecipe, nameOf } from "../lib/catalog";
-import { DAYS, SEASONS } from "../lib/constants";
+import { CUISINES, DAYS, SEASONS } from "../lib/constants";
 import { mealCostPerPerson, partsCost } from "../lib/cost";
 import { mealParts, vegPortions } from "../lib/mixed";
 import { daysToExpiry, mealCounts, planSeason, recipesUsing } from "../lib/planner";
 import { mondayOf, shiftWeek, isoWeek } from "../lib/season";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
-import { vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
+import { placeRecipe, vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
 import { coursePortions, eatersLabel, eatersOf, headcount, slotPortions } from "../lib/household";
 import { profile, PROTEIN_LABEL, type Protein } from "../lib/balance";
 import { drinkFor } from "../lib/drinks";
@@ -48,6 +48,9 @@ export default function Week() {
   }, [slots, s.recipes]);
   const [fridge, setFridge] = useState(false);
   const [ready, setReady] = useState(false);
+  // Bouton « Nouvelle semaine » réduit à l'icône dès qu'on fait défiler la liste.
+  const [mini, setMini] = useState(false);
+  useEffect(() => { const f = () => setMini(scrollY > 160); f(); addEventListener("scroll", f, { passive: true }); return () => removeEventListener("scroll", f); }, []);
   const cooked = slots.filter((x) => x.cooked).length;
 
   // Bientôt périmé : suggestion de repas pour l'utiliser.
@@ -62,11 +65,10 @@ export default function Week() {
     toast(note || (o.ai ? "Semaine générée avec l'IA ✨" : "Semaine générée"));
   };
   const swap = async (k: number) => { setBusy(k); await run(() => swapSlot(s, k, o.ai)); setBusy(null); };
-  const placeIn = (r: Recipe) => {
-    const k = slots.findIndex((x, i) => !x.cooked && (todayIdx < 0 || x.day >= todayIdx) && i >= 0);
-    if (k < 0) return toast("Aucun repas libre cette semaine");
-    const sl = [...slots]; sl[k] = { ...sl[k], recipeId: r.id, veg: o.veg && !isVegRecipe(r) && r.source !== "pret", cooked: false };
-    run(() => saveSlots(s, sl), `« ${r.name} » placé ${DAYS[sl[k].day].toLowerCase()}`);
+  const placeIn = async (r: Recipe) => {
+    const d = await run(() => placeRecipe(s, r));
+    if (d === null) toast("Aucun repas libre cette semaine : génère d'abord ta semaine");
+    else if (d !== undefined) toast(`« ${r.name} » placé ${DAYS[d].toLowerCase()}`);
   };
 
   const range = `${mon.toLocaleDateString("fr-BE", { day: "numeric", month: "short" })} – ${new Date(mon.getTime() + 6 * 864e5).toLocaleDateString("fr-BE", { day: "numeric", month: "short" })}`;
@@ -82,17 +84,17 @@ export default function Week() {
           <p className="season">{SEASONS[season].label}</p>
           <p>De saison : {SEASONS[season].produce}</p>
         </div>
-        <div className="row wrap" style={{ margin: "14px 0 4px" }}>
-          <button className="btn ghost" onClick={() => setOpts(true)} aria-label="Composition du foyer">👨‍👩‍👧 {eatersLabel(eaters)}</button>
+        <div className="quick">
+          <button className="btn ghost" onClick={() => setOpts(true)} aria-label="Composition du foyer">👨‍👩‍👧 {eatersLabel(eaters)}{vegCfg(s).vegEaters ? ` · ${vegCfg(s).vegEaters} 🌱` : ""}</button>
           <button className="btn ghost" onClick={() => setOpts(true)}><SlidersHorizontal size={18} />Options</button>
           <button className="btn ghost" onClick={() => setFridge(true)}>🧊 Frigo vide</button>
-          <button className="btn ghost" onClick={() => setReady(true)}>🥡 Soir sans cuisiner</button>
-          <div className="scroll-x grow" style={{ marginInline: 0, paddingInline: 0 }}>
-            {o.seasonal && <span className="tag ac">De saison</span>}{o.local && <span className="tag ac">Région</span>}{o.organic && <span className="tag ac">Bio</span>}
-            {o.veg && <span className="tag ac">Végé</span>}{o.budgetOn && <span className="tag ac">≤ {eur(o.budget)}</span>}{o.timeOn && <span className="tag ac">≤ {o.maxTime} min</span>}
-            {o.ai && <span className="tag ac">✨ IA</span>}{o.useStock && <span className="tag ac">Écouler le stock</span>}
-          </div>
+          <button className="btn ghost" onClick={() => setReady(true)}>🥡 Sans cuisiner</button>
         </div>
+        {(() => {
+          const tags = [o.seasonal && "De saison", o.local && "Région", o.organic && "Bio", o.veg && "Végé", o.budgetOn && `≤ ${eur(o.budget)}`, o.timeOn && `≤ ${o.maxTime} min`,
+            o.ai && "✨ IA", o.useStock && "Écouler le stock", ...(o.cuisines || []).map((c) => `${CUISINES[c].icon} ${CUISINES[c].label}`)].filter(Boolean) as string[];
+          return tags.length ? <button className="chips tags-line" onClick={() => setOpts(true)} aria-label="Options actives">{tags.map((t) => <span key={t} className="tag ac">{t}</span>)}</button> : null;
+        })()}
 
         {expiring.map(({ id, e, item }) => {
           const r = suggestFor(id);
@@ -151,7 +153,7 @@ export default function Week() {
           </>
         )}
       </div>
-      {!!slots.length && <button className="fab" disabled={busy === "gen"} onClick={generate}><Sparkles size={20} />{busy === "gen" ? "Je cuisine…" : "Nouvelle semaine"}</button>}
+      {!!slots.length && <button className={`fab${mini && busy !== "gen" ? " mini" : ""}`} disabled={busy === "gen"} onClick={generate} aria-label="Nouvelle semaine"><Sparkles size={20} /><span className="lbl">{busy === "gen" ? "Je cuisine…" : "Nouvelle semaine"}</span></button>}
       {open && <RecipeSheet recipe={open.r} slotIndex={open.k} onClose={() => setOpen(null)} />}
       {opts && <OptionsSheet onClose={() => setOpts(false)} />}
       {ready && <ReadySheet onClose={() => setReady(false)} onPick={(r) => { placeIn(r); setReady(false); }} />}

@@ -16,9 +16,9 @@ const recipes = new Map(BASE_RECIPES.map((r) => [r.id, r]));
 const ctxCost = { idx: BASE_INDEX, book: emptyBook(), stores: DEFAULT_SETTINGS.stores, pref: "cheapest" as const, organic: false };
 
 describe("données de départ", () => {
-  it("≈ 250 articles, 45 recettes reliées au catalogue", () => {
+  it("≈ 280 articles, plus de 180 recettes reliées au catalogue", () => {
     expect(BASE_ITEMS.length).toBeGreaterThanOrEqual(240);
-    expect(BASE_RECIPES.length).toBe(45);
+    expect(BASE_RECIPES.length).toBeGreaterThanOrEqual(180);
     for (const r of BASE_RECIPES) for (const i of [...r.ingredients, ...r.meat, ...r.vegSwap]) expect(BASE_INDEX.get(i.itemId)).toBeTruthy();
     expect(new Set(BASE_ITEMS.map((i) => i.id)).size).toBe(BASE_ITEMS.length);
   });

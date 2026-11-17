@@ -25,7 +25,7 @@
   --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .3); --shadow-lg: 0 12px 40px rgb(0 0 0 / .5); }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--sat) + 76px); }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--sat) + 66px); }
 body { margin: 0; overflow-x: hidden; background: var(--bg); color: var(--ink); font-family: "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 16px; line-height: 1.45; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -43,11 +43,10 @@ h1, h2, h3 { letter-spacing: -.015em; line-height: 1.15; }
 .content.wide { max-width: 1240px; }
 
 /* Barre du haut : verre flouté qui passe sous l'encoche */
-/* Le flou est sur un calque à part : posé sur la barre elle-même, Safari floute aussi le titre. */
-.topbar { position: sticky; top: 0; z-index: 20; padding: calc(var(--sat) + 14px) max(16px, var(--sar)) 10px max(16px, var(--sal)); isolation: isolate;
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
-.topbar::before { content: ""; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--bg) 82%, transparent);
-  -webkit-backdrop-filter: saturate(180%) blur(22px); backdrop-filter: saturate(180%) blur(22px); pointer-events: none; }
+/* Barre du haut : fond plein (sans flou : sur iPhone, Safari rendait le titre flou), compacte sous l'îlot. */
+.topbar { position: sticky; top: 0; z-index: 20; padding: calc(var(--sat) + 6px) max(16px, var(--sar)) 8px max(16px, var(--sal));
+  background: var(--bg); border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  -webkit-font-smoothing: antialiased; }
 .topbar-in { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 10px; min-height: 40px; }
 .topbar h1 { margin: 0; font-size: 22px; font-weight: 800; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar .sub { display: block; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
@@ -206,7 +205,7 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .sheet ol { padding-left: 22px; } .sheet ol li { margin-bottom: 8px; }
 .ings { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
 .ings li { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 15px; }
-@media (max-width: 420px) { .ings { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .ings { grid-template-columns: 1fr; } }
 
 /* Toast */
 .toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); top: calc(var(--sat) + 70px);
@@ -268,4 +267,17 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .task-card { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--bg); }
 .task-card + .task-card { margin-top: 10px; }
-.admin-tabs { position: sticky; top: calc(var(--sat) + 65px); z-index: 15; background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); padding: 8px 0; margin: 0 -16px 8px; padding-inline: 16px; }
+.admin-tabs { position: sticky; top: calc(var(--sat) + 55px); z-index: 15; background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); padding: 8px 0; margin: 0 -16px 8px; padding-inline: 16px; }
+
+/* Semaine : 4 actions rapides en grille 2 × 2 sur téléphone, en ligne sur grand écran ; options actives sur leur propre ligne. */
+.quick { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 8px; }
+.quick .btn { justify-content: center; min-height: 46px; padding-inline: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
+@media (min-width: 760px) { .quick { display: flex; flex-wrap: wrap; } .quick .btn { flex: none; } }
+.tags-line { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; }
+.acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.acts .btn { justify-content: center; min-height: 42px; }
+.acts .btn[aria-pressed="true"] { border-color: var(--ac); color: var(--ac); }
+@media (min-width: 760px) { .acts { display: flex; flex-wrap: wrap; } }
+/* Bouton d'action : se réduit à son icône pendant le défilement, pour ne pas cacher les boutons des repas. */
+.fab.mini { padding: 0; width: 56px; justify-content: center; }
+.fab.mini .lbl { display: none; }

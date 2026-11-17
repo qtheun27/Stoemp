@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { ChefHat, Heart, Leaf, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { ingredientsOf, isVegRecipe, nameOf } from "../lib/catalog";
-import { ALLERGENS } from "../lib/constants";
+import { ALLERGENS, CUISINES, DAYS } from "../lib/constants";
 import { mealCostPerPerson } from "../lib/cost";
 import { allergensOf } from "../lib/planner";
 import { eur } from "../lib/text";
 import type { Allergen, Item, Recipe } from "../lib/types";
 import { fmtIngredient } from "../lib/units";
-import { addManual, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, toggleFavorite, toggleLeftovers } from "../state/actions";
+import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, toggleFavorite, toggleLeftovers } from "../state/actions";
 import { eatersOf, headcount, slotPortions } from "../lib/household";
 import { drinkFor } from "../lib/drinks";
 import { mealParts, vegPortions } from "../lib/mixed";
@@ -17,7 +17,7 @@ import ReadySheet from "./Ready";
 const COURSE = { aperitif: "Apéritif", entree: "Entrée", dessert: "Dessert" } as const;
 const fmtPortions = (p: number) => `${Number.isInteger(p) ? p : p.toLocaleString("fr-BE", { maximumFractionDigits: 1 })} portion${p > 1 ? "s" : ""}`;
 import { useStore } from "../state/store";
-import { run, Sheet } from "../ui";
+import { run, Sheet, toast } from "../ui";
 
 /** Substitutions locales simples proposées avec l'option « Produits de la région ». */
 const LOCAL_SWAPS: Record<string, string> = {
@@ -60,19 +60,22 @@ export default function RecipeSheet({ recipe, slotIndex, onClose }: { recipe: Re
   if (reception && slotIndex != null) return <ReceptionSheet slotIndex={slotIndex} onClose={() => setReception(false)} onDone={onClose} />;
   return (
     <Sheet title={nameOf(recipe, veg)} onClose={onClose}
-      sub={<>{pret ? "🥡 plat préparé" : `⏱ ${recipe.prepMin} min`} · {fmtPortions(persons)}{slot?.leftovers ? " (dont demain midi)" : ""} · {eur(cost)} / portion{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
+      sub={<>{pret ? "🥡 plat préparé" : `⏱ ${recipe.prepMin} min`} · {fmtPortions(persons)}{slot?.leftovers ? " (dont demain midi)" : ""} · {eur(cost)} / portion{recipe.cuisine ? ` · ${CUISINES[recipe.cuisine].icon} ${CUISINES[recipe.cuisine].label}` : ""}{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
       {!!al.length && <div className="chips" style={{ margin: "4px 0 10px" }}>{al.map((a) => <span key={a} className="tag warn">Contient : {ALLERGENS[a]}</span>)}</div>}
-      <div className="row wrap" style={{ margin: "6px 0 14px" }}>
-        {slot && !isVegRecipe(recipe) && !pret && <button className="btn ghost sm" onClick={toggleVeg}><Leaf size={16} />{veg ? "Version classique" : "Version végé"}</button>}
-        <button className="btn ghost sm" onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, recipe.id))}><Heart size={16} fill={fav ? "currentColor" : "none"} />{fav ? "Favori" : "Ajouter aux favoris"}</button>
-        {slot && <button className="btn ghost sm" onClick={() => run(() => setCooked(s, slotIndex!, !slot.cooked), slot.cooked ? "Annulé : stock rétabli" : "Bon appétit ! Stock mis à jour")}><ChefHat size={16} />{slot.cooked ? "Pas encore cuisiné" : "Cuisiné"}</button>}
-        {!pret && <button className="btn sm" onClick={() => setCook(true)}><ChefHat size={16} />Mode cuisine</button>}
+      {/* Action principale en grand, actions secondaires en grille 2 colonnes (pouce, une main). */}
+      <div className="stack" style={{ gap: 8, margin: "6px 0 14px" }}>
+        {!slot && !!s.week?.slots.length && <button className="btn block" onClick={async () => { const d = await run(() => placeRecipe(s, recipe)); if (d === null) toast("Aucun repas libre cette semaine"); else if (d !== undefined) { toast(`Placé ${DAYS[d].toLowerCase()}`); onClose(); } }}>📅 Placer dans la semaine</button>}
+        {slot && !pret && <button className="btn block" onClick={() => setCook(true)}><ChefHat size={18} />Mode cuisine</button>}
+        <div className="acts">
+          {!slot && !pret && <button className="btn ghost sm" onClick={() => setCook(true)}><ChefHat size={16} />Mode cuisine</button>}
+          {slot && <button className="btn ghost sm" aria-pressed={slot.cooked} onClick={() => run(() => setCooked(s, slotIndex!, !slot.cooked), slot.cooked ? "Annulé : stock rétabli" : "Bon appétit ! Stock mis à jour")}><ChefHat size={16} />{slot.cooked ? "Pas cuisiné" : "Cuisiné ✓"}</button>}
+          <button className="btn ghost sm" aria-pressed={fav} onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, recipe.id))}><Heart size={16} fill={fav ? "currentColor" : "none"} />Favori</button>
+          {slot && !isVegRecipe(recipe) && !pret && <button className="btn ghost sm" aria-pressed={veg} onClick={toggleVeg}><Leaf size={16} />{veg ? "Version classique" : "Tout en végé"}</button>}
+          {slot && slot.meal === "soir" && !slot.fromLeftovers && <button className="btn ghost sm" aria-pressed={!!slot.leftovers} onClick={() => run(() => toggleLeftovers(s, slotIndex!, !slot.leftovers), slot.leftovers ? "Restes annulés" : "Portion doublée : demain midi = restes 🍱")}>🍱 {slot.leftovers ? "Sans restes" : "Restes demain"}</button>}
+          {slot && !slot.fromLeftovers && !slot.guests && s.app.features.ai && !pret && <button className="btn ghost sm" onClick={() => setReception(true)}>🎉 Je reçois</button>}
+          {slot && !slot.fromLeftovers && !slot.guests && !pret && <button className="btn ghost sm" onClick={() => setReady(true)}>🥡 Plat préparé</button>}
+        </div>
       </div>
-      {slot && <div className="row wrap" style={{ margin: "-6px 0 12px" }}>
-        {slot.meal === "soir" && !slot.fromLeftovers && <button className="btn ghost sm" aria-pressed={!!slot.leftovers} onClick={() => run(() => toggleLeftovers(s, slotIndex!, !slot.leftovers), slot.leftovers ? "Restes annulés" : "Portion doublée : demain midi = restes 🍱")}>🍱 {slot.leftovers ? "Annuler les restes de demain" : "Cuisiner aussi pour demain midi"}</button>}
-        {!slot.fromLeftovers && !slot.guests && s.app.features.ai && !pret && <button className="btn ghost sm" onClick={() => setReception(true)}>🎉 Je reçois</button>}
-        {!slot.fromLeftovers && !slot.guests && !pret && <button className="btn ghost sm" onClick={() => setReady(true)}>🥡 Plat préparé à la place</button>}
-      </div>}
       {slot?.guests && <div className="card" style={{ margin: "0 0 12px", background: "var(--bg)" }}>
         <h3>🎉 Réception · {headcount(eatersOf(s.settings)) + slot.guests.adults + slot.guests.kids} personnes</h3>
         {(slot.courses || []).map((c) => { const r = s.recipes.get(c.recipeId); return r ? <p key={c.recipeId} style={{ margin: "2px 0" }}><b>{COURSE[c.type]}</b> : {r.name} <span className="muted small">⏱ {r.prepMin} min</span></p> : null; })}
