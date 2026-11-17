@@ -1,7 +1,7 @@
 import type { Item } from "./types";
 
 // Même logique que functions/src/readers/match.ts (ressemblance de noms d'articles).
-const norm = (s: string) => s.toLowerCase().replace(/pâtes\b/g, "pasta").replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patev" : "pate")).replace(/\bpdt\b/g, "pommes de terre").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
+const norm = (s: string) => s.toLowerCase().replace(/\bp[âa]tes\b/g, "pasta").replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patev" : "pate")).replace(/\bpdt\b/g, "pommes de terre").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
 /** Mots de cuisine équivalents (« abricots séchés » = « abricots secs », « endive » = « chicon »). */
 const SYN: Record<string, string> = { seche: "sec", endive: "chicon", carbonnade: "carbonade", boulet: "boulette", cuite: "cuit", entiere: "entier" };
 /** Pluriel et féminin ramenés à une forme (« fumées » → « fume », « séchée » → « sec »). */
