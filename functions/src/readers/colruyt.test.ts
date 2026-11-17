@@ -133,6 +133,10 @@ describe("correspondance : le mot principal du produit compte", () => {
     expect(m("Saucisses de campagne")).toBeNull();
     expect(similarity("Saucisses de campagne", "Saucisson")).toBeLessThan(0.5);
   });
+  it("synonymes de cuisine", () => {
+    expect(similarity("Abricots séchés", "Abricots secs")).toBe(1);
+    expect(similarity("Endives", "Chicons")).toBe(1);
+  });
   it("un alias propre à l'article reste utilisable", () => {
     expect(m("Laitue iceberg", "pc")).toBe("salade-verte");
   });

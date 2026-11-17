@@ -1,9 +1,13 @@
 import type { ItemDoc } from "../catalog";
 
 // « pâté » et « pâtes » ne doivent pas se confondre une fois les accents retirés.
-const norm = (s: string) => s.toLowerCase().replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patee" : "pate")).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
+const norm = (s: string) => s.toLowerCase().replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patev" : "pate")).replace(/\bpdt\b/g, "pommes de terre").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
+/** Mots de cuisine équivalents (« abricots séchés » = « abricots secs », « endive » = « chicon »). */
+const SYN: Record<string, string> = { seche: "sec", endive: "chicon", carbonnade: "carbonade", boulet: "boulette", cuite: "cuit", entiere: "entier" };
+/** Pluriel et féminin ramenés à une forme (« fumées » → « fume », « séchée » → « sec »). */
+const stem = (w: string) => { const x = w.replace(/(x|s)$/, "").replace(/ee$/, "e"); return SYN[x] || x; };
 const STOP = new Set(["de", "du", "la", "le", "les", "des", "et", "en", "au", "aux", "a", "d", "l", "avec", "sans", "pour", "boite", "bio", "boni", "colruyt", "everyday", "selection", "extra", "fresh", "frais", "fraiche", "fraiches", "belge", "belges", "pce", "pc", "kg", "g", "ready", "to", "eat", "mur", "mure", "murs", "doux", "douce", "flandria", "papillon", "feuille"]);
-export const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)).map((w) => w.replace(/(x|s)$/, ""));
+export const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)).map(stem);
 
 /** Mots qui changent la nature du produit : si le produit les contient et pas l'article, ce n'est pas le même. */
 const DERIVED = ["seche", "sec", "confit", "jus", "soupe", "puree", "chip", "sirop", "compote", "confiture", "sauce", "conserve", "surgele", "glace", "yaourt", "biscuit", "saveur", "arome", "poudre", "pate", "salade", "plante", "graine",
