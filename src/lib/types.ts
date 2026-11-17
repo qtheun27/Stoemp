@@ -55,9 +55,6 @@ export interface Recipe {
   course?: Course;
   /** Recette de la grande bibliothèque : étapes chargées à l'ouverture. */
   lib?: boolean;
-  /** Recette adaptée d'une base ouverte : mention de la source (licence) et adresse d'origine. */
-  sourceNote?: string;
-  sourceUrl?: string;
   householdId?: string;
   deleted?: boolean;
   createdAt?: number;
