@@ -46,7 +46,8 @@ export const LibReview = z.object({ verdicts: z.array(z.object({
   reason: z.string().describe("Une phrase : pourquoi c'est refusé, ou « ok »"),
 })) });
 /** Recettes de la bibliothèque : avec le type de plat (plat principal, entrée, dessert). */
-export const LibRecipes = z.object({ recipes: z.array(AiRecipe.extend({ course: z.enum(["plat", "entree", "dessert"]) })) });
+export const LIB_COURSES = ["aperitif", "entree", "soupe", "plat", "accompagnement", "dessert", "patisserie", "petitdej"] as const;
+export const LibRecipes = z.object({ recipes: z.array(AiRecipe.extend({ course: z.enum(LIB_COURSES) })) });
 
 export const Match = z.object({ index: z.number().int().nullable().describe("Indice du produit correspondant, ou null si aucun") });
 

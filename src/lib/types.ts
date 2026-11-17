@@ -1,5 +1,7 @@
 export type { Cuisine } from "../data/recipes-more";
 import type { Cuisine } from "../data/recipes-more";
+/** Type de plat. */
+export type Course = "aperitif" | "entree" | "soupe" | "plat" | "accompagnement" | "dessert" | "patisserie" | "petitdej";
 export type Cat = "fl" | "vi" | "fr" | "bo" | "ep" | "bs" | "su" | "dr";
 export type Unit = "g" | "ml" | "pc";
 export type Season = "P" | "E" | "A" | "H";
@@ -50,7 +52,7 @@ export interface Recipe {
   /** Cuisine (belge, italienne, asiatique…). */
   cuisine?: Cuisine;
   /** Type de plat (plat principal par défaut). */
-  course?: "plat" | "entree" | "dessert" | "aperitif";
+  course?: Course;
   /** Recette de la grande bibliothèque : étapes chargées à l'ouverture. */
   lib?: boolean;
   householdId?: string;
