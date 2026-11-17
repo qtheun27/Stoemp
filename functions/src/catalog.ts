@@ -2,7 +2,7 @@ import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import type { z } from "zod";
 import type { ClassifiedItem } from "./schemas";
 
-export interface ItemDoc { id: string; name: string; aliases: string[]; category: string; unit: "g" | "ml" | "pc"; packSize: number; organicAvailable?: boolean }
+export interface ItemDoc { id: string; name: string; aliases: string[]; category: string; unit: "g" | "ml" | "pc"; packSize: number; organicAvailable?: boolean; ready?: boolean }
 
 export const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe").replace(/\s+/g, " ").trim();
 export const slug = (s: string) => norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -22,8 +22,8 @@ export function findItem(items: ItemDoc[], name: string): ItemDoc | undefined {
   return items.find((i) => [i.name, ...(i.aliases || [])].some((n) => key(n) === k));
 }
 
-/** Liste compacte du catalogue pour les prompts (identifiant, nom, unité). */
-export const catalogPrompt = (items: ItemDoc[]) => items.map((i) => `${i.id} | ${i.name} | ${i.unit}`).join("\n");
+/** Liste compacte du catalogue ; pour les recettes, sans les plats préparés du magasin (ce ne sont pas des ingrédients). */
+export const catalogPrompt = (items: ItemDoc[], ingredientsOnly = false) => items.filter((i) => !ingredientsOnly || !i.ready).map((i) => `${i.id} | ${i.name} | ${i.unit}`).join("\n");
 
 export async function createItem(c: z.infer<typeof ClassifiedItem>, alias?: string): Promise<ItemDoc> {
   const items = await loadItems();
@@ -34,7 +34,7 @@ export async function createItem(c: z.infer<typeof ClassifiedItem>, alias?: stri
     name: c.name, aliases: alias && norm(alias) !== norm(c.name) ? [alias] : [], category: c.category, unit: c.unit,
     packSize: c.packSize > 0 ? c.packSize : 1, local: c.local, organicAvailable: c.organicAvailable, perishable: c.perishable,
     shelfLifeDays: c.shelfLifeDays, allergens: c.allergens, seasonMonths: c.seasonMonths, staple: false, common: false,
-    demoPrice: 0, source: "ia", createdAt: FieldValue.serverTimestamp(),
+    demoPrice: 0, source: "ia", ready: !!c.ready, createdAt: FieldValue.serverTimestamp(),
   };
   await getFirestore().collection("items").doc(id).set(doc, { merge: true });
   const item = { id, ...doc } as unknown as ItemDoc;

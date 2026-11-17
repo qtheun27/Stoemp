@@ -22,6 +22,8 @@ export interface Item {
   packSize: number;
   demoPrice: number;
   source?: "base" | "ia";
+  /** Plat préparé vendu en magasin (lasagne, pizza…), à part des ingrédients. */
+  ready?: boolean;
 }
 
 export interface Ingredient {
@@ -41,7 +43,8 @@ export interface Recipe {
   meat: Ingredient[];
   vegSwap: Ingredient[];
   steps: string[];
-  source: "base" | "ia" | "perso";
+  /** « pret » : plat préparé du magasin, à réchauffer (créé à partir du catalogue). */
+  source: "base" | "ia" | "perso" | "pret";
   householdId?: string;
   deleted?: boolean;
   createdAt?: number;

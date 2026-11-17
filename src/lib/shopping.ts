@@ -116,10 +116,12 @@ export function buildShopping(inp: ShopInput): { lines: ShopLine[]; suggestions:
 }
 
 /** Texte partageable, rangé par rayon. */
-export function shareText(lines: ShopLine[], fmt: (l: ShopLine) => string, cats: Record<Cat, { label: string; icon: string }>, order: Cat[]) {
+export function shareText(lines: ShopLine[], fmt: (l: ShopLine) => string, cats: Record<Cat, { label: string; icon: string }>, order: Cat[], isReady: (l: ShopLine) => boolean = () => false) {
   let t = "🛒 Liste de courses — Stoemp\n";
+  const ready = lines.filter((l) => isReady(l) && !l.checked);
+  if (ready.length) t += `\n🥡 Plats préparés\n` + ready.map((l) => `• ${l.name}${fmt(l) ? " — " + fmt(l) : ""}`).join("\n") + "\n";
   for (const c of order) {
-    const L = lines.filter((l) => l.category === c && !l.checked);
+    const L = lines.filter((l) => l.category === c && !l.checked && !isReady(l));
     if (!L.length) continue;
     t += `\n${cats[c].icon} ${cats[c].label}\n` + L.map((l) => `• ${l.name}${fmt(l) ? " — " + fmt(l) : ""}`).join("\n") + "\n";
   }

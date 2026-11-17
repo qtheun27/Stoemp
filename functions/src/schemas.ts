@@ -15,6 +15,7 @@ export const ClassifiedItem = z.object({
   shelfLifeDays: z.number().int(),
   allergens: z.array(ALLERGEN),
   seasonMonths: z.array(z.number().int()).describe("Mois de saison en Belgique (1-12) pour fruits et légumes, sinon vide"),
+  ready: z.boolean().describe("Plat préparé prêt à réchauffer ou à manger (lasagne, hachis parmentier, pizza, plat traiteur) ; false pour un ingrédient ou une base de cuisine (pâte à pizza, sauce, feuilles de lasagne)"),
 });
 
 /** Ingrédient tel que renvoyé par l'IA : article connu (itemId) ou nouvel article (newName). */
@@ -74,5 +75,6 @@ export const NewItems = z.object({
     local: z.boolean(), organicAvailable: z.boolean(), perishable: z.boolean(), shelfLifeDays: z.number().int(),
     allergens: z.array(ALLERGEN),
     seasonMonths: z.array(z.number().int()).describe("Mois de saison en Belgique (1-12) pour fruits et légumes, sinon vide"),
+    ready: z.boolean().describe("Plat préparé prêt à réchauffer ou à manger (lasagne, hachis parmentier, pizza, plat traiteur) ; false pour un ingrédient ou une base de cuisine"),
   })),
 });

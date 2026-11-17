@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Heart, Sparkles, Trash2 } from "lucide-react";
-import { isVegRecipe } from "../lib/catalog";
+import { cookable, isVegRecipe } from "../lib/catalog";
 import type { Recipe } from "../lib/types";
 import { deleteRecipe, saveManualDish, structureMyDish, toggleFavorite } from "../state/actions";
 import { useStore } from "../state/store";
@@ -13,7 +13,7 @@ export default function Dishes() {
   const [busy, setBusy] = useState<"ai" | "save" | null>(null);
   const [open, setOpen] = useState<Recipe | null>(null);
   const [armed, setArmed] = useState<string | null>(null);
-  const all = [...s.recipes.values()].filter((r) => !r.deleted);
+  const all = cookable(s.recipes.values()).filter((r) => !r.deleted);
   const mine = all.filter((r) => r.source === "perso");
   const ia = all.filter((r) => r.source === "ia");
   const favs = all.filter((r) => s.prefs.favorites.includes(r.id));
