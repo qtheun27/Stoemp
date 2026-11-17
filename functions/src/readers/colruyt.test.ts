@@ -151,6 +151,9 @@ describe("correspondance : le mot principal du produit compte", () => {
     expect(aliasFits("Saucisses de poulet", "Filet de poulet")).toBe(false);
     expect(aliasFits("Pizza poulet kebab", "Pizza au chorizo")).toBe(false);
     expect(similarItem("Steaks hachés", "g", "viande", [it2("burger", "Burger croustillant")] as never)).toBeNull();
+    const vins = [it2("vin-rouge", "Vin rouge", [], "ml", "bs")] as never;
+    expect(similarItem("Vin rouge Pomerol", "ml", "bs", vins)).toBeNull(); // plus précis : nouvel article
+    expect(similarItem("Vins rouges", "ml", "bs", vins)).not.toBeNull();
   });
 });
 
