@@ -25,7 +25,7 @@ let spendCache: { at: number; v: number } | null = null;
  * Appel Claude pour une tâche : modèle, effort et plafond lus dans la configuration (console d'administration),
  * sortie JSON contrainte par un schéma zod puis revalidée, journalisation (jetons, coût, durée, erreurs).
  */
-export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system: string; content: Content; schema: T; uid?: string }): Promise<z.infer<T>> {
+export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system: string; content: Content; schema: T; uid?: string; minTokens?: number }): Promise<z.infer<T>> {
   const cfg = await aiConfig();
   const tc = cfg.tasks[task];
   if (!cfg.enabled || !tc.enabled) throw new HttpsError("failed-precondition", "Cette fonction IA est désactivée par l'administrateur.");
@@ -33,7 +33,7 @@ export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system
   if (cfg.monthlyBudgetUsd > 0 && spendCache.v >= cfg.monthlyBudgetUsd) throw new HttpsError("resource-exhausted", "Budget IA du mois atteint.");
 
   const params: Record<string, unknown> = {
-    model: tc.model, max_tokens: tc.maxTokens, system: opts.system,
+    model: tc.model, max_tokens: Math.max(tc.maxTokens, opts.minTokens || 0), system: opts.system,
     messages: [{ role: "user", content: opts.content }],
     output_config: { format: zodOutputFormat(opts.schema), ...(supportsEffort(tc.model) ? { effort: tc.effort } : {}) },
   };
@@ -47,6 +47,7 @@ export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system
     const cost = costOf(res.model || tc.model, inTok, outTok);
     if (spendCache && cost) spendCache.v += cost;
     if (res.stop_reason === "refusal") { await log({ ok: false, error: "refus", inTok, outTok, cost, served: res.model }); throw new HttpsError("failed-precondition", "L'IA a refusé cette demande."); }
+    if (res.stop_reason === "max_tokens") { await log({ ok: false, error: "réponse trop longue (jetons max atteints)", inTok, outTok, cost, served: res.model }); throw new HttpsError("resource-exhausted", "Réponse IA trop longue : augmente les jetons max dans la console."); }
     const text = res.content.map((b) => (b.type === "text" ? b.text : "")).join("");
     const parsed = opts.schema.parse(JSON.parse(text));
     await log({ ok: true, inTok, outTok, cost, served: res.model });

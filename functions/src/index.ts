@@ -265,10 +265,10 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     }
     // 2. Enrichissement : les produits inconnus deviennent des articles génériques (classés par l'IA, une seule fois).
     const created = new Set<string>();
-    for (let i = 0; i < Math.min(unmatched.length, 300); i += 60) {
-      const batch = unmatched.slice(i, i + 60);
+    for (let i = 0; i < Math.min(unmatched.length, 300); i += 40) {
+      const batch = unmatched.slice(i, i + 40);
       try {
-        const r = await askJson("classifyItem", { uid: u, schema: NewItems, system: ENRICH_SYSTEM,
+        const r = await askJson("classifyItem", { uid: u, schema: NewItems, system: ENRICH_SYSTEM, minTokens: 16000,
           content: batch.map((p, k) => `${k}. ${p.name} — vendu ${p.packUnit === "pc" ? "à la pièce" : p.packSize === 1000 ? (p.packUnit === "g" ? "au kg" : "au litre") : `par ${p.packSize} ${p.packUnit}`}`).join("\n") });
         for (const c of r.items) {
           const p = batch[c.index];
@@ -293,12 +293,12 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
   let found = 0;
   for (let i = 0; i < parts.length; i += 4) {
     const res = await Promise.allSettled(parts.slice(i, i + 4).map(async (part) => {
-      const page = await askJson("extractPrices", { uid: u, schema: PageProducts, system: EXTRACT_SYSTEM, content: `Enseigne : ${d.store}\nPage : ${d.url}\n\n${part}` });
+      const page = await askJson("extractPrices", { uid: u, schema: PageProducts, system: EXTRACT_SYSTEM, minTokens: 16000, content: `Enseigne : ${d.store}\nPage : ${d.url}\n\n${part}` });
       const usable = page.products.filter((p) => p.packSize && p.packUnit && p.price > 0);
       found += usable.length;
       if (!usable.length) return;
       const m = await askJson("matchProduct", {
-        uid: u, schema: PageMatches, system: `${MATCH_PAGE_SYSTEM}\nCatalogue (itemId | nom | unité) :\n${catalog}`,
+        uid: u, schema: PageMatches, minTokens: 4000, system: `${MATCH_PAGE_SYSTEM}\nCatalogue (itemId | nom | unité) :\n${catalog}`,
         content: usable.map((p, k) => `${k}. ${[p.brand, p.name].filter(Boolean).join(" ")} (${p.packSize} ${p.packUnit})`).join("\n"),
       });
       for (const x of m.matches) {
