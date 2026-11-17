@@ -549,6 +549,8 @@ UNIQUEMENT des plats qui existent réellement et sont connus sous ce nom dans le
 Recette fidèle à la tradition (ingrédients et techniques d'origine), adaptée seulement si un ingrédient est introuvable en Belgique ; faisable en famille.
 Recette COMPLÈTE et PRÉCISE, comme dans un bon livre de cuisine : tous les ingrédients qui comptent (vin, bouillon, herbes, beurre compris), 4 à 8 étapes avec les gestes (découper, précuire, pocher, réduire), les temps et les températures, jusqu'au dressage.
 Pour les desserts, pâtisseries et apéritifs : quantités pour 1 part ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
+prepMin = durée TOTALE réelle (préparation + cuisson + repos) ; une marinade ou un trempage de la veille se signale dans les étapes et compte aussi (ex. 3 h de four → prepMin ≥ 200).
+Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.
 Varie les ingrédients principaux (volaille, bœuf, porc, poisson, fruits de mer, légumineuses, œufs, légumes) et les saisons.
 N'en propose AUCUNE de cette liste (même sous un autre nom) : ${[...sameCourse.slice(-600), ...refusedBefore.slice(-100)].join(" ; ") || "—"}.`,
   });
@@ -559,7 +561,8 @@ N'en propose AUCUNE de cette liste (même sous un autre nom) : ${[...sameCourse.
     const all = [...r.ingredients, ...r.meat];
     const qtyOk = all.every((x) => { const it = x.itemId ? byId.get(x.itemId) : undefined; const u = it?.unit;
       return x.qtyPerPerson > 0 && (u === "pc" ? x.qtyPerPerson <= 6 : x.qtyPerPerson <= 700); });
-    return all.length >= (course === "plat" || course === "soupe" ? 3 : 2) && r.steps.length >= 2 && r.steps.length <= 10 && r.prepMin >= 5 && r.prepMin <= 300 && qtyOk && (!r.meat.length || r.vegSwap.length > 0);
+    const hours = Math.max(0, ...r.steps.join(" ").match(/(\d+)\s*h(?:eures?)?\b/gi)?.map((x) => parseInt(x)) || [0]);
+    return hours * 60 <= r.prepMin + 30 && all.length >= (course === "plat" || course === "soupe" ? 3 : 2) && r.steps.length >= 2 && r.steps.length <= 10 && r.prepMin >= 5 && r.prepMin <= 300 && qtyOk && (!r.meat.length || r.vegSwap.length > 0);
   };
   const candidates = res.recipes.map((r, k) => ({ r, k })).filter(({ r }) => sane(r) && !known.has(norm(r.name)));
   const line = (x: { itemId: string | null; newName: string | null; qtyPerPerson: number }) => { const it = x.itemId ? byId.get(x.itemId) : undefined;
@@ -586,7 +589,7 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
   for (const [k, r] of res.recipes.entries()) {
     const key = norm(r.name);
     if (!okIdx.has(k) || known.has(key) || taken.has(`lib-${slug(r.name)}`.slice(0, 120))) continue;
-    const ingredients = await resolveIngredients(r.ingredients, items);
+    const ingredients = (await resolveIngredients(r.ingredients.filter((x) => !/^eau( plate| du robinet)?$/i.test((x.itemId ? byId.get(x.itemId)?.name : x.newName) || "")), items)).filter((x) => x.itemId !== "eau-plate");
     if (ingredients.length < 2) continue;
     const meat = await resolveIngredients(r.meat, items);
     const vegSwap = meat.length ? await resolveIngredients(r.vegSwap, items) : [];
