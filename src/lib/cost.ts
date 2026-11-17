@@ -1,10 +1,10 @@
 import { ingredientsOf } from "./catalog";
 import type { ItemIndex } from "./catalog";
-import { bestPrice, lineCost, priceAt, type PriceBook } from "./pricing";
+import { bestPrice, lineCost, priceAt, type PriceBook, type PriceSel } from "./pricing";
 import type { Recipe, StoreId, Unit } from "./types";
 import { baseQty } from "./units";
 
-export interface CostCtx { idx: ItemIndex; book: PriceBook; stores: StoreId[]; pref: StoreId | "cheapest"; organic: boolean }
+export interface CostCtx { idx: ItemIndex; book: PriceBook; stores: StoreId[]; pref: StoreId | "cheapest"; organic: PriceSel | boolean }
 
 /** Coût par personne d'un repas (part réellement utilisée de chaque article). */
 export function mealCostPerPerson(r: Recipe, veg: boolean, ctx: CostCtx): number {

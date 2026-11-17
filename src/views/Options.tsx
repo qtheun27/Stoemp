@@ -42,6 +42,9 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
       <Opt o={o} set={set} k="local" title="Produits de la région" desc="Ingrédients principaux produits en Belgique, substitutions locales proposées" />
       <Opt o={o} set={set} k="organic" title="Bio" desc="Prix bio quand ils existent ; les articles sans version bio sont signalés" />
       <Opt o={o} set={set} k="veg" title="Végétarien" desc="Tous les repas en version végé (chaque repas garde son bouton 🌱)" />
+      <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Gamme de produits</b><div className="d">Sert au coût des repas et au budget, quand tu n'as pas encore de prix payés</div>
+        <div className="chips extra">{([["eco", "Premier prix"], ["maison", "Marque du magasin"], ["marque", "Grandes marques"]] as const).map(([k, l]) =>
+          <button key={k} className="chip" aria-pressed={(o.range || "maison") === k} onClick={() => set({ range: k })}>{l}</button>)}</div></div></div>
       <Opt o={o} set={set} k="budgetOn" title="Budget max" desc="Par semaine, pour tout le foyer">
         <div className="row"><input className="input num-in" type="number" inputMode="decimal" min={10} step={5} value={o.budget} onChange={(e) => set({ budget: Number(e.target.value) || 0 })} /><span>€ par semaine</span></div>
       </Opt>

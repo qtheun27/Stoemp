@@ -11,6 +11,7 @@ import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } fr
 import { AiRecipes, ClassifiedItem, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { matchItem } from "./readers/match";
+import { tagsOf, tierOf } from "./readers/tiers";
 
 initializeApp();
 setGlobalOptions({ region: "europe-west1", maxInstances: 5 });
@@ -219,26 +220,53 @@ function chunks(text: string, size = 18000): string[] {
   return out;
 }
 
-/** Enregistre, pour chaque article, le prix au kilo/litre/pièce le plus bas de la page. */
-async function savePrices(store: (typeof STORES)[number], url: string, shop: string | null, rows: { itemId: string; organic: boolean; productName: string; size: number; unit: string; price: number; promo: string | null }[]) {
+type Row = { itemId: string; organic: boolean; productName: string; size: number; unit: string; price: number; promo: string | null };
+
+/**
+ * Enregistre les prix d'une page : toutes les variantes de chaque article (gamme, bio, sans gluten…) fusionnées
+ * avec celles déjà connues, le prix le plus bas en résumé, et l'historique seulement quand le prix change.
+ */
+async function savePrices(store: (typeof STORES)[number], url: string, shop: string | null, rows: Row[]) {
   const now = new Date().toISOString();
-  const best = new Map<string, (typeof rows)[number] & { ppu: number }>();
-  for (const r of rows) {
-    const key = `${r.itemId}_${store}${r.organic ? "_bio" : ""}`;
-    const ppu = r.price / r.size;
-    if (!best.has(key) || best.get(key)!.ppu > ppu) best.set(key, { ...r, ppu });
-  }
+  const byItem = new Map<string, Row[]>();
+  for (const r of rows) byItem.set(r.itemId, [...(byItem.get(r.itemId) || []), r]);
   const w = db().bulkWriter();
   const saved: { itemId: string; productName: string; packPrice: number }[] = [];
-  for (const [key, r] of best) {
-    const doc = { itemId: r.itemId, store, shop, organic: r.organic, productName: r.productName, url, packSize: r.size, packUnit: r.unit,
-      packPrice: r.price, pricePerUnit: r.ppu, promo: r.promo, promoUntil: null, fetchedAt: now, source: "capture" };
-    w.set(db().collection("prices").doc(key), doc);
-    w.create(db().collection("priceHistory").doc(), doc);
-    saved.push({ itemId: r.itemId, productName: r.productName, packPrice: r.price });
+  const keepAfter = new Date(Date.now() - 60 * 86400_000).toISOString();
+  for (const [itemId, list] of byItem) {
+    const ref = db().collection("prices").doc(`${itemId}_${store}`);
+    const prev = (await ref.get()).data();
+    // Variantes : celles de cette page remplacent les mêmes produits, les autres restent (sauf si trop anciennes).
+    const fresh = list.map((r) => ({ name: r.productName, tier: tierOf(store, r.productName), organic: r.organic, tags: tagsOf(r.productName),
+      size: r.size, price: r.price, ppu: r.price / r.size, promo: r.promo, seenAt: now }));
+    const names = new Set(fresh.map((o) => o.name));
+    const offers = [...fresh, ...((prev?.offers as typeof fresh) || []).filter((o) => !names.has(o.name) && (o.seenAt || "") >= keepAfter)]
+      .sort((a, b) => a.ppu - b.ppu).slice(0, 30);
+    // Résumé : la variante la moins chère (non bio, sinon bio).
+    const best = offers.find((o) => !o.organic) || offers[0];
+    const unit = list[0].unit;
+    const doc = { itemId, store, shop, organic: best.organic, productName: best.name, url, packSize: best.size, packUnit: unit,
+      packPrice: best.price, pricePerUnit: best.ppu, promo: best.promo, promoUntil: null, fetchedAt: now, source: "capture", offers };
+    w.set(ref, doc);
+    const bio = offers.find((o) => o.organic);
+    if (bio) w.set(db().collection("prices").doc(`${itemId}_${store}_bio`), { ...doc, organic: true, productName: bio.name, packSize: bio.size, packPrice: bio.price, pricePerUnit: bio.ppu, promo: bio.promo });
+    // Historique uniquement si le prix a changé.
+    if (!prev || Math.abs((prev.pricePerUnit || 0) - best.ppu) > 1e-9) {
+      const { offers: _o, ...hist } = doc;
+      w.create(db().collection("priceHistory").doc(), hist);
+    }
+    saved.push({ itemId, productName: best.name, packPrice: best.price });
   }
   await w.close();
   return saved;
+}
+
+/** Ne garde que les 30 dernières copies brutes de pages. */
+async function pruneCaptures() {
+  const old = await db().collection("captures").orderBy("at", "desc").offset(30).select().get();
+  const w = db().bulkWriter();
+  old.docs.forEach((d) => w.delete(d.ref));
+  await w.close();
 }
 
 const ENRICH_SYSTEM = `${CLASSIFY_SYSTEM}
@@ -250,13 +278,14 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
   const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(300000) }), req.data);
   // Copie du texte brut (lecture réservée à l'administrateur) : sert à écrire des lecteurs d'enseigne sans IA.
   await db().collection("captures").add({ store: d.store, url: d.url, text: d.text, length: d.text.length, uid: u, at: Date.now() }).catch(() => {});
+  await pruneCaptures().catch(() => {});
   let items = await loadItems();
 
   // 1. Lecture sans IA quand on connaît le format de l'enseigne.
   const parsed: ShopProduct[] = d.store === "colruyt" ? parseColruyt(d.text) : [];
   if (parsed.length >= 3) {
     const shop = colruytShop(d.text);
-    const rows: Parameters<typeof savePrices>[3] = [];
+    const rows: Row[] = [];
     const unmatched: ShopProduct[] = [];
     for (const p of parsed) {
       const m = matchItem(p.name, p.packSize, p.packUnit, items);
@@ -289,7 +318,7 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
   // 3. Enseigne au format inconnu : lecture par l'IA, morceau par morceau (un morceau en échec n'arrête pas les autres).
   const catalog = catalogPrompt(items);
   const parts = chunks(d.text, 8000);
-  const rows: Parameters<typeof savePrices>[3] = [];
+  const rows: Row[] = [];
   let found = 0;
   for (let i = 0; i < parts.length; i += 4) {
     const res = await Promise.allSettled(parts.slice(i, i + 4).map(async (part) => {
