@@ -232,3 +232,44 @@ describe("favori « Envoyer à Stoemp »", () => {
     expect(() => new Function(real)).not.toThrow();
   });
 });
+
+import { eatersOf, portionsOf, slotPortions } from "../household";
+import { drinkFor } from "../drinks";
+import { profile } from "../balance";
+import { kidUnfriendly } from "../planner";
+describe("foyer, réception, restes, boissons, équilibre", () => {
+  it("portions : un enfant ≈ 0,6 portion, un ado une portion", () => {
+    const e = eatersOf({ persons: 4, adults: 2, teens: 1, kids: 2 });
+    expect(portionsOf(e)).toBeCloseTo(4.2);
+    expect(eatersOf({ persons: 3 } as never)).toEqual({ adults: 3, teens: 0, kids: 0 }); // ancien réglage
+  });
+  it("courses : invités, restes du lendemain et services de la réception", () => {
+    const slot = (x: Partial<Slot>): Slot => ({ day: 0, meal: "soir", recipeId: "base-pates-carbonara", veg: false, cooked: false, ...x });
+    expect(slotPortions(slot({ guests: { adults: 2, kids: 1 } }), 2)).toBeCloseTo(4.6);
+    expect(slotPortions(slot({ leftovers: true }), 2)).toBe(4);
+    expect(slotPortions(slot({ fromLeftovers: true }), 2)).toBe(0);
+    const need = mealNeeds([slot({ leftovers: true }), slot({ day: 1, meal: "midi", fromLeftovers: true }),
+      slot({ day: 2, guests: { adults: 2, kids: 0 }, courses: [{ type: "dessert", recipeId: "base-omelette-aux-herbes-et-pommes-de-terre" }] })], recipes, 2, BASE_INDEX);
+    expect(need.get("lardons")).toBe(60 * 4 + 60 * 4); // restes (2 + 2) + réception (2 + 2 invités)
+    expect(need.get("oeufs")).toBe(1 * 4 + 1 * 4 + 2 * 4); // carbonara ×2 + « dessert » (omelette, 2 œufs) pour 4
+  });
+  it("boissons : bière avec la carbonnade, vin blanc avec le poisson, rien d'alcoolisé si demandé", () => {
+    expect(drinkFor(recipes.get("base-carbonnade-flamande")!, false, BASE_INDEX).adultItem).toBe("biere-brune");
+    expect(drinkFor(recipes.get("base-saumon-riz-et-brocoli")!, false, BASE_INDEX).adultItem).toBe("vin-blanc");
+    expect(drinkFor(recipes.get("base-saumon-riz-et-brocoli")!, false, BASE_INDEX, true).adult).not.toMatch(/vin|bière/i);
+  });
+  it("équilibre : profil des repas et plats épicés écartés pour les enfants", () => {
+    expect(profile(recipes.get("base-saumon-riz-et-brocoli")!, false, BASE_INDEX)).toEqual({ protein: "poisson", starch: "riz" });
+    expect(profile(recipes.get("base-chili-con-carne")!, true, BASE_INDEX).protein).toBe("legumineuses");
+    expect(kidUnfriendly(recipes.get("base-chili-con-carne")!, false)).toBe(true);
+    expect(kidUnfriendly(recipes.get("base-pates-carbonara")!, false)).toBe(false);
+  });
+  it("la semaine équilibrée contient du poisson", () => {
+    let fish = 0;
+    for (let i = 0; i < 20; i++) {
+      const w = planWeek(BASE_RECIPES, { idx: BASE_INDEX, settings: { ...DEFAULT_SETTINGS, options: { ...DEFAULT_SETTINGS.options, seasonal: false } }, favorites: [], stock: new Map(), cost: ctxCost, rand: Math.random });
+      if (w.slots.some((s) => profile(recipes.get(s.recipeId)!, s.veg, BASE_INDEX).protein === "poisson")) fish++;
+    }
+    expect(fish).toBeGreaterThanOrEqual(17); // au moins 85 % des semaines
+  });
+});

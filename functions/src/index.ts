@@ -8,7 +8,7 @@ import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
-import { AiRecipes, ClassifiedItem, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
+import { AiRecipe, AiRecipes, ClassifiedItem, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { matchItem, similarItem } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
@@ -90,6 +90,7 @@ export const generateRecipes = onCall(ai, async (req) => {
     options: z.object({
       local: z.boolean(), organic: z.boolean(), veg: z.boolean(), maxTime: z.number().nullable(),
       allergens: z.array(z.string()), avoid: z.array(z.string()), budgetPerPerson: z.number().nullable(),
+      kidFriendly: z.boolean().optional(), stockOnly: z.boolean().optional(),
     }),
     knownNames: z.array(z.string()).max(400), stockToUse: z.array(z.string()).max(30),
   }), req.data);
@@ -104,7 +105,9 @@ export const generateRecipes = onCall(ai, async (req) => {
     o.allergens.length && `sans : ${o.allergens.map((a) => ALG_LABEL[a] || a).join(", ")}`,
     o.avoid.length && `sans ces ingrédients : ${o.avoid.join(", ")}`,
     o.budgetPerPerson && `économiques (environ ${o.budgetPerPerson.toFixed(2)} € par personne et par repas)`,
-    d.stockToUse.length && `qui utilisent si possible : ${d.stockToUse.join(", ")}`,
+    o.kidFriendly && "appréciés des enfants (pas épicés, saveurs douces)",
+    o.stockOnly ? d.stockToUse.length && `réalisables UNIQUEMENT avec ces ingrédients déjà à la maison (plus sel, poivre, huile, épices de base) : ${d.stockToUse.join(", ")}`
+      : d.stockToUse.length && `qui utilisent si possible : ${d.stockToUse.join(", ")}`,
   ].filter(Boolean).join(" ; ");
   const res = await askJson("generateRecipes", {
     uid: u, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items)),
@@ -131,6 +134,58 @@ N'utilise AUCUN de ces plats déjà connus : ${d.knownNames.join(" ; ")}.`,
   }
   await batch.commit();
   return { recipes: out };
+});
+
+// ---------- generateMenu : mode « Je reçois » ----------
+const COURSE_LABEL: Record<string, string> = { aperitif: "apéritif (bouchées à partager)", entree: "entrée", plat: "plat principal", dessert: "dessert" };
+
+export const generateMenu = onCall(ai, async (req) => {
+  const u = uid(req);
+  const d = input(z.object({
+    householdId: z.string(), season: z.enum(["P", "E", "A", "H"]),
+    courses: z.array(z.enum(["aperitif", "entree", "plat", "dessert"])).min(1).max(4),
+    keepMain: z.string().max(120).nullable(),
+    guests: z.object({ adults: z.number().int().min(1).max(40), kids: z.number().int().min(0).max(30) }),
+    options: z.object({ veg: z.boolean(), allergens: z.array(z.string()), avoid: z.array(z.string()), noAlcohol: z.boolean(), budgetPerHead: z.number().nullable() }),
+  }), req.data);
+  await requireMember(d.householdId, u);
+  const items = await loadItems();
+  const o = d.options;
+  const constraints = [
+    `de saison en ${SEASON_LABEL[d.season]} en Belgique`,
+    `pour ${d.guests.adults} adultes${d.guests.kids ? ` et ${d.guests.kids} enfants (au moins un élément qui leur plaît à chaque service)` : ""}`,
+    o.veg && "végétarien", o.allergens.length && `sans : ${o.allergens.map((a) => ALG_LABEL[a] || a).join(", ")}`,
+    o.avoid.length && `sans ces ingrédients : ${o.avoid.join(", ")}`,
+    o.budgetPerHead && `budget d'environ ${o.budgetPerHead.toFixed(2)} € par convive pour tout le repas`,
+  ].filter(Boolean).join(" ; ");
+  const MenuSchema = z.object({
+    courses: z.array(AiRecipe.extend({ course: z.enum(["aperitif", "entree", "plat", "dessert"]) })),
+    drinks: z.array(z.string()).describe("2 à 4 boissons conseillées (accords), dont une sans alcool"),
+  });
+  const res = await askJson("generateRecipes", {
+    uid: u, schema: MenuSchema, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items)),
+    content: `Compose un menu de réception harmonieux : ${d.courses.map((c) => COURSE_LABEL[c]).join(", ")}${d.keepMain ? `, autour du plat principal déjà prévu « ${d.keepMain} » (ne le redonne pas)` : ""}.
+Contraintes : ${constraints}. Recettes faisables à la maison, dont une partie préparable à l'avance.
+${o.noAlcohol ? "Boissons : uniquement sans alcool." : "Boissons : accords avec le menu (vins, bières belges) et une option sans alcool."}
+Donne exactement un plat par service demandé, avec le champ "course".`,
+  });
+  const batch = db().batch();
+  const out = [];
+  for (const r of res.courses.filter((c) => d.courses.includes(c.course))) {
+    const ingredients = await resolveIngredients(r.ingredients, items);
+    if (!ingredients.length) continue;
+    const meat = await resolveIngredients(r.meat, items);
+    const recipe = {
+      name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: r.prepMin, seasons: r.seasons.length ? r.seasons : [d.season],
+      ingredients, meat, vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps,
+      source: "ia", course: r.course, householdId: d.householdId, deleted: false, createdAt: Date.now(),
+    };
+    const ref = db().collection("recipes").doc(`ia-${slug(r.name)}-${randomBytes(3).toString("hex")}`);
+    batch.set(ref, recipe);
+    out.push({ id: ref.id, ...recipe });
+  }
+  await batch.commit();
+  return { courses: out, drinks: res.drinks.slice(0, 4) };
 });
 
 // ---------- structureMyDish ----------

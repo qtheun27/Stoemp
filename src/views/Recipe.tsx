@@ -7,7 +7,13 @@ import { allergensOf } from "../lib/planner";
 import { eur } from "../lib/text";
 import type { Allergen, Item, Recipe } from "../lib/types";
 import { fmtIngredient } from "../lib/units";
-import { planCtx, saveSlots, setCooked, toggleFavorite } from "../state/actions";
+import { addManual, basePortions, cancelReception, planCtx, saveSlots, setCooked, toggleFavorite, toggleLeftovers } from "../state/actions";
+import { eatersOf, headcount, slotPortions } from "../lib/household";
+import { drinkFor } from "../lib/drinks";
+import ReceptionSheet from "./Reception";
+
+const COURSE = { aperitif: "Apéritif", entree: "Entrée", dessert: "Dessert" } as const;
+const fmtPortions = (p: number) => `${Number.isInteger(p) ? p : p.toLocaleString("fr-BE", { maximumFractionDigits: 1 })} portion${p > 1 ? "s" : ""}`;
 import { useStore } from "../state/store";
 import { run, Sheet } from "../ui";
 
@@ -21,9 +27,13 @@ const LOCAL_SWAPS: Record<string, string> = {
 export default function RecipeSheet({ recipe, slotIndex, onClose }: { recipe: Recipe; slotIndex: number | null; onClose: () => void }) {
   const s = useStore();
   const [cook, setCook] = useState(false);
+  const [other, setOther] = useState<Recipe | null>(null);
   const slot = slotIndex != null ? s.week?.slots[slotIndex] : undefined;
   const veg = slot ? slot.veg : s.settings.options.veg && !isVegRecipe(recipe);
-  const persons = s.week?.persons || s.settings.persons;
+  const base = basePortions(s);
+  const persons = slot ? Math.max(slotPortions(slot, base), base) : base;
+  const [reception, setReception] = useState(false);
+  const drink = drinkFor(recipe, veg, s.idx, !!s.settings.options.noAlcohol);
   const ings = ingredientsOf(recipe, veg).map((i) => ({ ing: i, item: s.idx.get(i.itemId) })).filter((x): x is { ing: typeof x.ing; item: Item } => !!x.item);
   const al = allergensOf(recipe, veg, s.idx) as Allergen[];
   const cost = mealCostPerPerson(recipe, veg, planCtx(s).cost);
@@ -36,9 +46,11 @@ export default function RecipeSheet({ recipe, slotIndex, onClose }: { recipe: Re
   const putMine = (id: string) => { if (slotIndex == null || !s.week) return; const sl = [...s.week.slots]; sl[slotIndex] = { ...sl[slotIndex], recipeId: id, veg: false, cooked: false }; run(() => saveSlots(s, sl), "Repas remplacé"); onClose(); };
 
   if (cook) return <CookMode recipe={recipe} veg={veg} onClose={() => setCook(false)} />;
+  if (other) return <RecipeSheet recipe={other} slotIndex={null} onClose={() => setOther(null)} />;
+  if (reception && slotIndex != null) return <ReceptionSheet slotIndex={slotIndex} onClose={() => setReception(false)} onDone={onClose} />;
   return (
     <Sheet title={nameOf(recipe, veg)} onClose={onClose}
-      sub={<>⏱ {recipe.prepMin} min · {persons} pers. · {eur(cost)} / pers.{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
+      sub={<>⏱ {recipe.prepMin} min · {fmtPortions(persons)}{slot?.leftovers ? " (dont demain midi)" : ""} · {eur(cost)} / portion{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
       {!!al.length && <div className="chips" style={{ margin: "4px 0 10px" }}>{al.map((a) => <span key={a} className="tag warn">Contient : {ALLERGENS[a]}</span>)}</div>}
       <div className="row wrap" style={{ margin: "6px 0 14px" }}>
         {slot && !isVegRecipe(recipe) && <button className="btn ghost sm" onClick={toggleVeg}><Leaf size={16} />{veg ? "Version classique" : "Version végé"}</button>}
@@ -46,6 +58,23 @@ export default function RecipeSheet({ recipe, slotIndex, onClose }: { recipe: Re
         {slot && <button className="btn ghost sm" onClick={() => run(() => setCooked(s, slotIndex!, !slot.cooked), slot.cooked ? "Annulé : stock rétabli" : "Bon appétit ! Stock mis à jour")}><ChefHat size={16} />{slot.cooked ? "Pas encore cuisiné" : "Cuisiné"}</button>}
         <button className="btn sm" onClick={() => setCook(true)}><ChefHat size={16} />Mode cuisine</button>
       </div>
+      {slot && <div className="row wrap" style={{ margin: "-6px 0 12px" }}>
+        {slot.meal === "soir" && !slot.fromLeftovers && <button className="btn ghost sm" aria-pressed={!!slot.leftovers} onClick={() => run(() => toggleLeftovers(s, slotIndex!, !slot.leftovers), slot.leftovers ? "Restes annulés" : "Portion doublée : demain midi = restes 🍱")}>🍱 {slot.leftovers ? "Annuler les restes de demain" : "Cuisiner aussi pour demain midi"}</button>}
+        {!slot.fromLeftovers && !slot.guests && s.app.features.ai && <button className="btn ghost sm" onClick={() => setReception(true)}>🎉 Je reçois</button>}
+      </div>}
+      {slot?.guests && <div className="card" style={{ margin: "0 0 12px", background: "var(--bg)" }}>
+        <h3>🎉 Réception · {headcount(eatersOf(s.settings)) + slot.guests.adults + slot.guests.kids} personnes</h3>
+        {(slot.courses || []).map((c) => { const r = s.recipes.get(c.recipeId); return r ? <p key={c.recipeId} style={{ margin: "2px 0" }}><b>{COURSE[c.type]}</b> : {r.name} <span className="muted small">⏱ {r.prepMin} min</span></p> : null; })}
+        <p style={{ margin: "2px 0" }}><b>Plat</b> : {recipe.name}</p>
+        {!!slot.drinks?.length && <p className="small" style={{ margin: "6px 0 0" }}>🍷 {slot.drinks.join(" · ")}</p>}
+        <p className="small muted">Les ingrédients de tous les services sont dans la liste de courses. Touche un service dans la semaine pour voir sa recette.</p>
+        <div className="row wrap">
+          {(slot.courses || []).map((c) => { const r = s.recipes.get(c.recipeId); return r ? <button key={c.recipeId} className="chip" onClick={() => setOther(r)}>{COURSE[c.type]} : recette</button> : null; })}
+          <button className="btn soft sm" onClick={() => run(() => cancelReception(s, slotIndex!), "Réception annulée")}>Annuler la réception</button>
+        </div>
+      </div>}
+      {s.settings.options.drinks !== false && !slot?.guests && <p className="small" style={{ margin: "0 0 12px" }}>🍷 <b>Avec ce plat</b> : {drink.adult}{eatersOf(s.settings).kids + eatersOf(s.settings).teens > 0 ? ` · pour les enfants : ${drink.kid}` : ""}
+        {" "}<button className="btn soft sm" onClick={() => run(async () => { const it = s.idx.get(drink.adultItem); if (it) await addManual(s, it.name); }, "Boisson ajoutée aux courses")}>+ courses</button></p>}
       {slot && !!mine.length && <>
         <h3 style={{ margin: "8px 0 6px" }}>Mettre un de mes plats à la place</h3>
         <div className="scroll-x">{mine.map((r) => <button key={r.id} className="chip" onClick={() => putMine(r.id)}>📝 {r.name}</button>)}</div>

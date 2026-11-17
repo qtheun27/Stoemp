@@ -7,6 +7,7 @@ import { parseLine } from "../lib/parse";
 import { mealCounts, planSeason, planWeek, pickOne, daysToExpiry, type PlanCtx } from "../lib/planner";
 import { trimEvents, ev } from "../lib/predict";
 import type { PriceSel } from "../lib/pricing";
+import { eatersOf, portionsOf, slotPortions, coursePortions } from "../lib/household";
 import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
 import type { Cat, Consumption, ConsumptionEvent, EventType, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
@@ -66,23 +67,28 @@ export function planCtx(s: StoreState): PlanCtx {
 }
 
 /** Articles du stock à écouler en priorité (ceux qui périment bientôt d'abord). */
-export function stockToUse(s: StoreState) {
+export function stockToUse(s: StoreState, max = 12) {
   return [...s.stock.entries()]
     .filter(([id, e]) => e.qty > 0 && !s.idx.get(id)?.staple && s.idx.get(id)?.category !== "dr")
     .sort((a, b) => daysToExpiry(a[1]) - daysToExpiry(b[1]))
-    .slice(0, 12).map(([id]) => s.idx.get(id)?.name || id);
+    .slice(0, max).map(([id]) => s.idx.get(id)?.name || id);
 }
 
-async function aiRecipes(s: StoreState, n: number): Promise<Recipe[]> {
+/** Portions de base du foyer (un enfant ≈ 0,6 portion). */
+export const basePortions = (s: StoreState) => s.week?.persons ?? portionsOf(eatersOf(s.settings));
+
+async function aiRecipes(s: StoreState, n: number, extra: { stockOnly?: boolean } = {}): Promise<Recipe[]> {
   const o = s.settings.options;
+  const e = eatersOf(s.settings);
   const res = await generateRecipesFn({
     householdId: s.hid, n, season: planSeason(o),
     options: {
       local: o.local, organic: o.organic, veg: o.veg, maxTime: o.timeOn ? o.maxTime : null, allergens: o.allergens, avoid: o.avoid,
-      budgetPerPerson: o.budgetOn ? o.budget / s.settings.persons / Math.max(1, mealCounts(s.settings).total) : null,
+      budgetPerPerson: o.budgetOn ? o.budget / Math.max(0.5, portionsOf(e)) / Math.max(1, mealCounts(s.settings).total) : null,
+      kidFriendly: !!o.kidFriendly && e.kids > 0, stockOnly: !!extra.stockOnly,
     },
     knownNames: [...s.recipes.values()].filter((r) => !r.deleted).map((r) => r.name).slice(0, 400),
-    stockToUse: o.useStock ? stockToUse(s) : [],
+    stockToUse: o.useStock || extra.stockOnly ? stockToUse(s, extra.stockOnly ? 30 : 12) : [],
   });
   return res.recipes;
 }
@@ -102,7 +108,7 @@ export async function generateWeek(s: StoreState): Promise<string | undefined> {
   }
   const res = planWeek([...pool, ...fresh], planCtx(s), fresh);
   if (!res.slots.length) throw new Error(res.warning);
-  await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots: res.slots, persons: s.settings.persons, warning: res.warning || null, generatedAt: Date.now() });
+  await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots: res.slots, persons: portionsOf(eatersOf(s.settings)), warning: res.warning || null, generatedAt: Date.now() });
   return note || res.warning;
 }
 
@@ -117,6 +123,76 @@ export async function swapSlot(s: StoreState, k: number, useAi: boolean) {
   slots[k] = { ...slots[k], recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false };
   await saveSlots(s, slots);
 }
+
+// ---------------- Restes, réception, frigo vide ----------------
+const sortSlots = (l: Slot[]) => l.sort((a, b) => a.day - b.day || (a.meal === b.meal ? 0 : a.meal === "midi" ? -1 : 1));
+
+/** « Cuisiner aussi pour demain midi » : double la portion du soir et remplit le midi suivant avec les restes. */
+export async function toggleLeftovers(s: StoreState, k: number, on: boolean) {
+  const slots = [...(s.week?.slots || [])];
+  const sl = slots[k];
+  if (!sl || sl.meal !== "soir") return;
+  const next = sl.day + 1;
+  if (on && next > 6) throw new Error("Dernier soir de la semaine : pas de lendemain midi dans ce planning.");
+  const li = slots.findIndex((x) => x.day === next && x.meal === "midi");
+  if (on) {
+    slots[k] = { ...sl, leftovers: true };
+    const lunch: Slot = { day: next, meal: "midi", recipeId: sl.recipeId, veg: sl.veg, cooked: false, fromLeftovers: true };
+    if (li >= 0) slots[li] = { ...lunch, prevRecipeId: slots[li].recipeId, addedForLeftovers: false };
+    else slots.push({ ...lunch, addedForLeftovers: true });
+  } else {
+    slots[k] = { ...sl, leftovers: false };
+    if (li >= 0 && slots[li].fromLeftovers) {
+      if (slots[li].addedForLeftovers) slots.splice(li, 1);
+      else slots[li] = { ...slots[li], recipeId: slots[li].prevRecipeId || slots[li].recipeId, fromLeftovers: false, prevRecipeId: null };
+    }
+  }
+  await saveSlots(s, sortSlots(slots).map((x) => clean(x)));
+}
+
+export interface MenuRecipe extends Recipe { course: "aperitif" | "entree" | "plat" | "dessert" }
+const generateMenuFn = call<unknown, { courses: MenuRecipe[]; drinks: string[] }>("generateMenu");
+
+/** Mode « Je reçois » : menu complet (apéritif, entrée, plat, dessert) et boissons pour le foyer et ses invités. */
+export async function receive(s: StoreState, k: number, cfg: { adults: number; kids: number; courses: ("aperitif" | "entree" | "dessert")[]; newMain: boolean; budgetPerHead: number | null }) {
+  const slots = [...(s.week?.slots || [])];
+  const sl = slots[k];
+  const main = s.recipes.get(sl.recipeId);
+  const o = s.settings.options;
+  const e = eatersOf(s.settings);
+  const res = await generateMenuFn({
+    householdId: s.hid, season: planSeason(o), courses: [...cfg.courses, ...(cfg.newMain ? ["plat"] : [])],
+    keepMain: cfg.newMain ? null : main?.name || null,
+    guests: { adults: e.adults + e.teens + cfg.adults, kids: e.kids + cfg.kids },
+    options: { veg: o.veg, allergens: o.allergens, avoid: o.avoid, noAlcohol: !!o.noAlcohol, budgetPerHead: cfg.budgetPerHead },
+  });
+  const plat = res.courses.find((c) => c.course === "plat");
+  slots[k] = clean({ ...sl, recipeId: plat?.id || sl.recipeId, cooked: false, guests: { adults: cfg.adults, kids: cfg.kids },
+    courses: res.courses.filter((c) => c.course !== "plat").map((c) => ({ type: c.course as "aperitif" | "entree" | "dessert", recipeId: c.id })), drinks: res.drinks });
+  await saveSlots(s, slots);
+  return true;
+}
+export async function cancelReception(s: StoreState, k: number) {
+  const slots = [...(s.week?.slots || [])];
+  slots[k] = { ...slots[k], guests: null, courses: null, drinks: null };
+  await saveSlots(s, slots.map((x) => clean(x)));
+}
+
+/** Recettes réalisables avec le stock (part des ingrédients déjà à la maison, hors fond de placard). */
+export function fridgeIdeas(s: StoreState) {
+  const out: { r: Recipe; coverage: number; missing: string[] }[] = [];
+  for (const r of s.recipes.values()) {
+    if (r.deleted) continue;
+    const ings = ingredientsOf(r, s.settings.options.veg).filter((i) => !s.idx.get(i.itemId)?.staple);
+    if (!ings.length) continue;
+    const have = ings.filter((i) => (s.stock.get(i.itemId)?.qty || 0) > 0);
+    const coverage = have.length / ings.length;
+    if (coverage >= 0.5) out.push({ r, coverage, missing: ings.filter((i) => !have.includes(i)).map((i) => s.idx.get(i.itemId)?.name || i.itemId) });
+  }
+  return out.sort((a, b) => b.coverage - a.coverage).slice(0, 8);
+}
+/** Un plat inventé par l'IA avec uniquement le stock (et le fond de placard). */
+export const fridgeRecipe = async (s: StoreState) => (await aiRecipes(s, 1, { stockOnly: true }))[0] || null;
 
 // ---------------- Stock & consommation ----------------
 function pushEvent(s: StoreState, b: ReturnType<typeof writeBatch>, itemId: string, qty: number, type: EventType) {
@@ -144,10 +220,13 @@ export async function setCooked(s: StoreState, k: number, cooked: boolean) {
   slots[k] = { ...slot, cooked };
   const b = writeBatch(db);
   b.set(hh(s.hid!, "weeks", s.weekKey), { slots }, { merge: true });
-  if (r) for (const ing of ingredientsOf(r, slot.veg)) {
+  const base = basePortions(s);
+  const parts: [Recipe | undefined, boolean, number][] = [[r, slot.veg, slotPortions(slot, base)],
+    ...(slot.courses || []).map((c) => [s.recipes.get(c.recipeId), false, coursePortions(slot, base)] as [Recipe | undefined, boolean, number])];
+  for (const [rec, veg, portions] of parts) if (rec && portions > 0) for (const ing of ingredientsOf(rec, veg)) {
     const item = s.idx.get(ing.itemId);
     if (!item) continue;
-    const q = baseQty(ing, item) * (s.week?.persons || s.settings.persons);
+    const q = baseQty(ing, item) * portions;
     const cur = s.stock.get(item.id);
     if (!cur && item.staple) continue;
     if (!cur && !cooked) continue;

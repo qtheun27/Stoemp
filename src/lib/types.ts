@@ -66,10 +66,24 @@ export interface GenOptions {
   ai: boolean;
   useStock: boolean;
   range: PriceRange;
+  /** Plats appréciés des enfants (pas trop épicés). */
+  kidFriendly?: boolean;
+  /** Boissons conseillées avec les repas. */
+  drinks?: boolean;
+  /** Pas d'alcool dans les suggestions de boissons. */
+  noAlcohol?: boolean;
+  /** Favoriser les recettes dont les ingrédients sont en promo. */
+  promos?: boolean;
+  /** Semaine équilibrée (poisson, légumineuses, variété des féculents). */
+  balance?: boolean;
 }
 
 export interface Settings {
+  /** Nombre total de personnes (gardé pour compatibilité ; voir adults/teens/kids). */
   persons: number;
+  adults?: number;
+  teens?: number; // 11-17 ans : portion entière
+  kids?: number; // 3-10 ans : demi-portion environ
   /** Nombre de repas de midi (0 à 7) et du soir (0 à 7) par semaine. */
   lunches: number;
   dinners: number;
@@ -93,6 +107,18 @@ export interface Slot {
   recipeId: string;
   veg: boolean;
   cooked: boolean;
+  /** Réception : invités en plus du foyer, autres plats du menu, boissons conseillées. */
+  guests?: { adults: number; kids: number } | null;
+  courses?: { type: "aperitif" | "entree" | "dessert"; recipeId: string }[] | null;
+  drinks?: string[] | null;
+  /** Cuisiner aussi pour le lendemain midi. */
+  leftovers?: boolean;
+  /** Ce repas = les restes de la veille (pas de courses). */
+  fromLeftovers?: boolean;
+  /** Créneau ajouté pour accueillir les restes (retiré si on annule). */
+  addedForLeftovers?: boolean;
+  /** Plat prévu avant d'être remplacé par les restes (rétabli si on annule). */
+  prevRecipeId?: string | null;
 }
 
 export interface StockEntry {
