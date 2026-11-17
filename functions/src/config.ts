@@ -16,8 +16,8 @@ export const DEFAULT_AI: AiConfig = {
     structureMyDish: { model: "claude-opus-5-5", effort: "low", maxTokens: 8000, enabled: true },
     readReceipt: { model: "claude-opus-5-5", effort: "low", maxTokens: 8000, enabled: true },
     classifyItem: { model: "claude-haiku-5-5", effort: "low", maxTokens: 1000, enabled: true },
-    matchProduct: { model: "claude-haiku-5-5", effort: "low", maxTokens: 500, enabled: true },
-    extractPrices: { model: "claude-haiku-5-5", effort: "low", maxTokens: 8000, enabled: true },
+    matchProduct: { model: "claude-haiku-5-5", effort: "low", maxTokens: 4000, enabled: true },
+    extractPrices: { model: "claude-haiku-5-5", effort: "low", maxTokens: 16000, enabled: true },
   },
 };
 
