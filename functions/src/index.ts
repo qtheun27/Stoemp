@@ -551,8 +551,7 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
   const existing = await db().collection("recipes").where("householdId", "==", null).where("cuisine", "==", cuisine).select("name", "course").get();
   const names = existing.docs.map((d) => d.get("name") as string);
   // 1. Plan : la liste des VRAIS plats à écrire (avec leurs éléments clés), dressée par un modèle plus fort et gardée.
-  // r : recette de référence (base ouverte, souvent en anglais) à adapter ; u : son adresse d'origine (citée).
-  type Dish = { n: string; k: string; s: "todo" | "done" | "refused"; why?: string; r?: string; u?: string };
+  type Dish = { n: string; k: string; s: "todo" | "done" | "refused"; why?: string };
   const planRef = db().collection("libraryPlan").doc(`${cuisine}_${course}`);
   let plan: Dish[] = ((await planRef.get()).get("dishes") as Dish[]) || [];
   const taken0 = new Set([...names, ...plan.map((d) => d.n)].map(norm));
@@ -574,8 +573,7 @@ Exclus ceux-ci (déjà présents) : ${[...names, ...plan.map((d) => d.n)].slice(
   const res = await askJson("growLibrary", {
     schema: LibRecipes, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items, true)),
     content: `Écris les recettes de ces ${todo.length} ${LIB_COURSE[course]} de cuisine ${CUISINE_LABEL[cuisine]}, DANS CET ORDRE et sous CE NOM (course = "${course}", cuisine = "${cuisine}") :
-${todo.map((d, i) => `${i + 1}. ${d.n}${d.k ? ` — ${d.k}` : ""}${d.r ? `\n   Référence à adapter : ${d.r}` : ""}`).join("\n")}
-Quand une « référence » est donnée, c'est une vraie recette éprouvée (souvent anglaise, en unités impériales) : adapte-la FIDÈLEMENT, en français, avec tes propres mots, en unités métriques et pour 1 personne ; donne au plat son nom usuel en français (« Chicken Parmesan » → « Poulet à la parmesane »).
+${todo.map((d, i) => `${i + 1}. ${d.n} — ${d.k}`).join("\n")}
 Recette fidèle à la tradition et à ses éléments clés (ingrédients et techniques d'origine), adaptée seulement si un ingrédient est introuvable en Belgique ; faisable en famille.
 Recette COMPLÈTE et PRÉCISE, comme dans un bon livre de cuisine : tous les ingrédients qui comptent (vin, bouillon, herbes, beurre compris), 4 à 8 étapes avec les gestes (découper, précuire, pocher, réduire), les temps et les températures, jusqu'au dressage.
 Pour les desserts, pâtisseries et apéritifs : quantités pour 1 part ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
@@ -583,8 +581,7 @@ prepMin = durée TOTALE réelle (préparation + cuisson + repos) ; une marinade 
 Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.`,
   });
   // Le nom prévu fait foi (même ordre).
-  // Le nom prévu fait foi (même ordre), sauf pour une référence étrangère que l'écrivain traduit.
-  res.recipes.forEach((r, i) => { if (todo[i] && !todo[i].r) r.name = todo[i].n; });
+  res.recipes.forEach((r, i) => { if (todo[i]) r.name = todo[i].n; });
   const known = new Set(names.map(norm));
   // Garde-fous : contrôles de bon sens, puis relecture par un « chef critique » (modèle plus fort) ; le reste est écarté.
   const byId = new Map(items.map((i) => [i.id, i]));
@@ -617,7 +614,6 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
   const taken = new Set((ids.length ? await db().getAll(...ids.map((id) => db().collection("recipes").doc(id))) : []).filter((d) => d.exists).map((d) => d.id));
   const batch = db().batch();
   const metas: Record<string, unknown>[] = [];
-  const doneIdx = new Set<number>();
   for (const [k, r] of res.recipes.entries()) {
     const key = norm(r.name);
     if (!okIdx.has(k) || known.has(key) || taken.has(`lib-${slug(r.name)}`.slice(0, 120))) continue;
@@ -630,14 +626,12 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
       name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: Math.max(5, r.prepMin),
       seasons: r.seasons.length ? r.seasons : ["P", "E", "A", "H"], ingredients, meat, vegSwap, steps: r.steps.slice(0, 8),
       cuisine, course, source: "base", lib: true, householdId: null, deleted: false, createdAt: Date.now(),
-      ...(todo[k]?.u ? { sourceUrl: todo[k].u, sourceNote: "Adaptée d'une recette du Culinary Recipes Dataset (Barba et Canals, 2025, licence ODbL), d'après Allrecipes" } : {}),
     };
     batch.set(db().collection("recipes").doc(id), recipe);
     // Fiche compacte (sans les étapes) pour l'appli : chargée une fois, gardée hors ligne.
     metas.push({ i: id, n: recipe.name, v: recipe.vegName, t: recipe.prepMin, s: recipe.seasons.join(""), c: cuisine, k: course,
       g: ingredients.map((x) => [x.itemId, x.qtyPerPerson]), m: meat.map((x) => [x.itemId, x.qtyPerPerson]), w: vegSwap.map((x) => [x.itemId, x.qtyPerPerson]) });
     known.add(key);
-    doneIdx.add(k);
   }
   // Les fiches vont dans des documents de 400 recettes par cuisine.
   let count = names.length;
@@ -646,10 +640,9 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
     count++;
   }
   // 3. Le plan garde le résultat : écrite, ou refusée avec la raison (pas reproposée telle quelle).
-  // Par position dans le lot (le nom d'une référence étrangère change à la traduction).
-  const why = new Map(review.verdicts.filter((v) => !v.ok && candidates[v.index]).map((v) => [candidates[v.index].k, v.reason]));
-  plan = plan.map((d) => { const k = todo.indexOf(d); if (k < 0) return d; const reason = why.get(k);
-    return { ...d, s: doneIdx.has(k) ? "done" : "refused", ...(reason ? { why: reason } : {}) }; });
+  const doneNames = new Set(metas.map((m) => norm(m.n as string)));
+  const why = new Map(review.verdicts.filter((v) => !v.ok && candidates[v.index]).map((v) => [norm(candidates[v.index].r.name), v.reason]));
+  plan = plan.map((d) => todo.includes(d) ? { ...d, s: doneNames.has(norm(d.n)) ? "done" : "refused", ...(why.get(norm(d.n)) ? { why: why.get(norm(d.n)) } : {}) } : d);
   batch.set(planRef, { dishes: plan }, { merge: true });
   await batch.commit();
   return metas.length;

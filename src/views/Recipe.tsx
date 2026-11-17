@@ -30,14 +30,13 @@ const LOCAL_SWAPS: Record<string, string> = {
 
 /** Recette de la grande bibliothèque : les étapes sont lues à l'ouverture (hors ligne : depuis le cache, si déjà vues). */
 function useFullRecipe(r: Recipe): Recipe {
-  const [full, setFull] = useState<Partial<Recipe> | null>(null);
+  const [steps, setSteps] = useState<string[] | null>(null);
   useEffect(() => {
     if (!r.lib || r.steps.length) return;
-    setFull(null);
-    getDoc(doc(db, "recipes", r.id)).then((d) => setFull({ steps: (d.get("steps") as string[]) || [], sourceNote: d.get("sourceNote"), sourceUrl: d.get("sourceUrl") }))
-      .catch(() => setFull({ steps: ["Étapes indisponibles hors ligne : reconnecte-toi pour les afficher."] }));
+    setSteps(null);
+    getDoc(doc(db, "recipes", r.id)).then((d) => setSteps((d.get("steps") as string[]) || [])).catch(() => setSteps(["Étapes indisponibles hors ligne : reconnecte-toi pour les afficher."]));
   }, [r.id]);
-  return r.lib && !r.steps.length ? { ...r, ...full, steps: full?.steps || ["Chargement des étapes…"] } : r;
+  return r.lib && !r.steps.length ? { ...r, steps: steps || ["Chargement des étapes…"] } : r;
 }
 
 export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { recipe: Recipe; slotIndex: number | null; onClose: () => void }) {
@@ -125,7 +124,6 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
       {!pret && <p className="small muted">Sel, poivre et huile non listés.</p>}
       <h3 style={{ margin: "16px 0 6px" }}>Préparation</h3>
       <ol>{recipe.steps.map((st, i) => <li key={i}>{st}</li>)}</ol>
-      {recipe.sourceNote && <p className="small muted">📖 {recipe.sourceNote}{recipe.sourceUrl && <> · <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">recette d'origine</a></>}.</p>}
     </Sheet>
   );
 }
