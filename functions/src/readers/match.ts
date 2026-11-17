@@ -106,6 +106,9 @@ export function similarItem(name: string, unit: string, category: string, items:
   for (const it of items) {
     if (it.unit !== unit || it.category !== category) continue;
     if (!headFits(name, it.name)) continue;
+    // Plus précis que l'article existant (« Vin rouge Pomerol » face à « Vin rouge ») : c'est un autre article.
+    const A = stems(name), B = stems(it.name);
+    if ([...B].every((w) => A.has(w)) && A.size > B.size) continue;
     const s = similarity(name, it.name);
     if (s >= threshold && s > score) { best = it; score = s; }
   }
