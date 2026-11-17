@@ -7,10 +7,11 @@ import AiSettings from "./AiSettings";
 import AppSettings from "./AppSettings";
 import Catalog from "./Catalog";
 import Prices from "./Prices";
+import Library from "./Library";
 
 const TABS = [
   ["dash", "📊 Tableau de bord", Dashboard], ["users", "👤 Utilisateurs", Users], ["hh", "🏠 Foyers", Households],
-  ["ai", "✨ IA", AiSettings], ["app", "🎛 Appli", AppSettings], ["cat", "🥕 Catalogue", Catalog], ["prices", "🏷 Prix & robot", Prices],
+  ["ai", "✨ IA", AiSettings], ["app", "🎛 Appli", AppSettings], ["cat", "🥕 Catalogue", Catalog], ["lib", "📚 Recettes", Library], ["prices", "🏷 Prix & robot", Prices],
 ] as const;
 
 export default function Admin() {

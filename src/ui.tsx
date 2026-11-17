@@ -53,12 +53,12 @@ export const Switch = ({ checked, onChange, label }: { checked: boolean; onChang
 export const Check = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) =>
   <input type="checkbox" className="check" checked={checked} onChange={(e) => onChange(e.target.checked)} aria-label={label} />;
 
-export function Stepper({ value, onChange, min = 1, max = 12, fmt }: { value: number; onChange: (v: number) => void; min?: number; max?: number; fmt?: (v: number) => string }) {
+export function Stepper({ value, onChange, min = 1, max = 12, step = 1, fmt }: { value: number; onChange: (v: number) => void; min?: number; max?: number; step?: number; fmt?: (v: number) => string }) {
   return (
     <div className="stepper">
-      <button onClick={() => onChange(Math.max(min, value - 1))} aria-label="Moins">−</button>
+      <button onClick={() => onChange(Math.max(min, value - step))} aria-label="Moins">−</button>
       <b>{fmt ? fmt(value) : value}</b>
-      <button onClick={() => onChange(Math.min(max, value + 1))} aria-label="Plus">+</button>
+      <button onClick={() => onChange(Math.min(max, value + step))} aria-label="Plus">+</button>
     </div>
   );
 }

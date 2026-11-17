@@ -49,6 +49,10 @@ export interface Recipe {
   source: "base" | "ia" | "perso" | "pret";
   /** Cuisine (belge, italienne, asiatique…). */
   cuisine?: Cuisine;
+  /** Type de plat (plat principal par défaut). */
+  course?: "plat" | "entree" | "dessert" | "aperitif";
+  /** Recette de la grande bibliothèque : étapes chargées à l'ouverture. */
+  lib?: boolean;
   householdId?: string;
   deleted?: boolean;
   createdAt?: number;

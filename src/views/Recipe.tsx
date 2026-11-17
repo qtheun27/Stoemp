@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 import { ChefHat, Heart, Leaf, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { ingredientsOf, isVegRecipe, nameOf } from "../lib/catalog";
 import { ALLERGENS, CUISINES, DAYS } from "../lib/constants";
@@ -26,7 +28,19 @@ const LOCAL_SWAPS: Record<string, string> = {
   poivron: "courgette", aubergine: "courgette", "pave-de-saumon": "truite belge", "dos-de-cabillaud": "plie de mer du Nord",
 };
 
-export default function RecipeSheet({ recipe, slotIndex, onClose }: { recipe: Recipe; slotIndex: number | null; onClose: () => void }) {
+/** Recette de la grande bibliothèque : les étapes sont lues à l'ouverture (hors ligne : depuis le cache, si déjà vues). */
+function useFullRecipe(r: Recipe): Recipe {
+  const [steps, setSteps] = useState<string[] | null>(null);
+  useEffect(() => {
+    if (!r.lib || r.steps.length) return;
+    setSteps(null);
+    getDoc(doc(db, "recipes", r.id)).then((d) => setSteps((d.get("steps") as string[]) || [])).catch(() => setSteps(["Étapes indisponibles hors ligne : reconnecte-toi pour les afficher."]));
+  }, [r.id]);
+  return r.lib && !r.steps.length ? { ...r, steps: steps || ["Chargement des étapes…"] } : r;
+}
+
+export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { recipe: Recipe; slotIndex: number | null; onClose: () => void }) {
+  const recipe = useFullRecipe(initial);
   const s = useStore();
   const [cook, setCook] = useState(false);
   const [other, setOther] = useState<Recipe | null>(null);

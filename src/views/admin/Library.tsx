@@ -1,0 +1,66 @@
+import { useEffect, useState } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase";
+import { CUISINES, CUISINE_ORDER } from "../../lib/constants";
+import type { Cuisine } from "../../lib/types";
+import { useStore } from "../../state/store";
+import { Check, run, Stepper } from "../../ui";
+import { adminLibraryJob, dt, usd } from "./api";
+
+interface Job { status: "running" | "paused" | "stopped" | "done"; made: number; step: number; startedAt: number; updatedAt: number; lastError: string | null;
+  queue: { cuisine: Cuisine; course: string; remaining: number; made: number; failures: number }[] }
+
+/** Coût moyen observé d'une recette générée par Haiku 5.5 (catalogue en entrée + recette en sortie), en $. */
+const COST_PER_RECIPE = 0.0008;
+const COURSE: Record<string, string> = { plat: "Plats", entree: "Entrées", dessert: "Desserts" };
+
+/** Agrandir la bibliothèque de recettes : tâche de fond côté serveur, qui continue même console fermée. */
+export default function Library() {
+  const s = useStore();
+  const [job, setJob] = useState<Job | null>(null);
+  const [per, setPer] = useState({ plat: 300, entree: 40, dessert: 40 });
+  const [cuisines, setCuisines] = useState<Cuisine[]>(CUISINE_ORDER);
+  useEffect(() => onSnapshot(doc(db, "libraryJobs", "current"), (d) => setJob((d.data() as Job) || null), () => {}), []);
+
+  const all = [...s.recipes.values()].filter((r) => r.source === "base" && !r.deleted);
+  const by = (c: Cuisine, k: string) => all.filter((r) => r.cuisine === c && (r.course || "plat") === k).length;
+  const total = cuisines.length * (per.plat + per.entree + per.dessert);
+  const left = job?.queue.reduce((a, q) => a + q.remaining, 0) || 0;
+  const act = (action: "start" | "pause" | "resume" | "stop") => run(() => adminLibraryJob({ action, perCuisine: per, cuisines }), action === "start" ? "Génération lancée : elle continue en arrière-plan" : "C'est noté");
+
+  return <div className="stack">
+    <div className="card">
+      <h3>📚 Bibliothèque : {all.length} recettes</h3>
+      <div className="tbl-wrap"><table className="tbl"><thead><tr><th>Cuisine</th><th>Plats</th><th>Entrées</th><th>Desserts</th></tr></thead>
+        <tbody>{CUISINE_ORDER.map((c) => <tr key={c}><td>{CUISINES[c].icon} {CUISINES[c].label}</td><td className="num">{by(c, "plat")}</td><td className="num">{by(c, "entree")}</td><td className="num">{by(c, "dessert")}</td></tr>)}</tbody></table></div>
+    </div>
+
+    {job && <div className="card">
+      <h3>{job.status === "running" ? "⏳ Génération en cours" : job.status === "paused" ? "⏸ En pause" : job.status === "done" ? "✅ Terminé" : "⏹ Arrêté"}</h3>
+      <p>{job.made} recettes ajoutées · {left} restantes · dernière activité {dt(job.updatedAt)}</p>
+      {left > 0 && <div className="progress"><i style={{ width: `${(job.made / Math.max(1, job.made + left)) * 100}%` }} /></div>}
+      {job.lastError && <p className="small" style={{ color: "var(--bad)" }}>Dernière erreur : {job.lastError}</p>}
+      <div className="row wrap" style={{ marginTop: 10 }}>
+        {job.status === "running" && <button className="btn ghost" onClick={() => act("pause")}>⏸ Pause</button>}
+        {job.status === "paused" && <button className="btn" onClick={() => act("resume")}>▶ Reprendre</button>}
+        {(job.status === "running" || job.status === "paused") && <button className="btn ghost" onClick={() => act("stop")}>⏹ Arrêter</button>}
+      </div>
+    </div>}
+
+    <div className="card">
+      <h3>Agrandir la bibliothèque</h3>
+      <p className="small muted">L'IA propose des recettes authentiques par cuisine, sans doublon ; chaque ingrédient est relié au catalogue et chaque plat avec viande a sa version végé protéinée. Lots de 15, à la suite, même console fermée ; le budget IA du mois reste un plafond.</p>
+      <div className="chips">{CUISINE_ORDER.map((c) => { const on = cuisines.includes(c);
+        return <label key={c} className="chip"><Check checked={on} onChange={() => setCuisines(on ? cuisines.filter((x) => x !== c) : [...cuisines, c])} label={CUISINES[c].label} />{CUISINES[c].icon} {CUISINES[c].label}</label>; })}</div>
+      <div className="row wrap" style={{ gap: 14, margin: "12px 0" }}>
+        {(Object.keys(COURSE) as (keyof typeof per)[]).map((k) => <div key={k}><div className="small muted">{COURSE[k]} par cuisine</div>
+          <Stepper value={per[k]} min={0} max={2000} step={k === "plat" ? 50 : 10} onChange={(v) => setPer({ ...per, [k]: v })} /></div>)}
+      </div>
+      <p>≈ <b>{total.toLocaleString("fr-BE")}</b> recettes · coût estimé <b>{usd(total * COST_PER_RECIPE)}</b> · environ {Math.max(1, Math.round(total / 15 / 40))} h</p>
+      <button className="btn" disabled={!cuisines.length || !total || job?.status === "running"} onClick={() => { if (job?.status === "paused" && !confirm("Une génération est en pause : la remplacer ?")) return; act("start"); }}>✨ Lancer la génération</button>
+      {job?.status === "running" && <p className="small muted">Une génération est déjà en cours.</p>}
+      <p className="small muted" style={{ marginTop: 8 }}>Les recettes arrivent dans l'appli au fur et à mesure (onglet Plats). Une recette ratée peut être masquée depuis l'onglet Catalogue → Recettes de base.</p>
+    </div>
+  </div>;
+}
+

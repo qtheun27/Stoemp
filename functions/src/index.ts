@@ -1,14 +1,14 @@
 import { initializeApp } from "firebase-admin/app";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { onCall, HttpsError, type CallableRequest } from "firebase-functions/v2/https";
-import { onDocumentCreated } from "firebase-functions/v2/firestore";
+import { onDocumentCreated, onDocumentWritten } from "firebase-functions/v2/firestore";
 import { setGlobalOptions, logger } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
-import { AiRecipe, AiRecipes, ClassifiedItem, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
+import { AiRecipe, AiRecipes, ClassifiedItem, LibRecipes, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { aliasFits, matchItem, similarItem } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
@@ -467,5 +467,115 @@ export const joinHousehold = onCall(async (req) => {
   await db().collection("users").doc(u).set({ households: FieldValue.arrayUnion(hid), current: hid }, { merge: true });
   return { householdId: hid, name: inv.data()!.householdName };
 });
+
+// ---------- Bibliothèque de recettes (tâche de fond lancée depuis la console) ----------
+const CUISINE_LABEL: Record<string, string> = {
+  belge: "belge", francaise: "française", italienne: "italienne", mediterraneenne: "méditerranéenne (grecque, espagnole, portugaise)",
+  orientale: "orientale (Maghreb, Liban, Turquie, Moyen-Orient)", asiatique: "asiatique (chinoise, thaïe, japonaise, vietnamienne, coréenne)",
+  indienne: "indienne", latino: "mexicaine et latino-américaine", americaine: "américaine et anglaise",
+};
+const LIB_COURSE: Record<string, string> = { plat: "plats principaux", entree: "entrées ou soupes", dessert: "desserts" };
+const LIB_BATCH = 15;
+const LIB_CHUNK = 400;
+interface LibQueue { cuisine: string; course: string; remaining: number; made: number; failures: number }
+
+/** Lance (ou relance) l'agrandissement de la bibliothèque : N recettes par cuisine et par type de plat. */
+export const adminLibraryJob = onCall({ timeoutSeconds: 60 }, async (req) => {
+  if (!req.auth?.token.superAdmin) throw new HttpsError("permission-denied", "Réservé à l'administrateur.");
+  const d = input(z.object({
+    action: z.enum(["start", "pause", "resume", "stop"]),
+    perCuisine: z.record(z.string(), z.number().int().min(0).max(2000)).optional(),
+    cuisines: z.array(z.enum(Object.keys(CUISINE_LABEL) as [string, ...string[]])).optional(),
+  }), req.data);
+  const ref = db().collection("libraryJobs").doc("current");
+  if (d.action === "start") {
+    const queue: LibQueue[] = [];
+    for (const c of d.cuisines || Object.keys(CUISINE_LABEL)) for (const [course, n] of Object.entries(d.perCuisine || { plat: 300 })) {
+      if (n > 0 && LIB_COURSE[course]) queue.push({ cuisine: c, course, remaining: n, made: 0, failures: 0 });
+    }
+    await ref.set({ status: "running", queue, busy: false, step: 0, made: 0, startedAt: Date.now(), updatedAt: Date.now(), by: req.auth.uid, lastError: null });
+  } else {
+    await ref.set({ status: d.action === "pause" ? "paused" : d.action === "stop" ? "stopped" : "running", busy: false, updatedAt: Date.now() }, { merge: true });
+  }
+  return { ok: true };
+});
+
+/**
+ * Un lot à chaque écriture du document de la tâche : la fin d'un lot réécrit le document, ce qui déclenche le suivant.
+ * Le verrou « busy » (pris dans une transaction) évite deux lots en parallèle si un déclenchement est rejoué.
+ */
+export const onLibraryJob = onDocumentWritten({ document: "libraryJobs/{id}", ...ai, timeoutSeconds: 540 }, async (event) => {
+  const ref = db().collection("libraryJobs").doc(event.params.id);
+  const claimed = await db().runTransaction(async (t) => {
+    const j = (await t.get(ref)).data();
+    if (!j || j.status !== "running") return null;
+    if (j.busy && Date.now() - (j.busyAt || 0) < 9 * 60_000) return null;
+    const q = (j.queue as LibQueue[]).findIndex((x) => x.remaining > 0 && x.failures < 5);
+    if (q < 0) { t.update(ref, { status: "done", busy: false, updatedAt: Date.now() }); return null; }
+    t.update(ref, { busy: true, busyAt: Date.now() });
+    return { j, q };
+  });
+  if (!claimed) return;
+  const { j, q } = claimed;
+  const queue = j.queue as LibQueue[];
+  const cur = queue[q];
+  let made = 0, error: string | null = null;
+  try {
+    made = await growLibrary(cur.cuisine, cur.course, Math.min(LIB_BATCH, cur.remaining));
+  } catch (e) { error = (e as Error).message || String(e); logger.warn("Bibliothèque : lot en échec", e); }
+  queue[q] = { ...cur, remaining: Math.max(0, cur.remaining - made), made: cur.made + made, failures: made ? 0 : cur.failures + 1 };
+  // Budget atteint ou IA désactivée : on met en pause plutôt que de boucler.
+  const stop = error && /Budget|désactivée/.test(error);
+  await ref.update({ queue, busy: false, step: FieldValue.increment(1), made: FieldValue.increment(made), updatedAt: Date.now(),
+    lastError: error, ...(stop ? { status: "paused" } : {}) });
+});
+
+/** Génère un lot de recettes nouvelles pour une cuisine, les relie au catalogue et les range dans la bibliothèque. */
+async function growLibrary(cuisine: string, course: string, n: number): Promise<number> {
+  const items = await loadItems();
+  const existing = await db().collection("recipes").where("householdId", "==", null).where("cuisine", "==", cuisine).select("name", "course").get();
+  const names = existing.docs.map((d) => d.get("name") as string);
+  const sameCourse = existing.docs.filter((d) => (d.get("course") || "plat") === course).map((d) => d.get("name") as string);
+  const res = await askJson("growLibrary", {
+    schema: LibRecipes, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items, true)),
+    content: `Propose ${n} ${LIB_COURSE[course]} de cuisine ${CUISINE_LABEL[cuisine]} (course = "${course}", cuisine = "${cuisine}").
+Des recettes authentiques et connues, puis des classiques régionaux moins connus ; toutes différentes, faisables en famille avec des produits de supermarché belge.
+Varie les ingrédients principaux (volaille, bœuf, porc, poisson, fruits de mer, légumineuses, œufs, légumes) et les saisons.
+N'en propose AUCUNE de cette liste (même sous un autre nom) : ${sameCourse.slice(-600).join(" ; ") || "—"}.`,
+  });
+  const known = new Set(names.map(norm));
+  // Même nom déjà présent dans une autre cuisine : on ne l'écrase pas.
+  const ids = res.recipes.map((r) => `lib-${slug(r.name)}`.slice(0, 120));
+  const taken = new Set((ids.length ? await db().getAll(...ids.map((id) => db().collection("recipes").doc(id))) : []).filter((d) => d.exists).map((d) => d.id));
+  const batch = db().batch();
+  const metas: Record<string, unknown>[] = [];
+  for (const r of res.recipes) {
+    const key = norm(r.name);
+    if (known.has(key) || !r.steps.length || taken.has(`lib-${slug(r.name)}`.slice(0, 120))) continue;
+    const ingredients = await resolveIngredients(r.ingredients, items);
+    if (ingredients.length < 2) continue;
+    const meat = await resolveIngredients(r.meat, items);
+    const vegSwap = meat.length ? await resolveIngredients(r.vegSwap, items) : [];
+    const id = `lib-${slug(r.name)}`.slice(0, 120);
+    const recipe = {
+      name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: Math.max(5, r.prepMin),
+      seasons: r.seasons.length ? r.seasons : ["P", "E", "A", "H"], ingredients, meat, vegSwap, steps: r.steps.slice(0, 8),
+      cuisine, course, source: "base", lib: true, householdId: null, deleted: false, createdAt: Date.now(),
+    };
+    batch.set(db().collection("recipes").doc(id), recipe);
+    // Fiche compacte (sans les étapes) pour l'appli : chargée une fois, gardée hors ligne.
+    metas.push({ i: id, n: recipe.name, v: recipe.vegName, t: recipe.prepMin, s: recipe.seasons.join(""), c: cuisine, k: course,
+      g: ingredients.map((x) => [x.itemId, x.qtyPerPerson]), m: meat.map((x) => [x.itemId, x.qtyPerPerson]), w: vegSwap.map((x) => [x.itemId, x.qtyPerPerson]) });
+    known.add(key);
+  }
+  // Les fiches vont dans des documents de 400 recettes par cuisine.
+  let count = names.length;
+  for (const m of metas) {
+    batch.set(db().collection("library").doc(`${cuisine}-${Math.floor(count / LIB_CHUNK)}`), { cuisine, r: FieldValue.arrayUnion(m) }, { merge: true });
+    count++;
+  }
+  await batch.commit();
+  return metas.length;
+}
 
 export * from "./admin";

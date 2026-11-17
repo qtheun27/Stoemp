@@ -101,6 +101,16 @@ export const BASE_RECIPES = parseBaseRecipes(BASE_INDEX);
 export const isVegRecipe = (r: Recipe) => r.meat.length === 0;
 /** Recettes à cuisiner (sans les plats préparés du magasin). */
 export const cookable = (recipes: Iterable<Recipe>) => [...recipes].filter((r) => r.source !== "pret");
+/** Plats principaux à cuisiner : ce que le planificateur peut placer dans la semaine. */
+export const mains = (recipes: Iterable<Recipe>) => cookable(recipes).filter((r) => (r.course || "plat") === "plat");
+
+/** Fiche compacte de la bibliothèque (document « library ») → recette sans étapes. */
+export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: "plat" | "entree" | "dessert"; g: [string, number][]; m: [string, number][]; w: [string, number][] }
+export function libRecipe(e: LibEntry): Recipe {
+  const ing = (l: [string, number][]) => (l || []).map(([itemId, qtyPerPerson]) => ({ itemId, qtyPerPerson }));
+  return { id: e.i, name: e.n, vegName: e.v, prepMin: e.t, seasons: (e.s || "PEAH").split("") as Season[], ingredients: ing(e.g), meat: ing(e.m), vegSwap: ing(e.w),
+    steps: [], source: "base", cuisine: e.c, course: e.k || "plat", lib: true };
+}
 export const ingredientsOf = (r: Recipe, veg: boolean): Ingredient[] =>
   r.ingredients.concat(isVegRecipe(r) ? [] : veg ? r.vegSwap : r.meat);
 export const nameOf = (r: Recipe, veg: boolean) => (veg && !isVegRecipe(r) && r.vegName ? r.vegName : r.name);
