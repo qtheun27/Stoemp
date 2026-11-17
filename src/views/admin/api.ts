@@ -18,6 +18,8 @@ export const adminUpdateUser = call<{ uid: string; action: "disable" | "enable" 
 export const adminCleanAnonymous = call<{ days: number }, { removed: number }>("adminCleanAnonymous");
 export const adminDeleteHousehold = call<{ householdId: string }, { ok: boolean }>("adminDeleteHousehold");
 export const adminCleanOrphanHouseholds = call<unknown, { removed: number }>("adminCleanOrphanHouseholds");
+export const adminMergeItems = call<{ from: string; into: string }, { ok: boolean; moved: { prices: number; stock: number; shopping: number; recipes: number } }>("adminMergeItems");
+export const adminDeleteItem = call<{ id: string }, { ok: boolean }>("adminDeleteItem");
 export const adminClearAiCache = call<{ fn: string | null }, { removed: number }>("adminClearAiCache");
 
 /** 30 derniers jours, du plus ancien au plus récent. */

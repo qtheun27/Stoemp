@@ -10,7 +10,7 @@ import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipes, ClassifiedItem, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
-import { matchItem } from "./readers/match";
+import { matchItem, similarItem } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
 
 initializeApp();
@@ -303,7 +303,10 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
           const p = batch[c.index];
           if (!p || !c.keep) continue;
           const before = items.length;
-          const it = await createItem(c, p.name);
+          // Un article très proche existe déjà : on le réutilise (le nom du produit devient un alias).
+          const twin = similarItem(c.name, c.unit, c.category, items);
+          if (twin) await db().collection("items").doc(twin.id).set({ aliases: FieldValue.arrayUnion(c.name, p.name) }, { merge: true });
+          const it = twin || (await createItem(c, p.name));
           items = await loadItems();
           if (items.length > before) created.add(it.name);
           const m = matchItem(p.name, p.packSize, p.packUnit, [it]) || (it.unit === p.packUnit ? { item: it, size: p.packSize } : null);

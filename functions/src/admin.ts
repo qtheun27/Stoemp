@@ -1,5 +1,5 @@
 import { getAuth, type UserRecord } from "firebase-admin/auth";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { onCall, HttpsError, type CallableRequest } from "firebase-functions/v2/https";
 import { defineSecret } from "firebase-functions/params";
 import { z } from "zod";
@@ -215,4 +215,72 @@ export const adminClearAiCache = onCall({ ...opts, timeoutSeconds: 300 }, async 
   snap.docs.forEach((d) => w.delete(d.ref));
   await w.close();
   return { removed: snap.size };
+});
+
+/**
+ * Fusionne deux articles du catalogue : tout ce qui pointe vers « from » passe sur « into »
+ * (prix et variantes, stocks, courses, consommation, prix payés, recettes, correspondances), puis « from » est supprimé.
+ */
+export const adminMergeItems = onCall({ ...opts, timeoutSeconds: 540 }, async (req) => {
+  requireSuper(req);
+  const { from, into } = parse(z.object({ from: z.string().min(1), into: z.string().min(1) }), req.data);
+  if (from === into) throw new HttpsError("invalid-argument", "Choisis deux articles différents.");
+  const fromRef = db().collection("items").doc(from), intoRef = db().collection("items").doc(into);
+  const [f, t] = await Promise.all([fromRef.get(), intoRef.get()]);
+  if (!f.exists) throw new HttpsError("not-found", "Article à fusionner introuvable.");
+  if (f.get("source") === "base") throw new HttpsError("failed-precondition", "Un article de base ne peut pas disparaître : fusionne l'autre article dans celui-ci.");
+  const fd = f.data()!, td = t.data() || {};
+  const ratio = fd.unit === td.unit ? 1 : null; // unités différentes : quantités non converties
+  const moved = { prices: 0, stock: 0, shopping: 0, recipes: 0 };
+
+  // Alias : le nom et les alias de l'ancien article
+  await intoRef.set({ aliases: FieldValue.arrayUnion(fd.name, ...(fd.aliases || [])) }, { merge: true });
+
+  // Prix : variantes fusionnées dans le document de l'article cible
+  for (const p of (await db().collection("prices").where("itemId", "==", from).get()).docs) {
+    const target = db().collection("prices").doc(p.id.replace(from + "_", into + "_"));
+    const cur = (await target.get()).data();
+    const offers = [...((cur?.offers as { name: string; ppu: number }[]) || []), ...((p.get("offers") as { name: string; ppu: number }[]) || [])];
+    const uniq = [...new Map(offers.map((o) => [o.name, o])).values()].sort((a, b) => a.ppu - b.ppu);
+    await target.set({ ...p.data(), ...(cur || {}), itemId: into, offers: uniq }, { merge: true });
+    await p.ref.delete(); moved.prices++;
+  }
+  // Données des foyers
+  for (const sub of ["stock", "consumption", "paidPrices"]) {
+    for (const d of (await db().collectionGroup(sub).get()).docs) {
+      if (!(d.id === from || d.id.startsWith(from + "_") || d.get("itemId") === from)) continue;
+      const parent = d.ref.parent;
+      const newId = d.id === from ? into : d.id.replace(from + "_", into + "_");
+      const target = parent.doc(newId), cur = (await target.get()).data();
+      if (sub === "stock") await target.set({ ...d.data(), qty: (cur?.qty || 0) + (ratio ? d.get("qty") || 0 : 0), unit: td.unit || d.get("unit") }, { merge: true });
+      else if (sub === "consumption") await target.set({ events: [...((cur?.events as unknown[]) || []), ...((d.get("events") as unknown[]) || [])].slice(-60) }, { merge: true });
+      else await target.set({ ...d.data(), itemId: into }, { merge: true });
+      await d.ref.delete(); if (sub === "stock") moved.stock++;
+    }
+  }
+  for (const d of (await db().collectionGroup("shopping").where("itemId", "==", from).get()).docs) { await d.ref.set({ itemId: into }, { merge: true }); moved.shopping++; }
+  // Recettes (plats perso et IA ; les recettes de base sont dans l'appli et n'utilisent que des articles de base)
+  for (const r of (await db().collection("recipes").get()).docs) {
+    let changed = false;
+    const fix = (l: { itemId: string }[] = []) => l.map((i) => (i.itemId === from ? ((changed = true), { ...i, itemId: into }) : i));
+    const upd = { ingredients: fix(r.get("ingredients")), meat: fix(r.get("meat")), vegSwap: fix(r.get("vegSwap")) };
+    if (changed) { await r.ref.set(upd, { merge: true }); moved.recipes++; }
+  }
+  for (const m of (await db().collection("productMatches").where("itemId", "==", from).get()).docs) await m.ref.delete();
+  await fromRef.delete();
+  return { ok: true, moved };
+});
+
+/** Supprime un article ajouté par l'IA (et ses prix). Les articles de base ne se suppriment pas. */
+export const adminDeleteItem = onCall({ ...opts, timeoutSeconds: 120 }, async (req) => {
+  requireSuper(req);
+  const { id } = parse(z.object({ id: z.string().min(1) }), req.data);
+  const ref = db().collection("items").doc(id), d = await ref.get();
+  if (d.get("source") === "base") throw new HttpsError("failed-precondition", "Les articles de base ne se suppriment pas : fusionne plutôt un doublon dedans.");
+  const prices = await db().collection("prices").where("itemId", "==", id).get();
+  const w = db().bulkWriter();
+  prices.docs.forEach((p) => w.delete(p.ref));
+  w.delete(ref);
+  await w.close();
+  return { ok: true };
 });

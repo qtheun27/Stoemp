@@ -193,3 +193,17 @@ describe("variantes de prix selon le foyer", () => {
     expect(priceAt(pates, "colruyt", book, sel({ allergens: ["gl"] }))?.packPrice).toBeCloseTo(6);
   });
 });
+
+import { findDuplicates, similarity } from "../similar";
+describe("doublons du catalogue", () => {
+  const it0 = (id: string, name: string, source: "base" | "ia", extra: object = {}) => ({ ...BASE_INDEX.get("pates")!, id, name, aliases: [], unit: "g" as const, category: "ep" as const, source, ...extra });
+  it("repère les noms très proches", () => {
+    expect(similarity("Cacahuètes apéritif", "Cacahuètes et noix apéritives")).toBeGreaterThanOrEqual(0.75);
+    expect(similarity("Abricots secs", "Abricots")).toBeGreaterThanOrEqual(0.75);
+    expect(similarity("Framboises", "Fraises")).toBeLessThan(0.5);
+  });
+  it("propose de fusionner vers l'article de base ou le nom le plus court", () => {
+    const d = findDuplicates([it0("a", "Mélange de fruits secs et noix", "ia"), it0("b", "Mélange de fruits secs", "ia"), it0("c", "Riz", "base"), it0("d", "Riz long", "ia")]);
+    expect(d.map((x) => `${x.from.id}→${x.into.id}`)).toEqual(expect.arrayContaining(["a→b", "d→c"]));
+  });
+});
