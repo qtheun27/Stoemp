@@ -129,9 +129,15 @@ describe("correspondance : le mot principal du produit compte", () => {
   it("pâté ≠ pâtes, saucisse ≠ saucisson", () => {
     expect(m("EXEMPLE pâté de gibier")).toBe("pate-de-campagne"); // et surtout pas « Pâtes »
     expect(m("EXEMPLE pâtes fraîches")).toBe("pates");
+    expect(m("EXEMPLE pâte feuilletée")).toBeNull();
     expect(m("Pâté de campagne")).toBe("pate-de-campagne");
     expect(m("Saucisses de campagne")).toBeNull();
     expect(similarity("Saucisses de campagne", "Saucisson")).toBeLessThan(0.5);
+  });
+  it("un poisson n'est pas une viande", () => {
+    const c2 = [it2("steak-de-boeuf", "Steak de bœuf", ["steak"])] as never;
+    expect(matchItem("EXEMPLE steak de thon", 1000, "g", c2)).toBeNull();
+    expect(matchItem("steak minute", 1000, "g", c2)?.item.id).toBe("steak-de-boeuf");
   });
   it("synonymes de cuisine", () => {
     expect(similarity("Abricots séchés", "Abricots secs")).toBe(1);
