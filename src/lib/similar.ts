@@ -1,12 +1,12 @@
 import type { Item } from "./types";
 
 // Même logique que functions/src/readers/match.ts (ressemblance de noms d'articles).
-const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
-const STOP = new Set(["de", "du", "la", "le", "les", "des", "et", "en", "au", "aux", "a", "d", "l", "avec", "sans", "pour", "boite", "bio", "boni", "everyday", "selection", "extra", "fresh", "frais", "fraiche", "fraiches", "belge", "belges", "pce", "pc", "kg", "g"]);
+const norm = (s: string) => s.toLowerCase().replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patee" : "pate")).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
+const STOP = new Set(["de", "du", "la", "le", "les", "des", "et", "en", "au", "aux", "a", "d", "l", "avec", "sans", "pour", "boite", "bio", "boni", "colruyt", "everyday", "selection", "extra", "fresh", "frais", "fraiche", "fraiches", "belge", "belges", "pce", "pc", "kg", "g"]);
 const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)).map((w) => w.replace(/(x|s)$/, ""));
 
-/** Racine courte des mots (« apéritif » et « apéritives » → « aperit »), pour comparer des noms d'articles. */
-const stems = (s: string) => new Set(tokens(s).map((w) => w.slice(0, 6)));
+/** Racine des mots (« apéritif » et « apéritives » → « aperit », « saucisse » ≠ « saucisson »). */
+const stems = (s: string) => new Set(tokens(s).map((w) => w.replace(/(ive|if|ee|e)$/, "")));
 
 export function similarity(a: string, b: string): number {
   const A = stems(a), B = stems(b);
