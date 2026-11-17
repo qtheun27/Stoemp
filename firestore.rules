@@ -49,7 +49,7 @@ service cloud.firestore {
         allow read: if isMember(hid) || isSuper();
         allow create: if isAdmin(hid);
         allow update: if isAdmin(hid) || (isMember(hid)
-                      && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['options', 'persons', 'mealsPerDay', 'mineN']));
+                      && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['options', 'persons', 'mealsPerDay', 'lunches', 'dinners', 'mineN']));
       }
       match /{sub}/{doc} {
         allow read: if isSuper();

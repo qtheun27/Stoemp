@@ -3,7 +3,7 @@ import { ChefHat, ChevronLeft, ChevronRight, Heart, Leaf, RefreshCw, SlidersHori
 import { isVegRecipe, nameOf } from "../lib/catalog";
 import { DAYS, SEASONS } from "../lib/constants";
 import { mealCostPerPerson } from "../lib/cost";
-import { daysToExpiry, planSeason, recipesUsing } from "../lib/planner";
+import { daysToExpiry, mealCounts, planSeason, recipesUsing } from "../lib/planner";
 import { mondayOf, shiftWeek, isoWeek } from "../lib/season";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
@@ -106,7 +106,7 @@ export default function Week() {
                       return (
                         <div className={`meal${x.cooked ? " cooked" : ""}`} key={x.k}>
                           <button className="info" onClick={() => setOpen({ r, k: x.k })}>
-                            {s.settings.mealsPerDay === 2 && <span className="slot">{x.meal}</span>}
+                            {list.length > 1 || mealCounts(s.settings).lunches > 0 ? <span className="slot">{x.meal}</span> : null}
                             <span className="name">{nameOf(r, x.veg)}</span>
                             <span className="meta"><span>⏱ {r.prepMin} min</span><span className="num">{eur(costs[x.k])}/pers.</span>{(isVegRecipe(r) || x.veg) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}{x.cooked && <span>✅ cuisiné</span>}</span>
                           </button>

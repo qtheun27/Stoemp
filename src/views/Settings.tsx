@@ -21,7 +21,7 @@ b.style.cssText="position:fixed;z-index:2147483647;top:12px;right:12px;backgroun
 document.body.appendChild(b);
 const re=/^(voir plus|afficher plus|plus de produits|charger plus|meer laden|toon meer|meer producten)/i;
 let last=document.body.innerText.length,n=0;
-for(;n<80;n++){
+for(;n<150;n++){
 const btn=[...document.querySelectorAll("button,a,[role=button]")].find(e=>e.offsetParent&&re.test((e.innerText||"").trim()));
 if(!btn)break;
 b.textContent="Stoemp : chargement des produits… ("+(n+1)+") — garde cet onglet ouvert";
@@ -30,9 +30,21 @@ let changed=false;for(let i=0;i<40;i++){await z(250);if(document.body.innerText.
 if(!changed)break;
 await z(800);last=document.body.innerText.length;
 }
-const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:document.body.innerText.slice(0,300000)};
+let text=document.body.innerText;
+if(/colruyt\.be/.test(location.hostname)){
+const u=new URL(location.href);let p=Number(u.searchParams.get("page")||"1");
+for(let k=0;k<3;k++){
+p++;u.searchParams.set("page",String(p));
+b.textContent="Stoemp : recherche des produits cachés par les publicités… ("+(k+1)+"/3)";
+const f=document.createElement("iframe");f.style.cssText="position:fixed;left:-9999px;top:0;width:1280px;height:2400px";f.src=u.href;document.body.appendChild(f);
+let t="";for(let i=0;i<40;i++){await z(500);try{t=f.contentDocument.body.innerText}catch(e){break}if(i>8&&/\d+,\d{2,3}\/(kg|pce)/.test(t))break}
+f.remove();
+const m=t.match(/\d+,\d{2,3}\/(kg|pce|l)/g);if(!m)break;text+="\n"+t;
+}
+}
+const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:text.slice(0,1000000)};
 b.innerHTML="";
-const t=document.createElement("div");t.textContent="Stoemp : tout est chargé ("+n+" « Voir plus »).";
+const t=document.createElement("div");t.textContent="Stoemp : tout est chargé ("+n+" « Voir plus »)"+(text.length>1000000?" — page très longue : envoie plutôt par sous-catégorie.":".");
 const go=document.createElement("button");go.textContent="📥 Envoyer à Stoemp";
 go.style.cssText="margin-top:10px;width:100%;padding:10px;border:0;border-radius:10px;background:#68a83c;color:#fff;font:700 15px system-ui;cursor:pointer";
 b.append(t,go);
@@ -113,10 +125,13 @@ export default function Settings() {
                 <option value="cheapest">Le moins cher parmi mes magasins</option>
                 {st.stores.map((k) => <option key={k} value={k}>{STORES[k].label}</option>)}
               </select>
-              <div className="grid2">
-                <div><label className="field">Mon magasin Colruyt</label><input className="input" disabled={!admin} defaultValue={st.myColruytStore} placeholder="ex. Mons" onBlur={(e) => save({ myColruytStore: e.target.value.trim() })} /></div>
-                <div><label className="field">Ma boucherie Renmans</label><input className="input" disabled={!admin} defaultValue={st.renmansShop} placeholder="ex. Mons" onBlur={(e) => save({ renmansShop: e.target.value.trim() })} /></div>
-              </div>
+              <label className="field">Mon magasin, par enseigne</label>
+              <p className="small muted" style={{ margin: "0 0 6px" }}>Indique ton magasin habituel (et pour Carrefour son format : Hyper, Market ou Express) ; le magasin lu sur les pages envoyées est aussi gardé avec chaque prix.</p>
+              <div className="grid2">{st.stores.map((k) => {
+                const cur = st.shops?.[k] ?? (k === "colruyt" ? st.myColruytStore : k === "renmans" ? st.renmansShop : "") ?? "";
+                return <div key={k}><label className="field">{STORES[k].label}</label><input className="input" disabled={!admin} defaultValue={cur}
+                  placeholder={k === "carrefour" ? "ex. Carrefour Market Mons" : `ex. ${STORES[k].label} Mons`} onBlur={(e) => save({ shops: { ...(st.shops || {}), [k]: e.target.value.trim() } })} /></div>;
+              })}</div>
               <label className="field">Jours de courses</label>
               <div className="chips">{[1, 2, 3, 4, 5, 6, 0].map((d) => <button key={d} className="chip" disabled={!admin} aria-pressed={st.shoppingDays.includes(d)}
                 onClick={() => save({ shoppingDays: st.shoppingDays.includes(d) ? st.shoppingDays.filter((x) => x !== d) : [...st.shoppingDays, d] })}>{WEEKDAYS_SUN0[d].slice(0, 3)}</button>)}</div>

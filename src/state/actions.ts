@@ -4,7 +4,7 @@ import { ingredientsOf, isVegRecipe, type ItemIndex } from "../lib/catalog";
 import { guessCategory } from "../lib/classify";
 import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { parseLine } from "../lib/parse";
-import { planSeason, planWeek, pickOne, daysToExpiry, type PlanCtx } from "../lib/planner";
+import { mealCounts, planSeason, planWeek, pickOne, daysToExpiry, type PlanCtx } from "../lib/planner";
 import { trimEvents, ev } from "../lib/predict";
 import type { PriceSel } from "../lib/pricing";
 import { addDays, today, ymd } from "../lib/season";
@@ -79,7 +79,7 @@ async function aiRecipes(s: StoreState, n: number): Promise<Recipe[]> {
     householdId: s.hid, n, season: planSeason(o),
     options: {
       local: o.local, organic: o.organic, veg: o.veg, maxTime: o.timeOn ? o.maxTime : null, allergens: o.allergens, avoid: o.avoid,
-      budgetPerPerson: o.budgetOn ? o.budget / s.settings.persons / (7 * s.settings.mealsPerDay) : null,
+      budgetPerPerson: o.budgetOn ? o.budget / s.settings.persons / Math.max(1, mealCounts(s.settings).total) : null,
     },
     knownNames: [...s.recipes.values()].filter((r) => !r.deleted).map((r) => r.name).slice(0, 400),
     stockToUse: o.useStock ? stockToUse(s) : [],
@@ -95,7 +95,7 @@ export async function generateWeek(s: StoreState): Promise<string | undefined> {
     if (!s.online) note = "Hors ligne : plats de la base utilisés.";
     else {
       try {
-        const N = 7 * s.settings.mealsPerDay;
+        const N = mealCounts(s.settings).total;
         fresh = await aiRecipes(s, Math.max(1, Math.min(14, Math.ceil((N - s.settings.mineN) * s.app.aiWeekShare))));
       } catch (e) { note = (e as Error).message || "IA indisponible : plats de la base utilisés."; }
     }

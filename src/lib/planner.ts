@@ -77,6 +77,15 @@ function weightedPick<T>(items: T[], weights: number[], rand: () => number): T {
   return items[items.length - 1];
 }
 
+/** Repas par semaine (compatible avec l'ancien réglage 7 / 14 repas). */
+export function mealCounts(s: Pick<Settings, "lunches" | "dinners" | "mealsPerDay">) {
+  const lunches = Math.min(7, Math.max(0, s.lunches ?? (s.mealsPerDay === 2 ? 7 : 0)));
+  const dinners = Math.min(7, Math.max(0, s.dinners ?? 7));
+  return { lunches, dinners, total: lunches + dinners };
+}
+/** Répartit n repas sur la semaine (0 = lundi) : 7 → tous les jours, 2 → mardi et samedi, 1 → jeudi. */
+export const spreadDays = (n: number) => Array.from({ length: n }, (_, i) => Math.floor(((i + 0.5) * 7) / n));
+
 export interface PlanResult { slots: Slot[]; warning?: string; costPerPersonWeek: number }
 
 /**
@@ -87,8 +96,8 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   const { settings } = ctx;
   const o = settings.options;
   const rand = ctx.rand || Math.random;
-  const meals: Slot["meal"][] = settings.mealsPerDay === 2 ? ["midi", "soir"] : ["soir"];
-  const N = 7 * meals.length;
+  const { lunches, dinners, total: N } = mealCounts(settings);
+  const lunchDays = new Set(spreadDays(lunches)), dinnerDays = new Set(spreadDays(dinners));
   const ok = pool.filter((r) => allowed(r, o, ctx.idx, ctx.now));
   if (!ok.length && !fresh.length) return { slots: [], warning: "Aucun repas ne correspond à tes options. Décoche-en une ou deux.", costPerPersonWeek: 0 };
 
@@ -124,7 +133,8 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   const order = chosen.map((r, i) => ({ r, k: rand() + i * 0 })).sort((a, b) => a.k - b.k).map((x) => x.r);
   const slots: Slot[] = [];
   let k = 0;
-  for (let day = 0; day < 7; day++) for (const meal of meals) {
+  for (let day = 0; day < 7; day++) for (const meal of ["midi", "soir"] as const) {
+    if (!(meal === "midi" ? lunchDays : dinnerDays).has(day)) continue;
     const r = order[k++];
     slots.push({ day, meal, recipeId: r.id, veg: o.veg && !isVegRecipe(r), cooked: false });
   }

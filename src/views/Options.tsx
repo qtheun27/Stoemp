@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ALLERGENS, SEASONS, SEASON_ORDER } from "../lib/constants";
 import type { Allergen, GenOptions, Settings } from "../lib/types";
 import { saveSettings } from "../state/actions";
+import { mealCounts } from "../lib/planner";
 import { useStore } from "../state/store";
 import { Check, Sheet, Stepper } from "../ui";
 
@@ -22,16 +23,14 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
   const [avoid, setAvoid] = useState("");
   const set = (patch: Partial<GenOptions>) => saveSettings(s.hid!, { options: { ...o, ...patch } });
   const setS = (patch: Partial<Settings>) => saveSettings(s.hid!, patch);
+  const meals = mealCounts(s.settings);
   const mine = [...s.recipes.values()].filter((r) => r.source === "perso" && !r.deleted).length;
   return (
     <Sheet title="Options" sub="Elles s'appliquent à la prochaine génération" onClose={onClose}>
       <div className="row wrap" style={{ gap: 14, margin: "6px 0 10px" }}>
         <div><div className="small muted">Personnes</div><Stepper value={s.settings.persons} onChange={(v) => setS({ persons: v })} fmt={(v) => `${v} pers.`} /></div>
-        <div><div className="small muted">Repas</div>
-          <div className="chips">
-            <button className="chip" aria-pressed={s.settings.mealsPerDay === 1} onClick={() => setS({ mealsPerDay: 1 })}>7 · soir</button>
-            <button className="chip" aria-pressed={s.settings.mealsPerDay === 2} onClick={() => setS({ mealsPerDay: 2 })}>14 · midi + soir</button>
-          </div></div>
+        <div><div className="small muted">Midis</div><Stepper value={meals.lunches} min={0} max={7} onChange={(v) => setS({ lunches: v, dinners: meals.dinners || (v ? 0 : 1) })} fmt={(v) => `${v} / 7`} /></div>
+        <div><div className="small muted">Soirs</div><Stepper value={meals.dinners} min={0} max={7} onChange={(v) => setS({ dinners: v, lunches: meals.lunches || (v ? 0 : 1) })} fmt={(v) => `${v} / 7`} /></div>
       </div>
       <Opt o={o} set={set} k="seasonal" title="De saison" desc="Mois courant, ou saison choisie">
         <div className="chips">
