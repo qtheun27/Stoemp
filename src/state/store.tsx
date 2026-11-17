@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { BASE_ITEMS, BASE_RECIPES, ItemIndex } from "../lib/catalog";
+import { BASE_ITEMS, BASE_RECIPES, ItemIndex, libRecipe, type LibEntry } from "../lib/catalog";
 import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { DEFAULT_APP_CONFIG, mergeAppConfig, type AppConfig } from "../lib/appConfig";
 import { emptyBook, priceKey, type PriceBook } from "../lib/pricing";
@@ -57,6 +57,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [extraItems, setExtraItems] = useState<Item[]>([]);
   const [hhRecipes, setHhRecipes] = useState<Recipe[]>([]);
   const [hiddenBase, setHiddenBase] = useState(new Set<string>());
+  const [library, setLibrary] = useState<Recipe[]>([]);
   const [stock, setStock] = useState(new Map<string, StockEntry>());
   const [consumption, setConsumption] = useState(new Map<string, Consumption>());
   const [weekKey, setWeekKey] = useState(isoWeek());
@@ -109,12 +110,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     if (!user) return;
     // Tout le catalogue partagé : articles ajoutés par l'IA et corrections faites dans la console d'administration.
     const a = onSnapshot(collection(db, "items"), (s) => setExtraItems(s.docs.map((d) => ({ ...(d.data() as Item), id: d.id }))));
+    // Grande bibliothèque de recettes : fiches compactes, gardées hors ligne.
+    const lib = onSnapshot(collection(db, "library"), (s) => setLibrary(s.docs.flatMap((d) => ((d.data().r || []) as LibEntry[]).map(libRecipe))), () => {});
     const hidden = onSnapshot(query(collection(db, "recipes"), where("householdId", "==", null), where("deleted", "==", true)), (s) => setHiddenBase(new Set(s.docs.map((d) => d.id))), () => {});
     const b = onSnapshot(collection(db, "prices"), (s) => setShared(new Map(s.docs.map((d) => {
       const p = d.data() as Price;
       return [priceKey(p.itemId, p.store, p.organic), p];
     }))));
-    return () => { a(); b(); hidden(); };
+    return () => { a(); b(); hidden(); lib(); };
   }, [user]);
 
   // Données du foyer courant
@@ -149,8 +152,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return new ItemIndex([...byId.values()]);
   }, [extraItems]);
   // Recettes + plats préparés du magasin (à réchauffer), ces derniers à part des recettes à cuisiner.
-  const recipes = useMemo(() => new Map([...BASE_RECIPES.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)), ...hhRecipes,
-    ...idx.all().filter((i) => i.ready).map(readyRecipe)].map((r) => [r.id, r])), [hhRecipes, hiddenBase, idx]);
+  const recipes = useMemo(() => new Map([...library.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)),
+    ...BASE_RECIPES.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)), ...hhRecipes,
+    ...idx.all().filter((i) => i.ready).map(readyRecipe)].map((r) => [r.id, r])), [hhRecipes, hiddenBase, idx, library]);
   const book = useMemo(() => ({ ...emptyBook(), shared, paid }), [shared, paid]);
   const household = households.find((h) => h.id === hid) || null;
 

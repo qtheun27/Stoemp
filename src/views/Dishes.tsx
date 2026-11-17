@@ -19,6 +19,8 @@ export default function Dishes() {
   const [q, setQ] = useState("");
   const [cu, setCu] = useState<Cuisine | "all">("all");
   const [vegOnly, setVegOnly] = useState(false);
+  const [course, setCourse] = useState<"all" | "plat" | "entree" | "dessert">("plat");
+  const [limit, setLimit] = useState(60);
   const all = cookable(s.recipes.values()).filter((r) => !r.deleted);
   const mine = all.filter((r) => r.source === "perso");
   const ia = all.filter((r) => r.source === "ia");
@@ -51,9 +53,10 @@ export default function Dishes() {
     {r.source !== "base" && <button className="ib" aria-label="Supprimer" onClick={() => del(r)}>{armed === r.id ? "✔︎" : <Trash2 size={18} />}</button>}
   </div>;
   // Bibliothèque : toutes les recettes à cuisiner, filtrées par cuisine et par recherche.
-  const lib = all.filter((r) => (cu === "all" || r.cuisine === cu) && (!q || norm(r.name + " " + (r.vegName || "")).includes(norm(q))) && (!vegOnly || isVegRecipe(r) || !!r.vegName))
+  const lib = all.filter((r) => (course === "all" || (r.course || "plat") === course) && (cu === "all" || r.cuisine === cu) && (!q || norm(r.name + " " + (r.vegName || "")).includes(norm(q))) && (!vegOnly || isVegRecipe(r) || !!r.vegName))
     .sort((a, b) => a.name.localeCompare(b.name, "fr"));
-  const count = (c: Cuisine) => all.filter((r) => r.cuisine === c).length;
+  const count = (c: Cuisine) => all.filter((r) => r.cuisine === c && (course === "all" || (r.course || "plat") === course)).length;
+  const courses = (["plat", "entree", "dessert"] as const).filter((k) => all.some((r) => (r.course || "plat") === k));
 
   return (
     <>
@@ -66,13 +69,19 @@ export default function Dishes() {
         </div>
 
         {tab === "lib" && <>
-          <input className="input" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Chercher un plat (lasagne, curry, moules…)" aria-label="Chercher une recette" />
+          <input className="input" value={q} onChange={(e) => { setQ(e.target.value); setLimit(60); }} placeholder="Chercher un plat (lasagne, curry, moules…)" aria-label="Chercher une recette" />
+          {courses.length > 1 && <div className="seg" style={{ margin: "10px 0 0" }}>
+            {([["all", "Tout"], ["plat", "Plats"], ["entree", "Entrées"], ["dessert", "Desserts"]] as const).filter(([k]) => k === "all" || courses.includes(k as never)).map(([k, l]) =>
+              <button key={k} aria-pressed={course === k} onClick={() => { setCourse(k); setLimit(60); }}>{l}</button>)}
+          </div>}
           <div className="scroll-x" style={{ margin: "10px -16px 6px" }}>
-            <button className="chip" aria-pressed={cu === "all"} onClick={() => setCu("all")}>Toutes · {all.length}</button>
-            {CUISINE_ORDER.filter(count).map((c) => <button key={c} className="chip" aria-pressed={cu === c} onClick={() => setCu(c)}>{CUISINES[c].icon} {CUISINES[c].label} · {count(c)}</button>)}
+            <button className="chip" aria-pressed={cu === "all"} onClick={() => { setCu("all"); setLimit(60); }}>Toutes</button>
+            {CUISINE_ORDER.filter(count).map((c) => <button key={c} className="chip" aria-pressed={cu === c} onClick={() => { setCu(c); setLimit(60); }}>{CUISINES[c].icon} {CUISINES[c].label} · {count(c)}</button>)}
           </div>
           <label className="row small" style={{ margin: "4px 2px 10px" }}><Check checked={vegOnly} onChange={setVegOnly} label="Avec une version végé" />Avec une version végé</label>
-          {lib.length ? <div className="list">{lib.map((r) => <Row key={r.id} r={r} />)}</div> : <Empty icon="🔎">Aucune recette ne correspond.</Empty>}
+          <p className="small muted" style={{ margin: "0 2px 8px" }}>{lib.length} recette{lib.length > 1 ? "s" : ""}</p>
+          {lib.length ? <div className="list">{lib.slice(0, limit).map((r) => <Row key={r.id} r={r} />)}</div> : <Empty icon="🔎">Aucune recette ne correspond.</Empty>}
+          {lib.length > limit && <button className="btn ghost block" style={{ marginTop: 10 }} onClick={() => setLimit(limit + 120)}>Afficher plus ({lib.length - limit} restantes)</button>}
           <p className="small muted">Touche une recette pour la voir et la placer dans ta semaine.</p>
         </>}
 

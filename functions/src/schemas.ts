@@ -39,6 +39,8 @@ export const AiRecipe = z.object({
   cuisine: z.enum(CUISINES).describe("Cuisine du plat : belge, francaise, italienne, mediterraneenne (grecque, espagnole), orientale (Maghreb, Moyen-Orient), asiatique, indienne, latino (Mexique, Amérique latine), americaine (et anglaise)"),
 });
 export const AiRecipes = z.object({ recipes: z.array(AiRecipe) });
+/** Recettes de la bibliothèque : avec le type de plat (plat principal, entrée, dessert). */
+export const LibRecipes = z.object({ recipes: z.array(AiRecipe.extend({ course: z.enum(["plat", "entree", "dessert"]) })) });
 
 export const Match = z.object({ index: z.number().int().nullable().describe("Indice du produit correspondant, ou null si aucun") });
 

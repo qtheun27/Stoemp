@@ -22,3 +22,14 @@ describe("base de recettes", () => {
     expect(score(it, ctx(["belge"]))).toBeLessThan(score(it, ctx([])));
   });
 });
+
+describe("grande bibliothèque", () => {
+  it("fiche compacte → recette sans étapes, entrée et dessert hors du planificateur", async () => {
+    const { libRecipe, mains } = await import("../catalog");
+    const r = libRecipe({ i: "lib-x", n: "Velouté test", v: null, t: 20, s: "AH", c: "francaise", k: "entree", g: [["carottes", 150]], m: [], w: [] });
+    expect(r).toMatchObject({ id: "lib-x", lib: true, course: "entree", seasons: ["A", "H"], steps: [] });
+    expect(r.ingredients).toEqual([{ itemId: "carottes", qtyPerPerson: 150 }]);
+    const plat = libRecipe({ i: "lib-y", n: "Plat test", v: null, t: 30, s: "PEAH", c: "belge", g: [["carottes", 100]], m: [], w: [] });
+    expect(mains([r, plat]).map((x) => x.id)).toEqual(["lib-y"]);
+  });
+});

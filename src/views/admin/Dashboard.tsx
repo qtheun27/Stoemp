@@ -4,7 +4,7 @@ import { STORES } from "../../lib/constants";
 import { run } from "../../ui";
 import { adminStats, dt, last30, usd, type Stats } from "./api";
 
-const TASK_LABEL: Record<string, string> = { generateRecipes: "Recettes de la semaine", structureMyDish: "Mes plats", readReceipt: "Tickets de caisse", classifyItem: "Rangement par rayon", matchProduct: "Correspondance produit", extractPrices: "Capteur de prix" };
+const TASK_LABEL: Record<string, string> = { generateRecipes: "Recettes de la semaine", structureMyDish: "Mes plats", readReceipt: "Tickets de caisse", classifyItem: "Rangement par rayon", matchProduct: "Correspondance produit", extractPrices: "Capteur de prix", growLibrary: "Bibliothèque de recettes" };
 
 export function Bars({ data, label }: { data: number[]; label: (i: number) => string }) {
   const max = Math.max(1, ...data);

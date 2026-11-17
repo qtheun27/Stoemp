@@ -14,6 +14,7 @@ const DEFAULTS: AiConfig = {
   enabled: true, monthlyBudgetUsd: 20,
   tasks: {
     generateRecipes: { model: "claude-haiku-5-5", effort: "medium", maxTokens: 16000, enabled: true },
+    growLibrary: { model: "claude-haiku-5-5", effort: "low", maxTokens: 16000, enabled: true },
     structureMyDish: { model: "claude-haiku-5-5", effort: "low", maxTokens: 8000, enabled: true },
     readReceipt: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 8000, enabled: true },
     classifyItem: { model: "claude-haiku-5-5", effort: "low", maxTokens: 1000, enabled: true },
@@ -23,6 +24,7 @@ const DEFAULTS: AiConfig = {
 };
 const TASKS: [string, string, string][] = [
   ["generateRecipes", "Recettes de la semaine", "Plats inventés selon les options du foyer. Haiku suffit pour des recettes familiales."],
+  ["growLibrary", "Bibliothèque de recettes", "Génération par lots de la grande bibliothèque (onglet Recettes). Haiku : environ 0,08 $ pour 100 recettes."],
   ["structureMyDish", "Mes plats", "Complète un plat perso (ingrédients, version végé, étapes)."],
   ["readReceipt", "Tickets de caisse", "Lit la photo du ticket (abréviations, ticket froissé) : Sonnet conseillé. Le modèle doit accepter les images."],
   ["classifyItem", "Rangement par rayon", "Rayon, unité, conservation d'un nouvel article. Modèle rapide conseillé."],
