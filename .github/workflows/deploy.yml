@@ -25,7 +25,7 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npm test
-      - run: npm --prefix functions ci && npm --prefix functions run build
+      - run: npm --prefix functions ci && npm --prefix functions test && npm --prefix functions run build
       # Version GitHub Pages (sous-dossier /Stoemp/)
       - run: npm run build
         env: { BASE: /Stoemp/ }

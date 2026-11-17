@@ -39,3 +39,8 @@ Appli PWA « Stoemp » : repas de saison de la semaine, liste de courses avec pr
 - `config/app` : modules activables, maintenance, annonce, part IA de la semaine, fraîcheur des prix, réglages d'un nouveau foyer (lu en direct par l'appli).
 - `config/ai` : modèle, effort, jetons max et activation par fonction IA, budget mensuel ; liste des modèles lue en direct via l'API Models d'Anthropic. Les Functions relisent ce document toutes les 30 s.
 - `aiLogs` : journal des appels IA (jetons, coût estimé, durée, erreurs) pour le tableau de bord et le plafond de budget.
+
+## Capteur de prix
+- Le favori (`src/views/Settings.tsx`) clique lui-même sur « Voir plus », puis propose « 📥 Envoyer à Stoemp » ; `#/capture` transmet le texte à `extractPrices`.
+- Colruyt : lecteur **sans IA** (`functions/src/readers/colruyt.ts`) + correspondance déterministe (`readers/match.ts`, poids moyen par pièce pour convertir kilo ↔ pièce). L'IA ne sert qu'à classer les produits inconnus en **nouveaux articles génériques** (enrichissement du catalogue). Autres enseignes : lecture par l'IA, par morceaux.
+- Chaque prix garde le magasin (`shop`, ex. « Colruyt Basecles »). Copie brute des pages dans `captures` (admin) pour écrire de nouveaux lecteurs ; les tests n'utilisent que des extraits fictifs (prix jamais publiés).

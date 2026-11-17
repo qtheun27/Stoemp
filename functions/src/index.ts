@@ -8,7 +8,9 @@ import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
-import { AiRecipes, ClassifiedItem, Match, PageMatches, PageProducts, Receipt } from "./schemas";
+import { AiRecipes, ClassifiedItem, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
+import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
+import { matchItem } from "./readers/match";
 
 initializeApp();
 setGlobalOptions({ region: "europe-west1", maxInstances: 5 });
@@ -217,54 +219,97 @@ function chunks(text: string, size = 18000): string[] {
   return out;
 }
 
+/** Enregistre, pour chaque article, le prix au kilo/litre/pièce le plus bas de la page. */
+async function savePrices(store: (typeof STORES)[number], url: string, shop: string | null, rows: { itemId: string; organic: boolean; productName: string; size: number; unit: string; price: number; promo: string | null }[]) {
+  const now = new Date().toISOString();
+  const best = new Map<string, (typeof rows)[number] & { ppu: number }>();
+  for (const r of rows) {
+    const key = `${r.itemId}_${store}${r.organic ? "_bio" : ""}`;
+    const ppu = r.price / r.size;
+    if (!best.has(key) || best.get(key)!.ppu > ppu) best.set(key, { ...r, ppu });
+  }
+  const w = db().bulkWriter();
+  const saved: { itemId: string; productName: string; packPrice: number }[] = [];
+  for (const [key, r] of best) {
+    const doc = { itemId: r.itemId, store, shop, organic: r.organic, productName: r.productName, url, packSize: r.size, packUnit: r.unit,
+      packPrice: r.price, pricePerUnit: r.ppu, promo: r.promo, promoUntil: null, fetchedAt: now, source: "capture" };
+    w.set(db().collection("prices").doc(key), doc);
+    w.create(db().collection("priceHistory").doc(), doc);
+    saved.push({ itemId: r.itemId, productName: r.productName, packPrice: r.price });
+  }
+  await w.close();
+  return saved;
+}
+
+const ENRICH_SYSTEM = `${CLASSIFY_SYSTEM}
+On te donne des produits d'une enseigne belge absents du catalogue. Pour chacun, propose l'article GÉNÉRIQUE correspondant (sans marque ni variété commerciale : « BONI Royal Gala » → « Pommes Royal Gala » seulement si la variété compte pour les courses, sinon « Pommes »).
+L'unité doit permettre d'utiliser le prix affiché : produit vendu au kg → unité g ; à la pièce → pc ; liquide → ml.`;
+
 export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (req) => {
   const u = uid(req);
   const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(300000) }), req.data);
-  const items = await loadItems();
-  const catalog = catalogPrompt(items);
-  const now = new Date().toISOString();
   // Copie du texte brut (lecture réservée à l'administrateur) : sert à écrire des lecteurs d'enseigne sans IA.
   await db().collection("captures").add({ store: d.store, url: d.url, text: d.text, length: d.text.length, uid: u, at: Date.now() }).catch(() => {});
+  let items = await loadItems();
 
-  // Lecture et correspondance par morceaux, 4 à la fois : une catégorie entière passe d'un coup.
-  const parts = chunks(d.text);
-  const results: { p: z.infer<typeof PageProducts>["products"][number]; itemId: string | null }[] = [];
+  // 1. Lecture sans IA quand on connaît le format de l'enseigne.
+  const parsed: ShopProduct[] = d.store === "colruyt" ? parseColruyt(d.text) : [];
+  if (parsed.length >= 3) {
+    const shop = colruytShop(d.text);
+    const rows: Parameters<typeof savePrices>[3] = [];
+    const unmatched: ShopProduct[] = [];
+    for (const p of parsed) {
+      const m = matchItem(p.name, p.packSize, p.packUnit, items);
+      if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
+      else unmatched.push(p);
+    }
+    // 2. Enrichissement : les produits inconnus deviennent des articles génériques (classés par l'IA, une seule fois).
+    const created = new Set<string>();
+    for (let i = 0; i < Math.min(unmatched.length, 300); i += 60) {
+      const batch = unmatched.slice(i, i + 60);
+      try {
+        const r = await askJson("classifyItem", { uid: u, schema: NewItems, system: ENRICH_SYSTEM,
+          content: batch.map((p, k) => `${k}. ${p.name} — vendu ${p.packUnit === "pc" ? "à la pièce" : p.packSize === 1000 ? (p.packUnit === "g" ? "au kg" : "au litre") : `par ${p.packSize} ${p.packUnit}`}`).join("\n") });
+        for (const c of r.items) {
+          const p = batch[c.index];
+          if (!p || !c.keep) continue;
+          const before = items.length;
+          const it = await createItem(c, p.name);
+          items = await loadItems();
+          if (items.length > before) created.add(it.name);
+          const m = matchItem(p.name, p.packSize, p.packUnit, [it]) || (it.unit === p.packUnit ? { item: it, size: p.packSize } : null);
+          if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
+        }
+      } catch (e) { logger.warn("Enrichissement partiel", e); }
+    }
+    const saved = await savePrices(d.store, d.url, shop, rows);
+    return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA" };
+  }
+
+  // 3. Enseigne au format inconnu : lecture par l'IA, morceau par morceau (un morceau en échec n'arrête pas les autres).
+  const catalog = catalogPrompt(items);
+  const parts = chunks(d.text, 8000);
+  const rows: Parameters<typeof savePrices>[3] = [];
+  let found = 0;
   for (let i = 0; i < parts.length; i += 4) {
-    const batch = await Promise.all(parts.slice(i, i + 4).map(async (part) => {
+    const res = await Promise.allSettled(parts.slice(i, i + 4).map(async (part) => {
       const page = await askJson("extractPrices", { uid: u, schema: PageProducts, system: EXTRACT_SYSTEM, content: `Enseigne : ${d.store}\nPage : ${d.url}\n\n${part}` });
       const usable = page.products.filter((p) => p.packSize && p.packUnit && p.price > 0);
-      if (!usable.length) return [];
+      found += usable.length;
+      if (!usable.length) return;
       const m = await askJson("matchProduct", {
         uid: u, schema: PageMatches, system: `${MATCH_PAGE_SYSTEM}\nCatalogue (itemId | nom | unité) :\n${catalog}`,
         content: usable.map((p, k) => `${k}. ${[p.brand, p.name].filter(Boolean).join(" ")} (${p.packSize} ${p.packUnit})`).join("\n"),
       });
-      const byIndex = new Map(m.matches.map((x) => [x.index, x.itemId]));
-      return usable.map((p, k) => ({ p, itemId: byIndex.get(k) ?? null }));
+      for (const x of m.matches) {
+        const p = usable[x.index], item = x.itemId ? items.find((it) => it.id === x.itemId) : undefined;
+        if (p && item && item.unit === p.packUnit) rows.push({ itemId: item.id, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), size: p.packSize!, unit: item.unit, price: p.price, promo: p.promo });
+      }
     }));
-    batch.forEach((b) => results.push(...b));
+    res.filter((r) => r.status === "rejected").forEach((r) => logger.warn("Morceau illisible", (r as PromiseRejectedResult).reason));
   }
-
-  // Par article : le prix au kilo/litre le plus bas de la page (marque distributeur comprise).
-  const best = new Map<string, { p: (typeof results)[number]["p"]; ppu: number }>();
-  for (const { p, itemId } of results) {
-    const item = itemId ? items.find((i) => i.id === itemId) : undefined;
-    if (!item || item.unit !== p.packUnit) continue;
-    const key = `${item.id}_${d.store}${p.organic ? "_bio" : ""}`;
-    const ppu = p.price / p.packSize!;
-    if (!best.has(key) || best.get(key)!.ppu > ppu) best.set(key, { p, ppu });
-  }
-  const saved: { itemId: string; productName: string; packPrice: number }[] = [];
-  const w = db().bulkWriter();
-  for (const [key, { p, ppu }] of best) {
-    const itemId = key.split(`_${d.store}`)[0];
-    const doc = { itemId, store: d.store, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), url: d.url,
-      packSize: p.packSize, packUnit: p.packUnit, packPrice: p.price, pricePerUnit: ppu, promo: p.promo, promoUntil: null, fetchedAt: now, source: "capture" };
-    w.set(db().collection("prices").doc(key), doc);
-    w.create(db().collection("priceHistory").doc(), doc);
-    saved.push({ itemId, productName: doc.productName, packPrice: p.price });
-  }
-  await w.close();
-  return { found: results.length, saved };
+  const saved = await savePrices(d.store, d.url, null, rows);
+  return { found, saved, created: [], shop: null, reader: "IA" };
 });
 
 // ---------- readReceipt : photo du ticket de caisse ----------

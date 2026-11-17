@@ -338,4 +338,4 @@ export async function saveManualDish(s: StoreState, f: { name: string; persons: 
 export const deleteRecipe = (id: string) => updateDoc(doc(db, "recipes", id), { deleted: true });
 
 // ---------------- Capteur de prix ----------------
-export const extractPricesFn = call<{ store: StoreId; url: string; text: string }, { found: number; saved: { itemId: string; productName: string; packPrice: number }[] }>("extractPrices");
+export const extractPricesFn = call<{ store: StoreId; url: string; text: string }, { found: number; saved: { itemId: string; productName: string; packPrice: number }[]; created?: string[]; shop?: string | null; reader?: string }>("extractPrices");
