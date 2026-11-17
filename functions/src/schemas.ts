@@ -39,6 +39,12 @@ export const AiRecipe = z.object({
   cuisine: z.enum(CUISINES).describe("Cuisine du plat : belge, francaise, italienne, mediterraneenne (grecque, espagnole), orientale (Maghreb, Moyen-Orient), asiatique, indienne, latino (Mexique, Amérique latine), americaine (et anglaise)"),
 });
 export const AiRecipes = z.object({ recipes: z.array(AiRecipe) });
+/** Relecture « chef critique » d'un lot de recettes de la bibliothèque. */
+export const LibReview = z.object({ verdicts: z.array(z.object({
+  index: z.number().int(),
+  ok: z.boolean().describe("true seulement si c'est un vrai plat connu sous ce nom ET que la recette est correcte et réalisable"),
+  reason: z.string().describe("Une phrase : pourquoi c'est refusé, ou « ok »"),
+})) });
 /** Recettes de la bibliothèque : avec le type de plat (plat principal, entrée, dessert). */
 export const LibRecipes = z.object({ recipes: z.array(AiRecipe.extend({ course: z.enum(["plat", "entree", "dessert"]) })) });
 

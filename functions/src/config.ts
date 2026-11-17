@@ -1,7 +1,7 @@
 import { getFirestore } from "firebase-admin/firestore";
 
 /** Tâches IA réglables depuis la console d'administration. */
-export const TASKS = ["generateRecipes", "structureMyDish", "readReceipt", "classifyItem", "matchProduct", "extractPrices", "growLibrary"] as const;
+export const TASKS = ["generateRecipes", "structureMyDish", "readReceipt", "classifyItem", "matchProduct", "extractPrices", "growLibrary", "reviewLibrary"] as const;
 export type Task = (typeof TASKS)[number];
 export type Effort = "low" | "medium" | "high" | "xhigh" | "max";
 
@@ -19,6 +19,7 @@ export const DEFAULT_AI: AiConfig = {
     matchProduct: { model: "claude-haiku-5-5", effort: "low", maxTokens: 4000, enabled: true },
     extractPrices: { model: "claude-haiku-5-5", effort: "low", maxTokens: 16000, enabled: true },
     growLibrary: { model: "claude-haiku-5-5", effort: "low", maxTokens: 16000, enabled: true },
+    reviewLibrary: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 4000, enabled: true },
   },
 };
 
