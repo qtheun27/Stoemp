@@ -186,7 +186,7 @@ function LineSheet({ line, onClose }: { line: ShopLine; onClose: () => void }) {
     {!!prices.length && <div className="list" style={{ marginBottom: 12 }}>{prices.sort((a, b) => a.pricePerUnit - b.pricePerUnit).map((p) => <div key={p.store} className="store-row">
       <span className="store-dot" style={{ background: STORES[p.store].color }} />
       <div className="grow"><b>{STORES[p.store].label}</b> <span className="small muted">{p.productName || ""}</span>
-        <div className="small muted">{fmtQty(p.packSize, it!.unit)} · {p.source === "estimation" ? "estimation" : `${p.source} · ${p.date}`}{p.promo ? ` · 🏷 ${p.promo}` : ""}</div></div>
+        <div className="small muted">{fmtQty(p.packSize, it!.unit)} · {p.source === "estimation" ? "estimation" : `${p.source}${p.shop ? ` · ${p.shop}` : ""} · ${p.date}`}{p.promo ? ` · 🏷 ${p.promo}` : ""}</div></div>
       <b className="num">{eur(p.packPrice)}</b></div>)}</div>}
     <label className="field">Prix payé</label>
     <div className="row">

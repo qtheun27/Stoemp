@@ -135,6 +135,7 @@ export interface Price {
   promoUntil?: string | null;
   fetchedAt: string;
   source: "robot" | "capture" | "ticket" | "openprices" | "manuel";
+  shop?: string | null;
 }
 
 export interface PaidPrice {

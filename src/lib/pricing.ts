@@ -13,6 +13,7 @@ export interface PriceInfo {
   promo?: string | null;
   productName?: string;
   url?: string;
+  shop?: string | null;
 }
 
 export interface PriceBook {
@@ -39,7 +40,7 @@ export function priceAt(item: Item, store: StoreId, book: PriceBook, organic = f
   if (shared) {
     return {
       store, pricePerUnit: shared.pricePerUnit, packSize: shared.packSize, packPrice: shared.packPrice, organic: shared.organic,
-      source: shared.source, date: shared.fetchedAt.slice(0, 10), promo: shared.promo, productName: shared.productName, url: shared.url,
+      source: shared.source, date: shared.fetchedAt.slice(0, 10), promo: shared.promo, productName: shared.productName, url: shared.url, shop: shared.shop,
     };
   }
   const bio = organic && item.organicAvailable ? 1.35 : 1;

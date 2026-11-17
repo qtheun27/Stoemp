@@ -62,3 +62,17 @@ export const PageProducts = z.object({
 export const PageMatches = z.object({
   matches: z.array(z.object({ index: z.number().int(), itemId: z.string().nullable().describe("Identifiant exact d'un article du catalogue, ou null") })),
 });
+
+/** Classement par lots des produits inconnus en articles génériques (enrichissement du catalogue). */
+export const NewItems = z.object({
+  items: z.array(z.object({
+    index: z.number().int(),
+    keep: z.boolean().describe("false si ce n'est pas un article de courses alimentaire ou ménager utile (ex. décoration)"),
+    name: z.string().describe("Nom générique sans marque, en français, comme dans une liste de courses (ex. « Framboises », « Pleurotes »)"),
+    category: CAT, unit: UNIT,
+    packSize: z.number().describe("Format courant en magasin, dans l'unité choisie"),
+    local: z.boolean(), organicAvailable: z.boolean(), perishable: z.boolean(), shelfLifeDays: z.number().int(),
+    allergens: z.array(ALLERGEN),
+    seasonMonths: z.array(z.number().int()).describe("Mois de saison en Belgique (1-12) pour fruits et légumes, sinon vide"),
+  })),
+});
