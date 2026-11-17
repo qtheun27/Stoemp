@@ -49,8 +49,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: functions/package-lock.json }
       - uses: actions/download-artifact@v4
         with: { name: firebase-dist, path: dist }
+      # Dépendances des Cloud Functions (construites par le predeploy de firebase.json)
+      - run: npm --prefix functions ci
       - uses: google-github-actions/auth@v2
         with: { workload_identity_provider: "${{ env.WIF_PROVIDER }}", service_account: "${{ env.WIF_SA }}" }
-      - run: npx -y firebase-tools@14 deploy --only hosting,firestore:rules --project stoemp-app --non-interactive
+      # Site, règles, index et Cloud Functions : tout est déployé sans clé stockée (Workload Identity Federation).
+      - run: npx -y firebase-tools@14 deploy --only hosting,firestore:rules,firestore:indexes,functions --project stoemp-app --non-interactive --force
