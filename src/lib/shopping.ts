@@ -2,6 +2,7 @@ import { ingredientsOf, type ItemIndex } from "./catalog";
 import { predict, shouldAutoAdd } from "./predict";
 import type { Cat, Consumption, Reason, Recipe, ShoppingDoc, Slot, StockEntry, Unit } from "./types";
 import { baseQty, packsFor } from "./units";
+import { coursePortions, slotPortions } from "./household";
 
 export interface ShopLine {
   id: string;
@@ -36,15 +37,18 @@ export interface ShopInput {
 /** Besoins des repas non cuisinés, par article (unité de l'article). */
 export function mealNeeds(slots: Slot[], recipes: Map<string, Recipe>, persons: number, idx: ItemIndex) {
   const need = new Map<string, number>();
-  for (const s of slots) {
-    if (s.cooked) continue;
-    const r = recipes.get(s.recipeId);
-    if (!r) continue;
-    for (const ing of ingredientsOf(r, s.veg)) {
+  const add = (r: Recipe | undefined, veg: boolean, portions: number) => {
+    if (!r || portions <= 0) return;
+    for (const ing of ingredientsOf(r, veg)) {
       const item = idx.get(ing.itemId);
       if (!item) continue;
-      need.set(item.id, (need.get(item.id) || 0) + baseQty(ing, item) * persons);
+      need.set(item.id, (need.get(item.id) || 0) + baseQty(ing, item) * portions);
     }
+  };
+  for (const s of slots) {
+    if (s.cooked) continue;
+    add(recipes.get(s.recipeId), s.veg, slotPortions(s, persons)); // plat (+ invités, + restes du lendemain)
+    for (const c of s.courses || []) add(recipes.get(c.recipeId), false, coursePortions(s, persons)); // apéritif, entrée, dessert
   }
   return need;
 }

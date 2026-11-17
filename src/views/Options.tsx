@@ -3,6 +3,7 @@ import { ALLERGENS, SEASONS, SEASON_ORDER } from "../lib/constants";
 import type { Allergen, GenOptions, Settings } from "../lib/types";
 import { saveSettings } from "../state/actions";
 import { mealCounts } from "../lib/planner";
+import { eatersOf, headcount, type Eaters } from "../lib/household";
 import { useStore } from "../state/store";
 import { Check, Sheet, Stepper } from "../ui";
 
@@ -24,11 +25,15 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
   const set = (patch: Partial<GenOptions>) => saveSettings(s.hid!, { options: { ...o, ...patch } });
   const setS = (patch: Partial<Settings>) => saveSettings(s.hid!, patch);
   const meals = mealCounts(s.settings);
+  const e = eatersOf(s.settings);
+  const setEaters = (x: Eaters) => setS({ adults: x.adults, teens: x.teens, kids: x.kids, persons: headcount(x) });
   const mine = [...s.recipes.values()].filter((r) => r.source === "perso" && !r.deleted).length;
   return (
     <Sheet title="Options" sub="Elles s'appliquent à la prochaine génération" onClose={onClose}>
       <div className="row wrap" style={{ gap: 14, margin: "6px 0 10px" }}>
-        <div><div className="small muted">Personnes</div><Stepper value={s.settings.persons} onChange={(v) => setS({ persons: v })} fmt={(v) => `${v} pers.`} /></div>
+        <div><div className="small muted">Adultes</div><Stepper value={e.adults} min={1} max={12} onChange={(v) => setEaters({ ...e, adults: v })} /></div>
+        <div><div className="small muted">Ados (11-17 ans)</div><Stepper value={e.teens} min={0} max={8} onChange={(v) => setEaters({ ...e, teens: v })} /></div>
+        <div><div className="small muted">Enfants (3-10 ans)</div><Stepper value={e.kids} min={0} max={8} onChange={(v) => setEaters({ ...e, kids: v })} /></div>
         <div><div className="small muted">Midis</div><Stepper value={meals.lunches} min={0} max={7} onChange={(v) => setS({ lunches: v, dinners: meals.dinners || (v ? 0 : 1) })} fmt={(v) => `${v} / 7`} /></div>
         <div><div className="small muted">Soirs</div><Stepper value={meals.dinners} min={0} max={7} onChange={(v) => setS({ dinners: v, lunches: meals.lunches || (v ? 0 : 1) })} fmt={(v) => `${v} / 7`} /></div>
       </div>
@@ -67,6 +72,12 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
       </Opt>
       {s.app.features.ai && <Opt o={o} set={set} k="ai" title="Nouveaux plats inventés par l'IA" desc={`${Math.round(s.app.aiWeekShare * 100)} % de la semaine en plats inédits ; ils s'ajoutent à ta base`} />}
       <Opt o={o} set={set} k="useStock" title="Écouler le stock" desc="Favorise les recettes qui utilisent le stock, surtout ce qui périme bientôt" />
+      <Opt o={o} set={set} k="promos" title="Profiter des promos" desc="Favorise les recettes dont les ingrédients sont en promo cette semaine dans tes magasins" />
+      <Opt o={o} set={set} k="balance" title="Semaine équilibrée" desc="Du poisson, des légumineuses, pas trop de viande, et jamais deux fois le même féculent d'affilée" />
+      {e.kids > 0 && <Opt o={o} set={set} k="kidFriendly" title="Plats appréciés des enfants" desc="Écarte les plats épicés ou très relevés" />}
+      <Opt o={o} set={set} k="drinks" title="Boissons conseillées" desc="Un accord boisson avec chaque repas, à ajouter aux courses en un geste">
+        <label className="row small"><Check checked={!!o.noAlcohol} onChange={(v) => set({ noAlcohol: v })} label="Sans alcool" />Sans alcool</label>
+      </Opt>
     </Sheet>
   );
 }

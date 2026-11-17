@@ -45,3 +45,8 @@ Appli PWA « Stoemp » : repas de saison de la semaine, liste de courses avec pr
 - Colruyt : lecteur **sans IA** (`functions/src/readers/colruyt.ts`) + correspondance déterministe (`readers/match.ts`, poids moyen par pièce pour convertir kilo ↔ pièce). L'IA ne sert qu'à classer les produits inconnus en **nouveaux articles génériques** (enrichissement du catalogue). Autres enseignes : lecture par l'IA, par morceaux.
 - Chaque prix garde le magasin (`shop`, ex. « Colruyt Basecles »). Copie brute des pages dans `captures` (admin) pour écrire de nouveaux lecteurs ; les tests n'utilisent que des extraits fictifs (prix jamais publiés).
 - **Variantes** : `prices/{itemId}_{store}.offers[]` garde les produits relevés (gamme `eco`/`maison`/`marque`, bio, `sans-gluten`/`sans-lactose`/`vegetal`), fusionnés d'un envoi à l'autre (60 jours). `pickOffer` (`src/lib/pricing.ts`) choisit selon le foyer : prix payés d'abord, puis allergies, bio, gamme (option « Gamme de produits », défaut marque du magasin). L'historique (`priceHistory`) n'enregistre qu'en cas de changement.
+
+## Foyer et repas
+- Foyer : `adults`, `teens` (portion entière), `kids` 3-10 ans (0,6 portion) → `portionsOf` (`src/lib/household.ts`) ; `persons` gardé = nombre total.
+- Créneau : `guests` + `courses` (réception : apéritif, entrée, dessert via `generateMenu`), `leftovers` / `fromLeftovers` (restes du lendemain midi). Les courses suivent `slotPortions`/`coursePortions`.
+- Planificateur : plats pour enfants (sans épices), promos de la semaine, équilibre (poisson, légumineuses, viande limitée, féculents variés) — `src/lib/balance.ts`. Boissons conseillées sans IA (`src/lib/drinks.ts`). « Frigo vide » : `fridgeIdeas` + plat IA « stock uniquement ».

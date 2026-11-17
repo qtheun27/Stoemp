@@ -2,6 +2,9 @@ import { ingredientsOf, isVegRecipe, matchesWord, type ItemIndex } from "./catal
 import { mealCostPerPerson, type CostCtx } from "./cost";
 import { currentSeason } from "./season";
 import type { GenOptions, Item, Recipe, Season, Settings, Slot, StockEntry } from "./types";
+import { profile, type Protein } from "./balance";
+import { eatersOf, portionsOf } from "./household";
+import { priceKey } from "./pricing";
 
 export interface PlanCtx {
   idx: ItemIndex;
@@ -43,7 +46,27 @@ export function allowed(r: Recipe, o: GenOptions, idx: ItemIndex, now = new Date
     if (o.avoid.some((w) => names.some((n) => matchesWord(n, w)))) return false;
   }
   if (o.local && localShare(r, veg, idx) < 0.5) return false;
+  if (o.kidFriendly && kidUnfriendly(r, veg)) return false;
   return true;
+}
+
+/** Plats peu appréciés des enfants : épicés ou très relevés. */
+const SPICY = ["epices-chili", "curry", "epices-fajitas", "piment", "harissa", "wasabi"];
+export const kidUnfriendly = (r: Recipe, veg: boolean) => ingredientsOf(r, veg).some((i) => SPICY.some((k) => i.itemId.includes(k)));
+
+/** Options réellement appliquées : « plats pour enfants » seulement s'il y a des enfants. */
+export function effectiveOptions(s: Settings): GenOptions {
+  const e = eatersOf(s);
+  return { ...s.options, kidFriendly: !!s.options.kidFriendly && e.kids > 0 };
+}
+
+/** Article en promo dans un des magasins du foyer (prix relevé il y a moins de 10 jours). */
+export function onPromo(itemId: string, ctx: PlanCtx): boolean {
+  const recent = new Date(Date.now() - 10 * 86400000).toISOString();
+  return ctx.cost.stores.some((st) => {
+    const p = ctx.cost.book.shared.get(priceKey(itemId, st));
+    return !!p && !!p.promo && p.fetchedAt >= recent && (!!p.offers?.length ? p.offers.some((o) => o.promo) : true);
+  });
 }
 
 /** Jours avant péremption d'une fiche de stock (Infinity si inconnu). */
@@ -67,6 +90,11 @@ export function score(r: Recipe, ctx: PlanCtx): number {
     }
   }
   if (o.local) s *= 0.5 + localShare(r, o.veg, ctx.idx);
+  // Promos de la semaine dans les magasins du foyer.
+  if (o.promos !== false) {
+    const promo = ingredientsOf(r, o.veg).filter((i) => !ctx.idx.get(i.itemId)?.staple && onPromo(i.itemId, ctx)).length;
+    s *= 1 + 0.35 * Math.min(3, promo);
+  }
   return s;
 }
 
@@ -98,7 +126,8 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   const rand = ctx.rand || Math.random;
   const { lunches, dinners, total: N } = mealCounts(settings);
   const lunchDays = new Set(spreadDays(lunches)), dinnerDays = new Set(spreadDays(dinners));
-  const ok = pool.filter((r) => allowed(r, o, ctx.idx, ctx.now));
+  const eo = effectiveOptions(settings);
+  const ok = pool.filter((r) => allowed(r, eo, ctx.idx, ctx.now));
   if (!ok.length && !fresh.length) return { slots: [], warning: "Aucun repas ne correspond à tes options. Décoche-en une ou deux.", costPerPersonWeek: 0 };
 
   const mine = ok.filter((r) => r.source === "perso").sort(() => rand() - 0.5).slice(0, Math.min(settings.mineN, N));
@@ -108,7 +137,8 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
     let cands = ok.filter((r) => !used.has(r.id) && r.source !== "perso");
     if (!cands.length) cands = ok.filter((r) => r.source !== "perso");
     if (!cands.length) cands = ok;
-    const r = weightedPick(cands, cands.map((c) => score(c, ctx)), rand);
+    const weights = cands.map((c) => score(c, ctx) * (o.balance !== false ? balanceFactor(c, chosen, N, ctx) : 1));
+    const r = weightedPick(cands, weights, rand);
     chosen.push(r);
     used.add(r.id);
   }
@@ -116,7 +146,7 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   const cost = (r: Recipe) => mealCostPerPerson(r, o.veg, ctx.cost);
   let warning: string | undefined;
   if (o.budgetOn && o.budget > 0) {
-    const limitPP = o.budget / settings.persons;
+    const limitPP = o.budget / Math.max(0.5, portionsOf(eatersOf(settings)));
     const cheap = ok.filter((r) => r.source !== "perso").sort((a, b) => cost(a) - cost(b));
     for (let guard = 0; guard < N * 2; guard++) {
       const total = chosen.reduce((s, r) => s + cost(r), 0);
@@ -129,8 +159,9 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
     }
   }
 
-  // Mélange pour répartir plats perso et nouveautés dans la semaine.
-  const order = chosen.map((r, i) => ({ r, k: rand() + i * 0 })).sort((a, b) => a.k - b.k).map((x) => x.r);
+  // Mélange pour répartir plats perso et nouveautés, puis on évite deux fois le même féculent d'affilée.
+  let order = chosen.map((r) => ({ r, k: rand() })).sort((a, b) => a.k - b.k).map((x) => x.r);
+  if (o.balance !== false) order = spreadStarches(order, o.veg, ctx);
   const slots: Slot[] = [];
   let k = 0;
   for (let day = 0; day < 7; day++) for (const meal of ["midi", "soir"] as const) {
@@ -141,9 +172,33 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   return { slots, warning, costPerPersonWeek: order.reduce((s, r) => s + cost(r), 0) };
 }
 
+/** Pondération d'équilibre : favorise le poisson et les légumineuses tant qu'il en manque, freine l'excès de viande. */
+function balanceFactor(r: Recipe, chosen: Recipe[], N: number, ctx: PlanCtx): number {
+  const veg = ctx.settings.options.veg;
+  const count = (p: Protein) => chosen.filter((c) => profile(c, veg, ctx.idx).protein === p).length;
+  const p = profile(r, veg, ctx.idx).protein;
+  const noFish = ctx.settings.options.allergens.includes("po") || veg;
+  if (p === "poisson" && !noFish && count("poisson") < Math.max(1, Math.round(N / 7))) return 2.5;
+  if (p === "legumineuses" && count("legumineuses") < 1) return 1.8;
+  if (p === "viande" && count("viande") >= Math.ceil(N * 0.6)) return 0.4;
+  return 1;
+}
+
+/** Réordonne pour éviter le même féculent deux repas de suite. */
+function spreadStarches(list: Recipe[], veg: boolean, ctx: PlanCtx): Recipe[] {
+  const out: Recipe[] = [];
+  const rest = [...list];
+  while (rest.length) {
+    const prev = out.length ? profile(out[out.length - 1], veg, ctx.idx).starch : null;
+    const i = rest.findIndex((r) => { const st = profile(r, veg, ctx.idx).starch; return st === "autre" || st !== prev; });
+    out.push(...rest.splice(i >= 0 ? i : 0, 1));
+  }
+  return out;
+}
+
 /** Un seul repas de remplacement, différent de ceux de la semaine. */
 export function pickOne(pool: Recipe[], ctx: PlanCtx, exclude: Set<string>): Recipe | null {
-  const ok = pool.filter((r) => allowed(r, ctx.settings.options, ctx.idx, ctx.now) && r.source !== "perso");
+  const ok = pool.filter((r) => allowed(r, effectiveOptions(ctx.settings), ctx.idx, ctx.now) && r.source !== "perso");
   const c = ok.filter((r) => !exclude.has(r.id));
   const list = c.length ? c : ok;
   if (!list.length) return null;
