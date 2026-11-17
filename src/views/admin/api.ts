@@ -16,6 +16,8 @@ export const adminTestModel = call<{ model: string }, { ok: boolean; ms: number;
 export const adminListUsers = call<unknown, { users: AdminUser[] }>("adminListUsers");
 export const adminUpdateUser = call<{ uid: string; action: "disable" | "enable" | "delete" | "makeSuper" | "removeSuper" }, { ok: boolean }>("adminUpdateUser");
 export const adminCleanAnonymous = call<{ days: number }, { removed: number }>("adminCleanAnonymous");
+export const adminDeleteHousehold = call<{ householdId: string }, { ok: boolean }>("adminDeleteHousehold");
+export const adminCleanOrphanHouseholds = call<unknown, { removed: number }>("adminCleanOrphanHouseholds");
 export const adminClearAiCache = call<{ fn: string | null }, { removed: number }>("adminClearAiCache");
 
 /** 30 derniers jours, du plus ancien au plus récent. */

@@ -129,6 +129,50 @@ export const adminListUsers = onCall(opts, async (req) => {
   };
 });
 
+/** Supprime un foyer et tout son contenu (stock, courses, semaines…), ses plats perso, et le retire des profils. */
+async function deleteHousehold(hid: string) {
+  const ref = db().collection("households").doc(hid);
+  const members = Object.keys(((await ref.get()).get("members") as Record<string, string>) || {});
+  const recipes = await db().collection("recipes").where("householdId", "==", hid).get();
+  const w = db().bulkWriter();
+  recipes.docs.forEach((d) => w.delete(d.ref));
+  await w.close();
+  await db().recursiveDelete(ref);
+  for (const uid of members) {
+    const u = db().collection("users").doc(uid);
+    const d = (await u.get()).data();
+    if (!d) continue;
+    const rest = ((d.households as string[]) || []).filter((x) => x !== hid);
+    await u.set({ households: rest, current: d.current === hid ? rest[0] || null : d.current ?? null }, { merge: true });
+  }
+}
+
+/** Foyers dont il était le seul membre. */
+async function soleHouseholds(uid: string) {
+  const snap = await db().collection("households").where(`members.${uid}`, "in", ["admin", "member"]).get();
+  return snap.docs.filter((d) => Object.keys(d.get("members") || {}).length <= 1).map((d) => d.id);
+}
+
+export const adminDeleteHousehold = onCall({ ...opts, timeoutSeconds: 300 }, async (req) => {
+  requireSuper(req);
+  const { householdId } = parse(z.object({ householdId: z.string().min(1) }), req.data);
+  await deleteHousehold(householdId);
+  return { ok: true };
+});
+
+/** Ménage : foyers dont plus aucun membre n'a de compte. */
+export const adminCleanOrphanHouseholds = onCall({ ...opts, timeoutSeconds: 540 }, async (req) => {
+  requireSuper(req);
+  const uids = new Set((await allUsers()).map((u) => u.uid));
+  const snap = await db().collection("households").get();
+  let removed = 0;
+  for (const h of snap.docs) {
+    const members = Object.keys(h.get("members") || {});
+    if (!members.some((m) => uids.has(m))) { await deleteHousehold(h.id); removed++; }
+  }
+  return { removed };
+});
+
 /** Actions sur un compte : suspendre, réactiver, supprimer, donner/retirer l'accès admin. */
 export const adminUpdateUser = onCall(opts, async (req) => {
   const me = requireSuper(req);
@@ -137,7 +181,11 @@ export const adminUpdateUser = onCall(opts, async (req) => {
   const a = getAuth();
   if (action === "disable" || action === "enable") await a.updateUser(uid, { disabled: action === "disable" });
   if (action === "makeSuper" || action === "removeSuper") await a.setCustomUserClaims(uid, { superAdmin: action === "makeSuper" });
-  if (action === "delete") { await a.deleteUser(uid); await db().collection("users").doc(uid).delete(); }
+  if (action === "delete") {
+    for (const hid of await soleHouseholds(uid)) await deleteHousehold(hid); // ses foyers sans autre membre
+    await a.deleteUser(uid);
+    await db().collection("users").doc(uid).delete();
+  }
   return { ok: true };
 });
 
@@ -149,11 +197,7 @@ export const adminCleanAnonymous = onCall({ ...opts, timeoutSeconds: 540 }, asyn
   let removed = 0;
   for (const u of await allUsers()) {
     if (u.providerData.length || Date.parse(u.metadata.lastRefreshTime || u.metadata.lastSignInTime) > limit) continue;
-    const ud = (await db().collection("users").doc(u.uid).get()).data();
-    for (const hid of (ud?.households as string[]) || []) {
-      const h = await db().collection("households").doc(hid).get();
-      if (h.exists && Object.keys(h.get("members") || {}).length <= 1) await db().recursiveDelete(h.ref);
-    }
+    for (const hid of await soleHouseholds(u.uid)) await deleteHousehold(hid);
     await db().collection("users").doc(u.uid).delete();
     await getAuth().deleteUser(u.uid);
     removed++;
