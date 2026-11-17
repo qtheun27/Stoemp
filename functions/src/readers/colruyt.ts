@@ -55,12 +55,13 @@ export function parseColruyt(text: string): ShopProduct[] {
   const seen = new Set<string>();
   for (let i = 0; i + 3 < L.length; i++) {
     // Prix principal : euros / centimes / unité de vente, suivi du prix par unité de mesure.
-    if (!/^\d{1,3}$/.test(L[i]) || !/^\d{2}$/.test(L[i + 1]) || !/^\/(kg|pce|pc|l|st)$/i.test(L[i + 2])) continue;
+    // Les centimes ont 2 chiffres, parfois 3 (« 0 / 981 » = 0,981 € pour un petit format vendu au poids).
+    if (!/^\d{1,3}$/.test(L[i]) || !/^\d{2,3}$/.test(L[i + 1]) || !/^\/(kg|pce|pc|l|st)$/i.test(L[i + 2])) continue;
     const per = L[i + 3].match(/^(\d+,\d{2})\/(kg|pce|pc|l|st)$/i);
     if (!per) continue;
     // Ignore un prix dégressif (précédé d'un prix principal juste au-dessus).
     if (i >= 4 && /^\d+,\d{2}\/(kg|pce|pc|l|st)$/i.test(L[i - 1])) continue;
-    const price = Number(L[i]) + Number(L[i + 1]) / 100;
+    const price = Number(L[i]) + Number("0." + L[i + 1]);
     const saleUnit = L[i + 2].slice(1).toLowerCase();
     // Nom et contenance : on remonte au-dessus du prix.
     let j = i - 1;
@@ -86,10 +87,10 @@ export function parseColruyt(text: string): ShopProduct[] {
     else { size = 1; unit = "pc"; total = price; }
     // « ±1kg » vendu au kilo : le prix affiché est déjà au kilo.
     if (pk && saleUnit === "kg") pk = null;
-    const key = name + "|" + total;
+    const key = name + "|" + total + "|" + size + unit; // même nom et même prix mais autre format = autre produit
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push({ name, packSize: size, packUnit: unit, price: Math.round(total * 100) / 100, pricePerUnit: total / size, promo, organic });
+    out.push({ name, packSize: size, packUnit: unit, price: Math.round(total * 1000) / 1000, pricePerUnit: total / size, promo, organic });
   }
   return out;
 }

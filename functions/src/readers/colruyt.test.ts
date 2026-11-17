@@ -59,6 +59,12 @@ Réaction promo concurrent
 /pce
  àpd 4 pcs
 0,445/pce
+BONI roquette sachet
+100g
+0
+981
+/pce
+9,81/kg
 Bio
 BONI BIO menthe plante
 1pc
@@ -80,7 +86,8 @@ describe("lecteur Colruyt sans IA", () => {
   const P = parseColruyt(PAGE);
   it("lit nom, contenance, prix et promo ; ignore le prix dégressif", () => {
     expect(colruytShop(PAGE)).toBe("Colruyt Exempleville");
-    expect(P.map((p) => p.name)).toEqual(["concombre", "BONI bananes", "Oignons", "BONI BIO Orange", "BONI abricots séchés", "BONI mini poivrons", "Kaki", "BONI BIO menthe plante"]);
+    expect(P.map((p) => p.name)).toEqual(["concombre", "BONI bananes", "Oignons", "BONI BIO Orange", "BONI abricots séchés", "BONI mini poivrons", "Kaki", "BONI roquette sachet", "BONI BIO menthe plante"]);
+    expect(P[7]).toMatchObject({ packSize: 100, packUnit: "g", price: 0.981 }); // prix à 3 décimales
     expect(P[5]).toMatchObject({ packSize: 1000, packUnit: "g", price: 2.2 }); // « 6-8pc » vendu au kilo
     expect(P[6].promo).toMatch(/concurrent : 0,445 €\/pce àpd 4/);
     expect(P[1]).toMatchObject({ packSize: 1000, packUnit: "g", price: 1.9 });
@@ -95,7 +102,7 @@ describe("lecteur Colruyt sans IA", () => {
     expect(m(2)!.size).toBeCloseTo(1000 / 150); // 1 kg ≈ 6,7 oignons
     expect(m(3)?.item.id).toBe("oranges");
     expect(m(4)).toBeNull(); // abricots séchés ≠ abricots
-    expect(m(7)).toBeNull(); // menthe en plante ≠ menthe
+    expect(m(8)).toBeNull(); // menthe en plante ≠ menthe
   });
 });
 
