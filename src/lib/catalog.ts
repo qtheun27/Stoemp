@@ -1,7 +1,7 @@
 import { CATALOG_RAW } from "../data/catalog-raw";
 import { RECIPES_RAW, type RawRecipe } from "../data/recipes-raw";
 import { CUISINE_OF, RECIPES_MORE, type Cuisine } from "../data/recipes-more";
-import type { Allergen, Cat, Ingredient, Item, Recipe, Season, Unit } from "./types";
+import type { Allergen, Cat, Course, Ingredient, Item, Recipe, Season, Unit } from "./types";
 import { keyOf, norm, slug } from "./text";
 
 function months(s: string): number[] {
@@ -105,7 +105,7 @@ export const cookable = (recipes: Iterable<Recipe>) => [...recipes].filter((r) =
 export const mains = (recipes: Iterable<Recipe>) => cookable(recipes).filter((r) => (r.course || "plat") === "plat");
 
 /** Fiche compacte de la bibliothèque (document « library ») → recette sans étapes. */
-export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: "plat" | "entree" | "dessert"; g: [string, number][]; m: [string, number][]; w: [string, number][] }
+export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: Course; g: [string, number][]; m: [string, number][]; w: [string, number][] }
 export function libRecipe(e: LibEntry): Recipe {
   const ing = (l: [string, number][]) => (l || []).map(([itemId, qtyPerPerson]) => ({ itemId, qtyPerPerson }));
   return { id: e.i, name: e.n, vegName: e.v, prepMin: e.t, seasons: (e.s || "PEAH").split("") as Season[], ingredients: ing(e.g), meat: ing(e.m), vegSwap: ing(e.w),

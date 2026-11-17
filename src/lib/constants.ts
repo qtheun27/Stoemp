@@ -1,4 +1,4 @@
-import type { Cuisine, Allergen, Cat, Location, Season, StoreId } from "./types";
+import type { Course, Cuisine, Allergen, Cat, Location, Season, StoreId } from "./types";
 
 export const CATS: Record<Cat, { label: string; icon: string }> = {
   fl: { label: "Fruits & légumes", icon: "🥕" },
@@ -54,3 +54,11 @@ export const CUISINES: Record<Cuisine, { label: string; icon: string }> = {
   indienne: { label: "Indienne", icon: "🍛" }, latino: { label: "Mexicaine & latino", icon: "🌮" }, americaine: { label: "Américaine", icon: "🍔" },
 };
 export const CUISINE_ORDER = Object.keys(CUISINES) as Cuisine[];
+
+/** Types de plats de la bibliothèque, dans l'ordre d'un repas. */
+export const COURSES: Record<Course, { label: string; icon: string }> = {
+  aperitif: { label: "Apéritifs", icon: "🫒" }, entree: { label: "Entrées", icon: "🥗" }, soupe: { label: "Soupes", icon: "🍲" },
+  plat: { label: "Plats", icon: "🍽️" }, accompagnement: { label: "Accompagnements", icon: "🥔" }, dessert: { label: "Desserts", icon: "🍰" },
+  patisserie: { label: "Pâtisseries & goûters", icon: "🥐" }, petitdej: { label: "Petit-déjeuner & brunch", icon: "☕" },
+};
+export const COURSE_ORDER = Object.keys(COURSES) as Course[];

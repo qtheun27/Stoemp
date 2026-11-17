@@ -474,7 +474,11 @@ const CUISINE_LABEL: Record<string, string> = {
   orientale: "orientale (Maghreb, Liban, Turquie, Moyen-Orient)", asiatique: "asiatique (chinoise, thaïe, japonaise, vietnamienne, coréenne)",
   indienne: "indienne", latino: "mexicaine et latino-américaine", americaine: "américaine et anglaise",
 };
-const LIB_COURSE: Record<string, string> = { plat: "plats principaux", entree: "entrées ou soupes", dessert: "desserts" };
+const LIB_COURSE: Record<string, string> = {
+  aperitif: "bouchées et amuse-bouches d'apéritif", entree: "entrées (froides ou chaudes, hors soupes)", soupe: "soupes et veloutés",
+  plat: "plats principaux", accompagnement: "accompagnements (légumes, féculents, salades d'accompagnement)", dessert: "desserts",
+  patisserie: "pâtisseries, gâteaux et biscuits pour le goûter", petitdej: "recettes de petit-déjeuner et de brunch",
+};
 const LIB_BATCH = 15;
 const LIB_CHUNK = 400;
 interface LibQueue { cuisine: string; course: string; remaining: number; made: number; failures: number }
@@ -543,6 +547,8 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
     content: `Propose ${n} ${LIB_COURSE[course]} de cuisine ${CUISINE_LABEL[cuisine]} (course = "${course}", cuisine = "${cuisine}").
 UNIQUEMENT des plats qui existent réellement et sont connus sous ce nom dans leur pays ou leur région (un cuisinier de là-bas les reconnaîtrait) : d'abord les grands classiques, puis des spécialités régionales authentiques. AUCUNE invention, aucune « fusion », aucun nom fantaisiste.
 Recette fidèle à la tradition (ingrédients et techniques d'origine), adaptée seulement si un ingrédient est introuvable en Belgique ; faisable en famille.
+Recette COMPLÈTE et PRÉCISE, comme dans un bon livre de cuisine : tous les ingrédients qui comptent (vin, bouillon, herbes, beurre compris), 4 à 8 étapes avec les gestes (découper, précuire, pocher, réduire), les temps et les températures, jusqu'au dressage.
+Pour les desserts, pâtisseries et apéritifs : quantités pour 1 part ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
 Varie les ingrédients principaux (volaille, bœuf, porc, poisson, fruits de mer, légumineuses, œufs, légumes) et les saisons.
 N'en propose AUCUNE de cette liste (même sous un autre nom) : ${[...sameCourse.slice(-600), ...refusedBefore.slice(-100)].join(" ; ") || "—"}.`,
   });
@@ -553,15 +559,17 @@ N'en propose AUCUNE de cette liste (même sous un autre nom) : ${[...sameCourse.
     const all = [...r.ingredients, ...r.meat];
     const qtyOk = all.every((x) => { const it = x.itemId ? byId.get(x.itemId) : undefined; const u = it?.unit;
       return x.qtyPerPerson > 0 && (u === "pc" ? x.qtyPerPerson <= 6 : x.qtyPerPerson <= 700); });
-    return all.length >= 3 && r.steps.length >= 2 && r.steps.length <= 10 && r.prepMin >= 5 && r.prepMin <= 300 && qtyOk && (!r.meat.length || r.vegSwap.length > 0);
+    return all.length >= (course === "plat" || course === "soupe" ? 3 : 2) && r.steps.length >= 2 && r.steps.length <= 10 && r.prepMin >= 5 && r.prepMin <= 300 && qtyOk && (!r.meat.length || r.vegSwap.length > 0);
   };
   const candidates = res.recipes.map((r, k) => ({ r, k })).filter(({ r }) => sane(r) && !known.has(norm(r.name)));
-  const line = (x: { itemId: string | null; newName: string | null; qtyPerPerson: number }) => { const it = x.itemId ? byId.get(x.itemId) : undefined; return `${it?.name || x.newName} ${x.qtyPerPerson} ${it?.unit || ""}`.trim(); };
+  const line = (x: { itemId: string | null; newName: string | null; qtyPerPerson: number }) => { const it = x.itemId ? byId.get(x.itemId) : undefined;
+    return it ? `${it.name} ${x.qtyPerPerson} ${it.unit === "pc" ? "pièce(s)" : it.unit}` : `${x.newName} ${x.qtyPerPerson} (unité habituelle)`; };
   const review = candidates.length ? await askJson("reviewLibrary", {
     schema: LibReview, minTokens: 4000,
     system: `Tu es un chef critique exigeant, spécialiste de la cuisine ${CUISINE_LABEL[cuisine]}. On te soumet des recettes pour une appli familiale belge.
 Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour 1 personne, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
-Accepte les adaptations raisonnables aux supermarchés belges. Sois strict : dans le doute, refuse.`,
+Format de l'appli, à NE PAS reprocher : quantités pour 1 personne (0,5 œuf ou 0,25 citron = normal, on multiplie ensuite), sel, poivre et huile volontairement absents de la liste, étapes concises si elles sont justes. « pièce(s) » d'un bouquet d'herbes = fraction du bouquet.
+Accepte les adaptations raisonnables aux supermarchés belges. Refuse franchement ce qui est faux ou inventé ; pour un simple détail, accepte.`,
     content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.prepMin} min)
 Ingrédients : ${[...r.ingredients, ...r.meat].map(line).join(", ")}${r.vegSwap.length ? `
 Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}

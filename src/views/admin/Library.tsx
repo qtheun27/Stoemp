@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
-import { CUISINES, CUISINE_ORDER } from "../../lib/constants";
-import type { Cuisine } from "../../lib/types";
+import { COURSES, COURSE_ORDER, CUISINES, CUISINE_ORDER } from "../../lib/constants";
+import type { Course, Cuisine } from "../../lib/types";
 import { useStore } from "../../state/store";
 import { Check, run, Stepper } from "../../ui";
 import { adminLibraryJob, dt, usd } from "./api";
@@ -11,28 +11,29 @@ interface Job { status: "running" | "paused" | "stopped" | "done"; made: number;
   queue: { cuisine: Cuisine; course: string; remaining: number; made: number; failures: number }[] }
 
 /** Coût moyen observé d'une recette générée par Haiku 5.5 (catalogue en entrée + recette en sortie), en $. */
-const COST_PER_RECIPE = 0.0025; // écriture Haiku + relecture Sonnet
-const COURSE: Record<string, string> = { plat: "Plats", entree: "Entrées", dessert: "Desserts" };
+const COST_PER_RECIPE = 0.0015; // écriture Haiku + relecture Sonnet, refus compris
+/** Répartition conseillée par cuisine (≈ 555 × 9 cuisines ≈ 5 000 recettes). */
+const DEFAULT_PER: Record<Course, number> = { plat: 250, dessert: 70, entree: 60, soupe: 50, aperitif: 40, accompagnement: 40, patisserie: 30, petitdej: 15 };
 
 /** Agrandir la bibliothèque de recettes : tâche de fond côté serveur, qui continue même console fermée. */
 export default function Library() {
   const s = useStore();
   const [job, setJob] = useState<Job | null>(null);
-  const [per, setPer] = useState({ plat: 300, entree: 40, dessert: 40 });
+  const [per, setPer] = useState<Record<Course, number>>(DEFAULT_PER);
   const [cuisines, setCuisines] = useState<Cuisine[]>(CUISINE_ORDER);
   useEffect(() => onSnapshot(doc(db, "libraryJobs", "current"), (d) => setJob((d.data() as Job) || null), () => {}), []);
 
   const all = [...s.recipes.values()].filter((r) => r.source === "base" && !r.deleted);
   const by = (c: Cuisine, k: string) => all.filter((r) => r.cuisine === c && (r.course || "plat") === k).length;
-  const total = cuisines.length * (per.plat + per.entree + per.dessert);
+  const total = cuisines.length * Object.values(per).reduce((a, b) => a + b, 0);
   const left = job?.queue.reduce((a, q) => a + q.remaining, 0) || 0;
   const act = (action: "start" | "pause" | "resume" | "stop") => run(() => adminLibraryJob({ action, perCuisine: per, cuisines }), action === "start" ? "Génération lancée : elle continue en arrière-plan" : "C'est noté");
 
   return <div className="stack">
     <div className="card">
       <h3>📚 Bibliothèque : {all.length} recettes</h3>
-      <div className="tbl-wrap"><table className="tbl"><thead><tr><th>Cuisine</th><th>Plats</th><th>Entrées</th><th>Desserts</th></tr></thead>
-        <tbody>{CUISINE_ORDER.map((c) => <tr key={c}><td>{CUISINES[c].icon} {CUISINES[c].label}</td><td className="num">{by(c, "plat")}</td><td className="num">{by(c, "entree")}</td><td className="num">{by(c, "dessert")}</td></tr>)}</tbody></table></div>
+      <div className="tbl-wrap"><table className="tbl"><thead><tr><th>Cuisine</th>{COURSE_ORDER.map((k) => <th key={k} title={COURSES[k].label}>{COURSES[k].icon}</th>)}</tr></thead>
+        <tbody>{CUISINE_ORDER.map((c) => <tr key={c}><td>{CUISINES[c].icon} {CUISINES[c].label}</td>{COURSE_ORDER.map((k) => <td key={k} className="num">{by(c, k)}</td>)}</tr>)}</tbody></table></div>
     </div>
 
     {job && <div className="card">
@@ -55,7 +56,7 @@ export default function Library() {
       <div className="chips">{CUISINE_ORDER.map((c) => { const on = cuisines.includes(c);
         return <label key={c} className="chip"><Check checked={on} onChange={() => setCuisines(on ? cuisines.filter((x) => x !== c) : [...cuisines, c])} label={CUISINES[c].label} />{CUISINES[c].icon} {CUISINES[c].label}</label>; })}</div>
       <div className="row wrap" style={{ gap: 14, margin: "12px 0" }}>
-        {(Object.keys(COURSE) as (keyof typeof per)[]).map((k) => <div key={k}><div className="small muted">{COURSE[k]} par cuisine</div>
+        {COURSE_ORDER.map((k) => <div key={k}><div className="small muted">{COURSES[k].icon} {COURSES[k].label}</div>
           <Stepper value={per[k]} min={0} max={2000} step={k === "plat" ? 50 : 10} onChange={(v) => setPer({ ...per, [k]: v })} /></div>)}
       </div>
       <p>≈ <b>{total.toLocaleString("fr-BE")}</b> recettes · coût estimé <b>{usd(total * COST_PER_RECIPE)}</b> · environ {Math.max(1, Math.round(total / 15 / 40))} h</p>

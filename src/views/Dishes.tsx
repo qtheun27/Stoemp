@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Heart, Sparkles, Trash2 } from "lucide-react";
 import { cookable, isVegRecipe } from "../lib/catalog";
-import { CUISINES, CUISINE_ORDER } from "../lib/constants";
+import { COURSES, COURSE_ORDER, CUISINES, CUISINE_ORDER } from "../lib/constants";
 import { norm } from "../lib/text";
-import type { Cuisine, Recipe } from "../lib/types";
+import type { Course, Cuisine, Recipe } from "../lib/types";
 import { deleteRecipe, saveManualDish, structureMyDish, toggleFavorite } from "../state/actions";
 import { useStore } from "../state/store";
 import { Check, Empty, run, toast, TopBar } from "../ui";
@@ -19,7 +19,7 @@ export default function Dishes() {
   const [q, setQ] = useState("");
   const [cu, setCu] = useState<Cuisine | "all">("all");
   const [vegOnly, setVegOnly] = useState(false);
-  const [course, setCourse] = useState<"all" | "plat" | "entree" | "dessert">("plat");
+  const [course, setCourse] = useState<"all" | Course>("plat");
   const [limit, setLimit] = useState(60);
   const all = cookable(s.recipes.values()).filter((r) => !r.deleted);
   const mine = all.filter((r) => r.source === "perso");
@@ -56,7 +56,7 @@ export default function Dishes() {
   const lib = all.filter((r) => (course === "all" || (r.course || "plat") === course) && (cu === "all" || r.cuisine === cu) && (!q || norm(r.name + " " + (r.vegName || "")).includes(norm(q))) && (!vegOnly || isVegRecipe(r) || !!r.vegName))
     .sort((a, b) => a.name.localeCompare(b.name, "fr"));
   const count = (c: Cuisine) => all.filter((r) => r.cuisine === c && (course === "all" || (r.course || "plat") === course)).length;
-  const courses = (["plat", "entree", "dessert"] as const).filter((k) => all.some((r) => (r.course || "plat") === k));
+  const courses = COURSE_ORDER.filter((k) => all.some((r) => (r.course || "plat") === k));
 
   return (
     <>
@@ -70,9 +70,9 @@ export default function Dishes() {
 
         {tab === "lib" && <>
           <input className="input" value={q} onChange={(e) => { setQ(e.target.value); setLimit(60); }} placeholder="Chercher un plat (lasagne, curry, moules…)" aria-label="Chercher une recette" />
-          {courses.length > 1 && <div className="seg" style={{ margin: "10px 0 0" }}>
-            {([["all", "Tout"], ["plat", "Plats"], ["entree", "Entrées"], ["dessert", "Desserts"]] as const).filter(([k]) => k === "all" || courses.includes(k as never)).map(([k, l]) =>
-              <button key={k} aria-pressed={course === k} onClick={() => { setCourse(k); setLimit(60); }}>{l}</button>)}
+          {courses.length > 1 && <div className="scroll-x" style={{ margin: "10px -16px 0" }}>
+            <button className="chip" aria-pressed={course === "all"} onClick={() => { setCourse("all"); setLimit(60); }}>Tout</button>
+            {courses.map((k) => <button key={k} className="chip" aria-pressed={course === k} onClick={() => { setCourse(k); setLimit(60); }}>{COURSES[k].icon} {COURSES[k].label}</button>)}
           </div>}
           <div className="scroll-x" style={{ margin: "10px -16px 6px" }}>
             <button className="chip" aria-pressed={cu === "all"} onClick={() => { setCu("all"); setLimit(60); }}>Toutes</button>
