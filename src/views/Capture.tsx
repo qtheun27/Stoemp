@@ -15,6 +15,7 @@ export default function Capture() {
   useEffect(() => {
     let done = false;
     const onMsg = async (e: MessageEvent) => {
+      // Le favori envoie plusieurs fois par sécurité : on ne traite que le premier envoi.
       const d = e.data;
       if (done || !d || d.type !== "stoemp-capture" || typeof d.text !== "string") return;
       const store = HOSTS.find(([re]) => re.test(String(d.host)))?.[1];
@@ -33,7 +34,7 @@ export default function Capture() {
   return <>
     <TopBar title="Capteur de prix" sub={state.store ? STORES[state.store].label : undefined} />
     <div className="content">
-      {state.phase === "wait" && <Empty icon="📥">En attente de la page du magasin…<br />Ouvre une recherche sur le site de l'enseigne et touche le favori « Envoyer à Stoemp ».</Empty>}
+      {state.phase === "wait" && <Empty icon="📥">Le magasin charge tous les produits de la page…<br />Garde cet onglet ouvert : la lecture démarre dès que tout est chargé.</Empty>}
       {state.phase === "busy" && <Empty icon="🔎">Lecture des prix…<br />Une catégorie entière peut prendre une à deux minutes : garde cette page ouverte.</Empty>}
       {state.phase === "error" && <Empty icon="⚠️">{state.msg}</Empty>}
       {state.phase === "done" && <>

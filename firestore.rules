@@ -13,6 +13,7 @@ service cloud.firestore {
     // Journaux et files d'attente : lecture administrateur, écriture par les Functions et le robot.
     match /aiLogs/{id} { allow read: if isSuper(); allow write: if false; }
     match /scraperRuns/{id} { allow read: if isSuper(); allow write: if false; }
+    match /captures/{id} { allow read, delete: if isSuper(); allow create, update: if false; }
     match /productMatches/{id} { allow read, write: if isSuper(); }
 
     // Catalogue, prix et recettes de base : partagés, lecture seule côté client (écrits par les Functions et le robot).
