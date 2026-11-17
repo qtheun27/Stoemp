@@ -8,7 +8,7 @@ import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
-import { AiRecipe, AiRecipes, ClassifiedItem, LibRecipes, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
+import { AiRecipe, AiRecipes, ClassifiedItem, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { aliasFits, matchItem, similarItem } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
@@ -536,22 +536,48 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
   const existing = await db().collection("recipes").where("householdId", "==", null).where("cuisine", "==", cuisine).select("name", "course").get();
   const names = existing.docs.map((d) => d.get("name") as string);
   const sameCourse = existing.docs.filter((d) => (d.get("course") || "plat") === course).map((d) => d.get("name") as string);
+  // Recettes déjà refusées par le relecteur : ne pas les reproposer.
+  const refusedBefore = (((await db().collection("libraryJobs").doc("current").get()).get("refused") as string[]) || []).map((x) => x.split(" : ")[0]);
   const res = await askJson("growLibrary", {
     schema: LibRecipes, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items, true)),
     content: `Propose ${n} ${LIB_COURSE[course]} de cuisine ${CUISINE_LABEL[cuisine]} (course = "${course}", cuisine = "${cuisine}").
-Des recettes authentiques et connues, puis des classiques régionaux moins connus ; toutes différentes, faisables en famille avec des produits de supermarché belge.
+UNIQUEMENT des plats qui existent réellement et sont connus sous ce nom dans leur pays ou leur région (un cuisinier de là-bas les reconnaîtrait) : d'abord les grands classiques, puis des spécialités régionales authentiques. AUCUNE invention, aucune « fusion », aucun nom fantaisiste.
+Recette fidèle à la tradition (ingrédients et techniques d'origine), adaptée seulement si un ingrédient est introuvable en Belgique ; faisable en famille.
 Varie les ingrédients principaux (volaille, bœuf, porc, poisson, fruits de mer, légumineuses, œufs, légumes) et les saisons.
-N'en propose AUCUNE de cette liste (même sous un autre nom) : ${sameCourse.slice(-600).join(" ; ") || "—"}.`,
+N'en propose AUCUNE de cette liste (même sous un autre nom) : ${[...sameCourse.slice(-600), ...refusedBefore.slice(-100)].join(" ; ") || "—"}.`,
   });
   const known = new Set(names.map(norm));
+  // Garde-fous : contrôles de bon sens, puis relecture par un « chef critique » (modèle plus fort) ; le reste est écarté.
+  const byId = new Map(items.map((i) => [i.id, i]));
+  const sane = (r: (typeof res.recipes)[number]) => {
+    const all = [...r.ingredients, ...r.meat];
+    const qtyOk = all.every((x) => { const it = x.itemId ? byId.get(x.itemId) : undefined; const u = it?.unit;
+      return x.qtyPerPerson > 0 && (u === "pc" ? x.qtyPerPerson <= 6 : x.qtyPerPerson <= 700); });
+    return all.length >= 3 && r.steps.length >= 2 && r.steps.length <= 10 && r.prepMin >= 5 && r.prepMin <= 300 && qtyOk && (!r.meat.length || r.vegSwap.length > 0);
+  };
+  const candidates = res.recipes.map((r, k) => ({ r, k })).filter(({ r }) => sane(r) && !known.has(norm(r.name)));
+  const line = (x: { itemId: string | null; newName: string | null; qtyPerPerson: number }) => { const it = x.itemId ? byId.get(x.itemId) : undefined; return `${it?.name || x.newName} ${x.qtyPerPerson} ${it?.unit || ""}`.trim(); };
+  const review = candidates.length ? await askJson("reviewLibrary", {
+    schema: LibReview, minTokens: 4000,
+    system: `Tu es un chef critique exigeant, spécialiste de la cuisine ${CUISINE_LABEL[cuisine]}. On te soumet des recettes pour une appli familiale belge.
+Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour 1 personne, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
+Accepte les adaptations raisonnables aux supermarchés belges. Sois strict : dans le doute, refuse.`,
+    content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.prepMin} min)
+Ingrédients : ${[...r.ingredients, ...r.meat].map(line).join(", ")}${r.vegSwap.length ? `
+Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
+Étapes : ${r.steps.join(" / ")}`).join("\n\n"),
+  }) : { verdicts: [] };
+  const okIdx = new Set(review.verdicts.filter((v) => v.ok).map((v) => candidates[v.index]?.k).filter((k) => k !== undefined));
+  const refused = review.verdicts.filter((v) => !v.ok && candidates[v.index]).map((v) => `${candidates[v.index].r.name} : ${v.reason}`);
+  if (refused.length) await db().collection("libraryJobs").doc("current").set({ refused: FieldValue.arrayUnion(...refused.slice(0, 15)), refusedCount: FieldValue.increment(refused.length) }, { merge: true });
   // Même nom déjà présent dans une autre cuisine : on ne l'écrase pas.
   const ids = res.recipes.map((r) => `lib-${slug(r.name)}`.slice(0, 120));
   const taken = new Set((ids.length ? await db().getAll(...ids.map((id) => db().collection("recipes").doc(id))) : []).filter((d) => d.exists).map((d) => d.id));
   const batch = db().batch();
   const metas: Record<string, unknown>[] = [];
-  for (const r of res.recipes) {
+  for (const [k, r] of res.recipes.entries()) {
     const key = norm(r.name);
-    if (known.has(key) || !r.steps.length || taken.has(`lib-${slug(r.name)}`.slice(0, 120))) continue;
+    if (!okIdx.has(k) || known.has(key) || taken.has(`lib-${slug(r.name)}`.slice(0, 120))) continue;
     const ingredients = await resolveIngredients(r.ingredients, items);
     if (ingredients.length < 2) continue;
     const meat = await resolveIngredients(r.meat, items);

@@ -7,11 +7,11 @@ import { useStore } from "../../state/store";
 import { Check, run, Stepper } from "../../ui";
 import { adminLibraryJob, dt, usd } from "./api";
 
-interface Job { status: "running" | "paused" | "stopped" | "done"; made: number; step: number; startedAt: number; updatedAt: number; lastError: string | null;
+interface Job { status: "running" | "paused" | "stopped" | "done"; made: number; refused?: string[]; refusedCount?: number; step: number; startedAt: number; updatedAt: number; lastError: string | null;
   queue: { cuisine: Cuisine; course: string; remaining: number; made: number; failures: number }[] }
 
 /** Coût moyen observé d'une recette générée par Haiku 5.5 (catalogue en entrée + recette en sortie), en $. */
-const COST_PER_RECIPE = 0.0008;
+const COST_PER_RECIPE = 0.0025; // écriture Haiku + relecture Sonnet
 const COURSE: Record<string, string> = { plat: "Plats", entree: "Entrées", dessert: "Desserts" };
 
 /** Agrandir la bibliothèque de recettes : tâche de fond côté serveur, qui continue même console fermée. */
@@ -40,6 +40,8 @@ export default function Library() {
       <p>{job.made} recettes ajoutées · {left} restantes · dernière activité {dt(job.updatedAt)}</p>
       {left > 0 && <div className="progress"><i style={{ width: `${(job.made / Math.max(1, job.made + left)) * 100}%` }} /></div>}
       {job.lastError && <p className="small" style={{ color: "var(--bad)" }}>Dernière erreur : {job.lastError}</p>}
+      {!!job.refusedCount && <details style={{ marginTop: 8 }}><summary className="small">{job.refusedCount} recettes refusées par le relecteur</summary>
+        <ul className="small muted">{(job.refused || []).slice(-30).reverse().map((x) => <li key={x}>{x}</li>)}</ul></details>}
       <div className="row wrap" style={{ marginTop: 10 }}>
         {job.status === "running" && <button className="btn ghost" onClick={() => act("pause")}>⏸ Pause</button>}
         {job.status === "paused" && <button className="btn" onClick={() => act("resume")}>▶ Reprendre</button>}
