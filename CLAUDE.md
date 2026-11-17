@@ -16,7 +16,7 @@ Appli PWA « Stoemp » : repas de saison de la semaine, liste de courses avec pr
 - `src/lib/` : logique pure et testée (catalogue, unités, planificateur, liste de courses, prédiction, coûts, prix).
 - `src/state/` : `store.tsx` (abonnements Firestore, cache hors ligne persistant) et `actions.ts` (écritures).
 - `src/views/` : écrans (Semaine, Courses, Stock, Mes plats, Réglages, Capteur de prix, Ticket de caisse).
-- `src/data/` : catalogue de départ (~280 articles) et 185 recettes de base classées par **cuisine** (`recipes-raw.ts` + `recipes-more.ts`, `CUISINES` dans `constants.ts`). `npx tsx scripts/seed.ts` les copie dans Firestore sans écraser les alias appris ni les recettes masquées.
+- `src/data/` : catalogue de départ (~280 articles) et 250 recettes de base classées par **cuisine** (`recipes-raw.ts` + `recipes-more.ts`, `CUISINES` dans `constants.ts`). `npx tsx scripts/seed.ts` les copie dans Firestore sans écraser les alias appris ni les recettes masquées.
 - `functions/` : Cloud Functions Node 22 (europe-west1) : generateRecipes, structureMyDish, classifyItem, matchProduct, extractPrices, readReceipt, createInvite, joinHousehold, onMatchQueued. Par défaut : Haiku 5.5 pour tout (recettes, plats perso, rangement, correspondances, capteur), Sonnet 5.5 pour la lecture des tickets de caisse. Réglable par fonction dans la console. Cache dans `aiCache`.
 - `scraper/` : robot Playwright hebdomadaire (GitHub Actions `prix.yml`), connecteurs `search(query) → Product[]`.
 - `firestore.rules` : un membre ne lit/écrit que ses foyers ; catalogue, prix et recettes de base en lecture seule côté client.

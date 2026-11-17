@@ -285,4 +285,6 @@ Chou chinois|fl|g|800|1.79|P|10||pak choï|
 Germes de soja|fl|g|200|1.29|P|4||pousses de soja|
 Cheddar|fr|g|200|2.79||30|la||
 Pain hamburger|bo|pc|4|1.99||5|gl|pains burger|
+Choucroute|fr|g|500|1.99|LP|14||choucroute crue|
+Jarret de veau|vi|g|600|8.99|LP|3||osso buco|
 `;
