@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { colruytShop, parseColruyt } from "./colruyt";
-import { matchItem } from "./match";
+import { aliasFits, headFits, matchItem, similarItem, similarity } from "./match";
 import { tagsOf, tierOf } from "./tiers";
 
 // Extrait fictif au format d'une page Colruyt (prix inventés).
@@ -103,6 +103,44 @@ describe("lecteur Colruyt sans IA", () => {
     expect(m(3)?.item.id).toBe("oranges");
     expect(m(4)).toBeNull(); // abricots séchés ≠ abricots
     expect(m(8)).toBeNull(); // menthe en plante ≠ menthe
+  });
+});
+
+describe("correspondance : le mot principal du produit compte", () => {
+  const it2 = (id: string, name: string, aliases: string[] = [], unit = "g", category = "viande") => ({ id, name, aliases, unit, category });
+  const cat = [
+    it2("filet-de-poulet", "Filet de poulet", ["poulet", "blanc de poulet"]), it2("poivre", "Poivre", ["poivre noir"], "g", "epices"),
+    it2("salami", "Salami"), it2("feuilles-de-lasagne", "Feuilles de lasagne", ["lasagnes"], "g", "feculents"),
+    it2("pates", "Pâtes", [], "g", "feculents"), it2("pate-de-campagne", "Pâté de campagne", ["pâté"]), it2("saucisson", "Saucisson"),
+    it2("salade-verte", "Salade verte", ["laitue", "salade"], "pc", "legumes"), it2("escalope-de-porc", "Escalope de porc"),
+  ] as never;
+  const m = (name: string, unit: "g" | "pc" = "g") => matchItem(name, 1000, unit, cat)?.item.id ?? null;
+  it("ne prend pas un assaisonnement ou une garniture pour le produit", () => {
+    expect(m("EXEMPLE salami au poivre")).toBe("salami");
+    expect(m("lasagne bolognaise")).toBeNull();
+    expect(m("Escalope de dinde panées")).toBeNull();
+  });
+  it("une partie de la bête n'est pas une autre", () => {
+    expect(m("Cuisses de poulet")).toBeNull();
+    expect(m("Poulet entier")).toBeNull(); // « poulet » seul est un raccourci pour les recettes
+    expect(m("EXEMPLE Filet Poulet Nat.")).toBe("filet-de-poulet");
+    expect(headFits("Escal. de porc", "Escalope de porc")).toBe(true); // abréviation
+  });
+  it("pâté ≠ pâtes, saucisse ≠ saucisson", () => {
+    expect(m("EXEMPLE pâté de gibier")).toBe("pate-de-campagne"); // et surtout pas « Pâtes »
+    expect(m("EXEMPLE pâtes fraîches")).toBe("pates");
+    expect(m("Pâté de campagne")).toBe("pate-de-campagne");
+    expect(m("Saucisses de campagne")).toBeNull();
+    expect(similarity("Saucisses de campagne", "Saucisson")).toBeLessThan(0.5);
+  });
+  it("un alias propre à l'article reste utilisable", () => {
+    expect(m("Laitue iceberg", "pc")).toBe("salade-verte");
+  });
+  it("n'apprend que des noms qui conviennent", () => {
+    expect(aliasFits("Filets de poulet tranchés", "Filet de poulet")).toBe(true);
+    expect(aliasFits("Saucisses de poulet", "Filet de poulet")).toBe(false);
+    expect(aliasFits("Pizza poulet kebab", "Pizza au chorizo")).toBe(false);
+    expect(similarItem("Steaks hachés", "g", "viande", [it2("burger", "Burger croustillant")] as never)).toBeNull();
   });
 });
 

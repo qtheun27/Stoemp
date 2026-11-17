@@ -10,7 +10,7 @@ import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipe, AiRecipes, ClassifiedItem, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
-import { matchItem, similarItem } from "./readers/match";
+import { aliasFits, matchItem, similarItem } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
 
 initializeApp();
@@ -360,8 +360,15 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
           const before = items.length;
           // Un article très proche existe déjà : on le réutilise (le nom du produit devient un alias).
           const twin = similarItem(c.name, c.unit, c.category, items);
-          if (twin) await db().collection("items").doc(twin.id).set({ aliases: FieldValue.arrayUnion(c.name, p.name) }, { merge: true });
           const it = twin || (await createItem(c, p.name));
+          // Article déjà connu : on retient le nom exact du produit (plus besoin de l'IA la prochaine fois),
+          // et le nom générique proposé seulement s'il convient vraiment (sinon « Saucisses de poulet » finirait en « Filet de poulet »).
+          const known = items.some((x) => x.id === it.id);
+          const learn = known ? [p.name, ...(aliasFits(c.name, it.name) ? [c.name] : [])].filter((n) => n !== it.name && !(it.aliases || []).includes(n)) : [];
+          if (learn.length) {
+            await db().collection("items").doc(it.id).set({ aliases: FieldValue.arrayUnion(...learn) }, { merge: true });
+            it.aliases = [...(it.aliases || []), ...learn]; // aussi dans le cache, pour la suite de la page
+          }
           items = await loadItems();
           if (items.length > before) created.add(it.name);
           const m = matchItem(p.name, p.packSize, p.packUnit, [it]) || (it.unit === p.packUnit ? { item: it, size: p.packSize } : null);
