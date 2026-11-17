@@ -223,6 +223,8 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
   const items = await loadItems();
   const catalog = catalogPrompt(items);
   const now = new Date().toISOString();
+  // Copie du texte brut (lecture réservée à l'administrateur) : sert à écrire des lecteurs d'enseigne sans IA.
+  await db().collection("captures").add({ store: d.store, url: d.url, text: d.text, length: d.text.length, uid: u, at: Date.now() }).catch(() => {});
 
   // Lecture et correspondance par morceaux, 4 à la fois : une catégorie entière passe d'un coup.
   const parts = chunks(d.text);

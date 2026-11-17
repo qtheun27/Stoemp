@@ -9,8 +9,36 @@ import { useStore } from "../state/store";
 import { copyText, run, Switch, toast, TopBar } from "../ui";
 
 export const appUrl = () => location.origin + location.pathname;
-export const bookmarklet = () =>
-  `javascript:(()=>{const w=window.open(${JSON.stringify(appUrl() + "#/capture")},"stoemp");const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:document.body.innerText.slice(0,300000)};const s=()=>w&&w.postMessage(d,"*");addEventListener("message",e=>{if(e.data==="stoemp-ready")s()});setTimeout(s,3000)})()`;
+/**
+ * Favori « Envoyer à Stoemp » : ouvre Stoemp tout de suite (sinon le navigateur bloque la fenêtre),
+ * clique lui-même sur « Voir plus » jusqu'à ce que toute la catégorie soit chargée, puis envoie le texte de la page.
+ */
+const BOOKMARKLET_SRC = `(async()=>{
+const w=window.open(APP,"stoemp");
+const z=t=>new Promise(r=>setTimeout(r,t));
+const b=document.createElement("div");
+b.style.cssText="position:fixed;z-index:2147483647;top:12px;right:12px;background:#1d2a22;color:#fff;padding:10px 14px;border-radius:12px;font:600 14px system-ui;box-shadow:0 6px 24px rgba(0,0,0,.3)";
+document.body.appendChild(b);
+const re=/^(voir plus|afficher plus|plus de produits|charger plus|meer laden|toon meer|meer producten)/i;
+let last=0;
+for(let n=1;n<=80;n++){
+const btn=[...document.querySelectorAll("button,a,[role=button]")].find(e=>e.offsetParent&&re.test((e.innerText||"").trim()));
+if(!btn)break;
+b.textContent="Stoemp : chargement des produits… ("+n+")";
+btn.scrollIntoView({block:"center"});btn.click();
+for(let i=0;i<20;i++){await z(300);if(document.body.innerText.length!==last)break}
+await z(700);
+const len=document.body.innerText.length;if(len===last)break;last=len;
+}
+window.scrollTo(0,document.body.scrollHeight);await z(800);
+b.textContent="Stoemp : envoi de la page…";
+const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:document.body.innerText.slice(0,300000)};
+const s=()=>w&&w.postMessage(d,"*");
+addEventListener("message",e=>{if(e.data==="stoemp-ready")s()});
+s();setTimeout(s,1500);setTimeout(s,4000);
+setTimeout(()=>{b.textContent="Stoemp : envoyé ✓ (regarde l'onglet Stoemp)";setTimeout(()=>b.remove(),5000)},1500);
+})()`;
+export const bookmarklet = () => "javascript:" + encodeURIComponent(BOOKMARKLET_SRC.replace("APP", JSON.stringify(appUrl() + "#/capture")).replace(/\n/g, ""));
 
 type Theme = "auto" | "light" | "dark";
 export function applyTheme(t: Theme) {
@@ -92,7 +120,7 @@ export default function Settings() {
           <div className="stack">
             {s.app.features.capture && <div className="card">
               <h3>📥 Capteur de prix</h3>
-              <p>Sur le site de Colruyt, Delhaize, Carrefour, Albert Heijn ou Renmans, fais une recherche (ex. « lait »), puis touche ce favori : les prix affichés sont lus et rangés dans Stoemp. Le robot hebdomadaire s'occupe de Renmans tout seul.</p>
+              <p>Sur le site de Colruyt, Delhaize, Carrefour, Albert Heijn ou Renmans, ouvre une catégorie (ex. Légumes et fruits) ou fais une recherche, puis touche ce favori : il charge lui-même tous les produits (« Voir plus ») et envoie leurs prix à Stoemp. Le robot hebdomadaire s'occupe de Renmans tout seul.</p>
               <div className="row wrap">
                 <a className="btn" ref={bm} href="#" onClick={(e) => { e.preventDefault(); toast("Glisse ce bouton dans ta barre de favoris"); }}>📥 Envoyer à Stoemp</a>
                 <button className="btn ghost" onClick={async () => toast((await copyText(bookmarklet())) ? "Code copié" : "Copie impossible")}><Copy size={18} />Copier le code</button>
