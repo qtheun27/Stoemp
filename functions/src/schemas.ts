@@ -50,8 +50,8 @@ export const LibPlan = z.object({ dishes: z.array(z.object({
 /** Relecture « chef critique » d'un lot de recettes de la bibliothèque. */
 export const LibReview = z.object({ verdicts: z.array(z.object({
   index: z.number().int(),
-  ok: z.boolean().describe("true seulement si c'est un vrai plat connu sous ce nom ET que la recette est correcte et réalisable"),
-  reason: z.string().describe("Une phrase : pourquoi c'est refusé, ou « ok »"),
+  reason: z.string().describe("D'abord ton analyse en une ou deux phrases : défauts graves éventuels, sinon « ok »"),
+  ok: z.boolean().describe("Décision APRÈS l'analyse : false seulement s'il reste un défaut grave"),
 })) });
 /** Recettes de la bibliothèque : avec le type de plat (plat principal, entrée, dessert). */
 export const LIB_COURSES = ["aperitif", "entree", "soupe", "plat", "accompagnement", "dessert", "patisserie", "petitdej"] as const;
