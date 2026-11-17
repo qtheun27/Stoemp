@@ -22,7 +22,7 @@ export default function Capture() {
       done = true;
       setState({ phase: "busy", store });
       try {
-        const r = await extractPricesFn({ store, url: String(d.url).slice(0, 500), text: d.text.slice(0, 60000) });
+        const r = await extractPricesFn({ store, url: String(d.url).slice(0, 500), text: d.text.slice(0, 300000) });
         setState({ phase: "done", store, saved: r.saved, found: r.found });
       } catch (err) { setState({ phase: "error", msg: (err as Error).message }); }
     };
@@ -34,7 +34,7 @@ export default function Capture() {
     <TopBar title="Capteur de prix" sub={state.store ? STORES[state.store].label : undefined} />
     <div className="content">
       {state.phase === "wait" && <Empty icon="📥">En attente de la page du magasin…<br />Ouvre une recherche sur le site de l'enseigne et touche le favori « Envoyer à Stoemp ».</Empty>}
-      {state.phase === "busy" && <Empty icon="🔎">Lecture des prix…</Empty>}
+      {state.phase === "busy" && <Empty icon="🔎">Lecture des prix…<br />Une catégorie entière peut prendre une à deux minutes : garde cette page ouverte.</Empty>}
       {state.phase === "error" && <Empty icon="⚠️">{state.msg}</Empty>}
       {state.phase === "done" && <>
         <div className="notice">{state.found} produits lus, {state.saved!.length} prix reliés à ton catalogue.</div>

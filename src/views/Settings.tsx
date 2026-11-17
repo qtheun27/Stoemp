@@ -10,7 +10,7 @@ import { copyText, run, Switch, toast, TopBar } from "../ui";
 
 export const appUrl = () => location.origin + location.pathname;
 export const bookmarklet = () =>
-  `javascript:(()=>{const w=window.open(${JSON.stringify(appUrl() + "#/capture")},"stoemp");const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:document.body.innerText.slice(0,60000)};const s=()=>w&&w.postMessage(d,"*");addEventListener("message",e=>{if(e.data==="stoemp-ready")s()});setTimeout(s,3000)})()`;
+  `javascript:(()=>{const w=window.open(${JSON.stringify(appUrl() + "#/capture")},"stoemp");const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:document.body.innerText.slice(0,300000)};const s=()=>w&&w.postMessage(d,"*");addEventListener("message",e=>{if(e.data==="stoemp-ready")s()});setTimeout(s,3000)})()`;
 
 type Theme = "auto" | "light" | "dark";
 export function applyTheme(t: Theme) {

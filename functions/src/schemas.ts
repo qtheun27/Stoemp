@@ -58,3 +58,7 @@ export const PageProducts = z.object({
     price: z.number(), pricePerUnitLabel: z.string().nullable(), promo: z.string().nullable(), organic: z.boolean(),
   })),
 });
+
+export const PageMatches = z.object({
+  matches: z.array(z.object({ index: z.number().int(), itemId: z.string().nullable().describe("Identifiant exact d'un article du catalogue, ou null") })),
+});

@@ -8,7 +8,7 @@ import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
-import { AiRecipes, ClassifiedItem, Match, PageProducts, Receipt } from "./schemas";
+import { AiRecipes, ClassifiedItem, Match, PageMatches, PageProducts, Receipt } from "./schemas";
 
 initializeApp();
 setGlobalOptions({ region: "europe-west1", maxInstances: 5 });
@@ -195,39 +195,74 @@ export const onMatchQueued = onDocumentCreated({ document: "matchQueue/{id}", ..
 });
 
 // ---------- extractPrices : bouton « Envoyer à Stoemp » pendant la navigation ----------
-export const extractPrices = onCall(ai, async (req) => {
-  uid(req);
-  const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(60000) }), req.data);
-  const page = await askJson("extractPrices", {
-    uid: req.auth?.uid, schema: PageProducts,
-    system: "Tu extrais les produits et prix visibles d'une page de supermarché belge copiée en texte. Ignore menus, publicités et produits sans prix. Prix en euros.",
-    content: `Enseigne : ${d.store}\nPage : ${d.url}\n\n${d.text}`,
-  });
-  const items = await loadItems();
-  const now = new Date().toISOString();
-  const saved: { itemId: string; productName: string; packPrice: number }[] = [];
-  for (const p of page.products) {
-    if (!p.packSize || !p.packUnit || p.price <= 0) continue;
-    // Correspondance : nom générique exact, sinon IA rapide sur le catalogue restreint au même mot-clé.
-    const words = norm(p.name).split(/[^a-z]+/).filter((w) => w.length > 3);
-    const cands = items.filter((i) => i.unit === p.packUnit && words.some((w) => norm(i.name).includes(w.replace(/s$/, ""))));
-    if (!cands.length) continue;
-    const idx = await matchProductCore(p.name, cands.slice(0, 20).map((c) => ({ name: c.name })));
-    const item = idx != null ? cands[idx] : undefined;
-    if (!item) continue;
-    const pricePerUnit = p.price / p.packSize;
-    const id = `${item.id}_${d.store}${p.organic ? "_bio" : ""}`;
-    const ref = db().collection("prices").doc(id);
-    const prev = await ref.get();
-    // On garde le prix au kilo/litre le plus bas parmi les produits correspondants de la même page.
-    if (prev.exists && prev.data()!.fetchedAt?.slice(0, 10) === now.slice(0, 10) && prev.data()!.pricePerUnit <= pricePerUnit) continue;
-    const doc = { itemId: item.id, store: d.store, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), url: d.url,
-      packSize: p.packSize, packUnit: p.packUnit, packPrice: p.price, pricePerUnit, promo: p.promo, promoUntil: null, fetchedAt: now, source: "capture" };
-    await ref.set(doc);
-    await db().collection("priceHistory").add(doc);
-    saved.push({ itemId: item.id, productName: doc.productName, packPrice: p.price });
+const EXTRACT_SYSTEM = `Tu extrais les produits et leurs prix d'une page de supermarché belge copiée en texte (souvent une page de catégorie).
+Ignore menus, filtres, publicités et produits sans prix. Prix en euros.
+Contenance : donne packSize et packUnit (g, ml ou pc) pour le prix affiché.
+- Produit vendu au poids (« 2,49 €/kg ») : packSize = 1000, packUnit = "g", price = prix au kilo.
+- Vendu au litre : packSize = 1000, packUnit = "ml". À la pièce : packSize = nombre de pièces, packUnit = "pc".
+- Lot (« 6 x 1,5 l ») : contenance totale du lot.`;
+
+const MATCH_PAGE_SYSTEM = `Tu relies des produits d'une enseigne belge aux articles génériques d'un catalogue de courses.
+Pour chaque produit, donne l'identifiant exact (itemId) de l'article qui correspond vraiment (même produit, pas un dérivé : « Lait » ≠ « Lait de coco », « Poulet » ≠ « Chips saveur poulet »), ou null si aucun.`;
+
+/** Découpe un long texte en morceaux d'environ `size` caractères, sur des fins de ligne. */
+function chunks(text: string, size = 18000): string[] {
+  const out: string[] = [];
+  let cur = "";
+  for (const line of text.split("\n")) {
+    if (cur.length + line.length > size && cur) { out.push(cur); cur = ""; }
+    cur += line + "\n";
   }
-  return { found: page.products.length, saved };
+  if (cur.trim()) out.push(cur);
+  return out;
+}
+
+export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (req) => {
+  const u = uid(req);
+  const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(300000) }), req.data);
+  const items = await loadItems();
+  const catalog = catalogPrompt(items);
+  const now = new Date().toISOString();
+
+  // Lecture et correspondance par morceaux, 4 à la fois : une catégorie entière passe d'un coup.
+  const parts = chunks(d.text);
+  const results: { p: z.infer<typeof PageProducts>["products"][number]; itemId: string | null }[] = [];
+  for (let i = 0; i < parts.length; i += 4) {
+    const batch = await Promise.all(parts.slice(i, i + 4).map(async (part) => {
+      const page = await askJson("extractPrices", { uid: u, schema: PageProducts, system: EXTRACT_SYSTEM, content: `Enseigne : ${d.store}\nPage : ${d.url}\n\n${part}` });
+      const usable = page.products.filter((p) => p.packSize && p.packUnit && p.price > 0);
+      if (!usable.length) return [];
+      const m = await askJson("matchProduct", {
+        uid: u, schema: PageMatches, system: `${MATCH_PAGE_SYSTEM}\nCatalogue (itemId | nom | unité) :\n${catalog}`,
+        content: usable.map((p, k) => `${k}. ${[p.brand, p.name].filter(Boolean).join(" ")} (${p.packSize} ${p.packUnit})`).join("\n"),
+      });
+      const byIndex = new Map(m.matches.map((x) => [x.index, x.itemId]));
+      return usable.map((p, k) => ({ p, itemId: byIndex.get(k) ?? null }));
+    }));
+    batch.forEach((b) => results.push(...b));
+  }
+
+  // Par article : le prix au kilo/litre le plus bas de la page (marque distributeur comprise).
+  const best = new Map<string, { p: (typeof results)[number]["p"]; ppu: number }>();
+  for (const { p, itemId } of results) {
+    const item = itemId ? items.find((i) => i.id === itemId) : undefined;
+    if (!item || item.unit !== p.packUnit) continue;
+    const key = `${item.id}_${d.store}${p.organic ? "_bio" : ""}`;
+    const ppu = p.price / p.packSize!;
+    if (!best.has(key) || best.get(key)!.ppu > ppu) best.set(key, { p, ppu });
+  }
+  const saved: { itemId: string; productName: string; packPrice: number }[] = [];
+  const w = db().bulkWriter();
+  for (const [key, { p, ppu }] of best) {
+    const itemId = key.split(`_${d.store}`)[0];
+    const doc = { itemId, store: d.store, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), url: d.url,
+      packSize: p.packSize, packUnit: p.packUnit, packPrice: p.price, pricePerUnit: ppu, promo: p.promo, promoUntil: null, fetchedAt: now, source: "capture" };
+    w.set(db().collection("prices").doc(key), doc);
+    w.create(db().collection("priceHistory").doc(), doc);
+    saved.push({ itemId, productName: doc.productName, packPrice: p.price });
+  }
+  await w.close();
+  return { found: results.length, saved };
 });
 
 // ---------- readReceipt : photo du ticket de caisse ----------
