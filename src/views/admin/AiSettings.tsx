@@ -16,6 +16,7 @@ const DEFAULTS: AiConfig = {
     generateRecipes: { model: "claude-haiku-5-5", effort: "medium", maxTokens: 16000, enabled: true },
     growLibrary: { model: "claude-haiku-5-5", effort: "medium", maxTokens: 16000, enabled: true },
     reviewLibrary: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 4000, enabled: true },
+    planLibrary: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 8000, enabled: true },
     structureMyDish: { model: "claude-haiku-5-5", effort: "low", maxTokens: 8000, enabled: true },
     readReceipt: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 8000, enabled: true },
     classifyItem: { model: "claude-haiku-5-5", effort: "low", maxTokens: 1000, enabled: true },
@@ -25,6 +26,7 @@ const DEFAULTS: AiConfig = {
 };
 const TASKS: [string, string, string][] = [
   ["generateRecipes", "Recettes de la semaine", "Plats inventés selon les options du foyer. Haiku suffit pour des recettes familiales."],
+  ["planLibrary", "Plan de la bibliothèque", "Liste des vrais plats à écrire, avec leurs éléments clés : l'écrivain n'invente plus de plat."],
   ["reviewLibrary", "Relecture des recettes", "« Chef critique » qui refuse les plats inventés ou incohérents avant qu'ils entrent dans la bibliothèque. Un modèle plus fort que celui qui écrit."],
   ["growLibrary", "Bibliothèque de recettes", "Génération par lots de la grande bibliothèque (onglet Recettes). Haiku : environ 0,08 $ pour 100 recettes."],
   ["structureMyDish", "Mes plats", "Complète un plat perso (ingrédients, version végé, étapes)."],

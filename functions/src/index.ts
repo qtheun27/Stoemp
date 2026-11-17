@@ -8,7 +8,7 @@ import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
-import { AiRecipe, AiRecipes, ClassifiedItem, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
+import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { aliasFits, matchItem, similarItem } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
@@ -550,21 +550,38 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
   const items = await loadItems();
   const existing = await db().collection("recipes").where("householdId", "==", null).where("cuisine", "==", cuisine).select("name", "course").get();
   const names = existing.docs.map((d) => d.get("name") as string);
-  const sameCourse = existing.docs.filter((d) => (d.get("course") || "plat") === course).map((d) => d.get("name") as string);
-  // Recettes déjà refusées par le relecteur : ne pas les reproposer.
-  const refusedBefore = (((await db().collection("libraryJobs").doc("current").get()).get("refused") as string[]) || []).map((x) => x.split(" : ")[0]);
+  // 1. Plan : la liste des VRAIS plats à écrire (avec leurs éléments clés), dressée par un modèle plus fort et gardée.
+  type Dish = { n: string; k: string; s: "todo" | "done" | "refused"; why?: string };
+  const planRef = db().collection("libraryPlan").doc(`${cuisine}_${course}`);
+  let plan: Dish[] = ((await planRef.get()).get("dishes") as Dish[]) || [];
+  const taken0 = new Set([...names, ...plan.map((d) => d.n)].map(norm));
+  if (plan.filter((d) => d.s === "todo").length < n) {
+    const p = await askJson("planLibrary", {
+      schema: LibPlan, minTokens: 8000,
+      system: `Tu es un grand chef et historien de la cuisine ${CUISINE_LABEL[cuisine]}. Tu dresses la liste des vrais plats d'une cuisine, pour un livre de recettes familial belge.`,
+      content: `Liste 60 ${LIB_COURSE[course]} RÉELS et distincts de cuisine ${CUISINE_LABEL[cuisine]} : d'abord les grands classiques que tout le monde connaît, puis des spécialités régionales authentiques et reconnues. Uniquement des plats qui existent sous ce nom ; aucune variante déguisée d'un même plat.
+Pour chacun, « keys » : les ingrédients indispensables, la technique qui fait le plat et la durée totale réelle (ex. « bœuf, bière brune, oignons, pain d'épices moutardé ; mijoté ; 2 h 30 »).
+Exclus ceux-ci (déjà présents) : ${[...names, ...plan.map((d) => d.n)].slice(-500).join(" ; ") || "—"}.`,
+    });
+    for (const d of p.dishes) if (!taken0.has(norm(d.name))) { plan.push({ n: d.name, k: d.keys, s: "todo" }); taken0.add(norm(d.name)); }
+    await planRef.set({ cuisine, course, dishes: plan }, { merge: true });
+  }
+  const todo = plan.filter((d) => d.s === "todo").slice(0, n);
+  if (!todo.length) return 0;
+
+  // 2. Écriture : exactement ces plats, en respectant leurs éléments clés.
   const res = await askJson("growLibrary", {
     schema: LibRecipes, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items, true)),
-    content: `Propose ${n} ${LIB_COURSE[course]} de cuisine ${CUISINE_LABEL[cuisine]} (course = "${course}", cuisine = "${cuisine}").
-UNIQUEMENT des plats qui existent réellement et sont connus sous ce nom dans leur pays ou leur région (un cuisinier de là-bas les reconnaîtrait) : d'abord les grands classiques, puis des spécialités régionales authentiques. AUCUNE invention, aucune « fusion », aucun nom fantaisiste.
-Recette fidèle à la tradition (ingrédients et techniques d'origine), adaptée seulement si un ingrédient est introuvable en Belgique ; faisable en famille.
+    content: `Écris les recettes de ces ${todo.length} ${LIB_COURSE[course]} de cuisine ${CUISINE_LABEL[cuisine]}, DANS CET ORDRE et sous CE NOM (course = "${course}", cuisine = "${cuisine}") :
+${todo.map((d, i) => `${i + 1}. ${d.n} — ${d.k}`).join("\n")}
+Recette fidèle à la tradition et à ses éléments clés (ingrédients et techniques d'origine), adaptée seulement si un ingrédient est introuvable en Belgique ; faisable en famille.
 Recette COMPLÈTE et PRÉCISE, comme dans un bon livre de cuisine : tous les ingrédients qui comptent (vin, bouillon, herbes, beurre compris), 4 à 8 étapes avec les gestes (découper, précuire, pocher, réduire), les temps et les températures, jusqu'au dressage.
 Pour les desserts, pâtisseries et apéritifs : quantités pour 1 part ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
 prepMin = durée TOTALE réelle (préparation + cuisson + repos) ; une marinade ou un trempage de la veille se signale dans les étapes et compte aussi (ex. 3 h de four → prepMin ≥ 200).
-Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.
-Varie les ingrédients principaux (volaille, bœuf, porc, poisson, fruits de mer, légumineuses, œufs, légumes) et les saisons.
-N'en propose AUCUNE de cette liste (même sous un autre nom) : ${[...sameCourse.slice(-600), ...refusedBefore.slice(-100)].join(" ; ") || "—"}.`,
+Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.`,
   });
+  // Le nom prévu fait foi (même ordre).
+  res.recipes.forEach((r, i) => { if (todo[i]) r.name = todo[i].n; });
   const known = new Set(names.map(norm));
   // Garde-fous : contrôles de bon sens, puis relecture par un « chef critique » (modèle plus fort) ; le reste est écarté.
   const byId = new Map(items.map((i) => [i.id, i]));
@@ -622,6 +639,11 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
     batch.set(db().collection("library").doc(`${cuisine}-${Math.floor(count / LIB_CHUNK)}`), { cuisine, r: FieldValue.arrayUnion(m) }, { merge: true });
     count++;
   }
+  // 3. Le plan garde le résultat : écrite, ou refusée avec la raison (pas reproposée telle quelle).
+  const doneNames = new Set(metas.map((m) => norm(m.n as string)));
+  const why = new Map(review.verdicts.filter((v) => !v.ok && candidates[v.index]).map((v) => [norm(candidates[v.index].r.name), v.reason]));
+  plan = plan.map((d) => todo.includes(d) ? { ...d, s: doneNames.has(norm(d.n)) ? "done" : "refused", ...(why.get(norm(d.n)) ? { why: why.get(norm(d.n)) } : {}) } : d);
+  batch.set(planRef, { dishes: plan }, { merge: true });
   await batch.commit();
   return metas.length;
 }
