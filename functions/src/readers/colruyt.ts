@@ -21,9 +21,12 @@ export interface ShopProduct {
 const TAGS = /^(action|bio|nouveau|nouveauté|promo|top|exclusif|-?\d+%|\d+\+\d+ gratuit.*)$/i;
 const PACK = /^±?\s*(\d+(?:[.,]\d+)?)\s*(kg|g|gr|l|cl|ml|pc|pcs|pce|pièces?|st)$/i;
 const MULTI = /^(\d+)\s*x\s*(\d+(?:[.,]\d+)?)\s*(kg|g|l|cl|ml)$/i;
+const RANGE = /^(\d+)\s*-\s*(\d+)\s*(pc|pcs|pce|pièces?|st)$/i;
 const num = (s: string) => Number(s.replace(",", "."));
 
 function pack(line: string): { size: number; unit: "g" | "ml" | "pc" } | null {
+  const r = line.match(RANGE);
+  if (r) return { size: (Number(r[1]) + Number(r[2])) / 2, unit: "pc" };
   const m = line.match(MULTI);
   if (m) { const one = metric(num(m[2]), m[3]); return one && { size: one.size * Number(m[1]), unit: one.unit }; }
   const p = line.match(PACK);
@@ -67,9 +70,15 @@ export function parseColruyt(text: string): ShopProduct[] {
     const name = L[j];
     if (!name || name.length < 3 || /^\d/.test(name) || /\/(kg|pce|l)$/i.test(name)) continue;
     const organic = /\bbio\b/i.test(name) || TAGS.test(L[j - 1] || "") && /^bio$/i.test(L[j - 1]);
-    // Promo : « àpd 4 pcs » dans les lignes qui suivent.
-    const after = L.slice(i + 4, i + 9).join(" ");
-    const promo = /àpd\s+\d+\s*\w*/i.exec(after)?.[0] || (/^action$/i.test(L[j - 1] || "") ? "Action" : null);
+    // Promo : prix d'alignement sur un concurrent, prix dégressif « àpd 4 pcs », ou bandeau « Action ».
+    let promo: string | null = null;
+    if (/^réaction promo concurrent$/i.test(L[i + 4] || "") && /^\d{1,3}$/.test(L[i + 5] || "") && /^\d{2,3}$/.test(L[i + 6] || "")) {
+      const q = /àpd\s+\d+\s*\w*/i.exec(L[i + 8] || "")?.[0];
+      promo = `Prix concurrent : ${L[i + 5]},${L[i + 6]} €${L[i + 7] || ""}${q ? " " + q : ""}`;
+    } else {
+      const after = L.slice(i + 4, i + 9).join(" ");
+      promo = /àpd\s+\d+\s*\w*/i.exec(after)?.[0] || (/^action$/i.test(L[j - 1] || "") ? "Action" : null);
+    }
     let size: number, unit: "g" | "ml" | "pc", total: number;
     if (saleUnit === "kg") { size = 1000; unit = "g"; total = price; }
     else if (saleUnit === "l") { size = 1000; unit = "ml"; total = price; }
