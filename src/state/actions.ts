@@ -12,6 +12,7 @@ import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
 import type { Cat, Consumption, ConsumptionEvent, EventType, Ingredient, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
 import { mealParts, vegPortions } from "../lib/mixed";
+import { isoWeek } from "../lib/season";
 import { baseQty } from "../lib/units";
 import type { HistoryEntry, Prefs, StoreState } from "./store";
 
@@ -88,7 +89,7 @@ async function aiRecipes(s: StoreState, n: number, extra: { stockOnly?: boolean 
     options: {
       local: o.local, organic: o.organic, veg: o.veg, maxTime: o.timeOn ? o.maxTime : null, allergens: o.allergens, avoid: o.avoid,
       budgetPerPerson: o.budgetOn ? o.budget / Math.max(0.5, portionsOf(e)) / Math.max(1, mealCounts(s.settings).total) : null,
-      kidFriendly: !!o.kidFriendly && e.kids > 0, stockOnly: !!extra.stockOnly,
+      kidFriendly: !!o.kidFriendly && e.kids > 0, stockOnly: !!extra.stockOnly, cuisines: o.cuisines || [],
     },
     knownNames: cookable(s.recipes.values()).filter((r) => !r.deleted).map((r) => r.name).slice(0, 400),
     stockToUse: o.useStock || extra.stockOnly ? stockToUse(s, extra.stockOnly ? 30 : 12) : [],
@@ -116,6 +117,17 @@ export async function generateWeek(s: StoreState): Promise<string | undefined> {
 }
 
 export const saveSlots = (s: StoreState, slots: Slot[]) => setDoc(hh(s.hid!, "weeks", s.weekKey), { slots }, { merge: true });
+
+/** Place une recette sur le premier repas libre de la semaine (à partir d'aujourd'hui). Renvoie le jour, ou null. */
+export async function placeRecipe(s: StoreState, r: Recipe): Promise<number | null> {
+  const slots = [...(s.week?.slots || [])];
+  const todayIdx = s.weekKey === isoWeek() ? (new Date().getDay() + 6) % 7 : -1;
+  const k = slots.findIndex((x) => !x.cooked && !x.fromLeftovers && (todayIdx < 0 || x.day >= todayIdx));
+  if (k < 0) return null;
+  slots[k] = { ...slots[k], recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r) && r.source !== "pret", cooked: false };
+  await saveSlots(s, slots);
+  return slots[k].day;
+}
 
 export async function swapSlot(s: StoreState, k: number, useAi: boolean) {
   const slots = [...(s.week?.slots || [])];

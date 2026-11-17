@@ -25,6 +25,8 @@ export const AiIngredient = z.object({
   qtyPerPerson: z.number().describe("Quantité pour 1 personne dans l'unité de l'article (g, ml ou pièces)"),
 });
 
+export const CUISINES = ["belge", "francaise", "italienne", "mediterraneenne", "orientale", "asiatique", "indienne", "latino", "americaine"] as const;
+
 export const AiRecipe = z.object({
   name: z.string(),
   vegName: z.string().nullable(),
@@ -34,6 +36,7 @@ export const AiRecipe = z.object({
   meat: z.array(AiIngredient),
   vegSwap: z.array(AiIngredient),
   steps: z.array(z.string()),
+  cuisine: z.enum(CUISINES).describe("Cuisine du plat : belge, francaise, italienne, mediterraneenne (grecque, espagnole), orientale (Maghreb, Moyen-Orient), asiatique, indienne, latino (Mexique, Amérique latine), americaine (et anglaise)"),
 });
 export const AiRecipes = z.object({ recipes: z.array(AiRecipe) });
 

@@ -90,6 +90,8 @@ export function score(r: Recipe, ctx: PlanCtx): number {
     }
   }
   if (o.local) s *= 0.5 + localShare(r, o.veg, ctx.idx);
+  // Cuisines préférées : plus souvent, sans exclure les autres (variété).
+  if (o.cuisines?.length) s *= r.cuisine && o.cuisines.includes(r.cuisine) ? 2.5 : 0.5;
   // Promos de la semaine dans les magasins du foyer.
   if (o.promos !== false) {
     const promo = ingredientsOf(r, o.veg).filter((i) => !ctx.idx.get(i.itemId)?.staple && onPromo(i.itemId, ctx)).length;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ALLERGENS, SEASONS, SEASON_ORDER } from "../lib/constants";
+import { ALLERGENS, CUISINES, CUISINE_ORDER, SEASONS, SEASON_ORDER } from "../lib/constants";
 import type { Allergen, GenOptions, Settings } from "../lib/types";
 import { saveSettings } from "../state/actions";
 import { mealCounts } from "../lib/planner";
@@ -49,6 +49,9 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
       {!o.veg && <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Foyer mixte</b>
         <div className="d">Un seul plat pour tout le monde : pour les végétariens, la viande est remplacée par une protéine végétale (lentilles, pois chiches, œufs…) — même sauce, mêmes accompagnements.</div>
         <div className="row extra"><span className="grow small">Dont végétariens</span><Stepper value={Math.min(s.settings.vegEaters || 0, headcount(e))} min={0} max={headcount(e)} onChange={(v) => setS({ vegEaters: v })} /></div></div></div>}
+      <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Cuisines préférées</b><div className="d">Elles reviennent plus souvent dans la semaine ; aucune cochée = toutes, à parts égales</div>
+        <div className="chips extra">{CUISINE_ORDER.map((c) => { const on = (o.cuisines || []).includes(c);
+          return <button key={c} className="chip" aria-pressed={on} onClick={() => set({ cuisines: on ? (o.cuisines || []).filter((x) => x !== c) : [...(o.cuisines || []), c] })}>{CUISINES[c].icon} {CUISINES[c].label}</button>; })}</div></div></div>
       <div className="opt"><span style={{ width: 26 }} /><div className="t"><b>Gamme de produits</b><div className="d">Sert au coût des repas et au budget, quand tu n'as pas encore de prix payés</div>
         <div className="chips extra">{([["eco", "Premier prix"], ["maison", "Marque du magasin"], ["marque", "Grandes marques"]] as const).map(([k, l]) =>
           <button key={k} className="chip" aria-pressed={(o.range || "maison") === k} onClick={() => set({ range: k })}>{l}</button>)}</div></div></div>

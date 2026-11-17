@@ -1,4 +1,4 @@
-import type { Allergen, Cat, Location, Season, StoreId } from "./types";
+import type { Cuisine, Allergen, Cat, Location, Season, StoreId } from "./types";
 
 export const CATS: Record<Cat, { label: string; icon: string }> = {
   fl: { label: "Fruits & légumes", icon: "🥕" },
@@ -46,3 +46,11 @@ export const LOCATIONS: Record<Location, { label: string; icon: string }> = {
 
 export const DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 export const WEEKDAYS_SUN0 = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+
+/** Cuisines des recettes, dans l'ordre d'affichage. */
+export const CUISINES: Record<Cuisine, { label: string; icon: string }> = {
+  belge: { label: "Belge", icon: "🇧🇪" }, francaise: { label: "Française", icon: "🥖" }, italienne: { label: "Italienne", icon: "🍝" },
+  mediterraneenne: { label: "Méditerranéenne", icon: "🫒" }, orientale: { label: "Orientale", icon: "🧆" }, asiatique: { label: "Asiatique", icon: "🥢" },
+  indienne: { label: "Indienne", icon: "🍛" }, latino: { label: "Mexicaine & latino", icon: "🌮" }, americaine: { label: "Américaine", icon: "🍔" },
+};
+export const CUISINE_ORDER = Object.keys(CUISINES) as Cuisine[];

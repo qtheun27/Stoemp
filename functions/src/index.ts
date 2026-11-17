@@ -90,7 +90,7 @@ export const generateRecipes = onCall(ai, async (req) => {
     options: z.object({
       local: z.boolean(), organic: z.boolean(), veg: z.boolean(), maxTime: z.number().nullable(),
       allergens: z.array(z.string()), avoid: z.array(z.string()), budgetPerPerson: z.number().nullable(),
-      kidFriendly: z.boolean().optional(), stockOnly: z.boolean().optional(),
+      kidFriendly: z.boolean().optional(), stockOnly: z.boolean().optional(), cuisines: z.array(z.string()).max(9).optional(),
     }),
     knownNames: z.array(z.string()).max(400), stockToUse: z.array(z.string()).max(30),
   }), req.data);
@@ -106,6 +106,7 @@ export const generateRecipes = onCall(ai, async (req) => {
     o.avoid.length && `sans ces ingrédients : ${o.avoid.join(", ")}`,
     o.budgetPerPerson && `économiques (environ ${o.budgetPerPerson.toFixed(2)} € par personne et par repas)`,
     o.kidFriendly && "appréciés des enfants (pas épicés, saveurs douces)",
+    o.cuisines?.length && `de préférence dans ces cuisines : ${o.cuisines.join(", ")}`,
     o.stockOnly ? d.stockToUse.length && `réalisables UNIQUEMENT avec ces ingrédients déjà à la maison (plus sel, poivre, huile, épices de base) : ${d.stockToUse.join(", ")}`
       : d.stockToUse.length && `qui utilisent si possible : ${d.stockToUse.join(", ")}`,
   ].filter(Boolean).join(" ; ");
@@ -125,7 +126,7 @@ N'utilise AUCUN de ces plats déjà connus : ${d.knownNames.join(" ; ")}.`,
     const recipe = {
       name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: r.prepMin,
       seasons: r.seasons.length ? r.seasons : [d.season], ingredients, meat,
-      vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps,
+      vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps, cuisine: r.cuisine,
       source: "ia", householdId: d.householdId, deleted: false, createdAt: Date.now(),
     };
     const ref = db().collection("recipes").doc(`ia-${slug(r.name)}-${randomBytes(3).toString("hex")}`);
@@ -177,7 +178,7 @@ Donne exactement un plat par service demandé, avec le champ "course".`,
     const meat = await resolveIngredients(r.meat, items);
     const recipe = {
       name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: r.prepMin, seasons: r.seasons.length ? r.seasons : [d.season],
-      ingredients, meat, vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps,
+      ingredients, meat, vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps, cuisine: r.cuisine,
       source: "ia", course: r.course, householdId: d.householdId, deleted: false, createdAt: Date.now(),
     };
     const ref = db().collection("recipes").doc(`ia-${slug(r.name)}-${randomBytes(3).toString("hex")}`);
@@ -211,7 +212,7 @@ Garde fidèlement les ingrédients et étapes donnés (reformule à peine) et co
   const recipe = {
     name: d.name, vegName: meat.length ? r.vegName || `${d.name} (végé)` : null, prepMin: d.minutes,
     seasons: ["P", "E", "A", "H"], ingredients: await resolveIngredients(r.ingredients, items), meat,
-    vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps,
+    vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps, cuisine: r.cuisine,
     source: "perso", householdId: d.householdId, deleted: false, createdAt: Date.now(),
   };
   const ref = db().collection("recipes").doc(`perso-${slug(d.name)}-${randomBytes(3).toString("hex")}`);
