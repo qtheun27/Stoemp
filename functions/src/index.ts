@@ -61,21 +61,32 @@ export const classifyItem = onCall(ai, async (req) => {
 });
 
 /** Relie les ingrédients IA au catalogue ; crée les articles inconnus via classifyItem. */
-async function resolveIngredients(list: { itemId: string | null; newName: string | null; qtyPerPerson: number }[], items: ItemDoc[]) {
+type AiIng = { itemId: string | null; newName: string | null; qtyPerPerson: number; newCategory?: string | null; newUnit?: string | null; newAllergens?: string[] };
+async function resolveIngredients(list: AiIng[], items: ItemDoc[]) {
   const out: { itemId: string; qtyPerPerson: number }[] = [];
   for (const ing of list) {
     let item = ing.itemId ? items.find((i) => i.id === ing.itemId) : undefined;
     if (!item && (ing.newName || ing.itemId)) {
       const n = ing.newName || ing.itemId!;
-      item = findItem(items, n) || (await createItem(await classify(n), n));
+      // Nouvel article : rayon, unité et allergènes donnés par la recette elle-même (pas d'appel IA en plus) ; sinon, classement par l'IA.
+      item = findItem(items, n) || (await createItem(ing.newCategory && ing.newUnit ? newItemFrom(n, ing.newCategory, ing.newUnit, ing.newAllergens || []) : await classify(n), n));
+      if (!items.includes(item)) items.push(item);
     }
     if (item && ing.qtyPerPerson > 0) out.push({ itemId: item.id, qtyPerPerson: Math.round(ing.qtyPerPerson * 100) / 100 });
   }
   return out;
 }
 
+/** Fiche d'un nouvel article à partir de ce que la recette en dit (valeurs prudentes pour le reste). */
+function newItemFrom(name: string, category: string, unit: string, allergens: string[]): z.infer<typeof ClassifiedItem> {
+  const perishable = ["fl", "vi", "fr"].includes(category);
+  return { name: name.charAt(0).toUpperCase() + name.slice(1), category: category as never, unit: unit as never, packSize: unit === "pc" ? 1 : unit === "ml" ? 500 : 250,
+    local: false, organicAvailable: false, perishable, shelfLifeDays: perishable ? 7 : 365, allergens: allergens as never, seasonMonths: [], ready: false };
+}
+
 const RECIPE_RULES = (catalog: string) => `Tu es un chef de cuisine familiale en Belgique. Recettes simples, en français de Belgique.
-Relie chaque ingrédient au catalogue ci-dessous par son identifiant exact (itemId). Si aucun ne convient, mets itemId à null et donne newName (nom générique simple).
+Relie chaque ingrédient au catalogue ci-dessous par son identifiant exact (itemId). Si aucun ne convient, mets itemId à null et donne newName (nom générique simple), avec son rayon (newCategory), son unité (newUnit) et ses allergènes (newAllergens).
+Rayons (newCategory) : fl fruits-légumes, vi boucherie-poisson-charcuterie, fr frais-crèmerie-œufs, bo boulangerie, ep épicerie, bs boissons, su surgelés. Allergènes : gl gluten, la lait, oe œufs, po poisson, fc fruits à coque, so soja, cr crustacés.
 Quantités POUR 1 PERSONNE dans l'unité du catalogue (g, ml ou pièces ; une cuillère à soupe ≈ 15 g ou ml). Pas de sel, poivre ni huile.
 La protéine animale va dans "meat" et son remplacement végétarien dans "vegSwap" avec un nom végé "vegName" : même base (sauce, accompagnements), et "vegSwap" contient TOUJOURS une protéine végétale (lentilles, pois chiches, haricots, tofu, œufs ou fromage), pour qu'un foyer mixte cuisine un seul plat. Plat déjà végétarien : "meat" et "vegSwap" vides, "vegName" null.
 3 à 5 étapes courtes. Saisons : P printemps, E été, A automne, H hiver.

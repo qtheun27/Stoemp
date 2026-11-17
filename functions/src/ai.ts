@@ -25,6 +25,9 @@ let spendCache: { at: number; v: number } | null = null;
  * Appel Claude pour une tâche : modèle, effort et plafond lus dans la configuration (console d'administration),
  * sortie JSON contrainte par un schéma zod puis revalidée, journalisation (jetons, coût, durée, erreurs).
  */
+/** Tâches de simple classement : sans réflexion interne. */
+const NO_THINKING = new Set<Task>(["classifyItem", "matchProduct"]);
+
 export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system: string; content: Content; schema: T; uid?: string; minTokens?: number }): Promise<z.infer<T>> {
   const cfg = await aiConfig();
   const tc = cfg.tasks[task];
@@ -38,6 +41,8 @@ export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system
     output_config: { format: zodOutputFormat(opts.schema), ...(supportsEffort(tc.model) ? { effort: tc.effort } : {}) },
   };
   if (supportsFallback(tc.model)) { params.betas = ["server-side-fallback-2026-07-01"]; params.fallbacks = "default"; }
+  // Petites tâches de classement sur Haiku : pas de réflexion interne (inutile ici, et c'était l'essentiel du coût).
+  if (/haiku-5/.test(tc.model) && NO_THINKING.has(task) && ["low", "medium", "high"].includes(tc.effort)) params.thinking = { type: "disabled" };
   const t0 = Date.now();
   const log = (data: Record<string, unknown>) =>
     getFirestore().collection("aiLogs").add({ task, model: tc.model, uid: opts.uid || null, ms: Date.now() - t0, at: Date.now(), ...data }).catch(() => {});

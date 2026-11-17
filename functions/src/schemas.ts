@@ -23,6 +23,9 @@ export const AiIngredient = z.object({
   itemId: z.string().nullable().describe("Identifiant exact d'un article du catalogue, ou null"),
   newName: z.string().nullable().describe("Nom générique si aucun article du catalogue ne convient, sinon null"),
   qtyPerPerson: z.number().describe("Quantité pour 1 personne dans l'unité de l'article (g, ml ou pièces)"),
+  newCategory: CAT.nullable().describe("Pour un nouvel article (newName) : son rayon ; sinon null"),
+  newUnit: UNIT.nullable().describe("Pour un nouvel article : g (vendu au poids), ml (liquide) ou pc (pièce) ; sinon null"),
+  newAllergens: z.array(ALLERGEN).describe("Pour un nouvel article : ses allergènes ; sinon liste vide"),
 });
 
 export const CUISINES = ["belge", "francaise", "italienne", "mediterraneenne", "orientale", "asiatique", "indienne", "latino", "americaine"] as const;
