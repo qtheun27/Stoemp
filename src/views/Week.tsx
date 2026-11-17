@@ -2,12 +2,13 @@ import { useMemo, useState } from "react";
 import { ChefHat, ChevronLeft, ChevronRight, Heart, Leaf, RefreshCw, SlidersHorizontal, Sparkles, Check as CheckIcon } from "lucide-react";
 import { cookable, isVegRecipe, nameOf } from "../lib/catalog";
 import { DAYS, SEASONS } from "../lib/constants";
-import { mealCostPerPerson } from "../lib/cost";
+import { mealCostPerPerson, partsCost } from "../lib/cost";
+import { mealParts, vegPortions } from "../lib/mixed";
 import { daysToExpiry, mealCounts, planSeason, recipesUsing } from "../lib/planner";
 import { mondayOf, shiftWeek, isoWeek } from "../lib/season";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
-import { basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
+import { vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
 import { coursePortions, eatersLabel, eatersOf, headcount, slotPortions } from "../lib/household";
 import { profile, PROTEIN_LABEL, type Protein } from "../lib/balance";
 import { drinkFor } from "../lib/drinks";
@@ -34,9 +35,10 @@ export default function Week() {
   const todayIdx = s.weekKey === isoWeek() ? (new Date().getDay() + 6) % 7 : -1;
 
   // Coût par portion de chaque plat, et coût total de chaque créneau (invités, restes, entrée/dessert compris).
-  const costs = useMemo(() => slots.map((sl) => { const r = s.recipes.get(sl.recipeId); return r ? mealCostPerPerson(r, sl.veg, ctx.cost) : 0; }), [slots, s.recipes, s.book, s.settings]);
-  const slotTotals = useMemo(() => slots.map((sl, i) => costs[i] * slotPortions(sl, persons)
-    + (sl.courses || []).reduce((a, c) => { const r = s.recipes.get(c.recipeId); return a + (r ? mealCostPerPerson(r, false, ctx.cost) * coursePortions(sl, persons) : 0); }, 0)), [costs, slots, persons]);
+  // Foyer mixte : parts avec viande et parts végé du même plat.
+  const vegP = (sl: (typeof slots)[number]) => vegPortions(sl, vegCfg(s), persons);
+  const slotTotals = useMemo(() => slots.map((sl) => { const r = s.recipes.get(sl.recipeId); return (r ? partsCost(mealParts(r, sl.veg, slotPortions(sl, persons), vegP(sl), o.allergens), ctx.cost) : 0)
+    + (sl.courses || []).reduce((a, c) => { const r = s.recipes.get(c.recipeId); return a + (r ? mealCostPerPerson(r, false, ctx.cost) * coursePortions(sl, persons) : 0); }, 0); }), [slots, persons, s.recipes, s.book, s.settings]);
   const total = slotTotals.reduce((a, b) => a + b, 0);
   const eatenPortions = slots.reduce((a, sl) => a + (sl.fromLeftovers ? persons : slotPortions(sl, persons) - (sl.leftovers ? persons : 0)), 0);
   const balance = useMemo(() => {
@@ -132,7 +134,7 @@ export default function Week() {
                             {list.length > 1 || mealCounts(s.settings).lunches > 0 ? <span className="slot">{x.meal}</span> : null}
                             <span className="name">{nameOf(r, x.veg)}</span>
                             {x.guests && <span className="tag ac" style={{ marginBottom: 4 }}>🎉 réception · {headcount(eaters) + x.guests.adults + x.guests.kids} pers.{x.courses?.length ? ` · ${x.courses.length + 1} services` : ""}</span>}
-                            <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}
+                            <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}{!x.fromLeftovers && r.source !== "pret" && !isVegRecipe(r) && vegP(x) > 0 && <span>🌱 {vegP(x)} part{vegP(x) > 1 ? "s" : ""} végé</span>}
                             {o.drinks !== false && !x.fromLeftovers && <span>{x.drinks?.length ? `🍷 ${x.drinks[0]}` : `🍷 ${drinkFor(r, x.veg, s.idx, !!o.noAlcohol).adult}`}</span>}{(isVegRecipe(r) || (x.veg && r.source !== "pret")) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}{x.cooked && <span>✅ cuisiné</span>}</span>
                           </button>
                           {!isVegRecipe(r) && r.source !== "pret" && <button className="ib" aria-pressed={x.veg} aria-label="Version végétarienne" onClick={() => { const sl = [...slots]; sl[x.k] = { ...x, veg: !x.veg }; delete (sl[x.k] as { k?: number }).k; run(() => saveSlots(s, sl)); }}><Leaf size={18} /></button>}

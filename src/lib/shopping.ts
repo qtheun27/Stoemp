@@ -3,6 +3,7 @@ import { predict, shouldAutoAdd } from "./predict";
 import type { Cat, Consumption, Reason, Recipe, ShoppingDoc, Slot, StockEntry, Unit } from "./types";
 import { baseQty, packsFor } from "./units";
 import { coursePortions, slotPortions } from "./household";
+import { mealParts, vegPortions } from "./mixed";
 
 export interface ShopLine {
   id: string;
@@ -32,14 +33,17 @@ export interface ShopInput {
   docs: ShoppingDoc[];
   nextShopping: Date;
   packSizeOf?: (itemId: string) => number;
+  /** Foyer mixte : végétariens du foyer, et allergies (pour la protéine végé ajoutée). */
+  vegEaters?: number;
+  allergens?: string[];
 }
 
 /** Besoins des repas non cuisinés, par article (unité de l'article). */
-export function mealNeeds(slots: Slot[], recipes: Map<string, Recipe>, persons: number, idx: ItemIndex) {
+export function mealNeeds(slots: Slot[], recipes: Map<string, Recipe>, persons: number, idx: ItemIndex, vegEaters = 0, allergens: string[] = []) {
   const need = new Map<string, number>();
-  const add = (r: Recipe | undefined, veg: boolean, portions: number) => {
-    if (!r || portions <= 0) return;
-    for (const ing of ingredientsOf(r, veg)) {
+  const add = (ings: ReturnType<typeof ingredientsOf>, portions: number) => {
+    if (portions <= 0) return;
+    for (const ing of ings) {
       const item = idx.get(ing.itemId);
       if (!item) continue;
       need.set(item.id, (need.get(item.id) || 0) + baseQty(ing, item) * portions);
@@ -47,8 +51,10 @@ export function mealNeeds(slots: Slot[], recipes: Map<string, Recipe>, persons: 
   };
   for (const s of slots) {
     if (s.cooked) continue;
-    add(recipes.get(s.recipeId), s.veg, slotPortions(s, persons)); // plat (+ invités, + restes du lendemain)
-    for (const c of s.courses || []) add(recipes.get(c.recipeId), false, coursePortions(s, persons)); // apéritif, entrée, dessert
+    const r = recipes.get(s.recipeId);
+    // Plat (+ invités, + restes du lendemain) ; foyer mixte : parts avec viande et parts végé du même plat.
+    if (r) { const P = slotPortions(s, persons); for (const p of mealParts(r, s.veg, P, vegPortions(s, { vegEaters }, persons), allergens)) add(p.ings, p.portions); }
+    for (const c of s.courses || []) { const cr = recipes.get(c.recipeId); if (cr) add(ingredientsOf(cr, false), coursePortions(s, persons)); } // apéritif, entrée, dessert
   }
   return need;
 }
@@ -73,7 +79,7 @@ export function buildShopping(inp: ShopInput): { lines: ShopLine[]; suggestions:
   };
 
   // 1. Repas
-  for (const [itemId, need] of mealNeeds(inp.slots, inp.recipes, inp.persons, idx)) {
+  for (const [itemId, need] of mealNeeds(inp.slots, inp.recipes, inp.persons, idx, inp.vegEaters, inp.allergens)) {
     const item = idx.get(itemId)!;
     const s = stock.get(itemId);
     const doc = docById.get("auto_" + itemId);

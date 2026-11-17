@@ -7,9 +7,10 @@ import { allergensOf } from "../lib/planner";
 import { eur } from "../lib/text";
 import type { Allergen, Item, Recipe } from "../lib/types";
 import { fmtIngredient } from "../lib/units";
-import { addManual, basePortions, cancelReception, planCtx, saveSlots, setCooked, toggleFavorite, toggleLeftovers } from "../state/actions";
+import { addManual, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, toggleFavorite, toggleLeftovers } from "../state/actions";
 import { eatersOf, headcount, slotPortions } from "../lib/household";
 import { drinkFor } from "../lib/drinks";
+import { mealParts, vegPortions } from "../lib/mixed";
 import ReceptionSheet from "./Reception";
 import ReadySheet from "./Ready";
 
@@ -38,6 +39,11 @@ export default function RecipeSheet({ recipe, slotIndex, onClose }: { recipe: Re
   const pret = recipe.source === "pret";
   const drink = drinkFor(recipe, veg, s.idx, !!s.settings.options.noAlcohol);
   const ings = ingredientsOf(recipe, veg).map((i) => ({ ing: i, item: s.idx.get(i.itemId) })).filter((x): x is { ing: typeof x.ing; item: Item } => !!x.item);
+  // Foyer mixte : base commune, puis parts avec viande et parts végé (avec une protéine végétale).
+  const vegP = slot ? vegPortions(slot, vegCfg(s), base) : Math.min(vegCfg(s).vegEaters, persons);
+  const parts = mealParts(recipe, veg, persons, slot?.fromLeftovers ? 0 : vegP, s.settings.options.allergens)
+    .map((p) => ({ ...p, rows: p.ings.map((i) => ({ ing: i, item: s.idx.get(i.itemId) })).filter((x): x is { ing: typeof x.ing; item: Item } => !!x.item) }));
+  const mixed = parts.some((p) => p.label === "vege");
   const al = allergensOf(recipe, veg, s.idx) as Allergen[];
   const cost = mealCostPerPerson(recipe, veg, planCtx(s).cost);
   const fav = s.prefs.favorites.includes(recipe.id);
@@ -84,13 +90,18 @@ export default function RecipeSheet({ recipe, slotIndex, onClose }: { recipe: Re
         <h3 style={{ margin: "8px 0 6px" }}>Mettre un de mes plats à la place</h3>
         <div className="scroll-x">{mine.map((r) => <button key={r.id} className="chip" onClick={() => putMine(r.id)}>📝 {r.name}</button>)}</div>
       </>}
-      <h3 style={{ margin: "16px 0 6px" }}>{pret ? "À acheter" : "Ingrédients"}</h3>
-      <ul className="ings">
-        {ings.map(({ ing, item }) => {
-          const st = s.stock.get(item.id);
-          return <li key={item.id}><span>{item.name}{st && st.qty > 0 && <span className="tag ac" style={{ marginLeft: 6 }}>en stock</span>}</span><span className="muted num">{fmtIngredient(ing, item, persons)}</span></li>;
-        })}
-      </ul>
+      <h3 style={{ margin: "16px 0 6px" }}>{pret ? "À acheter" : mixed ? "Base commune" : "Ingrédients"}</h3>
+      {parts.map((p) => <div key={p.label}>
+        {p.label === "viande" && <h3 style={{ margin: "12px 0 6px" }}>🍖 Pour {fmtPortions(p.portions)} avec viande</h3>}
+        {p.label === "vege" && <h3 style={{ margin: "12px 0 6px" }}>🌱 Pour {fmtPortions(p.portions)} végé{recipe.vegName ? ` · ${recipe.vegName}` : ""}</h3>}
+        <ul className="ings">
+          {p.rows.map(({ ing, item }) => {
+            const st = s.stock.get(item.id);
+            return <li key={item.id}><span>{item.name}{st && st.qty > 0 && <span className="tag ac" style={{ marginLeft: 6 }}>en stock</span>}</span><span className="muted num">{fmtIngredient(ing, item, p.portions)}</span></li>;
+          })}
+        </ul>
+      </div>)}
+      {mixed && <p className="small muted">🍳 Un seul plat : prépare la base commune, puis partage-la en deux poêlons — la viande d'un côté, la protéine végé de l'autre (même sauce, mêmes accompagnements).</p>}
       {!!noBio.length && <p className="small muted">🌿 Sans version bio connue : {noBio.map((x) => x.item.name).join(", ")}.</p>}
       {!!swaps.length && <p className="small muted">📍 Version locale : {swaps.map((x) => `${x.item.name} → ${LOCAL_SWAPS[x.item.id]}`).join(" ; ")}.</p>}
       {!pret && <p className="small muted">Sel, poivre et huile non listés.</p>}

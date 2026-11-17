@@ -10,7 +10,8 @@ import type { PriceSel } from "../lib/pricing";
 import { eatersOf, portionsOf, slotPortions, coursePortions } from "../lib/household";
 import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
-import type { Cat, Consumption, ConsumptionEvent, EventType, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
+import type { Cat, Consumption, ConsumptionEvent, EventType, Ingredient, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
+import { mealParts, vegPortions } from "../lib/mixed";
 import { baseQty } from "../lib/units";
 import type { HistoryEntry, Prefs, StoreState } from "./store";
 
@@ -76,6 +77,8 @@ export function stockToUse(s: StoreState, max = 12) {
 
 /** Portions de base du foyer (un enfant ≈ 0,6 portion). */
 export const basePortions = (s: StoreState) => s.week?.persons ?? portionsOf(eatersOf(s.settings));
+/** Végétariens d'un foyer mixte (aucun si tout le foyer est végé). */
+export const vegCfg = (s: StoreState) => ({ vegEaters: s.settings.options.veg ? 0 : s.settings.vegEaters || 0 });
 
 async function aiRecipes(s: StoreState, n: number, extra: { stockOnly?: boolean } = {}): Promise<Recipe[]> {
   const o = s.settings.options;
@@ -221,9 +224,11 @@ export async function setCooked(s: StoreState, k: number, cooked: boolean) {
   const b = writeBatch(db);
   b.set(hh(s.hid!, "weeks", s.weekKey), { slots }, { merge: true });
   const base = basePortions(s);
-  const parts: [Recipe | undefined, boolean, number][] = [[r, slot.veg, slotPortions(slot, base)],
-    ...(slot.courses || []).map((c) => [s.recipes.get(c.recipeId), false, coursePortions(slot, base)] as [Recipe | undefined, boolean, number])];
-  for (const [rec, veg, portions] of parts) if (rec && portions > 0) for (const ing of ingredientsOf(rec, veg)) {
+  // Plat (parts avec viande et parts végé d'un foyer mixte) + autres services d'une réception.
+  const parts: [Ingredient[], number][] = [
+    ...(r ? mealParts(r, slot.veg, slotPortions(slot, base), vegPortions(slot, vegCfg(s), base), s.settings.options.allergens).map((p) => [p.ings, p.portions] as [Ingredient[], number]) : []),
+    ...(slot.courses || []).map((c) => { const cr = s.recipes.get(c.recipeId); return [cr ? ingredientsOf(cr, false) : [], coursePortions(slot, base)] as [Ingredient[], number]; })];
+  for (const [ings, portions] of parts) if (portions > 0) for (const ing of ings) {
     const item = s.idx.get(ing.itemId);
     if (!item) continue;
     const q = baseQty(ing, item) * portions;
