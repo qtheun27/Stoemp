@@ -13,18 +13,18 @@ interface AiConfig { enabled: boolean; monthlyBudgetUsd: number; tasks: Record<s
 const DEFAULTS: AiConfig = {
   enabled: true, monthlyBudgetUsd: 20,
   tasks: {
-    generateRecipes: { model: "claude-opus-5-5", effort: "medium", maxTokens: 16000, enabled: true },
-    structureMyDish: { model: "claude-opus-5-5", effort: "low", maxTokens: 8000, enabled: true },
-    readReceipt: { model: "claude-opus-5-5", effort: "low", maxTokens: 8000, enabled: true },
+    generateRecipes: { model: "claude-haiku-5-5", effort: "medium", maxTokens: 16000, enabled: true },
+    structureMyDish: { model: "claude-haiku-5-5", effort: "low", maxTokens: 8000, enabled: true },
+    readReceipt: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 8000, enabled: true },
     classifyItem: { model: "claude-haiku-5-5", effort: "low", maxTokens: 1000, enabled: true },
     matchProduct: { model: "claude-haiku-5-5", effort: "low", maxTokens: 4000, enabled: true },
     extractPrices: { model: "claude-haiku-5-5", effort: "low", maxTokens: 16000, enabled: true },
   },
 };
 const TASKS: [string, string, string][] = [
-  ["generateRecipes", "Recettes de la semaine", "Plats inventés selon les options du foyer. Modèle capable conseillé."],
+  ["generateRecipes", "Recettes de la semaine", "Plats inventés selon les options du foyer. Haiku suffit pour des recettes familiales."],
   ["structureMyDish", "Mes plats", "Complète un plat perso (ingrédients, version végé, étapes)."],
-  ["readReceipt", "Tickets de caisse", "Lit la photo du ticket. Le modèle doit accepter les images."],
+  ["readReceipt", "Tickets de caisse", "Lit la photo du ticket (abréviations, ticket froissé) : Sonnet conseillé. Le modèle doit accepter les images."],
   ["classifyItem", "Rangement par rayon", "Rayon, unité, conservation d'un nouvel article. Modèle rapide conseillé."],
   ["matchProduct", "Correspondance produit", "Relie un article au bon produit d'une enseigne. Modèle rapide conseillé."],
   ["extractPrices", "Capteur de prix", "Lit les prix d'une page de magasin (bouton « Envoyer à Stoemp »)."],
