@@ -31,15 +31,15 @@ if(!changed)break;
 await z(800);last=document.body.innerText.length;
 }
 let text=document.body.innerText;
-if(/colruyt\.be/.test(location.hostname)){
+if(/colruyt[.]be/.test(location.hostname)){
 const u=new URL(location.href);let p=Number(u.searchParams.get("page")||"1");
 for(let k=0;k<3;k++){
 p++;u.searchParams.set("page",String(p));
 b.textContent="Stoemp : recherche des produits cachés par les publicités… ("+(k+1)+"/3)";
 const f=document.createElement("iframe");f.style.cssText="position:fixed;left:-9999px;top:0;width:1280px;height:2400px";f.src=u.href;document.body.appendChild(f);
-let t="";for(let i=0;i<40;i++){await z(500);try{t=f.contentDocument.body.innerText}catch(e){break}if(i>8&&/\d+,\d{2,3}\/(kg|pce)/.test(t))break}
+let t="";for(let i=0;i<40;i++){await z(500);try{t=f.contentDocument.body.innerText}catch(e){break}if(i>8&&/[0-9]+,[0-9]{2,3}[/](kg|pce)/.test(t))break}
 f.remove();
-const m=t.match(/\d+,\d{2,3}\/(kg|pce|l)/g);if(!m)break;text+="\n"+t;
+const m=t.match(/[0-9]+,[0-9]{2,3}[/](kg|pce|l)/g);if(!m)break;text+=String.fromCharCode(10)+t;
 }
 }
 const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:text.slice(0,1000000)};

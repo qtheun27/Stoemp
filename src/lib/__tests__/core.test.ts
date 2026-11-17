@@ -223,3 +223,12 @@ describe("nombre de repas", () => {
     expect(w.slots.filter((s) => s.meal === "soir").length).toBe(5);
   });
 });
+
+import { readFileSync } from "node:fs";
+describe("favori « Envoyer à Stoemp »", () => {
+  it("le code réellement produit est du JavaScript valide (pas de \\ perdu dans le gabarit)", () => {
+    const raw = readFileSync("src/views/Settings.tsx", "utf8").match(/const BOOKMARKLET_SRC = `([\s\S]*?)`;/)![1];
+    const real = (0, eval)("`" + raw + "`").replace("APP", '"https://x/#/capture"').replace(/\n/g, "");
+    expect(() => new Function(real)).not.toThrow();
+  });
+});
