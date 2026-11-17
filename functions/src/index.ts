@@ -72,7 +72,7 @@ async function resolveIngredients(list: AiIng[], items: ItemDoc[]) {
       item = findItem(items, n) || (await createItem(ing.newCategory && ing.newUnit ? newItemFrom(n, ing.newCategory, ing.newUnit, ing.newAllergens || []) : await classify(n), n));
       if (!items.includes(item)) items.push(item);
     }
-    if (item && ing.qtyPerPerson > 0) out.push({ itemId: item.id, qtyPerPerson: Math.round(ing.qtyPerPerson * 100) / 100 });
+    if (item && ing.qtyPerPerson > 0) out.push({ itemId: item.id, qtyPerPerson: Math.round(ing.qtyPerPerson * 1000) / 1000 });
   }
   return out;
 }
@@ -490,7 +490,7 @@ const LIB_COURSE: Record<string, string> = {
   plat: "plats principaux", accompagnement: "accompagnements (légumes, féculents, salades d'accompagnement)", dessert: "desserts",
   patisserie: "pâtisseries, gâteaux et biscuits pour le goûter", petitdej: "recettes de petit-déjeuner et de brunch",
 };
-const LIB_BATCH = 15;
+const LIB_BATCH = 8; // au-delà, la réponse (recettes complètes) peut être coupée
 const LIB_CHUNK = 400;
 interface LibQueue { cuisine: string; course: string; remaining: number; made: number; failures: number }
 
@@ -571,12 +571,13 @@ Exclus ceux-ci (déjà présents) : ${[...names, ...plan.map((d) => d.n)].slice(
 
   // 2. Écriture : exactement ces plats, en respectant leurs éléments clés.
   const res = await askJson("growLibrary", {
-    schema: LibRecipes, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items, true)),
+    schema: LibRecipes, minTokens: 20000,
+    system: RECIPE_RULES(catalogPrompt(items, true)).replace("Quantités POUR 1 PERSONNE", "Quantités pour TOUTE LA RECETTE (champ qty), avec son nombre de parts (servings), comme dans un livre de cuisine ;"),
     content: `Écris les recettes de ces ${todo.length} ${LIB_COURSE[course]} de cuisine ${CUISINE_LABEL[cuisine]}, DANS CET ORDRE et sous CE NOM (course = "${course}", cuisine = "${cuisine}") :
 ${todo.map((d, i) => `${i + 1}. ${d.n} — ${d.k}`).join("\n")}
 Recette fidèle à la tradition et à ses éléments clés (ingrédients et techniques d'origine), adaptée seulement si un ingrédient est introuvable en Belgique ; faisable en famille.
 Recette COMPLÈTE et PRÉCISE, comme dans un bon livre de cuisine : tous les ingrédients qui comptent (vin, bouillon, herbes, beurre compris), 4 à 8 étapes avec les gestes (découper, précuire, pocher, réduire), les temps et les températures, jusqu'au dressage.
-Pour les desserts, pâtisseries et apéritifs : quantités pour 1 part ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
+Quantités pour la recette entière (servings = son nombre de parts : 4 pour un plat, 6 à 10 pour un gâteau ou une tarte) ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
 prepMin = durée TOTALE réelle (préparation + cuisson + repos) ; une marinade ou un trempage de la veille se signale dans les étapes et compte aussi (ex. 3 h de four → prepMin ≥ 200).
 Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.`,
   });
@@ -587,21 +588,22 @@ Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et
   const byId = new Map(items.map((i) => [i.id, i]));
   const sane = (r: (typeof res.recipes)[number]) => {
     const all = [...r.ingredients, ...r.meat];
-    const qtyOk = all.every((x) => { const it = x.itemId ? byId.get(x.itemId) : undefined; const u = it?.unit;
-      return x.qtyPerPerson > 0 && (u === "pc" ? x.qtyPerPerson <= 6 : x.qtyPerPerson <= 700); });
+    const parts = Math.max(1, r.servings || 1);
+    const qtyOk = r.servings >= 1 && r.servings <= 24 && all.every((x) => { const it = x.itemId ? byId.get(x.itemId) : undefined; const u = it?.unit || x.newUnit; const q = x.qty / parts;
+      return x.qty > 0 && (u === "pc" ? q <= 6 : q <= 700); });
     const hours = Math.max(0, ...r.steps.join(" ").match(/(\d+)\s*h(?:eures?)?\b/gi)?.map((x) => parseInt(x)) || [0]);
     return hours * 60 <= r.prepMin + 30 && all.length >= (course === "plat" || course === "soupe" ? 3 : 2) && r.steps.length >= 2 && r.steps.length <= 10 && r.prepMin >= 5 && r.prepMin <= 300 && qtyOk && (!r.meat.length || r.vegSwap.length > 0);
   };
   const candidates = res.recipes.map((r, k) => ({ r, k })).filter(({ r }) => sane(r) && !known.has(norm(r.name)));
-  const line = (x: { itemId: string | null; newName: string | null; qtyPerPerson: number }) => { const it = x.itemId ? byId.get(x.itemId) : undefined;
-    return it ? `${it.name} ${x.qtyPerPerson} ${it.unit === "pc" ? "pièce(s)" : it.unit}` : `${x.newName} ${x.qtyPerPerson} (unité habituelle)`; };
+  const line = (x: { itemId: string | null; newName: string | null; qty: number; newUnit?: string | null }) => { const it = x.itemId ? byId.get(x.itemId) : undefined;
+    const u = it?.unit || x.newUnit; return `${it?.name || x.newName} ${x.qty} ${u === "pc" ? "pièce(s)" : u || ""}`.trim(); };
   const review = candidates.length ? await askJson("reviewLibrary", {
     schema: LibReview, minTokens: 4000,
     system: `Tu es un chef critique exigeant, spécialiste de la cuisine ${CUISINE_LABEL[cuisine]}. On te soumet des recettes pour une appli familiale belge.
-Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour 1 personne, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
-Format de l'appli, à NE PAS reprocher : quantités pour 1 personne (0,5 œuf ou 0,25 citron = normal, on multiplie ensuite), sel, poivre et huile volontairement absents de la liste, étapes concises si elles sont justes. « pièce(s) » d'un bouquet d'herbes = fraction du bouquet.
+Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour le nombre de parts indiqué, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
+Format de l'appli, à NE PAS reprocher : quantités pour toute la recette (nombre de parts indiqué), sel, poivre et huile volontairement absents de la liste, étapes concises si elles sont justes. « pièce(s) » d'un bouquet d'herbes = fraction du bouquet.
 Accepte les adaptations raisonnables aux supermarchés belges. Refuse franchement ce qui est faux ou inventé ; pour un simple détail, accepte.`,
-    content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.prepMin} min)
+    content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.servings} parts, ${r.prepMin} min)
 Ingrédients : ${[...r.ingredients, ...r.meat].map(line).join(", ")}${r.vegSwap.length ? `
 Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
 Étapes : ${r.steps.join(" / ")}`).join("\n\n"),
@@ -617,10 +619,12 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
   for (const [k, r] of res.recipes.entries()) {
     const key = norm(r.name);
     if (!okIdx.has(k) || known.has(key) || taken.has(`lib-${slug(r.name)}`.slice(0, 120))) continue;
-    const ingredients = (await resolveIngredients(r.ingredients.filter((x) => !/^eau( plate| du robinet)?$/i.test((x.itemId ? byId.get(x.itemId)?.name : x.newName) || "")), items)).filter((x) => x.itemId !== "eau-plate");
+    // Quantités de la recette entière → par personne (l'appli multiplie ensuite selon le foyer).
+    const per = (l: typeof r.ingredients) => l.map((x) => ({ ...x, qtyPerPerson: x.qty / Math.max(1, r.servings) }));
+    const ingredients = (await resolveIngredients(per(r.ingredients).filter((x) => !/^eau( plate| du robinet)?$/i.test((x.itemId ? byId.get(x.itemId)?.name : x.newName) || "")), items)).filter((x) => x.itemId !== "eau-plate");
     if (ingredients.length < 2) continue;
-    const meat = await resolveIngredients(r.meat, items);
-    const vegSwap = meat.length ? await resolveIngredients(r.vegSwap, items) : [];
+    const meat = await resolveIngredients(per(r.meat), items);
+    const vegSwap = meat.length ? await resolveIngredients(per(r.vegSwap), items) : [];
     const id = `lib-${slug(r.name)}`.slice(0, 120);
     const recipe = {
       name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: Math.max(5, r.prepMin),
