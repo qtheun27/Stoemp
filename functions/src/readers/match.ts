@@ -1,7 +1,7 @@
 import type { ItemDoc } from "../catalog";
 
-// « pâté » et « pâtes » ne doivent pas se confondre une fois les accents retirés.
-const norm = (s: string) => s.toLowerCase().replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patev" : "pate")).replace(/\bpdt\b/g, "pommes de terre").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
+// « pâté », « pâte » (feuilletée…) et « pâtes » ne doivent pas se confondre une fois les accents retirés.
+const norm = (s: string) => s.toLowerCase().replace(/pâtes\b/g, "pasta").replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patev" : "pate")).replace(/\bpdt\b/g, "pommes de terre").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
 /** Mots de cuisine équivalents (« abricots séchés » = « abricots secs », « endive » = « chicon »). */
 const SYN: Record<string, string> = { seche: "sec", endive: "chicon", carbonnade: "carbonade", boulet: "boulette", cuite: "cuit", entiere: "entier" };
 /** Pluriel et féminin ramenés à une forme (« fumées » → « fume », « séchée » → « sec »). */
@@ -12,6 +12,9 @@ export const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w
 /** Mots qui changent la nature du produit : si le produit les contient et pas l'article, ce n'est pas le même. */
 const DERIVED = ["seche", "sec", "confit", "jus", "soupe", "puree", "chip", "sirop", "compote", "confiture", "sauce", "conserve", "surgele", "glace", "yaourt", "biscuit", "saveur", "arome", "poudre", "pate", "salade", "plante", "graine",
   "bolognaise", "pane", "panee", "caramelise", "farci", "farcie", "gratin", "gratine", "gratinee", "quiche", "wrap", "sandwich", "nugget", "croquette", "tarte", "plat", "curry"];
+
+/** Viandes et poissons : un « steak de thon » n'est pas un « steak de bœuf ». */
+const PROTEIN = new Set(["boeuf", "porc", "veau", "poulet", "dinde", "agneau", "canard", "cheval", "lapin", "cerf", "marcassin", "sanglier", "chevreuil", "gibier", "volaille", "thon", "saumon", "cabillaud", "colin", "truite", "crevette", "scampi", "poisson"]);
 
 /** Mots placés devant le nom sans le changer (« Mini concombres », « Jeunes carottes »). */
 const LEAD = new Set(["mini", "petit", "petite", "grand", "grande", "gro", "botte", "grosse", "jeune", "nouveau", "nouvelle", "demi", "fin", "fine", "vrai", "vraie"]);
@@ -74,6 +77,8 @@ export function matchItem(productName: string, size: number, unit: "g" | "ml" | 
       if (!t.length || !t.every((w) => pt.has(w)) || !headFits(productName, n)) continue;
       const itemWords = new Set(t);
       if (DERIVED.some((d) => pt.has(d) && !itemWords.has(d))) continue;
+      const nameP = nameT.filter((w) => PROTEIN.has(w));
+      if (nameP.length && [...pt].some((w) => PROTEIN.has(w) && !nameP.includes(w)) && !nameP.some((w) => pt.has(w))) continue;
       const len = t.join(" ").length + (it.unit === unit ? 0.5 : 0); // à égalité, la même unité l'emporte
       if (len > bestLen) { best = { item: it, size: s }; bestLen = len; }
     }
