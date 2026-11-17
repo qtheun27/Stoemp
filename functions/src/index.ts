@@ -325,8 +325,21 @@ async function pruneCaptures() {
 }
 
 const ENRICH_SYSTEM = `${CLASSIFY_SYSTEM}
-On te donne des produits d'une enseigne belge absents du catalogue. Pour chacun, propose l'article GÉNÉRIQUE correspondant (sans marque ni variété commerciale : « BONI Royal Gala » → « Pommes Royal Gala » seulement si la variété compte pour les courses, sinon « Pommes »).
+Tu es à la fois un grand chef de cuisine et un sommelier, qui tient le catalogue de courses d'un foyer belge.
+On te donne des produits d'une enseigne absents du catalogue. Pour chacun, donne l'article GÉNÉRIQUE qu'un cuisinier écrirait sur sa liste de courses :
+- RÉUTILISE LE NOM EXACT d'un article du catalogue existant (fourni) dès que c'est le même produit pour cuisiner ou servir, même s'il est écrit autrement : synonymes (« abricots séchés » = « Abricots secs », « endives » = « Chicons »), singulier/pluriel, abréviations (« pdt », « fil. »), marque ou variété commerciale sans importance (« BONI Royal Gala » → « Pommes »).
+- Ne crée un nouvel article que si le produit est vraiment différent en cuisine : autre morceau (« Cuisse de poulet » ≠ « Filet de poulet », « Poulet entier »), autre préparation (fumé, pané, haché, cuit), plat préparé (« Lasagne bolognaise »), autre fromage, autre poisson.
+- Viandes : morceau + animal (« Rumsteak de bœuf », « Carbonades de bœuf », « Pilons de poulet »). Charcuterie : son nom (« Salami », « Jambon cuit », « Pâté de campagne »).
+- Vins (sommelier) : couleur + appellation ou cépage, sans château, millésime ni marque (« Vin rouge Bordeaux », « Vin blanc Chardonnay », « Vin rosé de Provence »). Effervescents par type (« Champagne brut », « Crémant », « Cava », « Prosecco »). Bières par style (« Bière trappiste », « Bière blonde », « Bière blanche », « Bière sans alcool »). Spiritueux par type (« Gin », « Rhum »). Sodas par sorte (« Cola », « Cola zéro »).
+- Mêmes conventions que le catalogue : nom court en français, pluriel quand on achète plusieurs pièces (« Pommes », « Chicons »).
 L'unité doit permettre d'utiliser le prix affiché : produit vendu au kg → unité g ; à la pièce → pc ; liquide → ml.`;
+
+/** Catalogue existant, par rayon, pour que l'IA réutilise les noms au lieu de créer des doublons. */
+const catalogNames = (items: ItemDoc[]) => {
+  const by = new Map<string, string[]>();
+  for (const i of items) by.set(i.category, [...(by.get(i.category) || []), i.name]);
+  return [...by].map(([c, n]) => `${c} : ${n.sort().join(" · ")}`).join("\n");
+};
 
 export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (req) => {
   const u = uid(req);
@@ -352,7 +365,7 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     for (let i = 0; i < Math.min(unmatched.length, 300); i += 40) {
       const batch = unmatched.slice(i, i + 40);
       try {
-        const r = await askJson("classifyItem", { uid: u, schema: NewItems, system: ENRICH_SYSTEM, minTokens: 16000,
+        const r = await askJson("classifyItem", { uid: u, schema: NewItems, system: `${ENRICH_SYSTEM}\n\nCatalogue existant (rayon : noms) :\n${catalogNames(items)}`, minTokens: 16000,
           content: batch.map((p, k) => `${k}. ${p.name} — vendu ${p.packUnit === "pc" ? "à la pièce" : p.packSize === 1000 ? (p.packUnit === "g" ? "au kg" : "au litre") : `par ${p.packSize} ${p.packUnit}`}`).join("\n") });
         for (const c of r.items) {
           const p = batch[c.index];

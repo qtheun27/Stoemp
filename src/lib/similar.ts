@@ -1,9 +1,13 @@
 import type { Item } from "./types";
 
 // Même logique que functions/src/readers/match.ts (ressemblance de noms d'articles).
-const norm = (s: string) => s.toLowerCase().replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patee" : "pate")).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
+const norm = (s: string) => s.toLowerCase().replace(/pât[ée]/g, (m) => (m.endsWith("é") ? "patev" : "pate")).replace(/\bpdt\b/g, "pommes de terre").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
+/** Mots de cuisine équivalents (« abricots séchés » = « abricots secs », « endive » = « chicon »). */
+const SYN: Record<string, string> = { seche: "sec", endive: "chicon", carbonnade: "carbonade", boulet: "boulette", cuite: "cuit", entiere: "entier" };
+/** Pluriel et féminin ramenés à une forme (« fumées » → « fume », « séchée » → « sec »). */
+const stem = (w: string) => { const x = w.replace(/(x|s)$/, "").replace(/ee$/, "e"); return SYN[x] || x; };
 const STOP = new Set(["de", "du", "la", "le", "les", "des", "et", "en", "au", "aux", "a", "d", "l", "avec", "sans", "pour", "boite", "bio", "boni", "colruyt", "everyday", "selection", "extra", "fresh", "frais", "fraiche", "fraiches", "belge", "belges", "pce", "pc", "kg", "g"]);
-const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)).map((w) => w.replace(/(x|s)$/, ""));
+const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)).map(stem);
 
 /** Racine des mots (« apéritif » et « apéritives » → « aperit », « saucisse » ≠ « saucisson »). */
 const stems = (s: string) => new Set(tokens(s).map((w) => w.replace(/(ive|if|ee|e)$/, "")));
