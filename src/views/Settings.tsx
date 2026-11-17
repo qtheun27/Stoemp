@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { GoogleAuthProvider, linkWithPopup, signOut } from "firebase/auth";
-import { Copy, LogOut, Share2, UserPlus } from "lucide-react";
+import { Copy, LogOut, Share2, ShieldCheck, UserPlus } from "lucide-react";
 import { auth } from "../firebase";
 import { STORES, STORE_ORDER, WEEKDAYS_SUN0 } from "../lib/constants";
 import type { StoreId } from "../lib/types";
@@ -89,8 +89,11 @@ export default function Settings() {
 
   return (
     <>
-      <TopBar title="Réglages" sub={s.household?.name} />
+      <TopBar title="Réglages" sub={s.household?.name}>
+        {s.superAdmin && <a className="ib" href="#/admin" aria-label="Console d'administration"><ShieldCheck size={20} /></a>}
+      </TopBar>
       <div className="content wide">
+        {s.superAdmin && <a className="notice" href="#/admin" style={{ textDecoration: "none", color: "inherit" }}><ShieldCheck size={20} /><span className="grow"><b>Console d'administration</b><br /><span className="small muted">Tableau de bord, utilisateurs, catalogue, prix, IA</span></span><span aria-hidden>›</span></a>}
         <div className="grid2">
           <div className="stack">
             <div className="card">
@@ -109,7 +112,6 @@ export default function Settings() {
                   <div className="row"><input className="input" readOnly value={invite} onFocus={(e) => e.target.select()} /><button className="ib" onClick={shareInvite} aria-label="Partager"><Share2 size={18} /></button></div>}
                 {invite && <p className="small muted">Lien valable 7 jours.</p>}
               </div>}
-              {s.superAdmin && <a className="btn" href="#/admin" style={{ marginTop: 12 }}>🛠 Console d'administration</a>}
               {s.households.length > 1 && <><label className="field">Changer de foyer</label>
                 <div className="chips">{s.households.map((h) => <button key={h.id} className="chip" aria-pressed={h.id === s.hid} onClick={() => run(() => switchHousehold(h.id))}>{h.name}</button>)}</div></>}
               {s.app.features.multiHousehold && <form className="row" style={{ marginTop: 12 }} onSubmit={(e) => { e.preventDefault(); if (newName.trim()) { run(() => createHousehold(newName.trim(), false, s.app.defaults), "Foyer créé"); setNewName(""); } }}>
