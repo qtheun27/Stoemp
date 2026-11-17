@@ -9,9 +9,9 @@ import "./styles.css";
 
 try { const t = localStorage.getItem("stoemp-theme"); if (t === "light" || t === "dark") applyTheme(t); } catch { /* ignoré */ }
 
-// Mise à jour en douceur : nouvelle version installée en arrière-plan, appliquée au prochain lancement ou sur demande.
-const update = registerSW({
-  onNeedRefresh() { toast("Nouvelle version disponible : elle s'appliquera au prochain lancement"); setTimeout(() => update(true), 60_000); },
+// Mises à jour automatiques : la nouvelle version s'installe en arrière-plan et prend la main aussitôt.
+registerSW({
+  immediate: true,
   onOfflineReady() { toast("Prête à fonctionner hors ligne"); },
 });
 
