@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "prompt",
+      registerType: "autoUpdate",
       includeAssets: ["icons/*.png", "icons/*.svg", "splash/*.png"],
       manifest: {
         id: "stoemp",
@@ -41,6 +41,11 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
         globIgnores: ["splash/**"],
         navigateFallback: "index.html",
+        // Ne jamais intercepter les pages techniques de Firebase (connexion Google : /__/auth/handler).
+        navigateFallbackDenylist: [/^\/__\//, /\/__\/auth\//],
+        // La nouvelle version prend la main tout de suite (corrige les anciennes versions installées).
+        skipWaiting: true,
+        clientsClaim: true,
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
       },
     }),
