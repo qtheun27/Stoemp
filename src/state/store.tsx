@@ -7,6 +7,7 @@ import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { DEFAULT_APP_CONFIG, mergeAppConfig, type AppConfig } from "../lib/appConfig";
 import { emptyBook, priceKey, type PriceBook } from "../lib/pricing";
 import { isoWeek } from "../lib/season";
+import { readyRecipe } from "../lib/ready";
 import type { Cat, Consumption, Item, PaidPrice, Price, Recipe, Settings, ShoppingDoc, Slot, StockEntry } from "../lib/types";
 
 export interface Household { id: string; name: string; members: Record<string, "admin" | "member">; memberNames?: Record<string, string> }
@@ -147,7 +148,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     extraItems.forEach((x) => byId.set(x.id, { ...byId.get(x.id), ...x, aliases: x.aliases || [], allergens: x.allergens || [], seasonMonths: x.seasonMonths || [], demoPrice: x.demoPrice || byId.get(x.id)?.demoPrice || 0 }));
     return new ItemIndex([...byId.values()]);
   }, [extraItems]);
-  const recipes = useMemo(() => new Map([...BASE_RECIPES.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)), ...hhRecipes].map((r) => [r.id, r])), [hhRecipes, hiddenBase]);
+  // Recettes + plats préparés du magasin (à réchauffer), ces derniers à part des recettes à cuisiner.
+  const recipes = useMemo(() => new Map([...BASE_RECIPES.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)), ...hhRecipes,
+    ...idx.all().filter((i) => i.ready).map(readyRecipe)].map((r) => [r.id, r])), [hhRecipes, hiddenBase, idx]);
   const book = useMemo(() => ({ ...emptyBook(), shared, paid }), [shared, paid]);
   const household = households.find((h) => h.id === hid) || null;
 

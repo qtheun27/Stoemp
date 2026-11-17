@@ -110,7 +110,7 @@ export const generateRecipes = onCall(ai, async (req) => {
       : d.stockToUse.length && `qui utilisent si possible : ${d.stockToUse.join(", ")}`,
   ].filter(Boolean).join(" ; ");
   const res = await askJson("generateRecipes", {
-    uid: u, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items)),
+    uid: u, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items, true)),
     content: `Propose ${d.n} plats NOUVEAUX, variés et tous différents (cuisine belge, française ou du monde) : ${constraints}.
 N'utilise AUCUN de ces plats déjà connus : ${d.knownNames.join(" ; ")}.`,
   });
@@ -163,7 +163,7 @@ export const generateMenu = onCall(ai, async (req) => {
     drinks: z.array(z.string()).describe("2 à 4 boissons conseillées (accords), dont une sans alcool"),
   });
   const res = await askJson("generateRecipes", {
-    uid: u, schema: MenuSchema, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items)),
+    uid: u, schema: MenuSchema, minTokens: 16000, system: RECIPE_RULES(catalogPrompt(items, true)),
     content: `Compose un menu de réception harmonieux : ${d.courses.map((c) => COURSE_LABEL[c]).join(", ")}${d.keepMain ? `, autour du plat principal déjà prévu « ${d.keepMain} » (ne le redonne pas)` : ""}.
 Contraintes : ${constraints}. Recettes faisables à la maison, dont une partie préparable à l'avance.
 ${o.noAlcohol ? "Boissons : uniquement sans alcool." : "Boissons : accords avec le menu (vins, bières belges) et une option sans alcool."}
@@ -198,7 +198,7 @@ export const structureMyDish = onCall(ai, async (req) => {
   await requireMember(d.householdId, u);
   const items = await loadItems();
   const res = await askJson("structureMyDish", {
-    uid: u, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items)),
+    uid: u, schema: AiRecipes, system: RECIPE_RULES(catalogPrompt(items, true)),
     content: `Transforme ce plat familial en fiche recette structurée (renvoie exactement 1 recette).
 Plat : « ${d.name} » pour ${d.persons} personnes, environ ${d.minutes} min.
 Ingrédients donnés (pour ${d.persons} personnes) : ${d.ingredients || "aucun : propose les ingrédients habituels de ce plat"}
@@ -331,6 +331,7 @@ On te donne des produits d'une enseigne absents du catalogue. Pour chacun, donne
 - Ne crée un nouvel article que si le produit est vraiment différent en cuisine : autre morceau (« Cuisse de poulet » ≠ « Filet de poulet », « Poulet entier »), autre préparation (fumé, pané, haché, cuit), plat préparé (« Lasagne bolognaise »), autre fromage, autre poisson.
 - Viandes : morceau + animal (« Rumsteak de bœuf », « Carbonades de bœuf », « Pilons de poulet »). Charcuterie : son nom (« Salami », « Jambon cuit », « Pâté de campagne »).
 - Vins (sommelier) : couleur + appellation ou cépage, sans château, millésime ni marque (« Vin rouge Bordeaux », « Vin blanc Chardonnay », « Vin rosé de Provence »). Ne range JAMAIS une bouteille identifiable dans les génériques « Vin rouge », « Vin blanc » ou « Vin rosé » (réservés aux recettes) : crée ou réutilise l'article d'appellation ou de cépage. Effervescents par type (« Champagne brut », « Crémant », « Cava », « Prosecco »). Bières par style (« Bière trappiste », « Bière blonde », « Bière blanche », « Bière sans alcool »). Spiritueux par type (« Gin », « Rhum »). Sodas par sorte (« Cola », « Cola zéro »).
+- Plats préparés (lasagne, hachis parmentier, pizza, plat traiteur à réchauffer) : ready = true ; ils restent à part des ingrédients. Une base de cuisine (pâte à pizza, sauce, fond) n'est pas un plat préparé.
 - Mêmes conventions que le catalogue : nom court en français, pluriel quand on achète plusieurs pièces (« Pommes », « Chicons »).
 L'unité doit permettre d'utiliser le prix affiché : produit vendu au kg → unité g ; à la pièce → pc ; liquide → ml.`;
 

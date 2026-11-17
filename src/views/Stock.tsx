@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Minus, Plus, Sparkles, Trash2, Camera } from "lucide-react";
 import { CATS, LOCATIONS } from "../lib/constants";
+import { cookable } from "../lib/catalog";
 import { daysToExpiry, recipesUsing } from "../lib/planner";
 import { predict } from "../lib/predict";
 import { frDate } from "../lib/season";
@@ -50,7 +51,7 @@ export default function Stock() {
               <button className="btn" onClick={() => setSetup(true)}><Sparkles size={18} />Commencer</button>
             </div>}
             {expiring.map((r) => {
-              const rec = recipesUsing([...s.recipes.values()], r.id)[0];
+              const rec = recipesUsing(cookable(s.recipes.values()), r.id)[0];
               const d = Math.ceil(daysToExpiry(r.e));
               return <div className="notice" key={r.id}><span className="grow">⏳ <b>{r.it.name}</b> {d <= 0 ? "périme aujourd'hui" : `périme dans ${d} j`}{rec ? <> · idée : {rec.name}</> : ""}</span>
                 {rec && s.week && <button className="btn sm" onClick={() => {

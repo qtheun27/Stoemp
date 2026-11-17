@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { ChefHat, ChevronLeft, ChevronRight, Heart, Leaf, RefreshCw, SlidersHorizontal, Sparkles, Check as CheckIcon } from "lucide-react";
-import { isVegRecipe, nameOf } from "../lib/catalog";
+import { cookable, isVegRecipe, nameOf } from "../lib/catalog";
 import { DAYS, SEASONS } from "../lib/constants";
 import { mealCostPerPerson } from "../lib/cost";
 import { daysToExpiry, mealCounts, planSeason, recipesUsing } from "../lib/planner";
@@ -12,6 +12,7 @@ import { coursePortions, eatersLabel, eatersOf, headcount, slotPortions } from "
 import { profile, PROTEIN_LABEL, type Protein } from "../lib/balance";
 import { drinkFor } from "../lib/drinks";
 import FridgeSheet from "./Fridge";
+import ReadySheet from "./Ready";
 import { useStore } from "../state/store";
 import { Empty, run, toast, TopBar } from "../ui";
 import OptionsSheet from "./Options";
@@ -44,11 +45,12 @@ export default function Week() {
     return c;
   }, [slots, s.recipes]);
   const [fridge, setFridge] = useState(false);
+  const [ready, setReady] = useState(false);
   const cooked = slots.filter((x) => x.cooked).length;
 
   // Bientôt périmé : suggestion de repas pour l'utiliser.
   const expiring = [...s.stock.entries()].filter(([, e]) => e.qty > 0 && daysToExpiry(e) <= 3).map(([id, e]) => ({ id, e, item: s.idx.get(id) })).filter((x) => x.item).slice(0, 3);
-  const suggestFor = (itemId: string) => recipesUsing([...s.recipes.values()], itemId).find((r) => !slots.some((x) => x.recipeId === r.id));
+  const suggestFor = (itemId: string) => recipesUsing(cookable(s.recipes.values()), itemId).find((r) => !slots.some((x) => x.recipeId === r.id));
 
   const generate = async () => {
     setBusy("gen");
@@ -61,7 +63,7 @@ export default function Week() {
   const placeIn = (r: Recipe) => {
     const k = slots.findIndex((x, i) => !x.cooked && (todayIdx < 0 || x.day >= todayIdx) && i >= 0);
     if (k < 0) return toast("Aucun repas libre cette semaine");
-    const sl = [...slots]; sl[k] = { ...sl[k], recipeId: r.id, veg: o.veg && !isVegRecipe(r), cooked: false };
+    const sl = [...slots]; sl[k] = { ...sl[k], recipeId: r.id, veg: o.veg && !isVegRecipe(r) && r.source !== "pret", cooked: false };
     run(() => saveSlots(s, sl), `« ${r.name} » placé ${DAYS[sl[k].day].toLowerCase()}`);
   };
 
@@ -82,6 +84,7 @@ export default function Week() {
           <button className="btn ghost" onClick={() => setOpts(true)} aria-label="Composition du foyer">👨‍👩‍👧 {eatersLabel(eaters)}</button>
           <button className="btn ghost" onClick={() => setOpts(true)}><SlidersHorizontal size={18} />Options</button>
           <button className="btn ghost" onClick={() => setFridge(true)}>🧊 Frigo vide</button>
+          <button className="btn ghost" onClick={() => setReady(true)}>🥡 Soir sans cuisiner</button>
           <div className="scroll-x grow" style={{ marginInline: 0, paddingInline: 0 }}>
             {o.seasonal && <span className="tag ac">De saison</span>}{o.local && <span className="tag ac">Région</span>}{o.organic && <span className="tag ac">Bio</span>}
             {o.veg && <span className="tag ac">Végé</span>}{o.budgetOn && <span className="tag ac">≤ {eur(o.budget)}</span>}{o.timeOn && <span className="tag ac">≤ {o.maxTime} min</span>}
@@ -129,10 +132,10 @@ export default function Week() {
                             {list.length > 1 || mealCounts(s.settings).lunches > 0 ? <span className="slot">{x.meal}</span> : null}
                             <span className="name">{nameOf(r, x.veg)}</span>
                             {x.guests && <span className="tag ac" style={{ marginBottom: 4 }}>🎉 réception · {headcount(eaters) + x.guests.adults + x.guests.kids} pers.{x.courses?.length ? ` · ${x.courses.length + 1} services` : ""}</span>}
-                            <span className="meta"><span>⏱ {r.prepMin} min</span><span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}
-                            {o.drinks !== false && !x.fromLeftovers && <span>{x.drinks?.length ? `🍷 ${x.drinks[0]}` : `🍷 ${drinkFor(r, x.veg, s.idx, !!o.noAlcohol).adult}`}</span>}{(isVegRecipe(r) || x.veg) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}{x.cooked && <span>✅ cuisiné</span>}</span>
+                            <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}
+                            {o.drinks !== false && !x.fromLeftovers && <span>{x.drinks?.length ? `🍷 ${x.drinks[0]}` : `🍷 ${drinkFor(r, x.veg, s.idx, !!o.noAlcohol).adult}`}</span>}{(isVegRecipe(r) || (x.veg && r.source !== "pret")) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}{x.cooked && <span>✅ cuisiné</span>}</span>
                           </button>
-                          {!isVegRecipe(r) && <button className="ib" aria-pressed={x.veg} aria-label="Version végétarienne" onClick={() => { const sl = [...slots]; sl[x.k] = { ...x, veg: !x.veg }; delete (sl[x.k] as { k?: number }).k; run(() => saveSlots(s, sl)); }}><Leaf size={18} /></button>}
+                          {!isVegRecipe(r) && r.source !== "pret" && <button className="ib" aria-pressed={x.veg} aria-label="Version végétarienne" onClick={() => { const sl = [...slots]; sl[x.k] = { ...x, veg: !x.veg }; delete (sl[x.k] as { k?: number }).k; run(() => saveSlots(s, sl)); }}><Leaf size={18} /></button>}
                           <button className="ib" aria-label="Remplacer ce repas" disabled={busy === x.k} onClick={() => swap(x.k)}><RefreshCw size={18} className={busy === x.k ? "spin" : ""} /></button>
                           <button className="ib hide-xs" aria-label="Favori" aria-pressed={fav} onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, r.id))}><Heart size={18} fill={fav ? "currentColor" : "none"} /></button>
                           <button className="ib" aria-label="Cuisiné" aria-pressed={x.cooked} onClick={() => run(() => setCooked(s, x.k, !x.cooked), x.cooked ? "Stock rétabli" : "Cuisiné : stock mis à jour")}>{x.cooked ? <CheckIcon size={18} /> : <ChefHat size={18} />}</button>
@@ -149,6 +152,7 @@ export default function Week() {
       {!!slots.length && <button className="fab" disabled={busy === "gen"} onClick={generate}><Sparkles size={20} />{busy === "gen" ? "Je cuisine…" : "Nouvelle semaine"}</button>}
       {open && <RecipeSheet recipe={open.r} slotIndex={open.k} onClose={() => setOpen(null)} />}
       {opts && <OptionsSheet onClose={() => setOpts(false)} />}
+      {ready && <ReadySheet onClose={() => setReady(false)} onPick={(r) => { placeIn(r); setReady(false); }} />}
       {fridge && <FridgeSheet onClose={() => setFridge(false)} onPlace={(r) => { placeIn(r); setFridge(false); }} />}
     </>
   );

@@ -95,6 +95,8 @@ export const BASE_INDEX = new ItemIndex(BASE_ITEMS);
 export const BASE_RECIPES = parseBaseRecipes(BASE_INDEX);
 
 export const isVegRecipe = (r: Recipe) => r.meat.length === 0;
+/** Recettes à cuisiner (sans les plats préparés du magasin). */
+export const cookable = (recipes: Iterable<Recipe>) => [...recipes].filter((r) => r.source !== "pret");
 export const ingredientsOf = (r: Recipe, veg: boolean): Ingredient[] =>
   r.ingredients.concat(isVegRecipe(r) ? [] : veg ? r.vegSwap : r.meat);
 export const nameOf = (r: Recipe, veg: boolean) => (veg && !isVegRecipe(r) && r.vegName ? r.vegName : r.name);

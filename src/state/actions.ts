@@ -1,6 +1,6 @@
 import { arrayUnion, deleteDoc, deleteField, doc, setDoc, updateDoc, writeBatch, collection } from "firebase/firestore";
 import { auth, call, db } from "../firebase";
-import { ingredientsOf, isVegRecipe, type ItemIndex } from "../lib/catalog";
+import { cookable, ingredientsOf, isVegRecipe, type ItemIndex } from "../lib/catalog";
 import { guessCategory } from "../lib/classify";
 import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { parseLine } from "../lib/parse";
@@ -87,14 +87,14 @@ async function aiRecipes(s: StoreState, n: number, extra: { stockOnly?: boolean 
       budgetPerPerson: o.budgetOn ? o.budget / Math.max(0.5, portionsOf(e)) / Math.max(1, mealCounts(s.settings).total) : null,
       kidFriendly: !!o.kidFriendly && e.kids > 0, stockOnly: !!extra.stockOnly,
     },
-    knownNames: [...s.recipes.values()].filter((r) => !r.deleted).map((r) => r.name).slice(0, 400),
+    knownNames: cookable(s.recipes.values()).filter((r) => !r.deleted).map((r) => r.name).slice(0, 400),
     stockToUse: o.useStock || extra.stockOnly ? stockToUse(s, extra.stockOnly ? 30 : 12) : [],
   });
   return res.recipes;
 }
 
 export async function generateWeek(s: StoreState): Promise<string | undefined> {
-  const pool = [...s.recipes.values()];
+  const pool = cookable(s.recipes.values());
   let fresh: Recipe[] = [];
   let note: string | undefined;
   if (s.settings.options.ai && s.app.features.ai) {
@@ -118,7 +118,7 @@ export async function swapSlot(s: StoreState, k: number, useAi: boolean) {
   const slots = [...(s.week?.slots || [])];
   let r: Recipe | null = null;
   if (useAi && s.online && s.app.features.ai) { try { r = (await aiRecipes(s, 1))[0] || null; } catch { r = null; } }
-  if (!r) r = pickOne([...s.recipes.values()], planCtx(s), new Set(slots.map((x) => x.recipeId)));
+  if (!r) r = pickOne(cookable(s.recipes.values()), planCtx(s), new Set(slots.map((x) => x.recipeId)));
   if (!r) throw new Error("Aucun autre repas possible avec ces options.");
   slots[k] = { ...slots[k], recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false };
   await saveSlots(s, slots);
@@ -181,7 +181,7 @@ export async function cancelReception(s: StoreState, k: number) {
 /** Recettes réalisables avec le stock (part des ingrédients déjà à la maison, hors fond de placard). */
 export function fridgeIdeas(s: StoreState) {
   const out: { r: Recipe; coverage: number; missing: string[] }[] = [];
-  for (const r of s.recipes.values()) {
+  for (const r of cookable(s.recipes.values())) {
     if (r.deleted) continue;
     const ings = ingredientsOf(r, s.settings.options.veg).filter((i) => !s.idx.get(i.itemId)?.staple);
     if (!ings.length) continue;

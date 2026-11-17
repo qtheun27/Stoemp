@@ -54,7 +54,7 @@ export default function Shopping() {
 
   const add = async (t: string) => { const v = t.trim(); if (!v) return; const n = await run(() => addManual(s, v)); if (n) toast(`${n} ajouté`); };
   const share = async () => {
-    const t = shareText(lines, lineQty, CATS, CAT_ORDER);
+    const t = shareText(lines, lineQty, CATS, CAT_ORDER, (l) => !!(l.itemId && s.idx.get(l.itemId)?.ready));
     try { if (navigator.share) { await navigator.share({ title: "Liste de courses", text: t }); return; } } catch (e) { if ((e as Error).name === "AbortError") return; }
     toast((await copyText(t)) ? "Liste copiée : colle-la dans WhatsApp ou un SMS" : "Partage impossible ici");
   };
@@ -63,7 +63,7 @@ export default function Shopping() {
     <>
       <TopBar title="Courses" sub={`Prochaines courses : ${frDate(next)}`}>
         <button className="ib" onClick={share} aria-label="Partager"><Share2 size={20} /></button>
-        <button className="ib" onClick={async () => toast((await copyText(shareText(lines, lineQty, CATS, CAT_ORDER))) ? "Liste copiée" : "Copie impossible")} aria-label="Copier"><ClipboardCopy size={20} /></button>
+        <button className="ib" onClick={async () => toast((await copyText(shareText(lines, lineQty, CATS, CAT_ORDER, (l) => !!(l.itemId && s.idx.get(l.itemId)?.ready)))) ? "Liste copiée" : "Copie impossible")} aria-label="Copier"><ClipboardCopy size={20} /></button>
       </TopBar>
       <div className="content wide">
         <div className="cols">
@@ -108,11 +108,15 @@ export default function Shopping() {
 
 function ByCategory({ lines, priceOf, onEdit }: { lines: ShopLine[]; priceOf: (l: ShopLine) => { cost: number } | null; onEdit: (l: ShopLine) => void }) {
   const s = useStore();
-  return <>{CAT_ORDER.map((c) => {
-    const L = lines.filter((l) => l.category === c).sort((a, b) => Number(a.checked) - Number(b.checked) || a.name.localeCompare(b.name, "fr"));
+  // Plats préparés à part des ingrédients, puis les rayons.
+  const isReady = (l: ShopLine) => !!(l.itemId && s.idx.get(l.itemId)?.ready);
+  const groups = [{ key: "pret", icon: "🥡", label: "Plats préparés", L: lines.filter(isReady) },
+    ...CAT_ORDER.map((c) => ({ key: c, icon: CATS[c].icon, label: CATS[c].label, L: lines.filter((l) => l.category === c && !isReady(l)) }))];
+  return <>{groups.map(({ key, icon, label, L: all }) => {
+    const L = all.sort((a, b) => Number(a.checked) - Number(b.checked) || a.name.localeCompare(b.name, "fr"));
     if (!L.length) return null;
-    return <section key={c}>
-      <div className="cat-h"><span>{CATS[c].icon}</span>{CATS[c].label}<span className="muted">{L.filter((l) => !l.checked).length}</span></div>
+    return <section key={key}>
+      <div className="cat-h"><span>{icon}</span>{label}<span className="muted">{L.filter((l) => !l.checked).length}</span></div>
       <div className="list">{L.map((l) => {
         const pc = priceOf(l);
         return <div key={l.id} className={`li${l.checked ? " done" : ""}`}>
