@@ -288,13 +288,13 @@ Pain hamburger|bo|pc|4|1.99||5|gl|pains burger|
 Choucroute|fr|g|500|1.99|LP|14||choucroute crue|
 Jarret de veau|vi|g|600|8.99|LP|3||osso buco|
 Thym|fl|pc|1|1.29|LP|10||thym frais|
-Feuille de laurier|ep|pc|20|1.49|S|||laurier|
+Feuille de laurier|ep|g|10|1.49|S|||laurier|
 Clous de girofle|ep|g|30|1.99|S|||girofle,clou de girofle|
 Bouillon de bœuf|ep|ml|6000|1.49|S||gl|bouillon de boeuf|
 Bouillon de volaille|ep|ml|6000|1.49|S||gl|bouillon de poulet|
 Fumet de poisson|ep|ml|1000|2.49|S||po||
-Cerfeuil|fl|pc|1|1.49|LP|5|||3-6,9-11
-Cresson|fl|g|100|1.79|LP|4||cresson de fontaine|
+Cerfeuil|fl|g|50|1.49|LP|5|||3-6,9-11
+Cresson|fl|pc|1|1.79|LP|4||cresson de fontaine|
 Asperges blanches|fl|g|1000|8.99|LP|4||asperges de malines|4-6
 Pois cassés|ep|g|500|1.69|S|||pois cassés verts|
 Chapelure|ep|g|400|1.29|S||gl|panure|
