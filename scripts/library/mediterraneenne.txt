@@ -1,0 +1,254 @@
+// Cuisine méditerranéenne (Grèce, Espagne, Portugal) : recettes écrites à la main (format : voir format.ts).
+@mediterraneenne
+
+## aperitif
+# Tzatziki | 6 | 20 | PE
++ Yaourt grec 500g; Concombre 1pc; Ail 0.1pc; Aneth 0.25pc; Huile d'olive 2cs; Vinaigre 1cc; Pain pita 3pc
+- Râper le concombre avec la peau, le saler et le laisser dégorger 10 minutes dans une passoire ; bien le presser.
+- Mélanger le yaourt avec le concombre, l'ail râpé, l'aneth ciselé, l'huile et le vinaigre.
+- Saler, poivrer et réserver au frais ; servir avec des triangles de pain pita grillé.
+
+# Pan con tomate | 4 | 10 | T
++ Pain de campagne 0.5pc; Tomates 300g; Ail 0.1pc; Huile d'olive 4cs
+- Griller les tranches de pain.
+- Les frotter avec la gousse d'ail coupée, puis avec une demi-tomate bien mûre en écrasant la pulpe sur le pain.
+- Arroser généreusement d'huile d'olive et saler.
+
+# Croquetas de jamón | 6 | 200 | T
++ Beurre 60g; Farine 120g; Lait 700ml; Muscade 0.25cc; Oeufs 2pc; Chapelure 150g; Huile de tournesol 1000ml
+= Jambon cru 6pc
+~ Champignons de Paris 250g
+v Croquetas de champiñones
+- Faire fondre le beurre avec 2 cuillères d'huile d'olive, y faire revenir le jambon en tout petits dés 1 minute.
+- Ajouter 70 g de farine, cuire 2 minutes, puis verser le lait chaud petit à petit en remuant ; cuire 10 minutes jusqu'à une béchamel très épaisse ; muscade.
+- Étaler dans un plat, filmer au contact et laisser refroidir au frigo au moins 2 h.
+- Former des croquettes, les passer dans la farine, les œufs battus et la chapelure.
+- Frire 2 minutes à 180 °C et servir chaudes. Version végé : remplacer le jambon par les champignons hachés et bien revenus.
+
+# Melitzanosalata | 6 | 60 | E
++ Aubergine 800g; Ail 0.1pc; Citron 0.5pc; Persil 0.25pc; Huile d'olive 4cs; Vinaigre 1cs; Pain pita 3pc
+- Piquer les aubergines et les cuire entières 45 minutes à 220 °C (ou sur la flamme pour un goût fumé) jusqu'à ce qu'elles s'affaissent.
+- Récupérer la chair, l'égoutter 10 minutes dans une passoire.
+- La hacher au couteau avec l'ail, puis ajouter l'huile, le vinaigre, le jus de citron, le persil, sel et poivre.
+- Servir froide avec du pain pita.
+
+# Dolmades | 6 | 120 | T
++ Feuilles de vigne 250g; Riz 200g; Oignon 2pc; Aneth 0.5pc; Menthe 0.5pc; Citron 2pc; Huile d'olive 100ml
+- Blanchir les feuilles de vigne 2 minutes, les rincer et les égoutter.
+- Faire fondre les oignons hachés dans la moitié de l'huile, ajouter le riz, les herbes ciselées, le jus d'un citron, sel et poivre.
+- Déposer une petite cuillère de farce sur chaque feuille, rabattre les côtés et rouler serré.
+- Les ranger serrés dans une casserole tapissée de feuilles, arroser du reste d'huile, du jus du second citron et d'eau à hauteur ; poser une assiette dessus.
+- Cuire 50 minutes à feu doux ; laisser refroidir dans la casserole et servir froids.
+
+# Champiñones al ajillo | 4 | 15 | T
++ Champignons de Paris 500g; Ail 0.3pc; Persil 0.25pc; Vin blanc 50ml; Piment 0.25pc; Huile d'olive 4cs
+- Couper les champignons en quartiers.
+- Faire dorer l'ail émincé et le piment dans l'huile sans le brûler.
+- Ajouter les champignons et les faire sauter à feu vif 5 minutes, déglacer au vin blanc.
+- Saler, parsemer de persil et servir dans des petits plats en terre avec du pain.
+
+## entree
+# Escalivada | 4 | 70 | E
++ Aubergine 500g; Poivron 2pc; Oignon rouge 2pc; Ail 0.1pc; Huile d'olive 4cs; Pain de campagne 0.5pc
+- Cuire les aubergines, les poivrons et les oignons entiers 50 minutes au four à 200 °C en les retournant.
+- Laisser tiédir sous un essuie, puis les peler et les couper en lanières.
+- Les disposer sur un plat, arroser d'huile d'olive et d'ail haché, saler.
+- Servir tiède ou froide, sur des tranches de pain grillé.
+
+# Fava de Santorin | 4 | 60 | T
++ Pois cassés 250g; Oignon rouge 1pc; Câpres 20g; Citron 0.5pc; Huile d'olive 5cs
+- Rincer les pois cassés et les cuire 45 minutes avec la moitié de l'oignon et 750 ml d'eau en écumant, jusqu'à ce qu'ils se défassent.
+- Mixer avec 3 cuillères d'huile, le jus de citron et du sel pour obtenir une purée lisse.
+- Servir tiède, arrosée d'huile, avec le reste d'oignon émincé et les câpres.
+
+# Feta saganaki | 4 | 15 | T
++ Feta 400g; Farine 30g; Oeufs 1pc; Citron 1pc; Origan 0.5cc; Miel 2cs
+- Couper la feta en 4 tranches épaisses.
+- Les passer dans l'œuf battu puis dans la farine.
+- Les faire dorer 2 minutes par face dans l'huile d'olive bien chaude.
+- Servir aussitôt avec un filet de miel, l'origan et un quartier de citron.
+
+## soupe
+# Salmorejo | 4 | 140 | E
++ Tomates 1000g; Pain de campagne 0.25pc; Ail 0.1pc; Huile d'olive 100ml; Vinaigre 1cs; Oeufs 2pc
+- Mixer les tomates bien mûres, puis les passer au tamis.
+- Ajouter le pain rassis sans croûte et l'ail ; laisser tremper 10 minutes puis mixer longuement.
+- Verser l'huile en filet en mixant pour émulsionner ; saler et ajouter le vinaigre.
+- Réserver au frais au moins 2 h : la soupe doit être épaisse et crémeuse.
+- Servir glacée avec les œufs durs hachés et un filet d'huile.
+
+# Fasolada | 6 | 60 | AH
++ Haricots blancs (boîte) 800g; Carottes 200g; Céleri 150g; Oignon 1pc; Tomates concassées 300g; Concentré de tomate 1cs; Huile d'olive 80ml; Persil 0.25pc; Bouillon de légumes 1200ml
+- Faire suer l'oignon, les carottes et le céleri en rondelles dans la moitié de l'huile.
+- Ajouter les tomates, le concentré, les haricots égouttés et le bouillon.
+- Cuire 40 minutes à feu doux jusqu'à ce que la soupe épaississe.
+- Ajouter le reste d'huile d'olive crue et le persil au moment de servir.
+
+# Sopa de ajo | 4 | 30 | H
++ Ail 0.5pc; Pain de campagne 0.25pc; Paprika 1cc; Bouillon de volaille 1200ml; Oeufs 4pc; Huile d'olive 4cs
+- Faire dorer doucement l'ail en lamelles dans l'huile d'olive.
+- Ajouter le pain rassis en tranches fines et le faire dorer, puis le paprika hors du feu pour qu'il ne brûle pas.
+- Verser le bouillon et cuire 15 minutes.
+- Casser les œufs dans la soupe frémissante et les laisser pocher 3 minutes ; servir aussitôt.
+
+# Fakes | 6 | 60 | AH
++ Lentilles vertes 400g; Oignon 1pc; Ail 0.2pc; Carottes 150g; Tomates concassées 200g; Feuille de laurier 0.2g; Origan 1cc; Vinaigre 2cs; Huile d'olive 60ml; Bouillon de légumes 1500ml
+- Faire revenir l'oignon, l'ail et les carottes en dés dans l'huile.
+- Ajouter les lentilles rincées, les tomates, le laurier, l'origan et le bouillon.
+- Cuire 40 minutes à feu doux jusqu'à ce que les lentilles soient tendres.
+- Ajouter le vinaigre en fin de cuisson : il est indispensable au goût de la soupe.
+
+## accompagnement
+# Briam | 6 | 90 | E
++ Pommes de terre 600g; Courgettes 500g; Aubergine 300g; Poivron 1pc; Oignon rouge 1pc; Tomates 400g; Ail 0.2pc; Persil 0.25pc; Origan 1cc; Huile d'olive 100ml
+- Couper tous les légumes en morceaux et les tomates en dés.
+- Les mélanger dans un grand plat avec l'ail, le persil, l'origan, l'huile, sel et poivre.
+- Ajouter 100 ml d'eau, couvrir d'aluminium et cuire 45 minutes à 190 °C.
+- Retirer l'aluminium et cuire encore 30 minutes pour que les légumes dorent.
+
+# Pisto manchego | 4 | 60 | E
++ Courgettes 500g; Poivron 2pc; Oignon 2pc; Tomates 600g; Ail 0.1pc; Huile d'olive 4cs
+- Faire fondre l'oignon émincé 10 minutes dans l'huile, ajouter l'ail et les poivrons en dés.
+- Après 10 minutes, ajouter les courgettes en dés et cuire 10 minutes.
+- Ajouter les tomates pelées et concassées et laisser mijoter 25 minutes à feu doux.
+- Saler et servir chaud, traditionnellement avec un œuf au plat.
+
+# Gigantes plaki | 6 | 60 | AH
++ Haricots blancs (boîte) 800g; Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Concentré de tomate 1cs; Persil 0.5pc; Origan 1cc; Huile d'olive 80ml
+- Faire fondre l'oignon et l'ail dans l'huile, ajouter les tomates, le concentré et l'origan ; cuire 10 minutes.
+- Ajouter les haricots égouttés et le persil, saler et poivrer.
+- Verser dans un plat et cuire 40 minutes à 180 °C jusqu'à ce que la sauce épaississe et que le dessus caramélise.
+
+## dessert
+# Crema catalana | 6 | 260 | T
++ Lait 500ml; Oeufs 4pc; Sucre 160g; Fécule de maïs 20g; Citron 1pc; Cannelle 0.5cc
+- Chauffer le lait avec le zeste de citron et la cannelle, laisser infuser 10 minutes.
+- Fouetter 4 jaunes avec 100 g de sucre et la fécule, verser le lait filtré et cuire en remuant jusqu'à épaississement, sans bouillir.
+- Répartir dans des plats en terre et laisser refroidir puis prendre au frigo au moins 3 h.
+- Au moment de servir, saupoudrer du reste de sucre et caraméliser au fer ou au chalumeau.
+
+# Arroz con leche | 6 | 70 | T
++ Riz rond 150g; Lait 1000ml; Sucre 100g; Citron 1pc; Cannelle 1cc
+- Porter le lait à frémissement avec le zeste de citron en larges rubans et un bâton de cannelle (ou la cannelle en poudre).
+- Ajouter le riz et cuire 45 minutes à feu très doux en remuant souvent.
+- Ajouter le sucre en fin de cuisson et retirer le zeste.
+- Servir froid, saupoudré de cannelle.
+
+# Galaktoboureko | 10 | 300 | T
++ Pâte filo 250g; Beurre 120g; Lait 1000ml; Semoule 150g; Sucre 400g; Oeufs 4pc; Sucre vanillé 8g; Citron 1pc
+- Sirop : cuire 250 g de sucre, 200 ml d'eau et le zeste de citron 10 minutes ; laisser refroidir.
+- Crème : chauffer le lait, verser la semoule en pluie et cuire en remuant jusqu'à épaississement ; hors du feu, ajouter le reste du sucre, le sucre vanillé, 30 g de beurre et les œufs battus.
+- Beurrer un plat, y étaler la moitié des feuilles de filo en les badigeonnant de beurre fondu, verser la crème, couvrir du reste des feuilles beurrées.
+- Inciser le dessus en parts et cuire 45 minutes à 180 °C.
+- Verser le sirop froid sur le gâteau chaud et laisser absorber au moins 3 h avant de servir.
+
+# Loukoumades | 6 | 100 | T
++ Farine 250g; Levure de boulanger 7g; Sucre 1cs; Miel 150g; Cannelle 1cc; Cerneaux de noix 40g; Huile de tournesol 1000ml
+- Mélanger la farine, la levure, le sucre, une pincée de sel et 250 ml d'eau tiède jusqu'à obtenir une pâte lisse et collante.
+- Couvrir et laisser lever 1 heure : la pâte doit doubler et faire des bulles.
+- Faire tomber des petites boules de pâte avec une cuillère huilée dans l'huile à 175 °C et les frire 3 minutes jusqu'à ce qu'elles soient dorées.
+- Chauffer le miel avec 3 cuillères d'eau et en arroser les beignets.
+- Saupoudrer de cannelle et de noix concassées ; servir aussitôt.
+
+# Leche frita | 6 | 300 | T
++ Lait 750ml; Sucre 150g; Fécule de maïs 90g; Oeufs 3pc; Citron 1pc; Cannelle 2cc; Farine 50g; Huile de tournesol 500ml
+- Chauffer 600 ml de lait avec le zeste de citron et la moitié de la cannelle.
+- Délayer la fécule dans le reste du lait avec 100 g de sucre et 2 jaunes ; verser le lait chaud et cuire en remuant 5 minutes jusqu'à une crème très épaisse.
+- Étaler sur 2 cm dans un plat huilé et laisser prendre au frigo au moins 4 h.
+- Couper en carrés, les passer dans la farine puis dans l'œuf battu, et les frire 1 minute par face.
+- Les rouler dans le reste du sucre mélangé à la cannelle et servir tièdes.
+
+# Yaourt grec au miel et aux noix | 4 | 5 | T
++ Yaourt grec 500g; Miel 4cs; Cerneaux de noix 60g
+- Torréfier les noix 3 minutes à sec dans une poêle et les concasser.
+- Répartir le yaourt bien froid dans des bols.
+- Arroser de miel et parsemer de noix.
+
+## patisserie
+# Tarta de Santiago | 8 | 55 | T
++ Poudre d'amandes 250g; Sucre 250g; Oeufs 5pc; Citron 1pc; Cannelle 0.5cc; Sucre glace 2cs
+- Fouetter les œufs avec le sucre jusqu'à ce que le mélange blanchisse.
+- Ajouter la poudre d'amandes, le zeste de citron et la cannelle.
+- Verser dans un moule de 24 cm beurré et cuire 35 minutes à 180 °C.
+- Laisser refroidir, poser un pochoir de croix de Saint-Jacques et saupoudrer de sucre glace.
+
+# Polvorones | 10 | 60 | H
++ Farine 250g; Beurre 125g; Sucre glace 120g; Poudre d'amandes 75g; Cannelle 1cc
+- Torréfier la farine 15 minutes à 160 °C sur une plaque en remuant, puis la laisser refroidir.
+- Mélanger la farine, la poudre d'amandes, 100 g de sucre glace et la cannelle, puis ajouter le beurre mou.
+- Étaler sur 1,5 cm et découper des petits ronds.
+- Cuire 15 minutes à 170 °C ; laisser refroidir complètement (ils sont très friables) et saupoudrer du reste de sucre glace.
+
+# Baklava | 12 | 300 | T
++ Pâte filo 400g; Cerneaux de noix 300g; Beurre 200g; Cannelle 1cc; Sucre 300g; Miel 100g; Citron 0.5pc
+- Hacher grossièrement les noix et les mélanger avec la cannelle et 50 g de sucre.
+- Dans un plat beurré, superposer 8 feuilles de filo en badigeonnant chacune de beurre fondu, puis une couche de noix ; alterner jusqu'à épuisement et finir par 8 feuilles beurrées.
+- Découper en losanges avant cuisson et cuire 50 minutes à 170 °C.
+- Pendant ce temps, cuire le reste du sucre, 200 ml d'eau, le miel et le jus de citron 10 minutes ; laisser refroidir.
+- Verser le sirop froid sur la baklava chaude et la laisser absorber au moins 3 h.
+
+# Koulourakia | 12 | 50 | T
++ Farine 500g; Beurre 150g; Sucre 150g; Oeufs 3pc; Lait 50ml; Levure chimique 10g; Sucre vanillé 8g; Oranges 200g
+- Fouetter le beurre mou avec le sucre, ajouter 2 œufs, le lait, le zeste et le jus d'une orange.
+- Ajouter la farine, la levure et le sucre vanillé pour obtenir une pâte souple qui ne colle pas.
+- Former des boudins de 15 cm, les plier en deux et les torsader.
+- Dorer avec le dernier œuf battu et cuire 18 minutes à 180 °C.
+
+## petitdej
+# Bougatsa | 8 | 75 | T
++ Pâte filo 250g; Beurre 100g; Lait 750ml; Semoule 100g; Sucre 120g; Oeufs 2pc; Sucre vanillé 8g; Sucre glace 3cs; Cannelle 1cc
+- Chauffer le lait avec le sucre et le sucre vanillé, verser la semoule en pluie et cuire en remuant jusqu'à épaississement ; hors du feu, ajouter 20 g de beurre puis les œufs battus.
+- Beurrer un plat, y étaler la moitié des feuilles de filo en les badigeonnant de beurre fondu.
+- Verser la crème, replier les bords et couvrir du reste des feuilles beurrées.
+- Cuire 40 minutes à 180 °C jusqu'à ce que la pâte soit dorée.
+- Servir tiède, coupée en carrés, saupoudrée de sucre glace et de cannelle.
+
+## plat
+# Fideuà | 4 | 50 | T
++ Vermicelles 400g; Tomates 200g; Poivron 1pc; Ail 0.2pc; Paprika 1cc; Safran 0.1g; Mayonnaise 4cs; Citron 1pc
+= Scampis 300g; Dos de cabillaud 300g; Fumet de poisson 1000ml
+~ Pois chiches (boîte) 400g; Bouillon de légumes 1000ml
+v Fideuà de légumes aux pois chiches
+- Faire dorer les vermicelles à sec ou dans un peu d'huile dans une grande poêle à paella, les réserver.
+- Saisir les scampis et le poisson en morceaux 2 minutes, les réserver.
+- Faire revenir le poivron, l'ail et la tomate râpée, ajouter le paprika, puis les vermicelles et le fumet chaud au safran.
+- Cuire 10 minutes sans remuer, ajouter le poisson et les scampis et cuire encore 3 minutes jusqu'à ce que le liquide soit absorbé.
+- Servir avec un aïoli (mayonnaise et ail écrasé) et du citron. Version végé : cuire avec le bouillon de légumes et ajouter les pois chiches avec les vermicelles.
+
+# Cocido madrileño | 6 | 180 | H
++ Pois chiches (boîte) 800g; Chou vert 500g; Carottes 300g; Pommes de terre 600g; Petites pâtes 100g; Ail 0.1pc; Feuille de laurier 0.4g
+= Bœuf à braiser 500g; Cuisse de poulet 2pc; Chorizo 150g; Lardons 150g
+~ Champignons de Paris 300g; Tofu fumé 200g
+v Cocido de pois chiches et légumes
+- Mettre le bœuf, le poulet et les lardons dans une grande marmite d'eau froide, porter à ébullition et écumer ; ajouter le laurier et l'ail et cuire 2 heures à petit feu.
+- Ajouter les carottes, les pommes de terre et les pois chiches égouttés ; cuire 30 minutes.
+- Cuire le chou et le chorizo à part dans un peu de bouillon 20 minutes.
+- Filtrer une partie du bouillon et y cuire les petites pâtes : c'est la soupe servie en premier.
+- Servir ensuite les pois chiches et les légumes, puis les viandes. Version végé : cuire les légumes 45 minutes dans un bouillon aromatisé, avec les champignons et le tofu fumé.
+
+# Pollo al chilindrón | 4 | 70 | EA
++ Poivron 3pc; Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Vin blanc 150ml; Paprika 1cc; Riz 300g
+= Cuisse de poulet 4pc; Jambon cru 3pc
+~ Pois chiches (boîte) 400g
+v Chilindrón de pois chiches et riz
+- Saler les cuisses et les faire dorer à l'huile d'olive dans une cocotte ; les réserver.
+- Faire revenir le jambon en lanières, l'oignon, l'ail et les poivrons 10 minutes.
+- Ajouter le paprika, le vin, les tomates et remettre le poulet ; couvrir et cuire 40 minutes.
+- Servir avec le riz blanc. Version végé : laisser mijoter la sauce 25 minutes et y ajouter les pois chiches 10 minutes.
+
+# Youvetsi | 4 | 120 | AH
++ Pâtes orzo 300g; Tomates concassées 400g; Concentré de tomate 1cs; Oignon 1pc; Ail 0.1pc; Cannelle 0.5cc; Feuille de laurier 0.2g; Vin rouge 150ml; Pecorino 60g
+= Bœuf à braiser 700g; Bouillon de bœuf 800ml
+~ Lentilles vertes 250g; Bouillon de légumes 800ml
+v Youvetsi aux lentilles
+- Faire dorer le bœuf en morceaux à l'huile d'olive, ajouter l'oignon et l'ail, puis déglacer au vin rouge.
+- Ajouter les tomates, le concentré, la cannelle, le laurier et 400 ml de bouillon ; couvrir et cuire 1 h 15 au four à 170 °C.
+- Ajouter l'orzo et le reste du bouillon chaud, mélanger et remettre 25 minutes au four en remuant une fois, jusqu'à ce que les pâtes soient tendres.
+- Servir avec le fromage râpé. Version végé : cuire les lentilles 25 minutes dans la sauce avant d'ajouter l'orzo.
+
+# Fasolakia | 4 | 60 | E
++ Haricots verts 800g; Pommes de terre 600g; Oignon 1pc; Tomates concassées 400g; Ail 0.1pc; Persil 0.5pc; Huile d'olive 100ml; Feta 150g
+- Faire fondre l'oignon émincé dans l'huile d'olive, ajouter l'ail.
+- Ajouter les haricots équeutés, les pommes de terre en gros morceaux, les tomates et 200 ml d'eau.
+- Couvrir et cuire 45 minutes à feu doux : les haricots doivent être très fondants.
+- Ajouter le persil, saler et servir avec la feta et du pain.
