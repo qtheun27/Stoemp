@@ -106,6 +106,9 @@ export interface Settings {
   /** Nombre de repas de midi (0 à 7) et du soir (0 à 7) par semaine. */
   lunches: number;
   dinners: number;
+  /** Jours choisis pour le midi et le soir (0 = lundi … 6 = dimanche) ; sinon répartis selon lunches / dinners. */
+  lunchDays?: number[];
+  dinnerDays?: number[];
   /** Ancien réglage (7 ou 14 repas), lu seulement si lunches/dinners manquent. */
   mealsPerDay?: 1 | 2;
   mineN: number;

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ALLERGENS, CUISINES, CUISINE_ORDER, SEASONS, SEASON_ORDER } from "../lib/constants";
+import { ALLERGENS, CUISINES, CUISINE_ORDER, DAYS, SEASONS, SEASON_ORDER } from "../lib/constants";
 import type { Allergen, GenOptions, Settings } from "../lib/types";
 import { saveSettings } from "../state/actions";
-import { mealCounts } from "../lib/planner";
+import { mealDays } from "../lib/planner";
 import { eatersOf, headcount, type Eaters } from "../lib/household";
 import { useStore } from "../state/store";
 import { Check, Sheet, Stepper } from "../ui";
@@ -24,7 +24,13 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
   const [avoid, setAvoid] = useState("");
   const set = (patch: Partial<GenOptions>) => saveSettings(s.hid!, { options: { ...o, ...patch } });
   const setS = (patch: Partial<Settings>) => saveSettings(s.hid!, patch);
-  const meals = mealCounts(s.settings);
+  const days = mealDays(s.settings);
+  // Jours cochés pour le midi / le soir ; on garde au moins un repas dans la semaine.
+  const toggleDay = (meal: "lunch" | "dinner", d: number) => {
+    const next = { ...days, [meal]: days[meal].includes(d) ? days[meal].filter((x) => x !== d) : [...days[meal], d].sort((a, b) => a - b) };
+    if (!next.lunch.length && !next.dinner.length) return;
+    setS({ lunchDays: next.lunch, dinnerDays: next.dinner, lunches: next.lunch.length, dinners: next.dinner.length });
+  };
   const e = eatersOf(s.settings);
   const setEaters = (x: Eaters) => setS({ adults: x.adults, teens: x.teens, kids: x.kids, persons: headcount(x) });
   const mine = [...s.recipes.values()].filter((r) => r.source === "perso" && !r.deleted).length;
@@ -34,9 +40,12 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
         <div><div className="small muted">Adultes</div><Stepper value={e.adults} min={1} max={12} onChange={(v) => setEaters({ ...e, adults: v })} /></div>
         <div><div className="small muted">Ados (11-17 ans)</div><Stepper value={e.teens} min={0} max={8} onChange={(v) => setEaters({ ...e, teens: v })} /></div>
         <div><div className="small muted">Enfants (3-10 ans)</div><Stepper value={e.kids} min={0} max={8} onChange={(v) => setEaters({ ...e, kids: v })} /></div>
-        <div><div className="small muted">Midis</div><Stepper value={meals.lunches} min={0} max={7} onChange={(v) => setS({ lunches: v, dinners: meals.dinners || (v ? 0 : 1) })} fmt={(v) => `${v} / 7`} /></div>
-        <div><div className="small muted">Soirs</div><Stepper value={meals.dinners} min={0} max={7} onChange={(v) => setS({ dinners: v, lunches: meals.lunches || (v ? 0 : 1) })} fmt={(v) => `${v} / 7`} /></div>
       </div>
+      {(["lunch", "dinner"] as const).map((meal) => <div key={meal} style={{ marginBottom: 8 }}>
+        <div className="small muted">{meal === "lunch" ? "Repas de midi" : "Repas du soir"} · {days[meal].length} / 7</div>
+        <div className="chips">{DAYS.map((label, d) => <button key={d} className="chip" aria-pressed={days[meal].includes(d)} aria-label={`${label} ${meal === "lunch" ? "midi" : "soir"}`}
+          onClick={() => toggleDay(meal, d)}>{label.slice(0, 3)}</button>)}</div>
+      </div>)}
       <Opt o={o} set={set} k="seasonal" title="De saison" desc="Mois courant, ou saison choisie">
         <div className="chips">
           <button className="chip" aria-pressed={o.season === "auto"} onClick={() => set({ season: "auto" })}>Mois courant</button>

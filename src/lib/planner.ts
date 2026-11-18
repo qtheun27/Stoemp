@@ -107,11 +107,21 @@ function weightedPick<T>(items: T[], weights: number[], rand: () => number): T {
   return items[items.length - 1];
 }
 
+type MealSettings = Pick<Settings, "lunches" | "dinners" | "mealsPerDay" | "lunchDays" | "dinnerDays">;
+const cleanDays = (d: number[]) => [...new Set(d.filter((x) => Number.isInteger(x) && x >= 0 && x <= 6))].sort((a, b) => a - b);
+/** Jours de la semaine (0 = lundi) où l'on cuisine le midi et le soir : jours choisis, sinon répartis selon le nombre. */
+export function mealDays(s: MealSettings) {
+  const lunchN = Math.min(7, Math.max(0, s.lunches ?? (s.mealsPerDay === 2 ? 7 : 0)));
+  const dinnerN = Math.min(7, Math.max(0, s.dinners ?? 7));
+  return {
+    lunch: Array.isArray(s.lunchDays) ? cleanDays(s.lunchDays) : spreadDays(lunchN),
+    dinner: Array.isArray(s.dinnerDays) ? cleanDays(s.dinnerDays) : spreadDays(dinnerN),
+  };
+}
 /** Repas par semaine (compatible avec l'ancien réglage 7 / 14 repas). */
-export function mealCounts(s: Pick<Settings, "lunches" | "dinners" | "mealsPerDay">) {
-  const lunches = Math.min(7, Math.max(0, s.lunches ?? (s.mealsPerDay === 2 ? 7 : 0)));
-  const dinners = Math.min(7, Math.max(0, s.dinners ?? 7));
-  return { lunches, dinners, total: lunches + dinners };
+export function mealCounts(s: MealSettings) {
+  const d = mealDays(s);
+  return { lunches: d.lunch.length, dinners: d.dinner.length, total: d.lunch.length + d.dinner.length };
 }
 /** Répartit n repas sur la semaine (0 = lundi) : 7 → tous les jours, 2 → mardi et samedi, 1 → jeudi. */
 export const spreadDays = (n: number) => Array.from({ length: n }, (_, i) => Math.floor(((i + 0.5) * 7) / n));
@@ -127,7 +137,8 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   const o = settings.options;
   const rand = ctx.rand || Math.random;
   const { lunches, dinners, total: N } = mealCounts(settings);
-  const lunchDays = new Set(spreadDays(lunches)), dinnerDays = new Set(spreadDays(dinners));
+  const days = mealDays(settings);
+  const lunchDays = new Set(days.lunch), dinnerDays = new Set(days.dinner);
   const eo = effectiveOptions(settings);
   const ok = pool.filter((r) => allowed(r, eo, ctx.idx, ctx.now));
   if (!ok.length && !fresh.length) return { slots: [], warning: "Aucun repas ne correspond à tes options. Décoche-en une ou deux.", costPerPersonWeek: 0 };
