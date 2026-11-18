@@ -28,39 +28,47 @@ export interface BuyLine { itemId: string | null; qty: number; unit: Unit | "" }
 
 /** Total du panier dans chaque enseigne + articles qu'elle ne vend pas. */
 export function storeTotals(lines: BuyLine[], stores: StoreId[], ctx: Omit<CostCtx, "stores" | "pref">) {
-  const res = stores.map((s) => ({ store: s, total: 0, missing: [] as string[] }));
+  // « estimated » : articles sans prix relevé dans ce magasin (prix de démonstration × coefficient de l'enseigne).
+  const res = stores.map((s) => ({ store: s, total: 0, missing: [] as string[], estimated: 0, known: 0 }));
   for (const l of lines) {
     const item = l.itemId ? ctx.idx.get(l.itemId) : undefined;
     if (!item) continue;
     for (const r of res) {
       const p = priceAt(item, r.store, ctx.book, ctx.organic);
-      if (p) r.total += lineCost(l.qty || item.packSize, p);
-      else r.missing.push(item.id);
+      if (!p) { r.missing.push(item.id); continue; }
+      r.total += lineCost(l.qty || item.packSize, p);
+      if (p.source === "estimation") r.estimated++; else r.known++;
     }
   }
   return res;
 }
 
-/** Meilleure combinaison de 2 magasins : chaque article acheté là où il est le moins cher. */
+/**
+ * Meilleure combinaison de 2 magasins : chaque article acheté là où il est le moins cher.
+ * Seuls les magasins avec des prix relevés comptent, et un prix relevé passe toujours avant une estimation
+ * (une estimation ne dit rien du vrai prix : elle ne peut pas « gagner » une comparaison).
+ */
 export function bestPair(lines: BuyLine[], stores: StoreId[], ctx: Omit<CostCtx, "stores" | "pref">) {
-  let best: { stores: [StoreId, StoreId]; total: number; split: Record<string, StoreId>; missing: number } | null = null;
-  for (let i = 0; i < stores.length; i++) for (let j = i + 1; j < stores.length; j++) {
-    const pair: [StoreId, StoreId] = [stores[i], stores[j]];
-    let total = 0, missing = 0;
+  const real = storeTotals(lines, stores, ctx).filter((t) => t.known > 0).map((t) => t.store);
+  let best: { stores: [StoreId, StoreId]; total: number; split: Record<string, StoreId>; missing: number; estimated: number } | null = null;
+  for (let i = 0; i < real.length; i++) for (let j = i + 1; j < real.length; j++) {
+    const pair: [StoreId, StoreId] = [real[i], real[j]];
+    let total = 0, missing = 0, estimated = 0;
     const split: Record<string, StoreId> = {};
     for (const l of lines) {
       const item = l.itemId ? ctx.idx.get(l.itemId) : undefined;
       if (!item) continue;
-      let cheapest: { s: StoreId; c: number } | null = null;
+      let cheapest: { s: StoreId; c: number; est: boolean } | null = null;
       for (const s of pair) {
         const p = priceAt(item, s, ctx.book, ctx.organic);
         if (!p) continue;
-        const c = lineCost(l.qty || item.packSize, p);
-        if (!cheapest || c < cheapest.c) cheapest = { s, c };
+        const c = lineCost(l.qty || item.packSize, p), est = p.source === "estimation";
+        if (!cheapest || (cheapest.est && !est) || (cheapest.est === est && c < cheapest.c)) cheapest = { s, c, est };
       }
-      if (cheapest) { total += cheapest.c; split[item.id] = cheapest.s; } else missing++;
+      if (cheapest) { total += cheapest.c; split[item.id] = cheapest.s; if (cheapest.est) estimated++; } else missing++;
     }
-    if (!best || missing < best.missing || (missing === best.missing && total < best.total)) best = { stores: pair, total, split, missing };
+    if (!best || missing < best.missing || (missing === best.missing && estimated < best.estimated) || (missing === best.missing && estimated === best.estimated && total < best.total))
+      best = { stores: pair, total, split, missing, estimated };
   }
   return best;
 }

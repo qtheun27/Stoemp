@@ -147,15 +147,19 @@ function ByStore({ lines, stores }: { lines: ShopLine[]; stores: StoreId[] }) {
     <div className="list">{totals.map((t) => <div key={t.store} className="store-row">
       <span className="store-dot" style={{ background: STORES[t.store].color }} />
       <div className="grow"><b>{STORES[t.store].label}</b>{t.missing.length > 0 && <span className="small muted"> · {t.missing.length}/{named} articles non vendus</span>}
-        <div className="bar-bg"><i style={{ width: `${(t.total / max) * 100}%`, background: STORES[t.store].color }} /></div></div>
-      <b className="num">{eur(t.total)}</b>
+        {t.known === 0 ? <div className="small" style={{ color: "var(--warn, #d9a441)" }}>Aucun prix relevé : total estimé, à ne pas comparer</div>
+          : t.estimated > 0 && <div className="small muted">{t.known} prix relevés · {t.estimated} estimés</div>}
+        <div className="bar-bg"><i style={{ width: `${(t.total / max) * 100}%`, background: STORES[t.store].color, opacity: t.known === 0 ? 0.35 : 1 }} /></div></div>
+      <b className="num" style={t.known === 0 ? { opacity: 0.6 } : undefined}>{t.known === 0 ? "≈ " : ""}{eur(t.total)}</b>
     </div>)}</div>
+    {stores.length >= 2 && !pair && <p className="small muted" style={{ marginTop: 12 }}>Pas encore assez de prix relevés pour comparer deux magasins : capture des prix chez une deuxième enseigne (Réglages → Capteur de prix).</p>}
     {pair && <div className="card" style={{ marginTop: 12 }}>
       <h3>Meilleure combinaison de 2 magasins</h3>
       <p>{STORES[pair.stores[0]].label} + {STORES[pair.stores[1]].label} : <b className="num">{eur(pair.total)}</b>{pair.missing ? ` (${pair.missing} article(s) introuvables)` : ""}</p>
+      {pair.estimated > 0 && <p className="small muted">Dont {pair.estimated} article(s) au prix estimé (aucun prix relevé dans ces deux magasins).</p>}
       {pair.stores.map((st) => { const ids = Object.entries(pair.split).filter(([, v]) => v === st).map(([k]) => s.idx.get(k)?.name); return ids.length ? <p key={st} className="small"><b>{STORES[st].label}</b> : {ids.join(", ")}</p> : null; })}
     </div>}
-    <p className="small muted">Les montants arrondissent aux formats vendus. Prix « estimation » tant qu'aucun prix réel n'est connu.</p>
+    <p className="small muted">Les montants arrondissent aux formats vendus. Sans prix relevé, un article est estimé (prix moyen × niveau de prix de l'enseigne) : utile pour un budget, pas pour comparer.</p>
   </>;
 }
 
