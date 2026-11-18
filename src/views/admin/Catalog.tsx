@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { Plus } from "lucide-react";
 import { db } from "../../firebase";
@@ -20,11 +20,14 @@ export default function Catalog() {
   const [cat, setCat] = useState<Cat | "all" | "pret">("all");
   const [edit, setEdit] = useState<Item | null>(null);
   const [view, setView] = useState<"items" | "recipes" | "dups">("items");
-  const dups = findDuplicates(s.idx.all());
-  const items = s.idx.all().filter((i) => (cat === "all" || (cat === "pret" ? !!i.ready : i.category === cat)) && (!q || norm([i.name, ...i.aliases].join(" ")).includes(norm(q)))).sort((a, b) => a.name.localeCompare(b.name, "fr"));
+  // Liste triée et texte de recherche préparés une seule fois (pas à chaque frappe).
+  const sorted = useMemo(() => s.idx.all().map((i) => ({ i, key: norm([i.name, ...i.aliases].join(" ")) })).sort((a, b) => a.i.name.localeCompare(b.i.name, "fr")), [s.idx]);
+  const dq = useDeferredValue(q);
+  const items = useMemo(() => { const nq = norm(dq);
+    return sorted.filter(({ i, key }) => (cat === "all" || (cat === "pret" ? !!i.ready : i.category === cat)) && (!nq || key.includes(nq))).map((x) => x.i); }, [sorted, cat, dq]);
   return <div className="stack">
     <div className="row wrap">
-      <div className="seg"><button aria-pressed={view === "items"} onClick={() => setView("items")}>Articles ({s.idx.all().length})</button><button aria-pressed={view === "dups"} onClick={() => setView("dups")}>Doublons probables ({dups.length})</button><button aria-pressed={view === "recipes"} onClick={() => setView("recipes")}>Recettes de base</button></div>
+      <div className="seg"><button aria-pressed={view === "items"} onClick={() => setView("items")}>Articles ({sorted.length})</button><button aria-pressed={view === "dups"} onClick={() => setView("dups")}>Doublons probables</button><button aria-pressed={view === "recipes"} onClick={() => setView("recipes")}>Recettes de base</button></div>
       {view === "items" && <button className="btn sm" onClick={() => setEdit({ ...EMPTY })}><Plus size={16} />Nouvel article</button>}
     </div>
     {view === "items" ? <>
@@ -118,7 +121,7 @@ function Duplicates() {
   const s = useStore();
   const [busy, setBusy] = useState<string | null>(null);
   const [swap, setSwap] = useState<Record<string, boolean>>({});
-  const dups = findDuplicates(s.idx.all());
+  const dups = useMemo(() => findDuplicates(s.idx.all()), [s.idx]); // calculé une fois, seulement dans cet onglet
   if (!dups.length) return <div className="empty">Aucun doublon probable. 👌</div>;
   return <>
     <p className="small muted">Articles aux noms très proches (même rayon, même unité). Vérifie le sens de la fusion : l'article de gauche disparaît, celui de droite garde tout. ⇄ inverse le sens.</p>

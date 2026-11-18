@@ -81,6 +81,8 @@ async function main() {
     }
   }
   await db.collection("scraperRuns").add({ ...run, endedAt: FieldValue.serverTimestamp() });
+  // Carnet de prix compact de l'appli : reconstruit par une fonction déclenchée sur ce signal.
+  for (const s of stores) await db.collection("priceBookDirty").doc(s).set({ at: Date.now() }).catch(() => {});
   await closeBrowser();
 }
 main().then(() => process.exit(0)).catch((e) => { console.error(e); process.exit(0); /* un robot en panne ne casse jamais la CI */ });

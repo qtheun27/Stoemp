@@ -8,7 +8,7 @@ import type { Price, StoreId } from "../../lib/types";
 import { fmtQty } from "../../lib/units";
 import { useStore } from "../../state/store";
 import { run } from "../../ui";
-import { dt } from "./api";
+import { adminRebuildPriceBook, dt } from "./api";
 
 export default function Prices() {
   const s = useStore();
@@ -29,6 +29,8 @@ export default function Prices() {
     setForm({ ...form, item: "", size: "", price: "" });
   };
   return <div className="stack">
+    <div className="card"><h3>Carnet de prix de l'appli</h3><p>Les téléphones lisent un carnet compact (quelques documents) au lieu de chaque fiche. Il se met à jour tout seul après chaque capture ou passage du robot ; ce bouton le reconstruit en entier.</p>
+      <button className="btn ghost" onClick={() => run(async () => { const r = await adminRebuildPriceBook({}); return r; }, "Carnet de prix reconstruit")}>↻ Reconstruire le carnet</button></div>
     <div className="card"><h3>Saisir un prix à la main</h3><p>Pour les enseignes sans boutique en ligne (Lidl, Aldi, Intermarché) ou pour corriger un prix.</p>
       <div className="grid2">
         <input className="input" list="adm-items" value={form.item} onChange={(e) => setForm({ ...form, item: e.target.value })} placeholder="Article (ex. lait)" />

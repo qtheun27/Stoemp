@@ -33,3 +33,11 @@ describe("grande bibliothèque", () => {
     expect(mains([r, plat]).map((x) => x.id)).toEqual(["lib-y"]);
   });
 });
+
+describe("repas complets", () => {
+  it("chaque plat principal de base a son féculent (pommes de terre, riz, pâtes, pain…)", async () => {
+    const { hasStarch } = await import("../balance");
+    const { BASE_INDEX: idx } = await import("../catalog");
+    expect(BASE_RECIPES.filter((r) => (r.course || "plat") === "plat" && !hasStarch(r, idx)).map((r) => r.name)).toEqual([]);
+  });
+});

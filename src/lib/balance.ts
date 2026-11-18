@@ -19,3 +19,7 @@ export function profile(r: Recipe, veg: boolean, idx: ItemIndex): { protein: Pro
 }
 
 export const PROTEIN_LABEL: Record<Protein, string> = { poisson: "🐟 poisson", viande: "🥩 viande", legumineuses: "🫘 légumineuses", vege: "🥕 végé" };
+
+/** Féculents et bases qui rassasient : un plat principal complet en contient un (repas léger mis à part). */
+export const STARCH_RE = /farine|pomme(s)? de terre|grenaille|frite|croquette|pur[ée]e|riz|p[âa]tes|spaghetti|tagliatelle|penne|linguine|macaroni|lasagne|cannelloni|gnocchi|nouille|ramen|udon|vermicelle|semoule|couscous|boulgour|quinoa|polenta|pain|baguette|pistolet|toast|tortilla|wrap|pita|naan|galette|cr[êe]pe|p[âa]te (feuillet|bris|à pizza)|pizza|patate douce|lentille|pois chiche|haricots? (rouges?|blancs?|noirs?)|ma[ïi]s|feuilles de lasagne|croûton/i;
+export const hasStarch = (r: Recipe, idx: ItemIndex) => [...r.ingredients, ...r.meat].some((i) => STARCH_RE.test(idx.get(i.itemId)?.name || ""));

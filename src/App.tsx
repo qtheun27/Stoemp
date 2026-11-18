@@ -5,17 +5,18 @@ import { planSeason } from "./lib/planner";
 import { useRoute } from "./route";
 import { useStore } from "./state/store";
 import { Toasts } from "./ui";
-import Capture from "./views/Capture";
-import Dishes from "./views/Dishes";
 import Login from "./views/Login";
 import Onboarding from "./views/Onboarding";
 import Settings from "./views/Settings";
 import Shopping, { useShopping } from "./views/Shopping";
-import Stock from "./views/Stock";
 import Week from "./views/Week";
 
 // La console d'administration est chargée à part : elle ne pèse rien pour les autres utilisateurs.
 const Admin = lazy(() => import("./views/admin/Admin"));
+// Écrans chargés à la première ouverture : démarrage plus léger.
+const Dishes = lazy(() => import("./views/Dishes"));
+const Stock = lazy(() => import("./views/Stock"));
+const Capture = lazy(() => import("./views/Capture"));
 
 const TABS = [
   { id: "semaine", label: "Semaine", Icon: CalendarDays },
@@ -53,10 +54,12 @@ export default function App() {
         {s.app.banner.text && <div className="content wide" style={{ paddingBottom: 0 }}><div className="notice" style={s.app.banner.tone === "warn" ? { background: "color-mix(in srgb, var(--warn) 18%, var(--card))" } : undefined}>📣 {s.app.banner.text}</div></div>}
         {current === "semaine" && <Week />}
         {current === "courses" && <Shopping />}
-        {current === "stock" && <Stock />}
-        {current === "plats" && <Dishes />}
+        <Suspense fallback={<div className="empty">Chargement…</div>}>
+          {current === "stock" && <Stock />}
+          {current === "plats" && <Dishes />}
+          {current === "capture" && <Capture />}
+        </Suspense>
         {current === "reglages" && <Settings />}
-        {current === "capture" && <Capture />}
       </main>
       <Toasts />
     </div>
