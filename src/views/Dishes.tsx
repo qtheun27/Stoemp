@@ -8,6 +8,7 @@ import { deleteRecipe, saveManualDish, structureMyDish, toggleFavorite } from ".
 import { useStore } from "../state/store";
 import { Check, Empty, run, toast, TopBar } from "../ui";
 import RecipeSheet from "./Recipe";
+import { DishArt } from "./DishArt";
 
 export default function Dishes() {
   const s = useStore();
@@ -47,6 +48,7 @@ export default function Dishes() {
     setArmed(null); run(() => deleteRecipe(r.id), "Plat supprimé");
   };
   const Row = ({ r }: { r: Recipe }) => <div className="li">
+    <button className="thumb" onClick={() => setOpen(r)} aria-hidden tabIndex={-1}><DishArt recipe={r} idx={s.idx} height={48} rounded={10} /></button>
     <button className="main-t" onClick={() => setOpen(r)}><span className="name">{r.name}</span>
       <span className="meta">{r.cuisine && <span>{CUISINES[r.cuisine].icon} {CUISINES[r.cuisine].label}</span>}<span>⏱ {r.prepMin} min</span>{isVegRecipe(r) && <span>🌱 végé</span>}</span></button>
     <button className="ib" aria-pressed={s.prefs.favorites.includes(r.id)} aria-label="Favori" onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, r.id))}><Heart size={18} fill={s.prefs.favorites.includes(r.id) ? "currentColor" : "none"} /></button>

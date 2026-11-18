@@ -161,6 +161,7 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .li { display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border-bottom: 1px solid var(--line); min-height: 56px; }
 .li:last-child { border-bottom: 0; }
 .li .main-t { flex: 1; min-width: 0; }
+.li .thumb { flex: 0 0 64px; width: 64px; padding: 0; border: 0; background: none; cursor: pointer; }
 .li .name { font-weight: 600; display: block; line-height: 1.25; }
 .li .meta { font-size: 13px; color: var(--muted); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 2px; }
 .li.done .name { text-decoration: line-through; color: var(--muted); }
