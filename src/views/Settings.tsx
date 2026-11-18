@@ -6,6 +6,7 @@ import { STORES, STORE_ORDER, WEEKDAYS_SUN0 } from "../lib/constants";
 import type { StoreId } from "../lib/types";
 import { createHousehold, createInvite, leaveHousehold, removeMember, renameHousehold, saveSettings, setRole, switchHousehold } from "../state/actions";
 import { useStore } from "../state/store";
+import { TastesCard } from "./Tastes";
 import { copyText, run, Switch, toast, TopBar } from "../ui";
 
 export const appUrl = () => location.origin + location.pathname;
@@ -96,6 +97,7 @@ export default function Settings() {
         {s.superAdmin && <a className="notice" href="#/admin" style={{ textDecoration: "none", color: "inherit" }}><ShieldCheck size={20} /><span className="grow"><b>Console d'administration</b><br /><span className="small muted">Tableau de bord, utilisateurs, catalogue, prix, IA</span></span><span aria-hidden>›</span></a>}
         <div className="grid2">
           <div className="stack">
+            <TastesCard />
             <div className="card">
               <h3>Foyer</h3>
               <p>{admin ? "Tu es admin : tu gères les membres et les réglages." : "Tu es membre de ce foyer."}</p>

@@ -8,6 +8,7 @@ import { DEFAULT_APP_CONFIG, mergeAppConfig, type AppConfig } from "../lib/appCo
 import { emptyBook, expandBook, priceKey, type BookEntry, type PriceBook } from "../lib/pricing";
 import { isoWeek } from "../lib/season";
 import { readyRecipe } from "../lib/ready";
+import { EMPTY_TASTES, type Tastes } from "../lib/tastes";
 import type { Cat, Consumption, Item, PaidPrice, Price, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
 
 export interface Household { id: string; name: string; members: Record<string, "admin" | "member">; memberNames?: Record<string, string> }
@@ -26,6 +27,8 @@ export interface StoreState {
   isAdmin: boolean;
   settings: Settings;
   prefs: Prefs;
+  /** Profils de goûts des membres et leurs avis sur les plats (meta/tastes). */
+  tastes: Tastes;
   idx: ItemIndex;
   recipes: Map<string, Recipe>;
   stock: Map<string, StockEntry>;
@@ -54,6 +57,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [households, setHouseholds] = useState<Household[]>([]);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [prefs, setPrefs] = useState<Prefs>(EMPTY_PREFS);
+  const [tastes, setTastes] = useState<Tastes>(EMPTY_TASTES);
   const [extraItems, setExtraItems] = useState<Item[]>([]);
   const [hhRecipes, setHhRecipes] = useState<Recipe[]>([]);
   const [hiddenBase, setHiddenBase] = useState(new Set<string>());
@@ -141,6 +145,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setLoaded(true);
       }),
       onSnapshot(doc(db, "households", hid, "meta", "prefs"), (s) => setPrefs({ ...EMPTY_PREFS, ...(s.data() as Partial<Prefs>) })),
+      onSnapshot(doc(db, "households", hid, "meta", "tastes"), (s) => setTastes({ ...EMPTY_TASTES, ...(s.data() as Partial<Tastes>) }), () => setTastes(EMPTY_TASTES)),
       onSnapshot(base("stock"), (s) => setStock(mapOf<StockEntry>(s.docs))),
       onSnapshot(base("consumption"), (s) => setConsumption(mapOf<Consumption>(s.docs))),
       onSnapshot(base("shopping"), (s) => setShopping(s.docs.map((d) => ({ ...(d.data() as ShoppingDoc), id: d.id })))),
@@ -169,7 +174,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const value: StoreState = {
     user, authReady, userDoc, households, hid, household, isAdmin: !!(household && user && household.members[user.uid] === "admin"),
-    settings, prefs, idx, recipes, stock, consumption, weekKey, setWeekKey, week, shopping, book, online, loaded, app, superAdmin,
+    settings, prefs, tastes, idx, recipes, stock, consumption, weekKey, setWeekKey, week, shopping, book, online, loaded, app, superAdmin,
   };
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

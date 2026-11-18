@@ -6,6 +6,7 @@ import { mealCostPerPerson, partsCost } from "../lib/cost";
 import { mealParts, vegPortions } from "../lib/mixed";
 import { daysToExpiry, mealCounts, planSeason, recipesUsing } from "../lib/planner";
 import { mondayOf, shiftWeek, isoWeek } from "../lib/season";
+import { YesterdayRating } from "./Tastes";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
 import { placeRecipe, vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
@@ -103,6 +104,7 @@ export default function Week() {
             {r && <button className="btn sm" onClick={() => placeIn(r)}>Placer</button>}</div>;
         })}
         {s.week?.warning && <div className="notice">{s.week.warning}</div>}
+        {todayIdx > 0 && <YesterdayRating recipeIds={slots.filter((x) => x.day === todayIdx - 1 && !x.fromLeftovers).map((x) => x.recipeId)} />}
 
         {!slots.length ? (
           <Empty icon="🍲">Aucun repas prévu pour cette semaine.<br />Règle les options puis génère ta semaine.
