@@ -318,4 +318,20 @@ Poudre d'amandes|ep|g|125|2.49|S||fc|amandes en poudre|
 Tagliatelles|ep|g|500|1.69|B||gl,oe||
 Cornichons|ep|g|350|1.59|S|||
 Liqueur d'orange|bs|ml|350|12.99||||grand marnier,cointreau,triple sec|
+Romarin|fl|pc|1|1.29|LP|10||romarin frais|
+Amaretti|ep|g|200|2.49|S||fc,oe|amaretti morbidi|
+Pecorino|fr|g|200|4.49|P|30|la|pecorino romano|
+Cannelloni|ep|g|250|1.79|||gl|cannelloni secs|
+Vodka|bs|ml|700|14.99|||||
+Cacao en poudre|ep|g|250|2.99|S|||cacao non sucré|
+Marsala|bs|ml|750|8.99|||||
+Pignons de pin|ep|g|100|3.49|S||fc|pignons|
+Pêches|fl|g|1000|3.49|LBP|5||pêche|6-9
+Feuilles de vigne|ep|g|250|3.49|S|||feuilles de vigne en saumure|
+Pâte filo|fr|g|250|2.49|P|30|gl|filo,phyllo,pâte brick|
+Pâtes orzo|ep|g|500|1.79|||gl|orzo,kritharaki,langues d'oiseau|
+Vermicelles|ep|g|250|1.29|||gl|fideos,vermicelle|
+Safran|ep|g|1|3.99|S|||pistils de safran|
+Yaourt grec|fr|g|500|2.49|P|21|la|yaourt à la grecque|
+Aneth|fl|pc|1|1.29|P|7|||
 `;

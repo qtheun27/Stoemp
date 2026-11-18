@@ -1,0 +1,240 @@
+// Cuisine italienne : recettes écrites à la main (format : voir format.ts).
+@italienne
+
+## aperitif
+# Bruschetta al pomodoro | 4 | 15 | E
++ Pain de campagne 0.5pc; Tomates 400g; Ail 0.1pc; Basilic 0.5pc; Huile d'olive 3cs
+- Couper les tomates bien mûres en petits dés, les mélanger avec le basilic ciselé, l'huile d'olive, sel et poivre ; laisser reposer 10 minutes.
+- Griller les tranches de pain au four ou à la poêle-gril.
+- Frotter le pain chaud avec la gousse d'ail coupée.
+- Garnir de tomates au dernier moment et servir aussitôt.
+
+# Focaccia genovese | 8 | 240 | T
++ Farine 500g; Levure de boulanger 7g; Huile d'olive 100ml; Sucre 1cc; Romarin 0.25pc
+- Mélanger la farine, la levure, le sucre, 350 ml d'eau tiède, 2 cuillères d'huile et 10 g de sel ; pétrir 10 minutes jusqu'à obtenir une pâte souple et collante.
+- Couvrir et laisser lever 1 h 30.
+- Étaler la pâte avec les doigts dans une plaque huilée et laisser lever encore 1 heure.
+- Enfoncer le bout des doigts pour faire des alvéoles, arroser d'une émulsion de 3 cuillères d'huile et 3 cuillères d'eau, parsemer de gros sel et de romarin.
+- Cuire 20 minutes à 220 °C jusqu'à ce qu'elle soit dorée ; servir tiède, coupée en carrés.
+
+# Supplì | 6 | 90 | T
++ Riz arborio 300g; Sauce tomate 500ml; Bouillon de légumes 600ml; Parmesan 50g; Mozzarella 125g; Oeufs 2pc; Farine 50g; Chapelure 150g; Huile de tournesol 1000ml
+- Cuire le riz comme un risotto en ajoutant la sauce tomate puis le bouillon chaud louche par louche, 18 minutes ; il doit rester ferme.
+- Hors du feu, ajouter le parmesan, étaler dans un plat et laisser refroidir complètement (30 minutes).
+- Former des boulettes allongées avec une cuillère de riz, glisser un dé de mozzarella au centre et refermer.
+- Les passer dans la farine, les œufs battus puis la chapelure.
+- Frire 3 à 4 minutes à 175 °C ; servir chaud, la mozzarella doit filer.
+
+## entree
+# Caprese | 4 | 10 | E
++ Grosses tomates 4pc; Mozzarella 250g; Basilic 0.5pc; Huile d'olive 4cs
+- Couper les tomates et la mozzarella en tranches d'un demi-centimètre.
+- Les alterner sur un plat avec des feuilles de basilic.
+- Arroser d'huile d'olive, saler au gros sel et poivrer ; servir à température ambiante.
+
+# Carpaccio de bœuf | 4 | 20 | PE
++ Roquette 60g; Parmesan 50g; Citron 1pc; Câpres 15g; Huile d'olive 4cs
+= Steak de bœuf 300g
+~ Courgettes 400g
+v Carpaccio de courgettes au parmesan
+- Placer la viande 30 minutes au congélateur pour la raffermir, puis la trancher le plus finement possible.
+- Disposer les tranches sur des assiettes froides sans les superposer.
+- Arroser de jus de citron et d'huile d'olive, saler, poivrer.
+- Parsemer de roquette, de copeaux de parmesan et de câpres ; servir aussitôt.
+- Version végé : trancher les courgettes à la mandoline et les assaisonner de la même façon.
+
+# Caponata | 6 | 60 | E
++ Aubergine 800g; Céleri 150g; Oignon 1pc; Tomates concassées 300g; Olives noires 60g; Câpres 30g; Vinaigre 60ml; Sucre 2cs; Basilic 0.25pc; Pain de campagne 0.5pc
+- Couper les aubergines en cubes, les saler 20 minutes, les rincer et les sécher, puis les faire dorer à l'huile d'olive.
+- Faire fondre l'oignon et le céleri émincés, ajouter les tomates et cuire 10 minutes.
+- Ajouter les aubergines, les olives et les câpres ; mouiller avec le vinaigre et le sucre et cuire encore 10 minutes : la sauce doit être aigre-douce.
+- Laisser refroidir, ajouter le basilic et servir à température ambiante avec du pain.
+
+# Panzanella | 4 | 30 | E
++ Pain de campagne 0.5pc; Tomates 600g; Concombre 1pc; Oignon rouge 1pc; Basilic 0.5pc; Vinaigre 3cs; Huile d'olive 5cs
+- Couper le pain rassis en cubes et l'humidifier légèrement d'eau et de vinaigre ; bien l'essorer.
+- Couper les tomates en morceaux, le concombre en demi-rondelles et l'oignon en fines lamelles.
+- Mélanger le pain et les légumes avec l'huile, le reste du vinaigre, le basilic, sel et poivre.
+- Laisser reposer 15 minutes pour que le pain s'imbibe du jus des tomates.
+
+## soupe
+# Stracciatella alla romana | 4 | 20 | T
++ Bouillon de volaille 1200ml; Oeufs 4pc; Parmesan 50g; Muscade 0.25cc; Persil 0.25pc
+- Porter le bouillon à frémissement.
+- Battre les œufs avec le parmesan râpé, la muscade et le persil haché.
+- Verser le mélange en filet dans le bouillon en remuant doucement à la fourchette : l'œuf forme de fins filaments.
+- Cuire 1 minute et servir aussitôt avec du parmesan.
+
+# Pappa al pomodoro | 4 | 45 | E
++ Pain de campagne 0.5pc; Tomates 800g; Ail 0.2pc; Basilic 0.5pc; Bouillon de légumes 700ml; Huile d'olive 4cs
+- Faire revenir l'ail émincé dans l'huile d'olive, ajouter les tomates pelées et concassées et cuire 15 minutes.
+- Ajouter le bouillon et le pain rassis en morceaux ; cuire 15 minutes en remuant jusqu'à ce que le pain se défasse en une soupe épaisse.
+- Hors du feu, ajouter le basilic, saler, poivrer.
+- Servir tiède avec un filet d'huile d'olive crue.
+
+# Zuppa di lenticchie | 6 | 60 | AH
++ Lentilles vertes 300g; Carottes 150g; Céleri 100g; Oignon 1pc; Tomates concassées 200g; Ail 0.1pc; Romarin 0.25pc; Bouillon de légumes 1500ml; Pain de campagne 0.5pc
+- Faire suer l'oignon, la carotte et le céleri en petits dés dans l'huile d'olive.
+- Ajouter l'ail, le romarin, les tomates, les lentilles rincées et le bouillon.
+- Cuire 40 minutes à frémissement jusqu'à ce que les lentilles soient fondantes ; en écraser une partie pour épaissir.
+- Servir avec des tranches de pain grillé et un filet d'huile d'olive.
+
+# Pasta e ceci | 4 | 40 | AH
++ Pois chiches (boîte) 800g; Pâtes courtes 200g; Ail 0.1pc; Romarin 0.25pc; Concentré de tomate 1cs; Bouillon de légumes 1200ml; Parmesan 40g
+- Faire revenir l'ail et le romarin dans l'huile d'olive, ajouter le concentré de tomate puis les pois chiches égouttés.
+- Mouiller avec le bouillon, cuire 15 minutes et mixer la moitié des pois chiches pour une soupe crémeuse.
+- Ajouter les pâtes et les cuire directement dans la soupe, en ajoutant un peu d'eau si nécessaire.
+- Servir avec le parmesan et un filet d'huile d'olive.
+
+## accompagnement
+# Peperonata | 4 | 50 | E
++ Poivron 4pc; Oignon 2pc; Tomates 400g; Ail 0.1pc; Basilic 0.25pc
+- Couper les poivrons en lanières et les oignons en lamelles.
+- Les faire fondre 15 minutes à l'huile d'olive dans une grande poêle.
+- Ajouter les tomates en morceaux et l'ail, couvrir et cuire 25 minutes à feu doux.
+- Saler, poivrer et ajouter le basilic ; servir chaude ou tiède.
+
+# Patate al forno al rosmarino | 4 | 55 | T
++ Pommes de terre 1000g; Romarin 0.5pc; Ail 0.2pc; Huile d'olive 4cs
+- Éplucher les pommes de terre et les couper en quartiers.
+- Les mélanger dans un plat avec l'huile, les gousses d'ail en chemise, le romarin, sel et poivre.
+- Cuire 45 minutes à 200 °C en les retournant à mi-cuisson, jusqu'à ce qu'elles soient dorées et croustillantes.
+
+# Funghi trifolati | 4 | 20 | A
++ Champignons de Paris 600g; Ail 0.1pc; Persil 0.5pc; Huile d'olive 3cs
+- Nettoyer les champignons et les couper en lamelles.
+- Les faire sauter à feu vif dans l'huile avec l'ail écrasé jusqu'à ce que leur eau soit évaporée et qu'ils dorent.
+- Saler, poivrer et ajouter le persil haché en fin de cuisson.
+
+# Zucchine alla scapece | 4 | 160 | E
++ Courgettes 800g; Vinaigre 3cs; Menthe 0.5pc; Ail 0.1pc; Huile de tournesol 500ml
+- Couper les courgettes en rondelles fines et les laisser sécher 15 minutes sur un essuie.
+- Les frire en plusieurs fois jusqu'à ce qu'elles soient dorées, puis les égoutter.
+- Les disposer en couches avec l'ail émincé, la menthe, le vinaigre et du sel.
+- Laisser mariner au moins 2 h avant de servir à température ambiante.
+
+## dessert
+# Zabaione | 4 | 15 | T
++ Oeufs 4pc; Sucre 80g; Marsala 80ml
+- Séparer les œufs (garder les blancs pour une autre recette).
+- Dans un bol posé sur un bain-marie frémissant, fouetter les jaunes avec le sucre et le marsala dès le début.
+- Fouetter sans arrêt 8 à 10 minutes jusqu'à ce que la crème triple de volume et devienne mousseuse et épaisse, sans jamais bouillir.
+- Servir aussitôt, tiède, dans des coupes, avec des biscuits secs.
+
+# Bonet | 6 | 330 | AH
++ Lait 500ml; Oeufs 4pc; Sucre 180g; Cacao en poudre 30g; Amaretti 100g
+- Faire un caramel blond avec 80 g de sucre et 2 cuillères d'eau ; le verser dans un moule à cake.
+- Émietter les amaretti ; fouetter les œufs avec le reste du sucre et le cacao, puis ajouter les amaretti et le lait.
+- Verser dans le moule et cuire 50 minutes au bain-marie à 160 °C.
+- Laisser refroidir puis réserver au frigo au moins 4 h ; démouler sur un plat.
+
+# Salame di cioccolato | 8 | 260 | T
++ Chocolat noir 200g; Beurre 100g; Sucre 60g; Biscuits 200g; Cacao en poudre 15g; Sucre glace 2cs
+- Faire fondre le chocolat et le beurre avec le sucre au bain-marie.
+- Concasser les biscuits secs en morceaux et les mélanger au chocolat avec le cacao.
+- Former un boudin sur du film alimentaire, bien serrer et laisser durcir au frigo au moins 4 h.
+- Rouler dans le sucre glace et couper en tranches comme un saucisson.
+
+# Pesche al forno | 4 | 45 | E
++ Pêches 800g; Amaretti 80g; Cacao en poudre 1cs; Sucre 40g; Oeufs 1pc; Beurre 20g
+- Couper les pêches en deux, retirer le noyau et creuser un peu la chair.
+- Mélanger la chair hachée avec les amaretti émiettés, le cacao, le sucre et le jaune d'œuf.
+- Garnir les demi-pêches, poser une noisette de beurre sur chacune.
+- Cuire 30 minutes à 180 °C ; servir tièdes.
+
+# Macedonia di frutta | 6 | 80 | E
++ Fraises 250g; Kiwis 2pc; Bananes 300g; Oranges 400g; Pommes 300g; Citron 1pc; Sucre 50g
+- Couper tous les fruits en petits morceaux réguliers.
+- Les arroser du jus de citron et du jus d'une orange, ajouter le sucre et mélanger délicatement.
+- Laisser macérer 1 heure au frais avant de servir.
+
+## patisserie
+# Crostata di marmellata | 8 | 90 | T
++ Farine 300g; Beurre 150g; Sucre 120g; Oeufs 2pc; Citron 0.5pc; Levure chimique 1cc; Confiture 350g
+- Pâte frolla : sabler la farine avec le beurre froid, ajouter le sucre, le zeste de citron, la levure, un œuf et un jaune ; former une boule sans trop travailler et la reposer 30 minutes au frais.
+- Étaler les deux tiers de la pâte dans un moule de 24 cm.
+- Garnir de confiture en couche épaisse.
+- Découper des bandes dans le reste de pâte et former un quadrillage.
+- Cuire 35 minutes à 180 °C et laisser refroidir avant de démouler.
+
+# Ciambellone | 10 | 60 | T
++ Farine 300g; Sucre 200g; Oeufs 4pc; Lait 120ml; Huile de tournesol 120ml; Levure chimique 16g; Citron 1pc; Sucre glace 2cs
+- Fouetter les œufs avec le sucre jusqu'à ce que le mélange blanchisse et double de volume.
+- Ajouter l'huile, le lait et le zeste de citron, puis la farine et la levure tamisées.
+- Verser dans un moule à savarin beurré et fariné.
+- Cuire 40 minutes à 175 °C ; laisser refroidir et saupoudrer de sucre glace.
+
+# Torta della nonna | 8 | 150 | T
++ Farine 300g; Beurre 150g; Sucre 240g; Oeufs 6pc; Citron 1pc; Lait 500ml; Fécule de maïs 40g; Pignons de pin 40g; Sucre glace 2cs
+- Pâte frolla : sabler la farine avec le beurre froid, ajouter 120 g de sucre, le zeste d'un demi-citron et 2 œufs ; former une boule et la reposer 30 minutes au frais.
+- Crème pâtissière : chauffer le lait avec le reste du zeste ; fouetter 4 jaunes avec le reste du sucre et la fécule, verser le lait chaud et cuire en fouettant jusqu'à épaississement ; refroidir.
+- Foncer un moule de 24 cm avec la moitié de la pâte, garnir de crème.
+- Couvrir avec le reste de la pâte, souder les bords et parsemer de pignons.
+- Cuire 40 minutes à 175 °C ; laisser refroidir et saupoudrer de sucre glace.
+
+# Amaretti morbidi | 8 | 50 | T
++ Poudre d'amandes 250g; Sucre 200g; Oeufs 2pc; Sucre glace 50g
+- Mélanger la poudre d'amandes et le sucre.
+- Ajouter les 2 blancs d'œufs légèrement battus (garder les jaunes) et mélanger jusqu'à obtenir une pâte collante.
+- Former des boules de la taille d'une noix et les rouler dans le sucre glace.
+- Les poser sur une plaque, les aplatir légèrement et cuire 15 minutes à 170 °C : elles doivent craqueler en restant moelleuses.
+
+# Baci di dama | 10 | 100 | T
++ Farine 100g; Beurre 100g; Sucre 100g; Poudre d'amandes 100g; Chocolat noir 50g
+- Mélanger la farine, la poudre d'amandes et le sucre, puis ajouter le beurre froid en dés et pétrir rapidement.
+- Laisser reposer la pâte 1 heure au frais.
+- Former des billes de 8 g, les poser sur une plaque et les cuire 15 minutes à 160 °C ; laisser refroidir.
+- Coller les demi-sphères deux par deux avec le chocolat fondu et laisser figer.
+
+## petitdej
+# Maritozzi | 8 | 240 | T
++ Farine 500g; Levure de boulanger 10g; Lait 200ml; Oeufs 3pc; Sucre 80g; Beurre 70g; Oranges 200g; Crème liquide 400ml; Sucre glace 4cs
+- Délayer la levure dans le lait tiède ; pétrir avec la farine, le sucre, 2 œufs, le zeste d'orange et une pincée de sel, puis ajouter le beurre mou et pétrir 10 minutes.
+- Laisser lever 1 h 30.
+- Former 8 petits pains ovales, les poser sur une plaque et laisser lever encore 1 heure.
+- Dorer avec le dernier œuf battu et cuire 15 minutes à 180 °C ; laisser refroidir.
+- Fendre les brioches sans les séparer et les garnir généreusement de crème fouettée avec le sucre glace.
+
+## plat
+# Bucatini all'amatriciana | 4 | 30 | T
++ Spaghetti 400g; Tomates concassées 400g; Pecorino 60g; Vin blanc 50ml; Piment 0.5pc
+= Lardons 150g
+~ Aubergine 300g
+v Spaghetti à l'aubergine façon amatriciana
+- Faire rissoler les lardons (idéalement du guanciale) à sec jusqu'à ce qu'ils soient croustillants, déglacer au vin blanc.
+- Ajouter les tomates et le piment, cuire 15 minutes.
+- Cuire les bucatini ou spaghetti al dente, les égoutter et les mélanger à la sauce.
+- Servir avec le pecorino râpé. Version végé : dorer l'aubergine en petits dés à l'huile d'olive à la place des lardons.
+
+# Cannelloni ricotta et épinards | 4 | 75 | T
++ Cannelloni 250g; Ricotta 500g; Épinards frais 500g; Parmesan 80g; Oeufs 1pc; Muscade 0.25cc; Sauce tomate 500ml; Béchamel 300ml; Mozzarella 125g
+- Faire tomber les épinards dans une poêle, les presser fortement et les hacher.
+- Mélanger avec la ricotta, la moitié du parmesan, l'œuf, la muscade, sel et poivre.
+- Garnir les cannelloni crus à la poche ou à la petite cuillère.
+- Napper le fond d'un plat de sauce tomate, ranger les cannelloni, couvrir du reste de sauce puis de béchamel.
+- Parsemer de mozzarella et du reste de parmesan ; cuire 35 minutes à 190 °C.
+
+# Risi e bisi | 4 | 40 | P
++ Riz arborio 300g; Petits pois 500g; Oignon 1pc; Beurre 50g; Parmesan 60g; Bouillon de légumes 1200ml; Persil 0.25pc
+- Faire fondre l'oignon haché dans la moitié du beurre, ajouter les petits pois et 2 louches de bouillon ; cuire 5 minutes.
+- Ajouter le riz et le nacrer 1 minute.
+- Cuire 18 minutes en ajoutant le bouillon chaud au fur et à mesure : le plat doit rester plus liquide qu'un risotto.
+- Hors du feu, lier avec le reste du beurre, le parmesan et le persil haché.
+
+# Penne alla vodka | 4 | 25 | T
++ Pâtes courtes 400g; Tomates concassées 400g; Crème liquide 200ml; Vodka 50ml; Échalote 1pc; Parmesan 50g; Piment 0.25pc
+- Faire fondre l'échalote hachée à l'huile d'olive avec le piment.
+- Déglacer avec la vodka et laisser réduire 1 minute.
+- Ajouter les tomates et cuire 10 minutes, puis la crème et cuire encore 3 minutes.
+- Cuire les penne al dente, les mélanger à la sauce et servir avec le parmesan.
+
+# Orecchiette alle cime di rapa | 4 | 30 | AH
++ Pâtes courtes 400g; Brocoli 600g; Ail 0.2pc; Piment 0.5pc; Chapelure 30g
+= Filets d'anchois 30g
+~ Parmesan 40g
+v Orecchiette aux brocolis et parmesan
+- Détailler le brocoli en petits bouquets et éplucher la tige.
+- Cuire les orecchiette dans une grande casserole d'eau salée et ajouter le brocoli 5 minutes avant la fin.
+- Pendant ce temps, faire fondre les anchois dans l'huile d'olive avec l'ail et le piment ; dorer la chapelure dans une autre poêle.
+- Égoutter, mélanger avec l'huile aux anchois en écrasant un peu le brocoli, et parsemer de chapelure grillée.
+- Version végé : sans anchois, terminer avec le parmesan râpé.
