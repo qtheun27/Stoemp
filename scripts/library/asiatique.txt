@@ -200,7 +200,7 @@ v Curry massaman aux pois chiches
 - Version végé : mijoter les légumes 30 minutes dans la sauce et ajouter les pois chiches à la fin.
 
 # Laksa | 4 | 45 | AH
-+ Pâte de curry rouge 60g; Citronnelle 1pc; Lait de coco 800ml; Bouillon de volaille 800ml; Nouilles de riz 300g; Germes de soja 150g; Oeufs 2pc; Coriandre 0.5pc; Citron vert 1pc; Nuoc-mâm 2cs
++ Pâte de curry rouge 60g; Citronnelle 30g; Lait de coco 800ml; Bouillon de volaille 800ml; Nouilles de riz 300g; Germes de soja 150g; Oeufs 2pc; Coriandre 0.5pc; Citron vert 1pc; Nuoc-mâm 2cs
 = Scampis 300g
 ~ Tofu ferme 300g; Bouillon de légumes 800ml
 v Laksa au tofu
@@ -211,7 +211,7 @@ v Laksa au tofu
 - Répartir les nouilles dans les bols, verser la soupe, garnir de germes de soja, d'œuf, de coriandre et de citron vert. Version végé : tofu doré et bouillon de légumes.
 
 # Rendang de bœuf | 4 | 210 | AH
-+ Échalote 4pc; Ail 0.3pc; Gingembre 30g; Citronnelle 2pc; Piment 2pc; Curcuma 1cc; Lait de coco 400ml; Cassonade 1cs; Feuille de laurier 0.2g; Riz basmati 300g
++ Échalote 4pc; Ail 0.3pc; Gingembre 30g; Citronnelle 60g; Piment 2pc; Curcuma 1cc; Lait de coco 400ml; Cassonade 1cs; Feuille de laurier 0.2g; Riz basmati 300g
 = Bœuf à braiser 800g
 ~ Pommes de terre 600g; Oeufs 4pc
 v Rendang de pommes de terre et œufs

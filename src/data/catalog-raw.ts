@@ -348,7 +348,7 @@ Edamame|su|g|400|2.99|||so|fèves de soja|
 Pak choï|fl|g|500|2.49|P|5||bok choy,pak choi|
 Pâte de curry verte|ep|g|100|2.49|S|||curry vert|
 Pâte de curry massaman|ep|g|100|2.49|S|||curry massaman|
-Citronnelle|fl|pc|3|1.99|P|14||lemongrass|
+Citronnelle|fl|g|100|1.99|P|14||lemongrass|
 Nuoc-mâm|ep|ml|200|2.29|S||po|sauce de poisson,sauce poisson|
 Sauce huître|ep|ml|250|2.49|S||po,gl|sauce aux huîtres|
 Mirin|ep|ml|300|3.49|S||||
@@ -365,4 +365,12 @@ Farine de riz gluant|ep|g|400|2.49|S|||mochiko|
 Perles du Japon|ep|g|250|1.79|S|||tapioca,perles de tapioca|
 Pâte de haricots rouges|ep|g|500|3.49|S|||anko,haricots azuki sucrés|
 Curcuma|ep|g|40|1.79|S||||
+Paneer|fr|g|200|2.99|P|21|la||
+Farine de pois chiches|ep|g|500|2.29|S|||besan|
+Graines de moutarde|ep|g|50|1.99|S||||
+Mangue|fl|pc|1|1.49|P|7||mangues|
+Ghee|ep|g|250|5.49|S||la|beurre clarifié|
+Pistaches|ep|g|125|3.49|S||fc|pistaches décortiquées|
+Riz aplati (poha)|ep|g|500|2.49|S|||poha|
+Farine complète|ep|g|1000|1.49|S||gl|atta,farine de blé complet|
 `;
