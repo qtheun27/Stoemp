@@ -1,0 +1,195 @@
+// Cuisine italienne, deuxième série.
+@italienne
+
+## aperitif
+# Grissini | 10 | 100 | T
++ Farine 300g; Levure de boulanger 5g; Huile d'olive 3cs; Graines de sésame 20g
+- Mélanger la farine, la levure, 1 cuillère de sel, l'huile et 170 ml d'eau tiède ; pétrir 8 minutes.
+- Laisser lever 1 heure.
+- Couper des bandes de 1 cm et les étirer en longs bâtonnets ; en rouler une partie dans le sésame.
+- Cuire 15 minutes à 200 °C jusqu'à ce qu'ils soient dorés et croquants.
+
+# Gnocco fritto | 6 | 100 | T
++ Farine 400g; Levure de boulanger 7g; Lait 200ml; Beurre 40g; Huile de tournesol 1000ml
+= Jambon cru 12pc; Salami 120g
+~ Fromage frais nature 200g; Pecorino 80g
+v Gnocco fritto et fromages
+- Pétrir la farine avec la levure délayée dans le lait tiède, le beurre mou, une pincée de sel et environ 50 ml d'eau ; laisser lever 1 heure.
+- Étaler sur 3 mm et découper en losanges.
+- Les frire 1 minute de chaque côté à 180 °C : ils gonflent comme des coussins.
+- Servir chauds avec la charcuterie. Version végé : avec des fromages.
+
+# Taralli | 12 | 75 | T
++ Farine 500g; Vin blanc 150ml; Huile d'olive 120ml; Graines de fenouil 1cs
+- Mélanger la farine, 2 cuillères de sel, le fenouil, le vin et l'huile ; pétrir 10 minutes en une pâte ferme.
+- Former des boudins fins de 10 cm et les fermer en anneaux.
+- Les plonger dans l'eau bouillante jusqu'à ce qu'ils remontent, puis les égoutter sur un torchon.
+- Cuire 35 minutes à 190 °C jusqu'à ce qu'ils soient dorés et croquants.
+
+# Polpette di melanzane | 4 | 60 | E
++ Aubergine 700g; Pain de mie 2pc; Parmesan 60g; Oeufs 1pc; Ail 0.1pc; Basilic 0.25pc; Chapelure 80g; Huile de tournesol 500ml
+- Cuire les aubergines en dés 10 minutes à l'eau bouillante salée, les égoutter et les presser fortement.
+- Les hacher et mélanger avec le pain émietté, le parmesan, l'œuf, l'ail et le basilic.
+- Former des boulettes et les rouler dans la chapelure.
+- Les frire 3 minutes à 175 °C ; servir chaudes ou tièdes.
+
+## entree
+# Insalata di finocchi e arance | 4 | 15 | H
++ Fenouil 2pc; Oranges 600g; Olives noires 40g; Oignon rouge 0.5pc; Huile d'olive 3cs
+- Émincer finement le fenouil à la mandoline.
+- Peler les oranges à vif et les couper en rondelles.
+- Disposer fenouil, oranges, oignon émincé et olives sur un plat.
+- Arroser d'huile d'olive, saler et poivrer.
+
+# Involtini di melanzane | 4 | 60 | E
++ Aubergine 600g; Ricotta 250g; Parmesan 50g; Basilic 0.25pc; Sauce tomate 400ml; Mozzarella 125g
+- Couper les aubergines en tranches de 5 mm dans la longueur et les griller à la poêle-gril.
+- Mélanger la ricotta avec la moitié du parmesan, le basilic, sel et poivre.
+- Garnir chaque tranche et la rouler.
+- Les ranger dans un plat sur la sauce tomate, couvrir de mozzarella et du reste de parmesan.
+- Cuire 20 minutes à 190 °C.
+
+## soupe
+# Acquacotta | 4 | 50 | AH
++ Oignon 3pc; Céleri 100g; Tomates concassées 400g; Bouillon de légumes 1000ml; Oeufs 4pc; Pain de campagne 0.5pc; Pecorino 40g
+- Faire fondre lentement les oignons émincés et le céleri à l'huile d'olive 15 minutes.
+- Ajouter les tomates et le bouillon ; cuire 20 minutes.
+- Casser les œufs dans la soupe frémissante et les laisser pocher 3 minutes.
+- Servir sur des tranches de pain grillé, avec le pecorino râpé.
+
+# Tortellini in brodo | 4 | 30 | H
++ Tortellini 400g; Parmesan 40g
+= Bouillon de volaille 1500ml
+~ Bouillon de légumes 1500ml
+v Tortellini au bouillon de légumes
+- Porter le bouillon (idéalement un bouillon maison de chapon et de bœuf) à frémissement.
+- Y cuire les tortellini selon le paquet.
+- Servir dans des assiettes creuses avec le parmesan râpé.
+
+## accompagnement
+# Polenta crémeuse au parmesan | 4 | 40 | AH
++ Polenta 250g; Lait 500ml; Beurre 40g; Parmesan 60g
+- Porter le lait et 500 ml d'eau salée à ébullition.
+- Verser la polenta en pluie en fouettant.
+- Cuire selon le paquet (de 5 à 40 minutes) en remuant souvent avec une cuillère en bois.
+- Hors du feu, ajouter le beurre et le parmesan ; servir aussitôt.
+
+# Fagioli all'uccelletto | 4 | 30 | T
++ Haricots blancs (boîte) 800g; Tomates concassées 300g; Ail 0.2pc; Huile d'olive 4cs
+- Faire revenir l'ail écrasé dans l'huile d'olive (avec quelques feuilles de sauge si on en a).
+- Ajouter les tomates et cuire 10 minutes.
+- Ajouter les haricots égouttés et cuire 10 minutes en remuant doucement ; saler et poivrer.
+
+# Ciambotta | 6 | 60 | E
++ Aubergine 400g; Poivron 2pc; Courgettes 300g; Pommes de terre 400g; Oignon 1pc; Tomates 400g; Basilic 0.25pc
+- Couper tous les légumes en cubes.
+- Faire revenir l'oignon et les pommes de terre 10 minutes à l'huile d'olive.
+- Ajouter les poivrons, puis les aubergines et les courgettes.
+- Ajouter les tomates, couvrir et laisser mijoter 30 minutes ; finir avec le basilic.
+
+# Melanzane a funghetto | 4 | 30 | E
++ Aubergine 600g; Tomates cerises 200g; Ail 0.1pc; Basilic 0.25pc; Huile d'olive 5cs
+- Couper les aubergines en dés.
+- Les faire dorer à feu vif dans l'huile avec l'ail, comme des champignons.
+- Ajouter les tomates cerises coupées et cuire 5 minutes.
+- Saler et parsemer de basilic.
+
+## dessert
+# Semifreddo al caffè | 8 | 400 | E
++ Oeufs 4pc; Sucre 120g; Crème liquide 400ml; Café moulu 15g; Chocolat noir 50g
+- Préparer 80 ml de café très fort et le laisser refroidir.
+- Fouetter les jaunes avec 80 g de sucre au bain-marie jusqu'à ce qu'ils épaississent, ajouter le café ; laisser refroidir.
+- Monter les blancs en neige avec le reste du sucre, et la crème en chantilly.
+- Mélanger délicatement le tout, verser dans un moule à cake tapissé de film.
+- Congeler au moins 6 h ; démouler et servir en tranches avec le chocolat râpé.
+
+# Fragole all'aceto balsamico | 4 | 40 | PE
++ Fraises 500g; Vinaigre balsamique 2cs; Sucre 2cs; Menthe 0.25pc
+- Couper les fraises en deux ou en quatre.
+- Les mélanger avec le sucre et le vinaigre balsamique.
+- Laisser macérer 30 minutes au frais.
+- Servir parsemées de menthe, éventuellement avec une boule de glace vanille.
+
+# Torta di riso | 8 | 120 | T
++ Riz rond 150g; Lait 1000ml; Sucre 150g; Oeufs 4pc; Amandes 80g; Citron 1pc; Beurre 20g; Chapelure 20g
+- Cuire le riz dans le lait avec le zeste de citron 30 minutes à feu doux ; ajouter le sucre et laisser refroidir.
+- Ajouter les œufs un par un et les amandes hachées.
+- Verser dans un moule beurré et saupoudré de chapelure.
+- Cuire 1 heure à 170 °C ; laisser refroidir et servir le lendemain, coupée en losanges.
+
+## patisserie
+# Crostata di ricotta | 8 | 90 | T
++ Farine 300g; Beurre 150g; Sucre 220g; Oeufs 4pc; Citron 1pc; Ricotta 500g; Chocolat noir 50g
+- Pâte frolla : sabler la farine avec le beurre, ajouter 120 g de sucre, le zeste d'un demi-citron et 2 œufs ; reposer 30 minutes.
+- Mélanger la ricotta égouttée avec le reste du sucre, 2 œufs, le reste du zeste et le chocolat haché.
+- Foncer un moule avec les deux tiers de la pâte, garnir et couvrir de croisillons.
+- Cuire 45 minutes à 175 °C ; servir froide.
+
+# Zeppole di San Giuseppe | 8 | 90 | P
++ Beurre 80g; Lait 625ml; Farine 125g; Oeufs 7pc; Sucre 100g; Fécule de maïs 40g; Citron 1pc; Sucre glace 2cs
+- Pâte à choux : porter à ébullition 125 ml de lait, 125 ml d'eau, le beurre et une pincée de sel, verser la farine, dessécher et incorporer 4 œufs.
+- Dresser des couronnes de 7 cm à la poche cannelée et cuire 25 minutes à 190 °C.
+- Crème : chauffer le reste du lait avec le zeste de citron ; fouetter 3 jaunes avec le sucre et la fécule, verser le lait et cuire jusqu'à épaississement.
+- Garnir le centre des couronnes de crème, poser une griotte et saupoudrer de sucre glace.
+
+# Torta paradiso | 8 | 60 | T
++ Beurre 200g; Sucre glace 200g; Oeufs 4pc; Farine 100g; Fécule de maïs 100g; Levure chimique 8g; Citron 1pc
+- Fouetter le beurre mou avec le sucre glace et le zeste de citron jusqu'à ce qu'il soit très crémeux.
+- Ajouter les jaunes un par un, puis la farine, la fécule et la levure.
+- Incorporer les blancs montés en neige.
+- Cuire 45 minutes à 170 °C dans un moule de 24 cm ; saupoudrer de sucre glace.
+
+## petitdej
+# Uova in purgatorio | 2 | 25 | T
++ Oeufs 4pc; Tomates concassées 400g; Ail 0.1pc; Piment 0.25pc; Basilic 0.25pc; Pain de campagne 0.25pc
+- Faire revenir l'ail et le piment à l'huile d'olive, ajouter les tomates et cuire 10 minutes.
+- Creuser des puits dans la sauce et y casser les œufs.
+- Couvrir et cuire 5 à 6 minutes : les blancs doivent être pris et les jaunes coulants.
+- Parsemer de basilic et servir avec du pain grillé.
+
+## plat
+# Pasta e patate | 4 | 45 | AH
++ Pâtes courtes 300g; Pommes de terre 500g; Oignon 1pc; Céleri 80g; Carottes 80g; Concentré de tomate 1cs; Parmesan 50g; Provolone 120g; Bouillon de légumes 1200ml
+- Faire revenir l'oignon, le céleri et la carotte hachés à l'huile d'olive, ajouter le concentré.
+- Ajouter les pommes de terre en dés et le bouillon ; cuire 15 minutes.
+- Ajouter les pâtes et les cuire dans le bouillon en remuant, jusqu'à ce que le tout devienne crémeux.
+- Hors du feu, ajouter le parmesan et le provolone en dés qui fondent.
+
+# Gnocchi alla romana | 4 | 90 | AH
++ Semoule 250g; Lait 1000ml; Beurre 80g; Parmesan 100g; Oeufs 2pc; Muscade 0.25cc; Salade verte 1pc
+- Porter le lait à ébullition avec la muscade et du sel, verser la semoule en pluie et cuire 5 minutes en remuant.
+- Hors du feu, ajouter 30 g de beurre, la moitié du parmesan et les jaunes.
+- Étaler sur 1,5 cm sur une plaque humide et laisser refroidir 30 minutes.
+- Découper des disques et les ranger en tuiles dans un plat beurré ; parsemer du reste de beurre et de parmesan.
+- Gratiner 20 minutes à 200 °C ; servir avec une salade verte.
+
+# Branzino al forno con patate | 4 | 60 | T
++ Pommes de terre 800g; Citron 1pc; Tomates cerises 200g; Olives noires 50g; Ail 0.2pc; Romarin 0.25pc; Persil 0.25pc
+= Bar 1200g
+~ Pois chiches (boîte) 400g; Feta 150g
+v Pommes de terre au four, pois chiches et feta
+- Couper les pommes de terre en fines rondelles, les mélanger à l'huile, l'ail et le romarin et les précuire 20 minutes à 200 °C.
+- Garnir les poissons vidés de rondelles de citron et de persil.
+- Les poser sur les pommes de terre avec les tomates cerises et les olives.
+- Cuire 20 à 25 minutes : la chair doit se détacher de l'arête. Version végé : pois chiches et feta ajoutés pour les 15 dernières minutes.
+
+# Pasta alla genovese | 6 | 240 | AH
++ Oignon 8pc; Carottes 150g; Céleri 100g; Vin blanc 200ml; Pâtes courtes 500g; Parmesan 60g
+= Bœuf à braiser 700g
+~ Lentilles vertes 250g
+v Pasta alla genovese aux lentilles
+- Faire revenir le bœuf en gros morceaux à l'huile d'olive avec la carotte et le céleri hachés.
+- Ajouter les oignons émincés (beaucoup !) et le vin ; couvrir et cuire 3 heures à feu très doux, en remuant de temps en temps.
+- Les oignons fondent en une sauce brune et sucrée ; effilocher la viande.
+- Mélanger avec les pâtes (idéalement des ziti cassés) et servir avec le parmesan. Version végé : lentilles cuites 40 minutes dans la sauce aux oignons.
+
+# Scaloppine al limone | 4 | 40 | T
++ Farine 40g; Beurre 50g; Citron 2pc; Vin blanc 100ml; Persil 0.25pc; Pommes de terre 800g
+= Escalope de veau 600g
+~ Halloumi 400g
+v Halloumi au citron
+- Cuire les pommes de terre en quartiers au four ou à la vapeur.
+- Aplatir les escalopes, les fariner légèrement.
+- Les dorer 1 minute par face dans le beurre et les réserver.
+- Déglacer avec le vin blanc et le jus des citrons, réduire et monter avec une noisette de beurre ; remettre la viande 30 secondes.
+- Parsemer de persil et servir avec les pommes de terre. Version végé : tranches d'halloumi dorées et nappées de la même sauce.

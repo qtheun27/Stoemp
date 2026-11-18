@@ -411,4 +411,11 @@ Gigot d'agneau|vi|g|2000|29.90|P|4||gigot|
 Cidre|bs|ml|750|2.99||||cidre brut|
 Pâte de praliné|ep|g|200|4.49|S||fc|praliné|
 Biscuits à la cuillère|ep|g|200|1.99|S||gl,oe|boudoirs|
+Graines de fenouil|ep|g|40|1.99|S||||
+Tortellini|fr|g|250|2.79|P|30|gl,oe,la|tortellini frais|
+Vinaigre balsamique|ep|ml|250|2.99|S|||balsamique,aceto balsamico|
+Bar|vi|g|500|11.99|P|2|po|loup de mer,bar entier|
+Pimientos de Padrón|fl|g|200|2.99|P|7||piments de padron|
+Biscuits Maria|ep|g|200|1.29|S||gl|galletas maria|
+Thon frais|vi|g|400|12.99|P|2|po|thon rouge,thon albacore|
 `;
