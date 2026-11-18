@@ -104,7 +104,7 @@ export const generateRecipes = onCall(ai, async (req) => {
       allergens: z.array(z.string()), avoid: z.array(z.string()), budgetPerPerson: z.number().nullable(),
       kidFriendly: z.boolean().optional(), stockOnly: z.boolean().optional(), cuisines: z.array(z.string()).max(9).optional(),
     }),
-    knownNames: z.array(z.string()).max(400), stockToUse: z.array(z.string()).max(30),
+    knownNames: z.array(z.string()).max(1500), stockToUse: z.array(z.string()).max(30),
   }), req.data);
   await requireMember(d.householdId, u);
   const items = await loadItems();
@@ -128,10 +128,14 @@ export const generateRecipes = onCall(ai, async (req) => {
 N'utilise AUCUN de ces plats déjà connus : ${d.knownNames.join(" ; ")}.`,
   });
   const known = new Set(d.knownNames.map(norm));
+  // Doublon : même nom, ou nom très proche d'un plat déjà connu (« Carbonades flamandes » / « Carbonnade flamande »).
+  const names = [...d.knownNames];
+  const isDuplicate = (name: string) => known.has(norm(name)) || names.some((k) => similarity(name, k) >= 0.75);
   const batch = db().batch();
   const out = [];
   for (const r of res.recipes) {
-    if (known.has(norm(r.name))) continue;
+    if (isDuplicate(r.name)) continue;
+    known.add(norm(r.name)); names.push(r.name);
     const ingredients = await resolveIngredients(r.ingredients, items);
     if (!ingredients.length) continue;
     const meat = await resolveIngredients(r.meat, items);

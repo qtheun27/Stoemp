@@ -222,6 +222,13 @@ describe("nombre de repas", () => {
     expect(w.slots.filter((s) => s.meal === "midi").length).toBe(3);
     expect(w.slots.filter((s) => s.meal === "soir").length).toBe(5);
   });
+  it("ne cuisine que les jours choisis (midi et soir)", () => {
+    const settings = { ...DEFAULT_SETTINGS, lunchDays: [5, 6], dinnerDays: [0, 2, 4], options: { ...DEFAULT_SETTINGS.options, seasonal: false } };
+    expect(mealCounts(settings)).toEqual({ lunches: 2, dinners: 3, total: 5 });
+    const w = planWeek(BASE_RECIPES, { idx: BASE_INDEX, settings, favorites: [], stock: new Map(), cost: ctxCost, now: new Date(2026, 10, 14), rand: Math.random });
+    expect(w.slots.filter((s) => s.meal === "midi").map((s) => s.day).sort()).toEqual([5, 6]);
+    expect(w.slots.filter((s) => s.meal === "soir").map((s) => s.day).sort()).toEqual([0, 2, 4]);
+  });
 });
 
 import { readFileSync } from "node:fs";

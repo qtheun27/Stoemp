@@ -91,7 +91,8 @@ async function aiRecipes(s: StoreState, n: number, extra: { stockOnly?: boolean 
       budgetPerPerson: o.budgetOn ? o.budget / Math.max(0.5, portionsOf(e)) / Math.max(1, mealCounts(s.settings).total) : null,
       kidFriendly: !!o.kidFriendly && e.kids > 0, stockOnly: !!extra.stockOnly, cuisines: o.cuisines || [],
     },
-    knownNames: cookable(s.recipes.values()).filter((r) => !r.deleted).map((r) => r.name).slice(0, 400),
+    // Tous les plats principaux déjà connus (base, bibliothèque, plats du foyer) : l'IA n'en propose pas de doublon.
+    knownNames: [...new Set(mains(s.recipes.values()).filter((r) => !r.deleted).map((r) => r.name))].slice(0, 1500),
     stockToUse: o.useStock || extra.stockOnly ? stockToUse(s, extra.stockOnly ? 30 : 12) : [],
   });
   return res.recipes;
