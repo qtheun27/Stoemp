@@ -1,0 +1,57 @@
+// Cuisine italienne, troisième série (plats).
+@italienne
+
+## plat
+# Pollo alla diavola e patate | 4 | 260 | E
++ Citron 2pc; Piment 2pc; Ail 0.2pc; Romarin 0.25pc; Huile d'olive 5cs; Pommes de terre 1000g; Salade verte 1pc
+= Poulet entier 1600g
+~ Halloumi 400g; Courgettes 400g
+v Halloumi et courgettes alla diavola
+- Ouvrir le poulet en crapaudine (couper le dos et l'aplatir) ; le frotter avec l'huile, le jus de citron, le piment écrasé, l'ail et le romarin ; laisser mariner au moins 2 h.
+- Le cuire sous un poids dans une grande poêle ou au barbecue, 20 minutes côté peau puis 15 minutes de l'autre côté.
+- Rôtir les pommes de terre en quartiers 40 minutes à 200 °C avec un peu d'huile et de romarin.
+- Servir avec la salade. Version végé : halloumi et courgettes marinés et grillés.
+
+# Spezzatino di manzo con patate | 4 | 150 | AH
++ Oignon 1pc; Carottes 150g; Céleri 100g; Vin rouge 200ml; Tomates concassées 300g; Romarin 0.25pc; Pommes de terre 700g; Bouillon de légumes 400ml
+= Bœuf à braiser 800g
+~ Pois chiches (boîte) 400g; Champignons de Paris 300g
+v Spezzatino de pois chiches et champignons
+- Faire dorer le bœuf en morceaux à l'huile d'olive et le réserver.
+- Faire revenir l'oignon, la carotte et le céleri hachés, remettre la viande et déglacer au vin rouge.
+- Ajouter les tomates, le romarin et le bouillon ; couvrir et cuire 1 h 30 à feu doux.
+- Ajouter les pommes de terre en gros morceaux et cuire encore 30 minutes. Version végé : champignons et pois chiches mijotés 40 minutes.
+
+# Pasta alla crudaiola | 4 | 20 | E
++ Pâtes courtes 400g; Tomates cerises 500g; Mozzarella 250g; Basilic 0.5pc; Ail 0.1pc; Huile d'olive 5cs; Olives noires 50g
+- Couper les tomates en quatre, les mélanger avec l'huile, l'ail écrasé, le basilic, les olives et du sel ; laisser mariner pendant la cuisson des pâtes.
+- Cuire les pâtes al dente et les égoutter.
+- Les mélanger encore chaudes avec les tomates crues et la mozzarella en dés.
+- Servir tiède : un plat d'été sans cuisson de sauce.
+
+# Farfalle aux petits pois et jambon | 4 | 25 | P
++ Pâtes courtes 400g; Petits pois 400g; Échalote 1pc; Crème liquide 150ml; Parmesan 50g; Beurre 20g
+= Dés de jambon 150g
+~ Ricotta 200g
+v Farfalle aux petits pois et ricotta
+- Faire fondre l'échalote dans le beurre, ajouter les petits pois et 100 ml d'eau ; cuire 8 minutes.
+- Ajouter le jambon et la crème, chauffer 2 minutes.
+- Cuire les farfalle al dente et les mélanger à la sauce avec un peu d'eau de cuisson.
+- Servir avec le parmesan. Version végé : ricotta à la place du jambon.
+
+# Gnocchi au gorgonzola | 4 | 20 | AH
++ Gnocchi 800g; Fromage bleu 150g; Crème liquide 150ml; Cerneaux de noix 40g; Roquette 60g
+- Faire fondre le fromage bleu (idéalement du gorgonzola) dans la crème à feu doux.
+- Cuire les gnocchi : ils sont prêts quand ils remontent à la surface.
+- Les égoutter et les mélanger à la sauce.
+- Servir parsemés de noix grillées, avec la roquette.
+
+# Saucisses aux brocolis à la napolitaine | 4 | 40 | AH
++ Brocoli 800g; Ail 0.2pc; Piment 1pc; Huile d'olive 4cs; Pain de campagne 0.5pc
+= Saucisse 4pc
+~ Haricots blancs (boîte) 400g; Provolone 150g
+v Brocolis aux haricots et provolone
+- Blanchir le brocoli en bouquets 4 minutes (idéalement des friarielli).
+- Dorer les saucisses à l'huile d'olive 15 minutes en les retournant.
+- Ajouter l'ail, le piment et le brocoli dans la poêle et sauter 8 minutes en écrasant légèrement.
+- Servir avec du pain de campagne. Version végé : haricots blancs et provolone en dés à la place des saucisses.

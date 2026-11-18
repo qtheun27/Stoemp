@@ -429,5 +429,5 @@ Oseille|fl|g|100|2.49|P|4|||4-9
 Estragon|fl|pc|1|1.49|P|7|||
 Pintade|vi|g|1300|11.99|P|3||pintade fermière|
 Abricots|fl|g|500|3.49|P|5||abricot|6-8
-Côtelettes de porc|vi|pc|4|5.99|LP|3||côtes de porc|
+Côtelettes de porc|vi|g|800|5.99|LP|3||côtes de porc|
 `;
