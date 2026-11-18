@@ -1,0 +1,222 @@
+// Troisième série de plats : orientale, asiatique, indienne, latino, américaine.
+
+@orientale
+## plat
+# Mercimek köftesi | 4 | 60 | T
++ Lentilles corail 200g; Boulgour 150g; Oignon 1pc; Concentré de tomate 2cs; Cumin 1cc; Paprika 1cc; Persil 1pc; Oignons nouveaux 4pc; Citron 1pc; Salade verte 1pc
+- Cuire les lentilles 15 minutes dans 600 ml d'eau salée jusqu'à ce qu'elles absorbent tout ; hors du feu, ajouter le boulgour fin, couvrir et laisser gonfler 20 minutes.
+- Faire fondre l'oignon haché à l'huile d'olive avec le concentré et les épices ; l'ajouter au mélange.
+- Pétrir avec le persil et les oignons nouveaux hachés et le jus de citron.
+- Former des petites galettes allongées en serrant dans la main ; servir dans des feuilles de salade avec du citron.
+
+# Pide au fromage et à l'œuf | 4 | 100 | T
++ Farine 400g; Levure de boulanger 7g; Yaourt nature 50g; Mozzarella 250g; Feta 150g; Oeufs 4pc; Beurre 30g; Persil 0.25pc
+- Pétrir la farine, la levure, le yaourt, une pincée de sel et de sucre avec 220 ml d'eau tiède ; laisser lever 1 heure.
+- Diviser en 4, étaler en longs ovales et garnir des fromages ; replier les bords et pincer les pointes pour former des barques.
+- Cuire 10 minutes à 240 °C, puis casser un œuf au centre de chaque pide et cuire encore 5 minutes.
+- Badigeonner de beurre fondu, parsemer de persil et servir aussitôt.
+
+# Hünkar beğendi | 4 | 120 | AH
++ Oignon 2pc; Tomates concassées 300g; Poivron 1pc; Aubergine 1000g; Béchamel 500ml; Parmesan 60g
+= Épaule d'agneau en morceaux 700g
+~ Pois chiches (boîte) 400g
+v Ragoût de pois chiches sur crème d'aubergine
+l
+- Faire dorer l'agneau, ajouter les oignons et le poivron, puis les tomates et 300 ml d'eau ; mijoter 1 h 15.
+- Griller les aubergines entières sur la flamme ou au four jusqu'à ce qu'elles soient fondantes ; récupérer la chair et la hacher.
+- Chauffer la béchamel, ajouter la chair d'aubergine et le fromage râpé, fouetter jusqu'à ce que ce soit crémeux.
+- Servir le ragoût sur la crème d'aubergine : c'est un plat complet. Version végé : pois chiches mijotés 30 minutes dans la sauce.
+
+# Dawood basha | 4 | 60 | T
++ Oignon 2pc; Tomates concassées 400g; Concentré de tomate 1cs; Cannelle 0.5cc; Pignons de pin 30g; Persil 0.5pc; Riz 300g; Vermicelles 40g; Beurre 20g
+= Haché de bœuf 500g
+~ Lentilles vertes 250g; Chapelure 40g
+v Dawood basha aux boulettes de lentilles
+- Mélanger la viande avec un oignon râpé, la cannelle, sel et poivre ; former des petites boulettes et les dorer.
+- Faire fondre l'autre oignon émincé, ajouter les tomates, le concentré et 200 ml d'eau ; ajouter les boulettes et mijoter 25 minutes.
+- Riz aux vermicelles : dorer les vermicelles dans le beurre, ajouter le riz et 450 ml d'eau salée ; cuire 15 minutes.
+- Servir parsemé de pignons grillés et de persil. Version végé : boulettes de lentilles cuites liées à la chapelure.
+
+# Maghmour | 4 | 70 | E
++ Aubergine 800g; Pois chiches (boîte) 400g; Oignon 2pc; Ail 0.3pc; Tomates concassées 400g; Menthe 0.25pc; Huile d'olive 6cs; Pain pita 4pc
+- Couper les aubergines en gros cubes, les badigeonner d'huile et les rôtir 25 minutes à 220 °C.
+- Faire fondre les oignons émincés avec l'ail, ajouter les tomates et les pois chiches ; cuire 10 minutes.
+- Ajouter les aubergines et mijoter 15 minutes à couvert.
+- Parsemer de menthe ; servir tiède ou froid avec du pain pita.
+
+@asiatique
+## plat
+# Poulet au citron à la cantonaise | 4 | 40 | T
++ Citron 2pc; Sucre 3cs; Sauce soja 1cs; Fécule de maïs 6cs; Oeufs 1pc; Huile de tournesol 800ml; Riz 300g; Oignons nouveaux 2pc
+= Filet de poulet 600g
+~ Tofu ferme 500g
+v Tofu au citron à la cantonaise
+- Couper le poulet en lanières, les tremper dans l'œuf battu puis dans 4 cuillères de fécule.
+- Les frire 4 minutes à 175 °C jusqu'à ce qu'elles soient dorées.
+- Sauce : chauffer le jus et le zeste des citrons, le sucre, la sauce soja et 100 ml d'eau ; épaissir avec le reste de fécule délayée.
+- Napper le poulet et servir avec le riz et l'oignon nouveau. Version végé : tofu pressé en cubes.
+
+# Poisson vapeur au gingembre | 4 | 30 | T
++ Gingembre 40g; Oignons nouveaux 4pc; Sauce soja 4cs; Sucre 1cc; Huile de tournesol 3cs; Coriandre 0.5pc; Riz 300g; Pak choï 400g
+= Dos de cabillaud 700g
+~ Tofu ferme 500g
+v Tofu vapeur au gingembre
+- Poser le poisson sur une assiette avec la moitié du gingembre en lamelles et le cuire 8 à 10 minutes à la vapeur.
+- Vider le jus rendu, couvrir de julienne de gingembre et d'oignon nouveau.
+- Verser la sauce soja chauffée avec le sucre et un peu d'eau, puis l'huile fumante qui grésille sur les aromates.
+- Servir avec le riz, la coriandre et le pak choï vapeur. Version végé : tranches de tofu soyeux ou ferme.
+
+# Nouilles dan dan | 4 | 30 | T
++ Nouilles chinoises 400g; Tahini 3cs; Sauce soja 4cs; Vinaigre de riz 1cs; Sucre 1cc; Poivre du Sichuan 1cc; Piment 2pc; Ail 0.2pc; Pak choï 300g; Cacahuètes 40g
+= Haché porc et bœuf 300g
+~ Champignons de Paris 300g
+v Dan dan aux champignons
+- Faire revenir le haché à feu vif jusqu'à ce qu'il soit croustillant, avec 1 cuillère de sauce soja.
+- Sauce : mélanger le tahini, le reste de sauce soja, le vinaigre, le sucre, l'ail râpé, le poivre du Sichuan moulu et l'huile pimentée (piments chauffés dans 3 cuillères d'huile).
+- Cuire les nouilles et le pak choï.
+- Mettre la sauce au fond des bols, ajouter les nouilles, le pak choï, la viande et les cacahuètes. Version végé : champignons hachés bien dorés.
+
+# Saumon au miso et riz | 4 | 270 | T
++ Pâte miso 60g; Mirin 3cs; Sucre 2cs; Sauce soja 1cs; Riz 300g; Pak choï 400g; Graines de sésame 1cs
+= Pavé de saumon 600g
+~ Aubergine 600g
+v Aubergine au miso (nasu dengaku)
+- Mélanger le miso, le mirin, le sucre et la sauce soja.
+- Enrober le saumon de ce mélange et le laisser mariner au moins 4 h (idéalement une nuit).
+- Essuyer l'excès de marinade et cuire 10 minutes sous le gril du four jusqu'à ce qu'il caramélise.
+- Servir avec le riz, le pak choï et le sésame. Version végé : demi-aubergines quadrillées, rôties 25 minutes puis laquées de miso sous le gril.
+
+# Gado-gado | 4 | 40 | T
++ Pommes de terre 400g; Haricots verts 200g; Chou blanc 200g; Germes de soja 150g; Concombre 1pc; Oeufs 4pc; Tofu ferme 300g; Beurre de cacahuète 150g; Lait de coco 150ml; Sauce soja 2cs; Citron vert 1pc; Ail 0.1pc; Piment 1pc; Sucre 1cs
+- Cuire les pommes de terre en morceaux, blanchir les haricots, le chou et les germes ; cuire les œufs durs.
+- Dorer le tofu en cubes à la poêle.
+- Sauce : chauffer le beurre de cacahuète avec le lait de coco, la sauce soja, le jus de citron vert, l'ail, le piment et le sucre jusqu'à ce qu'elle soit nappante.
+- Disposer les légumes, le concombre, le tofu et les œufs ; napper de sauce aux cacahuètes.
+
+# Gà kho gừng | 4 | 50 | T
++ Sucre 3cs; Nuoc-mâm 3cs; Gingembre 40g; Échalote 3pc; Ail 0.2pc; Poivre 1cc; Riz 300g; Oignons nouveaux 2pc
+= Cuisse de poulet 6pc
+~ Tofu ferme 500g; Oeufs 4pc
+v Tofu et œufs au caramel de gingembre
+- Désosser le poulet et le couper en morceaux.
+- Faire un caramel brun avec le sucre et 2 cuillères d'eau, ajouter le nuoc-mâm (attention aux projections), le gingembre en julienne, les échalotes et l'ail.
+- Ajouter le poulet, le poivre et 150 ml d'eau ; couvrir et cuire 25 minutes, puis réduire jusqu'à ce que la sauce soit sirupeuse.
+- Servir avec le riz et l'oignon nouveau. Version végé : tofu doré et œufs durs, sauce soja à la place du nuoc-mâm.
+
+@indienne
+## plat
+# Korma de poulet | 4 | 60 | T
++ Oignon 2pc; Yaourt nature 150g; Noix de cajou 60g; Crème liquide 100ml; Gingembre 15g; Ail 0.2pc; Garam masala 1cc; Cardamome 0.5cc; Cannelle 0.5cc; Ghee 30g; Riz basmati 300g
+= Cuisse de poulet 6pc
+~ Paneer 300g; Pois chiches (boîte) 300g
+v Korma de paneer et pois chiches
+- Faire tremper les noix de cajou 15 minutes dans de l'eau chaude puis les mixer en crème.
+- Faire fondre les oignons émincés dans le ghee sans les colorer, ajouter le gingembre, l'ail et les épices.
+- Ajouter le poulet en morceaux et le yaourt, puis 200 ml d'eau ; cuire 30 minutes à feu doux.
+- Ajouter la crème de cajou et la crème ; mijoter 5 minutes. Servir avec le riz. Version végé : paneer et pois chiches, 15 minutes.
+
+# Paneer bhurji et chapatis | 4 | 40 | T
++ Paneer 400g; Oignon 1pc; Tomates 200g; Poivron 1pc; Piment 1pc; Gingembre 10g; Curcuma 0.5cc; Garam masala 1cc; Coriandre 0.5pc; Farine complète 300g; Ghee 30g
+- Préparer la pâte à chapatis (farine complète, sel, environ 190 ml d'eau) et la laisser reposer 20 minutes.
+- Faire revenir l'oignon, le poivron, le piment et le gingembre dans le ghee, ajouter les tomates et les épices.
+- Ajouter le paneer émietté et cuire 5 minutes en remuant ; parsemer de coriandre.
+- Cuire les chapatis à la poêle et servir avec le bhurji.
+
+# Champignons aux petits pois (mushroom matar) | 4 | 35 | T
++ Champignons de Paris 500g; Petits pois 300g; Oignon 2pc; Tomates concassées 300g; Gingembre 10g; Ail 0.1pc; Garam masala 1cc; Curcuma 0.5cc; Crème liquide 50ml; Riz basmati 300g
+- Faire dorer les champignons en quartiers à feu vif, les réserver.
+- Faire revenir les oignons, le gingembre, l'ail et les épices, ajouter les tomates et cuire 10 minutes.
+- Ajouter les champignons, les petits pois et 100 ml d'eau ; cuire 8 minutes.
+- Finir avec la crème et servir avec le riz.
+
+@latino
+## plat
+# Seco de pollo | 4 | 70 | T
++ Coriandre 2pc; Oignon 1pc; Ail 0.2pc; Piment 1pc; Bière blonde 200ml; Petits pois 200g; Carottes 150g; Pommes de terre 400g; Riz 300g
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 400g
+v Seco de pois chiches
+- Mixer la coriandre avec un peu d'eau en purée verte.
+- Faire dorer le poulet, ajouter l'oignon, l'ail et le piment, puis la purée de coriandre et la bière.
+- Ajouter les carottes et les pommes de terre ; cuire 35 minutes à couvert, puis les petits pois 5 minutes.
+- Servir avec le riz. Version végé : pois chiches mijotés 20 minutes.
+
+# Enfrijoladas | 4 | 30 | T
++ Haricots noirs (boîte) 800g; Oignon 1pc; Ail 0.1pc; Cumin 0.5cc; Piment 1pc; Tortillas 12pc; Feta 100g; Crème fraîche 100ml; Oeufs 4pc
+- Mixer les haricots avec leur jus, la moitié de l'oignon, l'ail, le cumin, le piment et un peu d'eau en sauce lisse ; la chauffer 5 minutes.
+- Réchauffer les tortillas, les tremper dans la sauce et les plier en quatre.
+- Les dresser nappées du reste de sauce, avec la feta émiettée, la crème et l'oignon émincé.
+- Servir avec un œuf au plat.
+
+# Pastel de choclo | 6 | 90 | EA
++ Maïs (boîte) 800g; Lait 200ml; Beurre 50g; Basilic 0.5pc; Oignon 2pc; Cumin 1cc; Paprika 1cc; Raisins secs 40g; Olives noires 50g; Oeufs 3pc; Sucre 2cs
+= Haché de bœuf 500g; Filet de poulet 300g
+~ Lentilles vertes 250g; Champignons de Paris 300g
+v Pastel de choclo aux lentilles et champignons
+- Mixer le maïs avec le lait et le basilic, puis le cuire avec le beurre en remuant 10 minutes jusqu'à ce qu'il épaississe.
+- Pino : faire revenir les oignons avec le bœuf, le cumin et le paprika ; pocher le poulet et l'effilocher.
+- Dans un plat, étaler le pino, le poulet, les raisins, les olives et les œufs durs en quartiers.
+- Couvrir de purée de maïs, saupoudrer de sucre et gratiner 30 minutes à 200 °C. Version végé : lentilles et champignons à la place des viandes.
+
+# Escondidinho | 4 | 60 | T
++ Pommes de terre 1000g; Lait 200ml; Beurre 50g; Oignon 1pc; Tomates 200g; Ail 0.1pc; Mozzarella 150g; Parmesan 40g
+= Bœuf à braiser 500g
+~ Haricots noirs (boîte) 400g; Champignons de Paris 200g
+v Escondidinho aux haricots noirs
+- Cuire le bœuf 1 heure en morceaux dans de l'eau salée (ou utiliser un reste de bœuf braisé), puis l'effilocher.
+- Le faire revenir avec l'oignon, l'ail et les tomates.
+- Préparer une purée crémeuse avec les pommes de terre (idéalement du manioc), le lait et le beurre.
+- Étaler la viande dans un plat, la cacher sous la purée, couvrir des fromages et gratiner 20 minutes à 200 °C.
+- Version végé : haricots noirs et champignons.
+
+@americaine
+## plat
+# Pot roast | 6 | 240 | AH
++ Oignon 2pc; Carottes 500g; Pommes de terre 1000g; Céleri 150g; Bouillon de bœuf 500ml; Concentré de tomate 1cs; Thym 0.25pc; Feuille de laurier 0.4g; Farine 2cs
+= Bœuf à braiser 1200g
+~ Champignons de Paris 600g; Haricots blancs (boîte) 400g
+v Cocotte de champignons et haricots
+- Fariner la pièce de bœuf et la saisir de tous côtés dans une cocotte.
+- Ajouter le concentré, le bouillon, le thym et le laurier ; couvrir et cuire 2 h 30 à 160 °C.
+- Ajouter les carottes, les pommes de terre et le céleri en gros morceaux ; cuire encore 1 heure.
+- Servir la viande tranchée avec les légumes et le jus. Version végé : champignons et haricots cuits 1 heure avec les légumes.
+
+# Chicken parmesan et spaghetti | 4 | 50 | T
++ Farine 50g; Oeufs 2pc; Chapelure 120g; Parmesan 80g; Sauce tomate 500ml; Mozzarella 250g; Spaghetti 400g; Basilic 0.25pc
+= Filet de poulet 600g
+~ Aubergine 600g
+v Aubergine parmesan et spaghetti
+- Aplatir les filets, les fariner, les passer dans l'œuf puis la chapelure mêlée de la moitié du parmesan.
+- Les dorer à l'huile 3 minutes par face.
+- Les poser dans un plat, napper d'un peu de sauce tomate, couvrir de mozzarella et du reste de parmesan ; gratiner 15 minutes à 200 °C.
+- Servir avec les spaghetti au reste de sauce tomate et au basilic. Version végé : tranches d'aubergine panées.
+
+# Salisbury steak et purée | 4 | 45 | T
++ Oignon 2pc; Chapelure 40g; Oeufs 1pc; Champignons de Paris 250g; Bouillon de bœuf 400ml; Farine 2cs; Moutarde 1cs; Pommes de terre 1000g; Lait 200ml; Beurre 50g; Petits pois 300g
+= Haché de bœuf 600g
+~ Lentilles vertes 250g
+v Galettes de lentilles sauce champignons et purée
+- Mélanger le haché avec un oignon râpé, la chapelure, l'œuf, sel et poivre ; former 4 galettes ovales et les dorer.
+- Dans la poêle, faire revenir l'autre oignon émincé et les champignons, saupoudrer de farine, verser le bouillon et la moutarde.
+- Remettre les galettes et mijoter 15 minutes dans la sauce.
+- Servir avec la purée et les petits pois. Version végé : galettes de lentilles cuites, chapelure et œuf, et bouillon de légumes.
+
+# Chicken à la king | 4 | 40 | T
++ Champignons de Paris 250g; Poivron 1pc; Beurre 40g; Farine 40g; Lait 400ml; Crème liquide 100ml; Bouillon de volaille 200ml; Petits pois 150g; Riz 300g
+= Filet de poulet 500g
+~ Oeufs 6pc
+v Œufs à la king
+- Pocher le poulet 15 minutes dans le bouillon et le couper en dés.
+- Faire revenir les champignons et le poivron dans le beurre, ajouter la farine, puis le lait, la crème et le bouillon.
+- Ajouter le poulet et les petits pois ; mijoter 5 minutes.
+- Servir sur le riz (ou dans des vol-au-vent). Version végé : œufs durs en quartiers.
+
+# Blackened salmon et riz | 4 | 25 | T
++ Paprika 2cc; Cumin 0.5cc; Origan 1cc; Thym 0.1pc; Ail 0.1pc; Piment 0.5pc; Beurre 30g; Riz 300g; Maïs (boîte) 300g; Citron 1pc
+= Pavé de saumon 600g
+~ Halloumi 400g
+v Blackened halloumi et riz
+- Mélanger les épices, le thym et l'ail écrasé avec du sel et en enrober le saumon.
+- Le cuire dans le beurre fumant d'une poêle en fonte 3 minutes par face : la croûte d'épices doit noircir.
+- Faire sauter le maïs avec un peu de beurre.
+- Servir avec le riz et le citron. Version végé : tranches d'halloumi épicées de la même façon.
