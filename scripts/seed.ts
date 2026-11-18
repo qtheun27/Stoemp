@@ -29,7 +29,12 @@ async function main() {
     if (!recipes.has(id)) newRecipes++;
     if (++n >= 400) await flush();
   }
+  // Recettes de base retirées ou renommées : leur ancienne fiche disparaît (les recettes de la bibliothèque « lib- » ne sont pas concernées).
+  const current = new Set(BASE_RECIPES.map((r) => r.id));
+  let removed = 0;
+  for (const id of recipes) if (id.startsWith("base-") && !current.has(id)) { b.delete(db.collection("recipes").doc(id)); removed++; if (++n >= 400) await flush(); }
   await flush();
+  if (removed) console.log(`${removed} anciennes recettes de base retirées.`);
   console.log(`${newItems} nouveaux articles (${BASE_ITEMS.length} au total), ${newRecipes} nouvelles recettes (${BASE_RECIPES.length} au total).`);
 }
 main().catch((e) => { console.error(e); process.exit(1); });
