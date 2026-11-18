@@ -1,0 +1,217 @@
+// Cuisine mexicaine et latino-américaine : recettes écrites à la main (format : voir format.ts).
+@latino
+
+## aperitif
+# Guacamole | 4 | 15 | T
++ Avocat 3pc; Citron vert 1pc; Oignon rouge 0.5pc; Tomates 150g; Coriandre 0.5pc; Piment 0.5pc; Tortillas 6pc
+- Écraser la chair des avocats à la fourchette avec le jus de citron vert, en gardant des morceaux.
+- Ajouter l'oignon, la tomate épépinée, le piment et la coriandre hachés ; saler.
+- Couper les tortillas en triangles, les badigeonner d'huile et les cuire 8 minutes à 200 °C pour en faire des chips.
+- Servir aussitôt (ou couvrir au contact pour éviter qu'il noircisse).
+
+# Pico de gallo | 4 | 15 | E
++ Tomates 500g; Oignon rouge 1pc; Piment 1pc; Coriandre 0.5pc; Citron vert 1pc
+- Couper les tomates épépinées et l'oignon en petits dés réguliers.
+- Ajouter le piment et la coriandre hachés, le jus de citron vert et du sel.
+- Laisser reposer 10 minutes et servir avec des chips de tortilla ou des tacos.
+
+# Pão de queijo | 6 | 45 | T
++ Fécule de manioc 250g; Lait 125ml; Huile de tournesol 60ml; Oeufs 1pc; Parmesan 60g; Gruyère râpé 60g
+- Porter le lait, l'huile et une pincée de sel à ébullition et verser sur la fécule en mélangeant : la pâte est collante.
+- Laisser tiédir, puis ajouter l'œuf et les fromages et pétrir jusqu'à obtenir une pâte lisse.
+- Former des boules de 3 cm avec les mains huilées.
+- Cuire 20 minutes à 190 °C jusqu'à ce qu'elles soient gonflées et dorées ; servir tièdes.
+
+# Tostones | 4 | 25 | T
++ Bananes plantains 2pc; Huile de tournesol 500ml; Ail 0.1pc
+- Éplucher les plantains verts et les couper en tronçons de 3 cm.
+- Les frire 4 minutes à 160 °C, puis les écraser avec le fond d'un verre en galettes.
+- Les refrire 2 minutes à 180 °C jusqu'à ce qu'elles soient croustillantes.
+- Saler et servir avec un mojo d'ail (ail écrasé, citron vert et huile) ou du guacamole.
+
+# Queso fundido | 4 | 20 | T
++ Mozzarella 250g; Cheddar 150g; Oignon 0.5pc; Piment 1pc; Tortillas 8pc
+= Chorizo 100g
+~ Champignons de Paris 150g
+v Queso fundido aux champignons
+- Faire revenir le chorizo en dés avec l'oignon et le piment.
+- Mettre dans un plat allant au four, couvrir des fromages râpés.
+- Cuire 10 minutes à 200 °C jusqu'à ce que le fromage soit fondu et bouillonnant.
+- Servir aussitôt avec les tortillas chaudes pour faire des petits tacos. Version végé : champignons poêlés à la place du chorizo.
+
+## entree
+# Esquites | 4 | 20 | E
++ Maïs (boîte) 600g; Beurre 20g; Mayonnaise 3cs; Feta 60g; Citron vert 1pc; Paprika 0.5cc; Coriandre 0.25pc
+- Faire sauter le maïs égoutté dans le beurre à feu vif 5 minutes pour qu'il colore légèrement.
+- Hors du feu, mélanger avec la mayonnaise, le jus de citron vert et le piment ou paprika.
+- Servir en gobelets, parsemé de feta émiettée et de coriandre.
+
+# Causa limeña | 4 | 60 | EA
++ Pommes de terre 1000g; Citron vert 2pc; Piment 1pc; Avocat 2pc; Mayonnaise 4cs; Oeufs 2pc; Olives noires 30g
+= Thon (boîte) 200g
+~ Oeufs 2pc
+v Causa limeña à l'œuf
+- Cuire les pommes de terre farineuses, les écraser en purée lisse avec le jus de citron vert, le piment mixé, 4 cuillères d'huile et du sel ; laisser refroidir.
+- Mélanger le thon avec la mayonnaise.
+- Dans un cercle, alterner une couche de purée, l'avocat en lamelles, le thon, puis une dernière couche de purée.
+- Démouler et décorer d'œufs durs et d'olives ; servir froid. Version végé : œufs durs écrasés à la mayonnaise à la place du thon.
+
+## soupe
+# Sopa de frijoles negros | 4 | 40 | AH
++ Haricots noirs (boîte) 800g; Oignon 1pc; Ail 0.2pc; Cumin 1cc; Tomates 200g; Bouillon de légumes 1000ml; Feta 60g; Crème fraîche 80ml; Avocat 1pc; Tortillas 4pc; Coriandre 0.25pc
+- Faire revenir l'oignon, l'ail et le cumin, ajouter les tomates et cuire 5 minutes.
+- Ajouter les haricots égouttés et le bouillon ; cuire 20 minutes et mixer en partie.
+- Couper les tortillas en lanières et les faire dorer à la poêle.
+- Servir avec la crème, la feta, l'avocat, les lanières de tortilla et la coriandre.
+
+# Crema de elote | 4 | 35 | E
++ Maïs (boîte) 700g; Oignon 1pc; Beurre 30g; Lait 500ml; Bouillon de légumes 500ml; Poivron 1pc; Crème liquide 100ml
+- Faire fondre l'oignon dans le beurre, ajouter le maïs (en garder un peu pour le décor) et le poivron en dés.
+- Verser le lait et le bouillon et cuire 15 minutes.
+- Mixer finement et passer au tamis, ajouter la crème.
+- Servir avec les grains de maïs réservés poêlés.
+
+## accompagnement
+# Arroz rojo | 4 | 35 | T
++ Riz 300g; Tomates 300g; Oignon 0.5pc; Ail 0.1pc; Bouillon de légumes 600ml; Petits pois 80g; Carottes 80g
+- Mixer les tomates avec l'oignon et l'ail.
+- Faire dorer le riz dans un peu d'huile en remuant jusqu'à ce qu'il soit blond.
+- Ajouter la purée de tomates et cuire 2 minutes, puis le bouillon chaud, les carottes en dés et les petits pois.
+- Couvrir et cuire 18 minutes à feu doux ; laisser reposer 5 minutes.
+
+# Frijoles refritos | 4 | 20 | T
++ Haricots noirs (boîte) 800g; Oignon 1pc; Ail 0.1pc; Cumin 0.5cc; Feta 50g
+- Faire revenir l'oignon haché dans 3 cuillères d'huile jusqu'à ce qu'il soit doré, ajouter l'ail et le cumin.
+- Ajouter les haricots avec un peu de leur jus et les écraser au presse-purée en cuisant 10 minutes.
+- La purée doit être épaisse et crémeuse ; servir parsemée de feta.
+
+# Elote asado | 4 | 25 | E
++ Épis de maïs 4pc; Mayonnaise 3cs; Feta 60g; Paprika 1cc; Citron vert 1pc
+- Griller les épis 10 à 15 minutes au barbecue ou à la poêle-gril en les retournant, jusqu'à ce qu'ils soient tachés de brun.
+- Les badigeonner de mayonnaise.
+- Les rouler dans la feta émiettée, saupoudrer de paprika (ou de piment) et servir avec le citron vert.
+
+# Plátanos maduros | 4 | 20 | T
++ Bananes plantains 3pc; Huile de tournesol 6cs
+- Choisir des plantains bien mûrs (peau presque noire) et les couper en biais en tranches de 1 cm.
+- Les faire dorer à feu moyen 3 minutes par face : ils caramélisent.
+- Égoutter et saler légèrement ; servir avec le riz et les haricots.
+
+## dessert
+# Tres leches | 10 | 300 | T
++ Farine 150g; Oeufs 5pc; Sucre 200g; Levure chimique 5g; Lait 120ml; Lait concentré sucré 397g; Lait évaporé 410ml; Crème liquide 400ml; Sucre vanillé 8g; Cannelle 0.5cc
+- Fouetter les jaunes avec 150 g de sucre, ajouter 60 ml de lait, la farine et la levure ; incorporer les blancs montés en neige.
+- Cuire 25 minutes à 175 °C dans un moule rectangulaire beurré ; laisser tiédir et piquer partout à la fourchette.
+- Mélanger le lait concentré, le lait évaporé, 200 ml de crème et le reste du lait ; verser lentement sur le gâteau.
+- Laisser imbiber au frigo au moins 4 h.
+- Couvrir du reste de crème fouettée avec le sucre restant et le sucre vanillé ; saupoudrer de cannelle.
+
+# Brigadeiros | 20 | 140 | T
++ Lait concentré sucré 397g; Cacao en poudre 20g; Beurre 15g; Vermicelles en chocolat 80g
+- Cuire le lait concentré, le cacao et le beurre à feu doux en remuant sans arrêt 10 à 12 minutes, jusqu'à ce que la pâte se détache du fond.
+- Verser dans une assiette beurrée et laisser refroidir au frigo 2 h.
+- Former des petites boules avec les mains beurrées et les rouler dans les vermicelles.
+- Servir dans des caissettes en papier.
+
+## patisserie
+# Alfajores | 15 | 90 | T
++ Fécule de maïs 300g; Farine 200g; Beurre 200g; Sucre glace 150g; Oeufs 3pc; Levure chimique 8g; Citron 0.5pc; Dulce de leche 400g; Noix de coco râpée 50g
+- Fouetter le beurre mou avec le sucre glace, ajouter 3 jaunes et le zeste de citron.
+- Ajouter la fécule, la farine et la levure ; former une boule et la reposer 30 minutes au frais.
+- Étaler sur 5 mm, découper des disques de 5 cm et les cuire 10 minutes à 170 °C : ils doivent rester pâles.
+- Une fois froids, les assembler deux par deux avec le dulce de leche et rouler les bords dans la noix de coco.
+
+# Conchas | 10 | 210 | T
++ Farine 600g; Levure de boulanger 10g; Lait 200ml; Oeufs 2pc; Sucre 100g; Beurre 160g; Sucre glace 100g; Cacao en poudre 10g
+- Pâte : délayer la levure dans le lait tiède ; pétrir 500 g de farine, le sucre, les œufs, une pincée de sel et 80 g de beurre mou 10 minutes ; laisser lever 1 h 30.
+- Croûte : mélanger le reste de farine, le sucre glace et le reste de beurre ; parfumer la moitié au cacao.
+- Former 10 boules, les poser sur une plaque et les couvrir d'un disque de croûte aplatie ; dessiner des sillons en coquillage au couteau.
+- Laisser lever 45 minutes et cuire 18 minutes à 180 °C.
+
+# Bolo de cenoura | 10 | 60 | T
++ Carottes 300g; Oeufs 3pc; Huile de tournesol 200ml; Sucre 400g; Farine 250g; Levure chimique 15g; Cacao en poudre 30g; Beurre 20g; Lait 60ml
+- Mixer les carottes crues en morceaux avec les œufs, l'huile et 300 g de sucre jusqu'à ce que ce soit très lisse.
+- Ajouter la farine et la levure, verser dans un moule beurré et cuire 40 minutes à 180 °C.
+- Glaçage : cuire le cacao, le reste du sucre, le beurre et le lait en remuant jusqu'à ce qu'il épaississe légèrement.
+- Verser le glaçage chaud sur le gâteau encore tiède.
+
+## petitdej
+# Gallo pinto | 4 | 20 | T
++ Riz 300g; Haricots noirs (boîte) 400g; Oignon 1pc; Poivron 1pc; Coriandre 0.5pc; Cumin 0.5cc; Oeufs 4pc
+- Cuire le riz la veille (ou utiliser un reste de riz froid).
+- Faire revenir l'oignon et le poivron en petits dés, ajouter les haricots avec un peu de leur jus et le cumin.
+- Ajouter le riz et sauter à feu vif jusqu'à ce qu'il prenne la couleur des haricots ; ajouter la coriandre.
+- Servir avec des œufs au plat.
+
+# Arepas au fromage et avocat | 4 | 30 | T
++ Farine de maïs précuite 300g; Beurre 20g; Mozzarella 150g; Avocat 2pc
+- Mélanger la farine avec 400 ml d'eau tiède, une pincée de sel et le beurre fondu ; pétrir 2 minutes et laisser reposer 5 minutes.
+- Former 8 galettes de 1,5 cm d'épaisseur.
+- Les cuire 5 minutes par face à la poêle, puis 10 minutes au four à 180 °C : elles sonnent creux quand on les tapote.
+- Les ouvrir et les garnir de fromage et d'avocat.
+
+# Molletes | 4 | 20 | T
++ Pistolets 4pc; Haricots noirs (boîte) 400g; Gruyère râpé 120g; Tomates 200g; Oignon rouge 0.5pc; Coriandre 0.25pc; Piment 0.5pc
+- Écraser les haricots chauds en purée épaisse.
+- Couper les pistolets en deux, les tartiner de purée de haricots et les couvrir de fromage.
+- Passer 8 minutes au four à 200 °C jusqu'à ce que le fromage fonde.
+- Servir avec un pico de gallo : tomate, oignon, piment et coriandre hachés.
+
+# Huevos a la mexicana | 4 | 15 | T
++ Oeufs 8pc; Tomates 200g; Oignon 0.5pc; Piment 1pc; Tortillas 8pc
+- Faire revenir l'oignon, le piment et la tomate hachés 3 minutes dans un peu d'huile.
+- Ajouter les œufs battus salés et brouiller doucement jusqu'à ce qu'ils soient juste pris.
+- Servir avec les tortillas chaudes.
+
+## plat
+# Ají de gallina | 4 | 70 | AH
++ Pain de mie 4pc; Lait 300ml; Oignon 2pc; Ail 0.2pc; Piment 2pc; Curcuma 0.5cc; Cerneaux de noix 50g; Parmesan 40g; Bouillon de volaille 500ml; Pommes de terre 600g; Riz 300g; Oeufs 2pc; Olives noires 30g
+= Filet de poulet 600g
+~ Champignons de Paris 500g
+v Ají de champignons
+- Pocher le poulet 20 minutes dans le bouillon, puis l'effilocher ; garder le bouillon.
+- Faire tremper le pain dans le lait et le mixer avec les noix.
+- Faire revenir l'oignon, l'ail et le piment mixé avec le curcuma, ajouter le pain mixé et un peu de bouillon ; cuire 10 minutes en remuant.
+- Ajouter le poulet et le parmesan, cuire 5 minutes : la sauce doit être crémeuse.
+- Servir avec le riz, les pommes de terre cuites en rondelles, les œufs durs et les olives. Version végé : champignons poêlés à la place du poulet.
+
+# Pabellón criollo | 4 | 150 | T
++ Haricots noirs (boîte) 800g; Riz 300g; Bananes plantains 2pc; Oignon 2pc; Poivron 1pc; Ail 0.2pc; Tomates 300g; Cumin 1cc
+= Bœuf à braiser 700g
+~ Oeufs 4pc
+v Pabellón à l'œuf au plat
+- Cuire le bœuf 1 h 30 dans de l'eau salée avec un oignon, puis l'effilocher.
+- Le faire revenir avec l'autre oignon, le poivron, l'ail, les tomates et le cumin ; mouiller d'un peu de bouillon et cuire 20 minutes.
+- Réchauffer les haricots avec un peu de cumin, cuire le riz et frire les plantains mûrs en tranches.
+- Servir le tout côte à côte dans l'assiette. Version végé : un œuf au plat à la place de la viande (« a caballo »).
+
+# Moqueca de poisson | 4 | 45 | T
++ Lait de coco 400ml; Tomates 400g; Poivron 2pc; Oignon 2pc; Ail 0.2pc; Citron vert 2pc; Coriandre 0.5pc; Paprika 1cc; Riz 300g
+= Dos de cabillaud 800g
+~ Bananes plantains 3pc
+v Moqueca de banane plantain
+- Faire mariner le poisson en gros morceaux 20 minutes avec le jus de citron vert, l'ail et du sel.
+- Dans une cocotte, alterner des rondelles d'oignon, de tomate et de poivron, poser le poisson dessus.
+- Verser le lait de coco mélangé au paprika et à 2 cuillères d'huile d'olive ; couvrir et cuire 15 minutes à feu moyen sans remuer.
+- Parsemer de coriandre et servir avec le riz. Version végé : plantains mûrs en tranches à la place du poisson.
+
+# Cochinita pibil | 6 | 1000 | T
++ Pâte d'achiote 100g; Oranges 400g; Citron vert 2pc; Ail 0.2pc; Cumin 1cc; Origan 1cc; Oignon rouge 2pc; Vinaigre 100ml; Tortillas 12pc
+= Rôti de porc 1200g
+~ Tofu ferme 600g
+v Pibil de tofu
+- Délayer l'achiote dans le jus des oranges et d'un citron vert avec l'ail, le cumin et l'origan.
+- Couper le porc en gros morceaux et le faire mariner une nuit (12 h) dans ce mélange.
+- Cuire à couvert (idéalement enveloppé de feuilles de bananier ou d'aluminium) 4 h à 150 °C, puis effilocher dans le jus.
+- Faire mariner les oignons émincés dans le vinaigre, le jus de l'autre citron vert et du sel au moins 30 minutes.
+- Servir dans les tortillas chaudes avec les oignons. Version végé : tofu émietté mariné 2 h et cuit 30 minutes dans la sauce.
+
+# Bavette sauce chimichurri et pommes de terre | 4 | 50 | EA
++ Pommes de terre 1000g; Persil 1pc; Origan 1cc; Ail 0.3pc; Piment 1pc; Vinaigre 3cs; Huile d'olive 120ml; Salade verte 1pc
+= Bavette de bœuf 800g
+~ Provolone 400g
+v Provoleta sauce chimichurri et pommes de terre
+- Chimichurri : hacher finement le persil, l'ail et le piment, ajouter l'origan, le vinaigre, l'huile et du sel ; laisser reposer au moins 20 minutes.
+- Cuire les pommes de terre en quartiers 35 minutes à 200 °C avec un filet d'huile.
+- Griller la bavette à feu très vif 3 à 4 minutes par face, la laisser reposer 5 minutes et la trancher contre le fil.
+- Servir avec le chimichurri, les pommes de terre et la salade. Version végé : provolone en tranche épaisse grillé jusqu'à ce qu'il fonde (provoleta).

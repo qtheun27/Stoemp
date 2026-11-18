@@ -1,0 +1,277 @@
+// Cuisine américaine et anglo-saxonne : recettes écrites à la main (format : voir format.ts).
+@americaine
+
+## aperitif
+# Buffalo wings | 4 | 60 | T
++ Farine 30g; Sauce piquante 100ml; Beurre 60g; Fromage bleu 80g; Crème fraîche 100ml; Céleri 150g
+= Ailes de poulet 1000g
+~ Chou-fleur 800g; Farine 60g
+v Chou-fleur façon buffalo
+- Sécher les ailes, les saler et les rouler dans la farine.
+- Les cuire 45 minutes à 220 °C sur une grille en les retournant, jusqu'à ce qu'elles soient très croustillantes.
+- Faire fondre le beurre avec la sauce piquante et y rouler les ailes chaudes.
+- Servir avec une sauce au bleu (fromage écrasé dans la crème) et des bâtonnets de céleri.
+- Version végé : bouquets de chou-fleur enrobés d'une pâte farine-eau, rôtis 25 minutes puis nappés de sauce.
+
+# Onion rings | 4 | 30 | T
++ Oignon 3pc; Farine 120g; Babeurre 250ml; Chapelure 120g; Paprika 1cc; Huile de tournesol 1000ml
+- Couper les oignons en rondelles de 1 cm et séparer les anneaux.
+- Les passer dans la farine, puis dans le babeurre assaisonné de paprika et de sel, puis dans la chapelure.
+- Frire 2 à 3 minutes à 180 °C jusqu'à ce qu'ils soient dorés.
+- Égoutter, saler et servir avec du ketchup.
+
+# Potato skins | 4 | 90 | AH
++ Pommes de terre 1200g; Cheddar 150g; Crème fraîche 100ml; Ciboulette 0.5pc
+= Bacon 120g
+~ Maïs (boîte) 150g
+v Potato skins au cheddar et maïs
+- Cuire les pommes de terre entières 50 minutes à 200 °C.
+- Les couper en deux, retirer la chair en laissant 5 mm contre la peau ; badigeonner d'huile et remettre 10 minutes au four.
+- Faire griller le bacon et l'émietter.
+- Garnir de cheddar râpé et de bacon, gratiner 5 minutes.
+- Servir avec la crème et la ciboulette. Version végé : maïs à la place du bacon.
+
+## entree
+# Wedge salad | 4 | 20 | E
++ Salade iceberg 1pc; Fromage bleu 100g; Crème fraîche 80ml; Mayonnaise 3cs; Tomates cerises 150g; Ciboulette 0.25pc
+= Bacon 100g
+~ Cerneaux de noix 40g
+v Wedge salad aux noix
+- Écraser le fromage bleu avec la crème et la mayonnaise, poivrer.
+- Faire griller le bacon et l'émietter.
+- Couper l'iceberg en quatre quartiers et les poser sur les assiettes.
+- Napper de sauce au bleu, parsemer de bacon, de tomates coupées et de ciboulette. Version végé : noix grillées à la place du bacon.
+
+# Salade Waldorf | 4 | 15 | AH
++ Pommes 400g; Céleri 200g; Cerneaux de noix 60g; Raisin 150g; Mayonnaise 4cs; Yaourt nature 60g; Citron 0.5pc; Salade verte 0.5pc
+- Couper les pommes en dés et les arroser de jus de citron.
+- Émincer le céleri et couper les raisins en deux.
+- Mélanger avec la mayonnaise et le yaourt, ajouter les noix grossièrement concassées.
+- Servir sur des feuilles de salade.
+
+# Shrimp cocktail | 4 | 20 | T
++ Ketchup 4cs; Raifort 1cs; Citron 1pc; Sauce piquante 1cc; Salade verte 0.5pc
+= Scampis 400g
+~ Avocat 2pc
+v Cocktail d'avocat
+- Cuire les scampis décortiqués 2 minutes à l'eau bouillante salée, puis les plonger dans l'eau glacée.
+- Préparer la sauce cocktail : ketchup, raifort, jus d'un demi-citron et sauce piquante.
+- Servir les scampis bien froids accrochés au bord de verres garnis de salade, avec la sauce et un quartier de citron.
+- Version végé : dés d'avocat citronnés avec la même sauce.
+
+## soupe
+# Corn chowder | 4 | 45 | EA
++ Maïs (boîte) 600g; Pommes de terre 400g; Oignon 1pc; Céleri 100g; Beurre 30g; Farine 2cs; Lait 500ml; Bouillon de légumes 500ml; Crème liquide 100ml
+= Bacon 100g
+~ Poivron 1pc
+v Corn chowder au poivron
+- Faire rissoler le bacon en dés, puis faire fondre l'oignon et le céleri dans le beurre.
+- Ajouter la farine, puis le lait et le bouillon en remuant.
+- Ajouter les pommes de terre en dés et cuire 15 minutes, puis le maïs et cuire 5 minutes.
+- Mixer un tiers de la soupe pour l'épaissir, ajouter la crème. Version végé : poivron en dés à la place du bacon.
+
+# Chicken noodle soup | 4 | 60 | AH
++ Carottes 200g; Céleri 150g; Oignon 1pc; Thym 0.25pc; Feuille de laurier 0.2g; Tagliatelles 150g; Persil 0.25pc
+= Cuisse de poulet 3pc; Bouillon de volaille 1500ml
+~ Pois chiches (boîte) 300g; Bouillon de légumes 1500ml
+v Noodle soup aux pois chiches
+- Cuire les cuisses 30 minutes dans le bouillon avec le thym et le laurier ; les retirer et les effilocher.
+- Ajouter dans le bouillon les carottes, le céleri et l'oignon en dés ; cuire 10 minutes.
+- Ajouter les tagliatelles cassées et cuire 8 minutes.
+- Remettre le poulet, parsemer de persil. Version végé : bouillon de légumes et pois chiches.
+
+# Broccoli cheddar soup | 4 | 40 | AH
++ Brocoli 500g; Cheddar 200g; Oignon 1pc; Carottes 100g; Beurre 40g; Farine 40g; Lait 500ml; Bouillon de légumes 500ml; Muscade 0.25cc
+- Faire fondre l'oignon dans le beurre, ajouter la farine, puis le lait et le bouillon en fouettant.
+- Ajouter le brocoli en petits bouquets et la carotte râpée ; cuire 20 minutes.
+- Mixer une partie, puis ajouter le cheddar râpé hors du feu jusqu'à ce qu'il fonde.
+- Assaisonner de muscade et servir.
+
+## accompagnement
+# Coleslaw | 6 | 20 | T
++ Chou blanc 500g; Carottes 150g; Mayonnaise 6cs; Vinaigre 1cs; Sucre 1cc; Moutarde 1cc
+- Émincer très finement le chou et râper les carottes.
+- Mélanger la mayonnaise, le vinaigre, le sucre et la moutarde ; saler et poivrer.
+- Enrober les légumes et laisser reposer 15 minutes au frais.
+
+# Cornbread | 8 | 35 | T
++ Polenta 200g; Farine 125g; Sucre 50g; Levure chimique 10g; Oeufs 2pc; Babeurre 250ml; Beurre 80g
+- Mélanger la polenta, la farine, le sucre, la levure et une pincée de sel.
+- Ajouter les œufs, le babeurre et le beurre fondu sans trop mélanger.
+- Verser dans un moule carré beurré (idéalement une poêle en fonte chaude).
+- Cuire 20 minutes à 200 °C ; servir tiède avec du beurre.
+
+# Baked beans | 6 | 120 | AH
++ Haricots blancs (boîte) 800g; Oignon 1pc; Concentré de tomate 2cs; Cassonade 3cs; Moutarde 1cs; Vinaigre 1cs; Paprika 1cc
+= Bacon 100g
+~ Paprika 1cc
+v Baked beans végétariens
+- Faire revenir le bacon en dés et l'oignon haché.
+- Ajouter les haricots égouttés, le concentré, la cassonade, la moutarde, le vinaigre, le paprika et 200 ml d'eau.
+- Cuire 1 h 30 à couvert au four à 160 °C, en remuant une fois : la sauce doit être épaisse et brillante.
+- Version végé : sans bacon, avec une pointe de paprika en plus (fumé si possible).
+
+# Potato salad | 6 | 40 | E
++ Pommes de terre 1000g; Mayonnaise 6cs; Moutarde 1cs; Céleri 100g; Oignon rouge 0.5pc; Oeufs 3pc; Cornichons 50g; Ciboulette 0.25pc; Paprika 0.5cc
+- Cuire les pommes de terre en robe des champs 20 minutes, les éplucher et les couper en cubes encore tièdes.
+- Cuire les œufs 10 minutes et les hacher.
+- Mélanger la mayonnaise, la moutarde et un peu de jus de cornichons.
+- Ajouter les pommes de terre, le céleri, l'oignon et les cornichons hachés, les œufs ; saupoudrer de paprika et de ciboulette.
+
+# Frites de patate douce | 4 | 40 | T
++ Patate douce 800g; Fécule de maïs 2cs; Paprika 1cc; Huile de tournesol 4cs
+- Couper les patates douces en bâtonnets de 1 cm.
+- Les enrober de fécule, puis d'huile et de paprika.
+- Les étaler sans qu'elles se touchent sur une plaque et cuire 25 minutes à 220 °C en les retournant à mi-cuisson.
+- Saler à la sortie du four.
+
+## dessert
+# Cheesecake new-yorkais | 10 | 500 | T
++ Biscuits digestive 200g; Beurre 80g; Fromage frais nature 900g; Sucre 200g; Crème fraîche 200ml; Oeufs 4pc; Farine 30g; Citron 1pc; Sucre vanillé 8g
+- Mixer les biscuits, les mélanger au beurre fondu et tasser au fond d'un moule à charnière de 24 cm ; cuire 10 minutes à 170 °C.
+- Battre le fromage frais avec le sucre, la farine, le sucre vanillé et le zeste de citron sans faire mousser ; ajouter la crème puis les œufs un par un.
+- Verser sur le fond et cuire 1 heure à 150 °C : le centre doit encore trembler.
+- Laisser refroidir dans le four entrouvert 1 heure (il ne fend pas), puis au frigo au moins 6 h.
+
+# Apple pie | 8 | 120 | AH
++ Farine 330g; Beurre 220g; Sucre 150g; Pommes 1200g; Cannelle 1cc; Muscade 0.25cc; Citron 0.5pc; Fécule de maïs 30g; Oeufs 1pc
+- Pâte : sabler la farine avec 200 g de beurre froid, une cuillère de sucre et une pincée de sel, ajouter 6 cuillères d'eau glacée ; faire deux disques et les reposer 30 minutes au frais.
+- Couper les pommes en lamelles et les mélanger avec le reste du sucre, les épices, le jus de citron et la fécule.
+- Foncer un moule à tarte profond avec un disque, garnir de pommes en dôme, parsemer du reste de beurre.
+- Couvrir du second disque, souder, inciser le dessus et dorer à l'œuf.
+- Cuire 20 minutes à 220 °C puis 40 minutes à 180 °C ; laisser tiédir avant de couper.
+
+# Pecan pie | 8 | 75 | AH
++ Pâte brisée 1pc; Noix de pécan 200g; Sirop d'érable 200ml; Cassonade 100g; Oeufs 3pc; Beurre 50g; Sucre vanillé 8g
+- Foncer un moule de 24 cm avec la pâte et la précuire 10 minutes à 180 °C.
+- Fouetter les œufs avec le sirop d'érable, la cassonade, le beurre fondu, le sucre vanillé et une pincée de sel.
+- Répartir les noix de pécan sur le fond et verser l'appareil.
+- Cuire 45 minutes à 170 °C jusqu'à ce que le centre soit presque pris ; laisser refroidir complètement.
+
+# Key lime pie | 8 | 280 | EA
++ Biscuits digestive 200g; Beurre 80g; Lait concentré sucré 397g; Oeufs 4pc; Citron vert 5pc; Crème liquide 200ml; Sucre glace 1cs
+- Mixer les biscuits avec le beurre fondu, tasser dans un moule de 22 cm et cuire 10 minutes à 170 °C.
+- Fouetter le lait concentré avec 4 jaunes, le zeste de 2 citrons verts et 150 ml de jus.
+- Verser sur le fond et cuire 15 minutes à 160 °C.
+- Laisser refroidir puis au frigo au moins 4 h ; servir avec la crème fouettée au sucre glace.
+
+## patisserie
+# Brownies | 12 | 45 | T
++ Chocolat noir 200g; Beurre 180g; Sucre 250g; Oeufs 4pc; Farine 100g; Cacao en poudre 30g; Cerneaux de noix 100g
+- Faire fondre le chocolat avec le beurre.
+- Fouetter les œufs avec le sucre, ajouter le chocolat, puis la farine, le cacao et une pincée de sel.
+- Ajouter les noix concassées et verser dans un moule carré de 22 cm tapissé de papier cuisson.
+- Cuire 25 minutes à 175 °C : le centre doit rester fondant. Laisser refroidir avant de couper en carrés.
+
+# Banana bread | 10 | 70 | T
++ Bananes 400g; Farine 250g; Cassonade 120g; Beurre 100g; Oeufs 2pc; Levure chimique 10g; Cannelle 1cc; Cerneaux de noix 60g
+- Écraser les bananes bien mûres à la fourchette.
+- Ajouter le beurre fondu, la cassonade et les œufs, puis la farine, la levure, la cannelle et une pincée de sel.
+- Ajouter les noix et verser dans un moule à cake beurré.
+- Cuire 55 minutes à 175 °C (la lame d'un couteau doit ressortir sèche).
+
+# Carrot cake | 12 | 90 | T
++ Carottes 300g; Farine 250g; Cassonade 200g; Huile de tournesol 200ml; Oeufs 4pc; Levure chimique 10g; Cannelle 2cc; Cerneaux de noix 80g; Raisins secs 60g; Fromage frais nature 250g; Beurre 60g; Sucre glace 120g
+- Fouetter les œufs avec la cassonade et l'huile, ajouter la farine, la levure, la cannelle et une pincée de sel.
+- Ajouter les carottes râpées finement, les noix et les raisins.
+- Cuire 45 minutes à 175 °C dans un moule de 24 cm ; laisser refroidir complètement.
+- Glaçage : battre le fromage frais avec le beurre mou et le sucre glace, en couvrir le gâteau.
+
+# Muffins aux myrtilles | 12 | 40 | E
++ Farine 280g; Sucre 150g; Levure chimique 10g; Oeufs 2pc; Lait 200ml; Beurre 100g; Myrtilles 200g; Citron 0.5pc
+- Mélanger la farine, le sucre, la levure, une pincée de sel et le zeste de citron.
+- Fouetter les œufs avec le lait et le beurre fondu, verser sur les ingrédients secs et mélanger juste assez (la pâte reste grumeleuse).
+- Incorporer les myrtilles et remplir les caissettes aux trois quarts.
+- Cuire 22 minutes à 190 °C.
+
+# Cinnamon rolls | 12 | 210 | T
++ Farine 500g; Levure de boulanger 10g; Lait 250ml; Sucre 50g; Oeufs 1pc; Beurre 150g; Cassonade 150g; Cannelle 3cc; Fromage frais nature 100g; Sucre glace 100g
+- Délayer la levure dans le lait tiède ; pétrir avec la farine, le sucre, l'œuf, une pincée de sel et 70 g de beurre mou 10 minutes ; laisser lever 1 heure.
+- Étaler la pâte en rectangle, tartiner du reste de beurre mou, parsemer de cassonade et de cannelle.
+- Rouler serré et couper en 12 tranches ; les ranger dans un plat beurré et laisser lever 45 minutes.
+- Cuire 25 minutes à 180 °C.
+- Napper de glaçage (fromage frais battu avec le sucre glace) pendant qu'ils sont tièdes.
+
+## petitdej
+# Pancakes | 4 | 25 | T
++ Farine 250g; Sucre 30g; Levure chimique 10g; Oeufs 2pc; Lait 300ml; Beurre 40g; Sirop d'érable 100ml
+- Mélanger la farine, le sucre, la levure et une pincée de sel.
+- Ajouter les œufs, le lait et le beurre fondu ; mélanger sans trop travailler (quelques grumeaux restent).
+- Cuire des louches de pâte dans une poêle légèrement beurrée à feu moyen ; retourner quand des bulles apparaissent.
+- Servir en piles avec le sirop d'érable.
+
+# Œufs Bénédicte | 4 | 30 | T
++ Muffins anglais 2pc; Oeufs 7pc; Beurre 150g; Citron 0.5pc; Vinaigre 2cs
+= Jambon 4pc
+~ Épinards frais 200g
+v Œufs Florentine
+- Hollandaise : fouetter 3 jaunes avec 2 cuillères d'eau au bain-marie jusqu'à ce qu'ils épaississent, puis incorporer le beurre fondu en filet et le jus de citron.
+- Pocher 4 œufs 3 minutes dans l'eau frémissante vinaigrée.
+- Toaster les muffins coupés en deux et poser une tranche de jambon sur chaque moitié.
+- Ajouter un œuf poché, napper de hollandaise et servir aussitôt. Version végé : épinards tombés au beurre à la place du jambon.
+
+# Granola maison | 10 | 40 | T
++ Flocons d'avoine 300g; Amandes 100g; Miel 100g; Huile de tournesol 60ml; Cannelle 1cc; Raisins secs 80g
+- Mélanger les flocons, les amandes concassées, la cannelle et une pincée de sel.
+- Ajouter le miel tiédi avec l'huile et bien enrober.
+- Étaler sur une plaque et cuire 25 minutes à 160 °C en remuant toutes les 8 minutes.
+- Ajouter les raisins secs une fois refroidi ; se conserve 3 semaines dans un bocal.
+
+# Hash browns | 4 | 30 | T
++ Pommes de terre 800g; Beurre 40g; Oignon 0.5pc
+- Râper les pommes de terre et l'oignon, puis les presser fortement dans un torchon pour retirer l'eau.
+- Saler et poivrer.
+- Former des galettes fines dans le beurre chaud et cuire 5 minutes par face à feu moyen jusqu'à ce qu'elles soient dorées et croustillantes.
+
+## plat
+# Gumbo | 6 | 120 | AH
++ Farine 60g; Huile de tournesol 60ml; Oignon 2pc; Poivron 2pc; Céleri 200g; Ail 0.2pc; Tomates concassées 400g; Bouillon de volaille 1500ml; Paprika 2cc; Thym 0.25pc; Feuille de laurier 0.4g; Piment 1pc; Riz 400g
+= Saucisse fumée 2pc; Cuisse de poulet 4pc; Scampis 300g
+~ Haricots rouges (boîte) 400g; Champignons de Paris 300g
+v Gumbo aux haricots rouges
+- Roux brun : cuire la farine dans l'huile 20 à 30 minutes à feu doux en remuant sans arrêt jusqu'à ce qu'il ait la couleur du chocolat.
+- Ajouter l'oignon, le poivron et le céleri en dés, puis l'ail ; cuire 5 minutes.
+- Verser le bouillon chaud, les tomates, les épices et le poulet ; cuire 45 minutes.
+- Ajouter la saucisse en rondelles pour 15 minutes, puis les scampis 3 minutes ; effilocher le poulet.
+- Servir sur le riz. Version végé : haricots rouges et champignons à la place des viandes.
+
+# Poulet frit et purée | 4 | 270 | T
++ Babeurre 500ml; Farine 250g; Paprika 2cc; Sauce piquante 1cs; Huile de tournesol 1500ml; Pommes de terre 1000g; Lait 200ml; Beurre 60g
+= Cuisse de poulet 8pc
+~ Chou-fleur 800g
+v Chou-fleur frit et purée
+- Faire mariner le poulet au moins 4 h dans le babeurre avec la sauce piquante et du sel.
+- Le rouler dans la farine assaisonnée de paprika, de sel et de poivre, en appuyant pour former une croûte.
+- Frire 12 à 15 minutes à 165 °C jusqu'à ce que la peau soit dorée et la viande cuite à cœur.
+- Préparer une purée avec les pommes de terre, le lait chaud et le beurre.
+- Servir le poulet avec la purée. Version végé : bouquets de chou-fleur marinés et panés de la même façon, frits 5 minutes.
+
+# Travers de porc BBQ | 4 | 200 | E
++ Sauce barbecue 300ml; Cassonade 2cs; Paprika 2cc; Ail 0.1pc; Pommes de terre 1000g
+= Travers de porc 1600g
+~ Tofu ferme 600g
+v Tofu BBQ et pommes de terre
+- Frotter les travers avec la cassonade, le paprika, l'ail écrasé, le sel et le poivre.
+- Les envelopper dans de l'aluminium et les cuire 2 h 30 à 150 °C.
+- Ouvrir, badigeonner de sauce barbecue et passer 15 minutes à 220 °C (ou au barbecue) jusqu'à ce qu'ils caramélisent.
+- Cuire les pommes de terre en quartiers au four en même temps. Version végé : tofu pressé en tranches, badigeonné de sauce et rôti 25 minutes.
+
+# Irish stew | 4 | 150 | AH
++ Pommes de terre 1000g; Oignon 2pc; Carottes 400g; Thym 0.25pc; Persil 0.25pc; Bouillon de légumes 800ml
+= Épaule d'agneau en morceaux 1000g
+~ Haricots blancs (boîte) 500g
+v Irish stew aux haricots
+- Dans une cocotte, alterner des couches d'agneau, d'oignons émincés, de carottes et de pommes de terre en rondelles ; saler et poivrer chaque couche, ajouter le thym.
+- Verser le bouillon, couvrir et cuire 2 heures à feu très doux ou au four à 160 °C.
+- Les pommes de terre du dessus doivent s'écraser et épaissir le jus.
+- Parsemer de persil. Version végé : légumes cuits 50 minutes, haricots ajoutés les 10 dernières minutes.
+
+# Shrimp and grits | 4 | 40 | T
++ Polenta 200g; Lait 500ml; Beurre 40g; Cheddar 100g; Ail 0.2pc; Oignons nouveaux 3pc; Citron 0.5pc; Paprika 1cc; Sauce piquante 1cc
+= Scampis 600g; Lardons 100g
+~ Champignons de Paris 400g
+v Grits aux champignons
+- Porter le lait et 500 ml d'eau à ébullition, verser la polenta en pluie et cuire en remuant selon le paquet jusqu'à ce qu'elle soit crémeuse ; ajouter le beurre et le cheddar.
+- Faire rissoler les lardons, ajouter les scampis assaisonnés de paprika et l'ail ; cuire 3 minutes.
+- Ajouter le jus de citron, la sauce piquante et les oignons nouveaux.
+- Servir les scampis sur les grits. Version végé : champignons sautés à la place des scampis et des lardons.
