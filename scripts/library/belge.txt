@@ -1,0 +1,349 @@
+// Cuisine belge : recettes écrites à la main (format : voir format.ts).
+@belge
+
+## aperitif
+# Bitterballen | 6 | 300 | AH
++ Beurre 60g; Farine 100g; Bouillon de bœuf 600ml; Oignon 1pc; Persil 0.25pc; Muscade 0.25cc; Oeufs 2pc; Chapelure 150g; Huile de tournesol 1000ml; Moutarde 3cs
+= Bœuf à braiser 400g
+~ Champignons de Paris 400g; Gruyère râpé 100g
+v Bitterballen aux champignons et au fromage
+- Cuire le bœuf 2 h à petit frémissement dans le bouillon avec l'oignon coupé en deux ; garder 400 ml de bouillon et effilocher finement la viande.
+- Faire un roux avec le beurre et 60 g de farine, mouiller avec le bouillon chaud en fouettant jusqu'à obtenir une sauce très épaisse.
+- Ajouter la viande, le persil haché, la muscade, sel et poivre ; étaler dans un plat, filmer au contact et laisser prendre au frigo au moins 2 h.
+- Former des boules de 3 cm, les rouler dans le reste de farine, puis dans les œufs battus et dans la chapelure.
+- Frire 3 à 4 minutes dans l'huile à 180 °C jusqu'à ce qu'elles soient bien dorées, égoutter sur du papier absorbant.
+- Servir aussitôt avec la moutarde pour tremper.
+- Version végé : faire revenir les champignons hachés jusqu'à évaporation complète, les lier à la sauce avec le fromage à la place de la viande.
+
+# Toasts aux crevettes grises | 4 | 15 | T
++ Pain de mie 4pc; Mayonnaise 3cs; Citron 0.25pc; Ciboulette 0.5pc
+= Crevettes grises 200g
+~ Oeufs 3pc
+v Toasts à l'œuf et à la ciboulette
+- Toaster le pain de mie, retirer les croûtes et couper chaque tranche en quatre triangles.
+- Mélanger les crevettes avec la mayonnaise, quelques gouttes de jus de citron, la moitié de la ciboulette ciselée et du poivre.
+- Garnir les toasts au dernier moment pour qu'ils restent croustillants et parsemer du reste de ciboulette.
+- Version végé : cuire les œufs 10 minutes, les écaler, les écraser à la fourchette avec la mayonnaise et la ciboulette.
+
+## entree
+# Croquettes au fromage | 4 | 200 | T
++ Beurre 75g; Farine 125g; Lait 500ml; Gruyère râpé 150g; Parmesan 75g; Oeufs 3pc; Muscade 0.25cc; Chapelure 150g; Huile de tournesol 1000ml; Persil 0.5pc; Citron 0.5pc
+- Faire fondre le beurre, ajouter 75 g de farine et cuire 1 minute ; verser le lait chaud en fouettant et cuire 5 minutes jusqu'à une béchamel très épaisse.
+- Hors du feu, ajouter les fromages, un jaune d'œuf, la muscade, sel et poivre ; étaler sur 2 cm dans un plat beurré, filmer au contact et laisser prendre au frigo au moins 2 h.
+- Couper en rectangles, les passer dans la farine, puis dans les deux œufs restants battus avec le blanc, et dans la chapelure.
+- Frire 2 à 3 minutes à 180 °C jusqu'à ce qu'elles soient dorées ; égoutter.
+- Frire le persil bien sec quelques secondes et servir les croquettes avec le persil frit et un quartier de citron.
+
+# Salade de chicons aux pommes et noix | 4 | 15 | AH
++ Chicons 4pc; Pommes 300g; Cerneaux de noix 60g; Raisins secs 40g; Citron 0.5pc; Moutarde 1cc; Vinaigre 2cs; Ciboulette 0.25pc
+- Retirer le cône amer des chicons et les émincer en lanières.
+- Couper les pommes en dés sans les éplucher et les arroser de jus de citron.
+- Préparer une vinaigrette avec la moutarde, le vinaigre, 4 cuillères d'huile, sel et poivre.
+- Mélanger chicons, pommes et raisins secs avec la vinaigrette, parsemer de noix concassées et de ciboulette ; servir aussitôt.
+
+# Asperges blanches sauce mousseline | 4 | 40 | P
++ Asperges blanches 1500g; Oeufs 3pc; Beurre 150g; Citron 0.5pc; Crème liquide 100ml; Ciboulette 0.25pc
+- Éplucher les asperges de la tête vers le pied et couper le bout ligneux.
+- Les cuire 12 à 15 minutes à l'eau salée frémissante : la pointe d'un couteau doit entrer sans résistance.
+- Pendant ce temps, fouetter les jaunes avec 2 cuillères d'eau et le jus de citron au bain-marie jusqu'à ce qu'ils épaississent et fassent le ruban.
+- Hors du feu, incorporer le beurre fondu tiède en filet, en fouettant, pour obtenir une hollandaise ; saler.
+- Fouetter la crème bien froide en chantilly et l'incorporer délicatement à la sauce juste avant de servir.
+- Égoutter les asperges, les napper de sauce mousseline et parsemer de ciboulette.
+
+## soupe
+# Soupe aux tomates et boulettes | 4 | 60 | T
++ Tomates 1000g; Oignon 1pc; Carottes 150g; Céleri 100g; Bouillon de volaille 1000ml; Concentré de tomate 2cs; Petites pâtes 60g; Beurre 20g; Persil 0.25pc
+= Haché porc et bœuf 300g; Oeufs 1pc; Chapelure 30g
+~ Pois chiches (boîte) 250g
+v Soupe aux tomates, pois chiches et vermicelles
+- Mélanger le haché avec l'œuf, la chapelure, la moitié du persil haché, sel et poivre ; rouler des petites boulettes de 1,5 cm.
+- Faire suer l'oignon, la carotte et le céleri émincés dans le beurre 5 minutes.
+- Ajouter les tomates en morceaux, le concentré et le bouillon ; cuire 25 minutes.
+- Mixer finement puis passer au chinois pour une soupe bien lisse ; remettre à frémir.
+- Pocher les boulettes 8 minutes dans la soupe frémissante, ajouter les vermicelles pour les 5 dernières minutes.
+- Parsemer du reste de persil. Version végé : ajouter les pois chiches égouttés avec les vermicelles.
+
+# Soupe au cerfeuil | 4 | 40 | P
++ Cerfeuil 2pc; Pommes de terre 300g; Poireaux 200g; Oignon 1pc; Beurre 30g; Bouillon de légumes 1000ml; Crème liquide 100ml
+- Faire suer l'oignon et le blanc de poireau émincés dans le beurre 5 minutes sans coloration.
+- Ajouter les pommes de terre en dés et le bouillon ; cuire 20 minutes.
+- Hors du feu, ajouter le cerfeuil (en garder quelques pluches) et mixer aussitôt pour garder une belle couleur verte.
+- Ajouter la crème, rectifier l'assaisonnement et servir avec les pluches de cerfeuil.
+
+# Soupe aux pois cassés et lard | 6 | 120 | AH
++ Pois cassés 400g; Oignon 1pc; Carottes 200g; Poireaux 200g; Céleri-rave 200g; Pommes de terre 200g; Thym 0.25pc; Feuille de laurier 2pc; Bouillon de légumes 2000ml
+= Lardons 200g; Saucisse fumée 2pc
+~ Tofu fumé 250g
+v Soupe aux pois cassés et tofu fumé
+- Rincer les pois cassés à l'eau froide (pas besoin de trempage).
+- Faire rissoler les lardons dans une grande casserole, les retirer et faire suer l'oignon dans leur graisse.
+- Ajouter les pois, les légumes en dés, le thym, le laurier et le bouillon ; cuire 1 heure à frémissement en écumant et en remuant de temps en temps.
+- Ajouter les saucisses fumées pour les 20 dernières minutes, puis les retirer et les couper en rondelles.
+- Retirer le laurier et le thym, mixer grossièrement, remettre les lardons et la saucisse.
+- Version végé : poêler le tofu fumé en dés et l'ajouter au moment de servir.
+
+# Potage au cresson | 4 | 35 | PAH
++ Cresson 200g; Pommes de terre 400g; Oignon 1pc; Beurre 30g; Bouillon de légumes 1000ml; Crème liquide 100ml
+- Faire suer l'oignon émincé dans le beurre 5 minutes.
+- Ajouter les pommes de terre en dés et le bouillon ; cuire 20 minutes.
+- Ajouter le cresson sans ses grosses tiges et cuire 3 minutes seulement.
+- Mixer, ajouter la crème, saler, poivrer et servir bien chaud.
+
+# Crème de chicons | 4 | 40 | AH
++ Chicons 6pc; Pommes de terre 250g; Oignon 1pc; Beurre 30g; Sucre 1cc; Bouillon de légumes 1000ml; Crème liquide 150ml; Muscade 0.25cc; Ciboulette 0.25pc
+- Retirer le cône amer des chicons et les émincer avec l'oignon.
+- Les faire fondre 10 minutes dans le beurre avec le sucre, qui adoucit l'amertume.
+- Ajouter les pommes de terre en dés et le bouillon ; cuire 20 minutes.
+- Mixer, ajouter la crème et la muscade, rectifier l'assaisonnement et parsemer de ciboulette.
+
+# Potage aux légumes | 6 | 50 | T
++ Carottes 300g; Poireaux 300g; Céleri 150g; Navets 200g; Pommes de terre 300g; Oignon 1pc; Beurre 30g; Bouillon de légumes 1500ml; Persil 0.25pc
+- Éplucher et couper tous les légumes en morceaux.
+- Les faire suer 5 minutes dans le beurre en commençant par l'oignon et le poireau.
+- Couvrir de bouillon et cuire 30 minutes.
+- Mixer plus ou moins finement selon le goût, rectifier l'assaisonnement et parsemer de persil.
+
+## accompagnement
+# Frites belges maison | 4 | 60 | T
++ Pommes de terre 1200g; Huile de tournesol 2000ml
+- Éplucher des pommes de terre farineuses (bintje) et les couper en bâtonnets d'1 cm.
+- Les rincer à l'eau froide pour retirer l'amidon, puis les sécher soigneusement dans un essuie.
+- Première cuisson à 160 °C pendant 5 à 6 minutes : elles doivent être cuites mais pas colorées ; égoutter et laisser reposer au moins 15 minutes.
+- Deuxième cuisson à 180 °C pendant 2 à 3 minutes jusqu'à ce qu'elles soient dorées et croustillantes.
+- Égoutter, saler aussitôt et servir.
+
+# Chou rouge à la flamande | 6 | 90 | AH
++ Chou rouge 1000g; Pommes 400g; Oignon 1pc; Beurre 40g; Cassonade 2cs; Vinaigre 50ml; Feuille de laurier 2pc; Clous de girofle 1g; Cannelle 0.5cc
+- Émincer finement le chou rouge en retirant le trognon ; éplucher les pommes et les couper en quartiers.
+- Faire fondre l'oignon émincé dans le beurre dans une cocotte.
+- Ajouter le chou, les pommes, la cassonade, le vinaigre, le laurier, les clous de girofle, la cannelle, 100 ml d'eau et du sel.
+- Couvrir et laisser mijoter 1 heure à feu doux en remuant de temps en temps.
+- Découvrir en fin de cuisson pour réduire le jus, retirer le laurier et les clous de girofle.
+
+# Choux de Bruxelles aux lardons | 4 | 30 | AH
++ Choux de Bruxelles 800g; Beurre 30g; Échalote 1pc; Muscade 0.25cc
+= Lardons 150g
+~ Cerneaux de noix 60g
+v Choux de Bruxelles aux noix
+- Retirer les premières feuilles des choux et couper la base.
+- Les blanchir 8 minutes à l'eau bouillante salée, puis les refroidir à l'eau glacée et les égoutter.
+- Faire rissoler les lardons à sec, ajouter le beurre, l'échalote émincée et les choux ; poêler 8 minutes jusqu'à ce qu'ils soient dorés.
+- Assaisonner de muscade et de poivre. Version végé : torréfier les noix à sec et les ajouter à la place des lardons.
+
+# Croquettes de pommes de terre maison | 4 | 80 | T
++ Pommes de terre 1000g; Beurre 30g; Oeufs 4pc; Muscade 0.25cc; Farine 50g; Chapelure 150g; Huile de tournesol 1000ml
+- Cuire les pommes de terre farineuses à l'eau salée 20 minutes, bien égoutter et les sécher quelques minutes sur le feu.
+- Les passer au presse-purée, ajouter le beurre, 2 jaunes d'œufs, la muscade, sel et poivre ; laisser refroidir 30 minutes.
+- Former des cylindres de 5 cm, les rouler dans la farine, puis dans les œufs battus avec les blancs, puis dans la chapelure.
+- Frire 3 minutes à 180 °C jusqu'à ce qu'elles soient dorées, égoutter et servir aussitôt.
+
+# Carottes à la flamande | 4 | 35 | T
++ Carottes 800g; Oignon 1pc; Beurre 30g; Sucre 1cc; Persil 0.25pc
+- Éplucher les carottes et les couper en rondelles.
+- Faire fondre l'oignon émincé dans le beurre, ajouter les carottes, le sucre, du sel et 100 ml d'eau.
+- Couvrir et cuire 20 minutes à feu doux.
+- Découvrir et laisser réduire jusqu'à ce que les carottes soient glacées ; parsemer de persil haché.
+
+# Purée de pommes de terre maison | 4 | 35 | T
++ Pommes de terre 1000g; Lait 250ml; Beurre 60g; Muscade 0.25cc
+- Cuire les pommes de terre farineuses épluchées en morceaux 20 minutes à l'eau salée.
+- Égoutter et les sécher 1 minute sur le feu.
+- Les passer au presse-purée en ajoutant le beurre puis le lait chaud petit à petit.
+- Assaisonner de sel, de poivre et de muscade ; ne pas mixer, sinon la purée devient collante.
+
+## dessert
+# Dame blanche | 4 | 15 | T
++ Glace vanille 500ml; Chocolat noir 150g; Crème liquide 250ml; Sucre glace 1cs; Beurre 15g
+- Fouetter 150 ml de crème bien froide avec le sucre glace en chantilly ferme.
+- Chauffer le reste de crème, la verser sur le chocolat haché, attendre 1 minute puis lisser avec le beurre.
+- Dresser deux boules de glace par coupe, ajouter la chantilly et servir la sauce chocolat bien chaude à part.
+
+# Mousse au chocolat | 6 | 270 | T
++ Chocolat noir 200g; Oeufs 6pc; Beurre 30g; Sucre 30g
+- Faire fondre le chocolat avec le beurre au bain-marie et laisser tiédir.
+- Séparer les blancs des jaunes ; incorporer les jaunes un par un dans le chocolat.
+- Monter les blancs en neige avec une pincée de sel, ajouter le sucre en fin de battage pour les serrer.
+- Incorporer un tiers des blancs vivement, puis le reste délicatement à la spatule.
+- Répartir dans des verrines et laisser prendre au frigo au moins 4 h.
+
+# Café liégeois | 4 | 80 | E
++ Café moulu 30g; Sucre 30g; Glace au café 500ml; Crème liquide 200ml; Sucre glace 1cs
+- Préparer 300 ml de café fort, le sucrer et le laisser refroidir complètement au frigo (1 h).
+- Fouetter la crème bien froide avec le sucre glace en chantilly.
+- Dans de grands verres, déposer deux boules de glace au café et verser le café froid.
+- Couvrir généreusement de chantilly à la poche et servir aussitôt avec une paille et une longue cuillère.
+
+# Pain perdu | 4 | 20 | T
++ Pain de mie 8pc; Oeufs 3pc; Lait 300ml; Sucre 40g; Sucre vanillé 8g; Cannelle 1cc; Beurre 50g; Cassonade 4cs
+- Battre les œufs avec le lait, le sucre, le sucre vanillé et la cannelle.
+- Tremper les tranches de pain rassis quelques secondes de chaque côté.
+- Les cuire dans le beurre moussant 2 à 3 minutes par face jusqu'à ce qu'elles soient dorées.
+- Saupoudrer de cassonade et servir chaud.
+
+# Riz au lait à la cassonade | 6 | 60 | T
++ Riz rond 150g; Lait 1000ml; Sucre 60g; Sucre vanillé 8g; Cassonade 6cs
+- Porter le lait à frémissement avec le sucre vanillé.
+- Verser le riz en pluie et cuire 40 minutes à feu très doux en remuant souvent pour qu'il n'attache pas.
+- Ajouter le sucre en fin de cuisson : le riz épaissit encore en tiédissant.
+- Servir tiède ou froid, saupoudré de cassonade.
+
+# Stoofpeertjes (poires au vin rouge) | 4 | 75 | AH
++ Poires 1000g; Vin rouge 500ml; Sucre 100g; Cannelle 1cc; Clous de girofle 1g; Citron 0.5pc
+- Éplucher les poires en gardant la queue.
+- Les placer dans une casserole juste à leur taille avec le vin, 200 ml d'eau, le sucre, la cannelle, les clous de girofle et le zeste de citron.
+- Cuire 40 à 60 minutes à frémissement à couvert en les retournant de temps en temps, jusqu'à ce qu'elles soient tendres à cœur.
+- Retirer les poires et réduire le sirop jusqu'à ce qu'il soit nappant.
+- Servir tièdes ou froides, nappées de sirop.
+
+# Crêpes à la cassonade | 4 | 60 | T
++ Farine 250g; Oeufs 3pc; Lait 500ml; Beurre 50g; Sucre vanillé 8g; Cassonade 8cs
+- Verser la farine dans un saladier, creuser un puits, ajouter les œufs et une pincée de sel.
+- Verser le lait petit à petit en fouettant pour éviter les grumeaux, puis ajouter le beurre fondu et le sucre vanillé.
+- Laisser reposer la pâte 30 minutes.
+- Cuire les crêpes fines dans une poêle chaude légèrement beurrée, 1 minute par face.
+- Saupoudrer de cassonade, rouler ou plier et servir chaud.
+
+# Tiramisu au spéculoos | 6 | 270 | T
++ Mascarpone 250g; Oeufs 3pc; Sucre 75g; Spéculoos 200g; Café moulu 20g
+- Préparer 250 ml de café fort et le laisser refroidir.
+- Fouetter les jaunes avec le sucre jusqu'à ce qu'ils blanchissent, puis incorporer le mascarpone.
+- Monter les blancs en neige avec une pincée de sel et les incorporer délicatement.
+- Tremper rapidement les spéculoos dans le café et en tapisser le fond d'un plat ; couvrir de crème et recommencer.
+- Finir par une couche de crème et des spéculoos émiettés ; laisser prendre au frigo au moins 4 h.
+
+## patisserie
+# Tarte au sucre | 8 | 150 | T
++ Farine 250g; Levure de boulanger 7g; Lait 100ml; Oeufs 3pc; Beurre 100g; Sucre 25g; Cassonade 200g; Crème liquide 100ml
+- Délayer la levure dans le lait tiède ; mélanger avec la farine, le sucre, une pincée de sel, un œuf et 50 g de beurre mou.
+- Pétrir 10 minutes jusqu'à obtenir une pâte souple, couvrir et laisser lever 1 heure.
+- Étaler la pâte dans un moule de 28 cm beurré et la laisser lever encore 30 minutes.
+- Répartir la cassonade sur la pâte et parsemer du reste de beurre en noisettes ; battre les deux œufs restants avec la crème et verser sur le dessus.
+- Cuire 20 à 25 minutes à 200 °C jusqu'à ce que la garniture soit caramélisée ; servir tiède.
+
+# Gaufres de Bruxelles | 6 | 90 | T
++ Farine 500g; Levure de boulanger 7g; Lait 500ml; Eau pétillante 300ml; Oeufs 4pc; Beurre 150g; Sucre 20g; Sucre vanillé 8g; Sucre glace 4cs
+- Délayer la levure dans un peu de lait tiède.
+- Mélanger la farine, les jaunes, le reste du lait tiède, le beurre fondu, les sucres et une pincée de sel ; ajouter l'eau pétillante.
+- Couvrir et laisser lever 1 heure.
+- Monter les blancs en neige et les incorporer délicatement à la pâte.
+- Cuire dans un gaufrier rectangulaire bien chaud et huilé 4 minutes par gaufre.
+- Servir aussitôt avec du sucre glace (ou de la chantilly et des fraises).
+
+# Gaufres de Liège | 12 | 150 | T
++ Farine 500g; Levure de boulanger 10g; Lait 150ml; Oeufs 2pc; Beurre 250g; Sucre perlé 250g; Sucre vanillé 8g; Cannelle 0.5cc
+- Délayer la levure dans le lait tiède ; mélanger avec la farine, les œufs, le sucre vanillé, la cannelle et une pincée de sel ; pétrir 5 minutes.
+- Ajouter le beurre mou en morceaux et pétrir jusqu'à ce que la pâte soit lisse et élastique.
+- Couvrir et laisser lever 1 heure.
+- Incorporer le sucre perlé au dernier moment, former des boules de 100 g et les laisser reposer 15 minutes.
+- Cuire 3 à 4 minutes dans un gaufrier à température moyenne : le sucre doit caraméliser sans brûler.
+- Laisser tiédir quelques minutes sur une grille avant de déguster.
+
+# Spéculoos maison | 10 | 780 | AH
++ Farine 250g; Cassonade 200g; Beurre 150g; Oeufs 1pc; Cannelle 2cc; Muscade 0.25cc; Levure chimique 1cc
+- Travailler le beurre mou avec la cassonade jusqu'à ce que le mélange soit crémeux, puis ajouter l'œuf.
+- Ajouter la farine, les épices, la levure et une pincée de sel ; former une boule.
+- Filmer et laisser reposer une nuit au frigo (au moins 12 h) pour que les épices se développent.
+- Étaler sur 4 mm (ou presser dans un moule à spéculoos) et découper les biscuits.
+- Cuire 12 à 15 minutes à 180 °C ; ils durcissent en refroidissant sur une grille.
+
+# Pain à la grecque | 8 | 150 | T
++ Farine 500g; Levure de boulanger 10g; Lait 250ml; Beurre 75g; Sucre 50g; Oeufs 1pc; Sucre perlé 150g; Cannelle 1cc
+- Délayer la levure dans le lait tiède ; pétrir avec la farine, le sucre, l'œuf, le beurre mou et une pincée de sel pendant 10 minutes.
+- Couvrir et laisser lever 1 heure.
+- Découper la pâte en 8 boudins de 25 cm, les aplatir légèrement.
+- Les rouler dans le sucre perlé mélangé à la cannelle en appuyant bien pour qu'il adhère.
+- Laisser lever 30 minutes sur une plaque, puis cuire 15 minutes à 200 °C jusqu'à ce que le sucre caramélise ; refroidir sur une grille.
+
+# Tarte au flan | 8 | 180 | T
++ Pâte brisée 1pc; Lait 1000ml; Oeufs 4pc; Sucre 150g; Fécule de maïs 80g; Sucre vanillé 8g
+- Foncer un moule de 28 cm avec la pâte, la piquer et la précuire 10 minutes à 180 °C.
+- Porter le lait à ébullition avec le sucre vanillé.
+- Fouetter les œufs avec le sucre et la fécule, verser le lait chaud en fouettant, puis remettre sur le feu et cuire 2 minutes en fouettant jusqu'à épaississement.
+- Verser la crème sur le fond de tarte et cuire 30 à 35 minutes à 180 °C jusqu'à ce que le dessus soit doré.
+- Laisser refroidir complètement (au moins 2 h) avant de découper.
+
+# Cramique aux raisins | 10 | 220 | T
++ Farine 500g; Levure de boulanger 10g; Lait 250ml; Oeufs 3pc; Beurre 80g; Sucre 50g; Raisins secs 200g
+- Faire gonfler les raisins 30 minutes dans de l'eau tiède, puis les égoutter et les sécher.
+- Délayer la levure dans le lait tiède ; pétrir avec la farine, le sucre, une pincée de sel, deux œufs et le beurre mou pendant 10 à 15 minutes.
+- Incorporer les raisins, couvrir et laisser lever 1 h 30.
+- Façonner la pâte dans un moule à cake beurré et laisser lever encore 45 minutes.
+- Dorer au jaune du dernier œuf et cuire 35 minutes à 180 °C ; démouler et laisser refroidir sur une grille.
+
+# Appeltaart | 8 | 120 | AH
++ Farine 300g; Beurre 200g; Sucre 150g; Oeufs 1pc; Levure chimique 1cc; Pommes 1200g; Cannelle 1cc; Raisins secs 50g; Citron 0.5pc
+- Travailler le beurre mou avec 125 g de sucre, l'œuf, la farine, la levure et une pincée de sel ; former une boule et la laisser reposer 30 minutes au frigo.
+- Éplucher les pommes, les couper en dés et les mélanger avec le jus de citron, la cannelle, le reste du sucre et les raisins secs.
+- Foncer un moule à charnière de 24 cm beurré avec les deux tiers de la pâte, en remontant bien sur les bords.
+- Remplir de pommes et couvrir de croisillons faits avec le reste de la pâte.
+- Cuire 60 minutes à 175 °C et laisser tiédir dans le moule avant de démouler.
+
+# Bodding | 8 | 100 | T
++ Cramique 1pc; Lait 750ml; Oeufs 4pc; Cassonade 150g; Raisins secs 100g; Cannelle 1cc; Beurre 30g
+- Émietter le cramique rassis et le laisser tremper 30 minutes dans le lait chaud.
+- Écraser à la fourchette, puis ajouter les œufs battus, la cassonade, la cannelle et les raisins secs.
+- Verser dans un moule beurré et parsemer de noisettes de beurre.
+- Cuire 50 minutes à 180 °C ; servir tiède ou froid, coupé en parts.
+
+## petitdej
+# Œufs au lard et pain gris | 2 | 15 | T
++ Oeufs 4pc; Pain gris 0.2pc; Beurre 20g
+= Bacon 120g
+~ Tomates 200g
+v Œufs au plat, tomates poêlées et pain gris
+- Faire rissoler les tranches de lard dans une poêle sans matière grasse jusqu'à ce qu'elles soient croustillantes.
+- Casser les œufs dans la graisse du lard et les cuire à feu moyen jusqu'à ce que le blanc soit pris.
+- Tartiner le pain gris de beurre et servir aussitôt avec les œufs au lard.
+- Version végé : poêler les tomates coupées en deux au beurre, puis cuire les œufs à côté.
+
+# Suikerbrood (pain au sucre) | 10 | 210 | T
++ Farine 500g; Levure de boulanger 10g; Lait 250ml; Oeufs 2pc; Beurre 75g; Sucre 30g; Sucre perlé 200g; Cannelle 1cc
+- Délayer la levure dans le lait tiède ; pétrir avec la farine, le sucre, une pincée de sel, un œuf et le beurre mou pendant 10 minutes.
+- Couvrir et laisser lever 1 heure.
+- Abaisser la pâte en rectangle, la parsemer de sucre perlé et de cannelle, la rouler serrée et la placer dans un moule à cake beurré.
+- Laisser lever 45 minutes, dorer avec le second œuf battu.
+- Cuire 35 minutes à 180 °C ; laisser refroidir avant de trancher.
+
+## plat
+# Pâté gaumais et salade | 6 | 800 | AH
++ Pâte brisée 2pc; Vin blanc 250ml; Échalote 3pc; Persil 0.5pc; Ail 0.1pc; Thym 0.25pc; Feuille de laurier 2pc; Oeufs 1pc; Salade verte 1pc
+= Filet de porc 900g
+~ Champignons de Paris 600g; Lentilles vertes 200g
+v Pâté gaumais aux champignons et lentilles
+- Couper le porc en fines lanières et le faire mariner une nuit (12 h) au frais avec le vin, les échalotes et le persil hachés, l'ail, le thym, le laurier, sel et poivre.
+- Foncer un moule haut de 24 cm avec une pâte, garnir de viande égouttée et ajouter 3 cuillères de marinade.
+- Couvrir avec la seconde pâte, souder les bords, percer une cheminée au centre et dorer à l'œuf battu.
+- Cuire 1 h 15 à 180 °C ; laisser reposer 15 minutes avant de découper.
+- Servir tiède avec la salade verte à la vinaigrette.
+- Version végé : faire revenir les champignons émincés, les mélanger aux lentilles cuites et aux aromates de la marinade, puis garnir le pâté de la même façon.
+
+# Cabillaud à la flamande et pommes de terre | 4 | 45 | T
++ Pommes de terre 1000g; Oeufs 2pc; Beurre 120g; Persil 0.5pc; Citron 1pc; Moutarde 1cs; Vin blanc 200ml; Oignon 1pc; Feuille de laurier 1pc; Thym 0.1pc
+= Dos de cabillaud 700g
+~ Oeufs 4pc
+v Œufs mollets à la flamande et pommes de terre
+- Cuire les pommes de terre épluchées à la vapeur 20 minutes.
+- Cuire 2 œufs 10 minutes, les écaler et les hacher.
+- Préparer un court-bouillon avec le vin, 1 litre d'eau, l'oignon, le laurier, le thym et du sel ; laisser frémir 10 minutes.
+- Pocher le cabillaud 6 à 8 minutes dans le court-bouillon frémissant, sans bouillir.
+- Faire fondre le beurre, ajouter la moutarde, le jus de citron, le persil haché et les œufs durs hachés.
+- Napper le poisson de sauce et servir avec les pommes de terre. Version végé : cuire 4 œufs 6 minutes, les écaler et les napper de la même sauce.
+
+# Sole à l'ostendaise et pommes vapeur | 4 | 50 | T
++ Pommes de terre 1000g; Champignons de Paris 200g; Échalote 2pc; Vin blanc 200ml; Fumet de poisson 300ml; Crème liquide 200ml; Beurre 50g; Farine 20g; Citron 0.5pc; Persil 0.25pc
+= Filets de sole 600g; Moules 500g; Crevettes grises 100g
+~ Tofu ferme 400g
+v Tofu à la sauce ostendaise et pommes vapeur
+- Cuire les pommes de terre épluchées à la vapeur 20 minutes.
+- Ouvrir les moules 3 à 4 minutes à couvert avec le vin blanc et une échalote hachée ; les décortiquer et filtrer le jus.
+- Rouler les filets de sole et les pocher 5 à 6 minutes dans le fumet et le jus des moules ; les réserver au chaud.
+- Faire sauter les champignons émincés au beurre avec l'autre échalote.
+- Faire un roux avec le reste de beurre et la farine, mouiller avec le liquide de cuisson, ajouter la crème et réduire jusqu'à ce que la sauce nappe ; citronner.
+- Ajouter à la sauce les moules, les crevettes et les champignons, napper la sole, parsemer de persil et servir avec les pommes de terre. Version végé : dorer le tofu en tranches et le napper de sauce aux champignons.
+
+# Stoemp aux épinards et œuf au plat | 4 | 40 | PA
++ Pommes de terre 1000g; Épinards frais 600g; Oignon 1pc; Beurre 40g; Lait 100ml; Muscade 0.25cc; Oeufs 4pc
+- Cuire les pommes de terre épluchées 20 minutes à l'eau salée et les égoutter.
+- Faire fondre l'oignon émincé dans la moitié du beurre, ajouter les épinards et les laisser tomber 3 minutes ; les hacher grossièrement.
+- Écraser les pommes de terre avec le lait chaud, le reste du beurre et la muscade, puis incorporer les épinards.
+- Cuire les œufs au plat et les poser sur le stoemp ; servir aussitôt.

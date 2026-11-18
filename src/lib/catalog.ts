@@ -106,9 +106,11 @@ export const cookable = (recipes: Iterable<Recipe>) => [...recipes].filter((r) =
 export const mains = (recipes: Iterable<Recipe>) => cookable(recipes).filter((r) => (r.course || "plat") === "plat");
 
 /** Fiche compacte de la bibliothèque (document « library ») → recette sans étapes. */
-export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: Course; lt?: 1; g: [string, number][]; m: [string, number][]; w: [string, number][] }
+/** Ingrédient d'une fiche : [article, quantité par personne] ou [article, cuillères par personne, "cs" | "cc"]. */
+type LibIng = [string, number] | [string, number, "cs" | "cc"];
+export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: Course; lt?: 1; g: LibIng[]; m: LibIng[]; w: LibIng[] }
 export function libRecipe(e: LibEntry): Recipe {
-  const ing = (l: [string, number][]) => (l || []).map(([itemId, qtyPerPerson]) => ({ itemId, qtyPerPerson }));
+  const ing = (l: LibIng[]) => (l || []).map(([itemId, qtyPerPerson, spoon]) => ({ itemId, qtyPerPerson, ...(spoon ? { spoon } : {}) }));
   return { id: e.i, name: e.n, vegName: e.v, prepMin: e.t, seasons: (e.s || "PEAH").split("") as Season[], ingredients: ing(e.g), meat: ing(e.m), vegSwap: ing(e.w),
     steps: [], source: "base", cuisine: e.c, course: e.k || "plat", lib: true, ...(e.lt ? { light: true } : {}) };
 }
