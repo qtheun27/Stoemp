@@ -306,4 +306,16 @@ Fécule de maïs|ep|g|400|1.49|S|||maïzena,maizena|
 Riz rond|ep|g|1000|1.79|S|||riz pour riz au lait,riz dessert|
 Glace au café|su|ml|1000|3.99|||la,oe||
 Filets de sole|vi|g|400|11.99|P|2|po|sole|
+Fromage à raclette|fr|g|400|6.49|P|21|la|raclette|
+Beaufort|fr|g|250|5.99|P|30|la||
+Poulet entier|vi|pc|1|8.99|LBP|3||poulet fermier,poule|
+Sauté de veau|vi|g|800|14.90|LP|3||veau en morceaux,blanquette de veau|
+Magret de canard|vi|g|400|8.99|P|5||magret|
+Câpres|ep|g|100|1.79|S|||capres|
+Filets d'anchois|ep|g|50|2.19|S||po|anchois|
+Graisse de canard|ep|g|350|3.49|S|||
+Poudre d'amandes|ep|g|125|2.49|S||fc|amandes en poudre|
+Tagliatelles|ep|g|500|1.69|B||gl,oe||
+Cornichons|ep|g|350|1.59|S|||
+Liqueur d'orange|bs|ml|350|12.99||||grand marnier,cointreau,triple sec|
 `;

@@ -1,0 +1,354 @@
+// Cuisine française : recettes écrites à la main (format : voir format.ts).
+@francaise
+
+## aperitif
+# Gougères | 6 | 50 | T
++ Beurre 80g; Lait 125ml; Farine 125g; Oeufs 4pc; Comté 100g; Muscade 0.25cc
+- Porter à ébullition le lait, 125 ml d'eau, le beurre et une pincée de sel.
+- Hors du feu, verser la farine d'un coup et mélanger ; remettre sur feu doux et dessécher la pâte 1 à 2 minutes jusqu'à ce qu'elle forme une boule.
+- Hors du feu, incorporer les œufs un par un, puis les trois quarts du comté râpé et la muscade.
+- Dresser des petits tas de 3 cm sur une plaque couverte de papier cuisson et parsemer du reste de fromage.
+- Cuire 25 minutes à 190 °C sans ouvrir le four ; servir tièdes.
+
+# Tapenade | 6 | 10 | T
++ Olives noires 200g; Câpres 20g; Ail 0.1pc; Citron 0.25pc; Herbes de Provence 0.5cc; Baguette 1pc
+= Filets d'anchois 30g
+~ Câpres 15g
+v Tapenade sans anchois
+- Dénoyauter les olives si nécessaire.
+- Mixer les olives, les câpres, les anchois, l'ail, le jus de citron et les herbes avec 4 cuillères d'huile d'olive, en gardant un peu de texture.
+- Servir sur des tranches de baguette grillées. Version végé : remplacer les anchois par un peu plus de câpres.
+
+# Cake aux olives et au jambon | 8 | 70 | T
++ Farine 200g; Levure chimique 10g; Oeufs 3pc; Lait 100ml; Gruyère râpé 100g; Olives noires 100g
+= Dés de jambon 150g
+~ Feta 150g
+v Cake aux olives et à la feta
+- Fouetter les œufs avec le lait et 100 ml d'huile d'olive.
+- Ajouter la farine et la levure, puis le fromage, les olives coupées et le jambon ; poivrer.
+- Verser dans un moule à cake beurré et cuire 45 minutes à 180 °C (la lame d'un couteau doit ressortir sèche).
+- Laisser tiédir, démouler et couper en cubes pour l'apéritif. Version végé : remplacer le jambon par la feta émiettée.
+
+# Allumettes au fromage | 6 | 25 | T
++ Pâte feuilletée 1pc; Gruyère râpé 80g; Oeufs 1pc; Paprika 0.5cc
+- Dérouler la pâte, la dorer à l'œuf battu et la parsemer de fromage et de paprika.
+- Couper en bandes de 1,5 cm de large, les torsader si on le souhaite.
+- Cuire 12 à 15 minutes à 200 °C jusqu'à ce qu'elles soient dorées.
+
+## entree
+# Œufs mimosa | 4 | 25 | T
++ Oeufs 6pc; Mayonnaise 4cs; Moutarde 1cc; Ciboulette 0.25pc; Salade verte 0.5pc
+- Cuire les œufs 10 minutes à l'eau bouillante, les refroidir et les écaler.
+- Les couper en deux dans la longueur et retirer les jaunes.
+- Écraser les deux tiers des jaunes avec la mayonnaise et la moutarde ; garnir les blancs.
+- Émietter le reste des jaunes au-dessus, parsemer de ciboulette et servir sur quelques feuilles de salade.
+
+# Poireaux vinaigrette | 4 | 30 | AH
++ Poireaux 800g; Moutarde 1cs; Vinaigre 2cs; Échalote 1pc; Oeufs 2pc; Persil 0.25pc
+- Garder le blanc et le vert tendre des poireaux, les fendre et bien les laver.
+- Les cuire 15 minutes à l'eau bouillante salée, les égoutter et les presser légèrement.
+- Cuire les œufs 10 minutes, les écaler et les hacher.
+- Préparer une vinaigrette avec la moutarde, le vinaigre, 6 cuillères d'huile, l'échalote ciselée, sel et poivre.
+- Napper les poireaux tièdes de vinaigrette et parsemer d'œuf haché et de persil.
+
+# Céleri rémoulade | 4 | 20 | AH
++ Céleri-rave 500g; Mayonnaise 5cs; Moutarde 1cs; Citron 0.5pc; Persil 0.25pc
+- Éplucher le céleri-rave et le râper en fine julienne.
+- L'arroser aussitôt de jus de citron pour qu'il ne noircisse pas.
+- Mélanger la mayonnaise et la moutarde, puis enrober le céleri ; saler et poivrer.
+- Laisser reposer 10 minutes au frais et parsemer de persil.
+
+# Salade de chèvre chaud | 4 | 20 | T
++ Fromage de chèvre 200g; Baguette 1pc; Salade verte 1pc; Cerneaux de noix 40g; Miel 2cs; Moutarde 1cc; Vinaigre 2cs
+- Couper la baguette en 8 tranches et la bûche de chèvre en 8 rondelles.
+- Poser une rondelle sur chaque tranche, arroser d'un filet de miel et passer 8 minutes sous le gril du four.
+- Préparer une vinaigrette avec la moutarde, le vinaigre, 5 cuillères d'huile, sel et poivre.
+- Servir les toasts chauds sur la salade assaisonnée, parsemée de noix.
+
+# Soufflé au fromage | 4 | 50 | T
++ Beurre 50g; Farine 40g; Lait 300ml; Oeufs 4pc; Comté 120g; Muscade 0.25cc
+- Beurrer un moule à soufflé et le fariner ; préchauffer le four à 200 °C.
+- Faire une béchamel épaisse avec le beurre, la farine et le lait ; hors du feu, ajouter les jaunes, le fromage râpé, la muscade, sel et poivre.
+- Monter les blancs en neige ferme avec une pincée de sel et les incorporer délicatement.
+- Verser dans le moule, lisser et cuire 25 minutes sans ouvrir le four.
+- Servir immédiatement, avant qu'il ne retombe.
+
+# Œufs cocotte | 4 | 20 | T
++ Oeufs 4pc; Crème fraîche 100ml; Beurre 10g; Ciboulette 0.25pc; Pain de mie 4pc
+= Jambon 2pc
+~ Champignons de Paris 100g
+v Œufs cocotte aux champignons
+- Beurrer 4 ramequins, y déposer le jambon coupé en dés et une cuillère de crème.
+- Casser un œuf dans chaque ramequin, saler, poivrer et couvrir du reste de crème.
+- Cuire 10 à 12 minutes au bain-marie dans le four à 180 °C : le blanc doit être pris et le jaune coulant.
+- Parsemer de ciboulette et servir avec des mouillettes de pain grillé. Version végé : remplacer le jambon par des champignons poêlés.
+
+## soupe
+# Velouté de champignons | 4 | 35 | AH
++ Champignons de Paris 500g; Échalote 2pc; Beurre 30g; Pommes de terre 150g; Bouillon de légumes 800ml; Crème liquide 150ml; Persil 0.25pc
+- Faire suer les échalotes émincées dans le beurre, ajouter les champignons coupés et les faire revenir 5 minutes.
+- Ajouter la pomme de terre en dés et le bouillon ; cuire 20 minutes.
+- Mixer finement, ajouter la crème, saler et poivrer.
+- Servir parsemé de persil.
+
+# Velouté Dubarry | 4 | 35 | AH
++ Chou-fleur 800g; Pommes de terre 150g; Poireaux 100g; Beurre 30g; Bouillon de légumes 800ml; Crème liquide 150ml; Muscade 0.25cc
+- Détailler le chou-fleur en bouquets ; en garder quelques petits pour le décor.
+- Faire suer le poireau dans le beurre, ajouter le chou-fleur, la pomme de terre en dés et le bouillon ; cuire 20 minutes.
+- Mixer, ajouter la crème et la muscade, rectifier l'assaisonnement.
+- Servir avec les petits bouquets réservés, poêlés au beurre.
+
+# Velouté de potiron | 4 | 40 | A
++ Potiron 1000g; Oignon 1pc; Pommes de terre 150g; Beurre 30g; Bouillon de légumes 800ml; Crème liquide 100ml; Muscade 0.25cc
+- Éplucher le potiron, retirer les graines et le couper en cubes.
+- Faire suer l'oignon dans le beurre, ajouter le potiron, la pomme de terre et le bouillon ; cuire 25 minutes.
+- Mixer, ajouter la crème et la muscade ; saler et poivrer.
+
+# Potage Crécy | 4 | 40 | T
++ Carottes 700g; Oignon 1pc; Pommes de terre 150g; Beurre 30g; Bouillon de légumes 1000ml; Crème liquide 100ml; Cerfeuil 20g
+- Éplucher les carottes et la pomme de terre, les couper en rondelles.
+- Faire suer l'oignon dans le beurre, ajouter les légumes et le bouillon ; cuire 25 minutes.
+- Mixer finement, ajouter la crème et rectifier l'assaisonnement.
+- Servir parsemé de pluches de cerfeuil.
+
+# Velouté d'asperges | 4 | 40 | P
++ Asperges vertes 500g; Pommes de terre 150g; Échalote 1pc; Beurre 30g; Bouillon de légumes 800ml; Crème liquide 100ml
+- Couper le bout ligneux des asperges et réserver les pointes.
+- Faire suer l'échalote dans le beurre, ajouter les tiges d'asperges en tronçons, la pomme de terre en dés et le bouillon ; cuire 20 minutes.
+- Pocher les pointes 3 minutes dans la soupe, les retirer pour le décor.
+- Mixer, passer au chinois, ajouter la crème et servir avec les pointes.
+
+## accompagnement
+# Gratin dauphinois | 6 | 90 | AH
++ Pommes de terre 1200g; Lait 500ml; Crème liquide 300ml; Ail 0.1pc; Beurre 20g; Muscade 0.25cc
+- Éplucher les pommes de terre et les couper en fines rondelles, sans les laver.
+- Les cuire 10 minutes dans le lait et la crème avec l'ail écrasé, la muscade, sel et poivre, en remuant doucement.
+- Verser dans un plat frotté d'ail et beurré.
+- Cuire 1 heure à 160 °C jusqu'à ce que le dessus soit doré et que la pointe d'un couteau entre sans résistance.
+
+# Pommes de terre sarladaises | 4 | 45 | T
++ Pommes de terre 1000g; Graisse de canard 60g; Ail 0.2pc; Persil 0.5pc
+- Éplucher les pommes de terre et les couper en rondelles de 3 mm ; les sécher dans un essuie.
+- Les faire dorer dans la graisse de canard bien chaude dans une grande poêle, en les retournant souvent.
+- Couvrir et cuire 15 minutes à feu moyen, puis découvrir pour les rendre croustillantes.
+- Ajouter l'ail et le persil hachés en fin de cuisson, saler et poivrer.
+
+# Haricots verts persillés | 4 | 20 | E
++ Haricots verts 600g; Beurre 30g; Ail 0.1pc; Persil 0.25pc
+- Équeuter les haricots et les cuire 8 minutes à l'eau bouillante très salée.
+- Les plonger dans l'eau glacée pour garder leur couleur, puis les égoutter.
+- Les faire sauter 3 minutes dans le beurre avec l'ail et le persil hachés.
+
+# Petits pois à la française | 4 | 30 | PE
++ Petits pois 600g; Salade verte 1pc; Oignons nouveaux 4pc; Beurre 40g; Sucre 1cc
+- Émincer la laitue en lanières et couper les oignons nouveaux.
+- Faire fondre le beurre, ajouter les oignons, les petits pois, la laitue, le sucre, une pincée de sel et 100 ml d'eau.
+- Couvrir et cuire 15 minutes à feu doux jusqu'à ce que les pois soient tendres.
+- Lier avec une noisette de beurre au moment de servir.
+
+# Ratatouille | 6 | 90 | E
++ Aubergine 400g; Courgettes 400g; Poivron 2pc; Tomates 600g; Oignon 2pc; Ail 0.2pc; Herbes de Provence 1cc; Basilic 0.25pc
+- Couper tous les légumes en cubes de 2 cm.
+- Faire revenir séparément à l'huile d'olive l'aubergine, la courgette, puis les poivrons, pour qu'ils dorent sans bouillir.
+- Faire fondre l'oignon, ajouter les tomates, l'ail et les herbes et cuire 10 minutes.
+- Réunir tous les légumes dans la cocotte et laisser mijoter 40 minutes à feu doux à couvert.
+- Ajouter le basilic ciselé au moment de servir ; elle est encore meilleure le lendemain.
+
+# Pommes de terre boulangère | 6 | 80 | AH
++ Pommes de terre 1200g; Oignon 2pc; Bouillon de légumes 400ml; Thym 0.25pc; Beurre 40g
+- Éplucher les pommes de terre et les couper en fines rondelles ; émincer les oignons.
+- Faire fondre les oignons 10 minutes dans la moitié du beurre.
+- Dans un plat beurré, alterner les couches de pommes de terre et d'oignons, saler, poivrer et parsemer de thym.
+- Verser le bouillon chaud, parsemer du reste de beurre et cuire 1 heure à 180 °C.
+
+## dessert
+# Crème brûlée | 6 | 260 | T
++ Crème liquide 500ml; Lait 100ml; Oeufs 6pc; Sucre 80g; Sucre vanillé 8g; Cassonade 6cs
+- Chauffer la crème et le lait avec le sucre vanillé, sans faire bouillir.
+- Fouetter 6 jaunes avec le sucre sans les faire mousser, puis verser le mélange chaud en remuant.
+- Répartir dans des plats à crème brûlée et cuire 40 minutes au four à 100 °C : la crème doit trembler légèrement au centre.
+- Laisser refroidir puis réserver au frigo au moins 3 h.
+- Au moment de servir, saupoudrer de cassonade et la caraméliser au chalumeau ou sous le gril bien chaud.
+
+# Île flottante | 4 | 40 | T
++ Lait 500ml; Oeufs 4pc; Sucre 150g; Sucre vanillé 8g; Amandes 20g
+- Chauffer le lait avec le sucre vanillé ; fouetter 4 jaunes avec 50 g de sucre, verser le lait chaud et cuire à feu doux en remuant jusqu'à ce que la crème nappe la cuillère (sans bouillir) ; refroidir.
+- Monter les blancs en neige ferme avec 30 g de sucre.
+- Pocher des grosses cuillerées de blancs 1 minute de chaque côté dans de l'eau frémissante, ou 30 secondes au micro-ondes ; égoutter.
+- Faire un caramel blond avec le reste de sucre et 2 cuillères d'eau.
+- Poser les blancs sur la crème anglaise froide, napper de caramel et parsemer d'amandes effilées grillées.
+
+# Tarte Tatin | 8 | 80 | AH
++ Pommes 1500g; Sucre 150g; Beurre 80g; Pâte brisée 1pc
+- Faire un caramel à sec avec le sucre dans un moule allant sur le feu, ajouter le beurre en morceaux.
+- Éplucher les pommes, les couper en quartiers et les serrer debout dans le caramel.
+- Cuire 15 minutes sur feu moyen pour qu'elles commencent à caraméliser.
+- Couvrir de pâte en rentrant les bords à l'intérieur, piquer et cuire 35 minutes à 190 °C.
+- Laisser reposer 10 minutes, puis retourner sur un plat ; servir tiède, éventuellement avec de la crème fraîche.
+
+# Crème caramel | 6 | 260 | T
++ Lait 750ml; Oeufs 5pc; Sucre 200g; Sucre vanillé 8g
+- Faire un caramel blond avec 100 g de sucre et 3 cuillères d'eau ; le répartir dans 6 ramequins.
+- Chauffer le lait avec le sucre vanillé ; fouetter les œufs avec le reste de sucre et verser le lait chaud dessus.
+- Verser dans les ramequins et cuire 40 minutes au bain-marie à 150 °C.
+- Laisser refroidir puis réserver au frigo au moins 3 h ; démouler en passant une lame tout autour.
+
+# Moelleux au chocolat | 6 | 35 | T
++ Chocolat noir 200g; Beurre 150g; Oeufs 4pc; Sucre 120g; Farine 50g
+- Faire fondre le chocolat et le beurre au bain-marie.
+- Fouetter les œufs avec le sucre jusqu'à ce que le mélange blanchisse, ajouter le chocolat puis la farine.
+- Verser dans un moule de 22 cm beurré et fariné.
+- Cuire 20 minutes à 180 °C : le centre doit rester fondant. Laisser tiédir avant de démouler.
+
+# Poire Belle-Hélène | 4 | 45 | AH
++ Poires 800g; Sucre 150g; Sucre vanillé 8g; Glace vanille 500ml; Chocolat noir 120g; Crème liquide 120ml; Amandes 20g
+- Éplucher les poires en gardant la queue.
+- Les pocher 20 à 25 minutes dans un sirop frémissant fait de 750 ml d'eau, du sucre et du sucre vanillé ; les laisser refroidir dans le sirop.
+- Chauffer la crème, la verser sur le chocolat haché et lisser.
+- Servir chaque poire sur une boule de glace vanille, nappée de sauce chocolat chaude et parsemée d'amandes grillées.
+
+# Crêpes Suzette | 4 | 70 | H
++ Farine 125g; Oeufs 2pc; Lait 300ml; Beurre 100g; Oranges 600g; Sucre 80g; Liqueur d'orange 60ml
+- Préparer la pâte avec la farine, les œufs, le lait, 20 g de beurre fondu et une pincée de sel ; laisser reposer 30 minutes.
+- Cuire 8 crêpes fines.
+- Dans une grande poêle, faire fondre le sucre avec le reste du beurre, ajouter le zeste d'une orange et le jus des oranges ; réduire jusqu'à obtenir un sirop.
+- Plier les crêpes en quatre et les réchauffer dans le sirop en les arrosant.
+- Verser la liqueur chaude et flamber hors de la hotte ; servir aussitôt.
+
+# Profiteroles | 6 | 70 | T
++ Beurre 80g; Lait 125ml; Farine 125g; Oeufs 4pc; Sucre 1cc; Glace vanille 750ml; Chocolat noir 150g; Crème liquide 150ml
+- Porter à ébullition le lait, 125 ml d'eau, le beurre, le sucre et une pincée de sel ; verser la farine d'un coup et dessécher la pâte 2 minutes.
+- Hors du feu, incorporer les œufs un par un jusqu'à ce que la pâte soit lisse et brillante.
+- Dresser des choux de 3 cm sur une plaque et cuire 25 minutes à 180 °C sans ouvrir le four ; laisser refroidir.
+- Faire la sauce : verser la crème chaude sur le chocolat haché et lisser.
+- Couper les choux, les garnir d'une petite boule de glace et napper de sauce chocolat chaude.
+
+## patisserie
+# Madeleines | 8 | 90 | T
++ Farine 125g; Sucre 100g; Oeufs 3pc; Beurre 100g; Levure chimique 5g; Citron 0.5pc; Miel 1cs
+- Fouetter les œufs avec le sucre et le miel jusqu'à ce que le mélange mousse.
+- Ajouter la farine, la levure, le zeste de citron, puis le beurre fondu tiède.
+- Laisser reposer la pâte au frigo au moins 1 h : c'est le choc thermique qui donne la bosse.
+- Remplir aux trois quarts des moules à madeleines beurrés et farinés.
+- Cuire 5 minutes à 220 °C puis 5 minutes à 180 °C ; démouler aussitôt.
+
+# Quatre-quarts | 8 | 60 | T
++ Oeufs 4pc; Sucre 220g; Farine 220g; Beurre 220g; Levure chimique 5g; Citron 0.5pc
+- Peser les œufs : utiliser le même poids de sucre, de farine et de beurre (environ 220 g).
+- Fouetter les jaunes avec le sucre, ajouter le beurre fondu, la farine, la levure et le zeste de citron.
+- Monter les blancs en neige avec une pincée de sel et les incorporer délicatement.
+- Verser dans un moule à cake beurré et cuire 40 minutes à 180 °C.
+
+# Far breton | 8 | 80 | T
++ Farine 200g; Sucre 150g; Oeufs 4pc; Lait 750ml; Beurre 50g; Pruneaux 200g; Sucre vanillé 8g
+- Mélanger la farine et le sucre, ajouter les œufs un par un, puis le lait petit à petit pour éviter les grumeaux.
+- Ajouter le beurre fondu et le sucre vanillé.
+- Disposer les pruneaux dénoyautés dans un plat beurré et verser la pâte.
+- Cuire 1 heure à 180 °C jusqu'à ce que le dessus soit bien doré ; servir tiède ou froid.
+
+# Financiers | 12 | 40 | T
++ Beurre 100g; Poudre d'amandes 80g; Sucre glace 150g; Farine 50g; Oeufs 4pc
+- Faire cuire le beurre jusqu'à ce qu'il soit noisette (doré, avec une odeur de noisette) et le laisser tiédir.
+- Mélanger la poudre d'amandes, le sucre glace et la farine ; ajouter les 4 blancs d'œufs non montés.
+- Incorporer le beurre noisette tiède.
+- Remplir des moules à financiers beurrés et cuire 12 à 15 minutes à 200 °C.
+
+# Tarte normande | 8 | 75 | AH
++ Pâte brisée 1pc; Pommes 800g; Oeufs 2pc; Crème fraîche 200ml; Sucre 100g; Farine 20g; Sucre vanillé 8g
+- Foncer un moule de 28 cm avec la pâte et la piquer.
+- Éplucher les pommes, les couper en quartiers puis en lamelles et les disposer en rosace.
+- Précuire 15 minutes à 200 °C.
+- Fouetter les œufs avec la crème, le sucre, le sucre vanillé et la farine ; verser sur les pommes.
+- Cuire encore 30 minutes à 180 °C jusqu'à ce que l'appareil soit pris et doré.
+
+# Tarte au citron meringuée | 8 | 150 | T
++ Farine 200g; Beurre 140g; Sucre 280g; Oeufs 5pc; Citron 4pc; Fécule de maïs 20g
+- Pâte sablée : sabler la farine avec 100 g de beurre froid, ajouter 50 g de sucre, un œuf et une pincée de sel ; former une boule et la reposer 30 minutes au frais.
+- Foncer un moule de 24 cm, piquer et cuire à blanc 20 minutes à 180 °C.
+- Crème au citron : chauffer le jus et le zeste des citrons avec 130 g de sucre et la fécule délayée ; verser sur 2 œufs entiers et 2 jaunes battus, remettre sur le feu en fouettant jusqu'à épaississement, puis ajouter le reste du beurre.
+- Verser sur le fond de tarte et laisser prendre au frais 1 heure.
+- Monter les 2 blancs en neige avec le reste du sucre en meringue ferme, en couvrir la tarte et la dorer 5 minutes sous le gril.
+
+# Gâteau au yaourt | 8 | 50 | T
++ Yaourt nature 125g; Sucre 200g; Farine 250g; Oeufs 3pc; Levure chimique 10g; Huile de tournesol 80ml; Citron 0.5pc
+- Verser le yaourt dans un saladier : son pot sert de mesure.
+- Ajouter 2 pots de sucre, les œufs, puis 3 pots de farine, la levure, le zeste de citron et un demi-pot d'huile.
+- Verser dans un moule de 24 cm beurré.
+- Cuire 35 minutes à 180 °C : la lame d'un couteau doit ressortir sèche.
+
+# Chouquettes | 8 | 45 | T
++ Beurre 80g; Lait 125ml; Farine 125g; Oeufs 4pc; Sucre 1cs; Sucre perlé 80g
+- Porter à ébullition le lait, 125 ml d'eau, le beurre, le sucre et une pincée de sel ; verser la farine d'un coup et dessécher la pâte 2 minutes.
+- Hors du feu, incorporer les œufs un par un.
+- Dresser des petites boules de 2,5 cm sur une plaque et les couvrir généreusement de sucre perlé.
+- Cuire 20 à 25 minutes à 190 °C sans ouvrir le four.
+
+## petitdej
+# Brioche tressée | 10 | 240 | T
++ Farine 500g; Levure de boulanger 10g; Lait 150ml; Oeufs 4pc; Sucre 60g; Beurre 150g; Sucre perlé 30g
+- Délayer la levure dans le lait tiède ; pétrir la farine, le sucre, une pincée de sel, 3 œufs et le lait pendant 10 minutes.
+- Ajouter le beurre mou en morceaux et pétrir encore 10 minutes jusqu'à ce que la pâte se décolle des parois.
+- Laisser lever 1 h 30 à température ambiante.
+- Diviser en trois boudins, les tresser et poser la tresse sur une plaque ; laisser lever 1 heure.
+- Dorer avec le dernier œuf battu, parsemer de sucre perlé et cuire 30 minutes à 180 °C.
+
+# Œufs à la coque et mouillettes | 2 | 10 | T
++ Oeufs 4pc; Pain de campagne 0.25pc; Beurre 20g
+- Plonger les œufs à température ambiante dans l'eau bouillante et les cuire exactement 3 minutes.
+- Pendant ce temps, griller le pain, le beurrer et le couper en mouillettes.
+- Servir les œufs dans des coquetiers, décalotter et tremper les mouillettes dans le jaune coulant.
+
+## plat
+# Raclette | 4 | 40 | AH
++ Fromage à raclette 800g; Pommes de terre grenaille 1200g; Cornichons 100g; Salade verte 1pc
+= Jambon cru 8pc; Salami 150g; Jambon 4pc
+~ Champignons de Paris 300g; Oeufs 4pc
+v Raclette aux champignons et œufs
+- Cuire les pommes de terre en robe des champs 20 à 25 minutes à l'eau salée et les garder au chaud.
+- Couper le fromage en tranches de 5 mm.
+- Disposer la charcuterie et les cornichons sur un plateau, la salade à côté.
+- Chacun fait fondre son fromage dans les poêlons et le verse sur ses pommes de terre.
+- Version végé : servir des champignons émincés à faire griller sur l'appareil et des œufs à cuire dans les poêlons.
+
+# Fondue savoyarde | 4 | 30 | AH
++ Beaufort 400g; Comté 400g; Vin blanc 300ml; Ail 0.1pc; Fécule de maïs 10g; Pain de campagne 1pc; Salade verte 1pc
+- Couper le pain en cubes la veille ou quelques heures avant, pour qu'il sèche un peu.
+- Frotter le caquelon avec la gousse d'ail coupée et râper ou couper les fromages en petits dés.
+- Chauffer le vin, ajouter les fromages petit à petit en remuant en huit avec une cuillère en bois.
+- Quand la fondue est lisse, ajouter la fécule délayée dans un peu de vin et poivrer.
+- Poser le caquelon sur le réchaud et servir avec le pain et une salade verte.
+
+# Poule au pot | 6 | 180 | AH
++ Carottes 500g; Poireaux 500g; Navets 300g; Céleri 200g; Oignon 1pc; Clous de girofle 1g; Thym 0.25pc; Feuille de laurier 0.4g; Pommes de terre 1000g; Cornichons 100g; Moutarde 3cs
+= Poulet entier 1pc
+~ Pois chiches (boîte) 800g
+v Pot-au-feu de légumes aux pois chiches
+- Mettre la volaille dans une grande marmite, couvrir d'eau froide, porter à ébullition et écumer.
+- Ajouter l'oignon piqué des clous de girofle, le thym, le laurier et du sel ; cuire 1 h 30 à petit frémissement.
+- Ajouter les carottes, les poireaux ficelés, les navets et le céleri ; cuire encore 45 minutes.
+- Cuire les pommes de terre épluchées dans un peu de bouillon les 25 dernières minutes.
+- Servir la volaille découpée avec les légumes, un bol de bouillon, la moutarde et les cornichons.
+- Version végé : cuire les légumes 45 minutes dans un bouillon aromatisé et ajouter les pois chiches les 10 dernières minutes.
+
+# Veau Marengo et tagliatelles | 4 | 120 | AH
++ Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Vin blanc 200ml; Bouillon de volaille 200ml; Champignons de Paris 250g; Concentré de tomate 1cs; Farine 1cs; Thym 0.25pc; Tagliatelles 400g; Persil 0.25pc
+= Sauté de veau 800g
+~ Pois chiches (boîte) 400g
+v Ragoût Marengo aux pois chiches et tagliatelles
+- Faire dorer les morceaux de veau à l'huile d'olive dans une cocotte, puis les saupoudrer de farine.
+- Ajouter l'oignon et l'ail hachés, le vin blanc, les tomates, le concentré, le bouillon et le thym.
+- Couvrir et laisser mijoter 1 h 15 à feu doux.
+- Ajouter les champignons poêlés pour les 15 dernières minutes.
+- Cuire les tagliatelles et servir avec le veau, parsemé de persil.
+- Version végé : faire mijoter la sauce 30 minutes avec les champignons, puis ajouter les pois chiches 10 minutes.
+
+# Magret de canard et pommes sarladaises | 4 | 50 | AH
++ Pommes de terre 1000g; Graisse de canard 40g; Ail 0.2pc; Persil 0.5pc; Salade verte 1pc
+= Magret de canard 800g
+~ Oeufs 8pc
+v Œufs au plat et pommes sarladaises
+- Préparer les pommes sarladaises : rondelles de pommes de terre dorées dans la graisse de canard, couvertes 15 minutes, puis rendues croustillantes ; ail et persil en fin de cuisson.
+- Quadriller la peau des magrets sans toucher la chair.
+- Les cuire 8 minutes côté peau à feu moyen dans une poêle sans matière grasse en retirant la graisse au fur et à mesure, puis 3 minutes côté chair.
+- Les laisser reposer 5 minutes sous une feuille d'aluminium avant de les trancher.
+- Servir rosé avec les pommes de terre et la salade. Version végé : cuire les œufs au plat dans un peu de graisse des pommes de terre.
