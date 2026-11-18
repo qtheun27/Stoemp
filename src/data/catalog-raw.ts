@@ -287,4 +287,23 @@ Cheddar|fr|g|200|2.79||30|la||
 Pain hamburger|bo|pc|4|1.99||5|gl|pains burger|
 Choucroute|fr|g|500|1.99|LP|14||choucroute crue|
 Jarret de veau|vi|g|600|8.99|LP|3||osso buco|
+Thym|fl|pc|1|1.29|LP|10||thym frais|
+Feuille de laurier|ep|pc|20|1.49|S|||laurier|
+Clous de girofle|ep|g|30|1.99|S|||girofle,clou de girofle|
+Bouillon de bœuf|ep|ml|6000|1.49|S||gl|bouillon de boeuf|
+Bouillon de volaille|ep|ml|6000|1.49|S||gl|bouillon de poulet|
+Fumet de poisson|ep|ml|1000|2.49|S||po||
+Cerfeuil|fl|pc|1|1.49|LP|5|||3-6,9-11
+Cresson|fl|g|100|1.79|LP|4||cresson de fontaine|
+Asperges blanches|fl|g|1000|8.99|LP|4||asperges de malines|4-6
+Pois cassés|ep|g|500|1.69|S|||pois cassés verts|
+Chapelure|ep|g|400|1.29|S||gl|panure|
+Sucre glace|ep|g|500|1.29|S|||sucre impalpable|
+Sucre perlé|ep|g|250|1.99|LS|||sucre en grains|
+Sucre vanillé|ep|g|80|0.99|S||||
+Levure de boulanger|ep|g|35|0.99|S|||levure sèche,levure boulangère|
+Fécule de maïs|ep|g|400|1.49|S|||maïzena,maizena|
+Riz rond|ep|g|1000|1.79|S|||riz pour riz au lait,riz dessert|
+Glace au café|su|ml|1000|3.99|||la,oe||
+Filets de sole|vi|g|400|11.99|P|2|po|sole|
 `;
