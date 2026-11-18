@@ -10,8 +10,9 @@ import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
-import { aliasFits, matchItem, similarItem } from "./readers/match";
+import { aliasFits, matchItem, similarItem, similarity } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
+import { rebuildPriceBook } from "./pricebook";
 
 initializeApp();
 setGlobalOptions({ region: "europe-west1", maxInstances: 5 });
@@ -325,6 +326,7 @@ async function savePrices(store: (typeof STORES)[number], url: string, shop: str
     saved.push({ itemId, productName: best.name, packPrice: best.price });
   }
   await w.close();
+  await rebuildPriceBook([store]).catch((e) => logger.warn("Carnet de prix non reconstruit", e));
   return saved;
 }
 
@@ -490,6 +492,8 @@ const LIB_COURSE: Record<string, string> = {
   plat: "plats principaux", accompagnement: "accompagnements (légumes, féculents, salades d'accompagnement)", dessert: "desserts",
   patisserie: "pâtisseries, gâteaux et biscuits pour le goûter", petitdej: "recettes de petit-déjeuner et de brunch",
 };
+/** Féculents et bases qui rassasient (même liste que src/lib/balance.ts) : un plat principal en contient un. */
+const LIB_STARCH = /farine|pomme(s)? de terre|grenaille|frite|croquette|pur[ée]e|riz|p[âa]tes|spaghetti|tagliatelle|penne|linguine|macaroni|lasagne|cannelloni|gnocchi|nouille|ramen|udon|vermicelle|semoule|couscous|boulgour|quinoa|polenta|pain|baguette|pistolet|toast|tortilla|wrap|pita|naan|galette|cr[êe]pe|p[âa]te (feuillet|bris|à pizza)|pizza|patate douce|lentille|pois chiche|haricots? (rouges?|blancs?|noirs?)|ma[ïi]s|feuilles de lasagne|croûton/i;
 const LIB_BATCH = 8; // au-delà, la réponse (recettes complètes) peut être coupée
 const LIB_CHUNK = 400;
 interface LibQueue { cuisine: string; course: string; remaining: number; made: number; failures: number }
@@ -550,6 +554,7 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
   const items = await loadItems();
   const existing = await db().collection("recipes").where("householdId", "==", null).where("cuisine", "==", cuisine).select("name", "course").get();
   const names = existing.docs.map((d) => d.get("name") as string);
+  const sameCourseNames = existing.docs.filter((d) => (d.get("course") || "plat") === course).map((d) => d.get("name") as string);
   // 1. Plan : la liste des VRAIS plats à écrire (avec leurs éléments clés), dressée par un modèle plus fort et gardée.
   type Dish = { n: string; k: string; s: "todo" | "done" | "refused"; why?: string };
   const planRef = db().collection("libraryPlan").doc(`${cuisine}_${course}`);
@@ -561,10 +566,13 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
       system: `Tu es un grand chef et historien de la cuisine ${CUISINE_LABEL[cuisine]}. Tu dresses la liste des vrais plats d'une cuisine, pour un livre de recettes familial belge.`,
       content: `Liste 60 ${LIB_COURSE[course]} RÉELS et distincts de cuisine ${CUISINE_LABEL[cuisine]}, que des familles cuisinent vraiment à la maison : d'abord les grands classiques que tout le monde connaît, puis des recettes populaires du quotidien. Uniquement des plats qui existent sous ce nom ; aucune variante déguisée d'un même plat.
 Évite les préparations de chef ou de pâtissier professionnel, les spécialités très locales et peu connues, et celles dont les ingrédients principaux sont introuvables en supermarché belge.
+Un même plat sous un autre nom ou dans une autre langue est un DOUBLON (ex. « stoofvlees » = « carbonnade flamande », « boulets » = « boulettes à la liégeoise ») : ne le propose pas.${course === "plat" ? "\nCe sont des REPAS COMPLETS : donne le plat avec son accompagnement habituel (ex. « Boulets à la liégeoise et frites », « Blanquette de veau et riz »)." : ""}
 Pour chacun, « keys » : les ingrédients indispensables, la technique qui fait le plat et la durée totale réelle (ex. « bœuf, bière brune, oignons, pain d'épices moutardé ; mijoté ; 2 h 30 »).
 Exclus ceux-ci (déjà présents) : ${[...names, ...plan.map((d) => d.n)].slice(-500).join(" ; ") || "—"}.`,
     });
-    for (const d of p.dishes) if (!taken0.has(norm(d.name))) { plan.push({ n: d.name, k: d.keys, s: "todo" }); taken0.add(norm(d.name)); }
+    // Doublons : même nom, ou nom très proche d'un plat existant (« boulets » / « boulettes à la liégeoise »).
+    const near = (n: string) => [...sameCourseNames, ...plan.map((d) => d.n)].some((x) => similarity(n, x) >= 0.75);
+    for (const d of p.dishes) if (!taken0.has(norm(d.name)) && !near(d.name)) { plan.push({ n: d.name, k: d.keys, s: "todo" }); taken0.add(norm(d.name)); }
     await planRef.set({ cuisine, course, dishes: plan }, { merge: true });
   }
   const todo = plan.filter((d) => d.s === "todo").slice(0, n);
@@ -580,7 +588,8 @@ Recette fidèle à la tradition et à ses éléments clés (ingrédients et tech
 Recette COMPLÈTE et PRÉCISE, comme dans un bon livre de cuisine : tous les ingrédients qui comptent (vin, bouillon, herbes, beurre compris), 4 à 8 étapes avec les gestes (découper, précuire, pocher, réduire), les temps et les températures, jusqu'au dressage.
 Quantités pour la recette entière (servings = son nombre de parts : 4 pour un plat, 6 à 10 pour un gâteau ou une tarte) ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
 prepMin = durée TOTALE réelle (préparation + cuisson + repos) ; une marinade ou un trempage de la veille se signale dans les étapes et compte aussi (ex. 3 h de four → prepMin ≥ 200).
-Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.`,
+Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.${course === "plat" ? `
+Un plat principal est un REPAS COMPLET : ses ingrédients et ses étapes comprennent son accompagnement habituel (pommes de terre, frites, purée, riz, pâtes, pain, semoule…), sauf s'il en contient déjà un.` : ""}`,
   });
   // Le nom prévu fait foi (même ordre).
   res.recipes.forEach((r, i) => { if (todo[i]) r.name = todo[i].n; });
@@ -601,6 +610,8 @@ Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et
     if (r.prepMin < 5 || r.prepMin > 1500) return `durée ${r.prepMin} min`; // repos, congélation ou marinade de la veille compris
     if (!qtyOk) return `quantités (${r.servings} parts)`;
     if (r.meat.length && !r.vegSwap.length) return "pas de version végé";
+    if (course === "plat" && !all.some((x) => LIB_STARCH.test((x.itemId ? byId.get(x.itemId)?.name : x.newName) || ""))) return "pas de féculent (repas incomplet)";
+    if (sameCourseNames.some((x) => similarity(r.name, x) >= 0.75)) return "doublon d'un plat existant";
     return null;
   };
   const skipped = res.recipes.map((r) => [r.name, insane(r)] as const).filter(([, why]) => why).map(([n, why]) => `${n} : contrôle (${why})`);
@@ -613,6 +624,7 @@ Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et
     system: `Tu es un chef critique exigeant, spécialiste de la cuisine ${CUISINE_LABEL[cuisine]}. On te soumet des recettes pour une appli familiale belge.
 Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour le nombre de parts indiqué, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
 Format de l'appli, à NE PAS reprocher : quantités pour toute la recette (nombre de parts indiqué), sel, poivre et huile volontairement absents de la liste, étapes concises si elles sont justes. « pièce(s) » d'un bouquet d'herbes = fraction du bouquet.
+Refuse aussi un DOUBLON d'un plat déjà présent (même plat sous un autre nom ou dans une autre langue). Déjà présents : ${names.slice(-400).join(" ; ")}.
 Accepte les adaptations raisonnables aux supermarchés belges.
 Décide APRÈS ton analyse : ok = false seulement pour un défaut GRAVE (plat inventé ou confondu, ingrédient clé absent ou faux, quantités ou cuisson qui feraient rater la recette, étape dangereuse). Un écart de tradition mineur ou une imprécision → ok = true.`,
     content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.servings} parts, ${r.prepMin} min)
@@ -663,5 +675,11 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
   await batch.commit();
   return metas.length;
 }
+
+/** Le robot (ou tout autre écrivain de prix) signale un magasin à remettre à jour : le carnet compact est reconstruit. */
+export const onPriceBookDirty = onDocumentWritten({ document: "priceBookDirty/{store}", timeoutSeconds: 300 }, async (event) => {
+  if (!event.data?.after.exists) return;
+  await rebuildPriceBook([event.params.store]);
+});
 
 export * from "./admin";

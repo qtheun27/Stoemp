@@ -10,7 +10,9 @@ const STOP = new Set(["de", "du", "la", "le", "les", "des", "et", "en", "au", "a
 const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)).map(stem);
 
 /** Racine des mots (« apéritif » et « apéritives » → « aperit », « saucisse » ≠ « saucisson »). */
-const stems = (s: string) => new Set(tokens(s).map((w) => w.replace(/(ive|if|ee|e)$/, "")));
+const stemCache = new Map<string, Set<string>>();
+/** Mis en cache : la recherche de doublons compare des milliers de paires de noms. */
+const stems = (s: string) => { let r = stemCache.get(s); if (!r) { r = new Set(tokens(s).map((w) => w.replace(/(ive|if|ee|e)$/, ""))); stemCache.set(s, r); } return r; };
 
 export function similarity(a: string, b: string): number {
   const A = stems(a), B = stems(b);

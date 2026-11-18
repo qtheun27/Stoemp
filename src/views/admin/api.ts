@@ -21,6 +21,7 @@ export const adminCleanOrphanHouseholds = call<unknown, { removed: number }>("ad
 export const adminMergeItems = call<{ from: string; into: string }, { ok: boolean; moved: { prices: number; stock: number; shopping: number; recipes: number } }>("adminMergeItems");
 export const adminDeleteItem = call<{ id: string }, { ok: boolean }>("adminDeleteItem");
 export const adminLibraryJob = call<{ action: "start" | "pause" | "resume" | "stop"; perCuisine?: Record<string, number>; cuisines?: string[] }, { ok: boolean }>("adminLibraryJob");
+export const adminRebuildPriceBook = call<unknown, { prices: number }>("adminRebuildPriceBook");
 export const adminClearAiCache = call<{ fn: string | null }, { removed: number }>("adminClearAiCache");
 
 /** 30 derniers jours, du plus ancien au plus récent. */

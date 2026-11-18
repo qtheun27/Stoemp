@@ -5,10 +5,10 @@ import { auth, db } from "../firebase";
 import { BASE_ITEMS, BASE_RECIPES, ItemIndex, libRecipe, type LibEntry } from "../lib/catalog";
 import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { DEFAULT_APP_CONFIG, mergeAppConfig, type AppConfig } from "../lib/appConfig";
-import { emptyBook, priceKey, type PriceBook } from "../lib/pricing";
+import { emptyBook, expandBook, priceKey, type BookEntry, type PriceBook } from "../lib/pricing";
 import { isoWeek } from "../lib/season";
 import { readyRecipe } from "../lib/ready";
-import type { Cat, Consumption, Item, PaidPrice, Price, Recipe, Settings, ShoppingDoc, Slot, StockEntry } from "../lib/types";
+import type { Cat, Consumption, Item, PaidPrice, Price, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
 
 export interface Household { id: string; name: string; members: Record<string, "admin" | "member">; memberNames?: Record<string, string> }
 export interface HistoryEntry { name: string; count: number; itemId?: string | null; category: Cat }
@@ -113,11 +113,20 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     // Grande bibliothèque de recettes : fiches compactes, gardées hors ligne.
     const lib = onSnapshot(collection(db, "library"), (s) => setLibrary(s.docs.flatMap((d) => ((d.data().r || []) as LibEntry[]).map(libRecipe))), () => {});
     const hidden = onSnapshot(query(collection(db, "recipes"), where("householdId", "==", null), where("deleted", "==", true)), (s) => setHiddenBase(new Set(s.docs.map((d) => d.id))), () => {});
-    const b = onSnapshot(collection(db, "prices"), (s) => setShared(new Map(s.docs.map((d) => {
-      const p = d.data() as Price;
-      return [priceKey(p.itemId, p.store, p.organic), p];
-    }))));
-    return () => { a(); b(); hidden(); lib(); };
+    // Prix : le carnet compact (quelques documents) ; tant qu'il n'existe pas, les fiches une par une.
+    let fallback: (() => void) | null = null;
+    const b = onSnapshot(collection(db, "priceBook"), (s) => {
+      if (s.empty) {
+        if (!fallback) fallback = onSnapshot(collection(db, "prices"), (ps) => setShared(new Map(ps.docs.map((d) => {
+          const p = d.data() as Price;
+          return [priceKey(p.itemId, p.store, p.organic), p];
+        }))));
+        return;
+      }
+      if (fallback) { fallback(); fallback = null; }
+      setShared(expandBook(s.docs.map((d) => d.data() as { store: StoreId; e: Record<string, BookEntry> })));
+    }, () => {});
+    return () => { a(); b(); fallback?.(); hidden(); lib(); };
   }, [user]);
 
   // Données du foyer courant

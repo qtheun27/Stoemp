@@ -273,3 +273,19 @@ describe("foyer, réception, restes, boissons, équilibre", () => {
     expect(fish).toBeGreaterThanOrEqual(17); // au moins 85 % des semaines
   });
 });
+
+describe("carnet de prix compact", () => {
+  it("déplie les entrées en fiches de prix avec leurs variantes", async () => {
+    const { expandBook, priceAt, emptyBook } = await import("../pricing");
+    const shared = expandBook([{ store: "colruyt", e: {
+      pates_colruyt: { i: "pates", b: 0, n: "EXEMPLE pâtes", z: 500, un: "g", p: 0.9, u: 0.0018, pr: null, d: "2026-11-17T00:00:00Z", src: "capture", sh: "Colruyt Exempleville",
+        f: [["EVERYDAY pâtes", "eco", 0, "", 1000, 0.8, null], ["EXEMPLE pâtes bio", "maison", 1, "", 500, 1.5, null]] },
+    } }]);
+    const p = shared.get("pates_colruyt")!;
+    expect(p).toMatchObject({ itemId: "pates", store: "colruyt", packPrice: 0.9, shop: "Colruyt Exempleville" });
+    expect(p.offers![0]).toMatchObject({ name: "EVERYDAY pâtes", tier: "eco", organic: false, ppu: 0.0008 });
+    const item = BASE_ITEMS.find((i) => i.id === "pates")!;
+    const info = priceAt(item, "colruyt", { ...emptyBook(), shared }, { organic: false, range: "eco", allergens: [] } as never);
+    expect(info?.packPrice).toBe(0.8);
+  });
+});

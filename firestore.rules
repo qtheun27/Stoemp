@@ -14,6 +14,9 @@ service cloud.firestore {
     match /aiLogs/{id} { allow read: if isSuper(); allow write: if false; }
     match /scraperRuns/{id} { allow read: if isSuper(); allow write: if false; }
     // Bibliothèque de recettes (fiches compactes) : lecture pour tous les comptes, écrite par les Functions.
+    // Carnet de prix compact (quelques documents par magasin), écrit par les Functions.
+    match /priceBook/{id} { allow read: if signedIn(); allow write: if false; }
+    match /priceBookDirty/{id} { allow read, write: if false; }
     match /library/{id} { allow read: if signedIn(); allow write: if false; }
     match /libraryJobs/{id} { allow read: if isSuper(); allow write: if false; }
     match /libraryPlan/{id} { allow read: if isSuper(); allow write: if false; }

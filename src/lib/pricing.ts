@@ -1,5 +1,5 @@
 import { STORES } from "./constants";
-import type { Allergen, Item, Offer, PaidPrice, Price, PriceRange, StoreId } from "./types";
+import type { Allergen, Item, Offer, PaidPrice, Price, PriceRange, StoreId, Unit } from "./types";
 import { packsFor } from "./units";
 
 export interface PriceInfo {
@@ -52,6 +52,23 @@ export interface PriceBook {
   paid: Map<string, PaidPrice>; // clé itemId_store
 }
 export const emptyBook = (): PriceBook => ({ shared: new Map(), paid: new Map() });
+
+/** Entrée du carnet de prix compact (documents « priceBook/{magasin}_{n} », voir functions/src/pricebook.ts). */
+export interface BookEntry { i: string; b: 0 | 1; n: string; z: number; un: Unit; p: number; u: number; pr: string | null; d: string; src: Price["source"]; sh: string | null; url?: string;
+  f?: [string, PriceRange, 0 | 1, string, number, number, string | null][] }
+
+/** Déplie les documents du carnet en fiches de prix (clé = identifiant de la fiche). */
+export function expandBook(docs: { store: StoreId; e: Record<string, BookEntry> }[]): Map<string, Price> {
+  const out = new Map<string, Price>();
+  for (const { store, e } of docs) for (const [key, x] of Object.entries(e || {})) {
+    out.set(key, {
+      itemId: x.i, store, organic: !!x.b, productName: x.n, packSize: x.z, packUnit: x.un, packPrice: x.p, pricePerUnit: x.u, promo: x.pr, fetchedAt: x.d,
+      source: x.src, shop: x.sh, url: x.url,
+      offers: x.f?.map(([name, tier, organic, tags, size, price, promo]) => ({ name, tier, organic: !!organic, tags: tags ? tags.split(",") : [], size, price, ppu: price / (size || 1), promo })),
+    });
+  }
+  return out;
+}
 export const priceKey = (itemId: string, store: StoreId, organic = false) => `${itemId}_${store}${organic ? "_bio" : ""}`;
 
 /** Le magasin vend-il ce rayon ? (Renmans : boucherie, charcuterie, fromage, traiteur.) */

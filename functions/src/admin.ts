@@ -5,6 +5,7 @@ import { defineSecret } from "firebase-functions/params";
 import { z } from "zod";
 import { anthropic } from "./ai";
 import { MODEL_PRICES, supportsEffort } from "./config";
+import { rebuildPriceBook } from "./pricebook";
 
 // Console d'administration : réservée aux comptes portant la marque superAdmin (posée avec scripts/super-admin.ts).
 const ANTHROPIC_API_KEY = defineSecret("ANTHROPIC_API_KEY");
@@ -245,6 +246,7 @@ export const adminMergeItems = onCall({ ...opts, timeoutSeconds: 540 }, async (r
     await target.set({ ...p.data(), ...(cur || {}), itemId: into, offers: uniq }, { merge: true });
     await p.ref.delete(); moved.prices++;
   }
+  if (moved.prices) await rebuildPriceBook();
   // Données des foyers
   for (const sub of ["stock", "consumption", "paidPrices"]) {
     for (const d of (await db().collectionGroup(sub).get()).docs) {
@@ -282,5 +284,12 @@ export const adminDeleteItem = onCall({ ...opts, timeoutSeconds: 120 }, async (r
   prices.docs.forEach((p) => w.delete(p.ref));
   w.delete(ref);
   await w.close();
+  if (prices.size) await rebuildPriceBook();
   return { ok: true };
+});
+
+/** Reconstruit le carnet de prix compact (tous les magasins). */
+export const adminRebuildPriceBook = onCall({ ...opts, timeoutSeconds: 300 }, async (req) => {
+  requireSuper(req);
+  return { prices: await rebuildPriceBook() };
 });
