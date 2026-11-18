@@ -587,16 +587,25 @@ Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et
   const known = new Set(names.map(norm));
   // Garde-fous : contrôles de bon sens, puis relecture par un « chef critique » (modèle plus fort) ; le reste est écarté.
   const byId = new Map(items.map((i) => [i.id, i]));
-  const sane = (r: (typeof res.recipes)[number]) => {
+  // Contrôles de bon sens : renvoie la raison d'un rejet (gardée dans la tâche pour comprendre), ou null.
+  const insane = (r: (typeof res.recipes)[number]): string | null => {
     const all = [...r.ingredients, ...r.meat];
-    if ([...all, ...r.vegSwap].some((x) => !x.itemId && !x.newName?.trim())) return false; // ingrédient sans nom
+    if ([...all, ...r.vegSwap].some((x) => !x.itemId && !x.newName?.trim())) return "ingrédient sans nom";
     const parts = Math.max(1, r.servings || 1);
     const qtyOk = r.servings >= 1 && r.servings <= 24 && all.every((x) => { const it = x.itemId ? byId.get(x.itemId) : undefined; const u = it?.unit || x.newUnit; const q = x.qty / parts;
-      return x.qty > 0 && (u === "pc" ? q <= 6 : q <= 700); });
+      return x.qty > 0 && (u === "pc" ? q <= 8 : q <= 800); });
     const hours = Math.max(0, ...r.steps.join(" ").match(/(\d+)\s*h(?:eures?)?\b/gi)?.map((x) => parseInt(x)) || [0]);
-    return hours * 60 <= r.prepMin + 30 && all.length >= (course === "plat" || course === "soupe" ? 3 : 2) && r.steps.length >= 2 && r.steps.length <= 10 && r.prepMin >= 5 && r.prepMin <= 300 && qtyOk && (!r.meat.length || r.vegSwap.length > 0);
+    if (hours * 60 > r.prepMin + 30) return `durée ${r.prepMin} min mais ${hours} h dans les étapes`;
+    if (all.length < (course === "plat" || course === "soupe" ? 3 : 2)) return "trop peu d'ingrédients";
+    if (r.steps.length < 2 || r.steps.length > 10) return `${r.steps.length} étapes`;
+    if (r.prepMin < 5 || r.prepMin > 300) return `durée ${r.prepMin} min`;
+    if (!qtyOk) return `quantités (${r.servings} parts)`;
+    if (r.meat.length && !r.vegSwap.length) return "pas de version végé";
+    return null;
   };
-  const candidates = res.recipes.map((r, k) => ({ r, k })).filter(({ r }) => sane(r) && !known.has(norm(r.name)));
+  const skipped = res.recipes.map((r) => [r.name, insane(r)] as const).filter(([, why]) => why).map(([n, why]) => `${n} : contrôle (${why})`);
+  if (skipped.length) await db().collection("libraryJobs").doc("current").set({ refused: FieldValue.arrayUnion(...skipped.slice(0, 15)), refusedCount: FieldValue.increment(skipped.length) }, { merge: true });
+  const candidates = res.recipes.map((r, k) => ({ r, k })).filter(({ r }) => !insane(r) && !known.has(norm(r.name)));
   const line = (x: { itemId: string | null; newName: string | null; qty: number; newUnit?: string | null }) => { const it = x.itemId ? byId.get(x.itemId) : undefined;
     const u = it?.unit || x.newUnit; return `${it?.name || x.newName} ${x.qty} ${u === "pc" ? "pièce(s)" : u || ""}`.trim(); };
   const review = candidates.length ? await askJson("reviewLibrary", {

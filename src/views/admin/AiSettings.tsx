@@ -14,7 +14,7 @@ const DEFAULTS: AiConfig = {
   enabled: true, monthlyBudgetUsd: 20,
   tasks: {
     generateRecipes: { model: "claude-haiku-5-5", effort: "medium", maxTokens: 16000, enabled: true },
-    growLibrary: { model: "claude-haiku-5-5", effort: "medium", maxTokens: 16000, enabled: true },
+    growLibrary: { model: "claude-haiku-5-5", effort: "low", maxTokens: 16000, enabled: true },
     reviewLibrary: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 4000, enabled: true },
     planLibrary: { model: "claude-sonnet-5-5", effort: "low", maxTokens: 8000, enabled: true },
     structureMyDish: { model: "claude-haiku-5-5", effort: "low", maxTokens: 8000, enabled: true },
