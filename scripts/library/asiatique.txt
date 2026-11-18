@@ -1,0 +1,263 @@
+// Cuisine asiatique (Chine, Japon, Corée, Thaïlande, Viêt Nam, Indonésie) : recettes écrites à la main (format : voir format.ts).
+@asiatique
+
+## aperitif
+# Edamame au sel | 4 | 10 | T
++ Edamame 400g; Sel 1cc
+- Cuire les edamame surgelés 5 minutes à l'eau bouillante salée.
+- Les égoutter et les saupoudrer de gros sel (ou de fleur de sel) encore chauds.
+- Servir tièdes : on presse la gousse entre les dents pour en sortir les fèves.
+
+# Wontons frits | 6 | 50 | T
++ Feuilles de wonton 250g; Oignons nouveaux 2pc; Gingembre 10g; Sauce soja 2cs; Huile de sésame 1cc; Huile de tournesol 1000ml
+= Haché porc et bœuf 250g
+~ Tofu ferme 200g; Champignons de Paris 150g
+v Wontons frits au tofu et champignons
+- Mélanger la viande avec les oignons nouveaux hachés, le gingembre râpé, la sauce soja et l'huile de sésame.
+- Déposer une petite cuillère de farce au centre de chaque carré de pâte, humidifier les bords et plier en triangle, puis rapprocher les deux pointes.
+- Frire 2 à 3 minutes à 175 °C jusqu'à ce qu'ils soient dorés et croustillants.
+- Servir avec une sauce aigre-douce ou soja-vinaigre. Version végé : farce de tofu émietté et de champignons hachés revenus.
+
+# Concombre smashé | 4 | 20 | E
++ Concombre 2pc; Ail 0.2pc; Vinaigre de riz 2cs; Sauce soja 1cs; Sucre 1cc; Huile de sésame 1cs; Piment 0.5pc
+- Écraser les concombres avec le plat d'un couteau, puis les couper en morceaux irréguliers.
+- Les saler et les laisser dégorger 10 minutes ; égoutter.
+- Mélanger avec l'ail haché, le vinaigre, la sauce soja, le sucre, l'huile de sésame et le piment.
+- Servir bien frais.
+
+## entree
+# Sunomono | 4 | 20 | E
++ Concombre 1pc; Vinaigre de riz 4cs; Sucre 2cs; Sauce soja 1cc; Graines de sésame 1cs
+- Couper le concombre en rondelles très fines, le saler et le laisser dégorger 10 minutes ; le presser.
+- Dissoudre le sucre dans le vinaigre avec la sauce soja.
+- Mélanger avec le concombre et parsemer de sésame grillé ; servir très frais.
+
+# Siu mai | 4 | 50 | T
++ Feuilles de wonton 150g; Champignons de Paris 100g; Gingembre 10g; Sauce soja 1cs; Huile de sésame 1cc; Fécule de maïs 1cs; Carottes 30g
+= Haché porc et bœuf 250g; Scampis 150g
+~ Tofu ferme 300g
+v Siu mai au tofu et champignons
+- Hacher les scampis grossièrement et les mélanger avec la viande, les champignons hachés, le gingembre, la sauce soja, l'huile de sésame et la fécule.
+- Poser une cuillère de farce au centre de chaque feuille et remonter la pâte autour en laissant le dessus ouvert, comme une petite bourse.
+- Décorer d'un peu de carotte râpée et cuire 12 minutes à la vapeur sur du papier cuisson.
+- Servir avec de la sauce soja. Version végé : farce de tofu émietté et de champignons.
+
+# Larb | 4 | 25 | E
++ Échalote 2pc; Menthe 0.5pc; Coriandre 0.5pc; Citron vert 2pc; Nuoc-mâm 3cs; Piment 1pc; Riz 30g; Salade verte 1pc
+= Haché porc et bœuf 500g
+~ Tofu ferme 400g
+v Larb au tofu
+- Griller le riz cru à sec jusqu'à ce qu'il soit doré, puis le moudre en poudre.
+- Cuire la viande 5 minutes dans une poêle avec 3 cuillères d'eau, sans matière grasse, en l'émiettant.
+- Hors du feu, ajouter le jus de citron vert, le nuoc-mâm, le piment, les échalotes émincées, les herbes et la poudre de riz.
+- Servir tiède dans des feuilles de salade. Version végé : tofu émietté et sauce soja à la place du nuoc-mâm.
+
+# Agedashi tofu | 4 | 25 | T
++ Tofu ferme 400g; Fécule de maïs 4cs; Dashi en poudre 5g; Sauce soja 3cs; Mirin 3cs; Gingembre 10g; Oignons nouveaux 1pc; Huile de tournesol 500ml
+- Couper le tofu en cubes et l'égoutter 15 minutes sur du papier absorbant.
+- Préparer le bouillon : 250 ml d'eau chaude, le dashi, la sauce soja et le mirin.
+- Rouler le tofu dans la fécule et le frire 3 minutes à 175 °C jusqu'à ce qu'il soit doré.
+- Servir dans des bols, arrosé de bouillon chaud, avec le gingembre râpé et l'oignon nouveau ciselé.
+
+## soupe
+# Soupe miso | 4 | 15 | T
++ Pâte miso 60g; Dashi en poudre 5g; Tofu ferme 150g; Oignons nouveaux 2pc
+- Porter à frémissement 1 litre d'eau avec le dashi.
+- Ajouter le tofu coupé en petits cubes.
+- Délayer le miso dans une louche de bouillon et le verser dans la casserole hors du feu (le miso ne doit pas bouillir).
+- Servir aussitôt parsemé d'oignon nouveau.
+
+# Soupe aigre-piquante | 4 | 30 | AH
++ Champignons de Paris 150g; Tofu ferme 150g; Bouillon de volaille 1000ml; Sauce soja 3cs; Vinaigre de riz 4cs; Poivre 1cc; Fécule de maïs 2cs; Oeufs 2pc; Oignons nouveaux 2pc
+- Porter le bouillon à ébullition avec les champignons émincés et le tofu en lanières.
+- Ajouter la sauce soja, le vinaigre et le poivre (c'est lui qui pique) ; cuire 5 minutes.
+- Épaissir avec la fécule délayée dans un peu d'eau froide.
+- Verser les œufs battus en filet en remuant doucement pour former des filaments.
+- Servir parsemé d'oignon nouveau.
+
+# Soupe wonton | 4 | 50 | AH
++ Feuilles de wonton 200g; Bouillon de volaille 1500ml; Gingembre 15g; Sauce soja 2cs; Huile de sésame 1cc; Pak choï 300g; Oignons nouveaux 2pc
+= Haché porc et bœuf 300g
+~ Tofu ferme 250g; Bouillon de légumes 1500ml
+v Soupe wonton au tofu
+- Mélanger la viande avec la moitié du gingembre râpé, 1 cuillère de sauce soja et l'huile de sésame.
+- Garnir les feuilles d'une cuillère de farce, humidifier les bords et plier en triangle puis rapprocher les pointes.
+- Faire frémir le bouillon avec le reste du gingembre et de la sauce soja.
+- Cuire les wontons 4 minutes dans le bouillon, ajouter le pak choï 2 minutes.
+- Servir parsemé d'oignon nouveau. Version végé : farce au tofu et bouillon de légumes.
+
+## accompagnement
+# Pak choï à l'ail | 4 | 15 | T
++ Pak choï 600g; Ail 0.2pc; Sauce huître 2cs; Huile de tournesol 2cs
+- Couper les pak choï en deux ou en quatre dans la longueur et bien les rincer.
+- Les blanchir 1 minute à l'eau bouillante et les égoutter.
+- Faire revenir l'ail émincé dans l'huile 30 secondes, ajouter le pak choï et sauter 2 minutes.
+- Arroser de sauce huître et servir aussitôt.
+
+# Haricots verts sautés à la sichuanaise | 4 | 25 | E
++ Haricots verts 500g; Ail 0.2pc; Gingembre 10g; Piment 1pc; Poivre du Sichuan 0.5cc; Sauce soja 2cs; Sucre 1cc; Huile de tournesol 4cs
+- Faire sauter les haricots équeutés et bien secs à feu vif dans l'huile 6 à 8 minutes, jusqu'à ce que la peau se ride et dore.
+- Les retirer, puis faire revenir l'ail, le gingembre, le piment et le poivre du Sichuan 30 secondes.
+- Remettre les haricots, ajouter la sauce soja et le sucre, sauter 1 minute et servir.
+
+# Aubergines yu xiang | 4 | 30 | E
++ Aubergine 600g; Ail 0.2pc; Gingembre 10g; Doubanjiang 1cs; Sauce soja 2cs; Vinaigre de riz 2cs; Sucre 1cs; Fécule de maïs 1cc; Oignons nouveaux 2pc; Huile de tournesol 6cs
+- Couper les aubergines en bâtonnets et les faire dorer dans l'huile chaude jusqu'à ce qu'elles soient fondantes ; les égoutter.
+- Faire revenir l'ail, le gingembre et le doubanjiang 1 minute.
+- Ajouter la sauce soja, le vinaigre, le sucre et 100 ml d'eau, puis la fécule délayée.
+- Remettre les aubergines, enrober de sauce et parsemer d'oignon nouveau.
+
+# Kimchi maison | 10 | 1500 | AH
++ Chou chinois 1500g; Sel 80g; Ail 0.5pc; Gingembre 20g; Sucre 1cs; Nuoc-mâm 3cs; Paprika 4cs; Piment 2pc; Oignons nouveaux 4pc; Carottes 100g
+- Couper le chou en quartiers, le frotter de sel entre chaque feuille et le laisser dégorger 2 h en le retournant ; le rincer 3 fois et l'égoutter.
+- Mixer l'ail, le gingembre, le sucre, le nuoc-mâm, le paprika et le piment en pâte (idéalement avec du piment coréen gochugaru).
+- Mélanger avec les oignons nouveaux et la carotte en julienne, puis enduire chaque feuille de chou de cette pâte (avec des gants).
+- Tasser dans un bocal en laissant de l'espace, fermer et laisser fermenter 24 h à température ambiante.
+- Conserver ensuite au frigo : il se bonifie pendant plusieurs semaines.
+
+## dessert
+# Beignets de banane | 4 | 25 | T
++ Bananes 500g; Farine 100g; Fécule de maïs 30g; Levure chimique 5g; Sucre 2cs; Graines de sésame 1cs; Huile de tournesol 1000ml; Miel 3cs
+- Mélanger la farine, la fécule, la levure, le sucre, une pincée de sel et 150 ml d'eau froide pour obtenir une pâte épaisse ; ajouter le sésame.
+- Couper les bananes en tronçons, les enrober de pâte.
+- Les frire 3 minutes à 175 °C jusqu'à ce qu'elles soient dorées.
+- Servir chaudes, arrosées de miel.
+
+# Tapioca au lait de coco | 4 | 140 | T
++ Perles du Japon 80g; Lait de coco 400ml; Sucre 60g; Bananes 200g
+- Cuire les perles 15 minutes dans une grande quantité d'eau bouillante jusqu'à ce qu'elles deviennent translucides ; les rincer à l'eau froide.
+- Chauffer le lait de coco avec le sucre et une pincée de sel.
+- Ajouter les perles et la banane en rondelles ; cuire 2 minutes.
+- Servir tiède ou froid (au moins 2 h au frigo).
+
+# Mochi à la pâte de haricots rouges | 8 | 40 | T
++ Farine de riz gluant 200g; Sucre 50g; Pâte de haricots rouges 250g; Fécule de maïs 40g
+- Mélanger la farine de riz, le sucre et 220 ml d'eau en pâte lisse.
+- Cuire 2 minutes au micro-ondes, mélanger, puis encore 1 à 2 minutes jusqu'à ce que la pâte soit translucide et élastique.
+- Étaler la pâte sur un plan couvert de fécule et la diviser en 8.
+- Aplatir chaque morceau, poser une boule de pâte de haricots rouges au centre et refermer en pinçant.
+- Retourner, épousseter l'excès de fécule ; à déguster le jour même.
+
+## patisserie
+# Dorayaki | 6 | 40 | T
++ Oeufs 2pc; Sucre 70g; Miel 1cs; Farine 120g; Levure chimique 3g; Lait 40ml; Pâte de haricots rouges 250g
+- Fouetter les œufs, le sucre et le miel jusqu'à ce que le mélange mousse.
+- Ajouter la farine et la levure, puis le lait pour obtenir une pâte nappante ; laisser reposer 15 minutes.
+- Cuire des petites crêpes épaisses de 10 cm dans une poêle légèrement huilée, à feu doux, jusqu'à ce que des bulles se forment ; retourner.
+- Assembler les crêpes deux par deux avec la pâte de haricots rouges.
+
+# Tartelettes aux œufs | 12 | 60 | T
++ Pâte brisée 2pc; Oeufs 3pc; Lait 150ml; Sucre 80g; Sucre vanillé 8g
+- Dissoudre le sucre dans 120 ml d'eau chaude et laisser refroidir.
+- Fouetter les œufs sans faire mousser, ajouter le lait, le sucre vanillé et le sirop ; passer au tamis.
+- Foncer des moules à tartelettes avec la pâte et les remplir de crème aux trois quarts.
+- Cuire 10 minutes à 200 °C puis 10 minutes à 170 °C : la crème doit à peine trembler au centre.
+
+# Castella | 10 | 90 | T
++ Oeufs 5pc; Sucre 150g; Miel 40g; Farine 130g; Lait 30ml
+- Fouetter les œufs avec le sucre au bain-marie tiède, puis hors du feu jusqu'à ce que le mélange triple de volume et fasse le ruban (10 minutes).
+- Ajouter le miel dilué dans le lait tiède, puis la farine tamisée en deux fois, délicatement.
+- Verser dans un moule à cake tapissé de papier cuisson, faire tomber quelques fois pour chasser les bulles.
+- Cuire 10 minutes à 170 °C puis 40 minutes à 150 °C.
+- Démouler et envelopper chaud dans du film alimentaire, côté dessus en bas : il reste ainsi moelleux.
+
+## petitdej
+# Congee | 4 | 90 | AH
++ Riz 150g; Gingembre 20g; Bouillon de volaille 1500ml; Oignons nouveaux 2pc; Sauce soja 2cs; Huile de sésame 1cc; Oeufs 4pc
+- Rincer le riz et le cuire 1 heure à feu doux dans le bouillon avec le gingembre en lamelles, en remuant de temps en temps, jusqu'à obtenir une bouillie crémeuse.
+- Ajouter de l'eau si elle épaissit trop.
+- Cuire les œufs 7 minutes et les écaler.
+- Servir dans des bols avec les œufs coupés, l'oignon nouveau, la sauce soja et l'huile de sésame.
+
+# Tamagoyaki | 2 | 15 | T
++ Oeufs 4pc; Sucre 1cs; Sauce soja 1cc; Mirin 1cs; Huile de tournesol 1cs
+- Battre les œufs avec le sucre, la sauce soja, le mirin et 2 cuillères d'eau.
+- Huiler légèrement une poêle (idéalement rectangulaire) et verser une fine couche d'œufs.
+- Quand elle est presque prise, la rouler vers soi, la repousser au fond et verser une nouvelle couche en la glissant sous le rouleau.
+- Recommencer jusqu'à épuisement, puis laisser tiédir et couper en tranches.
+
+## plat
+# Curry vert thaï au poulet | 4 | 35 | T
++ Pâte de curry verte 60g; Lait de coco 800ml; Courgettes 300g; Haricots verts 150g; Nuoc-mâm 2cs; Sucre 1cc; Basilic 0.5pc; Citron vert 1pc; Riz basmati 300g
+= Filet de poulet 600g
+~ Tofu ferme 400g
+v Curry vert thaï au tofu
+- Faire chauffer la crème épaisse du lait de coco jusqu'à ce que l'huile se sépare, ajouter la pâte de curry et la faire revenir 2 minutes.
+- Ajouter le poulet en lamelles et le saisir, puis le reste du lait de coco.
+- Ajouter les légumes, le nuoc-mâm et le sucre ; cuire 10 minutes.
+- Hors du feu, ajouter le basilic et le jus de citron vert ; servir avec le riz.
+- Version végé : tofu en cubes doré à la poêle et sauce soja à la place du nuoc-mâm.
+
+# Curry massaman au bœuf | 4 | 150 | AH
++ Pâte de curry massaman 70g; Lait de coco 800ml; Pommes de terre 500g; Oignon 1pc; Cacahuètes 50g; Nuoc-mâm 2cs; Cassonade 1cs; Citron vert 1pc; Riz basmati 300g
+= Bœuf à braiser 700g
+~ Pois chiches (boîte) 400g
+v Curry massaman aux pois chiches
+- Faire revenir la pâte de curry dans un peu de lait de coco épais, ajouter le bœuf en cubes et l'enrober.
+- Verser le reste du lait de coco et 200 ml d'eau ; couvrir et mijoter 1 h 30.
+- Ajouter les pommes de terre en morceaux, l'oignon en quartiers et les cacahuètes ; cuire 30 minutes.
+- Assaisonner de nuoc-mâm, de cassonade et de citron vert ; servir avec le riz.
+- Version végé : mijoter les légumes 30 minutes dans la sauce et ajouter les pois chiches à la fin.
+
+# Laksa | 4 | 45 | AH
++ Pâte de curry rouge 60g; Citronnelle 1pc; Lait de coco 800ml; Bouillon de volaille 800ml; Nouilles de riz 300g; Germes de soja 150g; Oeufs 2pc; Coriandre 0.5pc; Citron vert 1pc; Nuoc-mâm 2cs
+= Scampis 300g
+~ Tofu ferme 300g; Bouillon de légumes 800ml
+v Laksa au tofu
+- Faire revenir la pâte de curry et la citronnelle écrasée dans un peu d'huile 2 minutes.
+- Ajouter le lait de coco et le bouillon ; laisser frémir 15 minutes, assaisonner de nuoc-mâm.
+- Cuire les nouilles et les œufs durs (8 minutes).
+- Pocher les scampis 3 minutes dans la soupe.
+- Répartir les nouilles dans les bols, verser la soupe, garnir de germes de soja, d'œuf, de coriandre et de citron vert. Version végé : tofu doré et bouillon de légumes.
+
+# Rendang de bœuf | 4 | 210 | AH
++ Échalote 4pc; Ail 0.3pc; Gingembre 30g; Citronnelle 2pc; Piment 2pc; Curcuma 1cc; Lait de coco 400ml; Cassonade 1cs; Feuille de laurier 0.2g; Riz basmati 300g
+= Bœuf à braiser 800g
+~ Pommes de terre 600g; Oeufs 4pc
+v Rendang de pommes de terre et œufs
+- Mixer les échalotes, l'ail, le gingembre, la citronnelle (partie tendre), le piment et le curcuma en pâte.
+- Faire revenir la pâte 5 minutes dans l'huile, ajouter le bœuf en cubes et l'enrober.
+- Verser le lait de coco, ajouter le laurier et la cassonade ; cuire 3 heures à feu doux à découvert en remuant de plus en plus souvent.
+- La sauce s'évapore complètement et la viande caramélise dans l'huile : elle doit être presque sèche et brun foncé.
+- Servir avec le riz. Version végé : pommes de terre et œufs durs cuits 40 minutes dans la même sauce réduite.
+
+# Pad kra pao | 4 | 20 | T
++ Ail 0.3pc; Piment 2pc; Sauce huître 2cs; Sauce soja 1cs; Nuoc-mâm 1cs; Sucre 1cc; Basilic 1pc; Riz basmati 300g; Oeufs 4pc
+= Haché porc et bœuf 500g
+~ Tofu ferme 400g
+v Pad kra pao au tofu
+- Piler l'ail et le piment.
+- Les faire revenir 30 secondes dans l'huile très chaude, ajouter la viande et la saisir à feu vif en l'émiettant.
+- Ajouter les sauces et le sucre, puis le basilic (idéalement basilic sacré) hors du feu.
+- Servir sur le riz avec un œuf frit croustillant. Version végé : tofu émietté et bien doré.
+
+# Bánh mì | 4 | 40 | T
++ Baguette 2pc; Carottes 200g; Concombre 1pc; Coriandre 0.5pc; Piment 1pc; Mayonnaise 4cs; Vinaigre de riz 100ml; Sucre 2cs; Sauce soja 2cs; Ail 0.1pc
+= Filet de porc 400g; Pâté de campagne 100g
+~ Tofu ferme 400g
+v Bánh mì au tofu
+- Pickles : couper la carotte en julienne, la couvrir du vinaigre et du sucre dissous et laisser 30 minutes.
+- Mariner le porc en tranches fines avec la sauce soja et l'ail, puis le saisir à feu vif.
+- Fendre les baguettes coupées en deux, les tartiner de pâté et de mayonnaise.
+- Garnir de porc, de pickles égouttés, de concombre en bâtonnets, de coriandre et de piment.
+- Version végé : tofu en tranches mariné et grillé, sans pâté.
+
+# Kimchi jjigae | 4 | 40 | H
++ Kimchi 400g; Tofu ferme 300g; Oignon 1pc; Gochujang 1cs; Ail 0.1pc; Oignons nouveaux 2pc; Riz 300g
+= Lardons 200g
+~ Champignons de Paris 200g
+v Kimchi jjigae aux champignons
+- Faire revenir les lardons (idéalement de la poitrine de porc) puis le kimchi coupé 5 minutes.
+- Ajouter l'oignon, l'ail, le gochujang, un peu de jus de kimchi et 800 ml d'eau ; cuire 20 minutes.
+- Ajouter le tofu en tranches et cuire 5 minutes.
+- Servir bouillant avec l'oignon nouveau et le riz. Version végé : champignons à la place du porc.
+
+# Karaage et riz | 4 | 150 | T
++ Sauce soja 3cs; Mirin 1cs; Gingembre 15g; Ail 0.2pc; Fécule de maïs 80g; Huile de tournesol 1000ml; Citron 1pc; Mayonnaise 3cs; Riz 300g; Chou chinois 300g
+= Cuisse de poulet 6pc
+~ Tofu ferme 500g
+v Karaage de tofu et riz
+- Désosser les cuisses et les couper en morceaux de 4 cm en gardant la peau.
+- Les faire mariner au moins 1 h dans la sauce soja, le mirin, le gingembre et l'ail râpés.
+- Les égoutter, les rouler dans la fécule et les frire 4 minutes à 165 °C ; les laisser reposer 3 minutes puis les refrire 1 minute à 185 °C pour qu'ils soient croustillants.
+- Servir avec le riz, le chou émincé, le citron et la mayonnaise. Version végé : tofu pressé et mariné de la même façon.

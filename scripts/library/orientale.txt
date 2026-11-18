@@ -1,0 +1,239 @@
+// Cuisine orientale (Maghreb, Liban, Moyen-Orient) : recettes écrites à la main (format : voir format.ts).
+@orientale
+
+## aperitif
+# Houmous maison | 6 | 15 | T
++ Pois chiches (boîte) 800g; Tahini 80g; Citron 1pc; Ail 0.1pc; Cumin 0.5cc; Huile d'olive 3cs; Paprika 0.5cc; Pain pita 4pc
+- Égoutter les pois chiches en gardant leur liquide ; les retirer de leur peau pour un houmous très lisse.
+- Mixer avec le tahini, le jus de citron, l'ail, le cumin et du sel, en ajoutant du liquide des pois chiches jusqu'à ce qu'il soit crémeux.
+- Étaler dans une assiette en creusant un sillon, arroser d'huile d'olive et saupoudrer de paprika.
+- Servir avec du pain pita tiède.
+
+# Baba ganoush | 6 | 60 | E
++ Aubergine 800g; Tahini 60g; Citron 1pc; Ail 0.1pc; Persil 0.25pc; Huile d'olive 3cs; Pain pita 4pc
+- Griller les aubergines entières sur la flamme ou 45 minutes au four à 220 °C jusqu'à ce que la peau soit noire et la chair fondante.
+- Récupérer la chair et l'égoutter 10 minutes.
+- L'écraser à la fourchette avec le tahini, le jus de citron, l'ail râpé et du sel.
+- Servir arrosé d'huile d'olive et parsemé de persil, avec du pain pita.
+
+# Mouhammara | 6 | 50 | EA
++ Poivron 3pc; Cerneaux de noix 100g; Chapelure 40g; Cumin 1cc; Piment 0.5pc; Citron 0.5pc; Miel 1cs; Huile d'olive 4cs; Pain pita 4pc
+- Griller les poivrons 30 minutes à 220 °C, les laisser tiédir sous un essuie et les peler.
+- Torréfier les noix à sec.
+- Mixer les poivrons, les noix, la chapelure, le cumin, le piment, le jus de citron, le miel et l'huile en gardant un peu de texture.
+- Saler et servir avec du pain pita.
+
+# Briouates au fromage | 6 | 40 | T
++ Pâte filo 200g; Feta 150g; Ricotta 150g; Oeufs 1pc; Persil 0.5pc; Huile de tournesol 500ml
+- Mélanger la feta émiettée, la ricotta, l'œuf et le persil haché ; poivrer.
+- Couper les feuilles en bandes de 8 cm, poser une cuillère de farce au bout et plier en triangles successifs jusqu'au bout de la bande.
+- Frire 2 minutes à 170 °C jusqu'à ce qu'elles soient dorées (ou les badigeonner de beurre et cuire 15 minutes à 200 °C).
+- Servir chaudes.
+
+# Labneh au zaatar | 6 | 730 | T
++ Yaourt grec 1000g; Zaatar 2cs; Huile d'olive 4cs; Pain pita 4pc
+- Saler le yaourt et le verser dans un torchon fin posé dans une passoire.
+- Laisser égoutter 12 h au frigo : il devient ferme comme un fromage frais.
+- Étaler dans une assiette, arroser d'huile d'olive et saupoudrer de zaatar.
+- Servir avec du pain pita chaud.
+
+## entree
+# Taboulé libanais | 4 | 30 | PE
++ Persil 3pc; Menthe 1pc; Boulgour 50g; Tomates 400g; Oignons nouveaux 3pc; Citron 2pc; Huile d'olive 6cs
+- Rincer le boulgour fin et le laisser gonfler 10 minutes dans le jus des citrons.
+- Effeuiller le persil et la menthe, les hacher finement au couteau (sans les écraser).
+- Couper les tomates et les oignons nouveaux en tout petits dés.
+- Mélanger le tout avec l'huile d'olive, saler, poivrer : c'est une salade de persil, avec très peu de boulgour.
+
+# Salade mechouia | 4 | 50 | E
++ Poivron 4pc; Tomates 500g; Piment 1pc; Ail 0.2pc; Cumin 0.5cc; Oeufs 2pc; Huile d'olive 4cs; Citron 0.5pc
+= Thon (boîte) 140g
+~ Oeufs 2pc
+v Salade mechouia aux œufs
+- Griller les poivrons, les tomates et le piment au four à 220 °C ou sur la braise jusqu'à ce que la peau noircisse.
+- Les peler, les épépiner et les hacher grossièrement au couteau avec l'ail.
+- Assaisonner avec le cumin, l'huile, le jus de citron et du sel.
+- Servir garnie d'œufs durs en quartiers et de thon émietté. Version végé : sans thon, avec un œuf dur de plus.
+
+# Salade de carottes au cumin | 4 | 25 | T
++ Carottes 600g; Ail 0.1pc; Cumin 1cc; Paprika 0.5cc; Citron 1pc; Coriandre 0.5pc; Huile d'olive 3cs; Sucre 1cc
+- Éplucher les carottes, les couper en rondelles et les cuire 8 minutes à l'eau salée : elles doivent rester fermes.
+- Les égoutter et les mélanger tièdes avec l'ail écrasé, les épices, le jus de citron, le sucre et l'huile.
+- Ajouter la coriandre hachée et servir froide.
+
+# Zaalouk | 4 | 45 | E
++ Aubergine 800g; Tomates 500g; Ail 0.3pc; Cumin 1cc; Paprika 1cc; Coriandre 0.5pc; Persil 0.5pc; Huile d'olive 5cs; Citron 0.5pc; Pain pita 2pc
+- Éplucher les aubergines une bande sur deux et les couper en dés ; peler et concasser les tomates.
+- Cuire le tout 30 minutes à couvert avec l'ail, les épices, l'huile et un peu d'eau, en écrasant à la fourchette.
+- Découvrir et laisser réduire jusqu'à ce que le mélange soit compact.
+- Ajouter les herbes et le jus de citron ; servir tiède ou froid avec du pain.
+
+# Brick à l'œuf | 4 | 20 | T
++ Pâte filo 200g; Oeufs 4pc; Persil 0.25pc; Câpres 10g; Oignon 0.5pc; Citron 1pc; Huile de tournesol 500ml
+= Thon (boîte) 160g
+~ Gruyère râpé 60g
+v Brick à l'œuf et au fromage
+- Mélanger le thon émietté, l'oignon haché fin, le persil et les câpres.
+- Poser une feuille pliée en double, garnir d'un peu de farce au centre et y casser un œuf.
+- Replier en triangle et frire aussitôt 1 minute par face dans l'huile chaude : le jaune doit rester coulant.
+- Égoutter et servir avec un quartier de citron. Version végé : remplacer le thon par le fromage râpé.
+
+## soupe
+# Chorba frik | 6 | 90 | AH
++ Oignon 1pc; Tomates concassées 400g; Concentré de tomate 1cs; Pois chiches (boîte) 250g; Frik 150g; Coriandre 0.5pc; Paprika 1cc; Cannelle 0.5cc; Ras el hanout 1cc
+= Épaule d'agneau en morceaux 400g
+~ Pois chiches (boîte) 250g
+v Chorba frik aux pois chiches
+- Faire revenir la viande en petits morceaux et l'oignon râpé à l'huile avec les épices.
+- Ajouter les tomates, le concentré et 2 litres d'eau ; cuire 40 minutes.
+- Ajouter le frik rincé et les pois chiches ; cuire encore 30 minutes en remuant de temps en temps.
+- Ajouter la coriandre hachée et servir avec un quartier de citron. Version végé : sans viande, avec plus de pois chiches.
+
+# Bissara | 6 | 90 | AH
++ Fèves sèches 500g; Ail 0.3pc; Cumin 2cc; Paprika 1cc; Huile d'olive 6cs; Citron 1pc
+- Rincer les fèves cassées et les cuire avec l'ail et 1,5 litre d'eau 1 heure à feu doux, jusqu'à ce qu'elles se défassent.
+- Mixer en soupe épaisse, ajouter le cumin et saler ; allonger d'eau si nécessaire.
+- Servir bien chaude, arrosée d'huile d'olive, saupoudrée de cumin et de paprika, avec un filet de citron.
+
+# Lablabi | 4 | 30 | H
++ Pois chiches (boîte) 800g; Ail 0.3pc; Cumin 2cc; Harissa 1cs; Bouillon de légumes 1500ml; Pain de campagne 0.5pc; Oeufs 4pc; Câpres 20g; Citron 1pc; Huile d'olive 4cs
+- Cuire les pois chiches 15 minutes dans le bouillon avec l'ail écrasé, le cumin et la harissa.
+- Déposer des morceaux de pain rassis au fond de chaque bol.
+- Verser la soupe bouillante dessus et casser un œuf cru dans chaque bol : il cuit dans la chaleur du bouillon en remuant.
+- Garnir de câpres, de cumin, d'un filet d'huile et de citron.
+
+## accompagnement
+# Riz aux vermicelles | 4 | 30 | T
++ Riz 300g; Vermicelles 60g; Beurre 30g
+- Rincer le riz jusqu'à ce que l'eau soit claire.
+- Faire dorer les vermicelles cassés dans le beurre jusqu'à ce qu'ils soient bien bruns.
+- Ajouter le riz, mélanger 1 minute, puis 450 ml d'eau bouillante salée.
+- Couvrir et cuire 15 minutes à feu très doux, puis laisser reposer 10 minutes et égrainer à la fourchette.
+
+# Batata harra | 4 | 45 | T
++ Pommes de terre 800g; Ail 0.3pc; Coriandre 0.5pc; Piment 1pc; Citron 0.5pc; Paprika 1cc; Huile d'olive 5cs
+- Couper les pommes de terre en cubes et les rôtir 30 minutes à 220 °C avec 3 cuillères d'huile, jusqu'à ce qu'elles soient dorées.
+- Faire revenir 1 minute l'ail haché, le piment et la coriandre dans le reste de l'huile.
+- Mélanger avec les pommes de terre, le paprika, le jus de citron et du sel.
+
+## dessert
+# Oranges à la cannelle | 4 | 15 | H
++ Oranges 1000g; Cannelle 1cc; Eau de fleur d'oranger 1cs; Sucre glace 1cs; Menthe 0.25pc
+- Peler les oranges à vif et les couper en rondelles.
+- Les disposer sur un plat et arroser d'eau de fleur d'oranger.
+- Saupoudrer de cannelle et de sucre glace, décorer de menthe ; servir bien frais.
+
+# Om Ali | 6 | 50 | T
++ Pâte feuilletée 2pc; Lait 1000ml; Crème liquide 200ml; Sucre 100g; Sucre vanillé 8g; Raisins secs 50g; Amandes 50g; Cerneaux de noix 50g
+- Cuire les pâtes feuilletées piquées 15 minutes à 200 °C, puis les émietter dans un plat.
+- Parsemer de raisins secs, d'amandes et de noix concassées.
+- Chauffer le lait avec le sucre et le sucre vanillé et le verser sur la pâte.
+- Couvrir de crème légèrement fouettée et passer 15 minutes au four à 220 °C jusqu'à ce que le dessus dore ; servir chaud.
+
+# Seffa aux vermicelles | 6 | 50 | T
++ Vermicelles 500g; Beurre 80g; Sucre glace 60g; Cannelle 2cc; Amandes 100g; Eau de fleur d'oranger 1cs
+- Arroser les vermicelles d'un peu d'eau salée et d'huile, puis les cuire 15 minutes à la vapeur dans le haut d'un couscoussier.
+- Les égrener avec un peu d'eau et d'eau de fleur d'oranger et les cuire à nouveau 10 minutes à la vapeur (deux fois).
+- Mélanger avec le beurre en morceaux.
+- Dresser en dôme, décorer de lignes de cannelle, de sucre glace et d'amandes frites ou grillées.
+
+# Dattes farcies à la pâte d'amandes | 8 | 20 | H
++ Dattes 300g; Pâte d'amandes 200g; Eau de fleur d'oranger 1cc; Cerneaux de noix 30g
+- Inciser les dattes sur la longueur et retirer le noyau.
+- Parfumer la pâte d'amandes d'eau de fleur d'oranger et former des petits boudins.
+- Garnir chaque datte d'un boudin et décorer d'un éclat de noix.
+
+## patisserie
+# Ghriba aux amandes | 10 | 40 | T
++ Poudre d'amandes 300g; Sucre 150g; Oeufs 2pc; Levure chimique 5g; Citron 0.5pc; Sucre glace 80g
+- Mélanger la poudre d'amandes, le sucre, la levure et le zeste de citron, puis ajouter les œufs pour obtenir une pâte collante.
+- Former des boules de la taille d'une noix et les rouler généreusement dans le sucre glace.
+- Les poser sur une plaque et les aplatir légèrement avec le pouce.
+- Cuire 15 minutes à 180 °C : elles craquellent et restent moelleuses à cœur.
+
+# Fekkas | 12 | 120 | T
++ Farine 500g; Sucre 150g; Oeufs 3pc; Beurre 100g; Amandes 150g; Raisins secs 80g; Levure chimique 10g; Eau de fleur d'oranger 2cs; Graines de sésame 30g
+- Mélanger les œufs, le sucre, le beurre fondu et l'eau de fleur d'oranger, puis la farine, la levure, les amandes, les raisins et le sésame.
+- Former des boudins de 4 cm de diamètre et les cuire 25 minutes à 180 °C.
+- Les laisser refroidir, puis les couper en tranches fines.
+- Les sécher 20 minutes à 150 °C en les retournant ; ils deviennent croquants en refroidissant.
+
+# Briouates aux amandes | 12 | 70 | T
++ Pâte filo 250g; Poudre d'amandes 250g; Sucre 100g; Beurre 60g; Cannelle 1cc; Eau de fleur d'oranger 2cs; Miel 200g; Oeufs 1pc; Huile de tournesol 500ml; Graines de sésame 10g
+- Mélanger la poudre d'amandes, le sucre, le beurre fondu, la cannelle, l'eau de fleur d'oranger et l'œuf.
+- Couper les feuilles en bandes, poser une cuillère de farce et plier en triangles.
+- Frire 2 minutes à 170 °C jusqu'à ce qu'elles soient dorées.
+- Les plonger aussitôt quelques secondes dans le miel chaud, égoutter et parsemer de sésame.
+
+## petitdej
+# Msemen | 8 | 90 | T
++ Farine 300g; Semoule 150g; Sucre 1cc; Beurre 80g; Miel 100g
+- Mélanger la farine, 100 g de semoule fine, le sucre, une pincée de sel et environ 250 ml d'eau tiède ; pétrir 10 minutes jusqu'à ce que la pâte soit très souple.
+- Former des boules et les laisser reposer 15 minutes, huilées.
+- Étaler chaque boule très finement sur un plan huilé, badigeonner de beurre fondu, saupoudrer de semoule et plier en carré.
+- Aplatir le carré et le cuire 3 minutes par face dans une poêle chaude.
+- Servir chaud avec du miel tiède.
+
+# Baghrir | 8 | 60 | T
++ Semoule 300g; Farine 100g; Levure de boulanger 10g; Levure chimique 10g; Sucre 1cs; Lait 250ml; Beurre 60g; Miel 100g
+- Mixer la semoule fine, la farine, les levures, le sucre, une pincée de sel, le lait tiède et 500 ml d'eau tiède pendant 2 minutes.
+- Laisser reposer 30 minutes : la pâte doit faire des bulles.
+- Cuire des louches de pâte dans une poêle chaude, d'un seul côté, jusqu'à ce que la surface soit couverte de trous et sèche.
+- Servir arrosées de beurre fondu mélangé au miel.
+
+# Harcha | 8 | 40 | T
++ Semoule 450g; Beurre 100g; Lait 200ml; Sucre 50g; Levure chimique 10g
+- Mélanger 400 g de semoule moyenne, le sucre, la levure et une pincée de sel ; ajouter le beurre fondu et sabler.
+- Ajouter le lait petit à petit pour obtenir une pâte qui se tient.
+- Former des galettes de 1 cm d'épaisseur et les rouler dans le reste de semoule.
+- Cuire 6 à 8 minutes par face à feu doux dans une poêle sans matière grasse ; servir avec du miel ou du fromage frais.
+
+## plat
+# Tajine de poisson à la chermoula | 4 | 70 | T
++ Pommes de terre 600g; Tomates 400g; Poivron 1pc; Citrons confits 50g; Olives vertes 80g; Coriandre 0.5pc; Persil 0.5pc; Ail 0.2pc; Cumin 1cc; Paprika 1cc; Citron 1pc
+= Dos de cabillaud 800g
+~ Pois chiches (boîte) 400g
+v Tajine de pois chiches à la chermoula
+- Chermoula : mixer la coriandre, le persil, l'ail, le cumin, le paprika, le jus de citron et 4 cuillères d'huile d'olive.
+- Faire mariner le poisson en morceaux dans la moitié de la chermoula 30 minutes.
+- Tapisser le tajine de pommes de terre en rondelles, puis de tomates et de poivron en lanières ; arroser du reste de chermoula et de 100 ml d'eau ; cuire 25 minutes couvert.
+- Ajouter le poisson, les citrons confits en lamelles et les olives ; cuire encore 15 minutes.
+- Version végé : ajouter les pois chiches marinés dans la chermoula à la place du poisson.
+
+# Kabsa au poulet | 4 | 80 | T
++ Riz basmati 400g; Oignon 2pc; Ail 0.2pc; Tomates 300g; Concentré de tomate 1cs; Carottes 150g; Raisins secs 40g; Amandes 30g; Cardamome 1cc; Cannelle 1cc; Cumin 1cc; Clous de girofle 0.5g; Feuille de laurier 0.2g
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 400g
+v Kabsa aux pois chiches
+- Faire dorer les cuisses de poulet dans une cocotte, ajouter les oignons émincés et l'ail.
+- Ajouter les épices, les tomates en dés, le concentré, la carotte râpée et 1 litre d'eau ; cuire 35 minutes à couvert.
+- Retirer le poulet et le passer sous le gril pour dorer la peau.
+- Verser le riz rincé dans le bouillon (750 ml), ajouter les raisins et cuire 20 minutes à couvert à feu doux.
+- Servir le riz garni de poulet et d'amandes grillées. Version végé : cuire le riz avec les pois chiches dans un bouillon épicé.
+
+# Musakhan | 4 | 90 | AH
++ Pain pita 4pc; Oignon 6pc; Sumac 3cs; Huile d'olive 150ml; Pignons de pin 40g; Cumin 1cc
+= Cuisse de poulet 4pc
+~ Chou-fleur 800g
+v Musakhan au chou-fleur
+- Frotter le poulet avec un tiers du sumac, le cumin, du sel et 2 cuillères d'huile ; le rôtir 45 minutes à 200 °C.
+- Faire fondre lentement les oignons émincés 30 minutes dans le reste de l'huile avec le reste du sumac.
+- Étaler les oignons sur les pains, poser le poulet effiloché ou en morceaux et passer 5 minutes au four.
+- Parsemer de pignons grillés. Version végé : rôtir le chou-fleur en bouquets avec les mêmes épices.
+
+# Tajine de légumes aux pois chiches | 4 | 70 | AH
++ Carottes 400g; Courgettes 400g; Navets 200g; Pommes de terre 400g; Oignon 1pc; Tomates concassées 300g; Pois chiches (boîte) 400g; Ras el hanout 2cc; Gingembre 10g; Coriandre 0.5pc; Citrons confits 30g; Semoule 300g
+- Faire fondre l'oignon émincé à l'huile d'olive avec le ras el hanout et le gingembre râpé.
+- Ajouter les carottes, les navets et les pommes de terre en gros morceaux, les tomates et 300 ml d'eau ; couvrir et cuire 25 minutes.
+- Ajouter les courgettes, les pois chiches et le citron confit ; cuire encore 15 minutes.
+- Préparer la semoule et servir avec le tajine parsemé de coriandre.
+
+# Shish taouk et riz | 4 | 270 | EA
++ Yaourt grec 150g; Citron 1pc; Ail 0.2pc; Paprika 1cc; Concentré de tomate 1cs; Riz basmati 300g; Tomates 300g; Pain pita 4pc
+= Filet de poulet 800g
+~ Halloumi 400g
+v Brochettes d'halloumi et riz
+- Couper le poulet en cubes et le faire mariner au moins 4 h dans le yaourt, le jus de citron, l'ail râpé, le paprika, le concentré et 2 cuillères d'huile.
+- Enfiler sur des brochettes et griller 10 à 12 minutes en les retournant.
+- Cuire le riz et griller les tomates.
+- Servir avec le pain pita et une sauce à l'ail. Version végé : griller l'halloumi en cubes brièvement marinés.
