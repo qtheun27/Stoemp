@@ -279,7 +279,7 @@ describe("carnet de prix compact", () => {
     const { expandBook, priceAt, emptyBook } = await import("../pricing");
     const shared = expandBook([{ store: "colruyt", e: {
       pates_colruyt: { i: "pates", b: 0, n: "EXEMPLE pâtes", z: 500, un: "g", p: 0.9, u: 0.0018, pr: null, d: "2026-11-17T00:00:00Z", src: "capture", sh: "Colruyt Exempleville",
-        f: [["EVERYDAY pâtes", "eco", 0, "", 1000, 0.8, null], ["EXEMPLE pâtes bio", "maison", 1, "", 500, 1.5, null]] },
+        f: [{ n: "EVERYDAY pâtes", t: "eco", b: 0, g: "", z: 1000, p: 0.8, pr: null }, { n: "EXEMPLE pâtes bio", t: "maison", b: 1, g: "", z: 500, p: 1.5, pr: null }] },
     } }]);
     const p = shared.get("pates_colruyt")!;
     expect(p).toMatchObject({ itemId: "pates", store: "colruyt", packPrice: 0.9, shop: "Colruyt Exempleville" });

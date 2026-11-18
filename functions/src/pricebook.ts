@@ -27,7 +27,7 @@ function entry(d: FirebaseFirestore.DocumentData, bio: boolean) {
     i: d.itemId, b: d.organic ? 1 : 0, n: d.productName || "", z: Number(d.packSize) || 1, un: d.packUnit, p: d.packPrice, u: d.pricePerUnit,
     pr: d.promo || null, d: d.fetchedAt || "", src: d.source || "capture", sh: d.shop || null, ...(d.source === "robot" && d.url ? { url: d.url } : {}),
     // Les variantes ne sont gardées que sur la fiche principale (la fiche bio n'en a pas besoin).
-    ...(!bio && Array.isArray(d.offers) && d.offers.length ? { f: keepOffers(d.offers).map((o) => [o.name, o.tier, o.organic ? 1 : 0, (o.tags || []).join(","), Number(o.size), o.price, o.promo || null]) } : {}),
+    ...(!bio && Array.isArray(d.offers) && d.offers.length ? { f: keepOffers(d.offers).map((o) => ({ n: o.name, t: o.tier, b: o.organic ? 1 : 0, g: (o.tags || []).join(","), z: Number(o.size), p: o.price, pr: o.promo || null })) } : {}),
   };
 }
 
