@@ -1,4 +1,5 @@
 import { ingredientsOf, isVegRecipe, matchesWord, type ItemIndex } from "./catalog";
+import { allAllergens, groupScore, type Tastes } from "./tastes";
 import { mealCostPerPerson, type CostCtx } from "./cost";
 import { currentSeason } from "./season";
 import type { GenOptions, Item, Recipe, Season, Settings, Slot, StockEntry } from "./types";
@@ -14,6 +15,8 @@ export interface PlanCtx {
   cost: CostCtx;
   now?: Date;
   rand?: () => number;
+  /** Goûts des membres du foyer (profils et avis) : le planificateur choisit des plats qui plaisent à toute la table. */
+  tastes?: Tastes;
 }
 
 export const planSeason = (o: GenOptions, now = new Date()): Season => (o.season === "auto" ? currentSeason(now) : o.season);
@@ -90,6 +93,8 @@ export function score(r: Recipe, ctx: PlanCtx): number {
     }
   }
   if (o.local) s *= 0.5 + localShare(r, o.veg, ctx.idx);
+  // Goûts de chacun : un plat qui plaît à tous monte, un plat refusé par un membre disparaît presque.
+  if (ctx.tastes?.people.length) s *= groupScore(r, ctx.tastes, ctx.idx);
   // Cuisines préférées : plus souvent, sans exclure les autres (variété).
   if (o.cuisines?.length) s *= r.cuisine && o.cuisines.includes(r.cuisine) ? 2.5 : 0.5;
   // Promos de la semaine dans les magasins du foyer.
@@ -140,6 +145,8 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   const days = mealDays(settings);
   const lunchDays = new Set(days.lunch), dinnerDays = new Set(days.dinner);
   const eo = effectiveOptions(settings);
+  // Les allergies de chaque membre valent pour tout le repas.
+  if (ctx.tastes?.people.length) eo.allergens = [...new Set([...eo.allergens, ...allAllergens(ctx.tastes.people)])];
   const ok = pool.filter((r) => allowed(r, eo, ctx.idx, ctx.now));
   if (!ok.length && !fresh.length) return { slots: [], warning: "Aucun repas ne correspond à tes options. Décoche-en une ou deux.", costPerPersonWeek: 0 };
 

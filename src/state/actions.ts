@@ -12,6 +12,7 @@ import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
 import type { Cat, Consumption, ConsumptionEvent, EventType, Ingredient, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
 import { mealParts, vegPortions } from "../lib/mixed";
+import { eatersFromPeople, TASTE_GROUPS, type Person, type Rating } from "../lib/tastes";
 import { isoWeek } from "../lib/season";
 import { baseQty } from "../lib/units";
 import type { HistoryEntry, Prefs, StoreState } from "./store";
@@ -63,7 +64,7 @@ export const priceSel = (s: StoreState): PriceSel => ({ organic: s.settings.opti
 
 export function planCtx(s: StoreState): PlanCtx {
   return {
-    idx: s.idx, settings: s.settings, favorites: s.prefs.favorites, stock: s.stock,
+    idx: s.idx, settings: s.settings, favorites: s.prefs.favorites, stock: s.stock, tastes: s.tastes,
     cost: { idx: s.idx, book: s.book, stores: s.settings.stores, pref: s.settings.preferredStore, organic: priceSel(s) },
   };
 }
@@ -87,7 +88,10 @@ async function aiRecipes(s: StoreState, n: number, extra: { stockOnly?: boolean 
   const res = await generateRecipesFn({
     householdId: s.hid, n, season: planSeason(o),
     options: {
-      local: o.local, organic: o.organic, veg: o.veg, maxTime: o.timeOn ? o.maxTime : null, allergens: o.allergens, avoid: o.avoid,
+      local: o.local, organic: o.organic, veg: o.veg, maxTime: o.timeOn ? o.maxTime : null,
+      // Allergies et « jamais dans mon assiette » de chaque membre du foyer.
+      allergens: [...new Set([...o.allergens, ...s.tastes.people.flatMap((p) => p.allergens)])],
+      avoid: [...new Set([...o.avoid, ...s.tastes.people.flatMap((p) => p.never.map((k) => TASTE_GROUPS[k]?.label.toLowerCase()).filter(Boolean) as string[])])].slice(0, 30),
       budgetPerPerson: o.budgetOn ? o.budget / Math.max(0.5, portionsOf(e)) / Math.max(1, mealCounts(s.settings).total) : null,
       kidFriendly: !!o.kidFriendly && e.kids > 0, stockOnly: !!extra.stockOnly, cuisines: o.cuisines || [],
     },
@@ -440,3 +444,15 @@ export const deleteRecipe = (id: string) => updateDoc(doc(db, "recipes", id), { 
 
 // ---------------- Capteur de prix ----------------
 export const extractPricesFn = call<{ store: StoreId; url: string; text: string }, { found: number; saved: { itemId: string; productName: string; packPrice: number }[]; created?: string[]; shop?: string | null; reader?: string }>("extractPrices");
+
+// ---------- Goûts du foyer ----------
+/** Enregistre la liste des profils et met à jour la composition du foyer (adultes, ados, enfants, végétariens). */
+export async function savePeople(s: StoreState, people: Person[]) {
+  await setDoc(hh(s.hid!, "meta", "tastes"), clean({ people }), { merge: true });
+  if (!people.length) return;
+  const e = eatersFromPeople(people);
+  await saveSettings(s.hid!, { adults: Math.max(1, e.adults), teens: e.teens, kids: e.kids, persons: Math.max(1, e.adults) + e.teens + e.kids, vegEaters: e.vegEaters });
+}
+/** Avis d'un membre sur un plat (jeu « Ça te tente ? » ou note du lendemain). */
+export const rateRecipe = (s: StoreState, personId: string, recipeId: string, rating: Rating) =>
+  setDoc(hh(s.hid!, "meta", "tastes"), { ratings: { [personId]: { [recipeId]: rating } } }, { merge: true });
