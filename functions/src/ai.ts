@@ -38,6 +38,8 @@ export async function askJson<T extends z.ZodTypeAny>(task: Task, opts: { system
   const params: Record<string, unknown> = {
     model: tc.model, max_tokens: Math.max(tc.maxTokens, opts.minTokens || 0), system: opts.system,
     messages: [{ role: "user", content: opts.content }],
+    // Cache du préfixe (consignes + catalogue, identiques d'un appel à l'autre) : relu pour ~10 % du prix.
+    cache_control: { type: "ephemeral" },
     output_config: { format: zodOutputFormat(opts.schema), ...(supportsEffort(tc.model) ? { effort: tc.effort } : {}) },
   };
   if (supportsFallback(tc.model)) { params.betas = ["server-side-fallback-2026-07-01"]; params.fallbacks = "default"; }
