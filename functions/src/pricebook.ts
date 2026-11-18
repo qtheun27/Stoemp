@@ -7,7 +7,7 @@ import { getFirestore } from "firebase-admin/firestore";
  * Entrée : clé = identifiant de la fiche (itemId_magasin[_bio]) → valeurs courtes (voir expandBook côté appli).
  */
 export const BOOK_SHARDS = 4;
-const MAX_OFFERS = 15;
+const MAX_OFFERS = 8;
 
 const shardOf = (key: string) => { let h = 0; for (const c of key) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h % BOOK_SHARDS; };
 
