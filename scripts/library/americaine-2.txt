@@ -1,0 +1,197 @@
+// Cuisine américaine et britannique, deuxième série.
+@americaine
+
+## aperitif
+# Pigs in a blanket | 6 | 30 | T
++ Pâte feuilletée 1pc; Oeufs 1pc; Moutarde 2cs; Graines de sésame 1cs
+= Saucisse 6pc
+~ Cheddar 150g
+v Feuilletés au cheddar
+- Couper la pâte en triangles allongés et les tartiner d'un peu de moutarde.
+- Couper les saucisses en tronçons de 5 cm et les enrouler dans la pâte.
+- Dorer à l'œuf, parsemer de sésame et cuire 18 minutes à 200 °C.
+- Servir avec de la moutarde. Version végé : bâtonnets de cheddar à la place des saucisses.
+
+# Spinach dip | 6 | 35 | T
++ Épinards hachés surgelés 300g; Fromage frais nature 200g; Crème fraîche 100ml; Mozzarella 125g; Parmesan 50g; Ail 0.1pc; Tortillas 6pc
+- Décongeler et presser fortement les épinards.
+- Mélanger avec le fromage frais, la crème, l'ail, la moitié de la mozzarella et le parmesan.
+- Verser dans un petit plat, couvrir du reste de mozzarella et cuire 20 minutes à 190 °C.
+- Servir chaud avec des chips de tortilla.
+
+## entree
+# Scotch eggs | 4 | 45 | T
++ Oeufs 6pc; Farine 40g; Chapelure 120g; Moutarde 1cs; Huile de tournesol 1000ml
+= Haché porc et bœuf 400g
+~ Pois chiches (boîte) 400g; Chapelure 40g
+v Scotch eggs aux pois chiches
+- Cuire 4 œufs 6 minutes 30, les refroidir et les écaler.
+- Assaisonner la chair avec la moutarde et du poivre ; en envelopper chaque œuf fariné.
+- Passer dans la farine, les 2 œufs battus et la chapelure.
+- Frire 7 minutes à 165 °C ; servir coupés en deux. Version végé : pois chiches écrasés, liés à la chapelure.
+
+## soupe
+# Soupe de tomates et grilled cheese | 4 | 40 | AH
++ Tomates concassées 800g; Oignon 1pc; Ail 0.1pc; Beurre 60g; Bouillon de légumes 500ml; Sucre 1cc; Crème liquide 100ml; Pain de mie 8pc; Cheddar 200g
+- Faire fondre l'oignon et l'ail dans 20 g de beurre, ajouter les tomates, le bouillon et le sucre ; cuire 20 minutes.
+- Mixer et ajouter la crème.
+- Garnir le pain de cheddar, beurrer l'extérieur et dorer les sandwichs à la poêle 3 minutes par face.
+- Servir la soupe avec les grilled cheese coupés en mouillettes.
+
+# Cullen skink | 4 | 40 | AH
++ Pommes de terre 500g; Oignon 1pc; Beurre 30g; Lait 600ml; Crème liquide 100ml; Persil 0.25pc
+= Haddock fumé 400g
+~ Maïs (boîte) 200g; Paprika 1cc
+v Chowder de pommes de terre au maïs
+- Pocher le haddock 8 minutes dans le lait, le retirer et l'effeuiller.
+- Faire fondre l'oignon dans le beurre, ajouter les pommes de terre en dés et le lait de cuisson ; cuire 15 minutes.
+- Écraser une partie des pommes de terre pour épaissir, ajouter la crème et le poisson.
+- Parsemer de persil. Version végé : maïs et paprika fumé à la place du haddock.
+
+## accompagnement
+# Green bean casserole | 6 | 50 | AH
++ Haricots verts 600g; Champignons de Paris 250g; Beurre 30g; Farine 30g; Lait 300ml; Crème liquide 100ml; Oignon 2pc; Huile de tournesol 300ml
+- Blanchir les haricots 5 minutes.
+- Faire revenir les champignons dans le beurre, ajouter la farine, puis le lait et la crème en sauce.
+- Mélanger avec les haricots dans un plat.
+- Couvrir d'oignons émincés farinés et frits et cuire 20 minutes à 180 °C.
+
+# Épinards à la crème | 4 | 20 | T
++ Épinards frais 800g; Beurre 30g; Échalote 1pc; Crème liquide 150ml; Muscade 0.25cc; Parmesan 30g
+- Faire tomber les épinards et les presser ; les hacher grossièrement.
+- Faire fondre l'échalote dans le beurre, ajouter la crème et réduire de moitié.
+- Ajouter les épinards, la muscade et le parmesan ; chauffer 3 minutes.
+
+# Roast potatoes | 6 | 70 | T
++ Pommes de terre 1500g; Graisse de canard 80g; Romarin 0.25pc; Ail 0.2pc
+- Couper les pommes de terre farineuses en gros morceaux et les précuire 8 minutes à l'eau salée.
+- Les égoutter et les secouer dans la casserole pour abîmer les bords.
+- Les rouler dans la graisse chaude dans un plat préchauffé.
+- Rôtir 45 minutes à 220 °C en les retournant, avec l'ail et le romarin : elles deviennent très croustillantes.
+
+# Mushy peas | 4 | 20 | T
++ Petits pois 500g; Beurre 30g; Menthe 0.25pc; Citron 0.25pc
+- Cuire les petits pois 5 minutes à l'eau salée.
+- Les égoutter et les écraser grossièrement avec le beurre, la menthe et un trait de citron.
+- Servir avec le fish and chips ou une tourte.
+
+## dessert
+# Sticky toffee pudding | 8 | 70 | AH
++ Dattes 200g; Farine 175g; Levure chimique 5g; Beurre 155g; Cassonade 300g; Oeufs 2pc; Crème liquide 300ml; Sucre vanillé 8g
+- Faire tremper les dattes hachées 10 minutes dans 250 ml d'eau bouillante.
+- Battre 75 g de beurre avec 150 g de cassonade, ajouter les œufs, la farine, la levure, puis les dattes avec leur eau.
+- Cuire 30 minutes à 180 °C dans un moule beurré.
+- Sauce : faire fondre le reste du beurre et de la cassonade avec la crème et le sucre vanillé ; bouillir 3 minutes.
+- Servir le gâteau chaud nappé de sauce caramel.
+
+# Apple crumble | 6 | 55 | AH
++ Pommes 1000g; Sucre 40g; Cannelle 1cc; Farine 150g; Beurre 100g; Cassonade 100g; Flocons d'avoine 40g
+- Couper les pommes en morceaux, les mélanger avec le sucre et la cannelle dans un plat.
+- Sabler la farine avec le beurre froid, la cassonade et les flocons d'avoine.
+- Recouvrir les pommes de cette pâte en miettes.
+- Cuire 35 minutes à 190 °C jusqu'à ce que le dessus soit doré ; servir tiède avec de la crème.
+
+# Eton mess | 4 | 130 | PE
++ Fraises 500g; Crème liquide 300ml; Sucre glace 2cs; Oeufs 2pc; Sucre 100g
+- Meringues : monter les 2 blancs en neige ferme avec le sucre, dresser des petits tas et cuire 1 h 30 à 100 °C ; laisser refroidir.
+- Couper les fraises en morceaux et en mixer un quart en coulis.
+- Fouetter la crème avec le sucre glace.
+- Mélanger grossièrement la crème, les meringues cassées, les fraises et le coulis ; servir aussitôt en coupes.
+
+# Trifle | 8 | 260 | T
++ Biscuits à la cuillère 200g; Framboises surgelées 300g; Sucre 120g; Lait 500ml; Oeufs 4pc; Fécule de maïs 30g; Crème liquide 300ml; Sucre vanillé 8g; Amandes 20g
+- Crème anglaise épaisse : chauffer le lait avec le sucre vanillé ; fouetter 4 jaunes avec 80 g de sucre et la fécule, verser le lait et cuire jusqu'à épaississement ; refroidir.
+- Disposer les biscuits au fond d'un grand saladier et les couvrir de framboises sucrées avec 20 g de sucre.
+- Couvrir de crème refroidie.
+- Finir par la crème fouettée avec le reste du sucre et les amandes grillées ; réserver au frigo au moins 4 h.
+
+## patisserie
+# Scones | 8 | 35 | T
++ Farine 350g; Levure chimique 15g; Sucre 40g; Beurre 90g; Lait 175ml; Oeufs 1pc; Confiture 150g; Crème fraîche 150ml
+- Sabler la farine, la levure, le sucre et une pincée de sel avec le beurre froid.
+- Ajouter le lait et mélanger rapidement sans pétrir.
+- Abaisser sur 3 cm et découper des disques ; les dorer à l'œuf.
+- Cuire 12 minutes à 220 °C ; servir tièdes avec la confiture et la crème épaisse.
+
+# Victoria sponge | 8 | 50 | T
++ Beurre 200g; Sucre 200g; Oeufs 4pc; Farine 200g; Levure chimique 8g; Confiture 150g; Crème liquide 200ml; Sucre glace 2cs
+- Battre le beurre mou avec le sucre jusqu'à ce qu'il soit très léger, ajouter les œufs un par un.
+- Incorporer la farine et la levure ; répartir dans deux moules de 20 cm.
+- Cuire 22 minutes à 180 °C et laisser refroidir.
+- Garnir de confiture de framboise et de crème fouettée, saupoudrer de sucre glace.
+
+# Shortbread | 16 | 60 | H
++ Beurre 250g; Sucre 120g; Farine 300g; Fécule de maïs 60g
+- Battre le beurre mou avec le sucre.
+- Ajouter la farine, la fécule et une pincée de sel jusqu'à obtenir une pâte.
+- Tasser dans un moule carré, piquer à la fourchette et marquer les parts.
+- Cuire 35 minutes à 160 °C : il doit rester pâle ; couper encore chaud et saupoudrer de sucre.
+
+## petitdej
+# Full English breakfast | 2 | 30 | T
++ Oeufs 2pc; Tomates 200g; Champignons de Paris 150g; Haricots à la sauce tomate (boîte) 415g; Pain de mie 2pc; Beurre 20g
+= Saucisse 2pc; Bacon 100g
+~ Halloumi 150g
+v Full veggie breakfast
+- Cuire les saucisses à la poêle 15 minutes, puis le bacon.
+- Dans la graisse, griller les tomates coupées en deux et les champignons.
+- Réchauffer les haricots, toaster le pain et cuire les œufs au plat.
+- Servir le tout ensemble, bien chaud. Version végé : halloumi grillé à la place des viandes.
+
+# Porridge | 2 | 10 | AH
++ Flocons d'avoine 80g; Lait 400ml; Miel 2cs; Bananes 150g; Cannelle 0.25cc
+- Cuire les flocons dans le lait avec une pincée de sel 5 minutes en remuant.
+- Laisser épaissir hors du feu 1 minute.
+- Servir avec la banane en rondelles, le miel et la cannelle.
+
+# Bagels au saumon et cream cheese | 4 | 10 | T
++ Bagels 4pc; Fromage frais nature 150g; Oignon rouge 0.5pc; Câpres 15g; Citron 0.5pc; Aneth 0.25pc
+= Saumon fumé 200g
+~ Concombre 1pc; Avocat 1pc
+v Bagels au concombre et avocat
+- Couper les bagels en deux et les toaster.
+- Tartiner de fromage frais citronné.
+- Garnir de saumon fumé, d'oignon rouge émincé, de câpres et d'aneth. Version végé : concombre et avocat en tranches.
+
+## plat
+# Steak and ale pie | 6 | 210 | AH
++ Oignon 2pc; Carottes 200g; Farine 30g; Bière brune 500ml; Bouillon de bœuf 300ml; Thym 0.25pc; Pâte feuilletée 1pc; Oeufs 1pc; Pommes de terre 1000g; Petits pois 400g
+= Bœuf à braiser 1000g
+~ Champignons de Paris 600g; Lentilles vertes 200g
+v Tourte aux champignons et lentilles à la bière
+- Faire dorer le bœuf en cubes fariné, ajouter les oignons et les carottes.
+- Mouiller avec la bière et le bouillon, ajouter le thym ; cuire 2 heures à couvert.
+- Verser dans un plat, laisser tiédir et couvrir de pâte feuilletée ; dorer à l'œuf.
+- Cuire 30 minutes à 200 °C ; servir avec une purée et les petits pois. Version végé : champignons et lentilles mijotés 40 minutes.
+
+# Beef Wellington | 6 | 120 | H
++ Champignons de Paris 500g; Échalote 2pc; Moutarde 2cs; Pâte feuilletée 2pc; Oeufs 1pc; Pommes de terre 1000g; Haricots verts 500g
+= Rôti de bœuf 1000g; Jambon cru 8pc
+~ Champignons de Paris 300g; Lentilles vertes 200g; Châtaignes 200g
+v Wellington aux champignons et châtaignes
+- Saisir le filet de bœuf de tous côtés, le badigeonner de moutarde et le laisser refroidir.
+- Duxelles : hacher les champignons et l'échalote et les cuire jusqu'à ce que toute l'eau soit évaporée.
+- Étaler le jambon cru sur un film, couvrir de duxelles, poser le filet et rouler serré ; réfrigérer 20 minutes.
+- Envelopper de pâte feuilletée, dorer à l'œuf et cuire 35 minutes à 200 °C ; laisser reposer 10 minutes.
+- Servir avec des pommes de terre rôties et des haricots. Version végé : boudin de champignons, lentilles et châtaignes hachés.
+
+# Chicken and dumplings | 4 | 80 | AH
++ Carottes 200g; Céleri 150g; Oignon 1pc; Thym 0.25pc; Farine 250g; Levure chimique 10g; Beurre 60g; Lait 150ml; Persil 0.25pc
+= Cuisse de poulet 4pc; Bouillon de volaille 1200ml
+~ Pois chiches (boîte) 400g; Bouillon de légumes 1200ml
+v Ragoût de légumes et dumplings aux pois chiches
+- Cuire le poulet 35 minutes dans le bouillon avec l'oignon, le thym, les carottes et le céleri ; l'effilocher.
+- Dumplings : sabler 200 g de farine avec la levure, le beurre et du sel, ajouter le lait et le persil.
+- Lier le bouillon avec le reste de la farine délayée, remettre le poulet.
+- Déposer des cuillerées de pâte sur le ragoût frémissant, couvrir et cuire 15 minutes sans ouvrir.
+- Version végé : pois chiches et bouillon de légumes.
+
+# Kedgeree | 4 | 40 | T
++ Riz basmati 300g; Oeufs 4pc; Oignon 1pc; Curry en poudre 2cc; Beurre 40g; Persil 0.5pc; Citron 1pc
+= Haddock fumé 400g
+~ Pois chiches (boîte) 300g
+v Kedgeree aux pois chiches
+- Pocher le haddock 8 minutes dans de l'eau frémissante et l'effeuiller.
+- Cuire le riz et les œufs (8 minutes).
+- Faire fondre l'oignon dans le beurre avec le curry, ajouter le riz et le poisson.
+- Servir avec les œufs en quartiers, le persil et le citron. Version végé : pois chiches à la place du poisson.

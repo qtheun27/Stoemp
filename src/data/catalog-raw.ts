@@ -420,5 +420,9 @@ Biscuits Maria|ep|g|200|1.29|S||gl|galletas maria|
 Thon frais|vi|g|400|12.99|P|2|po|thon rouge,thon albacore|
 Mélasse de grenade|ep|ml|250|3.99|S|||sirop de grenade,dibs rumman|
 Agar-agar|ep|g|10|2.49|S||||
-Feuilles de nori|ep|pc|10|2.99|S|||nori,algues nori|
+Feuilles de nori|ep|g|30|2.99|S|||nori,algues nori|
+Haddock fumé|vi|g|300|6.99|P|5|po|églefin fumé|
+Fruits de la passion|fl|pc|1|0.79|P|10||maracuja,passion|
+Bagels|bo|pc|4|2.49|P|5|gl|bagel|
+Haricots à la sauce tomate (boîte)|ep|g|415|0.99|S|||baked beans en boîte|
 `;
