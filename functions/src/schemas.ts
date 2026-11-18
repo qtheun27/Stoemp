@@ -60,6 +60,7 @@ const LibIngredient = AiIngredient.omit({ qtyPerPerson: true }).extend({ qty: z.
 export const LibRecipes = z.object({ recipes: z.array(AiRecipe.omit({ ingredients: true, meat: true, vegSwap: true }).extend({
   course: z.enum(LIB_COURSES),
   servings: z.number().int().describe("Nombre de parts de la recette (ex. 4 pour un plat, 8 pour un gâteau)"),
+  light: z.boolean().describe("Plat principal servi SANS féculent par choix de cuisine : repas léger (salade composée, omelette) ou plat qui forme déjà un repas (moussaka, viande avec sa garniture de légumes). false s'il comporte son féculent ou si ce n'est pas un plat principal"),
   ingredients: z.array(LibIngredient), meat: z.array(LibIngredient), vegSwap: z.array(LibIngredient),
 })) });
 

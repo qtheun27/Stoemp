@@ -11,8 +11,8 @@ Appli PWA « Stoemp » : repas de saison de la semaine, liste de courses avec pr
 - **Aucune clé API côté client** : tous les appels IA passent par les Cloud Functions (`functions/`), clé dans le secret Firebase `ANTHROPIC_API_KEY`.
 - Réponses IA validées avec **zod** (`functions/src/schemas.ts`).
 - **Carnet de prix compact** : l'appli lit `priceBook/{magasin}_{0-3}` (`functions/src/pricebook.ts`, `expandBook` dans `src/lib/pricing.ts`), reconstruit après chaque capture, fusion/suppression d'article et passage du robot (signal `priceBookDirty/{magasin}`) ; repli sur `prices` tant qu'il est vide. 8 variantes au plus par article.
-- **Maintenance** sans connexion manuelle : workflow GitHub « Maintenance » (`seed`, `rebuild-pricebook`) avec le compte de service du déploiement.
-- Plats principaux = **repas complets** (féculent obligatoire, `hasStarch` dans `src/lib/balance.ts`, testé) ; doublons de noms refusés à la génération.
+- **Maintenance** sans connexion manuelle : workflow GitHub « Maintenance » (`seed`, `rebuild-pricebook`, `oneoff` = correction ponctuelle `scripts/maintenance/oneoff.mts`) avec le compte de service du déploiement.
+- Plats principaux = **repas** : avec leur accompagnement habituel, ou `light` (repas léger / déjà complet : salade-repas, omelette, moussaka, viande et sa garniture), décidé par le cuisinier (`LIGHT_MEALS` pour la base, champ `light` à la génération, vérifié par le relecteur ; `hasStarch` testé). Jamais de féculent artificiel. Doublons de noms refusés.
 - Prix : usage privé, jamais publiés. Un connecteur en panne ne casse jamais l'appli (derniers prix connus affichés avec leur date).
 
 ## Architecture

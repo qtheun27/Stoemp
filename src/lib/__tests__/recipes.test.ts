@@ -35,9 +35,11 @@ describe("grande bibliothèque", () => {
 });
 
 describe("repas complets", () => {
-  it("chaque plat principal de base a son féculent (pommes de terre, riz, pâtes, pain…)", async () => {
+  it("chaque plat principal de base a son féculent, sauf repas léger ou déjà complet déclaré", async () => {
     const { hasStarch } = await import("../balance");
     const { BASE_INDEX: idx } = await import("../catalog");
-    expect(BASE_RECIPES.filter((r) => (r.course || "plat") === "plat" && !hasStarch(r, idx)).map((r) => r.name)).toEqual([]);
+    expect(BASE_RECIPES.filter((r) => (r.course || "plat") === "plat" && !r.light && !hasStarch(r, idx)).map((r) => r.name)).toEqual([]);
+    // Un repas léger déclaré ne reçoit pas de féculent ajouté (le cuisinier a tranché).
+    expect(BASE_RECIPES.filter((r) => r.light && hasStarch(r, idx)).map((r) => r.name)).toEqual([]);
   });
 });
