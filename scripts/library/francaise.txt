@@ -320,7 +320,7 @@ v Raclette aux champignons et œufs
 
 # Poule au pot | 6 | 180 | AH
 + Carottes 500g; Poireaux 500g; Navets 300g; Céleri 200g; Oignon 1pc; Clous de girofle 1g; Thym 0.25pc; Feuille de laurier 0.4g; Pommes de terre 1000g; Cornichons 100g; Moutarde 3cs
-= Poulet entier 1pc
+= Poulet entier 1800g
 ~ Pois chiches (boîte) 800g
 v Pot-au-feu de légumes aux pois chiches
 - Mettre la volaille dans une grande marmite, couvrir d'eau froide, porter à ébullition et écumer.

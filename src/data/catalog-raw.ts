@@ -308,7 +308,7 @@ Glace au café|su|ml|1000|3.99|||la,oe||
 Filets de sole|vi|g|400|11.99|P|2|po|sole|
 Fromage à raclette|fr|g|400|6.49|P|21|la|raclette|
 Beaufort|fr|g|250|5.99|P|30|la||
-Poulet entier|vi|pc|1|8.99|LBP|3||poulet fermier,poule|
+Poulet entier|vi|g|1600|8.99|LBP|3||poulet fermier,poule|
 Sauté de veau|vi|g|800|14.90|LP|3||veau en morceaux,blanquette de veau|
 Magret de canard|vi|g|400|8.99|P|5||magret|
 Câpres|ep|g|100|1.79|S|||capres|
