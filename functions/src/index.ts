@@ -598,7 +598,7 @@ Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et
     if (hours * 60 > r.prepMin + 30) return `durée ${r.prepMin} min mais ${hours} h dans les étapes`;
     if (all.length < (course === "plat" || course === "soupe" ? 3 : 2)) return "trop peu d'ingrédients";
     if (r.steps.length < 2 || r.steps.length > 10) return `${r.steps.length} étapes`;
-    if (r.prepMin < 5 || r.prepMin > 300) return `durée ${r.prepMin} min`;
+    if (r.prepMin < 5 || r.prepMin > 1500) return `durée ${r.prepMin} min`; // repos, congélation ou marinade de la veille compris
     if (!qtyOk) return `quantités (${r.servings} parts)`;
     if (r.meat.length && !r.vegSwap.length) return "pas de version végé";
     return null;
@@ -641,7 +641,7 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
     const recipe = {
       name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: Math.max(5, r.prepMin),
       seasons: r.seasons.length ? r.seasons : ["P", "E", "A", "H"], ingredients, meat, vegSwap, steps: r.steps.slice(0, 8),
-      cuisine, course, source: "base", lib: true, householdId: null, deleted: false, createdAt: Date.now(),
+      cuisine, course, servings: r.servings, source: "base", lib: true, householdId: null, deleted: false, createdAt: Date.now(),
     };
     batch.set(db().collection("recipes").doc(id), recipe);
     // Fiche compacte (sans les étapes) pour l'appli : chargée une fois, gardée hors ligne.
