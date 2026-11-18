@@ -12,6 +12,9 @@ const TABLE: Record<Cuisine, string> = {
 /** Générateur pseudo-aléatoire déterministe (même plat → même dessin). */
 function rng(seed: number) { let a = seed || 1; return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 type R = () => number;
+/** Agrandit un aliment autour de son point d'ancrage, avec un léger contour pour qu'il se lise même en vignette. */
+const zoom = (x: number, y: number, k: number, child: ReactNode) =>
+  <g transform={`translate(${x} ${y}) scale(${k}) translate(${-x} ${-y})`} style={{ filter: "drop-shadow(0 0.6px 0 rgba(60,40,20,.45))" }}>{child}</g>;
 const around = (r: R, cx: number, cy: number, rx: number, ry: number, n: number) =>
   Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2 + r() * 0.8; const d = 0.35 + r() * 0.65; return [cx + Math.cos(a) * rx * d, cy + Math.sin(a) * ry * d, r()] as const; });
 
@@ -76,8 +79,8 @@ function vegArt(k: Veg, r: R, x: number, y: number): ReactNode {
 
 function garnishArt(s: ArtSpec, r: R, cx: number, cy: number): ReactNode {
   return <g>
-    {s.garnish.includes("herbes") && around(r, cx, cy, 44, 26, 14).map(([a, b, t], i) => <ellipse key={`h${i}`} cx={a} cy={b} rx={2} ry={1.1} fill="#3f9a3a" transform={`rotate(${t * 180} ${a} ${b})`} />)}
-    {s.garnish.includes("fromage") && around(r, cx, cy, 30, 18, 12).map(([a, b, t], i) => <rect key={`f${i}`} x={a} y={b} width={5} height={1.4} rx={0.7} fill="#f6e29a" transform={`rotate(${t * 180} ${a} ${b})`} />)}
+    {s.garnish.includes("herbes") && around(r, cx, cy, 40, 24, 7).map(([a, b, t], i) => <ellipse key={`h${i}`} cx={a} cy={b} rx={2.6} ry={1.4} fill="#3f9a3a" transform={`rotate(${t * 180} ${a} ${b})`} />)}
+    {s.garnish.includes("fromage") && around(r, cx, cy, 26, 14, 7).map(([a, b, t], i) => <rect key={`f${i}`} x={a} y={b} width={5} height={1.4} rx={0.7} fill="#f6e29a" transform={`rotate(${t * 180} ${a} ${b})`} />)}
     {s.garnish.includes("sesame") && around(r, cx, cy, 30, 18, 16).map(([a, b], i) => <ellipse key={`s${i}`} cx={a} cy={b} rx={1.1} ry={0.6} fill="#fbf3dd" />)}
     {s.garnish.includes("citron") && <g><path d={`M${cx + 40} ${cy + 16} a10 10 0 0 1 18 -6z`} fill="#f6d64a" stroke="#d9b52c" /><path d={`M${cx + 43} ${cy + 13} l10 -5`} stroke="#fbe99a" /></g>}
   </g>;
@@ -113,13 +116,13 @@ function sweetArt(s: ArtSpec, r: R): ReactNode {
   }
 }
 
-function DishArtSvg({ recipe, idx, height = 140, rounded = 14 }: { recipe: Recipe; idx: ItemIndex; height?: number | string; rounded?: number }) {
+function DishArtSvg({ recipe, idx, height = 140, rounded = 14, crop }: { recipe: Recipe; idx: ItemIndex; height?: number | string; rounded?: number; crop?: boolean }) {
   const s = artSpec(recipe, idx);
   const r = rng(s.seed);
   const bg = recipe.cuisine ? TABLE[recipe.cuisine] : "#efe9df";
   const sweet = ["cup", "glass", "slice", "tart", "cookies", "stack", "waffle"].includes(s.vessel);
   const name = recipe.name.toLowerCase() + " " + recipe.meat.map((i) => idx.get(i.itemId)?.name.toLowerCase()).join(" ");
-  return <svg viewBox="0 0 200 150" role="img" aria-label={`Illustration : ${recipe.name}`} style={{ width: "100%", height, display: "block", borderRadius: rounded, background: bg }}>
+  return <svg viewBox={crop ? "22 26 156 112" : "0 0 200 150"} role="img" aria-label={`Illustration : ${recipe.name}`} style={{ width: "100%", height, display: "block", borderRadius: rounded, background: bg }}>
     <ellipse cx={100} cy={134} rx={80} ry={10} fill="#00000014" />
     {sweet ? sweetArt(s, r)
       : s.vessel === "mug" ? <g><rect x={66} y={50} width={62} height={70} rx={12} fill="#fffaf2" stroke="#d9cfc0" strokeWidth={2} /><path d="M128 66 q20 0 20 18 q0 18 -20 18" fill="none" stroke="#d9cfc0" strokeWidth={6} />
@@ -139,17 +142,17 @@ function DishArtSvg({ recipe, idx, height = 140, rounded = 14 }: { recipe: Recip
           : <g>{around(r, 92, 86, 60, 24, 9).map(([a, b, t], i) => <g key={i}><circle cx={a} cy={b} r={9} fill={t > 0.66 ? "#e7b25a" : t > 0.33 ? "#d9953f" : "#f0cf86"} stroke="#b9853f" />
             {s.veg[0] && <circle cx={a + 2} cy={b - 2} r={3} fill={{ tomate: "#e2402f", poivron: "#e2472f", avocat: "#a7cc63" }[s.veg[0] as string] || "#7cbd48"} />}</g>)}</g>}</g>
       : <g><ellipse cx={100} cy={82} rx={84} ry={56} fill="#fbfaf7" stroke="#e1dbcf" strokeWidth={2} /><ellipse cx={100} cy={82} rx={66} ry={42} fill="#f4f1ea" />
-        {s.sauce && <path d={`M${92} ${70} q30 -14 40 6 q8 18 -18 22 q-26 4 -30 -10 q-2 -12 8 -18z`} fill={s.sauce} opacity={0.92} />}
-        {s.starch && starchArt(s.starch, r, s.protein ? 72 : 100, s.protein ? 80 : 78)}
-        {s.protein && proteinArt(s.protein, r, s.starch ? 120 : 100, 76, name)}
+        {s.sauce && <path d="M64 74 q36 -26 76 -8 q22 12 6 28 q-30 22 -70 10 q-26 -10 -12 -30z" fill={s.sauce} opacity={0.9} />}
+        {s.starch && zoom(s.protein ? 70 : 100, s.protein ? 82 : 80, 1.4, starchArt(s.starch, r, s.protein ? 70 : 100, s.protein ? 82 : 80))}
+        {s.protein && zoom(s.starch ? 126 : 100, 76, 1.4, proteinArt(s.protein, r, s.starch ? 126 : 100, 76, name))}
         {(s.starch || s.protein ? s.veg.slice(0, 3).map((v, i) => [v, [100, 70, 132][i], [104, 102, 100][i]] as const)
           // Plat de légumes seul : les légumes occupent toute l'assiette.
           : s.veg.flatMap((v, i) => [[v, 78 + (i % 3) * 22, 72 + (i % 2) * 10], [v, 92 + (i % 3) * 18, 92 - (i % 2) * 8]] as const))
-          .map(([v, x, y], i) => <g key={`${v}${i}`}>{vegArt(v, r, x, y)}</g>)}
+          .map(([v, x, y], i) => <g key={`${v}${i}`}>{zoom(x, y, s.starch || s.protein ? 1.25 : 1.35, vegArt(v, r, x, y))}</g>)}
         {!s.starch && !s.protein && !s.veg.length && <ellipse cx={100} cy={80} rx={34} ry={20} fill={s.color} />}
         {garnishArt(s, r, 100, 82)}</g>}
   </svg>;
 }
 
 /** Illustration vectorielle d'un plat, dessinée d'après sa recette (contenant, féculent, protéine, légumes, sauce). */
-export const DishArt = memo(DishArtSvg, (a, b) => a.recipe.id === b.recipe.id && a.recipe.name === b.recipe.name && a.height === b.height);
+export const DishArt = memo(DishArtSvg, (a, b) => a.recipe.id === b.recipe.id && a.recipe.name === b.recipe.name && a.height === b.height && a.crop === b.crop);
