@@ -432,4 +432,7 @@ Abricots|fl|g|500|3.49|P|5||abricot|6-8
 Côtelettes de porc|vi|g|800|5.99|LP|3||côtes de porc|
 Chair de crabe|vi|g|120|4.99|P|3|cr|crabe|
 Bicarbonate de soude|ep|g|200|1.29|S|||bicarbonate|
+Fromage de Herve|fr|g|200|3.49|LP|21|la|herve|
+Épeautre|ep|g|500|2.49|S||gl|farro,petit épeautre|
+Orge perlé|ep|g|500|1.49|S||gl|orge|
 `;
