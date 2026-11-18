@@ -1,0 +1,78 @@
+// Cuisine française, troisième série.
+@francaise
+
+## plat
+# Poulet à l'estragon et riz | 4 | 50 | PE
++ Échalote 2pc; Vin blanc 150ml; Crème fraîche 200ml; Estragon 1pc; Beurre 30g; Riz 300g
+= Cuisse de poulet 4pc
+~ Champignons de Paris 500g; Oeufs 4pc
+v Champignons à l'estragon, œuf mollet et riz
+- Faire dorer les cuisses dans le beurre de tous côtés, les retirer.
+- Faire fondre les échalotes, déglacer au vin blanc, remettre le poulet avec les tiges d'estragon ; couvrir et cuire 30 minutes.
+- Retirer le poulet, ajouter la crème et réduire jusqu'à ce que la sauce nappe ; ajouter les feuilles d'estragon hachées.
+- Servir avec le riz. Version végé : champignons sautés et œufs mollets nappés de la même sauce.
+
+# Saumon à l'oseille et riz | 4 | 35 | PE
++ Oseille 100g; Échalote 2pc; Vin blanc 100ml; Crème liquide 250ml; Beurre 20g; Citron 0.5pc; Riz 300g
+= Pavé de saumon 600g
+~ Oeufs 4pc
+v Œufs pochés à l'oseille et riz
+- Faire fondre les échalotes dans le beurre, ajouter le vin et réduire presque à sec.
+- Ajouter la crème et réduire de moitié, puis l'oseille ciselée : elle fond en 1 minute et prend une couleur kaki.
+- Cuire les pavés de saumon 2 minutes côté peau puis 1 minute de l'autre : le cœur reste nacré.
+- Napper de sauce, citronner et servir avec le riz. Version végé : œufs pochés.
+
+# Pintade aux choux | 4 | 100 | AH
++ Chou vert 1000g; Carottes 300g; Oignon 1pc; Vin blanc 150ml; Thym 0.25pc; Feuille de laurier 0.2g; Beurre 30g; Pommes de terre 800g
+= Pintade 1300g; Lardons 150g
+~ Haricots blancs (boîte) 400g; Tofu fumé 200g
+v Chou braisé aux haricots et tofu fumé
+- Blanchir le chou en quartiers 5 minutes et l'égoutter.
+- Faire dorer la pintade découpée et les lardons dans le beurre ; ajouter l'oignon et les carottes.
+- Ajouter le chou, le vin, le thym et le laurier ; couvrir et cuire 1 heure à feu doux.
+- Ajouter les pommes de terre en morceaux pour les 30 dernières minutes. Version végé : haricots et tofu fumé braisés avec le chou 40 minutes.
+
+# Chou farci | 6 | 150 | AH
++ Chou vert 1500g; Oignon 1pc; Pain de mie 2pc; Lait 100ml; Oeufs 1pc; Persil 0.5pc; Carottes 200g; Bouillon de légumes 500ml; Pommes de terre 1000g
+= Haché porc et bœuf 600g; Lardons 100g
+~ Riz 150g; Champignons de Paris 300g; Gruyère râpé 100g
+v Chou farci au riz, champignons et fromage
+- Blanchir les grandes feuilles du chou 5 minutes, hacher le cœur.
+- Mélanger le haché, les lardons, l'oignon et le persil hachés, le pain trempé dans le lait, l'œuf et un peu de cœur de chou.
+- Dans un saladier tapissé de feuilles, alterner farce et feuilles, refermer et ficeler dans un torchon ou placer dans une cocotte.
+- Cuire 1 h 30 dans le bouillon avec les carottes, à couvert, à feu doux ; ajouter les pommes de terre la dernière demi-heure.
+- Version végé : farce de riz cuit, champignons et fromage.
+
+# Cordon bleu et purée | 4 | 45 | T
++ Emmental 120g; Farine 50g; Oeufs 2pc; Chapelure 150g; Beurre 80g; Pommes de terre 1000g; Lait 200ml; Salade verte 1pc
+= Filet de poulet 600g; Jambon 4pc
+~ Courgettes 500g; Mozzarella 125g
+v Cordon bleu de courgette
+- Ouvrir les filets en portefeuille, les aplatir, les garnir de jambon et d'emmental et les refermer.
+- Les passer dans la farine, l'œuf battu et la chapelure.
+- Les dorer dans 40 g de beurre 4 minutes par face, puis terminer 10 minutes au four à 180 °C.
+- Servir avec une purée au beurre et une salade. Version végé : tranches épaisses de courgette garnies de mozzarella, panées et dorées.
+
+## patisserie
+# Tarte au chocolat | 8 | 150 | T
++ Farine 200g; Beurre 140g; Sucre 70g; Oeufs 3pc; Chocolat noir 200g; Crème liquide 250ml; Lait 50ml
+- Pâte sablée : sabler la farine avec 100 g de beurre, ajouter le sucre et un œuf ; reposer 30 minutes au frais.
+- Foncer un moule de 24 cm et cuire à blanc 25 minutes à 170 °C.
+- Ganache : verser la crème et le lait chauds sur le chocolat haché, lisser, ajouter le reste du beurre et 2 œufs battus.
+- Verser sur le fond et cuire 15 minutes à 150 °C : le centre doit trembler.
+- Laisser prendre 1 heure à température ambiante.
+
+# Mille-feuille | 8 | 120 | T
++ Pâte feuilletée 2pc; Lait 500ml; Oeufs 4pc; Sucre 100g; Fécule de maïs 45g; Beurre 30g; Sucre vanillé 8g; Sucre glace 150g; Chocolat noir 20g
+- Piquer la pâte, la cuire 20 minutes à 190 °C entre deux plaques (pour qu'elle ne gonfle pas) ; couper 3 rectangles égaux.
+- Crème pâtissière : chauffer le lait avec le sucre vanillé ; fouetter 4 jaunes avec le sucre et la fécule, verser le lait et cuire jusqu'à épaississement ; ajouter le beurre et refroidir.
+- Monter le mille-feuille : pâte, crème, pâte, crème, pâte.
+- Glacer avec le sucre glace délayé dans un peu d'eau, tracer des lignes de chocolat fondu et les marbrer à la pointe d'un couteau.
+- Réfrigérer 1 heure avant de couper au couteau-scie.
+
+# Tarte aux abricots | 8 | 70 | E
++ Pâte brisée 1pc; Abricots 800g; Poudre d'amandes 50g; Sucre 80g; Beurre 20g; Confiture 2cs
+- Foncer un moule de 26 cm avec la pâte et parsemer le fond de poudre d'amandes (elle absorbe le jus).
+- Couper les abricots en deux et les serrer debout, côté coupé vers le haut.
+- Saupoudrer de sucre et parsemer de noisettes de beurre.
+- Cuire 40 minutes à 190 °C ; napper de confiture chauffée pour faire briller.

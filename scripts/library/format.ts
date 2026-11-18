@@ -91,6 +91,7 @@ export function checkRecipe(r: HandRecipe, idx: ItemIndex = BASE_INDEX): string[
   const name = (id: string) => idx.get(id)?.name || "";
   if (all.length < (r.course === "plat" || r.course === "soupe" ? 3 : 2)) out.push("trop peu d'ingrédients");
   if (r.steps.length < 2 || r.steps.length > 10) out.push(`${r.steps.length} étapes`);
+  if (r.steps.some((s) => /placeholder|à compléter|todo/i.test(s) || s.length < 15)) out.push("étape inachevée");
   if (r.meat.length && !r.vegSwap.length) out.push("viande sans version végé");
   if (r.meat.length && !r.vegName) out.push("nom végé manquant");
   if (!r.meat.length && (r.vegSwap.length || r.vegName)) out.push("version végé sans viande");
