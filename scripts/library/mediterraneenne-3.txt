@@ -1,0 +1,63 @@
+// Cuisine méditerranéenne, troisième série (plats).
+@mediterraneenne
+
+## plat
+# Kotopoulo kokkinisto | 4 | 80 | AH
++ Oignon 2pc; Ail 0.2pc; Tomates concassées 400g; Concentré de tomate 1cs; Cannelle 1cc; Vin rouge 100ml; Spaghetti 400g; Feta 100g
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 400g; Aubergine 300g
+v Kokkinisto de pois chiches et aubergine
+- Faire dorer le poulet à l'huile d'olive, ajouter les oignons et l'ail.
+- Déglacer au vin, ajouter les tomates, le concentré, la cannelle et 200 ml d'eau.
+- Couvrir et mijoter 50 minutes jusqu'à ce que la sauce soit épaisse.
+- Servir sur les pâtes avec la feta émiettée. Version végé : aubergine et pois chiches mijotés 30 minutes.
+
+# Psari plaki | 4 | 60 | EA
++ Pommes de terre 700g; Oignon 2pc; Tomates 500g; Ail 0.2pc; Persil 0.5pc; Huile d'olive 100ml; Citron 1pc
+= Dos de cabillaud 700g
+~ Haricots blancs (boîte) 400g; Feta 150g
+v Plaki de haricots et feta
+- Faire fondre les oignons émincés dans l'huile, ajouter l'ail, les tomates concassées et le persil ; cuire 10 minutes.
+- Étaler les pommes de terre en rondelles dans un plat, les arroser d'un peu de sauce et cuire 25 minutes à 190 °C.
+- Poser le poisson, couvrir du reste de sauce et de rondelles de citron.
+- Cuire encore 20 minutes. Version végé : haricots et feta à la place du poisson.
+
+# Bifteki et frites | 4 | 45 | E
++ Oignon 1pc; Pain de mie 2pc; Origan 1cc; Menthe 0.25pc; Feta 120g; Pommes de terre 1000g; Huile de tournesol 2000ml; Yaourt grec 150g; Concombre 0.5pc
+= Haché porc et bœuf 600g
+~ Pois chiches (boîte) 400g; Chapelure 40g
+v Bifteki de pois chiches et frites
+- Mélanger la viande avec l'oignon râpé, le pain trempé et pressé, l'origan, la menthe, sel et poivre.
+- Former 8 galettes, glisser un bâtonnet de feta au cœur de chacune et bien refermer.
+- Les griller 5 minutes par face.
+- Servir avec des frites maison et un tzatziki rapide (yaourt et concombre râpé). Version végé : galettes de pois chiches écrasés et chapelure.
+
+# Albóndigas en salsa | 4 | 60 | AH
++ Pain de mie 2pc; Lait 100ml; Oeufs 1pc; Ail 0.2pc; Persil 0.5pc; Farine 30g; Oignon 1pc; Tomates concassées 400g; Vin blanc 100ml; Pommes de terre 800g
+= Haché porc et bœuf 500g
+~ Lentilles vertes 250g; Chapelure 40g
+v Albóndigas de lentilles en salsa
+- Mélanger le haché avec le pain trempé dans le lait, l'œuf, l'ail et le persil hachés ; former des boulettes et les fariner.
+- Les dorer à l'huile d'olive et les réserver.
+- Faire fondre l'oignon, ajouter le vin et les tomates ; cuire 10 minutes, puis remettre les boulettes 20 minutes.
+- Servir avec des pommes de terre frites en cubes. Version végé : boulettes de lentilles cuites écrasées et liées à la chapelure.
+
+# Bitoque | 4 | 40 | T
++ Ail 0.2pc; Vin blanc 100ml; Oeufs 4pc; Pommes de terre 1000g; Huile de tournesol 2000ml; Riz 200g; Salade verte 1pc
+= Steak de bœuf 600g
+~ Halloumi 300g
+v Bitoque d'halloumi
+- Mariner les steaks 15 minutes avec l'ail écrasé, le vin, sel et poivre.
+- Les saisir à feu vif, déglacer avec la marinade pour faire un jus.
+- Poser un œuf au plat sur chaque steak.
+- Servir avec des frites maison, du riz blanc et une salade. Version végé : tranches d'halloumi grillées.
+
+# Piperade aux œufs | 4 | 50 | E
++ Poivron 4pc; Oignon 2pc; Tomates 800g; Ail 0.2pc; Paprika 1cc; Oeufs 6pc; Pain de campagne 0.5pc
+= Jambon cru 4pc
+~ Feta 120g
+v Piperade aux œufs et feta
+- Faire fondre les oignons et les poivrons en lanières à l'huile d'olive 15 minutes.
+- Ajouter les tomates pelées concassées, l'ail et le paprika (idéalement du piment d'Espelette) ; cuire 20 minutes.
+- Ajouter les œufs battus et remuer doucement jusqu'à ce qu'ils soient crémeux, ou les cuire entiers dans la piperade.
+- Servir avec le jambon poêlé rapidement et du pain. Version végé : feta émiettée à la place du jambon.
