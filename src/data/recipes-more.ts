@@ -239,7 +239,7 @@ export const CUISINE_OF: Record<string, Cuisine> = {
   "Salade de pâtes, radis et poulet": "francaise", "Wok de printemps au poulet": "asiatique", "Omelette aux herbes et pommes de terre": "francaise",
   "Tartines ricotta, asperges et jambon cru": "italienne", "Cabillaud et purée aux herbes": "francaise", "Ratatouille, semoule et poulet rôti": "francaise",
   "Salade grecque et brochettes de porc": "mediterraneenne", "Pâtes au pesto, tomates cerises et poulet": "italienne", "Gaspacho et tartines au thon": "mediterraneenne",
-  "Tian de légumes et côtelettes d'agneau": "francaise", "Taboulé et poulet grillé": "orientale", "Tomates farcies": "francaise",
+  "Tian de légumes, côtelettes d'agneau et grenailles": "francaise", "Taboulé et poulet grillé": "orientale", "Tomates farcies": "francaise",
   "Wraps poulet, maïs et avocat": "latino", "Courgettes farcies ricotta et menthe": "mediterraneenne", "Velouté de potiron et croque-monsieur": "francaise",
   "Gratin de chou-fleur au jambon et pommes de terre": "francaise", "Poêlée champignons, pommes de terre et saucisse": "francaise", "Hachis parmentier": "francaise",
   "Risotto aux champignons et poulet": "italienne", "Curry de patate douce au poulet": "indienne", "Flamiche aux poireaux et lardons": "belge",
@@ -256,7 +256,6 @@ export const CUISINE_OF: Record<string, Cuisine> = {
  * ou plat qui forme déjà un repas (moussaka, viande et son accompagnement de légumes).
  */
 export const LIGHT_MEALS = new Set<string>([
-  "Tian de légumes et côtelettes d'agneau", // côtelettes avec leur tian provençal
   "Moussaka", // aubergines, viande et béchamel : un repas en soi
   "Salade Cobb", // salade-repas
   "Frittata de courgettes et salade", // omelette italienne et salade
