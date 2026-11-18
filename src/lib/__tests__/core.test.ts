@@ -134,9 +134,21 @@ describe("coûts", () => {
     const lines = [{ itemId: "lardons", qty: 200, unit: "g" as const }, { itemId: "pates", qty: 1000, unit: "g" as const }];
     const totals = storeTotals(lines, ["colruyt", "renmans", "delhaize"], ctxCost);
     expect(totals.find((t) => t.store === "renmans")!.missing).toContain("pates");
-    const pair = bestPair(lines, ["colruyt", "renmans", "delhaize"], ctxCost)!;
+    expect(totals.find((t) => t.store === "colruyt")!.known).toBe(0); // aucun prix relevé : tout est estimé
+    // Sans aucun prix relevé, pas de « meilleure combinaison » : des estimations ne se comparent pas.
+    expect(bestPair(lines, ["colruyt", "renmans", "delhaize"], ctxCost)).toBeNull();
+    // Prix relevés (fictifs) : lardons chez Colruyt, pâtes chez Delhaize.
+    const book = emptyBook();
+    const shared = (itemId: string, store: string, packSize: number, packPrice: number) =>
+      book.shared.set(`${itemId}_${store}`, { itemId, store, organic: false, productName: itemId, packSize, packUnit: "g", packPrice, pricePerUnit: packPrice / packSize, fetchedAt: "2026-11-01T00:00:00Z", source: "capture" } as never);
+    shared("lardons", "colruyt", 200, 9.99); shared("pates", "delhaize", 500, 1.5);
+    const ctx = { ...ctxCost, book };
+    const pair = bestPair(lines, ["colruyt", "renmans", "delhaize"], ctx)!;
+    expect(pair.stores).toEqual(["colruyt", "delhaize"]);
     expect(pair.missing).toBe(0);
-    expect(pair.stores).toContain("colruyt");
+    expect(pair.split.lardons).toBe("colruyt"); // prix relevé, même s'il est plus cher que l'estimation de Delhaize
+    expect(pair.split.pates).toBe("delhaize");
+    expect(pair.estimated).toBe(0);
   });
 });
 
