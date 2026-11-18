@@ -68,7 +68,13 @@ export function artSpec(r: Recipe, idx: ItemIndex): ArtSpec {
   if (/frites/.test(name)) starch = "frites";
   const protein = first(PROTEINS, meat.join(" | ")) ?? first(PROTEINS, all.replace(/fumet[^|]*|nuoc[^|]*|anchois[^|]*|bouillon[^|]*/g, ""));
   const veg: Veg[] = [];
-  for (const s of ingr) { const v = first(VEGS, s); if (v && !veg.includes(v)) veg.push(v); if (veg.length >= 3) break; }
+  for (const s of ingr) {
+    const v = first(VEGS, s);
+    // Oignon, échalote, poireau : aromates, dessinés seulement quand ils sont au cœur du plat.
+    if (v === "oignon" && !/oignon|poireau|echalote/.test(name)) continue;
+    if (v && !veg.includes(v)) veg.push(v);
+    if (veg.length >= 3) break;
+  }
   const sauce = first(SAUCES, all);
   const garnish: Garnish[] = [];
   if (/persil|coriandre|basilic|ciboulette|menthe|aneth|cerfeuil|estragon|oignons nouveaux/.test(all)) garnish.push("herbes");
