@@ -32,8 +32,7 @@ function entry(d: FirebaseFirestore.DocumentData, bio: boolean) {
 }
 
 /** Reconstruit le carnet des magasins donnés (tous si vide). */
-export async function rebuildPriceBook(stores?: string[]) {
-  const db = getFirestore();
+export async function rebuildPriceBook(stores?: string[], db: FirebaseFirestore.Firestore = getFirestore()) {
   const snap = stores?.length ? await db.collection("prices").where("store", "in", stores.slice(0, 30)).get() : await db.collection("prices").get();
   const shards = new Map<string, Record<string, unknown>>();
   const all = new Set(stores || []);
