@@ -1,0 +1,192 @@
+// Cuisine asiatique, deuxième série.
+@asiatique
+
+## aperitif
+# Onigiri | 6 | 50 | T
++ Riz rond 400g; Feuilles de nori 3pc; Vinaigre de riz 1cs; Graines de sésame 1cs
+= Thon (boîte) 140g; Mayonnaise 2cs
+~ Oeufs 3pc; Sauce soja 1cs
+v Onigiri à l'œuf mariné
+- Rincer le riz jusqu'à ce que l'eau soit claire, le cuire avec 480 ml d'eau 12 minutes à couvert puis laisser reposer 10 minutes ; ajouter le vinaigre et une pincée de sel.
+- Mélanger le thon avec la mayonnaise.
+- Avec les mains mouillées et salées, former des triangles de riz en glissant une cuillère de garniture au centre.
+- Entourer la base d'une bande de nori et parsemer de sésame. Version végé : œufs durs écrasés avec la sauce soja.
+
+# Tempura de légumes | 4 | 30 | T
++ Farine 120g; Fécule de maïs 30g; Oeufs 1pc; Courgettes 200g; Patate douce 200g; Champignons de Paris 150g; Oignon 1pc; Huile de tournesol 1000ml; Sauce soja 4cs; Mirin 2cs
+- Couper les légumes en tranches fines ou en lamelles.
+- Pâte : mélanger rapidement l'œuf, 200 ml d'eau glacée, la farine et la fécule avec des baguettes ; elle doit rester grumeleuse.
+- Tremper les légumes dans la pâte et les frire 2 minutes à 175 °C jusqu'à ce qu'ils soient croustillants et pâles.
+- Servir aussitôt avec la sauce soja allongée de mirin et d'un peu d'eau.
+
+## entree
+# Yam neua | 4 | 30 | E
++ Concombre 1pc; Tomates cerises 150g; Oignon rouge 0.5pc; Menthe 0.5pc; Coriandre 0.5pc; Citron vert 2pc; Nuoc-mâm 2cs; Sucre 1cc; Piment 1pc
+= Steak de bœuf 400g
+~ Tofu ferme 400g
+v Salade thaïe au tofu grillé
+- Griller le steak à feu vif 3 minutes par face, le laisser reposer et le trancher finement.
+- Préparer l'assaisonnement : jus de citron vert, nuoc-mâm, sucre et piment haché.
+- Mélanger le bœuf tiède avec le concombre, les tomates, l'oignon et les herbes.
+- Arroser d'assaisonnement et servir aussitôt. Version végé : tofu grillé et sauce soja à la place du nuoc-mâm.
+
+# Gỏi gà | 4 | 40 | T
++ Chou blanc 400g; Carottes 150g; Oignon rouge 0.5pc; Coriandre 0.5pc; Menthe 0.5pc; Cacahuètes 40g; Citron vert 2pc; Nuoc-mâm 3cs; Sucre 1cs; Ail 0.1pc; Piment 1pc
+= Filet de poulet 400g
+~ Tofu ferme 300g
+v Salade vietnamienne au tofu
+- Pocher le poulet 15 minutes et l'effilocher.
+- Émincer très finement le chou et l'oignon, râper la carotte.
+- Sauce : jus de citron vert, nuoc-mâm, sucre, ail et piment hachés.
+- Mélanger le tout avec les herbes et parsemer de cacahuètes concassées. Version végé : tofu poêlé en lanières.
+
+# Tataki de thon | 4 | 20 | T
++ Graines de sésame 3cs; Sauce soja 4cs; Citron vert 1pc; Gingembre 10g; Oignons nouveaux 1pc; Huile de sésame 1cc
+= Thon frais 400g
+~ Avocat 2pc
+v Tataki d'avocat
+- Rouler le thon dans le sésame.
+- Le saisir 30 secondes sur chaque face dans une poêle très chaude : l'intérieur doit rester cru.
+- Mélanger la sauce soja, le jus de citron vert, le gingembre râpé et l'huile de sésame.
+- Trancher le thon en tranches épaisses et arroser de sauce ; parsemer d'oignon nouveau. Version végé : tranches d'avocat roulées dans le sésame avec la même sauce.
+
+## soupe
+# Soto ayam | 4 | 70 | T
++ Échalote 3pc; Ail 0.2pc; Gingembre 20g; Curcuma 1cc; Citronnelle 30g; Nouilles de riz 150g; Germes de soja 150g; Oeufs 2pc; Citron vert 1pc; Oignons nouveaux 2pc
+= Cuisse de poulet 4pc
+~ Tofu ferme 300g
+v Soto au tofu
+- Mixer les échalotes, l'ail, le gingembre et le curcuma en pâte et la faire revenir 3 minutes.
+- Ajouter 1,5 litre d'eau, la citronnelle écrasée et le poulet ; cuire 40 minutes, puis effilocher le poulet.
+- Cuire les nouilles et les œufs durs.
+- Dresser nouilles, poulet, germes de soja et œuf, verser le bouillon jaune bouillant ; servir avec citron vert et oignon nouveau.
+- Version végé : tofu doré dans le bouillon épicé.
+
+## accompagnement
+# Namul d'épinards | 4 | 10 | T
++ Épinards frais 500g; Ail 0.1pc; Sauce soja 1cs; Huile de sésame 1cs; Graines de sésame 1cs
+- Blanchir les épinards 30 secondes, les rafraîchir et les presser.
+- Les mélanger avec l'ail râpé, la sauce soja, l'huile et le sésame grillé.
+- Servir froid ou à température ambiante.
+
+# Germes de soja sautés | 4 | 10 | T
++ Germes de soja 400g; Oignons nouveaux 2pc; Ail 0.1pc; Sauce soja 1cs; Huile de tournesol 2cs
+- Faire sauter l'ail dans l'huile très chaude.
+- Ajouter les germes de soja et sauter 1 à 2 minutes : ils doivent rester croquants.
+- Ajouter la sauce soja et les oignons nouveaux ; servir aussitôt.
+
+# Ajitama | 6 | 500 | T
++ Oeufs 6pc; Sauce soja 100ml; Mirin 100ml; Sucre 1cs
+- Cuire les œufs sortis du frigo exactement 6 min 30 dans l'eau bouillante, puis les plonger dans l'eau glacée et les écaler.
+- Mélanger la sauce soja, le mirin, le sucre et 100 ml d'eau.
+- Faire mariner les œufs dans un sac fermé au frigo au moins 8 h.
+- Couper en deux : le jaune est confit et coulant ; à servir sur les ramen ou le riz.
+
+## dessert
+# Bananes caramélisées au sésame | 4 | 25 | T
++ Bananes 500g; Fécule de maïs 40g; Farine 40g; Oeufs 1pc; Sucre 150g; Graines de sésame 1cs; Huile de tournesol 500ml
+- Couper les bananes en tronçons, les enrober d'une pâte faite d'œuf, de farine, de fécule et d'un peu d'eau.
+- Les frire 2 minutes et les égoutter.
+- Faire un caramel blond avec le sucre et 2 cuillères d'huile, y rouler les bananes et parsemer de sésame.
+- Les plonger aussitôt dans un bol d'eau glacée : le caramel durcit en fils croquants. Servir tout de suite.
+
+# Mango pudding | 6 | 260 | E
++ Mangue 3pc; Sucre 60g; Agar-agar 2g; Lait de coco 200ml; Lait 150ml
+- Mixer la chair des mangues en purée.
+- Porter à ébullition le lait, le lait de coco, le sucre et l'agar-agar 2 minutes.
+- Hors du feu, mélanger avec la purée de mangue.
+- Répartir dans des verrines et laisser prendre au frigo au moins 4 h.
+
+## patisserie
+# Hotteok | 8 | 100 | AH
++ Farine 300g; Levure de boulanger 5g; Sucre 30g; Lait 200ml; Cassonade 100g; Cannelle 1cc; Cacahuètes 40g; Huile de tournesol 4cs
+- Pétrir la farine, la levure, le sucre, une pincée de sel et le lait tiède en pâte collante ; laisser lever 1 heure.
+- Mélanger la cassonade, la cannelle et les cacahuètes concassées.
+- Avec les mains huilées, aplatir une boule de pâte, mettre une cuillère de garniture et refermer.
+- Cuire dans l'huile à feu moyen en aplatissant la galette ; 2 à 3 minutes par face : le sucre fond en sirop à l'intérieur.
+
+# Melonpan | 8 | 180 | T
++ Farine 450g; Levure de boulanger 7g; Lait 150ml; Oeufs 2pc; Sucre 110g; Beurre 80g; Levure chimique 2g; Sucre perlé 30g
+- Pâte : pétrir 300 g de farine, la levure, le lait tiède, un œuf, 30 g de sucre, 30 g de beurre et une pincée de sel 10 minutes ; laisser lever 1 heure.
+- Biscuit : mélanger le reste du beurre mou avec le reste du sucre, l'autre œuf, le reste de farine et la levure chimique ; réfrigérer 30 minutes.
+- Former 8 boules de pain, couvrir chacune d'un disque de pâte à biscuit, le quadriller au couteau et le saupoudrer de sucre.
+- Laisser lever 40 minutes et cuire 15 minutes à 180 °C.
+
+## petitdej
+# Kaya toast | 4 | 50 | T
++ Oeufs 3pc; Lait de coco 200ml; Sucre 120g; Pain de mie 8pc; Beurre 60g
+- Kaya : fouetter les œufs avec le sucre et le lait de coco, puis cuire au bain-marie en remuant 30 minutes jusqu'à une crème épaisse.
+- Toaster le pain jusqu'à ce qu'il soit croustillant.
+- Tartiner de kaya et de fines tranches de beurre froid, refermer en sandwich.
+- Servir avec des œufs mollets assaisonnés de sauce soja, comme à Singapour.
+
+## plat
+# Bœuf lok lak | 4 | 40 | T
++ Sauce huître 2cs; Sauce soja 2cs; Sucre 1cc; Ail 0.2pc; Poivre 1cc; Citron vert 2pc; Salade verte 1pc; Tomates 300g; Oignon rouge 1pc; Riz 300g
+= Steak de bœuf 600g
+~ Tofu ferme 500g
+v Tofu lok lak
+- Couper le bœuf en cubes et le faire mariner 20 minutes avec les sauces, le sucre et l'ail.
+- Le saisir à feu très vif 2 minutes avec l'oignon en quartiers.
+- Préparer la sauce citron-poivre : jus de citron vert, poivre noir concassé et sel.
+- Servir sur un lit de salade et de tomates, avec le riz et la sauce à part. Version végé : tofu en cubes doré.
+
+# Pad see ew | 4 | 25 | T
++ Nouilles de riz 400g; Brocoli 300g; Oeufs 2pc; Ail 0.2pc; Sauce soja 3cs; Sauce huître 2cs; Sucre 1cs; Huile de tournesol 3cs
+= Filet de poulet 400g
+~ Tofu ferme 400g
+v Pad see ew au tofu
+- Tremper les nouilles larges selon le paquet et les égoutter.
+- Saisir le poulet en lamelles avec l'ail dans l'huile très chaude, ajouter le brocoli (tiges en premier).
+- Pousser sur le côté, brouiller les œufs, ajouter les nouilles et les sauces.
+- Sauter à feu vif en laissant les nouilles légèrement caraméliser. Version végé : tofu ferme.
+
+# Khao man gai | 4 | 90 | T
++ Riz basmati 400g; Gingembre 40g; Ail 0.3pc; Concombre 1pc; Coriandre 0.5pc; Sauce soja 3cs; Vinaigre de riz 2cs; Sucre 1cs; Piment 1pc
+= Cuisse de poulet 6pc
+~ Tofu ferme 500g; Bouillon de légumes 1000ml
+v Riz au gingembre et tofu
+- Pocher le poulet 40 minutes dans 1,5 litre d'eau avec la moitié du gingembre et de l'ail, sans bouillir.
+- Faire revenir le riz avec le reste de l'ail et du gingembre hachés, puis le cuire dans 600 ml du bouillon.
+- Sauce : sauce soja, vinaigre, sucre, piment et un peu de gingembre râpé.
+- Servir le poulet tranché sur le riz avec le concombre, la coriandre, la sauce et un bol de bouillon. Version végé : tofu poché dans un bouillon de légumes au gingembre.
+
+# Bún chả | 4 | 60 | E
++ Nouilles de riz 300g; Ail 0.3pc; Échalote 2pc; Nuoc-mâm 5cs; Sucre 3cs; Citron vert 2pc; Carottes 100g; Salade verte 1pc; Menthe 0.5pc; Coriandre 0.5pc; Piment 1pc
+= Haché porc et bœuf 300g; Filet de porc 300g
+~ Tofu ferme 500g
+v Bún au tofu grillé
+- Mariner le haché et le porc tranché finement 30 minutes avec l'ail, l'échalote, 2 cuillères de nuoc-mâm et 1 de sucre ; former des petites galettes avec le haché.
+- Griller le porc au barbecue ou sous le gril jusqu'à ce qu'il caramélise.
+- Sauce : 3 cuillères de nuoc-mâm, 2 de sucre, le jus de citron vert, 200 ml d'eau tiède, carotte en fines rondelles et piment.
+- Servir le porc dans la sauce, avec les vermicelles cuits, la salade et les herbes à part. Version végé : tofu mariné et grillé, sauce soja.
+
+# Adobo de poulet | 4 | 70 | T
++ Vinaigre 120ml; Sauce soja 100ml; Ail 0.5pc; Feuille de laurier 0.4g; Poivre 1cc; Sucre 1cs; Riz 300g
+= Cuisse de poulet 6pc
+~ Tofu ferme 400g; Oeufs 4pc
+v Adobo de tofu et œufs
+- Mariner le poulet 30 minutes dans le vinaigre, la sauce soja, l'ail écrasé, le laurier et le poivre.
+- Cuire à couvert 30 minutes dans la marinade avec 150 ml d'eau.
+- Retirer le poulet, le dorer à la poêle, puis réduire la sauce avec le sucre jusqu'à ce qu'elle nappe.
+- Remettre le poulet et servir avec le riz. Version végé : tofu doré et œufs durs mijotés dans la sauce.
+
+# Char siu et riz | 4 | 300 | T
++ Sauce huître 2cs; Sauce soja 3cs; Miel 4cs; Vin de riz chinois (Shaoxing) 2cs; Ail 0.2pc; Riz 300g; Pak choï 400g
+= Filet de porc 800g
+~ Tofu ferme 500g
+v Tofu char siu
+- Mélanger les sauces, 2 cuillères de miel, le vin de riz et l'ail ; faire mariner le porc au moins 4 h.
+- Cuire 25 minutes à 200 °C sur une grille, en retournant et badigeonnant de marinade.
+- Badigeonner du reste de miel et passer 5 minutes sous le gril pour laquer.
+- Trancher et servir avec le riz et le pak choï sauté. Version végé : tofu pressé, mariné et laqué de la même façon (15 minutes).
+
+# Dakgalbi | 4 | 50 | AH
++ Gochujang 3cs; Sauce soja 2cs; Sucre 1cs; Ail 0.2pc; Gingembre 10g; Chou blanc 400g; Patate douce 300g; Oignon 1pc; Oignons nouveaux 3pc; Riz 300g
+= Cuisse de poulet 6pc
+~ Tofu ferme 500g
+v Dakgalbi au tofu
+- Désosser le poulet, le couper en morceaux et le mariner 20 minutes dans le gochujang, la sauce soja, le sucre, l'ail et le gingembre.
+- Sauter le poulet à feu vif dans une grande poêle avec la patate douce en bâtonnets.
+- Ajouter le chou et l'oignon et cuire 10 minutes en remuant, avec un peu d'eau si ça attache.
+- Ajouter les oignons nouveaux et servir avec le riz. Version végé : tofu ferme mariné.

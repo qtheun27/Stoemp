@@ -418,4 +418,7 @@ Bar|vi|g|500|11.99|P|2|po|loup de mer,bar entier|
 Pimientos de Padrón|fl|g|200|2.99|P|7||piments de padron|
 Biscuits Maria|ep|g|200|1.29|S||gl|galletas maria|
 Thon frais|vi|g|400|12.99|P|2|po|thon rouge,thon albacore|
+Mélasse de grenade|ep|ml|250|3.99|S|||sirop de grenade,dibs rumman|
+Agar-agar|ep|g|10|2.49|S||||
+Feuilles de nori|ep|pc|10|2.99|S|||nori,algues nori|
 `;
