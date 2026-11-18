@@ -1,0 +1,217 @@
+// Cuisine indienne : recettes écrites à la main (format : voir format.ts).
+@indienne
+
+## aperitif
+# Samoussas aux légumes | 6 | 90 | T
++ Farine 250g; Beurre 50g; Pommes de terre 500g; Petits pois 100g; Oignon 1pc; Gingembre 10g; Piment 1pc; Garam masala 1cc; Cumin 1cc; Coriandre 0.5pc; Citron 0.5pc; Huile de tournesol 1000ml
+- Pâte : sabler la farine avec le beurre et une pincée de sel, ajouter environ 100 ml d'eau pour obtenir une pâte ferme ; laisser reposer 30 minutes.
+- Farce : cuire les pommes de terre en dés 12 minutes ; faire revenir l'oignon, le gingembre, le piment et les épices, ajouter les pommes de terre, les petits pois, la coriandre et le citron.
+- Étaler des disques de pâte de 15 cm, les couper en deux, former un cône, garnir et souder les bords avec un peu d'eau.
+- Frire à feu moyen (160 °C) 6 à 8 minutes jusqu'à ce qu'ils soient dorés et croustillants.
+- Servir chauds avec un chutney.
+
+# Bhajis d'oignon | 4 | 25 | T
++ Oignon 3pc; Farine de pois chiches 150g; Curcuma 0.5cc; Piment 1pc; Cumin 1cc; Coriandre 0.5pc; Huile de tournesol 1000ml
+- Émincer finement les oignons et les mélanger avec la farine de pois chiches, les épices, le piment et la coriandre hachés et du sel.
+- Ajouter juste assez d'eau (environ 80 ml) pour que la pâte enrobe les oignons.
+- Faire tomber des petits tas dans l'huile à 175 °C et frire 4 minutes jusqu'à ce qu'ils soient dorés.
+- Égoutter et servir avec un chutney à la menthe.
+
+# Paneer tikka | 4 | 150 | T
++ Paneer 400g; Yaourt nature 150g; Garam masala 1cc; Paprika 1cc; Curcuma 0.5cc; Gingembre 10g; Ail 0.1pc; Citron 1pc; Poivron 1pc; Oignon rouge 1pc
+- Couper le paneer, le poivron et l'oignon en gros cubes.
+- Mélanger le yaourt, les épices, le gingembre et l'ail râpés et le jus de citron ; y faire mariner le tout au moins 2 h.
+- Enfiler sur des brochettes en alternant.
+- Griller 10 minutes sous le gril bien chaud ou au barbecue en retournant, jusqu'à ce que les bords noircissent légèrement.
+
+## entree
+# Aloo tikki | 4 | 45 | T
++ Pommes de terre 600g; Petits pois 100g; Gingembre 10g; Piment 1pc; Garam masala 1cc; Coriandre 0.5pc; Chapelure 30g; Yaourt nature 150g
+- Cuire les pommes de terre à l'eau, les éplucher et les écraser.
+- Ajouter les petits pois cuits, le gingembre râpé, le piment, le garam masala, la coriandre, la chapelure et du sel.
+- Former des galettes de 7 cm et les dorer 3 minutes par face dans un peu d'huile.
+- Servir chaudes avec le yaourt (et un chutney).
+
+# Kachumber | 4 | 15 | E
++ Concombre 1pc; Tomates 300g; Oignon rouge 1pc; Coriandre 0.5pc; Citron 1pc; Cumin 0.5cc; Piment 0.5pc
+- Couper le concombre, les tomates et l'oignon en petits dés.
+- Assaisonner avec le jus de citron, le cumin grillé, le piment, la coriandre et du sel.
+- Servir aussitôt, bien frais.
+
+## soupe
+# Mulligatawny | 4 | 45 | AH
++ Lentilles corail 150g; Oignon 1pc; Carottes 200g; Pommes 150g; Curry en poudre 2cc; Gingembre 10g; Ail 0.1pc; Lait de coco 200ml; Bouillon de légumes 1200ml; Riz 60g; Citron 0.5pc
+- Faire revenir l'oignon, la carotte et la pomme en dés avec le gingembre, l'ail et le curry 5 minutes.
+- Ajouter les lentilles et le bouillon ; cuire 25 minutes.
+- Mixer, ajouter le lait de coco et le jus de citron.
+- Servir avec une cuillère de riz cuit dans chaque bol.
+
+# Tomato shorba | 4 | 35 | EA
++ Tomates 1000g; Oignon 1pc; Ail 0.1pc; Gingembre 10g; Cumin 1cc; Garam masala 0.5cc; Sucre 1cc; Beurre 20g; Coriandre 0.25pc
+- Faire revenir le cumin dans le beurre, puis l'oignon, l'ail et le gingembre.
+- Ajouter les tomates en morceaux et 300 ml d'eau ; cuire 20 minutes.
+- Mixer et passer au tamis, ajouter le garam masala et le sucre.
+- Servir parsemé de coriandre.
+
+## accompagnement
+# Naan | 8 | 120 | T
++ Farine 500g; Levure de boulanger 7g; Yaourt nature 150g; Lait 150ml; Sucre 1cc; Levure chimique 1cc; Beurre 50g; Ail 0.1pc
+- Mélanger la farine, les levures, le sucre et une pincée de sel avec le yaourt et le lait tiède ; pétrir 8 minutes en une pâte souple.
+- Couvrir et laisser lever 1 heure.
+- Diviser en 8, étaler en ovales fins.
+- Cuire dans une poêle en fonte très chaude 1 à 2 minutes par face jusqu'à ce qu'ils gonflent et se tachent de brun.
+- Badigeonner aussitôt de beurre fondu à l'ail.
+
+# Chapati | 8 | 40 | T
++ Farine complète 300g; Ghee 20g
+- Mélanger la farine, une pincée de sel et environ 190 ml d'eau tiède ; pétrir 5 minutes et laisser reposer 20 minutes.
+- Diviser en 8 boules et les étaler en disques fins.
+- Cuire dans une poêle très chaude sans matière grasse 30 secondes, retourner, puis appuyer avec un torchon pour qu'ils gonflent.
+- Badigeonner de ghee et garder au chaud dans un torchon.
+
+# Raïta au concombre | 4 | 10 | T
++ Yaourt nature 500g; Concombre 1pc; Cumin 1cc; Menthe 0.25pc
+- Râper le concombre et le presser.
+- Griller le cumin à sec 1 minute et le moudre.
+- Mélanger le yaourt, le concombre, le cumin, la menthe ciselée et du sel ; servir frais.
+
+# Riz jeera | 4 | 30 | T
++ Riz basmati 300g; Ghee 30g; Cumin 2cc; Feuille de laurier 0.2g; Cardamome 0.25cc
+- Rincer le riz jusqu'à ce que l'eau soit claire et le laisser tremper 20 minutes.
+- Faire grésiller le cumin, le laurier et la cardamome dans le ghee 30 secondes.
+- Ajouter le riz égoutté, 450 ml d'eau et du sel ; couvrir et cuire 12 minutes à feu doux.
+- Laisser reposer 5 minutes et égrainer.
+
+# Chutney menthe-coriandre | 6 | 10 | T
++ Coriandre 1pc; Menthe 0.5pc; Piment 1pc; Gingembre 10g; Citron 1pc; Yaourt nature 100g; Sucre 1cc; Cumin 0.5cc
+- Mixer les herbes avec le piment, le gingembre, le jus de citron, le sucre, le cumin et 2 cuillères d'eau en pâte lisse.
+- Mélanger avec le yaourt et saler.
+- Servir avec les samoussas, pakoras ou grillades.
+
+## dessert
+# Mango lassi | 4 | 10 | E
++ Mangue 2pc; Yaourt nature 500g; Lait 200ml; Sucre 3cs; Cardamome 0.25cc
+- Peler les mangues et couper la chair.
+- Mixer avec le yaourt, le lait, le sucre et la cardamome jusqu'à ce que ce soit très lisse.
+- Servir bien frais.
+
+# Shrikhand | 6 | 380 | T
++ Yaourt grec 1000g; Sucre glace 100g; Safran 0.1g; Cardamome 0.5cc; Pistaches 20g
+- Égoutter le yaourt dans un torchon fin au frigo 6 h : il doit devenir épais comme un fromage frais.
+- Faire infuser le safran dans une cuillère de lait chaud.
+- Fouetter le yaourt avec le sucre glace, le safran et la cardamome jusqu'à ce qu'il soit lisse.
+- Servir frais, parsemé de pistaches hachées.
+
+# Kulfi | 6 | 450 | E
++ Lait 1000ml; Sucre 100g; Pistaches 40g; Amandes 20g; Cardamome 0.5cc; Safran 0.1g
+- Faire réduire le lait à feu doux 1 heure en remuant souvent, jusqu'à ce qu'il ne reste qu'un tiers.
+- Ajouter le sucre, la cardamome, le safran et les fruits secs hachés ; laisser refroidir.
+- Verser dans des moules (ou des petits verres) et congeler au moins 6 h.
+- Démouler en passant les moules sous l'eau chaude quelques secondes.
+
+## patisserie
+# Nankhatai | 12 | 45 | T
++ Farine 150g; Farine de pois chiches 30g; Ghee 100g; Sucre glace 100g; Cardamome 0.5cc; Levure chimique 2g; Pistaches 15g
+- Fouetter le ghee mou avec le sucre glace jusqu'à ce qu'il soit crémeux.
+- Ajouter les farines, la levure et la cardamome ; former une pâte souple.
+- Façonner des petites boules légèrement aplaties, poser une pistache sur chacune.
+- Cuire 15 minutes à 170 °C : ils doivent rester pâles et craquelés.
+
+# Shakarpara | 8 | 60 | T
++ Farine 250g; Ghee 50g; Sucre 80g; Lait 100ml; Huile de tournesol 1000ml
+- Chauffer le lait avec le sucre et le ghee jusqu'à ce que le sucre fonde ; laisser tiédir.
+- Ajouter la farine et une pincée de sel pour obtenir une pâte ferme ; laisser reposer 15 minutes.
+- Étaler sur 5 mm et couper en petits losanges.
+- Frire à feu moyen (160 °C) jusqu'à ce qu'ils soient dorés ; ils durcissent en refroidissant.
+
+## petitdej
+# Aloo paratha | 4 | 50 | T
++ Farine complète 300g; Pommes de terre 400g; Piment 1pc; Coriandre 0.5pc; Cumin 1cc; Garam masala 0.5cc; Ghee 40g; Yaourt nature 200g
+- Pétrir la farine avec environ 190 ml d'eau et une pincée de sel ; laisser reposer 20 minutes.
+- Cuire les pommes de terre, les écraser avec le piment, la coriandre et les épices.
+- Étaler une boule de pâte, mettre une boule de farce au centre, refermer et étaler délicatement en galette.
+- Cuire à la poêle 2 minutes par face en badigeonnant de ghee.
+- Servir chaud avec le yaourt.
+
+# Poha | 4 | 25 | T
++ Riz aplati (poha) 250g; Oignon 1pc; Pommes de terre 150g; Cacahuètes 40g; Graines de moutarde 1cc; Curcuma 0.5cc; Piment 1pc; Citron 1pc; Coriandre 0.25pc; Sucre 1cc
+- Rincer le poha dans une passoire jusqu'à ce qu'il soit souple, l'égoutter.
+- Faire dorer les cacahuètes dans un peu d'huile, puis faire crépiter les graines de moutarde.
+- Ajouter l'oignon, le piment et la pomme de terre en petits dés ; cuire 8 minutes à couvert.
+- Ajouter le curcuma, le poha, le sucre et du sel ; mélanger 2 minutes.
+- Servir avec le jus de citron et la coriandre.
+
+# Upma | 4 | 25 | T
++ Semoule 200g; Oignon 1pc; Graines de moutarde 1cc; Gingembre 10g; Piment 1pc; Petits pois 80g; Carottes 80g; Noix de cajou 20g; Ghee 30g; Citron 0.5pc; Coriandre 0.25pc
+- Griller la semoule à sec jusqu'à ce qu'elle sente le biscuit ; la réserver.
+- Dans le ghee, faire crépiter la moutarde, dorer les noix de cajou, puis l'oignon, le gingembre et le piment.
+- Ajouter les légumes en petits dés et 500 ml d'eau salée ; porter à ébullition.
+- Verser la semoule en pluie en remuant et cuire 3 minutes à couvert.
+- Servir avec le citron et la coriandre.
+
+# Masala omelette | 2 | 15 | T
++ Oeufs 4pc; Oignon 0.5pc; Tomates 100g; Piment 0.5pc; Coriandre 0.25pc; Curcuma 0.25cc; Beurre 10g; Pain de mie 4pc
+- Battre les œufs avec l'oignon, la tomate et le piment hachés, la coriandre, le curcuma et du sel.
+- Cuire dans le beurre à feu moyen 2 minutes par face.
+- Servir avec le pain grillé.
+
+## plat
+# Biryani de poulet | 6 | 180 | T
++ Riz basmati 400g; Oignon 3pc; Yaourt nature 200g; Gingembre 20g; Ail 0.3pc; Garam masala 2cc; Curcuma 0.5cc; Piment 1pc; Safran 0.1g; Lait 50ml; Menthe 0.5pc; Coriandre 0.5pc; Ghee 50g; Cardamome 0.5cc; Feuille de laurier 0.2g
+= Cuisse de poulet 6pc
+~ Paneer 400g
+v Biryani au paneer
+- Faire mariner le poulet au moins 1 h avec le yaourt, le gingembre et l'ail râpés, le garam masala, le curcuma et le piment.
+- Faire frire les oignons émincés dans le ghee jusqu'à ce qu'ils soient bruns et croustillants.
+- Cuire le riz trempé 5 minutes à l'eau bouillante salée avec la cardamome et le laurier : il doit rester à moitié cru.
+- Dans une cocotte, étaler le poulet mariné, la moitié des oignons et des herbes, puis le riz ; arroser du safran infusé dans le lait chaud et du reste d'oignons.
+- Fermer hermétiquement et cuire 45 minutes à feu très doux. Version végé : paneer en cubes mariné de la même façon, cuit 25 minutes.
+
+# Paneer butter masala | 4 | 40 | T
++ Paneer 400g; Tomates concassées 400g; Oignon 1pc; Noix de cajou 40g; Beurre 50g; Crème liquide 100ml; Gingembre 10g; Ail 0.1pc; Garam masala 1cc; Paprika 1cc; Sucre 1cc; Riz basmati 300g
+- Faire revenir l'oignon, le gingembre et l'ail dans la moitié du beurre, ajouter les tomates et les noix de cajou ; cuire 15 minutes.
+- Mixer très finement en sauce lisse.
+- Remettre dans la casserole avec le reste du beurre, le paprika, le garam masala et le sucre ; cuire 5 minutes.
+- Ajouter le paneer en cubes et la crème, chauffer 5 minutes ; servir avec le riz.
+
+# Baingan bharta | 4 | 60 | EA
++ Aubergine 1000g; Oignon 1pc; Tomates 300g; Gingembre 10g; Ail 0.2pc; Piment 1pc; Cumin 1cc; Garam masala 1cc; Coriandre 0.5pc; Petits pois 100g; Riz basmati 300g
+- Griller les aubergines sur la flamme ou 45 minutes au four à 220 °C, puis récupérer la chair et l'écraser.
+- Faire revenir le cumin, puis l'oignon, le gingembre, l'ail et le piment.
+- Ajouter les tomates et cuire 8 minutes, puis l'aubergine, les petits pois et le garam masala ; cuire 10 minutes.
+- Parsemer de coriandre et servir avec le riz (ou des chapatis).
+
+# Jalfrezi de poulet | 4 | 35 | T
++ Poivron 2pc; Oignon 2pc; Tomates 300g; Gingembre 10g; Ail 0.2pc; Piment 2pc; Garam masala 1cc; Curcuma 0.5cc; Cumin 1cc; Riz basmati 300g
+= Filet de poulet 600g
+~ Paneer 400g
+v Jalfrezi de paneer
+- Faire sauter le poulet en lanières à feu vif avec le curcuma ; le réserver.
+- Faire revenir le cumin, puis les oignons et les poivrons en lanières 5 minutes : ils doivent rester croquants.
+- Ajouter le gingembre, l'ail, le piment et les tomates en quartiers ; cuire 5 minutes.
+- Remettre le poulet avec le garam masala, sauter 3 minutes ; servir avec le riz. Version végé : paneer en cubes doré à la poêle.
+
+# Curry de crevettes de Goa | 4 | 35 | T
++ Lait de coco 400ml; Oignon 1pc; Tomates 200g; Ail 0.2pc; Gingembre 10g; Piment 2pc; Curcuma 0.5cc; Cumin 1cc; Paprika 1cc; Vinaigre 1cs; Riz basmati 300g
+= Scampis 600g
+~ Pois chiches (boîte) 400g
+v Curry de pois chiches de Goa
+- Mixer l'ail, le gingembre, le piment, les épices et le vinaigre en pâte.
+- Faire revenir l'oignon émincé, ajouter la pâte et cuire 3 minutes, puis les tomates.
+- Verser le lait de coco et laisser mijoter 10 minutes.
+- Ajouter les crevettes et cuire 4 minutes ; servir avec le riz. Version végé : pois chiches mijotés 10 minutes dans la sauce.
+
+# Anda curry | 4 | 35 | T
++ Oeufs 8pc; Oignon 2pc; Tomates concassées 400g; Gingembre 10g; Ail 0.2pc; Garam masala 1cc; Curcuma 0.5cc; Paprika 1cc; Coriandre 0.5pc; Riz basmati 300g
+- Cuire les œufs 9 minutes, les écaler et les inciser légèrement ; les dorer 2 minutes à la poêle avec le curcuma.
+- Faire dorer les oignons hachés, ajouter le gingembre, l'ail et les épices.
+- Ajouter les tomates et 150 ml d'eau ; cuire 15 minutes.
+- Ajouter les œufs et cuire 5 minutes ; parsemer de coriandre et servir avec le riz.
+
+# Kadhi pakora | 4 | 50 | T
++ Yaourt nature 500g; Farine de pois chiches 150g; Oignon 2pc; Curcuma 0.5cc; Graines de moutarde 1cc; Cumin 1cc; Piment 1pc; Gingembre 10g; Ghee 30g; Coriandre 0.5pc; Huile de tournesol 500ml; Riz basmati 300g
+- Pakoras : mélanger les oignons émincés avec 110 g de farine de pois chiches, le piment, du sel et un peu d'eau ; frire des petites boulettes et les égoutter.
+- Kadhi : fouetter le yaourt avec le reste de farine de pois chiches, le curcuma et 600 ml d'eau.
+- Porter doucement à ébullition en remuant, puis cuire 20 minutes à feu doux.
+- Faire crépiter la moutarde, le cumin et le gingembre dans le ghee et verser sur le kadhi.
+- Ajouter les pakoras 5 minutes avant de servir, parsemer de coriandre ; servir avec le riz.
