@@ -17,7 +17,7 @@ export const DEFAULT_APP_CONFIG: AppConfig = {
   features: { demo: true, ai: true, receipt: true, capture: true, invites: true, multiHousehold: true },
   maintenance: { on: false, message: "Stoemp est en maintenance, reviens dans quelques minutes." },
   banner: { text: "", tone: "info" },
-  aiWeekShare: 0.5,
+  aiWeekShare: 0.15, // une ou deux surprises par semaine : le reste vient du catalogue, relu et gratuit
   freshDays: 14,
   defaults: { persons: 2, lunches: 0, dinners: 7, stores: ["colruyt", "renmans"], shoppingDays: [6], mineN: 2 },
 };
