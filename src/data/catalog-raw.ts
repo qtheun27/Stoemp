@@ -425,4 +425,9 @@ Haddock fumé|vi|g|300|6.99|P|5|po|églefin fumé|
 Fruits de la passion|fl|g|250|0.79|P|10||maracuja,passion|
 Bagels|bo|g|360|2.49|P|5|gl|bagel|
 Haricots à la sauce tomate (boîte)|ep|g|415|0.99|S|||baked beans en boîte|
+Oseille|fl|g|100|2.49|P|4|||4-9
+Estragon|fl|pc|1|1.49|P|7|||
+Pintade|vi|g|1300|11.99|P|3||pintade fermière|
+Abricots|fl|g|500|3.49|P|5||abricot|6-8
+Côtelettes de porc|vi|pc|4|5.99|LP|3||côtes de porc|
 `;

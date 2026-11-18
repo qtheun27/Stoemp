@@ -1,0 +1,71 @@
+// Cuisine belge, troisième série.
+@belge
+
+## plat
+# Vispannetje | 4 | 55 | T
++ Pommes de terre 1000g; Lait 200ml; Beurre 80g; Poireaux 200g; Farine 30g; Crème liquide 150ml; Vin blanc 100ml; Gruyère râpé 60g; Persil 0.25pc; Muscade 0.25cc
+= Dos de cabillaud 300g; Pavé de saumon 200g; Crevettes grises 100g
+~ Oeufs 4pc
+v Gratin de poireaux et œufs sous purée
+- Préparer une purée avec les pommes de terre, le lait chaud, 40 g de beurre et la muscade.
+- Faire fondre les poireaux émincés dans 20 g de beurre.
+- Faire un roux avec le reste du beurre et la farine, mouiller avec le vin blanc et la crème ; cuire 3 minutes.
+- Dans un plat, disposer les poissons crus en cubes, les poireaux et les crevettes, napper de sauce, couvrir de purée et de fromage.
+- Gratiner 25 minutes à 200 °C ; parsemer de persil. Version végé : œufs durs en quartiers à la place des poissons.
+
+# Filet mignon de porc sauce champignons et croquettes | 4 | 45 | T
++ Champignons de Paris 300g; Échalote 2pc; Crème liquide 200ml; Vin blanc 100ml; Beurre 30g; Croquettes de pommes de terre 800g; Haricots verts 400g
+= Filet de porc 700g
+~ Galettes végétales 4pc
+v Galette végétale sauce champignons et croquettes
+- Saisir le filet de tous côtés dans le beurre, puis le cuire 18 minutes à 180 °C ; le laisser reposer 5 minutes.
+- Dans la poêle, faire revenir les échalotes et les champignons émincés, déglacer au vin blanc.
+- Ajouter la crème, réduire 5 minutes, saler et poivrer.
+- Servir le filet tranché nappé de sauce, avec les croquettes et les haricots. Version végé : galettes végétales dorées.
+
+# Poireaux au jambon gratinés | 4 | 60 | AH
++ Poireaux 1000g; Beurre 40g; Farine 40g; Lait 500ml; Gruyère râpé 100g; Muscade 0.25cc; Pommes de terre 800g
+= Jambon 8pc
+~ Oeufs 4pc
+v Poireaux gratinés aux œufs
+- Couper les poireaux en tronçons de 15 cm et les cuire 12 minutes à l'eau salée ; bien les égoutter.
+- Faire une béchamel avec le beurre, la farine et le lait ; ajouter la moitié du fromage et la muscade.
+- Rouler chaque tronçon dans une tranche de jambon et les ranger dans un plat.
+- Napper de béchamel, parsemer du reste de fromage et gratiner 20 minutes à 200 °C ; servir avec des pommes de terre vapeur.
+- Version végé : poireaux sans jambon, avec des œufs durs en quartiers.
+
+# Poulet, petits pois-carottes et pommes de terre | 4 | 40 | T
++ Petits pois 400g; Carottes 400g; Oignon 1pc; Beurre 50g; Sucre 1cc; Persil 0.25pc; Pommes de terre 1000g
+= Filet de poulet 600g
+~ Oeufs 4pc
+v Œufs miroir, petits pois-carottes et pommes de terre
+- Cuire les carottes en dés 10 minutes avec l'oignon, un peu de beurre, le sucre et un fond d'eau, puis ajouter les petits pois 8 minutes.
+- Cuire les pommes de terre à l'eau ou à la vapeur.
+- Dorer les filets de poulet dans le reste du beurre 6 minutes par face et déglacer d'un peu d'eau pour un jus.
+- Servir avec les légumes persillés. Version végé : œufs au plat.
+
+# Côtelettes de porc, haricots et pommes de terre | 4 | 40 | EA
++ Haricots verts 600g; Beurre 50g; Échalote 1pc; Pommes de terre 1000g; Moutarde 1cs
+= Côtelettes de porc 4pc
+~ Galettes végétales 4pc
+v Galette végétale, haricots et pommes de terre
+- Cuire les pommes de terre en robe des champs ou à la vapeur.
+- Cuire les haricots 8 minutes à l'eau salée et les faire revenir avec l'échalote dans un peu de beurre.
+- Cuire les côtelettes dans le reste du beurre 5 minutes par face ; déglacer d'un peu d'eau et de moutarde pour la sauce.
+- Servir ensemble. Version végé : galettes végétales dorées.
+
+## patisserie
+# Tarte au fromage blanc | 8 | 90 | T
++ Pâte brisée 1pc; Fromage blanc 500g; Oeufs 3pc; Sucre 120g; Fécule de maïs 30g; Crème fraîche 100ml; Citron 1pc; Sucre vanillé 8g
+- Foncer un moule de 26 cm avec la pâte.
+- Fouetter le fromage blanc avec les jaunes, le sucre, la fécule, la crème, le zeste de citron et le sucre vanillé.
+- Incorporer les blancs montés en neige.
+- Verser sur la pâte et cuire 45 minutes à 170 °C ; laisser refroidir dans le four entrouvert.
+
+# Cougnou | 8 | 200 | H
++ Farine 500g; Levure de boulanger 10g; Lait 250ml; Oeufs 3pc; Sucre 60g; Beurre 100g; Raisins secs 100g; Sucre perlé 30g
+- Pétrir la farine, la levure délayée dans le lait tiède, 2 œufs, le sucre et une pincée de sel 10 minutes, puis le beurre mou et les raisins.
+- Laisser lever 1 h 30.
+- Façonner des cougnous : une boule pour le corps, une petite pour la tête, en forme d'enfant Jésus emmailloté.
+- Laisser lever 45 minutes, dorer avec le dernier œuf et parsemer de sucre perlé.
+- Cuire 25 minutes à 180 °C ; à servir le matin de Noël avec un chocolat chaud.
