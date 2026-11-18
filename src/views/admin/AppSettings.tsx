@@ -37,7 +37,7 @@ export default function AppSettings() {
     <div className="stack">
       <div className="card"><h3>Génération des repas</h3>
         <label className="field">Part de la semaine inventée par l'IA (option cochée) : {Math.round(app.aiWeekShare * 100)} %</label>
-        <input type="range" min={0} max={1} step={0.1} defaultValue={app.aiWeekShare} onChange={(e) => save({ aiWeekShare: Number(e.target.value) })} style={{ width: "100%", accentColor: "var(--ac)" }} />
+        <input type="range" min={0} max={1} step={0.05} defaultValue={app.aiWeekShare} onChange={(e) => save({ aiWeekShare: Number(e.target.value) })} style={{ width: "100%", accentColor: "var(--ac)" }} />
         <label className="field">Un prix reste « récent » pendant</label>
         <Stepper value={app.freshDays} min={3} max={60} onChange={(v) => save({ freshDays: v })} fmt={(v) => `${v} jours`} />
       </div>
