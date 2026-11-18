@@ -20,6 +20,7 @@ const COURSE = { aperitif: "Apéritif", entree: "Entrée", dessert: "Dessert" } 
 const fmtPortions = (p: number) => `${Number.isInteger(p) ? p : p.toLocaleString("fr-BE", { maximumFractionDigits: 1 })} portion${p > 1 ? "s" : ""}`;
 import { useStore } from "../state/store";
 import { run, Sheet, toast } from "../ui";
+import { DishArt } from "./DishArt";
 
 /** Substitutions locales simples proposées avec l'option « Produits de la région ». */
 const LOCAL_SWAPS: Record<string, string> = {
@@ -77,6 +78,7 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
   return (
     <Sheet title={nameOf(recipe, veg)} onClose={onClose}
       sub={<>{pret ? "🥡 plat préparé" : `⏱ ${recipe.prepMin} min`} · {fmtPortions(persons)}{slot?.leftovers ? " (dont demain midi)" : ""} · {eur(cost)} / portion{recipe.cuisine ? ` · ${CUISINES[recipe.cuisine].icon} ${CUISINES[recipe.cuisine].label}` : ""}{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
+      {!pret && <div style={{ margin: "2px 0 10px" }}><DishArt recipe={recipe} idx={s.idx} height={150} /></div>}
       {!!al.length && <div className="chips" style={{ margin: "4px 0 10px" }}>{al.map((a) => <span key={a} className="tag warn">Contient : {ALLERGENS[a]}</span>)}</div>}
       {/* Action principale en grand, actions secondaires en grille 2 colonnes (pouce, une main). */}
       <div className="stack" style={{ gap: 8, margin: "6px 0 14px" }}>
