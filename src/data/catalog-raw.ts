@@ -373,4 +373,31 @@ Ghee|ep|g|250|5.49|S||la|beurre clarifié|
 Pistaches|ep|g|125|3.49|S||fc|pistaches décortiquées|
 Riz aplati (poha)|ep|g|500|2.49|S|||poha|
 Farine complète|ep|g|1000|1.49|S||gl|atta,farine de blé complet|
+Fécule de manioc|ep|g|500|2.49|S|||tapioca en farine,polvilho|
+Bananes plantains|fl|pc|1|0.99|P|7||plantain,banane plantain|
+Haricots noirs (boîte)|ep|g|400|1.29|S|||haricots noirs,frijoles|
+Farine de maïs précuite|ep|g|1000|3.49|S|||harina pan,masarepa|
+Lait concentré sucré|ep|g|397|1.99|S||la||
+Lait évaporé|ep|ml|410|1.79|S||la|lait concentré non sucré|
+Pâte d'achiote|ep|g|100|3.99|S|||achiote,rocou|
+Bavette de bœuf|vi|g|500|9.99|LP|3||bavette,flanchet|
+Provolone|fr|g|250|3.99|P|30|la||
+Dulce de leche|ep|g|400|3.49|S||la|confiture de lait|
+Noix de coco râpée|ep|g|200|1.99|S|||coco râpée|
+Vermicelles en chocolat|ep|g|200|1.99|S||la|granulés de chocolat|
+Épis de maïs|fl|pc|2|1.99|LP|5||maïs en épi|7-9
+Noix de pécan|ep|g|125|3.49|S||fc|pécan|
+Fromage frais nature|fr|g|300|2.49|P|21|la|cream cheese,philadelphia|
+Biscuits digestive|ep|g|400|1.79|S||gl,la|digestive,biscuits graham|
+Sirop d'érable|ep|ml|250|5.99|S|||sirop d'erable|
+Sauce barbecue|ep|ml|500|2.49|S|||sauce bbq|
+Babeurre|fr|ml|1000|1.19|LP|10|la|karnemelk,lait battu,buttermilk|
+Fromage bleu|fr|g|150|2.99|P|21|la|bleu,roquefort,gorgonzola|
+Salade iceberg|fl|pc|1|1.29|P|7||iceberg|
+Sauce piquante|ep|ml|60|2.49|S|||tabasco|
+Raifort|ep|g|150|2.49|S|||raifort râpé|
+Muffins anglais|bo|pc|6|1.99|P|7|gl|english muffins|
+Ailes de poulet|vi|g|1000|5.99|LP|3||chicken wings|
+Chou blanc|fl|g|1000|1.49|LBP|21||chou cabus blanc|
+Travers de porc|vi|g|1000|8.99|LP|3||spare ribs,ribs|
 `;
