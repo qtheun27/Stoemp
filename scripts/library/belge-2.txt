@@ -1,0 +1,140 @@
+// Cuisine belge, deuxième série.
+@belge
+
+## aperitif
+# Tartines de plattekaas aux radis | 4 | 15 | PE
++ Fromage blanc 400g; Radis 10pc; Ciboulette 0.5pc; Oignons nouveaux 2pc; Pain gris 0.4pc
+- Assaisonner le fromage blanc de sel, de poivre et de la moitié de la ciboulette ciselée.
+- Couper les radis en fines rondelles et émincer les oignons nouveaux.
+- Tartiner généreusement le pain gris de fromage blanc, couvrir de radis et d'oignons.
+- Parsemer du reste de ciboulette et servir en petits morceaux, avec une bière.
+
+## accompagnement
+# Pommes de terre persillées | 4 | 30 | T
++ Pommes de terre 1000g; Beurre 40g; Persil 0.5pc
+- Éplucher les pommes de terre et les cuire 20 minutes à l'eau salée ou à la vapeur.
+- Les égoutter et les sécher 1 minute sur le feu.
+- Les rouler dans le beurre fondu et le persil haché ; servir aussitôt.
+
+# Compote de pommes maison | 6 | 30 | AH
++ Pommes 1500g; Sucre 80g; Cannelle 0.5cc; Citron 0.5pc
+- Éplucher les pommes (un mélange de variétés acidulées et sucrées) et les couper en morceaux.
+- Les cuire 20 minutes à couvert avec le sucre, la cannelle, le jus de citron et 100 ml d'eau, en remuant de temps en temps.
+- Écraser à la fourchette pour une compote rustique ou mixer pour une compote lisse.
+- Servir tiède ou froide, avec le boudin, la saucisse ou le poulet.
+
+# Chicons braisés | 4 | 45 | AH
++ Chicons 8pc; Beurre 40g; Sucre 1cc; Citron 0.5pc; Muscade 0.25cc
+- Retirer le cône amer des chicons.
+- Les ranger dans une sauteuse avec le beurre, le sucre, le jus de citron, du sel et 100 ml d'eau.
+- Couvrir et cuire 30 minutes à feu doux en les retournant.
+- Découvrir et laisser caraméliser légèrement ; assaisonner de muscade.
+
+# Purée de céleri-rave | 4 | 35 | AH
++ Céleri-rave 800g; Pommes de terre 300g; Lait 150ml; Beurre 40g; Muscade 0.25cc
+- Éplucher le céleri et les pommes de terre et les couper en morceaux.
+- Les cuire 20 minutes à l'eau salée et bien les égoutter.
+- Les écraser au presse-purée avec le beurre et le lait chaud ; assaisonner de muscade.
+
+## dessert
+# Merveilleux | 8 | 180 | T
++ Oeufs 4pc; Sucre 120g; Sucre glace 170g; Crème liquide 500ml; Chocolat noir 150g
+- Meringue : monter les 4 blancs en neige, ajouter le sucre petit à petit, puis 120 g de sucre glace tamisé.
+- Dresser des disques de 6 cm sur une plaque et les cuire 2 h à 100 °C ; les laisser refroidir dans le four.
+- Fouetter la crème bien froide avec le reste du sucre glace en chantilly ferme.
+- Assembler deux meringues avec de la chantilly, couvrir le tout de chantilly.
+- Rouler dans les copeaux de chocolat râpé et garder au frais jusqu'au service.
+
+# Coupe brésilienne | 4 | 25 | T
++ Glace vanille 500ml; Noisettes 80g; Sucre 80g; Crème liquide 200ml; Sucre glace 1cs
+- Faire griller les noisettes à sec et les frotter pour retirer la peau.
+- Faire un caramel blond avec le sucre, y rouler les noisettes et verser sur du papier cuisson ; laisser durcir, puis concasser.
+- Fouetter la crème avec le sucre glace en chantilly.
+- Dresser la glace en coupes, couvrir de chantilly et de nougatine concassée.
+
+## patisserie
+# Tarte frangipane | 8 | 60 | T
++ Pâte brisée 1pc; Beurre 125g; Sucre 125g; Oeufs 2pc; Poudre d'amandes 125g; Confiture 100g; Sucre glace 80g; Citron 0.5pc
+- Foncer un moule de 26 cm avec la pâte et étaler la confiture (abricot) sur le fond.
+- Battre le beurre mou avec le sucre, ajouter les œufs puis la poudre d'amandes.
+- Étaler la frangipane sur la confiture.
+- Cuire 35 minutes à 180 °C.
+- Glacer la tarte refroidie avec le sucre glace délayé dans le jus de citron.
+
+# Mattentaart | 8 | 60 | T
++ Pâte feuilletée 2pc; Fromage blanc 500g; Oeufs 3pc; Sucre 120g; Poudre d'amandes 40g; Sucre vanillé 8g
+- Égoutter le fromage blanc 30 minutes dans une passoire (il remplace le maton).
+- Le mélanger avec 2 œufs, le sucre, le sucre vanillé et la poudre d'amandes.
+- Découper des disques de pâte feuilletée, en garnir des moules à tartelettes, remplir de crème.
+- Couvrir d'un second disque, souder et dorer avec le dernier œuf battu.
+- Cuire 25 minutes à 200 °C ; servir tiède ou froid.
+
+# Pain d'épices maison | 10 | 90 | AH
++ Farine de seigle 150g; Farine 100g; Miel 250g; Cassonade 60g; Lait 150ml; Oeufs 1pc; Levure chimique 10g; Cannelle 2cc; Muscade 0.5cc; Clous de girofle 0.5g
+- Chauffer le lait avec le miel et la cassonade jusqu'à ce qu'ils fondent ; laisser tiédir.
+- Mélanger les farines, la levure et les épices (girofle moulu), puis ajouter le lait au miel et l'œuf.
+- Verser dans un moule à cake beurré.
+- Cuire 50 minutes à 160 °C ; il est meilleur enveloppé et attendu un jour.
+
+# Boules de Berlin | 10 | 200 | T
++ Farine 500g; Levure de boulanger 10g; Lait 700ml; Oeufs 6pc; Sucre 150g; Beurre 60g; Fécule de maïs 40g; Huile de tournesol 1500ml; Sucre glace 4cs
+- Pâte : délayer la levure dans 200 ml de lait tiède ; pétrir avec la farine, 50 g de sucre, 2 œufs, le beurre mou et une pincée de sel 10 minutes ; laisser lever 1 heure.
+- Crème pâtissière : chauffer le reste du lait ; fouetter 4 jaunes avec le reste du sucre et la fécule, verser le lait et cuire en fouettant jusqu'à épaississement ; refroidir.
+- Former 10 boules, les laisser lever 45 minutes sur un plan fariné.
+- Les frire 3 minutes de chaque côté à 170 °C et les égoutter.
+- Les fendre sur le côté, les garnir de crème à la poche et saupoudrer de sucre glace.
+
+## petitdej
+# Matoufet | 4 | 20 | T
++ Oeufs 6pc; Farine 60g; Lait 250ml; Beurre 20g; Ciboulette 0.25pc; Pain gris 0.3pc
+= Lardons 150g
+~ Champignons de Paris 200g
+v Matoufet aux champignons
+- Fouetter la farine avec le lait, puis les œufs, du sel et du poivre.
+- Faire rissoler les lardons dans le beurre dans une grande poêle.
+- Verser la pâte et cuire à feu doux, couvert, jusqu'à ce que le dessus soit pris ; retourner pour dorer l'autre face.
+- Parsemer de ciboulette et servir avec du pain gris. Version végé : champignons poêlés à la place des lardons.
+
+## plat
+# Rôti de bœuf, haricots et croquettes | 6 | 70 | T
++ Haricots verts 800g; Beurre 60g; Échalote 2pc; Croquettes de pommes de terre 900g; Moutarde 1cs
+= Rôti de bœuf 1000g; Bouillon de bœuf 200ml
+~ Galettes végétales 6pc
+v Galette végétale, haricots et croquettes
+- Sortir le rôti 1 heure à l'avance ; le saisir de tous côtés dans le beurre puis le cuire 35 minutes à 200 °C pour une cuisson rosée.
+- Le laisser reposer 10 minutes sous une feuille d'aluminium.
+- Déglacer le plat avec le bouillon et la moutarde pour la sauce.
+- Cuire les haricots 8 minutes à l'eau salée, les faire revenir avec l'échalote et un peu de beurre ; cuire les croquettes au four ou à la friteuse.
+- Servir le rôti tranché avec la sauce, les haricots et les croquettes. Version végé : galettes végétales dorées à la poêle.
+
+# Saucisse, compote et purée | 4 | 40 | AH
++ Pommes de terre 1000g; Lait 200ml; Beurre 60g; Muscade 0.25cc; Compote de pommes 400g
+= Saucisse 4pc
+~ Galettes végétales 4pc
+v Galette végétale, compote et purée
+- Cuire les pommes de terre 20 minutes à l'eau salée et les écraser avec le lait chaud, 40 g de beurre et la muscade.
+- Cuire les saucisses doucement dans le reste du beurre 15 à 20 minutes en les retournant, jusqu'à ce qu'elles soient bien dorées.
+- Déglacer la poêle avec un peu d'eau pour faire un jus.
+- Servir avec la purée et la compote froide. Version végé : galettes végétales dorées à la poêle.
+
+# Joues de porc à la bière et stoemp aux carottes | 4 | 200 | AH
++ Bière brune 500ml; Oignon 2pc; Thym 0.25pc; Feuille de laurier 0.4g; Sirop de Liège 2cs; Moutarde 1cs; Pain d'épices 2pc; Beurre 50g; Pommes de terre 800g; Carottes 400g
+= Joues de porc 1000g
+~ Champignons de Paris 500g; Lentilles vertes 200g
+v Champignons et lentilles à la bière, stoemp aux carottes
+- Faire dorer les joues dans la moitié du beurre, ajouter les oignons émincés.
+- Mouiller avec la bière, ajouter le thym, le laurier et le sirop de Liège ; poser les tranches de pain d'épices tartinées de moutarde sur le dessus.
+- Couvrir et laisser mijoter 2 h 30 à feu doux en remuant de temps en temps.
+- Stoemp : cuire les pommes de terre et les carottes ensemble 25 minutes, les écraser avec le reste du beurre.
+- Servir les joues nappées de sauce avec le stoemp. Version végé : champignons et lentilles mijotés 40 minutes dans la même sauce.
+
+# Cabillaud sauce aux crevettes grises et purée | 4 | 45 | T
++ Pommes de terre 1000g; Lait 200ml; Beurre 80g; Farine 30g; Crème liquide 150ml; Citron 0.5pc; Persil 0.25pc; Muscade 0.25cc
+= Dos de cabillaud 700g; Crevettes grises 150g; Fumet de poisson 300ml
+~ Oeufs 4pc; Bouillon de légumes 300ml
+v Œufs pochés à la crème et purée
+- Préparer une purée avec les pommes de terre, le lait chaud, 40 g de beurre et la muscade.
+- Pocher le cabillaud 6 à 8 minutes dans le fumet frémissant ; le réserver au chaud.
+- Faire un roux avec le reste du beurre et la farine, mouiller avec le fumet, ajouter la crème et cuire 5 minutes.
+- Ajouter les crevettes grises, le jus de citron et le persil hors du feu.
+- Napper le poisson et servir avec la purée. Version végé : œufs pochés 3 minutes et sauce au bouillon de légumes.

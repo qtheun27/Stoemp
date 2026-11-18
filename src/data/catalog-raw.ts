@@ -400,4 +400,15 @@ Muffins anglais|bo|pc|6|1.99|P|7|gl|english muffins|
 Ailes de poulet|vi|g|1000|5.99|LP|3||chicken wings|
 Chou blanc|fl|g|1000|1.49|LBP|21||chou cabus blanc|
 Travers de porc|vi|g|1000|8.99|LP|3||spare ribs,ribs|
+Rhum|bs|ml|700|14.99||||rhum brun,rhum ambré|
+Châtaignes|ep|g|400|4.99|S|||marrons cuits,châtaignes cuites|10-1
+Rôti de bœuf|vi|g|1000|19.90|LP|3||rosbif,rôti de boeuf|
+Joues de porc|vi|g|1000|9.99|LP|3||joue de porc|
+Noisettes|ep|g|200|2.99|S||fc|noisettes décortiquées|
+Farine de seigle|ep|g|1000|1.99|S||gl||
+Cuisses de canard confites|vi|pc|2|7.99|P|90||confit de canard|
+Gigot d'agneau|vi|g|2000|29.90|P|4||gigot|
+Cidre|bs|ml|750|2.99||||cidre brut|
+Pâte de praliné|ep|g|200|4.49|S||fc|praliné|
+Biscuits à la cuillère|ep|g|200|1.99|S||gl,oe|boudoirs|
 `;
