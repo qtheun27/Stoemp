@@ -1,0 +1,154 @@
+// Cuisine orientale, deuxième série (Maghreb, Levant, Turquie, Iran).
+@orientale
+
+## aperitif
+# Kibbeh de potiron | 6 | 80 | AH
++ Potiron 600g; Boulgour 200g; Oignon 2pc; Épinards frais 200g; Pois chiches (boîte) 200g; Cumin 1cc; Cannelle 0.5cc; Pignons de pin 30g; Huile d'olive 6cs
+- Cuire le potiron en cubes à la vapeur 15 minutes et l'écraser ; y mélanger le boulgour fin rincé, le cumin, la cannelle, du sel ; laisser gonfler 20 minutes.
+- Farce : faire fondre les oignons, ajouter les épinards, les pois chiches écrasés et les pignons.
+- Étaler la moitié de la pâte dans un plat huilé, couvrir de farce, puis du reste de pâte.
+- Découper en losanges, arroser d'huile et cuire 35 minutes à 190 °C.
+
+# Fatayer aux épinards | 8 | 90 | T
++ Farine 400g; Levure de boulanger 7g; Huile d'olive 80ml; Épinards frais 600g; Oignon 1pc; Citron 1pc; Sumac 1cs; Pignons de pin 20g
+- Pétrir la farine, la levure, une pincée de sucre et de sel, 3 cuillères d'huile et 220 ml d'eau tiède ; laisser lever 1 heure.
+- Hacher les épinards, les saler 10 minutes et les presser fortement ; mélanger avec l'oignon haché, le jus de citron, le sumac, les pignons et le reste d'huile.
+- Étaler la pâte, découper des disques de 10 cm, garnir et refermer en triangles en pinçant bien les bords.
+- Cuire 15 minutes à 210 °C.
+
+## entree
+# Salade de betteraves au cumin | 4 | 15 | AH
++ Betterave cuite 500g; Oignon rouge 0.5pc; Cumin 1cc; Citron 0.5pc; Persil 0.5pc; Huile d'olive 3cs
+- Couper les betteraves en petits dés.
+- Assaisonner avec le cumin, le jus de citron, l'huile, du sel et l'oignon finement haché.
+- Parsemer de persil ; servir frais.
+
+# Salade shirazi | 4 | 15 | E
++ Concombre 1pc; Tomates 400g; Oignon rouge 1pc; Menthe 0.25pc; Citron vert 1pc; Huile d'olive 2cs
+- Couper le concombre, les tomates et l'oignon en tout petits dés.
+- Assaisonner de jus de citron vert, d'huile, de menthe (séchée ou fraîche), de sel et de poivre.
+- Laisser reposer 10 minutes avant de servir.
+
+# Fattet hummus | 4 | 25 | T
++ Pain pita 3pc; Pois chiches (boîte) 800g; Yaourt grec 400g; Tahini 3cs; Ail 0.1pc; Citron 1pc; Pignons de pin 30g; Beurre 20g; Cumin 0.5cc
+- Couper le pain en carrés et le griller au four jusqu'à ce qu'il soit croustillant.
+- Réchauffer les pois chiches dans leur jus.
+- Mélanger le yaourt avec le tahini, l'ail écrasé, le jus de citron et du sel.
+- Dresser le pain, puis les pois chiches avec un peu de jus, napper de sauce au yaourt.
+- Parsemer de pignons dorés au beurre et de cumin ; servir aussitôt.
+
+## accompagnement
+# Riz persan au tahdig | 6 | 80 | T
++ Riz basmati 400g; Beurre 60g; Safran 0.1g; Yaourt nature 50g
+- Rincer et faire tremper le riz 30 minutes, puis le cuire 6 minutes à l'eau bouillante très salée ; l'égoutter.
+- Mélanger 3 cuillères de riz avec le yaourt et le safran infusé dans une cuillère d'eau chaude.
+- Faire fondre le beurre dans une cocotte, étaler ce mélange au fond, puis le reste du riz en dôme.
+- Percer quelques trous, couvrir d'un torchon et du couvercle ; cuire 10 minutes à feu moyen puis 40 minutes à feu très doux.
+- Retourner la cocotte sur un plat : la croûte dorée (tahdig) est la meilleure partie.
+
+## dessert
+# Sellou | 12 | 60 | T
++ Farine 300g; Amandes 250g; Graines de sésame 150g; Beurre 120g; Miel 80g; Sucre glace 100g; Cannelle 1cc
+- Griller la farine à la poêle à feu doux 20 minutes en remuant, jusqu'à ce qu'elle soit blonde.
+- Griller les amandes et le sésame, puis les mixer finement.
+- Mélanger farine, amandes, sésame, sucre glace et cannelle, puis ajouter le beurre fondu et le miel chaud.
+- Servir en dôme, à la cuillère, avec le thé à la menthe.
+
+# Ktefa | 8 | 60 | T
++ Pâte filo 250g; Huile de tournesol 300ml; Lait 750ml; Sucre 80g; Fécule de maïs 50g; Eau de fleur d'oranger 2cs; Amandes 150g; Sucre glace 2cs; Cannelle 1cc
+- Découper la filo en disques et les frire quelques secondes jusqu'à ce qu'ils soient dorés ; égoutter.
+- Crème : cuire le lait, le sucre et la fécule en remuant jusqu'à épaississement, ajouter l'eau de fleur d'oranger ; laisser tiédir.
+- Griller les amandes, les mixer grossièrement avec le sucre glace et la cannelle.
+- Monter au dernier moment : disques de filo, amandes, crème, en trois étages.
+
+## patisserie
+# Sfouf | 12 | 60 | T
++ Semoule 250g; Farine 150g; Sucre 220g; Curcuma 1cs; Levure chimique 10g; Lait 300ml; Huile de tournesol 150ml; Graines de sésame 2cs; Tahini 1cs
+- Mélanger la semoule fine, la farine, le sucre, le curcuma et la levure.
+- Ajouter le lait et l'huile et fouetter en pâte lisse.
+- Badigeonner un moule de tahini, verser la pâte et parsemer de sésame (ou de pignons).
+- Cuire 35 minutes à 180 °C ; couper en losanges une fois refroidi.
+
+## petitdej
+# Ful medames | 4 | 100 | T
++ Fèves sèches 300g; Ail 0.2pc; Cumin 1cc; Citron 1pc; Huile d'olive 4cs; Tomates 150g; Persil 0.25pc; Pain pita 4pc
+- Cuire les fèves 1 h 15 dans l'eau à frémissement jusqu'à ce qu'elles soient très tendres.
+- Les écraser grossièrement avec un peu d'eau de cuisson, l'ail, le cumin, le jus de citron et du sel.
+- Arroser d'huile d'olive, parsemer de tomate en dés et de persil.
+- Servir chaud avec du pain pita.
+
+# Manakish au zaatar | 6 | 100 | T
++ Farine 500g; Levure de boulanger 7g; Sucre 1cc; Zaatar 6cs; Huile d'olive 120ml; Tomates 200g; Concombre 1pc; Menthe 0.25pc
+- Pétrir la farine, la levure, le sucre, une pincée de sel, 2 cuillères d'huile et 300 ml d'eau tiède ; laisser lever 1 heure.
+- Mélanger le zaatar avec le reste de l'huile.
+- Diviser en 6 disques, presser du bout des doigts et étaler le zaatar.
+- Cuire 8 minutes à 240 °C ; servir avec tomate, concombre et menthe.
+
+# Menemen | 2 | 20 | EA
++ Oeufs 4pc; Tomates 400g; Poivron 1pc; Oignon 0.5pc; Piment 0.5pc; Beurre 20g; Pain de campagne 0.25pc
+- Faire fondre l'oignon et le poivron en lanières dans le beurre.
+- Ajouter les tomates râpées et le piment ; cuire 8 minutes.
+- Ajouter les œufs battus et remuer doucement jusqu'à ce qu'ils soient crémeux.
+- Servir aussitôt avec du pain.
+
+## plat
+# Rfissa | 6 | 120 | H
++ Farine 300g; Semoule 100g; Beurre 100g; Lentilles vertes 150g; Oignon 3pc; Ras el hanout 2cc; Gingembre 10g; Curcuma 1cc; Safran 0.1g; Coriandre 0.5pc; Persil 0.5pc
+= Cuisse de poulet 6pc
+~ Pois chiches (boîte) 400g
+v Rfissa aux pois chiches
+- Préparer des msemen : pétrir la farine, la semoule, une pincée de sel et 250 ml d'eau ; étaler finement, beurrer, plier en carrés et cuire à la poêle ; les déchirer en lanières.
+- Faire revenir le poulet avec les oignons émincés, les épices, les herbes hachées et 40 g de beurre ; ajouter 1,5 litre d'eau et cuire 50 minutes (une cuillère de graines de fenugrec si on en a).
+- Ajouter les lentilles et cuire 30 minutes.
+- Réchauffer les lanières de msemen à la vapeur, les dresser sur un grand plat et les arroser généreusement de bouillon.
+- Disposer le poulet et les lentilles dessus. Version végé : pois chiches mijotés dans le bouillon épicé à la place du poulet.
+
+# Kafta au tahini et pommes de terre | 4 | 60 | T
++ Pommes de terre 600g; Oignon 1pc; Persil 0.5pc; Tahini 100g; Citron 1pc; Ail 0.1pc; Cannelle 0.5cc; Pignons de pin 20g
+= Haché de bœuf 600g
+~ Pois chiches (boîte) 400g; Chapelure 40g
+v Kafta de pois chiches au tahini
+- Mélanger la viande avec l'oignon et le persil hachés, la cannelle, du sel et du poivre ; former des petits boudins.
+- Couper les pommes de terre en rondelles, les dorer à l'huile et les étaler dans un plat avec les kaftas.
+- Délayer le tahini avec le jus de citron, l'ail écrasé et 200 ml d'eau en sauce fluide ; napper le plat.
+- Cuire 30 minutes à 200 °C ; parsemer de pignons dorés. Version végé : boulettes de pois chiches écrasés liés à la chapelure.
+
+# Fasolia | 4 | 50 | AH
++ Haricots blancs (boîte) 800g; Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Concentré de tomate 1cs; Cumin 1cc; Coriandre 0.5pc; Riz 300g; Vermicelles 40g; Beurre 20g; Huile d'olive 4cs
+- Faire fondre l'oignon dans l'huile, ajouter l'ail, le cumin et le concentré.
+- Ajouter les tomates, les haricots égouttés et 200 ml d'eau ; mijoter 25 minutes.
+- Riz aux vermicelles : dorer les vermicelles dans le beurre, ajouter le riz, 450 ml d'eau salée et cuire 15 minutes à couvert.
+- Parsemer les haricots de coriandre et servir avec le riz.
+
+# Méchoui d'épaule d'agneau | 6 | 300 | T
++ Beurre 80g; Ail 0.3pc; Cumin 2cs; Paprika 1cs; Coriandre 0.5pc; Semoule 400g
+= Épaule d'agneau en morceaux 1800g
+~ Pois chiches (boîte) 800g; Carottes 500g
+v Méchoui de légumes et pois chiches
+- Mélanger le beurre mou avec l'ail écrasé, la moitié du cumin, le paprika, la coriandre hachée et du sel.
+- Enduire l'agneau (idéalement une épaule entière) de ce beurre.
+- Cuire 4 h à 160 °C à couvert en arrosant toutes les 30 minutes, puis 20 minutes à 220 °C à découvert pour dorer.
+- La viande doit se détacher à la main ; servir avec la semoule et le reste de cumin mêlé de sel pour tremper.
+- Version végé : carottes et pois chiches rôtis 45 minutes avec le beurre épicé.
+
+# Ghormeh sabzi | 6 | 180 | T
++ Persil 2pc; Coriandre 1pc; Ciboulette 1pc; Épinards frais 200g; Oignon 2pc; Curcuma 1cc; Haricots rouges (boîte) 400g; Citron vert 2pc; Riz basmati 400g
+= Épaule d'agneau en morceaux 800g
+~ Pois chiches (boîte) 400g
+v Ghormeh sabzi aux pois chiches
+- Hacher très finement toutes les herbes et les épinards, puis les faire revenir 20 minutes à l'huile jusqu'à ce qu'ils foncent et sentent bon.
+- Faire dorer l'agneau avec les oignons et le curcuma.
+- Ajouter les herbes, le jus des citrons verts et 1 litre d'eau ; cuire 2 heures à feu doux.
+- Ajouter les haricots rouges les 30 dernières minutes.
+- Servir avec le riz basmati. Version végé : pois chiches à la place de l'agneau, cuisson 1 heure.
+
+# Fesenjan | 4 | 150 | AH
++ Cerneaux de noix 250g; Mélasse de grenade 150ml; Oignon 1pc; Sucre 1cs; Cannelle 0.5cc; Riz basmati 300g
+= Cuisse de poulet 6pc
+~ Courge butternut 800g
+v Fesenjan de courge
+- Griller les noix à sec et les mixer en poudre fine.
+- Les cuire 30 minutes à feu doux avec 600 ml d'eau en remuant, jusqu'à ce qu'elles rendent leur huile.
+- Faire dorer le poulet et l'oignon émincé, les ajouter aux noix avec la mélasse de grenade, le sucre et la cannelle.
+- Mijoter 1 heure jusqu'à ce que la sauce soit épaisse et brun foncé ; ajuster l'équilibre aigre-doux.
+- Servir avec le riz. Version végé : cubes de courge rôtis puis mijotés 20 minutes dans la sauce.
