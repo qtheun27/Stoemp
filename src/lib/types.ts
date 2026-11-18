@@ -55,6 +55,8 @@ export interface Recipe {
   course?: Course;
   /** Recette de la grande bibliothèque : étapes chargées à l'ouverture. */
   lib?: boolean;
+  /** Repas léger ou déjà complet servi sans féculent (salade-repas, omelette, moussaka…), par choix de cuisine. */
+  light?: boolean;
   /** Nombre de parts pour lequel les étapes sont écrites (recettes de la bibliothèque). */
   servings?: number;
   householdId?: string;

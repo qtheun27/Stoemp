@@ -1,6 +1,6 @@
 import { CATALOG_RAW } from "../data/catalog-raw";
 import { RECIPES_RAW, type RawRecipe } from "../data/recipes-raw";
-import { CUISINE_OF, RECIPES_MORE, type Cuisine } from "../data/recipes-more";
+import { CUISINE_OF, LIGHT_MEALS, RECIPES_MORE, type Cuisine } from "../data/recipes-more";
 import type { Allergen, Cat, Course, Ingredient, Item, Recipe, Season, Unit } from "./types";
 import { keyOf, norm, slug } from "./text";
 
@@ -91,6 +91,7 @@ export function parseBaseRecipes(idx: ItemIndex): Recipe[] {
     steps: steps.split("|"),
     source: "base" as const,
     cuisine,
+    ...(LIGHT_MEALS.has(name) ? { light: true } : {}),
   }));
 }
 
@@ -105,11 +106,11 @@ export const cookable = (recipes: Iterable<Recipe>) => [...recipes].filter((r) =
 export const mains = (recipes: Iterable<Recipe>) => cookable(recipes).filter((r) => (r.course || "plat") === "plat");
 
 /** Fiche compacte de la bibliothèque (document « library ») → recette sans étapes. */
-export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: Course; g: [string, number][]; m: [string, number][]; w: [string, number][] }
+export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: Course; lt?: 1; g: [string, number][]; m: [string, number][]; w: [string, number][] }
 export function libRecipe(e: LibEntry): Recipe {
   const ing = (l: [string, number][]) => (l || []).map(([itemId, qtyPerPerson]) => ({ itemId, qtyPerPerson }));
   return { id: e.i, name: e.n, vegName: e.v, prepMin: e.t, seasons: (e.s || "PEAH").split("") as Season[], ingredients: ing(e.g), meat: ing(e.m), vegSwap: ing(e.w),
-    steps: [], source: "base", cuisine: e.c, course: e.k || "plat", lib: true };
+    steps: [], source: "base", cuisine: e.c, course: e.k || "plat", lib: true, ...(e.lt ? { light: true } : {}) };
 }
 export const ingredientsOf = (r: Recipe, veg: boolean): Ingredient[] =>
   r.ingredients.concat(isVegRecipe(r) ? [] : veg ? r.vegSwap : r.meat);

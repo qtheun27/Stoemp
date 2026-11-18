@@ -7,7 +7,7 @@ on:
         description: "Tâche"
         required: true
         type: choice
-        options: [seed, rebuild-pricebook]
+        options: [seed, rebuild-pricebook, oneoff]
 permissions:
   contents: read
   id-token: write
@@ -30,4 +30,5 @@ jobs:
           case "${{ inputs.task }}" in
             seed) npx tsx scripts/seed.ts ;;
             rebuild-pricebook) npx tsx scripts/rebuild-pricebook.mts ;;
+            oneoff) npx tsx scripts/maintenance/oneoff.mts ;;
           esac

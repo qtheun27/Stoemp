@@ -566,7 +566,7 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
       system: `Tu es un grand chef et historien de la cuisine ${CUISINE_LABEL[cuisine]}. Tu dresses la liste des vrais plats d'une cuisine, pour un livre de recettes familial belge.`,
       content: `Liste 60 ${LIB_COURSE[course]} RÉELS et distincts de cuisine ${CUISINE_LABEL[cuisine]}, que des familles cuisinent vraiment à la maison : d'abord les grands classiques que tout le monde connaît, puis des recettes populaires du quotidien. Uniquement des plats qui existent sous ce nom ; aucune variante déguisée d'un même plat.
 Évite les préparations de chef ou de pâtissier professionnel, les spécialités très locales et peu connues, et celles dont les ingrédients principaux sont introuvables en supermarché belge.
-Un même plat sous un autre nom ou dans une autre langue est un DOUBLON (ex. « stoofvlees » = « carbonnade flamande », « boulets » = « boulettes à la liégeoise ») : ne le propose pas.${course === "plat" ? "\nCe sont des REPAS COMPLETS : donne le plat avec son accompagnement habituel (ex. « Boulets à la liégeoise et frites », « Blanquette de veau et riz »)." : ""}
+Un même plat sous un autre nom ou dans une autre langue est un DOUBLON (ex. « stoofvlees » = « carbonnade flamande », « boulets » = « boulettes à la liégeoise ») : ne le propose pas.${course === "plat" ? "\nCe sont des repas : quand le plat se sert avec un accompagnement habituel, donne-le avec (ex. « Boulets à la liégeoise et frites », « Blanquette de veau et riz ») ; un plat qui forme déjà un repas ou un repas léger reste tel quel (moussaka, salade composée)." : ""}
 Pour chacun, « keys » : les ingrédients indispensables, la technique qui fait le plat et la durée totale réelle (ex. « bœuf, bière brune, oignons, pain d'épices moutardé ; mijoté ; 2 h 30 »).
 Exclus ceux-ci (déjà présents) : ${[...names, ...plan.map((d) => d.n)].slice(-500).join(" ; ") || "—"}.`,
     });
@@ -589,7 +589,7 @@ Recette COMPLÈTE et PRÉCISE, comme dans un bon livre de cuisine : tous les ing
 Quantités pour la recette entière (servings = son nombre de parts : 4 pour un plat, 6 à 10 pour un gâteau ou une tarte) ; meat et vegSwap vides sauf s'il y a de la viande ou du poisson.
 prepMin = durée TOTALE réelle (préparation + cuisson + repos) ; une marinade ou un trempage de la veille se signale dans les étapes et compte aussi (ex. 3 h de four → prepMin ≥ 200).
 Jamais d'eau dans les ingrédients. Pour les vins, bières, alcools, fromages et produits courants, utilise l'article GÉNÉRIQUE du catalogue (« Vin blanc », pas « Vin blanc Riesling ») ; ne crée un nouvel article (newName) que pour un ingrédient vraiment absent, avec un nom générique.${course === "plat" ? `
-Un plat principal est un REPAS COMPLET : ses ingrédients et ses étapes comprennent son accompagnement habituel (pommes de terre, frites, purée, riz, pâtes, pain, semoule…), sauf s'il en contient déjà un.` : ""}`,
+Un plat principal est un REPAS : s'il se sert traditionnellement avec un accompagnement (pommes de terre, frites, purée, riz, pâtes, pain, semoule…), mets-le dans les ingrédients et les étapes. S'il forme déjà un repas sans féculent (moussaka, viande et sa garniture de légumes) ou si c'est un repas léger (salade composée, omelette), n'ajoute RIEN d'artificiel et mets light = true.` : ""}`,
   });
   // Le nom prévu fait foi (même ordre).
   res.recipes.forEach((r, i) => { if (todo[i]) r.name = todo[i].n; });
@@ -610,7 +610,7 @@ Un plat principal est un REPAS COMPLET : ses ingrédients et ses étapes compren
     if (r.prepMin < 5 || r.prepMin > 1500) return `durée ${r.prepMin} min`; // repos, congélation ou marinade de la veille compris
     if (!qtyOk) return `quantités (${r.servings} parts)`;
     if (r.meat.length && !r.vegSwap.length) return "pas de version végé";
-    if (course === "plat" && !all.some((x) => LIB_STARCH.test((x.itemId ? byId.get(x.itemId)?.name : x.newName) || ""))) return "pas de féculent (repas incomplet)";
+    if (course === "plat" && !r.light && !all.some((x) => LIB_STARCH.test((x.itemId ? byId.get(x.itemId)?.name : x.newName) || ""))) return "pas de féculent ni repas léger déclaré";
     if (sameCourseNames.some((x) => similarity(r.name, x) >= 0.75)) return "doublon d'un plat existant";
     return null;
   };
@@ -624,10 +624,10 @@ Un plat principal est un REPAS COMPLET : ses ingrédients et ses étapes compren
     system: `Tu es un chef critique exigeant, spécialiste de la cuisine ${CUISINE_LABEL[cuisine]}. On te soumet des recettes pour une appli familiale belge.
 Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour le nombre de parts indiqué, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
 Format de l'appli, à NE PAS reprocher : quantités pour toute la recette (nombre de parts indiqué), sel, poivre et huile volontairement absents de la liste, étapes concises si elles sont justes. « pièce(s) » d'un bouquet d'herbes = fraction du bouquet.
-Refuse aussi un DOUBLON d'un plat déjà présent (même plat sous un autre nom ou dans une autre langue). Déjà présents : ${names.slice(-400).join(" ; ")}.
+${course === "plat" ? `Repas : refuse un plat consistant à qui il manque son accompagnement habituel, et refuse aussi un féculent ajouté qui n'a rien à faire là. Un plat marqué « repas léger / déjà complet » est accepté s'il l'est vraiment (salade composée, omelette, moussaka, viande et sa garniture).\n` : ""}Refuse aussi un DOUBLON d'un plat déjà présent (même plat sous un autre nom ou dans une autre langue). Déjà présents : ${names.slice(-400).join(" ; ")}.
 Accepte les adaptations raisonnables aux supermarchés belges.
 Décide APRÈS ton analyse : ok = false seulement pour un défaut GRAVE (plat inventé ou confondu, ingrédient clé absent ou faux, quantités ou cuisson qui feraient rater la recette, étape dangereuse). Un écart de tradition mineur ou une imprécision → ok = true.`,
-    content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.servings} parts, ${r.prepMin} min)
+    content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.servings} parts, ${r.prepMin} min${r.light ? ", repas léger / déjà complet" : ""})
 Ingrédients : ${[...r.ingredients, ...r.meat].map(line).join(", ")}${r.vegSwap.length ? `
 Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
 Étapes : ${r.steps.join(" / ")}`).join("\n\n"),
@@ -653,11 +653,11 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
     const recipe = {
       name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: Math.max(5, r.prepMin),
       seasons: r.seasons.length ? r.seasons : ["P", "E", "A", "H"], ingredients, meat, vegSwap, steps: r.steps.slice(0, 8),
-      cuisine, course, servings: r.servings, source: "base", lib: true, householdId: null, deleted: false, createdAt: Date.now(),
+      cuisine, course, servings: r.servings, ...(r.light ? { light: true } : {}), source: "base", lib: true, householdId: null, deleted: false, createdAt: Date.now(),
     };
     batch.set(db().collection("recipes").doc(id), recipe);
     // Fiche compacte (sans les étapes) pour l'appli : chargée une fois, gardée hors ligne.
-    metas.push({ i: id, n: recipe.name, v: recipe.vegName, t: recipe.prepMin, s: recipe.seasons.join(""), c: cuisine, k: course,
+    metas.push({ i: id, n: recipe.name, v: recipe.vegName, t: recipe.prepMin, s: recipe.seasons.join(""), c: cuisine, k: course, ...(r.light ? { lt: 1 } : {}),
       g: ingredients.map((x) => [x.itemId, x.qtyPerPerson]), m: meat.map((x) => [x.itemId, x.qtyPerPerson]), w: vegSwap.map((x) => [x.itemId, x.qtyPerPerson]) });
     known.add(key);
   }
