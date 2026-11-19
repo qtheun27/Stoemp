@@ -86,6 +86,12 @@ export function matchItem(productName: string, size: number, unit: "g" | "ml" | 
   return best;
 }
 
+/** Viande ou poisson différents (« carbonades de porc » ≠ « Bœuf à braiser ») : jamais le même article. */
+export function proteinClash(productName: string, itemName: string): boolean {
+  const pt = tokens(productName).filter((w) => PROTEIN.has(w)), it = tokens(itemName).filter((w) => PROTEIN.has(w));
+  return pt.length > 0 && it.length > 0 && !pt.some((w) => it.includes(w));
+}
+
 /** Racine des mots (« apéritif » et « apéritives » → « aperit », « saucisse » ≠ « saucisson »). */
 const stems = (s: string) => new Set(tokens(s).map((w) => w.replace(/(ive|if|ee|e)$/, "")));
 
