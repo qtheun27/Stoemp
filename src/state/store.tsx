@@ -7,6 +7,7 @@ import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { DEFAULT_APP_CONFIG, mergeAppConfig, type AppConfig } from "../lib/appConfig";
 import { emptyBook, expandBook, priceKey, type BookEntry, type PriceBook } from "../lib/pricing";
 import { isoWeek } from "../lib/season";
+import { norm } from "../lib/text";
 import { readyRecipe } from "../lib/ready";
 import { EMPTY_TASTES, type Tastes } from "../lib/tastes";
 import type { Cat, Consumption, Item, PaidPrice, Price, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
@@ -166,9 +167,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return new ItemIndex([...byId.values()]);
   }, [extraItems]);
   // Recettes + plats préparés du magasin (à réchauffer), ces derniers à part des recettes à cuisiner.
-  const recipes = useMemo(() => new Map([...library.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)),
-    ...BASE_RECIPES.map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r)), ...hhRecipes,
-    ...idx.all().filter((i) => i.ready).map(readyRecipe)].map((r) => [r.id, r])), [hhRecipes, hiddenBase, idx, library]);
+  // Un plat IA du foyer qui porte le nom d'un plat de la bibliothèque est masqué (il reste lisible pour les semaines passées).
+  const recipes = useMemo(() => {
+    const shared = [...library, ...BASE_RECIPES].map((r) => (hiddenBase.has(r.id) ? { ...r, deleted: true } : r));
+    const known = new Set(shared.filter((r) => !r.deleted).map((r) => norm(r.name)));
+    const own = hhRecipes.map((r) => (r.source === "ia" && known.has(norm(r.name)) ? { ...r, deleted: true } : r));
+    return new Map([...shared, ...own, ...idx.all().filter((i) => i.ready).map(readyRecipe)].map((r) => [r.id, r]));
+  }, [hhRecipes, hiddenBase, idx, library]);
   const book = useMemo(() => ({ ...emptyBook(), shared, paid }), [shared, paid]);
   const household = households.find((h) => h.id === hid) || null;
 

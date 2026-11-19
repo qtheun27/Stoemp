@@ -65,10 +65,10 @@ v Œufs mimosa, coleslaw et maïs
 # Shepherd's pie | 6 | 100 | AH
 r
 + Pommes de terre 1300g; Carottes 300g; Petits pois 250g; Oignon 2pc; Lait 200ml; Beurre 60g; Cheddar 120g; Concentré de tomate 2cs; Bouillon de bœuf 300ml; Farine 1cs; Thym 0.25pc; Romarin 0.25pc
-= Épaule d'agneau en morceaux 750g
+= Haché d'agneau 750g
 ~ Lentilles vertes 400g
 v Shepherd's pie aux lentilles
-- Hacher l'agneau au couteau (ou demander au boucher un haché d'agneau) et le faire dorer.
+- Faire dorer le haché d'agneau en l'émiettant.
 - Ajouter oignons et carottes en dés, la farine et le concentré, puis le bouillon et les herbes ; mijoter 30 minutes.
 - Ajouter les petits pois.
 - Préparer une purée avec les pommes de terre, le beurre et le lait chaud.

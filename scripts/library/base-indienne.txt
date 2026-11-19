@@ -181,8 +181,8 @@ r
 
 # Dal makhani | 4 | 70 | AH
 r
-+ Lentilles vertes 200g; Haricots rouges (boîte) 400g; Tomates concassées 300g; Concentré de tomate 1cs; Crème liquide 150ml; Beurre 60g; Garam masala 5g; Cumin 3g; Gingembre 20g; Ail 0.2pc; Oignon 1pc; Piment 0.5pc; Riz basmati 240g
-- Cuire les lentilles 30 minutes à l'eau (idéalement des lentilles noires urad).
++ Lentilles noires 200g; Haricots rouges (boîte) 400g; Tomates concassées 300g; Concentré de tomate 1cs; Crème liquide 150ml; Beurre 60g; Garam masala 5g; Cumin 3g; Gingembre 20g; Ail 0.2pc; Oignon 1pc; Piment 0.5pc; Riz basmati 240g
+- Cuire les lentilles noires 30 minutes à l'eau.
 - Faire fondre l'oignon dans la moitié du beurre avec le cumin, l'ail, le gingembre et le piment.
 - Ajouter tomates, concentré et garam masala ; cuire 10 minutes.
 - Ajouter les lentilles, les haricots rouges et un peu d'eau ; mijoter 20 minutes à feu doux en écrasant une partie.

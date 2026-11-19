@@ -435,4 +435,25 @@ Bicarbonate de soude|ep|g|200|1.29|S|||bicarbonate|
 Fromage de Herve|fr|g|200|3.49|LP|21|la|herve|
 Épeautre|ep|g|500|2.49|S||gl|farro,petit épeautre|
 Orge perlé|ep|g|500|1.49|S||gl|orge|
+Chou kale|fl|g|250|1.99|LBP|7||kale,cavolo nero,chou noir|10-3
+Salade frisée|fl|pc|1|1.69|LP|4||frisée,chicorée frisée|9-3
+Guanciale|vi|g|150|4.49|P|21||joue de porc séchée,pancetta|
+Poitrine de porc demi-sel|vi|g|500|5.49|LP|5||petit salé,poitrine salée|
+Lentilles noires|ep|g|500|2.49|S|||lentilles beluga,urad,lentilles noires urad|
+Pâte de tamarin|ep|g|200|2.99|S|||tamarin|
+Poivre de Sichuan|ep|g|30|3.49|S|||baies de Sichuan|
+Badiane|ep|g|30|2.29|S|||anis étoilé|
+Kecap manis|ep|ml|250|2.99|S||so,gl|sauce soja sucrée|
+Panko|ep|g|200|2.49|S||gl|chapelure japonaise|
+Piment d'Espelette|ep|g|40|5.99|S|||espelette|
+Farine de sarrasin|ep|g|500|2.49|BS|||sarrasin,blé noir|
+Farine de manioc|ep|g|500|2.99|S|||farofa,gari|
+Piment chipotle|ep|g|200|3.49|S|||chipotle,chipotle en adobo|
+Morue salée|vi|g|500|11.99|S|60|po|morue,bacalhau|
+Haché d'agneau|vi|g|500|8.99|P|2||agneau haché|
+Sardines fraîches|vi|g|500|6.99|P|2|po||5-9
+Basilic thaï|fl|pc|1|1.99|P|5||horapha|
+Ananas|fl|pc|1|2.49|P|7||ananas frais|
+Paprika fumé|ep|g|40|1.89|S|||pimentón,paprika fumé|
+Sauge|fl|pc|1|1.29|P|7||sauge fraîche|
 `;
