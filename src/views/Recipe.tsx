@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { ChefHat, Heart, Leaf, X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -9,7 +9,7 @@ import { allergensOf } from "../lib/planner";
 import { eur } from "../lib/text";
 import type { Allergen, Item, Recipe } from "../lib/types";
 import { fmtIngredient } from "../lib/units";
-import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, toggleFavorite, toggleLeftovers } from "../state/actions";
+import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, setSide, toggleFavorite, toggleLeftovers } from "../state/actions";
 import { eatersOf, headcount, slotPortions } from "../lib/household";
 import { drinkFor } from "../lib/drinks";
 import { mealParts, vegPortions } from "../lib/mixed";
@@ -21,6 +21,7 @@ const fmtPortions = (p: number) => `${Number.isInteger(p) ? p : p.toLocaleString
 import { useStore } from "../state/store";
 import { run, Sheet, toast } from "../ui";
 import { DishImage } from "./DishImage";
+import { sideOptions, withSide } from "../lib/sides";
 
 /** Substitutions locales simples proposées avec l'option « Produits de la région ». */
 const LOCAL_SWAPS: Record<string, string> = {
@@ -43,11 +44,16 @@ function useFullRecipe(r: Recipe): Recipe {
 }
 
 export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { recipe: Recipe; slotIndex: number | null; onClose: () => void }) {
-  const recipe = useFullRecipe(initial);
   const s = useStore();
   const [cook, setCook] = useState(false);
   const [other, setOther] = useState<Recipe | null>(null);
   const slot = slotIndex != null ? s.week?.slots[slotIndex] : undefined;
+  // Accompagnement choisi pour ce repas : il remplace le féculent d'origine (ingrédients, étapes, coût).
+  const sideRecipe = slot?.side ? s.recipes.get(slot.side) : undefined;
+  const fullSide = useFullRecipe(sideRecipe || initial);
+  const baseRecipe = useFullRecipe(initial);
+  const recipe = withSide(baseRecipe, sideRecipe ? fullSide : null, s.idx);
+  const sides = useMemo(() => (slot && !slot.fromLeftovers ? sideOptions(initial, s.recipes.values(), s.idx).slice(0, 10) : []), [initial.id, slot?.fromLeftovers, s.recipes]);
   const veg = slot ? slot.veg : s.settings.options.veg && !isVegRecipe(recipe);
   const base = basePortions(s);
   const persons = slot ? Math.max(slotPortions(slot, base), base) : base;
@@ -79,6 +85,13 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
     <Sheet title={nameOf(recipe, veg)} onClose={onClose}
       sub={<>{pret ? "🥡 plat préparé" : `⏱ ${recipe.prepMin} min`} · {fmtPortions(persons)}{slot?.leftovers ? " (dont demain midi)" : ""} · {eur(cost)} / portion{recipe.cuisine ? ` · ${CUISINES[recipe.cuisine].icon} ${CUISINES[recipe.cuisine].label}` : ""}{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
       {!pret && <div style={{ margin: "2px 0 10px" }}><DishImage recipe={recipe} idx={s.idx} height={190} /></div>}
+      {sides.length > 0 && <div style={{ margin: "0 0 10px" }}>
+        <div className="small muted" style={{ marginBottom: 4 }}>Accompagnement</div>
+        <div className="chips">
+          <button className="chip" aria-pressed={!slot?.side} onClick={() => run(() => setSide(s, slotIndex!, null))}>Celui de la recette</button>
+          {sides.map((x) => <button key={x.id} className="chip" aria-pressed={slot?.side === x.id} onClick={() => run(() => setSide(s, slotIndex!, x.id), `Avec : ${x.name}`)}>{x.name}</button>)}
+        </div>
+      </div>}
       {!!al.length && <div className="chips" style={{ margin: "4px 0 10px" }}>{al.map((a) => <span key={a} className="tag warn">Contient : {ALLERGENS[a]}</span>)}</div>}
       {/* Action principale en grand, actions secondaires en grille 2 colonnes (pouce, une main). */}
       <div className="stack" style={{ gap: 8, margin: "6px 0 14px" }}>
