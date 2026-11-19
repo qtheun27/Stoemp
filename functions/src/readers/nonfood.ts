@@ -14,7 +14,7 @@ const HYGIENE = [
   "savon", "creme de jour", "creme de nuit", "creme visage", "creme mains", "creme pour les mains", "creme corps", "creme pour le corps", "creme solaire", "creme hydratante", "creme a raser", "anti-age", "anti-rides",
   "lait corporel", "lait demaquillant", "lait solaire", "lait hydratant", "lait pour le corps", "lotion", "demaquill", "mascara", "rouge a levres", "vernis", "maquillage", "fond de teint",
   "parfum", "eau de toilette", "eau de parfum", "rasoir", "rasoirs", "lames de rasoir", "mousse a raser", "gel a raser", "coton-tiges", "cotons", "disques demaquillants", "lingettes",
-  "nivea", "garnier", "l'oreal", "colgate", "sanex", "palmolive", "rexona", "gillette", "pampers", "head & shoulders",
+  "nivea", "ogx", "garnier", "l'oreal", "colgate", "sanex", "palmolive", "rexona", "gillette", "pampers", "head & shoulders",
   "serviettes hygieniques", "tampons", "protege-slips", "couches", "laque", "gel coiffant", "coloration", "baume a levres", "serum", "masque visage", "masque cheveux", "exfoliant", "gommage", "soin du visage", "huile de massage", "huile pour le corps", "huile de soin", "huile de bain", "johnson's", "huile bebe", "baby huile", "baby oil", "bio-oil", "micellaire", "dch",
 ];
 const CLEANING = [
