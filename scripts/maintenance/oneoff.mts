@@ -1,33 +1,40 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : corrige le classement de recettes écrites par l'IA (type de plat, durée).
-// Puis lancer la tâche « library » pour reconstruire les fiches compactes.
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : diagnostic EN LECTURE SEULE.
+// 1. Captures récentes hors Colruyt (structure seulement : les chiffres sont masqués, aucun prix n'apparaît dans le journal public).
+// 2. Appels IA du capteur (extractPrices, matchProduct) des dernières 48 h : nombre, erreurs.
+// 3. Photos : durée moyenne, refus de quota et cadence des dernières heures.
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import { STARCH_RE } from "../../src/lib/balance";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
-const COURSE: Record<string, string> = {
-  "Mì Quảng": "plat", "Cao lầu": "plat", "Hủ tiếu Nam Vang": "plat", "Pozole verde": "plat",
-  "Sopa de tortilla": "soupe", "Asperges vertes à la flamande": "entree",
-  ...Object.fromEntries(["Cookies aux pépites de chocolat", "Tarte au riz liégeoise", "Barfi au lait en poudre", "Ladoo au besan", "Motichoor ladoo",
-    "Brutti ma buoni", "Cartellate", "Chiacchiere", "Ferratelle abruzzaises", "Frittelle veneziane", "Pasta di mandorla", "Pettole pugliesi", "Pinza veneta",
-    "Struffoli", "Torta caprese", "Torta di mele umbra", "Torta di nocciole", "Torta di pere e cioccolato", "Torta sbrisolona", "Pastéis de nata",
-    "Basboussa (revani)", "Chebakia", "Cornes de gazelle", "Kataïf aux noix", "Maamoul aux dattes", "Makrout", "Churros"].map((n) => [n, "patisserie"])),
-};
-const MINUTES: Record<string, number> = { "Baeckeoffe alsacien": 240, "Clafoutis limousin aux cerises noires": 60 };
-const names = new Map((await db.collection("items").select("name").get()).docs.map((d) => [d.id, d.get("name") as string]));
-const docs = (await db.collection("recipes").where("lib", "==", true).get()).docs.filter((d) => !d.get("deleted") && d.get("author") !== "chef");
-let n = 0;
-for (const d of docs) {
-  const name = d.get("name") as string, patch: Record<string, unknown> = {};
-  if (COURSE[name] && COURSE[name] !== (d.get("course") || "plat")) {
-    patch.course = COURSE[name];
-    const ings = [...(d.get("ingredients") || []), ...(d.get("meat") || [])] as { itemId: string }[];
-    if (COURSE[name] === "plat") patch.light = !ings.some((i) => STARCH_RE.test(names.get(i.itemId) || ""));
-  }
-  if (MINUTES[name] && MINUTES[name] !== d.get("prepMin")) patch.prepMin = MINUTES[name];
-  if (!Object.keys(patch).length) continue;
-  await d.ref.set(patch, { merge: true }); n++;
-  console.log(`${name} : ${JSON.stringify(patch)}`);
+const mask = (s: string) => s.replace(/\d/g, "#");
+
+const caps = (await db.collection("captures").orderBy("at", "desc").limit(30).get()).docs.map((d) => d.data());
+console.log(`=== Captures récentes : ${caps.length} (${caps.filter((c) => c.store === "colruyt").length} Colruyt)`);
+for (const c of caps.filter((x) => x.store !== "colruyt").slice(0, 6)) {
+  const t = String(c.text || "");
+  const lines = t.split("\n").map((l) => l.trim()).filter(Boolean);
+  const euro = lines.findIndex((l) => /€/.test(l));
+  console.log(`\n--- ${c.store} · ${new Date(c.at).toISOString()} · ${mask(String(c.url).replace(/^https?:\/\/[^/]+/, ""))} · ${t.length} car., ${lines.length} lignes, ${(t.match(/€/g) || []).length} « € », ${(t.match(/\/\s?kg/gi) || []).length} « /kg »`);
+  if (euro >= 0) console.log("Autour du 1er prix :\n  " + lines.slice(Math.max(0, euro - 6), euro + 10).map(mask).join("\n  "));
+  else console.log("Aucun « € » dans le texte. Début :\n  " + lines.slice(0, 25).map(mask).join("\n  "));
 }
-const missing = [...Object.keys(COURSE), ...Object.keys(MINUTES)].filter((k) => !docs.some((d) => d.get("name") === k));
-console.log(`${n} recettes corrigées.${missing.length ? " Introuvables : " + missing.join(", ") : ""}`);
+
+const since = Date.now() - 48 * 3600_000;
+const logs = (await db.collection("aiLogs").where("at", ">=", since).get()).docs.map((d) => d.data());
+for (const task of ["extractPrices", "matchProduct", "classifyItem"]) {
+  const l = logs.filter((x) => x.task === task);
+  const errs = l.filter((x) => x.error).map((x) => String(x.error).slice(0, 120));
+  console.log(`\n=== ${task} (48 h) : ${l.length} appels, ${errs.length} erreurs${errs.length ? " — " + [...new Set(errs)].slice(0, 4).join(" | ") : ""}`);
+}
+
+const img = logs.filter((x) => x.task === "dishImage");
+const ok = img.filter((x) => !x.error), ko = img.filter((x) => x.error);
+const avg = ok.length ? Math.round(ok.reduce((s, x) => s + (x.ms || 0), 0) / ok.length / 100) / 10 : 0;
+console.log(`\n=== Photos (48 h) : ${ok.length} réussies (durée moyenne ${avg} s), ${ko.length} refus/erreurs`);
+const byErr = new Map<string, number>();
+for (const x of ko) { const k = String(x.error).slice(0, 80); byErr.set(k, (byErr.get(k) || 0) + 1); }
+for (const [k, n] of [...byErr].sort((a, b) => b[1] - a[1]).slice(0, 5)) console.log(`  ${n} × ${k}`);
+for (let h = 5; h >= 0; h--) {
+  const a = Date.now() - (h + 1) * 3600_000, b = Date.now() - h * 3600_000;
+  console.log(`  il y a ${h + 1}-${h} h : ${ok.filter((x) => x.at >= a && x.at < b).length} photos, ${ko.filter((x) => x.at >= a && x.at < b).length} refus`);
+}

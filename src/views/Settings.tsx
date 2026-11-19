@@ -14,13 +14,19 @@ export const appUrl = () => location.origin + location.pathname;
  * Favori « Envoyer à Stoemp » : reste sur la page du magasin (au premier plan, sinon Chrome la met en veille),
  * clique lui-même sur « Voir plus » jusqu'à ce que toute la catégorie soit chargée, puis propose un bouton
  * « Envoyer à Stoemp » : ce clic ouvre Stoemp (autorisé par le navigateur) et transmet le texte de la page.
+ * Toutes les enseignes : boutons « voir plus » (FR/NL/EN) et pages qui se chargent en défilant ; hors Colruyt, seule la zone
+ * qui contient les prix est envoyée (pas les menus ni la liste des magasins). Le texte est AUSSI copié dans le presse-papiers :
+ * sur un site qui coupe le lien entre onglets (protection courante), Stoemp propose « Coller la page copiée ».
+ * Pas de barre oblique inverse ni de « // » dans ce code : il est mis sur une seule ligne.
  */
 const BOOKMARKLET_SRC = `(async()=>{
 const z=t=>new Promise(r=>setTimeout(r,t));
+const NL=String.fromCharCode(10);
 const b=document.createElement("div");
 b.style.cssText="position:fixed;z-index:2147483647;top:12px;right:12px;background:#1d2a22;color:#fff;padding:12px 16px;border-radius:14px;font:600 14px system-ui;box-shadow:0 6px 24px rgba(0,0,0,.3);max-width:320px";
 document.body.appendChild(b);
-const re=/^(voir plus|afficher plus|plus de produits|charger plus|meer laden|toon meer|meer producten)/i;
+b.textContent="Stoemp : chargement des produits…";
+const re=/^(voir plus|afficher plus|plus de produits|plus de résultats|charger plus|meer laden|toon meer|meer producten|meer resultaten|load more|show more)/i;
 const cnt=()=>document.links.length+document.images.length;
 let last=cnt(),n=0;
 for(;n<150;n++){
@@ -33,8 +39,16 @@ if(!grew)break;
 let c=cnt(),still=0;for(let i=0;i<40&&still<4;i++){await z(250);const c2=cnt();if(c2===c)still++;else{c=c2;still=0}}
 last=c;
 }
+const colruyt=/colruyt[.]be|collectandgo[.]be/.test(location.hostname);
+if(!colruyt){let h=0;for(let i=0;i<30;i++){scrollTo(0,document.body.scrollHeight);await z(900);const nh=document.body.scrollHeight;if(nh===h)break;h=nh;b.textContent="Stoemp : défilement de la page… ("+(i+1)+")";}scrollTo(0,0);}
 let text=document.body.innerText;
-if(/colruyt[.]be/.test(location.hostname)){
+if(!colruyt){
+const pr=/€ ?[0-9]+[,.][0-9]{2}|[0-9]+[,.][0-9]{2} ?€/;
+const els=[...document.querySelectorAll("body *")].filter(e=>e.children.length<5&&e.offsetParent&&(e.textContent||"").length<50&&pr.test(e.textContent||""));
+if(els.length>=3){let a=els[0];while(a&&a!==document.body&&els.filter(e=>a.contains(e)).length<els.length*0.7)a=a.parentElement;
+const h1=document.querySelector("h1");text=(h1?h1.innerText:document.title)+NL+(a||document.body).innerText;}
+}
+if(colruyt){
 const u=new URL(location.href);let p=Number(u.searchParams.get("page")||"1");
 for(let k=0;k<3;k++){
 p++;u.searchParams.set("page",String(p));
@@ -42,7 +56,7 @@ b.textContent="Stoemp : recherche des produits cachés par les publicités… ("
 const f=document.createElement("iframe");f.style.cssText="position:fixed;left:-9999px;top:0;width:1280px;height:2400px";f.src=u.href;document.body.appendChild(f);
 let t="";for(let i=0;i<40;i++){await z(500);try{t=f.contentDocument.body.innerText}catch(e){break}if(i>8&&/[0-9]+,[0-9]{2,3}[/](kg|pce)/.test(t))break}
 f.remove();
-const m=t.match(/[0-9]+,[0-9]{2,3}[/](kg|pce|l)/g);if(!m)break;text+=String.fromCharCode(10)+t;
+const m=t.match(/[0-9]+,[0-9]{2,3}[/](kg|pce|l)/g);if(!m)break;text+=NL+t;
 }
 }
 const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:text.slice(0,1000000)};
@@ -52,11 +66,14 @@ const go=document.createElement("button");go.textContent="📥 Envoyer à Stoemp
 go.style.cssText="margin-top:10px;width:100%;padding:10px;border:0;border-radius:10px;background:#68a83c;color:#fff;font:700 15px system-ui;cursor:pointer";
 b.append(t,go);
 go.onclick=()=>{
+const payload="STOEMP-CAPTURE"+NL+JSON.stringify(d);
+let copied=false;const ta=document.createElement("textarea");ta.value=payload;ta.style.cssText="position:fixed;left:-9999px";document.body.appendChild(ta);ta.select();try{copied=document.execCommand("copy")}catch(e){}ta.remove();
+if(!copied&&navigator.clipboard)navigator.clipboard.writeText(payload).catch(()=>{});
 const w=window.open(APP,"stoemp");
-const s=()=>w&&w.postMessage(d,"*");
+const s=()=>{try{w&&w.postMessage(d,"*")}catch(e){}};
 addEventListener("message",e=>{if(e.data==="stoemp-ready")s()});
 [1000,2500,5000,9000].forEach(x=>setTimeout(s,x));
-t.textContent="Envoyé ✓ — la lecture se poursuit dans l'onglet Stoemp.";go.remove();setTimeout(()=>b.remove(),8000);
+t.textContent="Envoyé ✓ — la lecture se poursuit dans l'onglet Stoemp. Si rien ne s'y passe, touche « Coller la page copiée ».";go.remove();setTimeout(()=>b.remove(),15000);
 };
 })()`;
 export const bookmarklet = () => "javascript:" + encodeURIComponent(BOOKMARKLET_SRC.replace("APP", JSON.stringify(appUrl() + "#/capture")).replace(/\n/g, ""));
