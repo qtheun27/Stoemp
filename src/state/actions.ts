@@ -12,7 +12,7 @@ import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
 import type { Cat, Consumption, ConsumptionEvent, EventType, Ingredient, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
 import { mealParts, vegPortions } from "../lib/mixed";
-import { slotRecipe } from "../lib/sides";
+import { assignSides, slotRecipe } from "../lib/sides";
 import { eatersFromPeople, TASTE_GROUPS, type Person, type Rating } from "../lib/tastes";
 import { isoWeek } from "../lib/season";
 import { baseQty } from "../lib/units";
@@ -118,7 +118,9 @@ export async function generateWeek(s: StoreState): Promise<string | undefined> {
   }
   const res = planWeek([...pool, ...fresh], planCtx(s), fresh);
   if (!res.slots.length) throw new Error(res.warning);
-  await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots: res.slots, persons: portionsOf(eatersOf(s.settings)), warning: res.warning || null, generatedAt: Date.now() });
+  // Un accompagnement proposé d'office pour chaque plat où il est interchangeable (modifiable dans la fiche).
+  const slots = assignSides(res.slots, s.recipes, s.idx);
+  await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots, persons: portionsOf(eatersOf(s.settings)), warning: res.warning || null, generatedAt: Date.now() });
   return note || res.warning;
 }
 

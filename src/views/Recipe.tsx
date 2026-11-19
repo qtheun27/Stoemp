@@ -21,7 +21,7 @@ const fmtPortions = (p: number) => `${Number.isInteger(p) ? p : p.toLocaleString
 import { useStore } from "../state/store";
 import { run, Sheet, toast } from "../ui";
 import { DishImage } from "./DishImage";
-import { sideOptions, withSide } from "../lib/sides";
+import { defaultSideLabel, sideOptions, withSide } from "../lib/sides";
 
 /** Substitutions locales simples proposées avec l'option « Produits de la région ». */
 const LOCAL_SWAPS: Record<string, string> = {
@@ -86,7 +86,7 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
       sub={<>{pret ? "🥡 plat préparé" : `⏱ ${recipe.prepMin} min`} · {fmtPortions(persons)}{slot?.leftovers ? " (dont demain midi)" : ""} · {eur(cost)} / portion{recipe.cuisine ? ` · ${CUISINES[recipe.cuisine].icon} ${CUISINES[recipe.cuisine].label}` : ""}{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
       {!pret && <div style={{ margin: "2px 0 10px" }}><DishImage recipe={recipe} idx={s.idx} height={190} /></div>}
       {sides.length > 0 && <div style={{ margin: "0 0 10px" }}>
-        <div className="small muted" style={{ marginBottom: 4 }}>Accompagnement</div>
+        <div className="small muted" style={{ marginBottom: 4 }}>Accompagnement{!slot?.side && defaultSideLabel(initial, s.idx) ? ` : ${defaultSideLabel(initial, s.idx)} (celui de la recette)` : ""}</div>
         <div className="chips">
           <button className="chip" aria-pressed={!slot?.side} onClick={() => run(() => setSide(s, slotIndex!, null))}>Celui de la recette</button>
           {sides.map((x) => <button key={x.id} className="chip" aria-pressed={slot?.side === x.id} onClick={() => run(() => setSide(s, slotIndex!, x.id), `Avec : ${x.name}`)}>{x.name}</button>)}

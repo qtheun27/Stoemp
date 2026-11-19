@@ -32,3 +32,16 @@ describe("accompagnement au choix", () => {
     expect(slotRecipe(all, { recipeId: carbo.id, side: frites.id }, BASE_INDEX)!.sideName).toBe("Frites belges maison");
   });
 });
+
+describe("accompagnement proposé d'office", () => {
+  it("varie dans la semaine et ne touche pas aux plats dont le féculent est le plat", async () => {
+    const { assignSides, defaultSideLabel } = await import("../sides");
+    const carbo = byName("Carbonnade flamande"), pasta = byName("Pâtes carbonara");
+    const slots = assignSides([{ recipeId: carbo.id }, { recipeId: carbo.id }, { recipeId: pasta.id }] as never[], all, BASE_INDEX, () => 0) as { side?: string }[];
+    expect(slots[0].side).toBeTruthy();
+    expect(slots[1].side).toBeTruthy();
+    expect(slots[0].side).not.toBe(slots[1].side);
+    expect(slots[2].side).toBeUndefined();
+    expect(defaultSideLabel(carbo, BASE_INDEX)).toBe("pommes de terre");
+  });
+});
