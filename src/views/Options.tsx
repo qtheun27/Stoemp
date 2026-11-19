@@ -25,12 +25,20 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
   const set = (patch: Partial<GenOptions>) => saveSettings(s.hid!, { options: { ...o, ...patch } });
   const setS = (patch: Partial<Settings>) => saveSettings(s.hid!, patch);
   const days = mealDays(s.settings);
-  // Jours cochés pour le midi / le soir ; on garde au moins un repas dans la semaine.
-  const toggleDay = (meal: "lunch" | "dinner", d: number) => {
-    const next = { ...days, [meal]: days[meal].includes(d) ? days[meal].filter((x) => x !== d) : [...days[meal], d].sort((a, b) => a - b) };
+  const light = new Set(s.settings.lightSlots || []);
+  // Midi / soir : une touche fait passer le jour de « pas de repas » à « complet », puis « léger », puis « pas de repas ».
+  const cycleDay = (meal: "lunch" | "dinner", d: number) => {
+    const key = `${d}-${meal === "lunch" ? "midi" : "soir"}`, on = days[meal].includes(d);
+    const nextLight = new Set(light);
+    let list = days[meal];
+    if (!on) list = [...list, d].sort((a, b) => a - b);
+    else if (!light.has(key)) nextLight.add(key);
+    else { list = list.filter((x) => x !== d); nextLight.delete(key); }
+    const next = { ...days, [meal]: list };
     if (!next.lunch.length && !next.dinner.length) return;
-    setS({ lunchDays: next.lunch, dinnerDays: next.dinner, lunches: next.lunch.length, dinners: next.dinner.length });
+    setS({ lunchDays: next.lunch, dinnerDays: next.dinner, lunches: next.lunch.length, dinners: next.dinner.length, lightSlots: [...nextLight] });
   };
+  const toggleBreakfast = (d: number) => setS({ breakfastDays: days.breakfast.includes(d) ? days.breakfast.filter((x) => x !== d) : [...days.breakfast, d].sort((a, b) => a - b) });
   const e = eatersOf(s.settings);
   const setEaters = (x: Eaters) => setS({ adults: x.adults, teens: x.teens, kids: x.kids, persons: headcount(x) });
   const mine = [...s.recipes.values()].filter((r) => r.source === "perso" && !r.deleted).length;
@@ -41,11 +49,17 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
         <div><div className="small muted">Ados (11-17 ans)</div><Stepper value={e.teens} min={0} max={8} onChange={(v) => setEaters({ ...e, teens: v })} /></div>
         <div><div className="small muted">Enfants (3-10 ans)</div><Stepper value={e.kids} min={0} max={8} onChange={(v) => setEaters({ ...e, kids: v })} /></div>
       </div>
+      <div style={{ marginBottom: 8 }}>
+        <div className="small muted">Déjeuner du matin (une recette : pancakes, œufs, cramique…) · {days.breakfast.length} / 7</div>
+        <div className="chips">{DAYS.map((label, d) => <button key={d} className="chip" aria-pressed={days.breakfast.includes(d)} aria-label={`${label} déjeuner`} onClick={() => toggleBreakfast(d)}>{label.slice(0, 3)}</button>)}</div>
+      </div>
       {(["lunch", "dinner"] as const).map((meal) => <div key={meal} style={{ marginBottom: 8 }}>
         <div className="small muted">{meal === "lunch" ? "Repas de midi" : "Repas du soir"} · {days[meal].length} / 7</div>
-        <div className="chips">{DAYS.map((label, d) => <button key={d} className="chip" aria-pressed={days[meal].includes(d)} aria-label={`${label} ${meal === "lunch" ? "midi" : "soir"}`}
-          onClick={() => toggleDay(meal, d)}>{label.slice(0, 3)}</button>)}</div>
+        <div className="chips">{DAYS.map((label, d) => { const on = days[meal].includes(d), lt = on && light.has(`${d}-${meal === "lunch" ? "midi" : "soir"}`);
+          return <button key={d} className="chip" aria-pressed={on} aria-label={`${label} ${meal === "lunch" ? "midi" : "soir"} : ${!on ? "pas de repas" : lt ? "léger" : "complet"}`}
+            onClick={() => cycleDay(meal, d)}>{label.slice(0, 3)}{lt ? " 🥗" : ""}</button>; })}</div>
       </div>)}
+      <div className="small muted" style={{ margin: "-2px 0 10px" }}>Touche un jour : repas complet, puis 🥗 léger (salade-repas, soupe, tartines, omelette…), puis pas de repas. En semaine, le déjeuner habituel (pain, lait, céréales…) est prévu par le stock.</div>
       <Opt o={o} set={set} k="seasonal" title="De saison" desc="Mois courant, ou saison choisie">
         <div className="chips">
           <button className="chip" aria-pressed={o.season === "auto"} onClick={() => set({ season: "auto" })}>Mois courant</button>

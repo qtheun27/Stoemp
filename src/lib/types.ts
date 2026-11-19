@@ -111,6 +111,10 @@ export interface Settings {
   /** Jours choisis pour le midi et le soir (0 = lundi … 6 = dimanche) ; sinon répartis selon lunches / dinners. */
   lunchDays?: number[];
   dinnerDays?: number[];
+  /** Jours avec une recette de déjeuner du matin (0 = lundi). */
+  breakfastDays?: number[];
+  /** Repas légers choisis : « jour-midi » ou « jour-soir » (ex. « 2-midi »). */
+  lightSlots?: string[];
   /** Ancien réglage (7 ou 14 repas), lu seulement si lunches/dinners manquent. */
   mealsPerDay?: 1 | 2;
   mineN: number;
@@ -129,8 +133,11 @@ export interface Settings {
 
 export interface Slot {
   day: number; // 0 = lundi
-  meal: "midi" | "soir";
+  /** matin = déjeuner (petit-déjeuner), midi = dîner, soir = souper. */
+  meal: "matin" | "midi" | "soir";
   recipeId: string;
+  /** Repas léger (salade-repas, soupe, tartines, omelette…) au lieu d'un repas complet. */
+  light?: boolean;
   veg: boolean;
   cooked: boolean;
   /** Réception : invités en plus du foyer, autres plats du menu, boissons conseillées. */

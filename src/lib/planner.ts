@@ -112,7 +112,7 @@ function weightedPick<T>(items: T[], weights: number[], rand: () => number): T {
   return items[items.length - 1];
 }
 
-type MealSettings = Pick<Settings, "lunches" | "dinners" | "mealsPerDay" | "lunchDays" | "dinnerDays">;
+type MealSettings = Pick<Settings, "lunches" | "dinners" | "mealsPerDay" | "lunchDays" | "dinnerDays"> & Partial<Pick<Settings, "breakfastDays">>;
 const cleanDays = (d: number[]) => [...new Set(d.filter((x) => Number.isInteger(x) && x >= 0 && x <= 6))].sort((a, b) => a - b);
 /** Jours de la semaine (0 = lundi) où l'on cuisine le midi et le soir : jours choisis, sinon répartis selon le nombre. */
 export function mealDays(s: MealSettings) {
@@ -121,7 +121,26 @@ export function mealDays(s: MealSettings) {
   return {
     lunch: Array.isArray(s.lunchDays) ? cleanDays(s.lunchDays) : spreadDays(lunchN),
     dinner: Array.isArray(s.dinnerDays) ? cleanDays(s.dinnerDays) : spreadDays(dinnerN),
+    breakfast: cleanDays(s.breakfastDays || []),
   };
+}
+
+/** Repas léger possible : soupe, ou plat de type salade-repas, tartine, omelette, quiche, bowl… */
+const LIGHT_RE = /salade|soupe|velout|potage|tartine|croque|omelette|frittata|tortilla espagnole|quiche|tarte fine|flamiche|wrap|bowl|poke|toast|bruschetta|gaspacho|gazpacho|tabboul|taboul|fattouche|bo bun|galette|quesadilla|bagel|sandwich|club|pan bagnat|shakshuka|chakchouka|huevos/i;
+export const isLightMeal = (r: Recipe) => r.source !== "pret" && ((r.course || "plat") === "soupe" || ((r.course || "plat") === "plat" && LIGHT_RE.test(r.name)));
+export const isBreakfast = (r: Recipe) => r.source !== "pret" && r.course === "petitdej";
+/** Recettes possibles pour un créneau : déjeuner du matin, repas léger ou repas complet. */
+export const poolFor = (sl: Pick<Slot, "meal" | "light">, all: Recipe[]) =>
+  sl.meal === "matin" ? all.filter(isBreakfast) : sl.light ? all.filter(isLightMeal) : all.filter((r) => r.source !== "pret" && (r.course || "plat") === "plat");
+/** Créneaux de la semaine (jour, repas, léger), dans l'ordre. */
+export function weekFrame(s: MealSettings & Partial<Pick<Settings, "lightSlots">>) {
+  const d = mealDays(s), light = new Set(s.lightSlots || []), out: { day: number; meal: Slot["meal"]; light: boolean }[] = [];
+  for (let day = 0; day < 7; day++) {
+    if (d.breakfast.includes(day)) out.push({ day, meal: "matin", light: false });
+    if (d.lunch.includes(day)) out.push({ day, meal: "midi", light: light.has(`${day}-midi`) });
+    if (d.dinner.includes(day)) out.push({ day, meal: "soir", light: light.has(`${day}-soir`) });
+  }
+  return out;
 }
 /** Repas par semaine (compatible avec l'ancien réglage 7 / 14 repas). */
 export function mealCounts(s: MealSettings) {
@@ -137,18 +156,18 @@ export interface PlanResult { slots: Slot[]; warning?: string; costPerPersonWeek
  * Génère les créneaux de la semaine : plats perso placés d'abord, puis tirage pondéré sans répétition,
  * puis ajustement au budget en remplaçant les repas les plus chers.
  */
-export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): PlanResult {
+export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = [], all: Recipe[] = pool): PlanResult {
   const { settings } = ctx;
   const o = settings.options;
   const rand = ctx.rand || Math.random;
-  const { lunches, dinners, total: N } = mealCounts(settings);
-  const days = mealDays(settings);
-  const lunchDays = new Set(days.lunch), dinnerDays = new Set(days.dinner);
+  const frame = weekFrame(settings);
+  const full = frame.filter((f) => f.meal !== "matin" && !f.light);
+  const N = full.length;
   const eo = effectiveOptions(settings);
   // Les allergies de chaque membre valent pour tout le repas.
   if (ctx.tastes?.people.length) eo.allergens = [...new Set([...eo.allergens, ...allAllergens(ctx.tastes.people)])];
   const ok = pool.filter((r) => allowed(r, eo, ctx.idx, ctx.now));
-  if (!ok.length && !fresh.length) return { slots: [], warning: "Aucun repas ne correspond à tes options. Décoche-en une ou deux.", costPerPersonWeek: 0 };
+  if (N && !ok.length && !fresh.length) return { slots: [], warning: "Aucun repas ne correspond à tes options. Décoche-en une ou deux.", costPerPersonWeek: 0 };
 
   const mine = ok.filter((r) => r.source === "perso").sort(() => rand() - 0.5).slice(0, Math.min(settings.mineN, N));
   const chosen: Recipe[] = [...mine, ...fresh.slice(0, N - mine.length)];
@@ -182,13 +201,26 @@ export function planWeek(pool: Recipe[], ctx: PlanCtx, fresh: Recipe[] = []): Pl
   // Mélange pour répartir plats perso et nouveautés, puis on évite deux fois le même féculent d'affilée.
   let order = chosen.map((r) => ({ r, k: rand() })).sort((a, b) => a.k - b.k).map((x) => x.r);
   if (o.balance !== false) order = spreadStarches(order, o.veg, ctx);
+  // Repas légers et déjeuners du matin : tirés de leur propre liste, sans répétition dans la semaine.
+  const allOk = all.filter((r) => allowed(r, eo, ctx.idx, ctx.now));
+  const taken = new Set(order.map((r) => r.id));
+  const pickFor = (f: { meal: Slot["meal"]; light: boolean }) => {
+    const cands = poolFor(f, allOk);
+    const fresh = cands.filter((r) => !taken.has(r.id));
+    const list = fresh.length ? fresh : cands;
+    if (!list.length) return null;
+    const r = weightedPick(list, list.map((c) => score(c, ctx)), rand);
+    taken.add(r.id);
+    return r;
+  };
   const slots: Slot[] = [];
   let k = 0;
-  for (let day = 0; day < 7; day++) for (const meal of ["midi", "soir"] as const) {
-    if (!(meal === "midi" ? lunchDays : dinnerDays).has(day)) continue;
-    const r = order[k++];
-    slots.push({ day, meal, recipeId: r.id, veg: o.veg && !isVegRecipe(r), cooked: false });
+  for (const f of frame) {
+    const r = f.meal !== "matin" && !f.light ? order[k++] : pickFor(f);
+    if (!r) continue;
+    slots.push({ day: f.day, meal: f.meal, ...(f.light ? { light: true } : {}), recipeId: r.id, veg: o.veg && !isVegRecipe(r), cooked: false });
   }
+  if (!slots.length) return { slots, warning: "Aucun repas ne correspond à tes options. Décoche-en une ou deux.", costPerPersonWeek: 0 };
   return { slots, warning, costPerPersonWeek: order.reduce((s, r) => s + cost(r), 0) };
 }
 
@@ -216,9 +248,11 @@ function spreadStarches(list: Recipe[], veg: boolean, ctx: PlanCtx): Recipe[] {
   return out;
 }
 
-/** Un seul repas de remplacement, différent de ceux de la semaine. */
+/** Un seul repas de remplacement, différent de ceux de la semaine (pool : poolFor(créneau, recettes)). */
 export function pickOne(pool: Recipe[], ctx: PlanCtx, exclude: Set<string>): Recipe | null {
-  const ok = pool.filter((r) => allowed(r, effectiveOptions(ctx.settings), ctx.idx, ctx.now) && r.source !== "perso");
+  const eo = effectiveOptions(ctx.settings);
+  if (ctx.tastes?.people.length) eo.allergens = [...new Set([...eo.allergens, ...allAllergens(ctx.tastes.people)])];
+  const ok = pool.filter((r) => allowed(r, eo, ctx.idx, ctx.now) && r.source !== "perso");
   const c = ok.filter((r) => !exclude.has(r.id));
   const list = c.length ? c : ok;
   if (!list.length) return null;

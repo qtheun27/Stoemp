@@ -9,7 +9,7 @@ import { allergensOf } from "../lib/planner";
 import { eur } from "../lib/text";
 import type { Allergen, Item, Recipe } from "../lib/types";
 import { fmtIngredient } from "../lib/units";
-import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, setSide, toggleFavorite, toggleLeftovers } from "../state/actions";
+import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, setSide, setSlotLight, toggleFavorite, toggleLeftovers } from "../state/actions";
 import { eatersOf, headcount, slotPortions } from "../lib/household";
 import { drinkFor } from "../lib/drinks";
 import { mealParts, vegPortions } from "../lib/mixed";
@@ -102,6 +102,7 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
           {slot && <button className="btn ghost sm" aria-pressed={slot.cooked} onClick={() => run(() => setCooked(s, slotIndex!, !slot.cooked), slot.cooked ? "Annulé : stock rétabli" : "Bon appétit ! Stock mis à jour")}><ChefHat size={16} />{slot.cooked ? "Pas cuisiné" : "Cuisiné ✓"}</button>}
           <button className="btn ghost sm" aria-pressed={fav} onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, recipe.id))}><Heart size={16} fill={fav ? "currentColor" : "none"} />Favori</button>
           {slot && !isVegRecipe(recipe) && !pret && <button className="btn ghost sm" aria-pressed={veg} onClick={toggleVeg}><Leaf size={16} />{veg ? "Version classique" : "Tout en végé"}</button>}
+          {slot && slot.meal !== "matin" && !slot.fromLeftovers && !slot.guests && <button className="btn ghost sm" aria-pressed={!!slot.light} onClick={async () => { await run(() => setSlotLight(s, slotIndex!, !slot.light), slot.light ? "Repas complet proposé" : "Repas léger proposé"); onClose(); }}>🥗 {slot.light ? "Repas complet" : "Repas léger"}</button>}
           {slot && slot.meal === "soir" && !slot.fromLeftovers && <button className="btn ghost sm" aria-pressed={!!slot.leftovers} onClick={() => run(() => toggleLeftovers(s, slotIndex!, !slot.leftovers), slot.leftovers ? "Restes annulés" : "Portion doublée : demain midi = restes 🍱")}>🍱 {slot.leftovers ? "Sans restes" : "Restes demain"}</button>}
           {slot && !slot.fromLeftovers && !slot.guests && s.app.features.ai && !pret && <button className="btn ghost sm" onClick={() => setReception(true)}>🎉 Je reçois</button>}
           {slot && !slot.fromLeftovers && !slot.guests && !pret && <button className="btn ghost sm" onClick={() => setReady(true)}>🥡 Plat préparé</button>}
