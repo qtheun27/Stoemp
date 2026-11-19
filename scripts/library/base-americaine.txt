@@ -1,0 +1,268 @@
+// Plats de base américains et britanniques réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@americaine
+## plat
+
+# Salade César | 4 | 30 | T
+r
++ Salade romaine 2pc; Parmesan 80g; Croûtons 100g; Sauce César 120ml; Citron 0.5pc; Huile d'olive 1cs; Pain de campagne 0.5pc
+= Filet de poulet 500g
+~ Oeufs 4pc
+v Salade César à l'œuf mollet
+- Aplatir légèrement les filets de poulet, les saler, les poivrer et les cuire 5 à 6 minutes par face à la poêle huilée ; laisser reposer et trancher.
+- Laver la romaine, la sécher soigneusement et la couper en larges lanières.
+- Détendre la sauce César avec le jus de citron.
+- Mélanger la salade avec la sauce, les croûtons et la moitié du parmesan en copeaux.
+- Disposer le poulet tranché, le reste du parmesan, et servir avec le pain grillé. Version végé : œufs mollets de 6 minutes.
+
+# Burger maison et potatoes | 4 | 50 | T
+r
++ Pain hamburger 4pc; Cheddar 80g; Tomates 250g; Salade verte 0.5pc; Oignon rouge 1pc; Cornichons 60g; Pommes de terre 900g; Paprika 2cc; Huile de tournesol 3cs; Ketchup 4cs; Mayonnaise 2cs; Moutarde 1cc
+= Haché de bœuf 600g
+~ Galettes végétales 4pc
+v Burger végétal et potatoes
+- Couper les pommes de terre en quartiers avec la peau, les enrober d'huile, de paprika et de sel ; rôtir 35 minutes à 220 °C.
+- Former 4 steaks de 150 g sans trop les tasser, un peu plus larges que le pain, et ne les saler qu'au moment de cuire.
+- Sauce : ketchup, mayonnaise, moutarde et cornichons hachés.
+- Saisir les steaks 3 minutes par face dans une poêle très chaude, poser le cheddar la dernière minute et couvrir pour qu'il fonde ; toaster les pains.
+- Monter : pain, sauce, salade, steak, tomate, oignon rouge ; servir avec les potatoes. Version végé : galettes végétales poêlées.
+
+# Mac and cheese et salade | 4 | 40 | T
+r
++ Pâtes courtes 360g; Cheddar 250g; Lait 600ml; Beurre 50g; Farine 40g; Moutarde 1cc; Paprika 1cc; Chapelure 40g; Salade verte 1pc
+= Bacon 150g
+~ Brocoli 400g
+v Mac and cheese au brocoli
+- Cuire les macaronis 2 minutes de moins que le temps indiqué.
+- Faire un roux avec le beurre et la farine, ajouter le lait chaud et cuire 5 minutes en fouettant.
+- Hors du feu, ajouter les trois quarts du cheddar, la moutarde et le paprika jusqu'à ce que la sauce soit lisse.
+- Mélanger avec les pâtes et le bacon grillé émietté, verser dans un plat, couvrir du reste de fromage et de chapelure.
+- Gratiner 15 minutes à 200 °C et servir avec la salade. Version végé : bouquets de brocoli blanchis.
+
+# Fish and chips et petits pois | 4 | 45 | T
+r
++ Pommes de terre 1000g; Farine 200g; Bière blonde 250ml; Petits pois 400g; Beurre 20g; Menthe 0.25pc; Citron 1pc; Huile de tournesol 1000ml; Mayonnaise 3cs; Cornichons 40g; Câpres 10g
+= Dos de cabillaud 600g
+~ Halloumi 400g
+v Halloumi and chips et petits pois
+- Couper les pommes de terre en grosses frites, les rincer et les sécher ; les frire une première fois 6 minutes à 150 °C.
+- Pâte : farine, bière bien froide et une pincée de sel, fouettées juste ce qu'il faut.
+- Cuire les petits pois, les écraser grossièrement avec le beurre et la menthe (mushy peas) ; sauce tartare avec mayonnaise, cornichons et câpres hachés.
+- Fariner le poisson, le tremper dans la pâte et le frire 5 minutes à 180 °C jusqu'à ce qu'il soit doré.
+- Refrire les frites 3 minutes à 180 °C et servir avec les petits pois, la sauce et le citron. Version végé : bâtonnets de halloumi frits dans la même pâte.
+
+# Poulet rôti, coleslaw et maïs | 4 | 80 | PE
+r
++ Chou vert 400g; Carottes 250g; Mayonnaise 5cs; Yaourt nature 100g; Vinaigre 1cs; Maïs (boîte) 300g; Pommes de terre grenaille 700g; Paprika 2cc; Ail 0.2pc; Beurre 30g; Huile de tournesol 2cs
+= Cuisse de poulet 4pc
+~ Oeufs 8pc
+v Œufs mimosa, coleslaw et maïs
+- Frotter les cuisses de paprika, d'ail écrasé, d'huile et de sel ; les rôtir 50 minutes à 200 °C avec les grenailles autour.
+- Coleslaw : chou très finement émincé et carottes râpées, mélangés à la mayonnaise, au yaourt, au vinaigre, sel et poivre ; réserver au frais.
+- Faire griller le maïs égoutté dans le beurre jusqu'à ce qu'il caramélise.
+- Arroser le poulet de son jus à mi-cuisson.
+- Servir avec les grenailles, le coleslaw et le maïs. Version végé : œufs durs farcis de leur jaune écrasé à la mayonnaise.
+
+# Shepherd's pie | 6 | 100 | AH
+r
++ Pommes de terre 1300g; Carottes 300g; Petits pois 250g; Oignon 2pc; Lait 200ml; Beurre 60g; Cheddar 120g; Concentré de tomate 2cs; Bouillon de bœuf 300ml; Farine 1cs; Thym 0.25pc; Romarin 0.25pc
+= Épaule d'agneau en morceaux 750g
+~ Lentilles vertes 400g
+v Shepherd's pie aux lentilles
+- Hacher l'agneau au couteau (ou demander au boucher un haché d'agneau) et le faire dorer.
+- Ajouter oignons et carottes en dés, la farine et le concentré, puis le bouillon et les herbes ; mijoter 30 minutes.
+- Ajouter les petits pois.
+- Préparer une purée avec les pommes de terre, le beurre et le lait chaud.
+- Étaler la viande dans un plat, couvrir de purée, rayer à la fourchette, parsemer de cheddar et cuire 30 minutes à 200 °C. Version végé : lentilles cuites dans le bouillon de légumes.
+
+# Pommes de terre farcies au chili | 4 | 90 | AH
+r
++ Pommes de terre 1400g; Haricots rouges (boîte) 400g; Tomates concassées 300g; Oignon 1pc; Ail 0.1pc; Cheddar 150g; Crème fraîche 150ml; Épices chili 8g; Oignons nouveaux 2pc; Huile de tournesol 2cs; Salade verte 1pc
+= Haché de bœuf 400g
+~ Maïs (boîte) 300g
+v Pommes de terre farcies chili sin carne
+- Piquer les grosses pommes de terre, les huiler, les saler et les cuire 1 heure à 200 °C jusqu'à ce que la peau soit croustillante.
+- Faire dorer l'oignon, l'ail et la viande, ajouter les épices, les tomates et les haricots ; mijoter 25 minutes.
+- Fendre les pommes de terre en croix et écraser un peu la chair à la fourchette.
+- Garnir de chili, de cheddar et repasser 5 minutes au four.
+- Servir avec la crème, les oignons nouveaux et la salade. Version végé : maïs à la place de la viande.
+
+# Salade Cobb | 4 | 35 | EP
+r
+l
++ Salade romaine 2pc; Oeufs 4pc; Avocat 2pc; Tomates cerises 300g; Cheddar 80g; Fromage bleu 80g; Ciboulette 0.25pc; Vinaigre 2cs; Moutarde 1cc; Huile d'olive 5cs
+= Filet de poulet 450g; Bacon 120g
+~ Pois chiches (boîte) 400g
+v Salade Cobb aux pois chiches grillés
+- Cuire les œufs 9 minutes, les refroidir et les couper en quartiers.
+- Griller le poulet et le couper en dés ; faire croustiller le bacon et l'émietter.
+- Vinaigrette : moutarde, vinaigre, huile, sel, poivre et ciboulette.
+- Disposer sur la romaine émincée des rangées de poulet, bacon, œufs, avocat, tomates, cheddar en dés et fromage bleu émietté.
+- Présenter ainsi, puis mélanger à table avec la vinaigrette. Version végé : pois chiches rôtis au paprika.
+
+# Chowder de poisson | 4 | 50 | AH
+r
++ Pommes de terre 600g; Poireaux 300g; Lait 600ml; Crème liquide 150ml; Maïs (boîte) 200g; Oignon 1pc; Céleri 100g; Beurre 30g; Farine 2cs; Thym 0.1pc; Feuille de laurier 0.2g; Persil 0.25pc; Pain de campagne 0.5pc
+= Dos de cabillaud 450g; Bacon 100g
+~ Haricots blancs (boîte) 450g
+v Chowder de maïs et haricots blancs
+- Faire rissoler le bacon en dés dans le beurre, puis ajouter l'oignon, le céleri et le poireau ; faire fondre 8 minutes.
+- Saupoudrer de farine, verser le lait et 300 ml d'eau, ajouter thym, laurier et pommes de terre en dés ; cuire 15 minutes.
+- Ajouter le maïs et le poisson en gros morceaux ; pocher 5 minutes à frémissement.
+- Ajouter la crème et réchauffer sans bouillir.
+- Servir parsemé de persil, avec le pain grillé. Version végé : haricots blancs et beurre sans bacon.
+
+# Pulled pork burger et coleslaw | 6 | 300 | T
+r
++ Pain hamburger 6pc; Ketchup 8cs; Cassonade 3cs; Paprika 4cc; Cumin 2g; Ail 0.2pc; Vinaigre 4cs; Moutarde 1cs; Chou vert 400g; Carottes 200g; Mayonnaise 5cs; Oignon 1pc; Pommes de terre 1000g; Huile de tournesol 2cs
+= Rôti de porc 1200g
+~ Haricots rouges (boîte) 700g; Champignons de Paris 500g
+v Burger de haricots BBQ et coleslaw
+- Frotter l'épaule de porc avec le paprika, le cumin, la moitié de la cassonade, sel et poivre.
+- La cuire 4 heures à 150 °C en cocotte fermée sur l'oignon émincé avec 200 ml d'eau, jusqu'à ce qu'elle s'effiloche à la fourchette.
+- Sauce BBQ : ketchup, reste de cassonade, vinaigre, moutarde et ail, réduits 10 minutes ; y mélanger la viande effilochée.
+- Coleslaw : chou et carottes râpés à la mayonnaise ; rôtir les pommes de terre en quartiers 35 minutes à 220 °C.
+- Garnir les pains toastés de viande et de coleslaw ; servir avec les potatoes. Version végé : haricots rouges et champignons émincés mijotés 20 minutes dans la sauce BBQ.
+
+# Poulet cajun, maïs et patates douces | 4 | 50 | T
+r
++ Patate douce 1000g; Maïs (boîte) 300g; Paprika 3cc; Cumin 3g; Origan 1g; Thym 0.1pc; Piment 0.5pc; Ail 0.2pc; Crème fraîche 150ml; Citron vert 1pc; Huile de tournesol 3cs; Beurre 20g
+= Filet de poulet 600g
+~ Haricots rouges (boîte) 600g
+v Haricots cajun, maïs et patates douces
+- Mélange cajun : paprika, cumin, origan, thym, piment, ail en poudre ou écrasé, sel et poivre.
+- Couper les patates douces en quartiers, les enrober d'huile et de la moitié des épices ; rôtir 35 minutes à 210 °C.
+- Frotter le poulet du reste des épices et le saisir 6 minutes par face jusqu'à ce qu'il soit noirci par endroits.
+- Griller le maïs au beurre ; mélanger la crème avec le jus de citron vert.
+- Servir le poulet tranché avec les patates douces, le maïs et la crème. Version végé : haricots rouges sautés aux épices.
+
+# Hot-dogs maison et coleslaw | 4 | 30 | T
+r
++ Pistolets 4pc; Oignon 2pc; Moutarde 2cs; Ketchup 3cs; Chou vert 300g; Carottes 150g; Mayonnaise 4cs; Vinaigre 1cs; Cornichons 60g; Beurre 20g
+= Saucisse 4pc
+~ Galettes végétales 4pc
+v Hot-dogs végétariens et coleslaw
+- Faire fondre les oignons émincés 15 minutes dans le beurre jusqu'à ce qu'ils soient bien dorés.
+- Coleslaw : chou et carottes râpés, mayonnaise, vinaigre, sel et poivre.
+- Pocher les saucisses 5 minutes, puis les dorer à la poêle.
+- Fendre et toaster les pistolets.
+- Garnir d'oignons, de saucisse, de moutarde, de ketchup et de cornichons hachés ; servir avec le coleslaw. Version végé : galettes végétales coupées en bâtonnets.
+
+# Club sandwich et chips de légumes | 4 | 45 | T
+r
++ Pain de mie 12pc; Tomates 300g; Salade verte 1pc; Mayonnaise 5cs; Oeufs 4pc; Patate douce 400g; Betterave cuite 300g; Huile de tournesol 3cs; Paprika 1cc
+= Blanc de poulet tranché 240g; Bacon 120g
+~ Gouda en tranches 160g
+v Club sandwich œuf-fromage
+- Chips de légumes : trancher très finement patate douce et betterave, les huiler, les saler et les cuire 20 minutes à 180 °C en les retournant.
+- Faire croustiller le bacon, cuire les œufs 9 minutes et les trancher.
+- Toaster le pain et le tartiner de mayonnaise.
+- Monter en trois étages : poulet, salade et tomate ; puis bacon, œuf et salade.
+- Maintenir avec des piques, couper en triangles et servir avec les chips. Version végé : gouda et double ration d'œuf.
+
+# Spaghetti meatballs | 4 | 50 | T
+r
++ Spaghetti 360g; Sauce tomate 600ml; Oignon 1pc; Ail 0.2pc; Oeufs 1pc; Pain de mie 2pc; Lait 50ml; Parmesan 60g; Basilic 0.5pc; Origan 1g; Huile d'olive 3cs
+= Haché porc et bœuf 500g
+~ Lentilles corail 200g; Pois chiches (boîte) 250g
+v Spaghetti et boulettes végétales
+- Mélanger la viande avec l'oignon râpé, la moitié de l'ail, l'œuf, le pain trempé dans le lait, la moitié du parmesan, l'origan, sel et poivre.
+- Former des boulettes de la taille d'une noix et les dorer à l'huile.
+- Ajouter le reste d'ail et la sauce tomate ; mijoter 20 minutes.
+- Cuire les spaghetti al dente.
+- Servir les pâtes nappées de sauce et de boulettes, avec le basilic et le reste du parmesan. Version végé : lentilles cuites et pois chiches écrasés, liés à l'œuf et au pain.
+
+# Jambalaya | 4 | 55 | T
+r
++ Riz 320g; Poivron 2pc; Céleri 150g; Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Paprika 3cc; Thym 0.1pc; Feuille de laurier 0.2g; Piment 0.5pc; Bouillon de volaille 800ml; Oignons nouveaux 2pc; Huile de tournesol 2cs
+= Chorizo 120g; Filet de poulet 350g; Scampis 250g
+~ Haricots rouges (boîte) 600g
+v Jambalaya aux haricots rouges
+- Dorer le chorizo et le poulet en dés dans une grande cocotte ; réserver.
+- Faire revenir la « sainte trinité » : oignon, céleri et poivron, puis l'ail.
+- Ajouter le riz, le paprika, le piment, le thym et le laurier, puis les tomates et le bouillon ; remettre les viandes.
+- Couvrir et cuire 20 minutes à feu doux, ajouter les scampis pour les 5 dernières minutes.
+- Laisser reposer 5 minutes et servir avec les oignons nouveaux. Version végé : haricots rouges et bouillon de légumes.
+
+# Meatloaf et purée | 6 | 90 | AH
+r
++ Oignon 1pc; Oeufs 2pc; Chapelure 60g; Lait 300ml; Ketchup 6cs; Cassonade 1cs; Moutarde 1cc; Thym 0.1pc; Pommes de terre 1300g; Beurre 60g; Haricots verts 500g
+= Haché porc et bœuf 900g
+~ Lentilles vertes 400g; Cheddar 180g
+v Meatloaf de lentilles au cheddar
+- Mélanger la viande avec l'oignon râpé, les œufs, la chapelure trempée dans 100 ml de lait, le thym, 2 cuillères de ketchup, sel et poivre.
+- Façonner un pain dans un plat et le napper du glaçage : reste du ketchup, cassonade et moutarde.
+- Cuire 1 heure à 180 °C, puis laisser reposer 10 minutes avant de trancher.
+- Préparer une purée avec les pommes de terre, le beurre et le reste du lait chaud ; cuire les haricots verts.
+- Servir en tranches épaisses avec la purée et les haricots. Version végé : lentilles cuites écrasées avec le cheddar râpé, 40 minutes de cuisson.
+
+# Bangers and mash | 4 | 50 | AH
+r
++ Pommes de terre 1000g; Oignon 3pc; Lait 200ml; Beurre 60g; Petits pois 300g; Farine 1cs; Bouillon de bœuf 400ml; Moutarde 2cc; Thym 0.1pc
+= Saucisse 8pc
+~ Galettes végétales 4pc; Oeufs 4pc
+v Galette végétale, œuf et purée sauce oignon
+- Cuire les saucisses doucement 20 minutes à la poêle, en les retournant, jusqu'à ce qu'elles soient bien dorées.
+- Faire fondre les oignons émincés 20 minutes dans 20 g de beurre jusqu'à ce qu'ils soient caramélisés.
+- Saupoudrer de farine, ajouter le bouillon et le thym, réduire jusqu'à obtenir une sauce brune nappante (onion gravy).
+- Préparer une purée onctueuse avec les pommes de terre, le reste du beurre, le lait chaud et la moutarde ; cuire les petits pois.
+- Servir les saucisses sur la purée, nappées de sauce à l'oignon. Version végé : galettes végétales et œufs au plat, bouillon de légumes.
+
+# Chicken pot pie | 6 | 75 | AH
+r
++ Pâte feuilletée 1pc; Carottes 300g; Petits pois 200g; Champignons de Paris 250g; Oignon 1pc; Céleri 100g; Lait 400ml; Bouillon de volaille 300ml; Farine 50g; Beurre 50g; Thym 0.1pc; Oeufs 1pc; Pommes de terre 600g
+= Filet de poulet 700g
+~ Pois chiches (boîte) 700g
+v Pot pie aux légumes et pois chiches
+- Pocher le poulet 15 minutes dans le bouillon et le couper en dés ; garder le bouillon.
+- Faire revenir oignon, céleri, carottes, champignons et pommes de terre en petits dés dans le beurre 10 minutes.
+- Saupoudrer de farine, verser le lait et le bouillon et cuire jusqu'à ce que la sauce épaississe ; ajouter le thym, le poulet et les petits pois.
+- Verser dans un plat, couvrir de pâte feuilletée, souder les bords, inciser le dessus et dorer à l'œuf battu.
+- Cuire 30 minutes à 200 °C jusqu'à ce que la pâte soit gonflée et dorée. Version végé : pois chiches et bouillon de légumes.
+
+# Philly cheesesteak | 4 | 35 | T
+r
++ Baguette 2pc; Oignon 2pc; Poivron 2pc; Cheddar 200g; Salade verte 1pc; Beurre 20g; Huile de tournesol 2cs; Pommes de terre 800g; Paprika 1cc
+= Steak de bœuf 550g
+~ Champignons de Paris 600g
+v Philly aux champignons
+- Rôtir les pommes de terre en quartiers avec l'huile et le paprika 35 minutes à 220 °C.
+- Trancher le bœuf le plus finement possible (plus facile légèrement congelé).
+- Faire fondre les oignons et les poivrons en lanières dans le beurre 10 minutes.
+- Saisir la viande 1 minute à feu vif, la mélanger aux légumes, couvrir de fromage et laisser fondre à couvert.
+- Garnir les tronçons de baguette fendus et toastés ; servir avec les potatoes et la salade. Version végé : champignons émincés bien saisis.
+
+# Sloppy joes et coleslaw | 4 | 35 | T
+r
++ Pain hamburger 4pc; Oignon 1pc; Poivron 1pc; Ail 0.1pc; Ketchup 6cs; Concentré de tomate 1cs; Cassonade 1cs; Moutarde 1cs; Vinaigre 1cs; Chou vert 300g; Carottes 150g; Mayonnaise 4cs; Huile de tournesol 1cs
+= Haché de bœuf 500g
+~ Lentilles corail 250g
+v Sloppy joes aux lentilles
+- Faire revenir l'oignon, le poivron et l'ail dans l'huile.
+- Ajouter la viande et la faire colorer en l'émiettant.
+- Ajouter le ketchup, le concentré, la cassonade, la moutarde, le vinaigre et 150 ml d'eau ; mijoter 15 minutes jusqu'à ce que ce soit épais.
+- Préparer le coleslaw avec le chou et les carottes râpés à la mayonnaise ; toaster les pains.
+- Garnir généreusement les pains (ça déborde, c'est le principe) et servir avec le coleslaw. Version végé : lentilles corail cuites dans la sauce avec 300 ml d'eau.
+
+# Fish pie | 6 | 80 | AH
+r
++ Pommes de terre 1300g; Lait 800ml; Poireaux 400g; Petits pois 200g; Farine 50g; Beurre 90g; Cheddar 100g; Persil 0.5pc; Moutarde 1cc; Feuille de laurier 0.2g
+= Dos de cabillaud 500g; Saumon fumé 150g
+~ Oeufs 8pc
+v Pie aux œufs, poireaux et petits pois
+- Pocher le cabillaud 6 minutes dans 500 ml de lait avec le laurier, l'effeuiller et garder le lait.
+- Faire fondre les poireaux émincés dans 30 g de beurre, ajouter la farine puis le lait de pochage ; cuire en sauce épaisse.
+- Ajouter le persil, les petits pois, le cabillaud et le saumon fumé en lanières.
+- Préparer une purée avec les pommes de terre, 50 g de beurre, le reste du lait et la moutarde.
+- Couvrir le poisson de purée et de cheddar et cuire 30 minutes à 200 °C. Version végé : œufs durs en quartiers dans la sauce.
+
+# BBQ chicken et maïs | 4 | 80 | E
+r
++ Ketchup 8cs; Miel 2cs; Paprika 3cc; Vinaigre 2cs; Ail 0.2pc; Moutarde 1cc; Maïs (boîte) 300g; Pommes de terre 800g; Chou vert 300g; Carottes 150g; Mayonnaise 4cs; Beurre 20g; Huile de tournesol 2cs
+= Cuisse de poulet 4pc
+~ Haricots rouges (boîte) 600g
+v Haricots BBQ, maïs et pommes de terre
+- Sauce BBQ : ketchup, miel, paprika, vinaigre, ail et moutarde, réduits 5 minutes.
+- Frotter les cuisses de sel et d'un peu de paprika, les cuire 30 minutes au four à 200 °C (ou au barbecue en zone indirecte).
+- Les badigeonner de sauce BBQ et cuire encore 15 minutes en les laquant deux fois ; rôtir les pommes de terre en quartiers en même temps.
+- Coleslaw : chou et carottes râpés, mayonnaise, sel et poivre ; griller le maïs au beurre.
+- Servir le poulet laqué avec le maïs, les pommes de terre et le coleslaw. Version végé : haricots rouges mijotés 15 minutes dans la sauce BBQ.

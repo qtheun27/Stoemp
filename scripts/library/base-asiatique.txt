@@ -1,0 +1,360 @@
+// Plats de base asiatiques réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@asiatique
+## plat
+
+# Wok de printemps au poulet | 4 | 25 | P
+r
++ Nouilles chinoises 320g; Pois mange-tout 300g; Carottes 200g; Oignons nouveaux 4pc; Ail 0.1pc; Gingembre 15g; Sauce soja 4cs; Sauce huître 2cs; Fécule de maïs 1cc; Huile de tournesol 3cs
+= Filet de poulet 450g
+~ Tofu ferme 450g
+v Wok de printemps au tofu
+- Cuire les nouilles, les rincer à l'eau froide et les égoutter.
+- Couper le poulet en lanières et le mélanger à 1 cuillère de soja et à la fécule.
+- Saisir le poulet 4 minutes au wok très chaud dans l'huile ; réserver.
+- Sauter les carottes en julienne, l'ail et le gingembre 2 minutes, puis les mange-tout 2 minutes.
+- Ajouter nouilles, poulet, sauces et oignons nouveaux ; sauter 2 minutes à feu vif et servir. Version végé : tofu en dés bien doré.
+
+# Riz cantonais | 4 | 30 | T
+r
++ Riz 320g; Oeufs 3pc; Petits pois 200g; Carottes 150g; Oignons nouveaux 3pc; Sauce soja 3cs; Huile de tournesol 3cs
+= Dés de jambon 200g; Scampis 150g
+~ Tofu fumé 300g
+v Riz cantonais au tofu fumé
+- Cuire le riz la veille si possible (ou le refroidir étalé) : un riz froid ne colle pas.
+- Brouiller les œufs dans un peu d'huile au wok, les sortir en morceaux.
+- Sauter les carottes en petits dés et les petits pois 3 minutes, puis le jambon et les scampis 2 minutes.
+- Ajouter le riz et le sauter à feu vif 4 minutes en l'égrenant.
+- Ajouter la sauce soja, les œufs et les oignons nouveaux, mélanger et servir. Version végé : tofu fumé en dés.
+
+# Pad thaï | 4 | 35 | T
+r
++ Nouilles de riz 300g; Oeufs 3pc; Germes de soja 200g; Cacahuètes 60g; Citron vert 2pc; Oignons nouveaux 3pc; Ail 0.1pc; Nuoc-mâm 3cs; Cassonade 2cs; Concentré de tomate 1cs; Sauce soja 1cs; Piment 0.5pc; Coriandre 0.25pc; Huile de tournesol 3cs
+= Scampis 400g
+~ Tofu ferme 450g
+v Pad thaï au tofu
+- Faire tremper les nouilles 20 minutes dans l'eau tiède, puis les égoutter.
+- Sauce : nuoc-mâm, cassonade, concentré (à défaut de tamarin), jus d'un citron vert et soja.
+- Saisir l'ail et les scampis au wok 2 minutes, pousser sur le côté et brouiller les œufs.
+- Ajouter les nouilles et la sauce, sauter 3 minutes jusqu'à ce qu'elles soient tendres, puis les germes et les oignons nouveaux.
+- Servir avec les cacahuètes concassées, le piment, la coriandre et des quartiers de citron vert. Version végé : tofu doré et sauce soja à la place du nuoc-mâm.
+
+# Curry rouge thaï | 4 | 35 | T
+r
++ Pâte de curry rouge 60g; Lait de coco 500ml; Poivron 2pc; Courgettes 300g; Nuoc-mâm 2cs; Cassonade 1cs; Citron vert 1pc; Basilic 0.5pc; Riz basmati 300g; Huile de tournesol 1cs
+= Filet de poulet 550g
+~ Tofu ferme 450g; Pois chiches (boîte) 250g
+v Curry rouge au tofu et pois chiches
+- Faire frire la pâte de curry 2 minutes dans l'huile avec la crème épaisse du dessus du lait de coco.
+- Ajouter le poulet en lanières et l'enrober 2 minutes.
+- Verser le reste du lait de coco, le nuoc-mâm et la cassonade, puis les poivrons et courgettes ; cuire 10 minutes.
+- Cuire le riz à l'eau salée ou au cuiseur.
+- Finir avec le jus de citron vert et le basilic (idéalement thaï) et servir sur le riz. Version végé : tofu et pois chiches, soja à la place du nuoc-mâm.
+
+# Bœuf sauté aux brocolis | 4 | 30 | T
+r
++ Brocoli 600g; Sauce soja 4cs; Sauce huître 3cs; Gingembre 20g; Ail 0.2pc; Fécule de maïs 2cc; Cassonade 1cc; Riz 300g; Graines de sésame 1cs; Huile de tournesol 3cs
+= Steak de bœuf 500g
+~ Tofu ferme 500g
+v Tofu sauté aux brocolis
+- Trancher le bœuf finement contre le sens des fibres, le mélanger à 1 cuillère de soja et 1 cuillère à café de fécule.
+- Blanchir les bouquets de brocoli 2 minutes et les égoutter.
+- Saisir le bœuf en deux fois au wok très chaud, 1 minute par fournée ; réserver.
+- Sauter l'ail et le gingembre, ajouter le brocoli, puis la sauce (soja, huître, cassonade, reste de fécule délayée dans 80 ml d'eau).
+- Remettre le bœuf 30 secondes, parsemer de sésame et servir avec le riz. Version végé : tofu pressé et doré.
+
+# Ramen express | 4 | 35 | AH
+r
++ Nouilles chinoises 320g; Bouillon de volaille 1600ml; Sauce soja 4cs; Pâte miso 40g; Gingembre 20g; Ail 0.1pc; Champignons de Paris 250g; Chou chinois 300g; Oeufs 4pc; Oignons nouveaux 3pc; Huile de sésame 1cs
+= Rôti de porc 350g
+~ Tofu fumé 400g
+v Ramen au tofu fumé
+- Cuire les œufs 6 minutes 30, les refroidir, les écaler et les laisser mariner dans 2 cuillères de soja.
+- Faire infuser le bouillon 15 minutes avec le gingembre et l'ail, puis ajouter le miso délayé et le reste du soja.
+- Pocher les champignons et le chou émincés 3 minutes dans le bouillon.
+- Cuire les nouilles à part et les répartir dans de grands bols.
+- Verser le bouillon, poser le porc rôti en tranches, l'œuf coupé en deux, les oignons nouveaux et un filet d'huile de sésame. Version végé : bouillon de légumes et tofu fumé.
+
+# Poulet teriyaki, riz et légumes | 4 | 30 | T
+r
++ Riz 300g; Sauce soja 5cs; Mirin 4cs; Miel 2cs; Gingembre 15g; Pois mange-tout 300g; Carottes 150g; Graines de sésame 1cs; Huile de tournesol 1cs
+= Cuisse de poulet 4pc
+~ Tofu ferme 500g
+v Tofu teriyaki, riz et légumes
+- Désosser les cuisses (ou prendre des hauts de cuisse) et les cuire côté peau 8 minutes à feu moyen jusqu'à ce qu'elle soit croustillante.
+- Retourner 4 minutes, puis jeter l'excédent de gras.
+- Verser soja, mirin, miel et gingembre râpé, et laquer le poulet en l'arrosant jusqu'à ce que la sauce soit sirupeuse.
+- Cuire le riz et sauter les légumes 3 minutes.
+- Trancher le poulet, napper de sauce et parsemer de sésame. Version végé : tofu en tranches doré et laqué.
+
+# Nouilles sautées aux légumes | 4 | 25 | T
+r
++ Nouilles chinoises 320g; Légumes pour wok 800g; Sauce soja 4cs; Sauce huître 2cs; Huile de sésame 1cs; Ail 0.2pc; Gingembre 10g; Oignons nouveaux 3pc; Huile de tournesol 2cs
+= Filet de porc 400g
+~ Oeufs 6pc
+v Nouilles sautées aux légumes et œufs
+- Cuire les nouilles, les rincer et les égoutter.
+- Saisir le porc en fines lanières au wok très chaud ; réserver.
+- Sauter l'ail, le gingembre et les légumes 4 minutes en les gardant croquants.
+- Ajouter les nouilles, le porc et les sauces ; sauter 2 minutes à feu vif.
+- Finir avec l'huile de sésame et les oignons nouveaux. Version végé : œufs brouillés au wok.
+
+# Bo bun | 4 | 40 | EA
+r
++ Nouilles de riz 280g; Salade verte 1pc; Carottes 250g; Concombre 1pc; Germes de soja 150g; Cacahuètes 60g; Menthe 0.5pc; Coriandre 0.5pc; Citronnelle 30g; Ail 0.1pc; Nuoc-mâm 5cs; Sucre 40g; Citron vert 2pc; Piment 0.5pc; Échalote 2pc; Huile de tournesol 3cs
+= Steak de bœuf 450g
+~ Tofu ferme 450g
+v Bo bun au tofu
+- Faire mariner le bœuf en fines lanières avec la citronnelle hachée, l'ail et 1 cuillère de nuoc-mâm.
+- Sauce : 4 cuillères de nuoc-mâm, sucre, jus de citron vert, piment et 150 ml d'eau.
+- Cuire les nouilles de riz et les rincer à l'eau froide ; faire frire les échalotes émincées.
+- Saisir le bœuf 2 minutes au wok très chaud.
+- Dresser dans des bols : salade, nouilles, carottes et concombre en julienne, germes, bœuf chaud, herbes, cacahuètes et échalotes ; arroser de sauce. Version végé : tofu mariné, sauce au soja.
+
+# Riz sauté aux crevettes | 4 | 25 | T
+r
++ Riz 300g; Oeufs 3pc; Petits pois 200g; Carottes 150g; Oignons nouveaux 3pc; Ail 0.1pc; Sauce soja 3cs; Huile de tournesol 3cs
+= Scampis 400g
+~ Tofu fumé 400g
+v Riz sauté au tofu fumé
+- Utiliser un riz cuit et refroidi.
+- Saisir les scampis avec l'ail 2 minutes au wok ; réserver.
+- Brouiller les œufs, puis sauter carottes et petits pois 3 minutes.
+- Ajouter le riz et le sauter à feu vif en l'égrenant 4 minutes.
+- Remettre les scampis, assaisonner de soja et finir avec les oignons nouveaux. Version végé : tofu fumé.
+
+# Saumon laqué, riz et chou chinois | 4 | 30 | T
+r
++ Riz 300g; Sauce soja 4cs; Miel 2cs; Mirin 2cs; Chou chinois 600g; Gingembre 20g; Ail 0.1pc; Graines de sésame 1cs; Huile de sésame 1cs
+= Pavé de saumon 600g
+~ Tofu ferme 500g
+v Tofu laqué, riz et chou chinois
+- Mélanger soja, miel, mirin et la moitié du gingembre râpé.
+- Cuire le saumon côté peau 4 minutes, le retourner, verser la sauce et laquer 2 minutes.
+- Cuire le riz à l'eau salée ou au cuiseur.
+- Sauter le chou émincé 3 minutes avec l'ail, le reste du gingembre et l'huile de sésame.
+- Servir le saumon nappé de laque et parsemé de sésame. Version végé : tofu laqué.
+
+# Soupe miso-nouilles aux légumes | 4 | 25 | AH
+r
++ Nouilles de riz 240g; Bouillon de légumes 1600ml; Pâte miso 80g; Sauce soja 2cs; Gingembre 15g; Champignons de Paris 250g; Épinards frais 250g; Oignons nouveaux 3pc; Tofu ferme 400g; Feuilles de nori 3g
+- Faire chauffer le bouillon avec le gingembre en lamelles sans le faire bouillir fort.
+- Ajouter les champignons émincés et le tofu en dés ; cuire 5 minutes.
+- Cuire les nouilles à part et les répartir dans les bols.
+- Hors du feu, délayer le miso dans une louche de bouillon et le reverser (il ne doit pas bouillir), ajouter le soja et les épinards.
+- Verser sur les nouilles et garnir d'oignons nouveaux et de nori émietté.
+
+# Porc au caramel et riz | 4 | 50 | T
+r
++ Riz 300g; Cassonade 80g; Nuoc-mâm 4cs; Sauce soja 1cs; Oignon 1pc; Ail 0.2pc; Gingembre 15g; Haricots verts 400g; Oignons nouveaux 2pc
+= Filet de porc 600g
+~ Tofu ferme 500g
+v Tofu au caramel et riz
+- Faire un caramel brun avec la cassonade et 2 cuillères d'eau, puis le détendre avec 150 ml d'eau chaude (attention aux projections).
+- Ajouter l'oignon émincé, l'ail, le gingembre, le nuoc-mâm et le soja.
+- Ajouter le porc en cubes et mijoter 35 minutes à découvert jusqu'à ce qu'il soit laqué.
+- Cuire le riz et les haricots verts.
+- Servir parsemé d'oignons nouveaux. Version végé : tofu doré, sauce soja à la place du nuoc-mâm, 15 minutes de mijotage.
+
+# Gyozas et salade de chou | 4 | 70 | T
+r
++ Farine 250g; Chou chinois 400g; Gingembre 15g; Ail 0.1pc; Oignons nouveaux 3pc; Sauce soja 4cs; Vinaigre de riz 3cs; Carottes 200g; Huile de sésame 2cs; Huile de tournesol 2cs; Riz 200g
+= Haché porc et bœuf 350g
+~ Tofu ferme 300g; Champignons de Paris 250g
+v Raviolis tofu-champignons poêlés
+- Pétrir la farine avec 130 ml d'eau chaude et une pincée de sel, laisser reposer 30 minutes sous un linge.
+- Farce : viande, 200 g de chou finement haché et salé puis pressé, gingembre, ail, oignons nouveaux et 1 cuillère de soja.
+- Étaler la pâte en disques fins, garnir et plisser les bords.
+- Dorer les gyozas à l'huile, verser 100 ml d'eau, couvrir 6 minutes, puis découvrir pour les recroustiller.
+- Servir avec une sauce soja-vinaigre de riz, le riz et une salade du reste du chou et des carottes râpées à l'huile de sésame. Version végé : tofu émietté et champignons hachés.
+
+# Poulet aux noix de cajou | 4 | 30 | T
+r
++ Noix de cajou 100g; Poivron 2pc; Oignon 1pc; Ail 0.1pc; Gingembre 10g; Sauce soja 4cs; Sauce huître 2cs; Miel 1cs; Fécule de maïs 2cc; Riz 300g; Huile de tournesol 3cs
+= Filet de poulet 550g
+~ Tofu ferme 500g
+v Tofu aux noix de cajou
+- Couper le poulet en dés et l'enrober d'1 cuillère de soja et de la moitié de la fécule.
+- Griller les noix de cajou à sec ; réserver.
+- Saisir le poulet au wok 4 minutes, puis ajouter l'oignon et le poivron en carrés 2 minutes.
+- Ajouter ail, gingembre, puis la sauce (soja, huître, miel, reste de fécule et 80 ml d'eau).
+- Ajouter les noix de cajou et servir avec le riz. Version végé : tofu doré.
+
+# Porc aigre-doux | 4 | 40 | T
+r
++ Poivron 2pc; Oignon 1pc; Ketchup 4cs; Vinaigre de riz 4cs; Sucre 40g; Sauce soja 2cs; Fécule de maïs 60g; Oeufs 1pc; Huile de tournesol 500ml; Riz 300g
+= Filet de porc 550g
+~ Tofu ferme 500g
+v Tofu aigre-doux
+- Couper le porc en cubes, les tremper dans l'œuf battu puis dans la fécule.
+- Les frire 4 minutes à 175 °C jusqu'à ce qu'ils soient croustillants ; égoutter.
+- Sauce : ketchup, vinaigre, sucre, soja et 100 ml d'eau, épaissie d'1 cuillère à café de fécule.
+- Sauter le poivron et l'oignon en carrés 3 minutes, verser la sauce et laisser épaissir.
+- Ajouter le porc au dernier moment pour qu'il reste croustillant ; servir avec le riz. Version végé : tofu enrobé et frit.
+
+# Soupe thaï coco-poulet | 4 | 30 | AH
+r
++ Lait de coco 600ml; Bouillon de volaille 800ml; Pâte de curry rouge 40g; Citronnelle 60g; Gingembre 20g; Champignons de Paris 250g; Citron vert 2pc; Nuoc-mâm 3cs; Cassonade 1cs; Coriandre 0.5pc; Nouilles de riz 200g
+= Filet de poulet 450g
+~ Tofu ferme 450g
+v Soupe thaï coco-tofu
+- Faire infuser 10 minutes le bouillon avec la citronnelle écrasée et le gingembre en lamelles.
+- Ajouter le lait de coco et la pâte de curry, puis le poulet en lanières et les champignons ; cuire 8 minutes.
+- Assaisonner de nuoc-mâm, de cassonade et du jus des citrons verts : la soupe doit être à la fois salée, acide et douce.
+- Cuire les nouilles et les répartir dans les bols.
+- Verser la soupe et parsemer de coriandre (tom kha). Version végé : tofu, bouillon de légumes et soja.
+
+# Yakisoba | 4 | 25 | T
+r
++ Nouilles chinoises 360g; Chou chinois 400g; Carottes 200g; Oignon 1pc; Sauce soja 3cs; Ketchup 2cs; Sauce huître 2cs; Miel 1cc; Oignons nouveaux 2pc; Huile de tournesol 2cs
+= Filet de porc 400g
+~ Tofu fumé 400g
+v Yakisoba au tofu fumé
+- Cuire les nouilles et les égoutter.
+- Sauce yakisoba : soja, ketchup, sauce huître et miel.
+- Saisir le porc en fines lanières au wok, puis l'oignon, les carottes et le chou émincés 3 minutes.
+- Ajouter les nouilles et la sauce, sauter 2 minutes à feu vif pour bien les enrober.
+- Servir avec les oignons nouveaux. Version végé : tofu fumé.
+
+# Curry japonais | 4 | 55 | AH
+r
++ Pommes de terre 600g; Carottes 300g; Oignon 2pc; Curry en poudre 2cs; Farine 40g; Beurre 40g; Pommes 150g; Sauce soja 2cs; Ketchup 1cs; Miel 1cs; Bouillon de volaille 800ml; Riz 300g
+= Filet de poulet 500g
+~ Tofu ferme 450g
+v Curry japonais au tofu
+- Faire un roux : beurre, farine et curry, cuits 5 minutes à feu doux jusqu'à ce qu'il brunisse légèrement.
+- Faire dorer le poulet en morceaux et les oignons émincés dans une cocotte.
+- Ajouter carottes et pommes de terre en gros morceaux, la pomme râpée et le bouillon ; cuire 20 minutes.
+- Délayer le roux dans la sauce, ajouter soja, ketchup et miel, et laisser épaissir 10 minutes.
+- Servir à côté du riz. Version végé : tofu et bouillon de légumes.
+
+# Bibimbap | 4 | 45 | T
+r
++ Riz 300g; Carottes 200g; Épinards frais 300g; Germes de soja 200g; Courgettes 200g; Oeufs 4pc; Sauce soja 4cs; Gochujang 60g; Huile de sésame 3cs; Ail 0.2pc; Graines de sésame 1cs; Kimchi 200g; Cassonade 1cs
+= Haché de bœuf 400g
+~ Tofu ferme 450g
+v Bibimbap au tofu
+- Cuire le riz à l'eau salée ou au cuiseur.
+- Préparer chaque légume séparément : épinards tombés, germes blanchis, carottes et courgettes en julienne sautées ; assaisonner chacun d'ail, d'huile de sésame et de sel.
+- Sauter la viande avec 2 cuillères de soja et la cassonade.
+- Cuire les œufs au plat, jaune coulant.
+- Dresser le riz dans des bols, disposer légumes, viande et kimchi en couronne, l'œuf au centre ; servir avec le gochujang détendu d'huile de sésame. Version végé : tofu émietté et sauté.
+
+# Poke bowl au saumon | 4 | 30 | PE
+r
++ Riz 300g; Vinaigre de riz 3cs; Sucre 1cs; Avocat 2pc; Concombre 1pc; Carottes 150g; Edamame 200g; Mangue 1pc; Graines de sésame 1cs; Sauce soja 4cs; Huile de sésame 1cs; Oignons nouveaux 2pc
+= Pavé de saumon 450g
+~ Tofu ferme 450g; Maïs (boîte) 150g
+v Poke bowl au tofu
+- Cuire le riz et l'assaisonner tiède du vinaigre de riz et du sucre.
+- Couper le saumon très frais en dés et le mariner 10 minutes dans le soja et l'huile de sésame.
+- Couper avocat, concombre et mangue en dés, râper les carottes ; cuire les edamame 4 minutes.
+- Répartir le riz dans des bols et disposer chaque garniture en quartiers.
+- Parsemer de sésame et d'oignons nouveaux. Version végé : tofu mariné et doré, et maïs.
+
+# Poulet général Tao | 4 | 40 | T
+r
++ Riz 300g; Sauce soja 4cs; Miel 3cs; Vinaigre de riz 2cs; Ketchup 1cs; Gingembre 15g; Ail 0.2pc; Fécule de maïs 80g; Oeufs 1pc; Piment 1pc; Brocoli 400g; Graines de sésame 1cs; Huile de tournesol 500ml
+= Filet de poulet 600g
+~ Tofu ferme 550g
+v Tofu général Tao
+- Couper le poulet en dés, l'enrober d'œuf battu puis de fécule.
+- Le frire en deux fois 5 minutes à 175 °C ; égoutter.
+- Sauce : soja, miel, vinaigre, ketchup, 80 ml d'eau et 1 cuillère à café de fécule.
+- Faire revenir l'ail, le gingembre et le piment, verser la sauce et la laisser épaissir, puis enrober le poulet.
+- Servir avec le riz et le brocoli vapeur, parsemé de sésame. Version végé : tofu enrobé et frit.
+
+# Mapo tofu | 4 | 30 | T
+r
++ Tofu ferme 600g; Sauce soja 2cs; Ail 0.2pc; Gingembre 15g; Piment 1pc; Oignons nouveaux 3pc; Concentré de tomate 1cs; Fécule de maïs 2cc; Bouillon de volaille 300ml; Huile de tournesol 2cs; Riz 300g
+= Haché porc et bœuf 250g
+~ Champignons de Paris 350g
+v Mapo tofu aux champignons
+- Couper le tofu en dés et le pocher 2 minutes dans de l'eau salée frémissante pour le raffermir.
+- Faire revenir la viande hachée jusqu'à ce qu'elle soit croustillante.
+- Ajouter l'ail, le gingembre, le piment et le concentré (à défaut de doubanjiang), puis le bouillon et le soja.
+- Ajouter le tofu délicatement, mijoter 5 minutes, puis lier avec la fécule délayée.
+- Parsemer d'oignons nouveaux (et de poivre de Sichuan si possible) et servir avec le riz. Version végé : champignons hachés et bouillon de légumes.
+
+# Bulgogi de bœuf et riz | 4 | 40 | T
+r
++ Sauce soja 5cs; Cassonade 2cs; Ail 0.3pc; Gingembre 10g; Huile de sésame 2cs; Poires 200g; Oignon 1pc; Oignons nouveaux 3pc; Riz 300g; Concombre 1pc; Kimchi 200g; Graines de sésame 1cs; Salade verte 1pc
+= Steak de bœuf 550g
+~ Tofu ferme 550g
+v Bulgogi de tofu et riz
+- Mixer la poire avec le soja, la cassonade, l'ail, le gingembre et l'huile de sésame.
+- Trancher le bœuf très finement (plus facile légèrement congelé) et le mariner 20 minutes avec l'oignon émincé.
+- Cuire le riz à l'eau salée ou au cuiseur.
+- Saisir la viande par petites quantités dans une poêle très chaude 2 minutes.
+- Servir avec le riz, le concombre en bâtonnets, le kimchi et des feuilles de salade pour faire des wraps ; parsemer de sésame et d'oignons nouveaux. Version végé : tofu en tranches fines.
+
+# Phở au bœuf | 4 | 60 | AH
+r
++ Nouilles de riz 300g; Bouillon de bœuf 2000ml; Gingembre 40g; Cannelle 1g; Clous de girofle 0.5g; Oignon 2pc; Germes de soja 200g; Citron vert 2pc; Coriandre 0.5pc; Menthe 0.25pc; Nuoc-mâm 3cs; Piment 1pc
+= Steak de bœuf 400g
+~ Tofu ferme 450g
+v Phở au tofu
+- Faire noircir les oignons coupés en deux et le gingembre à sec dans une poêle.
+- Les mettre dans le bouillon avec la cannelle et le girofle (et une étoile de badiane si possible) ; infuser 40 minutes à frémissement.
+- Filtrer et assaisonner de nuoc-mâm.
+- Cuire les nouilles et les répartir dans des bols avec le bœuf cru tranché très finement.
+- Verser le bouillon bouillant qui cuit la viande ; servir avec germes, herbes, citron vert et piment. Version végé : bouillon de légumes, tofu et soja.
+
+# Nasi goreng | 4 | 30 | T
+r
++ Riz 320g; Oeufs 4pc; Oignon 1pc; Échalote 2pc; Ail 0.2pc; Sauce soja 4cs; Miel 1cs; Carottes 150g; Concombre 1pc; Piment 1pc; Tomates 250g; Huile de tournesol 3cs
+= Filet de poulet 350g; Scampis 200g
+~ Tofu fumé 450g
+v Nasi goreng au tofu
+- Utiliser un riz cuit et refroidi.
+- Mixer échalotes, ail et piment en pâte et la faire revenir 2 minutes dans l'huile.
+- Saisir le poulet en dés et les scampis, puis l'oignon et les carottes.
+- Ajouter le riz, le soja et le miel (à défaut de kecap manis) ; sauter 4 minutes à feu vif.
+- Servir avec un œuf au plat, des tranches de concombre et de tomate. Version végé : tofu fumé.
+
+# Poulet satay et riz | 4 | 45 | T
+r
++ Beurre de cacahuète 120g; Lait de coco 250ml; Sauce soja 3cs; Curry en poudre 2cc; Cassonade 1cs; Citron vert 1pc; Ail 0.1pc; Riz 300g; Concombre 1pc; Cacahuètes 40g; Vinaigre de riz 2cs
+= Filet de poulet 600g
+~ Tofu ferme 550g
+v Satay de tofu et riz
+- Mariner le poulet en lanières avec 1 cuillère de soja, le curry, l'ail et la moitié du lait de coco 20 minutes.
+- Enfiler sur des brochettes et griller 3 minutes par face.
+- Sauce satay : beurre de cacahuète, reste du lait de coco, soja, cassonade et jus de citron vert, chauffés en remuant.
+- Concombre en dés au vinaigre de riz pour la fraîcheur.
+- Servir les brochettes avec le riz, la sauce chaude, le concombre et les cacahuètes concassées. Version végé : tofu en bâtonnets.
+
+# Tonkatsu et chou | 4 | 35 | T
+r
++ Farine 60g; Oeufs 2pc; Chapelure 150g; Chou chinois 400g; Riz 300g; Ketchup 4cs; Sauce soja 2cs; Miel 1cs; Moutarde 1cc; Huile de tournesol 500ml; Citron 1pc
+= Filet de porc 600g
+~ Tofu ferme 600g
+v Tofu katsu et chou
+- Couper le porc en tranches épaisses d'1,5 cm, les aplatir légèrement et les saler.
+- Les passer dans la farine, l'œuf battu puis la chapelure (idéalement du panko) en pressant bien.
+- Frire 5 minutes à 170 °C jusqu'à ce qu'elles soient dorées, égoutter et trancher.
+- Sauce tonkatsu : ketchup, soja, miel et moutarde.
+- Servir avec le chou cru très finement émincé, le riz, la sauce et le citron. Version végé : tranches épaisses de tofu pressé, panées de la même façon.
+
+# Okonomiyaki | 4 | 35 | T
+r
++ Chou vert 600g; Farine 200g; Oeufs 4pc; Bouillon de légumes 200ml; Oignons nouveaux 3pc; Mayonnaise 4cs; Ketchup 3cs; Sauce soja 2cs; Miel 1cc; Feuilles de nori 3g; Huile de tournesol 2cs
+= Bacon 200g
+~ Tofu fumé 300g
+v Okonomiyaki au tofu fumé
+- Fouetter la farine avec le bouillon et les œufs, puis ajouter le chou très finement émincé et les oignons nouveaux.
+- Verser une galette épaisse dans une poêle huilée et poser les tranches de bacon dessus.
+- Cuire 5 minutes à couvert, retourner et cuire encore 5 minutes à feu moyen.
+- Sauce : ketchup, soja et miel.
+- Servir zébrée de sauce et de mayonnaise, parsemée de nori émietté. Version végé : tofu fumé en fines tranches.
+
+# Chow mein au poulet | 4 | 30 | T
+r
++ Nouilles chinoises 360g; Chou chinois 300g; Carottes 200g; Germes de soja 200g; Sauce soja 4cs; Sauce huître 2cs; Huile de sésame 1cs; Oignons nouveaux 3pc; Ail 0.1pc; Fécule de maïs 1cc; Huile de tournesol 3cs
+= Filet de poulet 450g
+~ Tofu fumé 400g
+v Chow mein au tofu
+- Cuire les nouilles, les égoutter et les faire dorer à la poêle dans un peu d'huile pour qu'elles croustillent par endroits.
+- Enrober le poulet en lanières de fécule et d'1 cuillère de soja, puis le saisir au wok.
+- Sauter l'ail, les carottes en julienne et le chou 2 minutes.
+- Ajouter les nouilles, les germes, les sauces et l'huile de sésame ; sauter 2 minutes.
+- Finir avec les oignons nouveaux. Version végé : tofu fumé.

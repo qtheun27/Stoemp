@@ -1,0 +1,213 @@
+// Plats de base indiens réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@indienne
+## plat
+
+# Curry de patate douce au poulet | 4 | 45 | A
+r
++ Patate douce 800g; Lait de coco 400ml; Curry en poudre 8g; Curcuma 1g; Oignon 1pc; Ail 0.2pc; Gingembre 20g; Tomates concassées 200g; Épinards frais 200g; Citron vert 1pc; Coriandre 0.25pc; Huile de tournesol 2cs; Riz basmati 280g
+= Filet de poulet 500g
+~ Pois chiches (boîte) 500g
+v Curry de patate douce et pois chiches
+- Faire fondre l'oignon dans l'huile 8 minutes, ajouter l'ail et le gingembre râpés, puis les épices 1 minute.
+- Ajouter le poulet en morceaux et l'enrober d'épices.
+- Ajouter la patate douce en cubes, les tomates et le lait de coco ; mijoter 20 minutes.
+- Incorporer les épinards jusqu'à ce qu'ils tombent et finir avec le jus de citron vert.
+- Servir sur le riz basmati, parsemé de coriandre. Version végé : pois chiches ajoutés avec la patate douce.
+
+# Butter chicken et riz basmati | 4 | 60 | T
+r
++ Tomates concassées 500g; Concentré de tomate 2cs; Crème liquide 200ml; Beurre 60g; Garam masala 6g; Paprika 2cc; Gingembre 20g; Ail 0.2pc; Yaourt nature 150g; Citron 0.5pc; Miel 1cs; Cardamome 0.5g; Riz basmati 300g; Coriandre 0.25pc
+= Filet de poulet 600g
+~ Pois chiches (boîte) 500g; Chou-fleur 500g
+v Butter chickpeas et chou-fleur
+- Mariner le poulet en morceaux avec le yaourt, la moitié du gingembre et de l'ail, le paprika, la moitié du garam masala et le citron, au moins 30 minutes.
+- Le griller au four sous le gril ou à la poêle très chaude jusqu'à ce qu'il soit marqué.
+- Faire fondre le beurre, ajouter le reste d'ail et de gingembre, la cardamome, les tomates et le concentré ; cuire 15 minutes puis mixer.
+- Ajouter la crème, le miel et le reste du garam masala, puis le poulet ; mijoter 10 minutes.
+- Servir avec le riz basmati et la coriandre. Version végé : chou-fleur rôti et pois chiches dans la sauce.
+
+# Dal de lentilles corail | 4 | 40 | T
+r
++ Lentilles corail 300g; Lait de coco 300ml; Tomates concassées 300g; Oignon 1pc; Ail 0.2pc; Gingembre 15g; Curcuma 1g; Cumin 3g; Graines de moutarde 3g; Curry en poudre 4g; Ghee 30g; Riz basmati 240g; Coriandre 0.5pc; Citron 0.5pc
+- Rincer les lentilles et les cuire 20 minutes avec le lait de coco, les tomates, le curcuma et 600 ml d'eau, jusqu'à ce qu'elles se défassent.
+- Faire fondre l'oignon dans la moitié du ghee avec l'ail, le gingembre et le curry, puis l'ajouter aux lentilles.
+- Cuire le riz basmati.
+- Tadka : chauffer le reste du ghee, y faire éclater les graines de moutarde et le cumin quelques secondes.
+- Verser le tadka grésillant sur le dal, ajouter le jus de citron et la coriandre, et servir avec le riz.
+
+# Curry d'agneau aux épinards | 4 | 100 | AH
+r
++ Épinards frais 600g; Oignon 2pc; Tomates concassées 300g; Yaourt nature 150g; Garam masala 6g; Cumin 3g; Gingembre 20g; Ail 0.3pc; Piment 0.5pc; Huile de tournesol 3cs; Riz basmati 280g
+= Épaule d'agneau en morceaux 700g
+~ Pois chiches (boîte) 600g; Paneer 200g
+v Curry de pois chiches aux épinards
+- Faire dorer l'agneau dans l'huile, ajouter les oignons émincés et les laisser brunir 10 minutes.
+- Ajouter ail, gingembre, piment et épices, puis les tomates et le yaourt cuillère par cuillère.
+- Couvrir et mijoter 1 heure à feu doux jusqu'à ce que l'agneau soit tendre (saag gosht).
+- Blanchir les épinards, les mixer grossièrement et les ajouter ; cuire 10 minutes.
+- Servir avec le riz basmati. Version végé : pois chiches et paneer, 20 minutes de cuisson.
+
+# Chana masala | 4 | 40 | T
+r
++ Pois chiches (boîte) 800g; Tomates concassées 500g; Oignon 2pc; Ail 0.2pc; Gingembre 20g; Garam masala 6g; Cumin 3g; Curcuma 1g; Piment 0.5pc; Huile de tournesol 3cs; Riz basmati 240g; Citron 1pc; Coriandre 0.5pc
+- Faire revenir le cumin dans l'huile, puis les oignons hachés 10 minutes jusqu'à ce qu'ils soient dorés.
+- Ajouter ail, gingembre, piment, curcuma et la moitié du garam masala, puis les tomates ; cuire 10 minutes.
+- Ajouter les pois chiches et 200 ml d'eau ; mijoter 15 minutes en écrasant quelques pois chiches.
+- Finir avec le reste du garam masala et le jus de citron.
+- Servir avec le riz basmati et la coriandre.
+
+# Poulet tikka masala | 4 | 60 | T
+r
++ Yaourt nature 250g; Tomates concassées 500g; Crème liquide 150ml; Oignon 2pc; Ail 0.2pc; Gingembre 20g; Garam masala 8g; Paprika 3cc; Cumin 3g; Citron 1pc; Huile de tournesol 3cs; Riz basmati 300g; Coriandre 0.25pc
+= Filet de poulet 600g
+~ Halloumi 400g; Pois chiches (boîte) 300g
+v Tikka masala à l'halloumi
+- Mariner le poulet en gros dés dans le yaourt, le jus de citron, la moitié des épices, de l'ail et du gingembre, au moins 1 heure.
+- Enfiler sur des brochettes et griller 10 minutes au four sous le gril.
+- Faire dorer les oignons dans l'huile, ajouter le reste d'ail, de gingembre et d'épices, puis les tomates ; cuire 15 minutes.
+- Ajouter la crème et le poulet grillé ; mijoter 10 minutes.
+- Servir avec le riz basmati et la coriandre. Version végé : halloumi grillé et pois chiches.
+
+# Biryani de légumes | 4 | 70 | T
+r
++ Riz basmati 320g; Oignon 3pc; Carottes 200g; Petits pois 200g; Garam masala 6g; Curcuma 1g; Cardamome 0.5g; Cannelle 0.5g; Clous de girofle 0.3g; Safran 0.1g; Yaourt nature 200g; Amandes 40g; Raisins secs 40g; Ghee 40g; Menthe 0.25pc; Coriandre 0.25pc; Lait 50ml
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 500g
+v Biryani végétarien aux pois chiches
+- Faire frire les oignons émincés dans le ghee jusqu'à ce qu'ils soient bien bruns ; en garder la moitié pour le dessus.
+- Mariner le poulet dans le yaourt et le garam masala, puis le cuire 25 minutes avec la moitié des oignons, les carottes et le curcuma.
+- Précuire le riz 6 minutes dans l'eau bouillante salée avec la cardamome, la cannelle et le girofle ; égoutter.
+- Dans une cocotte, alterner poulet et riz avec les petits pois, les herbes, les amandes et les raisins ; arroser du safran infusé dans le lait chaud.
+- Fermer hermétiquement et cuire 20 minutes à feu très doux (dum) ; servir couvert d'oignons frits. Version végé : pois chiches marinés.
+
+# Korma de légumes à la noix de cajou | 4 | 45 | AH
+r
++ Chou-fleur 500g; Patate douce 400g; Petits pois 150g; Lait de coco 400ml; Noix de cajou 80g; Yaourt nature 100g; Oignon 1pc; Ail 0.2pc; Gingembre 15g; Curry en poudre 6g; Cardamome 0.5g; Ghee 30g; Riz basmati 240g
+= Filet de poulet 450g
+~ Pois chiches (boîte) 500g
+v Korma de légumes et pois chiches
+- Faire tremper la moitié des noix de cajou 15 minutes dans l'eau chaude, puis les mixer avec le yaourt.
+- Faire fondre l'oignon dans le ghee sans le colorer, ajouter ail, gingembre, curry et cardamome.
+- Ajouter le poulet en morceaux, la patate douce et le chou-fleur, puis le lait de coco ; mijoter 20 minutes.
+- Incorporer la crème de cajou et les petits pois ; cuire 5 minutes, la sauce doit être douce et onctueuse.
+- Servir avec le riz basmati et le reste des noix de cajou grillées. Version végé : pois chiches.
+
+# Aloo gobi | 4 | 40 | AH
+r
++ Chou-fleur 800g; Pommes de terre 600g; Tomates concassées 300g; Oignon 1pc; Ail 0.2pc; Gingembre 15g; Curry en poudre 4g; Cumin 3g; Curcuma 1g; Garam masala 3g; Pois chiches (boîte) 300g; Coriandre 0.5pc; Huile de tournesol 4cs; Yaourt nature 200g
+- Faire grésiller le cumin dans l'huile, puis faire revenir l'oignon, l'ail et le gingembre.
+- Ajouter les pommes de terre en cubes et le curcuma ; cuire 8 minutes à couvert.
+- Ajouter le chou-fleur en petits bouquets, le curry et les tomates ; couvrir et cuire 15 minutes en remuant de temps en temps.
+- Ajouter les pois chiches et le garam masala, cuire à découvert 5 minutes pour que les légumes dorent.
+- Parsemer de coriandre et servir avec le yaourt.
+
+# Poulet tandoori et riz | 4 | 160 | T
+r
++ Yaourt nature 300g; Garam masala 6g; Paprika 3cc; Cumin 3g; Ail 0.2pc; Gingembre 20g; Citron 2pc; Riz basmati 300g; Concombre 1pc; Menthe 0.25pc; Oignon rouge 1pc; Huile de tournesol 2cs
+= Cuisse de poulet 4pc
+~ Halloumi 400g; Chou-fleur 600g
+v Halloumi et chou-fleur tandoori
+- Inciser profondément les cuisses et les frotter de jus de citron et de sel.
+- Les mariner au moins 2 heures dans 200 g de yaourt avec les épices, l'ail et le gingembre.
+- Les rôtir 35 minutes à 230 °C sur une grille, jusqu'à ce qu'elles soient grillées par endroits.
+- Raïta : reste du yaourt, concombre râpé, menthe et sel.
+- Servir avec le riz, la raïta, l'oignon rouge en rondelles et le citron. Version végé : chou-fleur et halloumi marinés et rôtis 25 minutes.
+
+# Curry de poisson au lait de coco | 4 | 35 | T
+r
++ Lait de coco 400ml; Tomates concassées 300g; Oignon 1pc; Ail 0.2pc; Gingembre 20g; Curry en poudre 6g; Curcuma 1g; Graines de moutarde 3g; Épinards frais 250g; Citron vert 1pc; Coriandre 0.25pc; Huile de tournesol 2cs; Riz basmati 280g
+= Dos de cabillaud 600g
+~ Pois chiches (boîte) 600g
+v Curry coco aux pois chiches
+- Faire éclater les graines de moutarde dans l'huile, ajouter l'oignon, l'ail et le gingembre.
+- Ajouter le curry et le curcuma, puis les tomates ; cuire 8 minutes.
+- Verser le lait de coco et porter à frémissement.
+- Poser le poisson en gros morceaux et les épinards, couvrir et pocher 6 minutes sans remuer.
+- Finir au jus de citron vert et à la coriandre ; servir avec le riz, à la façon du Kerala. Version végé : pois chiches.
+
+# Halloumi aux épinards (façon palak paneer) | 4 | 35 | AH
+r
++ Épinards frais 800g; Halloumi 400g; Oignon 1pc; Ail 0.2pc; Gingembre 15g; Tomates concassées 200g; Crème liquide 150ml; Garam masala 5g; Cumin 3g; Piment 0.5pc; Ghee 30g; Riz basmati 240g
+- Blanchir les épinards 1 minute, les refroidir dans l'eau glacée et les mixer en purée.
+- Faire dorer le halloumi en dés dans la moitié du ghee ; réserver.
+- Faire revenir le cumin, l'oignon, l'ail, le gingembre et le piment dans le reste du ghee, puis les tomates.
+- Ajouter la purée d'épinards, le garam masala et la crème ; cuire 5 minutes, la couleur doit rester vert vif.
+- Ajouter le halloumi et servir avec le riz basmati.
+
+# Keema aux petits pois | 4 | 40 | T
+r
++ Petits pois 300g; Oignon 2pc; Tomates concassées 400g; Garam masala 6g; Cumin 3g; Curcuma 1g; Gingembre 20g; Ail 0.2pc; Piment 0.5pc; Yaourt nature 100g; Huile de tournesol 2cs; Coriandre 0.5pc; Riz basmati 280g
+= Haché de bœuf 500g
+~ Lentilles corail 280g
+v Keema de lentilles aux petits pois
+- Faire dorer les oignons hachés dans l'huile, puis l'ail, le gingembre et le piment.
+- Ajouter la viande et la faire bien colorer en l'émiettant.
+- Ajouter les épices, les tomates et le yaourt ; mijoter 15 minutes.
+- Ajouter les petits pois et cuire 5 minutes.
+- Servir avec le riz et la coriandre. Version végé : lentilles corail cuites dans la sauce avec 400 ml d'eau.
+
+# Poulet vindaloo et riz | 4 | 120 | T
+r
++ Tomates concassées 300g; Oignon 2pc; Vinaigre 4cs; Garam masala 6g; Paprika 3cc; Cumin 3g; Cannelle 0.5g; Clous de girofle 0.3g; Piment 1.5pc; Ail 0.3pc; Gingembre 20g; Cassonade 1cs; Pommes de terre 500g; Huile de tournesol 3cs; Riz basmati 280g
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 600g
+v Vindaloo de pois chiches et pommes de terre
+- Mixer le vinaigre, l'ail, le gingembre, le piment et les épices en pâte ; y mariner le poulet au moins 1 heure.
+- Faire dorer les oignons émincés dans l'huile.
+- Ajouter le poulet et sa marinade, les tomates, la cassonade et 200 ml d'eau ; couvrir et mijoter 30 minutes.
+- Ajouter les pommes de terre en cubes et cuire 20 minutes : la sauce est piquante et acidulée, à la goanaise.
+- Servir avec le riz basmati. Version végé : pois chiches marinés.
+
+# Rogan josh d'agneau | 4 | 110 | AH
+r
++ Yaourt nature 200g; Tomates concassées 300g; Oignon 2pc; Garam masala 6g; Paprika 4cc; Gingembre 20g; Ail 0.2pc; Cardamome 0.5g; Cannelle 0.5g; Clous de girofle 0.3g; Ghee 40g; Riz basmati 280g; Coriandre 0.25pc
+= Épaule d'agneau en morceaux 700g
+~ Pois chiches (boîte) 500g; Patate douce 500g
+v Rogan josh de pois chiches et patate douce
+- Faire chauffer le ghee avec la cardamome, la cannelle et le girofle, puis dorer l'agneau.
+- Ajouter les oignons, l'ail et le gingembre, puis le paprika (il donne la couleur rouge profonde) et le garam masala.
+- Ajouter le yaourt cuillère par cuillère en remuant, puis les tomates et 300 ml d'eau.
+- Couvrir et mijoter 1 h 15 jusqu'à ce que l'agneau soit fondant et la sauce épaisse.
+- Servir avec le riz et la coriandre. Version végé : patate douce et pois chiches, 25 minutes.
+
+# Saag aloo | 4 | 40 | AH
+r
++ Pommes de terre 800g; Épinards frais 600g; Oignon 1pc; Ail 0.2pc; Gingembre 15g; Cumin 3g; Graines de moutarde 3g; Curcuma 1g; Garam masala 3g; Pois chiches (boîte) 300g; Piment 0.5pc; Huile de tournesol 4cs; Yaourt nature 200g
+- Précuire les pommes de terre en cubes 8 minutes à l'eau salée et les égoutter.
+- Faire éclater la moutarde et le cumin dans l'huile, ajouter l'oignon, l'ail, le gingembre et le piment.
+- Ajouter les pommes de terre et le curcuma ; les faire dorer 10 minutes.
+- Ajouter les épinards hachés et les pois chiches, cuire jusqu'à ce que les épinards soient tombés et que l'eau s'évapore.
+- Finir avec le garam masala et servir avec le yaourt.
+
+# Dal makhani | 4 | 70 | AH
+r
++ Lentilles vertes 200g; Haricots rouges (boîte) 400g; Tomates concassées 300g; Concentré de tomate 1cs; Crème liquide 150ml; Beurre 60g; Garam masala 5g; Cumin 3g; Gingembre 20g; Ail 0.2pc; Oignon 1pc; Piment 0.5pc; Riz basmati 240g
+- Cuire les lentilles 30 minutes à l'eau (idéalement des lentilles noires urad).
+- Faire fondre l'oignon dans la moitié du beurre avec le cumin, l'ail, le gingembre et le piment.
+- Ajouter tomates, concentré et garam masala ; cuire 10 minutes.
+- Ajouter les lentilles, les haricots rouges et un peu d'eau ; mijoter 20 minutes à feu doux en écrasant une partie.
+- Finir avec la crème et le reste du beurre : le dal doit être velouté et riche ; servir avec le riz.
+
+# Poulet madras | 4 | 50 | T
+r
++ Tomates concassées 400g; Lait de coco 200ml; Oignon 2pc; Ail 0.2pc; Gingembre 20g; Curry en poudre 8g; Paprika 2cc; Graines de moutarde 3g; Piment 1pc; Citron 0.5pc; Huile de tournesol 3cs; Riz basmati 280g; Coriandre 0.25pc
+= Filet de poulet 600g
+~ Pois chiches (boîte) 600g
+v Madras de pois chiches
+- Faire éclater la moutarde dans l'huile, ajouter les oignons et les dorer 10 minutes.
+- Ajouter l'ail, le gingembre, le piment, le curry et le paprika ; faire revenir 1 minute.
+- Ajouter le poulet en morceaux, puis les tomates ; cuire 15 minutes.
+- Verser le lait de coco et mijoter 10 minutes : la sauce est rouge, relevée et assez sèche.
+- Finir au jus de citron et servir avec le riz et la coriandre. Version végé : pois chiches.
+
+# Pulao aux légumes et raïta | 4 | 40 | T
+r
++ Riz basmati 320g; Petits pois 200g; Carottes 200g; Oignon 1pc; Cumin 3g; Cardamome 0.5g; Cannelle 0.5g; Clous de girofle 0.3g; Ghee 30g; Yaourt nature 300g; Concombre 1pc; Menthe 0.25pc; Amandes 30g
+= Filet de poulet 400g
+~ Noix de cajou 80g; Pois chiches (boîte) 300g
+v Pulao aux légumes, cajou et pois chiches
+- Rincer le riz jusqu'à ce que l'eau soit claire et le faire tremper 20 minutes.
+- Faire revenir les épices entières dans le ghee, puis l'oignon émincé et le poulet en dés.
+- Ajouter carottes, petits pois et riz égoutté, nacrer 2 minutes, puis 500 ml d'eau salée.
+- Couvrir et cuire 12 minutes à feu très doux, puis laisser reposer 10 minutes sans ouvrir.
+- Servir avec les amandes grillées et une raïta de yaourt, concombre râpé et menthe. Version végé : noix de cajou grillées et pois chiches.
