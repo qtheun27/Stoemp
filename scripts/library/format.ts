@@ -8,6 +8,7 @@
 //   ~ Seitan 600g                                      ← remplacement végé (obligatoire s'il y a « = »)
 //   v Carbonnade de seitan et frites                   ← nom de la version végé
 //   l                                                  ← repas léger / déjà complet (plat sans féculent, voulu)
+//   r                                                  ← remplace le plat de base du même nom (version détaillée)
 //   - Étape 1 …                                        ← étapes, dans l'ordre
 //
 // Aucune quantité « par personne » à calculer à la main : l'import divise par le nombre de parts.
@@ -23,7 +24,7 @@ import { similarity } from "../../functions/src/readers/match";
 export interface LibIng { itemId: string; qtyPerPerson: number; spoon?: "cs" | "cc" }
 export interface HandRecipe {
   id: string; name: string; vegName: string | null; servings: number; prepMin: number; seasons: Season[];
-  cuisine: Cuisine; course: Course; light: boolean; ingredients: LibIng[]; meat: LibIng[]; vegSwap: LibIng[]; steps: string[]; file: string; line: number;
+  cuisine: Cuisine; course: Course; light: boolean; replaces?: string; ingredients: LibIng[]; meat: LibIng[]; vegSwap: LibIng[]; steps: string[]; file: string; line: number;
 }
 
 export const LIB_DIR = new URL(".", import.meta.url).pathname;
@@ -77,6 +78,10 @@ export function parseLibrary(text: string, file: string, idx: ItemIndex = BASE_I
     else if (tag === "~") c.raw.w += ";" + rest;
     else if (tag === "v") c.vegName = rest;
     else if (tag === "l" && !rest) c.light = true;
+    else if (tag === "r" && !rest) {
+      const base = BASE_RECIPES.find((b) => norm(b.name) === norm(c.name));
+      if (base) c.replaces = base.id; else err(n, `« r » : aucun plat de base nommé « ${c.name} »`);
+    }
     else if (tag === "-") c.steps.push(rest);
     else err(n, `ligne inconnue : ${line}`);
   });
@@ -116,7 +121,7 @@ export function loadLibrary(dir = LIB_DIR, idx: ItemIndex = BASE_INDEX) {
   for (const r of recipes) for (const e of checkRecipe(r, idx)) errors.push(`${r.file}:${r.line} ${r.name} : ${e}`);
   const dup = (r: HandRecipe, others: { name: string; course?: Course }[]) => others.find((o) => (o.course || "plat") === r.course && (norm(o.name) === norm(r.name) || similarity(o.name, r.name) >= 0.75));
   recipes.forEach((r, i) => {
-    const d = dup(r, recipes.slice(0, i)) || dup(r, BASE_RECIPES);
+    const d = dup(r, recipes.slice(0, i)) || dup(r, BASE_RECIPES.filter((b) => b.id !== r.replaces && !recipes.some((x) => x.replaces === b.id)));
     if (d) errors.push(`${r.file}:${r.line} ${r.name} : doublon de « ${d.name} »`);
   });
   return { recipes, errors };
