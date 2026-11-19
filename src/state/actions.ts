@@ -4,7 +4,7 @@ import { cookable, ingredientsOf, isVegRecipe, mains, type ItemIndex } from "../
 import { guessCategory } from "../lib/classify";
 import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { parseLine } from "../lib/parse";
-import { mealCounts, planSeason, planWeek, pickOne, daysToExpiry, type PlanCtx } from "../lib/planner";
+import { mealCounts, planSeason, planWeek, pickOne, poolFor, weekFrame, daysToExpiry, type PlanCtx } from "../lib/planner";
 import { trimEvents, ev } from "../lib/predict";
 import type { PriceSel } from "../lib/pricing";
 import { eatersOf, portionsOf, slotPortions, coursePortions } from "../lib/household";
@@ -111,12 +111,12 @@ export async function generateWeek(s: StoreState): Promise<string | undefined> {
     if (!s.online) note = "Hors ligne : plats de la base utilisés.";
     else {
       try {
-        const N = mealCounts(s.settings).total;
+        const N = weekFrame(s.settings).filter((f) => f.meal !== "matin" && !f.light).length;
         fresh = await aiRecipes(s, Math.max(1, Math.min(14, Math.ceil((N - s.settings.mineN) * s.app.aiWeekShare))));
       } catch (e) { note = (e as Error).message || "IA indisponible : plats de la base utilisés."; }
     }
   }
-  const res = planWeek([...pool, ...fresh], planCtx(s), fresh);
+  const res = planWeek([...pool, ...fresh], planCtx(s), fresh, cookable(s.recipes.values()));
   if (!res.slots.length) throw new Error(res.warning);
   // Un accompagnement proposé d'office pour chaque plat où il est interchangeable (modifiable dans la fiche).
   const slots = assignSides(res.slots, s.recipes, s.idx);
@@ -140,15 +140,32 @@ export async function placeRecipe(s: StoreState, r: Recipe): Promise<number | nu
 export async function swapSlot(s: StoreState, k: number, useAi: boolean) {
   const slots = [...(s.week?.slots || [])];
   let r: Recipe | null = null;
-  if (useAi && s.online && s.app.features.ai) { try { r = (await aiRecipes(s, 1))[0] || null; } catch { r = null; } }
-  if (!r) r = pickOne(mains(s.recipes.values()), planCtx(s), new Set(slots.map((x) => x.recipeId)));
+  const sl = slots[k];
+  if (useAi && !sl.light && sl.meal !== "matin" && s.online && s.app.features.ai) { try { r = (await aiRecipes(s, 1))[0] || null; } catch { r = null; } }
+  if (!r) r = pickOne(poolFor(sl, cookable(s.recipes.values())), planCtx(s), new Set(slots.map((x) => x.recipeId)));
   if (!r) throw new Error("Aucun autre repas possible avec ces options.");
   slots[k] = { ...slots[k], recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false };
   await saveSlots(s, slots);
 }
 
 // ---------------- Restes, réception, frigo vide ----------------
-const sortSlots = (l: Slot[]) => l.sort((a, b) => a.day - b.day || (a.meal === b.meal ? 0 : a.meal === "midi" ? -1 : 1));
+const MEAL_RANK = { matin: 0, midi: 1, soir: 2 } as const;
+const sortSlots = (l: Slot[]) => l.sort((a, b) => a.day - b.day || MEAL_RANK[a.meal] - MEAL_RANK[b.meal]);
+
+/** Passe un repas de complet à léger (ou l'inverse) : un autre plat adapté est choisi, et le réglage est retenu pour les prochaines semaines. */
+export async function setSlotLight(s: StoreState, k: number, light: boolean) {
+  const slots = [...(s.week?.slots || [])];
+  const sl = slots[k];
+  if (!sl || sl.meal === "matin") return;
+  const r = pickOne(poolFor({ meal: sl.meal, light }, cookable(s.recipes.values())), planCtx(s), new Set(slots.map((x) => x.recipeId)));
+  if (!r) throw new Error(light ? "Aucun repas léger possible avec ces options." : "Aucun repas complet possible avec ces options.");
+  const { side: _side, ...rest } = sl;
+  slots[k] = { ...rest, light, recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false, leftovers: false };
+  await saveSlots(s, assignSides(slots, s.recipes, s.idx).map((x, i) => (i === k ? x : slots[i])));
+  const key = `${sl.day}-${sl.meal}`, cur = new Set(s.settings.lightSlots || []);
+  if (light) cur.add(key); else cur.delete(key);
+  await saveSettings(s.hid!, { lightSlots: [...cur] });
+}
 
 /** « Cuisiner aussi pour demain midi » : double la portion du soir et remplit le midi suivant avec les restes. */
 export async function toggleLeftovers(s: StoreState, k: number, on: boolean) {

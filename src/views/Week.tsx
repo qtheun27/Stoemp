@@ -136,7 +136,7 @@ export default function Week() {
                       return (
                         <div className={`meal${x.cooked ? " cooked" : ""}`} key={x.k}>
                           <button className="info" onClick={() => setOpen({ r, k: x.k })}>
-                            {list.length > 1 || mealCounts(s.settings).lunches > 0 ? <span className="slot">{x.meal}</span> : null}
+                            {list.length > 1 || mealCounts(s.settings).lunches > 0 || x.light ? <span className="slot">{x.meal === "matin" ? "déjeuner" : x.meal}{x.light ? " · léger" : ""}</span> : null}
                             <span className="name">{nameOf(r, x.veg)}{(() => { const side = x.side ? s.recipes.get(x.side)?.name.toLowerCase() : defaultSideLabel(r, s.idx); return side ? <span className="muted"> · {side}</span> : null; })()}</span>
                             {x.guests && <span className="tag ac" style={{ marginBottom: 4 }}>🎉 réception · {headcount(eaters) + x.guests.adults + x.guests.kids} pers.{x.courses?.length ? ` · ${x.courses.length + 1} services` : ""}</span>}
                             <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}{!x.fromLeftovers && r.source !== "pret" && !isVegRecipe(r) && vegP(x) > 0 && <span>🌱 {vegP(x)} part{vegP(x) > 1 ? "s" : ""} végé</span>}
