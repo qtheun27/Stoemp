@@ -1,0 +1,394 @@
+// Plats de base italiens réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@italienne
+## plat
+
+# Risotto aux asperges et lardons | 4 | 40 | P
+r
++ Riz arborio 320g; Asperges vertes 500g; Oignon 1pc; Bouillon de légumes 1100ml; Vin blanc 100ml; Beurre 40g; Parmesan 80g; Huile d'olive 2cs
+= Lardons 200g
+~ Petits pois 250g
+v Risotto asperges et petits pois
+- Couper les pointes des asperges et les blanchir 3 minutes ; tailler les tiges en rondelles et garder le bouillon frémissant.
+- Faire rissoler les lardons à sec et les réserver.
+- Faire fondre l'oignon haché dans l'huile, ajouter le riz et le nacrer 2 minutes, puis déglacer au vin blanc.
+- Ajouter le bouillon louche par louche pendant 18 minutes en remuant, avec les rondelles d'asperges à mi-cuisson.
+- Hors du feu, lier avec le beurre froid et le parmesan, ajouter pointes et lardons, couvrir 2 minutes et servir. Version végé : petits pois ajoutés 5 minutes avant la fin.
+
+# Tartines ricotta, asperges et jambon cru | 4 | 20 | P
+r
++ Pain de campagne 8pc; Ricotta 250g; Asperges vertes 400g; Roquette 80g; Citron 0.5pc; Huile d'olive 3cs; Parmesan 30g
+= Jambon cru 8pc
+~ Oeufs 4pc
+v Tartines ricotta, asperges et œuf mollet
+- Couper les asperges en deux dans la longueur et les griller 4 minutes à la poêle avec un filet d'huile, saler.
+- Assaisonner la ricotta du zeste de citron, de sel et de poivre.
+- Griller les tranches de pain et les tartiner généreusement de ricotta.
+- Poser les asperges, le jambon cru et quelques copeaux de parmesan.
+- Servir avec la roquette au jus de citron et à l'huile. Version végé : œuf mollet de 6 minutes coupé en deux.
+
+# Pâtes au pesto, tomates cerises et poulet | 4 | 20 | E
+r
++ Pâtes 360g; Pesto 120g; Tomates cerises 400g; Basilic 0.5pc; Huile d'olive 1cs; Parmesan 30g
+= Filet de poulet 450g
+~ Mozzarella 250g
+v Pâtes pesto, tomates cerises et mozzarella
+- Cuire les pâtes al dente en gardant une tasse d'eau de cuisson.
+- Saisir le poulet en lanières 6 minutes à l'huile, saler et poivrer.
+- Couper les tomates cerises en deux.
+- Mélanger les pâtes avec le pesto et un peu d'eau de cuisson pour l'assouplir, puis ajouter poulet et tomates.
+- Servir avec le basilic et le parmesan. Version végé : mozzarella déchirée à la place du poulet.
+
+# Risotto aux champignons et poulet | 4 | 40 | A
+r
++ Riz arborio 320g; Champignons de Paris 500g; Oignon 1pc; Ail 0.1pc; Bouillon de légumes 1100ml; Vin blanc 100ml; Beurre 40g; Parmesan 80g; Persil 0.25pc; Huile d'olive 2cs
+= Filet de poulet 400g
+~ Cerneaux de noix 60g
+v Risotto champignons et noix
+- Faire sauter à feu vif les champignons émincés avec l'ail, puis le poulet en dés ; réserver.
+- Faire fondre l'oignon dans l'huile, nacrer le riz 2 minutes et déglacer au vin blanc.
+- Ajouter le bouillon chaud louche par louche pendant 18 minutes en remuant.
+- Remettre champignons et poulet 3 minutes avant la fin.
+- Hors du feu, lier au beurre et au parmesan, parsemer de persil. Version végé : noix concassées et grillées.
+
+# Lasagnes bolognaise | 6 | 150 | A
+r
++ Feuilles de lasagne 360g; Tomates concassées 800g; Oignon 1pc; Carottes 150g; Céleri 100g; Ail 0.1pc; Vin rouge 150ml; Béchamel 600ml; Mozzarella 200g; Parmesan 60g; Huile d'olive 2cs
+= Haché de bœuf 600g
+~ Courge butternut 900g; Épinards frais 300g
+v Lasagnes butternut et épinards
+- Faire revenir oignon, carotte et céleri finement hachés 10 minutes à l'huile, ajouter l'ail.
+- Ajouter la viande et la faire colorer, déglacer au vin rouge, puis ajouter les tomates ; mijoter 1 heure à couvert.
+- Monter en couches dans un plat : sauce, feuilles, béchamel, mozzarella ; finir par béchamel et parmesan.
+- Cuire 40 minutes à 180 °C.
+- Laisser reposer 10 minutes avant de couper. Version végé : butternut rôtie en cubes et épinards tombés à la place de la viande.
+
+# Spaghetti bolognaise | 4 | 90 | T
+r
++ Spaghetti 360g; Tomates concassées 600g; Oignon 1pc; Carottes 100g; Céleri 80g; Ail 0.1pc; Vin rouge 100ml; Parmesan 50g; Huile d'olive 2cs
+= Haché de bœuf 400g
+~ Lentilles corail 200g
+v Spaghetti bolognaise aux lentilles
+- Faire revenir doucement oignon, carotte et céleri hachés fin 10 minutes à l'huile.
+- Ajouter l'ail et la viande, la faire bien colorer en l'émiettant, puis déglacer au vin.
+- Ajouter les tomates, saler, poivrer et mijoter 1 heure à feu doux à couvert.
+- Cuire les spaghetti al dente et les mélanger à la sauce avec un peu d'eau de cuisson.
+- Servir avec le parmesan. Version végé : lentilles corail cuites 20 minutes dans la sauce avec 300 ml d'eau.
+
+# Pâtes carbonara | 4 | 20 | T
+r
++ Spaghetti 400g; Oeufs 4pc; Pecorino 60g; Parmesan 40g; Poivre 2g
+= Lardons 200g
+~ Champignons de Paris 400g; Petits pois 150g
+v Carbonara champignons et petits pois
+- Cuire les pâtes dans une grande eau salée.
+- Faire rissoler les lardons (idéalement du guanciale) à sec jusqu'à ce qu'ils soient croustillants ; couper le feu.
+- Battre 2 œufs entiers et 2 jaunes avec les fromages râpés et beaucoup de poivre.
+- Verser les pâtes égouttées dans la poêle hors du feu, ajouter le mélange œufs-fromage et une louche d'eau de cuisson.
+- Remuer vivement jusqu'à obtenir une sauce crémeuse, sans jamais faire cuire l'œuf, et servir aussitôt. Version végé : champignons poêlés et petits pois.
+
+# Minestrone | 6 | 60 | T
+r
++ Courgettes 400g; Carottes 300g; Céleri 200g; Oignon 1pc; Pommes de terre 300g; Haricots blancs (boîte) 400g; Tomates concassées 400g; Petites pâtes 150g; Bouillon de légumes 1500ml; Parmesan 60g; Basilic 0.5pc; Huile d'olive 3cs
+- Faire revenir l'oignon, le céleri et les carottes en dés 10 minutes à l'huile d'olive.
+- Ajouter les pommes de terre, les tomates et le bouillon ; cuire 20 minutes.
+- Ajouter les courgettes et les haricots égouttés, cuire 10 minutes.
+- Ajouter les petites pâtes et cuire le temps indiqué sur le paquet.
+- Servir avec un filet d'huile, le basilic et le parmesan râpé.
+
+# Poulet cacciatore | 4 | 70 | AH
+r
++ Tomates concassées 600g; Champignons de Paris 300g; Oignon 1pc; Ail 0.2pc; Poivron 2pc; Olives noires 80g; Vin rouge 150ml; Romarin 0.25pc; Huile d'olive 3cs; Pâtes 360g
+= Cuisse de poulet 4pc
+~ Haricots blancs (boîte) 600g
+v Cacciatore aux haricots blancs
+- Dorer les cuisses de poulet à l'huile côté peau, les retourner et les réserver.
+- Faire revenir l'oignon, les poivrons et les champignons, puis l'ail et le romarin.
+- Déglacer au vin rouge, ajouter les tomates et les olives.
+- Remettre le poulet, couvrir et mijoter 40 minutes.
+- Servir avec les pâtes. Version végé : haricots blancs mijotés 20 minutes dans la sauce.
+
+# Pizza maison jambon-champignons | 4 | 40 | T
+r
++ Pâte à pizza 2pc; Sauce tomate 250ml; Mozzarella 250g; Champignons de Paris 250g; Origan 1g; Huile d'olive 2cs; Salade verte 1pc
+= Jambon 4pc
+~ Poivron 2pc
+v Pizza maison champignons-poivron
+- Préchauffer le four au plus chaud (250 °C), avec la plaque à l'intérieur.
+- Étaler les pâtes finement et les étaler de sauce tomate sans aller jusqu'au bord.
+- Garnir de champignons émincés, de jambon et de mozzarella égouttée.
+- Arroser d'huile, parsemer d'origan et cuire 10 à 12 minutes sur la plaque chaude.
+- Servir avec la salade. Version végé : poivrons en lanières.
+
+# Pâtes alla norma | 4 | 40 | E
+r
++ Pâtes courtes 360g; Aubergine 600g; Tomates concassées 500g; Ail 0.2pc; Ricotta 150g; Basilic 0.5pc; Huile d'olive 6cs; Piment 0.25pc
+- Couper les aubergines en cubes, les saler 15 minutes puis les sécher.
+- Les frire dans l'huile d'olive jusqu'à ce qu'elles soient bien dorées.
+- Faire revenir l'ail et le piment, ajouter les tomates et cuire 15 minutes ; ajouter la moitié des aubergines.
+- Cuire les pâtes al dente et les mélanger à la sauce.
+- Servir avec le reste des aubergines, la ricotta émiettée (idéalement salée) et le basilic.
+
+# Saltimbocca, polenta et épinards | 4 | 35 | T
+r
++ Polenta 280g; Épinards frais 400g; Parmesan 60g; Beurre 50g; Vin blanc 120ml; Ail 0.1pc
+= Escalope de veau 560g; Jambon cru 4pc
+~ Mozzarella 300g; Aubergine 400g
+v Aubergine grillée à la mozzarella, polenta et épinards
+- Aplatir les escalopes, poser sur chacune une tranche de jambon cru (et une feuille de sauge si possible) et fixer d'un pique.
+- Cuire la polenta dans 1,1 l d'eau salée en remuant, puis la lier avec 20 g de beurre et le parmesan.
+- Faire tomber les épinards avec l'ail dans un peu de beurre.
+- Cuire les escalopes 1 à 2 minutes par face dans le reste du beurre, côté jambon d'abord ; déglacer au vin blanc et réduire.
+- Servir nappé du jus avec la polenta et les épinards. Version végé : tranches d'aubergine grillées couvertes de mozzarella fondue.
+
+# Risotto à la milanaise et scampis | 4 | 40 | T
+r
++ Riz arborio 320g; Oignon 1pc; Bouillon de légumes 1100ml; Vin blanc 100ml; Safran 0.2g; Beurre 50g; Parmesan 80g; Ail 0.1pc; Persil 0.25pc
+= Scampis 400g
+~ Petits pois 300g
+v Risotto aux petits pois
+- Faire infuser le safran dans une louche de bouillon chaud.
+- Faire fondre l'oignon dans 20 g de beurre, nacrer le riz et déglacer au vin blanc.
+- Ajouter le bouillon louche par louche 18 minutes, le safran à mi-cuisson.
+- Saisir les scampis 2 minutes avec l'ail dans un peu de beurre, parsemer de persil.
+- Lier le risotto au beurre froid et au parmesan, servir avec les scampis par-dessus. Version végé : petits pois ajoutés 5 minutes avant la fin.
+
+# Gnocchi à la sauce tomate et mozzarella | 4 | 30 | T
+r
++ Gnocchi 750g; Tomates concassées 500g; Ail 0.1pc; Mozzarella 250g; Basilic 0.5pc; Huile d'olive 2cs; Parmesan 40g
+= Dés de jambon 150g
+~ Pois chiches (boîte) 300g
+v Gnocchi tomate, mozzarella et pois chiches
+- Faire revenir l'ail dans l'huile, ajouter les tomates, saler et cuire 15 minutes.
+- Pocher les gnocchi dans l'eau salée bouillante jusqu'à ce qu'ils remontent.
+- Les mélanger à la sauce avec le jambon et la moitié du basilic.
+- Verser dans un plat, couvrir de mozzarella en morceaux et de parmesan.
+- Gratiner 10 minutes à 220 °C (gnocchi alla sorrentina). Version végé : pois chiches.
+
+# Lasagnes aux épinards et ricotta | 6 | 70 | T
+r
++ Feuilles de lasagne 360g; Épinards frais 800g; Ricotta 400g; Oeufs 1pc; Béchamel 600ml; Mozzarella 200g; Parmesan 80g; Muscade 0.25cc; Ail 0.1pc
+- Faire tomber les épinards avec l'ail, les presser et les hacher.
+- Mélanger avec la ricotta, l'œuf, la moitié du parmesan, la muscade, sel et poivre.
+- Monter en couches : béchamel, feuilles, farce, mozzarella ; finir par la béchamel et le parmesan.
+- Cuire 40 minutes à 180 °C jusqu'à ce que le dessus soit doré.
+- Laisser reposer 10 minutes avant de servir.
+
+# Spaghetti aux scampis à l'ail | 4 | 20 | T
+r
++ Spaghetti 360g; Ail 0.3pc; Persil 0.5pc; Citron 1pc; Piment 0.5pc; Vin blanc 80ml; Huile d'olive 5cs
+= Scampis 500g
+~ Tomates cerises 400g; Haricots blancs (boîte) 400g
+v Spaghetti à l'ail, tomates cerises et haricots blancs
+- Cuire les spaghetti al dente en gardant une tasse d'eau de cuisson.
+- Chauffer doucement l'huile avec l'ail émincé et le piment sans les colorer.
+- Monter le feu, saisir les scampis 2 minutes et déglacer au vin blanc.
+- Ajouter les pâtes, le zeste et le jus de citron, un peu d'eau de cuisson et remuer pour lier.
+- Parsemer de persil et servir. Version végé : tomates cerises et haricots blancs sautés.
+
+# Pasta e fagioli | 4 | 45 | AH
+r
++ Petites pâtes 200g; Haricots rouges (boîte) 500g; Tomates concassées 400g; Carottes 150g; Céleri 100g; Oignon 1pc; Ail 0.1pc; Romarin 0.25pc; Bouillon de légumes 1000ml; Parmesan 60g; Huile d'olive 3cs
+- Faire revenir l'oignon, la carotte et le céleri hachés avec l'ail et le romarin.
+- Ajouter les tomates, la moitié des haricots et le bouillon ; cuire 15 minutes.
+- Mixer grossièrement une partie pour épaissir et ajouter le reste des haricots.
+- Cuire les pâtes directement dans la soupe jusqu'à ce qu'elles soient tendres.
+- Servir épais, avec un filet d'huile d'olive et le parmesan.
+
+# Polenta crémeuse, saucisse et champignons | 4 | 35 | AH
+r
++ Polenta 280g; Lait 400ml; Champignons de Paris 500g; Parmesan 80g; Beurre 40g; Ail 0.1pc; Romarin 0.25pc; Vin blanc 80ml
+= Saucisse 4pc
+~ Lentilles vertes 250g
+v Polenta crémeuse, champignons et lentilles
+- Porter le lait et 800 ml d'eau salée à ébullition, verser la polenta en pluie et cuire en remuant.
+- Lier avec la moitié du beurre et le parmesan : elle doit rester coulante.
+- Retirer la peau des saucisses et faire dorer la chair émiettée avec le romarin.
+- Ajouter les champignons et l'ail, faire sauter puis déglacer au vin blanc.
+- Servir la polenta surmontée de la poêlée. Version végé : lentilles cuites ajoutées aux champignons.
+
+# Tagliatelles au saumon | 4 | 20 | T
+r
++ Pâtes 360g; Crème liquide 250ml; Citron 1pc; Ciboulette 0.5pc; Échalote 1pc; Beurre 20g; Vin blanc 80ml
+= Pavé de saumon 450g
+~ Petits pois 300g; Ricotta 160g
+v Tagliatelles petits pois et ricotta citronnée
+- Cuire les tagliatelles al dente.
+- Faire fondre l'échalote dans le beurre, déglacer au vin blanc, ajouter la crème et le zeste de citron.
+- Ajouter le saumon en dés et le pocher 3 minutes dans la sauce.
+- Mélanger les pâtes avec la sauce et un trait de jus de citron.
+- Parsemer de ciboulette et servir. Version végé : petits pois dans la crème et ricotta citronnée.
+
+# Arancini et salade de roquette | 4 | 90 | T
+r
++ Riz arborio 320g; Bouillon de légumes 1000ml; Safran 0.1g; Parmesan 60g; Mozzarella 150g; Farine 60g; Oeufs 2pc; Chapelure 150g; Huile de tournesol 1000ml; Roquette 150g; Sauce tomate 250ml
+= Haché de bœuf 250g
+~ Petits pois 200g
+v Arancini aux petits pois
+- Cuire un risotto au safran avec le bouillon, le lier au parmesan et l'étaler pour le refroidir complètement.
+- Faire revenir la viande hachée dans un peu de sauce tomate jusqu'à ce qu'elle soit sèche.
+- Former des boules de riz, les creuser, y mettre la viande et un dé de mozzarella, puis refermer.
+- Les passer dans la farine, l'œuf battu et la chapelure, puis les frire 5 minutes à 175 °C.
+- Servir avec le reste de sauce tomate chaude et la roquette. Version végé : petits pois au cœur.
+
+# Escalope milanaise et spaghetti | 4 | 35 | T
+r
++ Spaghetti 360g; Sauce tomate 300ml; Farine 60g; Oeufs 2pc; Chapelure 120g; Parmesan 40g; Beurre 60g; Citron 1pc; Basilic 0.25pc
+= Escalope de veau 560g
+~ Aubergine 600g; Mozzarella 150g
+v Aubergine panée à la milanaise et spaghetti
+- Aplatir les escalopes, les passer dans la farine, l'œuf battu puis la chapelure mêlée au parmesan.
+- Cuire les spaghetti et réchauffer la sauce tomate avec le basilic.
+- Dorer les escalopes 2 à 3 minutes par face dans le beurre moussant.
+- Égoutter sur du papier absorbant et saler.
+- Servir avec les spaghetti à la tomate et des quartiers de citron. Version végé : tranches d'aubergine panées, couvertes de mozzarella.
+
+# Pâtes puttanesca | 4 | 25 | T
+r
++ Spaghetti 360g; Tomates concassées 600g; Olives noires 100g; Câpres 30g; Ail 0.2pc; Piment 0.5pc; Persil 0.25pc; Huile d'olive 3cs
+= Filets d'anchois 30g; Thon (boîte) 200g
+~ Haricots blancs (boîte) 400g
+v Pâtes puttanesca aux haricots blancs
+- Faire fondre les anchois dans l'huile chaude avec l'ail et le piment.
+- Ajouter les tomates, les olives et les câpres ; cuire 12 minutes.
+- Ajouter le thon émietté hors du feu.
+- Cuire les spaghetti al dente et les terminer 1 minute dans la sauce.
+- Parsemer de persil et servir. Version végé : haricots blancs à la place des anchois et du thon.
+
+# Risotto au potiron | 4 | 45 | AH
+r
++ Riz arborio 320g; Potiron 600g; Oignon 1pc; Bouillon de légumes 1100ml; Vin blanc 100ml; Beurre 40g; Parmesan 80g; Romarin 0.25pc; Huile d'olive 2cs
+= Lardons 160g
+~ Noix de cajou 60g; Fromage de chèvre 120g
+v Risotto au potiron, chèvre et noix de cajou
+- Rôtir la moitié du potiron en cubes 25 minutes à 200 °C avec le romarin et l'huile.
+- Faire fondre l'oignon, ajouter l'autre moitié du potiron râpé et le riz ; nacrer et déglacer au vin.
+- Ajouter le bouillon louche par louche 18 minutes : le potiron râpé fond et colore le riz.
+- Faire croustiller les lardons à sec.
+- Lier au beurre et au parmesan, garnir des cubes rôtis et des lardons. Version végé : chèvre émietté et noix de cajou grillées.
+
+# Pâtes aux champignons et à la crème | 4 | 25 | AH
+r
++ Pâtes 360g; Champignons de Paris 600g; Crème liquide 250ml; Ail 0.2pc; Échalote 1pc; Persil 0.25pc; Parmesan 60g; Beurre 20g
+= Blanc de poulet tranché 240g
+~ Noix de cajou 60g; Lentilles corail 120g
+v Pâtes champignons-crème, lentilles et cajou
+- Faire sauter les champignons émincés à feu vif dans le beurre jusqu'à ce qu'ils soient dorés.
+- Ajouter l'échalote et l'ail, puis la crème ; laisser réduire 5 minutes.
+- Ajouter le poulet en lanières pour le réchauffer.
+- Cuire les pâtes al dente et les mélanger à la sauce avec un peu d'eau de cuisson.
+- Servir avec le persil et le parmesan. Version végé : lentilles corail cuites et noix de cajou grillées.
+
+# Calzone et salade | 4 | 45 | T
+r
++ Pâte à pizza 2pc; Sauce tomate 250ml; Mozzarella 250g; Ricotta 150g; Origan 1g; Huile d'olive 2cs; Salade verte 1pc
+= Jambon 4pc
+~ Épinards frais 350g
+v Calzone ricotta-épinards
+- Préchauffer le four à 240 °C.
+- Étaler les pâtes en disques et étaler un peu de sauce tomate sur une moitié.
+- Garnir de ricotta, de jambon et de mozzarella, parsemer d'origan.
+- Replier, souder fermement les bords et badigeonner d'huile ; cuire 15 minutes.
+- Servir avec le reste de sauce chaude et la salade. Version végé : épinards tombés et bien pressés.
+
+# Gnocchi au pesto et haricots verts | 4 | 25 | EA
+r
++ Gnocchi 750g; Pesto 120g; Haricots verts 400g; Tomates cerises 300g; Parmesan 60g; Pignons de pin 30g
+= Dés de jambon 150g
+~ Pois chiches (boîte) 300g
+v Gnocchi au pesto, haricots verts et pois chiches
+- Cuire les haricots verts coupés en tronçons 6 minutes à l'eau salée.
+- Dans la même eau, pocher les gnocchi jusqu'à ce qu'ils remontent.
+- Griller les pignons à sec.
+- Mélanger gnocchi, haricots, pesto, tomates cerises coupées et jambon avec un peu d'eau de cuisson.
+- Servir avec le parmesan et les pignons. Version végé : pois chiches.
+
+# Pâtes au thon et tomate | 4 | 25 | T
+r
++ Pâtes courtes 360g; Tomates concassées 500g; Oignon 1pc; Ail 0.1pc; Câpres 20g; Origan 1g; Huile d'olive 3cs; Persil 0.25pc
+= Thon (boîte) 300g
+~ Pois chiches (boîte) 400g
+v Pâtes tomate et pois chiches
+- Faire fondre l'oignon et l'ail dans l'huile.
+- Ajouter les tomates, l'origan et les câpres ; cuire 15 minutes.
+- Ajouter le thon émietté et chauffer 2 minutes.
+- Cuire les pâtes al dente et les mélanger à la sauce.
+- Parsemer de persil et servir. Version végé : pois chiches.
+
+# Osso buco et polenta | 4 | 130 | AH
+r
++ Tomates concassées 500g; Carottes 200g; Céleri 150g; Oignon 1pc; Ail 0.2pc; Vin blanc 200ml; Bouillon de légumes 300ml; Farine 2cs; Citron 1pc; Persil 0.5pc; Beurre 30g; Polenta 280g; Parmesan 50g
+= Jarret de veau 1000g
+~ Haricots blancs (boîte) 600g; Champignons de Paris 300g
+v Ragoût de haricots blancs à la milanaise, polenta
+- Fariner les tranches de jarret et les dorer dans le beurre ; réserver.
+- Faire revenir oignon, carotte et céleri en petits dés, déglacer au vin blanc.
+- Ajouter les tomates et le bouillon, remettre la viande, couvrir et mijoter 1 h 30 à feu doux.
+- Préparer la gremolata : zeste de citron, ail et persil hachés finement.
+- Cuire la polenta, la lier au parmesan et servir avec l'osso buco parsemé de gremolata. Version végé : haricots blancs et champignons mijotés 25 minutes.
+
+# Pâtes all'arrabbiata | 4 | 25 | T
+r
++ Pâtes courtes 400g; Tomates concassées 600g; Ail 0.3pc; Piment 1pc; Huile d'olive 4cs; Parmesan 60g; Persil 0.25pc
+- Faire chauffer l'huile avec l'ail émincé et le piment haché sans laisser brunir l'ail.
+- Ajouter les tomates, saler et cuire 15 minutes jusqu'à ce que la sauce épaississe.
+- Cuire les penne al dente.
+- Les terminer 1 minute dans la sauce avec un peu d'eau de cuisson.
+- Servir avec le persil et le parmesan (ou du pecorino).
+
+# Spaghetti cacio e pepe | 4 | 20 | T
+r
++ Spaghetti 400g; Pecorino 120g; Parmesan 40g; Poivre 4g; Petits pois 250g
+- Cuire les spaghetti dans peu d'eau salée pour que l'eau soit bien chargée en amidon ; cuire les petits pois dans la même eau.
+- Concasser grossièrement le poivre et le torréfier 1 minute à sec dans une grande poêle.
+- Mélanger les fromages râpés finement avec un peu d'eau de cuisson tiède pour faire une crème.
+- Verser les pâtes égouttées dans la poêle hors du feu, ajouter la crème de fromage et remuer vivement en ajoutant de l'eau de cuisson.
+- Servir aussitôt, la sauce doit être lisse et nappante.
+
+# Parmigiana d'aubergines | 6 | 90 | EA
+r
++ Aubergine 1500g; Sauce tomate 700ml; Mozzarella 375g; Parmesan 120g; Basilic 1pc; Huile d'olive 8cs; Ail 0.1pc; Pain de campagne 1pc
+- Couper les aubergines en tranches d'un demi-centimètre dans la longueur, les saler 20 minutes et les sécher.
+- Les griller ou les frire à l'huile d'olive jusqu'à ce qu'elles soient dorées.
+- Faire cuire la sauce tomate 10 minutes avec l'ail.
+- Monter en couches dans un plat : sauce, aubergines, mozzarella, parmesan, basilic ; finir par la sauce et le parmesan.
+- Cuire 40 minutes à 180 °C, laisser reposer 15 minutes et servir avec le pain.
+
+# Pizza margherita maison | 4 | 35 | T
+r
++ Pâte à pizza 2pc; Sauce tomate 250ml; Mozzarella 320g; Basilic 0.5pc; Huile d'olive 3cs; Roquette 120g
+- Préchauffer le four au plus chaud avec la plaque à l'intérieur.
+- Égoutter la mozzarella et la déchirer en morceaux.
+- Étaler finement les pâtes et les couvrir de sauce tomate salée.
+- Garnir de mozzarella, arroser d'huile et cuire 10 à 12 minutes sur la plaque chaude.
+- Ajouter le basilic frais à la sortie du four et servir avec la roquette.
+
+# Ribollita (soupe toscane) | 6 | 70 | AH
+r
++ Haricots blancs (boîte) 800g; Chou vert 600g; Carottes 250g; Céleri 200g; Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Bouillon de légumes 1500ml; Pain de campagne 1pc; Parmesan 80g; Huile d'olive 5cs
+- Faire revenir oignon, carotte et céleri dans l'huile 10 minutes, puis l'ail.
+- Ajouter les tomates, le chou émincé (idéalement du cavolo nero), le bouillon et la moitié des haricots ; cuire 30 minutes.
+- Écraser le reste des haricots et l'ajouter pour épaissir.
+- Disposer des tranches de pain rassis dans les bols et verser la soupe épaisse par-dessus.
+- Arroser d'huile d'olive et servir avec le parmesan. Elle est encore meilleure réchauffée le lendemain.
+
+# Frittata de courgettes et salade | 4 | 30 | PE
+r
+l
++ Oeufs 10pc; Courgettes 500g; Oignon 1pc; Parmesan 80g; Basilic 0.25pc; Huile d'olive 3cs; Salade verte 1pc
+= Dés de jambon 150g
+~ Fromage de chèvre 150g
+v Frittata de courgettes au chèvre
+- Faire revenir l'oignon et les courgettes en fines rondelles 10 minutes à l'huile, saler.
+- Battre les œufs avec le parmesan, le basilic et du poivre.
+- Ajouter courgettes et jambon, verser dans une poêle huilée de 26 cm allant au four.
+- Cuire 5 minutes à feu doux, puis 10 minutes au four à 180 °C jusqu'à ce qu'elle soit prise.
+- Servir tiède en parts avec la salade. Version végé : chèvre émietté.
+
+# Pâtes aux courgettes, citron et ricotta | 4 | 25 | PE
+r
++ Pâtes 360g; Courgettes 600g; Ricotta 250g; Citron 1pc; Ail 0.1pc; Basilic 0.5pc; Parmesan 60g; Huile d'olive 4cs
+- Râper la moitié des courgettes et couper l'autre en demi-rondelles.
+- Faire sauter les courgettes avec l'ail dans l'huile 8 minutes, jusqu'à ce qu'elles fondent.
+- Mélanger la ricotta avec le zeste de citron, la moitié du parmesan et un peu d'eau de cuisson.
+- Cuire les pâtes al dente et les mélanger aux courgettes et à la crème de ricotta.
+- Servir avec le jus de citron, le basilic et le reste du parmesan.

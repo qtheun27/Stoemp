@@ -1,0 +1,280 @@
+// Plats de base méditerranéens réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@mediterraneenne
+## plat
+
+# Salade grecque et brochettes de porc | 4 | 40 | E
+r
++ Tomates 600g; Concombre 1pc; Oignon rouge 1pc; Poivron 1pc; Olives noires 120g; Origan 2g; Huile d'olive 6cs; Citron 1pc; Ail 0.1pc; Pain pita 4pc
+= Brochettes de porc 600g
+~ Feta 320g
+v Salade grecque à la feta
+- Mariner les brochettes 20 minutes avec 2 cuillères d'huile, le jus de citron, l'ail et la moitié de l'origan.
+- Couper tomates et concombre en gros morceaux, le poivron et l'oignon rouge en fines lanières.
+- Assaisonner la salade d'huile d'olive, de sel et d'origan, ajouter les olives.
+- Griller les brochettes 10 à 12 minutes en les retournant.
+- Servir avec la salade et les pitas tiédies. Version végé : un pavé de feta sur la salade, arrosé d'huile et d'origan.
+
+# Gaspacho et tartines au thon | 4 | 85 | E
+r
++ Tomates 1000g; Concombre 1pc; Poivron 1pc; Ail 0.1pc; Vinaigre 2cs; Huile d'olive 6cs; Pain de campagne 8pc; Mayonnaise 2cs; Citron 0.5pc; Ciboulette 0.25pc
+= Thon (boîte) 250g
+~ Houmous 200g
+v Gaspacho et tartines houmous
+- Mixer longuement les tomates, les trois quarts du concombre et du poivron, l'ail, le vinaigre et 4 cuillères d'huile.
+- Saler, passer au tamis si on le veut lisse et réfrigérer au moins 1 heure.
+- Mélanger le thon avec la mayonnaise, le jus de citron et la ciboulette.
+- Griller le pain et le tartiner de thon.
+- Servir le gaspacho bien froid garni du reste de concombre et de poivron en petits dés et d'un filet d'huile. Version végé : tartines de houmous.
+
+# Courgettes farcies ricotta et menthe | 4 | 55 | E
+r
++ Courgettes 1000g; Ricotta 280g; Parmesan 60g; Menthe 0.5pc; Oeufs 1pc; Citron 0.5pc; Ail 0.1pc; Riz 200g; Sauce tomate 300ml; Huile d'olive 3cs
+- Couper les courgettes en deux dans la longueur, les évider et hacher la chair.
+- Faire revenir la chair avec l'ail 5 minutes, puis la mélanger avec la ricotta, l'œuf, la moitié du parmesan, la menthe ciselée et le zeste de citron.
+- Farcir les courgettes, les ranger sur la sauce tomate et parsemer du reste de parmesan.
+- Cuire 30 minutes à 190 °C.
+- Servir avec le riz cuit et un filet d'huile d'olive.
+
+# Paëlla | 6 | 70 | T
+r
++ Riz rond 450g; Poivron 2pc; Petits pois 250g; Haricots verts 200g; Tomates concassées 300g; Oignon 1pc; Ail 0.2pc; Bouillon de volaille 1300ml; Paprika 2cc; Safran 0.3g; Citron 2pc; Huile d'olive 5cs
+= Cuisse de poulet 6pc; Scampis 400g; Chorizo 120g; Moules 600g
+~ Pois chiches (boîte) 700g
+v Paëlla de légumes aux pois chiches
+- Dorer les cuisses de poulet coupées en deux et le chorizo dans l'huile, dans une grande poêle à paëlla ; réserver.
+- Faire revenir l'oignon, le poivron et l'ail, puis les tomates et le paprika jusqu'à obtenir un sofrito confit.
+- Ajouter le riz, le nacrer, puis verser le bouillon chaud infusé au safran ; remettre le poulet et répartir les haricots.
+- Cuire 18 minutes sans remuer, en ajoutant petits pois, scampis et moules sur le dessus à mi-cuisson.
+- Laisser accrocher légèrement le fond (le socarrat), couvrir d'un linge 5 minutes et servir avec les citrons. Version végé : pois chiches et bouillon de légumes.
+
+# Moussaka | 6 | 120 | EA
+r
+l
++ Aubergine 1200g; Tomates concassées 500g; Oignon 2pc; Ail 0.2pc; Cannelle 1g; Vin rouge 100ml; Béchamel 500ml; Oeufs 1pc; Feta 120g; Huile d'olive 6cs; Origan 1g
+= Haché de bœuf 700g
+~ Lentilles vertes 400g
+v Moussaka aux lentilles
+- Couper les aubergines en tranches, les badigeonner d'huile et les rôtir 25 minutes à 200 °C.
+- Faire revenir oignon et ail, ajouter la viande (idéalement d'agneau) et la colorer, déglacer au vin.
+- Ajouter tomates, cannelle et origan ; mijoter 30 minutes jusqu'à ce que la sauce soit épaisse.
+- Monter en couches : aubergines, viande, aubergines ; napper de béchamel liée à l'œuf et parsemer de feta.
+- Cuire 45 minutes à 180 °C et laisser reposer 20 minutes avant de couper. Version végé : lentilles cuites 25 minutes dans la sauce tomate.
+
+# Souvlaki, tzatziki et pita | 4 | 40 | PE
+r
++ Pain pita 4pc; Yaourt grec 300g; Concombre 1pc; Ail 0.2pc; Aneth 0.25pc; Tomates 300g; Oignon rouge 1pc; Origan 2g; Citron 1pc; Huile d'olive 4cs; Pommes de terre 600g
+= Filet de porc 600g
+~ Halloumi 400g
+v Souvlaki d'halloumi, tzatziki et pita
+- Mariner le porc en cubes avec l'huile, le jus de citron, l'origan et l'ail 30 minutes.
+- Tzatziki : concombre râpé, salé et pressé, mélangé au yaourt, à l'ail et à l'aneth.
+- Couper les pommes de terre en frites et les rôtir 35 minutes à 220 °C avec un filet d'huile et de l'origan.
+- Griller les brochettes 10 minutes et les pitas 1 minute.
+- Garnir les pitas de viande, tzatziki, tomates et oignon rouge, avec les frites au four. Version végé : halloumi grillé.
+
+# Tortilla espagnole et salade | 4 | 50 | T
+r
++ Pommes de terre 800g; Oignon 2pc; Oeufs 8pc; Huile d'olive 200ml; Salade verte 1pc; Vinaigre 1cs
+= Chorizo 120g
+~ Poivron 2pc
+v Tortilla aux poivrons et salade
+- Couper les pommes de terre en fines lamelles et l'oignon en fines tranches.
+- Les confire 20 minutes à feu doux dans l'huile d'olive, sans les colorer ; égoutter (garder l'huile).
+- Battre les œufs avec du sel, y plonger les pommes de terre et le chorizo en dés, laisser reposer 10 minutes.
+- Cuire dans une poêle huilée 6 minutes à feu moyen, retourner à l'aide d'une assiette et cuire 3 minutes : le cœur reste moelleux.
+- Servir tiède avec la salade à la vinaigrette. Version végé : poivrons confits avec les pommes de terre.
+
+# Salade niçoise | 4 | 35 | E
+r
++ Haricots verts 300g; Pommes de terre grenaille 500g; Tomates 500g; Oeufs 4pc; Olives noires 80g; Salade verte 1pc; Oignon rouge 1pc; Huile d'olive 5cs; Vinaigre 2cs; Moutarde 1cc; Basilic 0.25pc
+= Thon (boîte) 320g; Filets d'anchois 30g
+~ Pois chiches (boîte) 400g
+v Salade niçoise aux pois chiches
+- Cuire les grenailles 20 minutes et les haricots verts 6 minutes, puis les refroidir.
+- Cuire les œufs 9 minutes, les écaler et les couper en quartiers.
+- Vinaigrette : moutarde, vinaigre, huile, sel et poivre.
+- Disposer la salade, les tomates en quartiers, les légumes, l'oignon émincé, les olives, le thon et les anchois.
+- Arroser de vinaigrette, poser les œufs et le basilic. Version végé : pois chiches.
+
+# Gambas à l'ail, riz au citron | 4 | 30 | T
+r
++ Riz 300g; Ail 0.4pc; Persil 0.5pc; Citron 2pc; Paprika 1cc; Piment 0.5pc; Huile d'olive 100ml; Vin blanc 60ml
+= Scampis 600g
+~ Pois chiches (boîte) 600g
+v Pois chiches à l'ail et au paprika, riz citronné
+- Cuire le riz avec le zeste d'un citron et une pincée de sel.
+- Chauffer doucement l'huile avec l'ail en lamelles et le piment dans une cassolette.
+- Monter le feu, ajouter les crevettes et le paprika, cuire 2 minutes en remuant.
+- Déglacer au vin blanc, ajouter le jus d'un citron et le persil.
+- Servir grésillant avec le riz et l'autre citron en quartiers (gambas al ajillo). Version végé : pois chiches dorés dans l'huile à l'ail.
+
+# Spanakopita (feuilleté épinards-feta) | 6 | 75 | T
+r
++ Pâte filo 400g; Épinards frais 1000g; Feta 400g; Oeufs 3pc; Oignons nouveaux 4pc; Aneth 0.5pc; Menthe 0.25pc; Beurre 100g; Muscade 0.25cc; Salade verte 1pc; Pain pita 3pc
+- Faire tomber les épinards, les presser très fortement et les hacher.
+- Mélanger avec la feta émiettée, les œufs, les oignons nouveaux, l'aneth, la menthe et la muscade.
+- Beurrer un plat, y étaler la moitié des feuilles de filo en les beurrant une à une.
+- Étaler la farce, couvrir du reste des feuilles beurrées et inciser le dessus en parts.
+- Cuire 45 minutes à 180 °C jusqu'à ce qu'il soit doré, et servir tiède avec la salade et les pitas.
+
+# Poulet au citron et pommes de terre grecques | 4 | 75 | T
+r
++ Pommes de terre 1000g; Citron 2pc; Ail 0.3pc; Origan 3g; Huile d'olive 6cs; Bouillon de volaille 250ml; Feta 80g; Salade verte 1pc
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 600g
+v Pommes de terre grecques, pois chiches et feta
+- Couper les pommes de terre en quartiers épais.
+- Les mélanger avec l'huile, le jus des citrons, l'ail, l'origan et le bouillon dans un grand plat.
+- Poser les cuisses dessus, côté peau vers le haut, saler et poivrer.
+- Rôtir 1 heure à 200 °C en arrosant deux fois : les pommes de terre boivent le jus citronné.
+- Parsemer de feta et servir avec la salade. Version végé : pois chiches ajoutés pour les 25 dernières minutes.
+
+# Gaspacho andalou et tartines | 4 | 145 | E
+r
++ Tomates 1000g; Concombre 1pc; Poivron 1pc; Ail 0.1pc; Pain de campagne 1pc; Vinaigre 3cs; Huile d'olive 8cs; Oignon 0.5pc
+= Jambon cru 4pc
+~ Fromage de chèvre 160g
+v Gaspacho et tartines au chèvre
+- Faire tremper une tranche de pain rassis dans un peu d'eau.
+- Mixer longuement tomates, concombre, poivron, ail, oignon, pain trempé et vinaigre, puis ajouter l'huile en filet.
+- Saler, passer et réfrigérer au moins 2 heures.
+- Griller des tranches de pain, les frotter d'ail et d'un filet d'huile, et les couvrir de jambon cru.
+- Servir le gaspacho glacé avec les tartines. Version végé : tartines de chèvre.
+
+# Boulettes à la grecque (keftedes) et riz | 4 | 50 | T
+r
++ Riz 300g; Yaourt grec 250g; Menthe 0.5pc; Persil 0.25pc; Oignon 1pc; Ail 0.1pc; Pain de mie 2pc; Oeufs 1pc; Origan 2g; Tomates 400g; Concombre 1pc; Citron 1pc; Huile d'olive 5cs
+= Haché de bœuf 550g
+~ Lentilles corail 250g; Feta 120g
+v Boulettes de lentilles-feta et riz
+- Mélanger la viande avec l'oignon râpé, l'ail, le pain trempé et pressé, l'œuf, la menthe, le persil, l'origan, sel et poivre.
+- Former des boulettes et les réfrigérer 15 minutes.
+- Les dorer à l'huile d'olive 10 minutes en les roulant.
+- Cuire le riz ; préparer une salade de tomates et concombre au citron.
+- Servir avec le yaourt mêlé d'un peu de menthe. Version végé : lentilles cuites et égouttées, écrasées avec la feta et un peu de chapelure de pain.
+
+# Patatas bravas et œufs | 4 | 50 | T
+r
++ Pommes de terre 1000g; Tomates concassées 300g; Paprika 2cc; Piment 0.5pc; Ail 0.2pc; Mayonnaise 4cs; Oeufs 8pc; Huile d'olive 6cs; Salade verte 1pc
+= Chorizo 120g
+~ Pois chiches (boîte) 300g
+v Patatas bravas, pois chiches et œufs
+- Couper les pommes de terre en cubes, les précuire 6 minutes à l'eau salée et les sécher.
+- Les rôtir 30 minutes à 220 °C avec l'huile jusqu'à ce qu'elles soient croustillantes.
+- Sauce brava : faire revenir l'ail, le paprika (idéalement fumé) et le piment, ajouter les tomates et réduire 10 minutes, puis mixer.
+- Faire dorer le chorizo en rondelles et cuire les œufs au plat.
+- Servir les pommes de terre nappées de sauce brava et de mayonnaise aillée, avec chorizo et œufs. Version végé : pois chiches rôtis avec les pommes de terre.
+
+# Salade de lentilles, feta et légumes | 4 | 35 | PEA
+r
++ Lentilles vertes 280g; Tomates cerises 300g; Concombre 1pc; Oignon rouge 1pc; Feta 160g; Persil 0.5pc; Menthe 0.25pc; Citron 1pc; Huile d'olive 5cs; Moutarde 1cc; Pain pita 4pc
+- Cuire les lentilles 20 minutes à l'eau non salée avec une feuille de laurier ; elles doivent rester fermes.
+- Les assaisonner encore tièdes de la vinaigrette citron-moutarde-huile, sel et poivre.
+- Ajouter tomates coupées, concombre en dés et oignon rouge émincé.
+- Ajouter la feta émiettée et les herbes ciselées.
+- Servir à température ambiante avec les pitas grillées.
+
+# Sardines grillées et salade de pommes de terre | 4 | 35 | E
+r
++ Pommes de terre grenaille 800g; Oignon rouge 1pc; Persil 0.5pc; Citron 2pc; Huile d'olive 5cs; Vinaigre 1cs; Salade verte 1pc; Ail 0.1pc
+= Sardines (boîte) 400g
+~ Oeufs 8pc
+v Salade de pommes de terre aux œufs
+- Cuire les grenailles 20 minutes et les couper en deux encore chaudes.
+- Les assaisonner d'huile, de vinaigre, d'oignon rouge émincé, de persil, sel et poivre.
+- Griller les sardines (fraîches de préférence, sinon en boîte égouttées) 2 à 3 minutes par face sur une plaque très chaude.
+- Les arroser d'huile à l'ail et de jus de citron.
+- Servir avec la salade de pommes de terre et la salade verte. Version végé : œufs mollets.
+
+# Brochettes de poulet mariné et taboulé | 4 | 45 | PE
+r
++ Boulgour 250g; Tomates 400g; Concombre 1pc; Persil 1pc; Menthe 0.5pc; Oignons nouveaux 3pc; Citron 3pc; Huile d'olive 7cs; Yaourt nature 200g; Ail 0.1pc; Paprika 1cc; Cumin 2g
+= Filet de poulet 600g
+~ Halloumi 400g; Courgettes 300g
+v Brochettes halloumi-courgette et taboulé
+- Mariner le poulet en cubes avec la moitié du yaourt, l'ail, le paprika, le cumin et le jus d'un citron, 30 minutes.
+- Couvrir le boulgour d'eau bouillante salée et laisser gonfler 15 minutes, puis l'égrener.
+- Hacher très finement le persil et la menthe, couper tomates et concombre en petits dés.
+- Mélanger au boulgour avec le jus de deux citrons et l'huile : le taboulé doit être vert et herbacé.
+- Griller les brochettes 10 minutes et servir avec le taboulé et le reste du yaourt. Version végé : halloumi et courgettes en cubes.
+
+# Bacalhau à brás | 4 | 40 | T
+r
++ Pommes de terre 600g; Huile de tournesol 500ml; Oeufs 6pc; Oignon 2pc; Ail 0.1pc; Olives noires 80g; Persil 0.5pc; Huile d'olive 3cs; Salade verte 1pc
+= Dos de cabillaud 450g
+~ Pois chiches (boîte) 400g
+v Brás aux pois chiches
+- Pocher le cabillaud (idéalement de la morue dessalée) 8 minutes et l'effeuiller.
+- Couper les pommes de terre en très fines allumettes et les frire jusqu'à ce qu'elles soient dorées.
+- Faire fondre lentement les oignons émincés et l'ail dans l'huile d'olive.
+- Ajouter le poisson et les allumettes, puis les œufs battus ; remuer à feu doux jusqu'à ce qu'ils soient crémeux.
+- Parsemer d'olives et de persil, servir avec la salade. Version végé : pois chiches écrasés grossièrement.
+
+# Pastitsio | 6 | 90 | AH
+r
++ Pâtes courtes 450g; Tomates concassées 500g; Oignon 1pc; Ail 0.1pc; Cannelle 1g; Vin rouge 100ml; Béchamel 700ml; Oeufs 2pc; Feta 120g; Parmesan 60g; Huile d'olive 3cs
+= Haché de bœuf 700g
+~ Lentilles vertes 400g
+v Pastitsio aux lentilles
+- Faire revenir l'oignon et l'ail, ajouter la viande et la colorer, déglacer au vin.
+- Ajouter les tomates et la cannelle ; mijoter 25 minutes.
+- Cuire les pâtes (idéalement des macaronis longs), les égoutter et les mélanger à un œuf battu et à la moitié du parmesan.
+- Monter : la moitié des pâtes, la viande, le reste des pâtes ; napper de béchamel liée au second œuf et parsemer de feta et de parmesan.
+- Cuire 45 minutes à 180 °C et laisser reposer 15 minutes avant de couper. Version végé : lentilles mijotées dans la sauce.
+
+# Gemista (légumes farcis au riz) | 4 | 90 | E
+r
++ Grosses tomates 4pc; Poivron 4pc; Riz 200g; Oignon 1pc; Ail 0.1pc; Menthe 0.5pc; Persil 0.5pc; Pommes de terre 600g; Feta 120g; Huile d'olive 8cs; Concentré de tomate 1cs
+- Couper un chapeau aux tomates et aux poivrons, les évider et mixer la pulpe des tomates.
+- Faire fondre l'oignon et l'ail dans l'huile, ajouter le riz cru, la pulpe, le concentré, les herbes, sel et poivre ; cuire 5 minutes.
+- Remplir les légumes aux trois quarts (le riz gonfle) et reposer les chapeaux.
+- Caler les pommes de terre en quartiers entre les légumes, arroser d'huile et de 200 ml d'eau.
+- Cuire 1 heure à 180 °C et servir tiède avec la feta.
+
+# Fabada asturiana | 4 | 70 | AH
+r
++ Haricots blancs (boîte) 800g; Oignon 1pc; Paprika 2cc; Ail 0.2pc; Safran 0.1g; Feuille de laurier 0.4g; Bouillon de volaille 700ml; Pain de campagne 1pc; Huile d'olive 2cs
+= Chorizo 160g; Lardons 160g; Saucisse fumée 2pc
+~ Tofu fumé 400g
+v Fabada au tofu fumé
+- Faire revenir l'oignon et l'ail dans l'huile, ajouter le paprika et le laurier.
+- Ajouter chorizo, lardons et saucisse en tronçons, puis le bouillon au safran.
+- Mijoter 30 minutes pour que les charcuteries parfument le bouillon.
+- Ajouter les haricots égouttés et mijoter 20 minutes en écrasant quelques haricots pour épaissir.
+- Servir bien chaud avec le pain. Version végé : tofu fumé et bouillon de légumes.
+
+# Caldo verde | 4 | 45 | AH
+r
++ Pommes de terre 800g; Chou vert 400g; Oignon 1pc; Ail 0.2pc; Bouillon de légumes 1500ml; Huile d'olive 5cs; Pain de campagne 0.5pc
+= Chorizo 160g
+~ Haricots blancs (boîte) 400g
+v Caldo verde aux haricots blancs
+- Faire revenir l'oignon et l'ail dans 2 cuillères d'huile, ajouter les pommes de terre en morceaux et le bouillon ; cuire 20 minutes.
+- Mixer finement pour obtenir une base veloutée.
+- Couper le chou en très fines lanières, comme des cheveux.
+- Ajouter le chou et le chorizo en rondelles, cuire 5 minutes : le chou doit rester vert vif.
+- Servir avec un filet d'huile d'olive et le pain. Version végé : haricots blancs ajoutés avec le chou.
+
+# Stifado de bœuf | 4 | 170 | AH
+r
++ Échalote 12pc; Tomates concassées 400g; Concentré de tomate 1cs; Vin rouge 250ml; Cannelle 1g; Clous de girofle 0.3g; Feuille de laurier 0.4g; Vinaigre 2cs; Ail 0.2pc; Huile d'olive 4cs; Pommes de terre 800g
+= Bœuf à braiser 800g
+~ Haricots blancs (boîte) 600g; Champignons de Paris 400g
+v Stifado de haricots et champignons
+- Dorer le bœuf en gros cubes dans l'huile ; réserver.
+- Faire dorer les échalotes entières épluchées, puis ajouter l'ail et le concentré.
+- Déglacer au vin et au vinaigre, ajouter les tomates, la cannelle, le girofle et le laurier.
+- Remettre la viande, couvrir et mijoter 2 h 15 à feu très doux jusqu'à ce que la sauce soit épaisse et brillante.
+- Servir avec les pommes de terre vapeur. Version végé : haricots et champignons mijotés 40 minutes.
+
+# Pollo al ajillo | 4 | 55 | T
+r
++ Ail 1pc; Vin blanc 200ml; Persil 0.5pc; Pommes de terre 1000g; Paprika 1cc; Huile d'olive 6cs; Feuille de laurier 0.2g; Thym 0.1pc
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 600g; Champignons de Paris 350g
+v Pois chiches et champignons al ajillo
+- Couper les cuisses en morceaux, les saler et les dorer lentement dans l'huile avec les gousses d'ail entières écrasées.
+- Ajouter le laurier, le thym et le paprika, puis le vin blanc ; couvrir et cuire 30 minutes.
+- Pendant ce temps, couper les pommes de terre en cubes et les faire rissoler à l'huile d'olive.
+- Découvrir le poulet et laisser réduire jusqu'à ce que la sauce nappe.
+- Parsemer de persil et servir avec les pommes de terre. Version végé : pois chiches et champignons, 15 minutes de cuisson.

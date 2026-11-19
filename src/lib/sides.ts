@@ -16,7 +16,8 @@ const FAMILY: [SideFamily, RegExp][] = [
   ["pain", /^pain( de campagne| gris| pita)?$|^baguette|^pistolets?$|^naan|^chapati/],
 ];
 /** Plats dont le féculent EST le plat (on ne le remplace pas). */
-const CORE = /pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado/;
+// Un plat qui nomme son accompagnement (« moules-frites », « … et purée ») le garde.
+const CORE = /frites|puree|pommes vapeur|pommes de terre|grenailles|semoule|polenta|pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado/;
 
 const familyOf = (name: string): SideFamily | null => FAMILY.find(([, re]) => re.test(norm(name)))?.[0] ?? null;
 

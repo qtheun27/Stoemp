@@ -1,0 +1,246 @@
+// Plats de base latino-américains réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@latino
+## plat
+
+# Wraps poulet, maïs et avocat | 4 | 25 | E
+r
++ Tortillas 8pc; Avocat 2pc; Maïs (boîte) 200g; Salade verte 1pc; Tomates 300g; Citron vert 1pc; Yaourt nature 150g; Épices fajitas 10g; Coriandre 0.25pc; Huile de tournesol 1cs
+= Filet de poulet 450g
+~ Haricots rouges (boîte) 400g
+v Wraps haricots rouges, maïs et avocat
+- Enrober le poulet en lanières d'épices et le saisir 6 minutes à la poêle.
+- Écraser les avocats avec le jus du citron vert, sel et coriandre.
+- Mélanger le yaourt avec une pincée d'épices.
+- Tiédir les tortillas 20 secondes à la poêle sèche.
+- Garnir d'avocat, salade, tomates en dés, maïs et poulet, napper de yaourt et rouler serré. Version végé : haricots rouges réchauffés avec les épices.
+
+# Chili con carne | 6 | 100 | AH
+r
++ Haricots rouges (boîte) 800g; Tomates concassées 800g; Concentré de tomate 2cs; Oignon 2pc; Ail 0.2pc; Poivron 2pc; Épices chili 15g; Cumin 3g; Origan 1g; Chocolat noir 15g; Riz 450g; Crème fraîche 150ml; Huile de tournesol 2cs
+= Haché de bœuf 700g
+~ Maïs (boîte) 300g; Lentilles corail 200g
+v Chili sin carne
+- Faire revenir les oignons et les poivrons en dés dans l'huile 8 minutes, puis l'ail.
+- Ajouter la viande et la faire bien colorer, puis les épices chili, le cumin et l'origan 1 minute.
+- Ajouter les tomates, le concentré et 200 ml d'eau ; mijoter 45 minutes à feu doux.
+- Ajouter les haricots et le carré de chocolat (il arrondit l'amertume) et cuire 15 minutes.
+- Servir sur le riz avec une cuillère de crème. Version végé : lentilles corail et maïs, 25 minutes de cuisson.
+
+# Fajitas au poulet | 4 | 30 | T
+r
++ Tortillas 8pc; Poivron 3pc; Oignon 2pc; Crème fraîche 150ml; Épices fajitas 15g; Citron vert 1pc; Avocat 2pc; Tomates 200g; Coriandre 0.25pc; Huile de tournesol 3cs; Cheddar 100g
+= Filet de poulet 500g
+~ Haricots rouges (boîte) 400g
+v Fajitas aux haricots rouges
+- Mariner le poulet en lanières avec la moitié des épices, le jus du citron vert et 1 cuillère d'huile.
+- Préparer un guacamole rapide : avocats écrasés, tomate en dés, coriandre, sel.
+- Saisir les poivrons et oignons en lanières à feu très vif avec le reste des épices : ils doivent rester croquants et grillés.
+- Saisir le poulet dans la même poêle 5 minutes.
+- Servir grésillant avec les tortillas chaudes, la crème, le guacamole et le fromage râpé. Version végé : haricots rouges sautés avec les poivrons.
+
+# Quesadillas jambon-fromage | 4 | 25 | T
+r
++ Tortillas 8pc; Cheddar 200g; Tomates 300g; Oignon rouge 1pc; Citron vert 1pc; Coriandre 0.25pc; Crème fraîche 100ml; Salade verte 1pc; Piment 0.25pc
+= Jambon 4pc
+~ Haricots rouges (boîte) 250g; Maïs (boîte) 150g
+v Quesadillas haricots, maïs et fromage
+- Préparer une salsa : tomates et oignon rouge en petits dés, coriandre, piment, jus de citron vert et sel.
+- Couvrir 4 tortillas de fromage râpé et de jambon, refermer avec les autres.
+- Cuire à sec dans une poêle 2 à 3 minutes par face, en appuyant, jusqu'à ce que le fromage file.
+- Couper en quartiers.
+- Servir avec la salsa, la crème et la salade. Version végé : haricots écrasés et maïs.
+
+# Tacos de bœuf | 4 | 35 | T
+r
++ Tortillas 12pc; Tomates 300g; Oignon rouge 1pc; Coriandre 0.5pc; Citron vert 2pc; Avocat 2pc; Épices fajitas 15g; Chou rouge 200g; Crème fraîche 100ml; Huile de tournesol 1cs; Riz 200g
+= Haché de bœuf 500g
+~ Haricots rouges (boîte) 600g
+v Tacos aux haricots rouges
+- Cuire le riz à l'eau salée selon le paquet.
+- Faire dorer la viande en l'émiettant, ajouter les épices et un peu d'eau ; cuire jusqu'à ce que ce soit sec.
+- Préparer une salsa de tomates, oignon rouge, coriandre et citron vert ; émincer finement le chou.
+- Tiédir les tortillas à sec.
+- Garnir de viande, chou, salsa, avocat en tranches et crème ; servir avec le riz et des quartiers de citron vert. Version végé : haricots rouges écrasés aux épices.
+
+# Burritos au chili sin carne | 4 | 40 | T
+r
++ Tortillas 8pc; Haricots rouges (boîte) 500g; Riz 200g; Maïs (boîte) 150g; Tomates concassées 300g; Oignon 1pc; Poivron 1pc; Ail 0.1pc; Cheddar 120g; Épices chili 10g; Crème fraîche 100ml; Citron vert 1pc; Salade verte 1pc
+- Cuire le riz et l'assaisonner du zeste et du jus de citron vert.
+- Faire revenir l'oignon, le poivron et l'ail, ajouter les épices, les tomates, les haricots et le maïs ; mijoter 15 minutes jusqu'à ce que ce soit épais.
+- Garnir chaque tortilla de riz, de chili, de fromage et de crème.
+- Replier les côtés et rouler serré, puis dorer 2 minutes par face à la poêle.
+- Servir avec la salade.
+
+# Enchiladas au poulet | 4 | 50 | T
+r
++ Tortillas 8pc; Sauce tomate 500ml; Haricots rouges (boîte) 250g; Cheddar 160g; Épices chili 10g; Crème fraîche 100ml; Oignon 1pc; Ail 0.1pc; Coriandre 0.25pc; Huile de tournesol 1cs; Salade verte 1pc
+= Filet de poulet 500g
+~ Patate douce 500g
+v Enchiladas patate douce et haricots
+- Pocher le poulet 15 minutes et l'effilocher.
+- Faire revenir l'oignon et l'ail, ajouter les épices et la sauce tomate ; cuire 10 minutes.
+- Mélanger le poulet, les haricots et un tiers de la sauce.
+- Garnir et rouler les tortillas, les ranger dans un plat, napper du reste de sauce et couvrir de fromage.
+- Gratiner 20 minutes à 200 °C et servir avec la crème, la coriandre et la salade. Version végé : patate douce en cubes rôtie 25 minutes.
+
+# Bowl mexicain | 4 | 35 | T
+r
++ Riz 240g; Haricots noirs (boîte) 400g; Maïs (boîte) 200g; Avocat 2pc; Tomates cerises 300g; Oignon rouge 1pc; Citron vert 2pc; Coriandre 0.5pc; Épices fajitas 10g; Yaourt nature 150g; Piment 0.25pc; Huile de tournesol 1cs
+= Filet de poulet 450g
+~ Oeufs 4pc
+v Bowl mexicain à l'œuf
+- Cuire le riz et l'assaisonner de citron vert et de coriandre.
+- Saisir le poulet en lanières avec les épices.
+- Réchauffer les haricots noirs et griller le maïs à sec dans une poêle pour qu'il caramélise.
+- Préparer une salsa de tomates cerises, oignon rouge, piment et citron vert ; trancher les avocats.
+- Dresser en bols, chaque garniture en quartiers, avec une sauce yaourt-citron vert. Version végé : œuf au plat.
+
+# Chili de patate douce | 4 | 55 | AH
+r
++ Patate douce 700g; Haricots rouges (boîte) 500g; Tomates concassées 500g; Oignon 1pc; Ail 0.2pc; Poivron 1pc; Épices chili 12g; Cumin 3g; Riz 240g; Crème fraîche 100ml; Citron vert 1pc; Coriandre 0.25pc; Huile de tournesol 2cs
+- Faire revenir l'oignon, l'ail et le poivron, puis les épices.
+- Ajouter les patates douces en cubes, les tomates et 300 ml d'eau ; cuire 20 minutes.
+- Ajouter les haricots et cuire 10 minutes jusqu'à ce que les patates douces commencent à se défaire.
+- Cuire le riz à l'eau salée selon le paquet.
+- Servir avec la crème, la coriandre et un trait de citron vert.
+
+# Empanadas et salade | 4 | 70 | T
+r
++ Pâte brisée 2pc; Oignon 2pc; Poivron 1pc; Olives vertes 60g; Oeufs 3pc; Paprika 2cc; Cumin 2g; Raisins secs 30g; Salade verte 1pc; Huile de tournesol 2cs
+= Haché de bœuf 400g
+~ Lentilles vertes 250g
+v Empanadas aux lentilles
+- Faire fondre les oignons et le poivron, ajouter la viande, le paprika et le cumin ; cuire jusqu'à ce que ce soit sec et laisser refroidir.
+- Ajouter 2 œufs durs hachés, les olives et les raisins secs (à l'argentine).
+- Découper des disques de 12 cm dans la pâte, garnir et refermer en chaussons en torsadant le bord.
+- Dorer au jaune d'œuf battu et cuire 25 minutes à 200 °C.
+- Servir chaud ou tiède avec la salade. Version végé : lentilles cuites et bien égouttées.
+
+# Ceviche de cabillaud et riz | 4 | 40 | E
+r
++ Citron vert 6pc; Oignon rouge 1pc; Coriandre 0.5pc; Piment 0.5pc; Avocat 2pc; Riz 240g; Maïs (boîte) 150g; Patate douce 400g; Huile d'olive 2cs
+= Dos de cabillaud 500g
+~ Pois chiches (boîte) 500g
+v Salade de pois chiches au citron vert
+- Couper le poisson très frais en dés d'1,5 cm et l'oignon rouge en très fines lamelles rincées à l'eau froide.
+- Couvrir le poisson de jus de citron vert avec le piment haché et du sel ; laisser « cuire » 15 minutes au frais : il devient opaque.
+- Cuire le riz et la patate douce en rondelles à l'eau.
+- Ajouter l'oignon, la coriandre, le maïs et l'huile au poisson.
+- Servir aussitôt avec l'avocat, la patate douce et le riz, comme au Pérou. Version végé : pois chiches marinés au citron vert.
+
+# Arroz con pollo | 4 | 60 | T
+r
++ Riz 320g; Poivron 2pc; Petits pois 200g; Tomates concassées 300g; Oignon 1pc; Ail 0.2pc; Paprika 2cc; Cumin 2g; Safran 0.1g; Bouillon de volaille 900ml; Olives vertes 60g; Coriandre 0.25pc; Huile d'olive 3cs
+= Cuisse de poulet 4pc
+~ Haricots rouges (boîte) 600g
+v Arroz aux haricots rouges
+- Dorer les cuisses dans l'huile et les réserver.
+- Faire revenir l'oignon, le poivron et l'ail, ajouter les tomates, le paprika et le cumin.
+- Ajouter le riz, le nacrer, puis le bouillon chaud au safran ; remettre le poulet.
+- Couvrir et cuire 25 minutes à feu doux, petits pois et olives ajoutés 10 minutes avant la fin.
+- Laisser reposer 5 minutes et parsemer de coriandre. Version végé : haricots rouges et bouillon de légumes.
+
+# Fajitas de bœuf | 4 | 30 | T
+r
++ Tortillas 8pc; Poivron 3pc; Oignon rouge 2pc; Épices fajitas 15g; Crème fraîche 120ml; Avocat 2pc; Citron vert 2pc; Ail 0.1pc; Coriandre 0.25pc; Huile de tournesol 3cs; Tomates 200g
+= Steak de bœuf 550g
+~ Haricots rouges (boîte) 600g
+v Fajitas aux haricots rouges
+- Mariner le bœuf en fines lanières avec l'ail, le jus d'un citron vert, la moitié des épices et 1 cuillère d'huile, 20 minutes.
+- Écraser les avocats avec la tomate, la coriandre et le jus du second citron vert.
+- Saisir poivrons et oignons à feu très vif avec le reste des épices.
+- Saisir le bœuf 2 minutes seulement, en deux fois, pour qu'il reste rosé.
+- Servir dans la poêle avec les tortillas chaudes, le guacamole et la crème. Version végé : haricots rouges.
+
+# Huevos rancheros | 4 | 30 | T
+r
++ Oeufs 8pc; Tortillas 8pc; Haricots rouges (boîte) 400g; Tomates concassées 400g; Oignon 1pc; Ail 0.1pc; Piment 0.5pc; Cumin 2g; Avocat 2pc; Coriandre 0.25pc; Feta 100g; Huile de tournesol 3cs
+- Sauce ranchera : faire revenir l'oignon, l'ail et le piment, ajouter les tomates et le cumin ; cuire 10 minutes.
+- Réchauffer les haricots et les écraser grossièrement avec une louche de sauce.
+- Dorer légèrement les tortillas à la poêle dans un peu d'huile.
+- Cuire les œufs au plat.
+- Dresser : tortillas, haricots, œufs, sauce ranchera, avocat, feta émiettée (à la place du queso fresco) et coriandre.
+
+# Tacos de poisson et chou croquant | 4 | 35 | PE
+r
++ Tortillas 12pc; Chou rouge 300g; Citron vert 2pc; Yaourt nature 150g; Mayonnaise 2cs; Coriandre 0.25pc; Paprika 2cc; Cumin 2g; Farine 50g; Avocat 1pc; Huile de tournesol 4cs; Piment 0.25pc; Riz 200g
+= Dos de cabillaud 550g
+~ Haricots rouges (boîte) 500g; Avocat 1pc
+v Tacos haricots-avocat et chou croquant
+- Émincer finement le chou rouge et le mélanger au jus d'un citron vert et au sel ; le laisser 15 minutes pour qu'il s'attendrisse.
+- Sauce : yaourt, mayonnaise, piment haché et jus du second citron vert.
+- Couper le poisson en bâtonnets, les rouler dans la farine mêlée au paprika et au cumin, puis les dorer 3 minutes dans l'huile.
+- Cuire le riz et tiédir les tortillas.
+- Garnir de chou, de poisson, de sauce, d'avocat et de coriandre ; servir avec le riz. Version végé : haricots rouges écrasés et avocat.
+
+# Feijoada | 6 | 120 | AH
+r
++ Haricots noirs (boîte) 1200g; Oignon 2pc; Ail 0.3pc; Feuille de laurier 0.4g; Riz 400g; Oranges 300g; Chou vert 400g; Huile d'olive 3cs; Chapelure 60g; Beurre 30g
+= Saucisse fumée 3pc; Lardons 200g; Filet de porc 500g
+~ Tofu fumé 600g
+v Feijoada au tofu fumé
+- Faire rissoler les lardons, puis dorer le porc en cubes et la saucisse en tronçons.
+- Ajouter oignons et ail, puis les haricots noirs avec leur jus, le laurier et 500 ml d'eau ; mijoter 1 h 15 à couvert.
+- Écraser une louche de haricots pour épaissir la sauce.
+- Faire sauter le chou en très fines lanières à l'ail et préparer la farofa (chapelure dorée au beurre, à défaut de farine de manioc).
+- Servir avec le riz, le chou, la farofa et des quartiers d'orange, comme au Brésil. Version végé : tofu fumé, 30 minutes de mijotage.
+
+# Lomo saltado | 4 | 40 | T
+r
++ Oignon rouge 2pc; Tomates 400g; Sauce soja 4cs; Vinaigre 2cs; Ail 0.2pc; Cumin 1g; Piment 0.5pc; Frites surgelées 600g; Riz 240g; Coriandre 0.5pc; Huile de tournesol 3cs
+= Steak de bœuf 550g
+~ Tofu ferme 500g
+v Saltado de tofu
+- Cuire les frites au four et le riz.
+- Saisir le bœuf en lanières au wok très chaud, en deux fois, 1 minute par fournée ; réserver.
+- Sauter l'oignon rouge en quartiers, l'ail, le piment et le cumin 2 minutes.
+- Ajouter les tomates en quartiers, la sauce soja et le vinaigre ; remettre la viande 30 secondes.
+- Mélanger avec les frites au dernier moment, parsemer de coriandre et servir avec le riz, à la péruvienne. Version végé : tofu doré.
+
+# Tinga de poulet et tostadas | 4 | 50 | T
+r
++ Tortillas 8pc; Tomates concassées 500g; Oignon 2pc; Ail 0.2pc; Épices chili 10g; Origan 1g; Haricots rouges (boîte) 400g; Crème fraîche 120ml; Avocat 2pc; Salade verte 1pc; Feta 80g; Huile de tournesol 4cs
+= Filet de poulet 550g
+~ Patate douce 600g
+v Tinga de patate douce
+- Pocher le poulet 15 minutes et l'effilocher.
+- Faire fondre les oignons émincés, ajouter l'ail, les épices (idéalement du chipotle) et l'origan, puis les tomates ; cuire 10 minutes et mixer à moitié.
+- Ajouter le poulet et mijoter 10 minutes jusqu'à ce que ce soit nappé.
+- Frire ou cuire au four les tortillas jusqu'à ce qu'elles soient croustillantes (tostadas) ; réchauffer et écraser les haricots.
+- Tartiner les tostadas de haricots, garnir de tinga, de salade, d'avocat, de crème et de feta. Version végé : patate douce rôtie en cubes.
+
+# Tacos al pastor | 4 | 45 | T
+r
++ Tortillas 12pc; Oignon rouge 1pc; Coriandre 0.5pc; Citron vert 2pc; Épices fajitas 15g; Oranges 150g; Ail 0.2pc; Vinaigre 2cs; Concentré de tomate 1cs; Origan 1g; Mangue 1pc; Huile de tournesol 2cs; Riz 200g
+= Filet de porc 600g
+~ Tofu ferme 500g; Champignons de Paris 250g
+v Tacos al pastor au tofu et champignons
+- Marinade : jus d'orange, ail, vinaigre, concentré de tomate, épices et origan.
+- Trancher le porc très finement et le mariner au moins 30 minutes.
+- Le saisir par petites quantités dans une poêle très chaude jusqu'à ce qu'il caramélise, puis le hacher grossièrement.
+- Faire griller la mangue en dés (à la place de l'ananas) et cuire le riz.
+- Garnir les tortillas chaudes de porc, mangue, oignon rouge, coriandre et citron vert. Version végé : tofu et champignons émincés, même marinade.
+
+# Nachos gratinés et guacamole | 4 | 30 | T
+r
++ Chips 300g; Haricots rouges (boîte) 400g; Cheddar 250g; Tomates 300g; Avocat 3pc; Citron vert 1pc; Crème fraîche 150ml; Oignon rouge 1pc; Coriandre 0.25pc; Piment 0.5pc; Épices chili 8g
+= Haché de bœuf 350g
+~ Maïs (boîte) 300g
+v Nachos gratinés au maïs
+- Faire dorer la viande avec les épices et un peu d'eau ; ajouter les haricots égouttés.
+- Étaler les chips de maïs dans un grand plat, couvrir de viande-haricots et de cheddar râpé.
+- Gratiner 8 minutes à 200 °C jusqu'à ce que le fromage fonde.
+- Guacamole : avocats écrasés, jus de citron vert, oignon rouge, coriandre, piment et sel ; salsa de tomates en dés.
+- Servir le plat au centre de la table avec le guacamole, la salsa et la crème. Version végé : maïs.
+
+# Picadillo et riz | 4 | 45 | T
+r
++ Pommes de terre 400g; Tomates concassées 400g; Oignon 1pc; Ail 0.2pc; Poivron 1pc; Olives vertes 80g; Raisins secs 40g; Cumin 2g; Origan 1g; Vin blanc 80ml; Riz 240g; Huile d'olive 3cs
+= Haché de bœuf 500g
+~ Lentilles vertes 250g
+v Picadillo de lentilles et riz
+- Faire revenir l'oignon, le poivron et l'ail, ajouter la viande et la faire colorer.
+- Ajouter le cumin et l'origan, déglacer au vin blanc.
+- Ajouter les tomates et les pommes de terre en petits dés ; mijoter 20 minutes.
+- Ajouter les olives et les raisins secs (le sucré-salé cubain) et cuire 5 minutes.
+- Servir avec le riz blanc. Version végé : lentilles cuites ajoutées avec les tomates.

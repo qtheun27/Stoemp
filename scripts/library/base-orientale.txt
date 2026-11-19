@@ -1,0 +1,234 @@
+// Plats de base orientaux réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@orientale
+## plat
+
+# Taboulé et poulet grillé | 4 | 40 | E
+r
++ Boulgour 250g; Tomates 400g; Concombre 1pc; Persil 1.5pc; Menthe 0.75pc; Oignons nouveaux 3pc; Citron 3pc; Huile d'olive 7cs; Ail 0.1pc; Cumin 2g; Paprika 1cc
+= Filet de poulet 500g
+~ Falafels 16pc
+v Taboulé et falafels
+- Mariner le poulet avec 2 cuillères d'huile, le jus d'un citron, l'ail, le cumin et le paprika 20 minutes.
+- Faire gonfler le boulgour 15 minutes dans son volume d'eau bouillante salée, puis l'égrener et le laisser refroidir.
+- Hacher très finement le persil et la menthe, couper tomates et concombre en petits dés, émincer les oignons nouveaux.
+- Assaisonner le tout du jus de deux citrons et de l'huile : à la libanaise, les herbes dominent le boulgour.
+- Griller le poulet 5 minutes par face, le trancher et servir sur le taboulé. Version végé : falafels réchauffés au four.
+
+# Soupe de lentilles corail et carottes | 4 | 40 | AH
+r
++ Lentilles corail 250g; Carottes 500g; Oignon 1pc; Ail 0.1pc; Cumin 3g; Curcuma 1g; Bouillon de légumes 1300ml; Citron 1pc; Huile d'olive 3cs; Paprika 1cc; Pain pita 4pc
+- Faire revenir l'oignon, l'ail et les carottes en rondelles 8 minutes dans l'huile.
+- Ajouter le cumin et le curcuma, puis les lentilles rincées et le bouillon.
+- Cuire 25 minutes jusqu'à ce que les lentilles se défassent.
+- Mixer finement et ajouter le jus de citron, sel et poivre.
+- Servir avec un filet d'huile pimentée au paprika et les pitas grillées.
+
+# Couscous aux légumes et merguez | 6 | 90 | T
+r
++ Semoule 500g; Carottes 500g; Courgettes 500g; Navets 400g; Pois chiches (boîte) 400g; Tomates concassées 400g; Oignon 2pc; Ras el hanout 8g; Harissa 30g; Beurre 40g; Huile d'olive 4cs; Coriandre 0.5pc
+= Merguez 12pc; Cuisse de poulet 3pc
+~ Pois chiches (boîte) 400g
+v Couscous aux sept légumes
+- Dorer les morceaux de poulet et les oignons dans l'huile au fond d'une grande marmite, ajouter le ras el hanout et les tomates.
+- Couvrir d'1,5 litre d'eau, ajouter les carottes et les navets ; cuire 30 minutes.
+- Ajouter les courgettes et les pois chiches ; cuire 20 minutes.
+- Préparer la semoule : l'arroser d'eau salée, laisser gonfler, l'égrener avec le beurre (idéalement la cuire deux fois à la vapeur).
+- Griller les merguez et servir avec la semoule, les légumes, le bouillon et la harissa délayée dans une louche de bouillon. Version végé : double ration de pois chiches.
+
+# Tajine de poulet aux abricots | 4 | 80 | AH
+r
++ Abricots secs 180g; Oignon 2pc; Carottes 300g; Ras el hanout 5g; Cannelle 1g; Gingembre 10g; Miel 1cs; Amandes 60g; Coriandre 0.5pc; Huile d'olive 3cs; Semoule 300g; Beurre 20g
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 600g
+v Tajine de pois chiches aux abricots
+- Dorer les cuisses dans l'huile, ajouter les oignons émincés, le gingembre, le ras el hanout et la cannelle.
+- Ajouter 400 ml d'eau et les carottes en tronçons, couvrir et mijoter 40 minutes.
+- Ajouter les abricots et le miel ; cuire 15 minutes à découvert pour que la sauce devienne sirupeuse.
+- Faire griller les amandes à sec et préparer la semoule beurrée.
+- Servir parsemé d'amandes et de coriandre. Version végé : pois chiches, 25 minutes de cuisson en tout.
+
+# Chakchouka | 4 | 40 | T
+r
++ Poivron 4pc; Tomates concassées 600g; Oignon 1pc; Ail 0.2pc; Cumin 3g; Paprika 2cc; Harissa 15g; Oeufs 8pc; Coriandre 0.5pc; Huile d'olive 4cs; Pain de campagne 1pc
+- Faire fondre l'oignon et les poivrons en lanières 15 minutes dans l'huile.
+- Ajouter l'ail, le cumin, le paprika et la harissa, puis les tomates ; cuire 10 minutes jusqu'à ce que la sauce épaississe.
+- Creuser des puits et y casser les œufs.
+- Couvrir et cuire 6 à 8 minutes : les blancs pris, les jaunes coulants.
+- Parsemer de coriandre et servir dans la poêle avec le pain.
+
+# Falafels, houmous et taboulé | 4 | 35 | T
+r
++ Falafels 20pc; Houmous 200g; Boulgour 240g; Tomates 300g; Concombre 1pc; Persil 1pc; Menthe 0.5pc; Citron 2pc; Huile d'olive 5cs; Tahini 60g; Yaourt nature 100g; Pain pita 4pc
+- Faire gonfler le boulgour dans son volume d'eau bouillante salée 15 minutes, puis le refroidir.
+- Préparer le taboulé avec les herbes hachées, les tomates et le concombre en dés, le jus d'un citron et l'huile.
+- Sauce tahini : tahini, yaourt, jus de citron, sel et un peu d'eau pour la détendre.
+- Réchauffer les falafels 10 minutes au four à 200 °C pour qu'ils recroustillent.
+- Servir avec le houmous arrosé d'huile, la sauce tahini, le taboulé et les pitas chaudes.
+
+# Kefta, semoule et sauce yaourt | 4 | 40 | T
+r
++ Semoule 300g; Yaourt nature 250g; Oignon 1pc; Cumin 4g; Paprika 1cc; Cannelle 0.5g; Coriandre 0.5pc; Persil 0.5pc; Menthe 0.25pc; Ail 0.1pc; Tomates 300g; Citron 1pc; Huile d'olive 3cs
+= Haché de bœuf 550g
+~ Pois chiches (boîte) 500g; Lentilles corail 120g
+v Keftas de pois chiches, semoule et yaourt
+- Mélanger la viande avec l'oignon râpé et pressé, le cumin, le paprika, la cannelle, la coriandre et le persil hachés.
+- Former des boudins allongés autour de brochettes et les réfrigérer 15 minutes.
+- Sauce : yaourt, menthe ciselée, ail râpé, jus de citron et sel.
+- Préparer la semoule et une salade de tomates à l'huile d'olive.
+- Griller les keftas 8 à 10 minutes en les retournant et servir avec la semoule et la sauce. Version végé : pois chiches et lentilles cuites écrasés avec les mêmes épices, en galettes poêlées.
+
+# Shawarma de poulet, pita et crudités | 4 | 50 | T
+r
++ Pain pita 4pc; Tahini 60g; Yaourt nature 200g; Tomates 300g; Oignon rouge 1pc; Salade verte 1pc; Cumin 3g; Paprika 2cc; Curcuma 1g; Cannelle 0.5g; Ail 0.2pc; Citron 2pc; Huile d'olive 4cs; Cornichons 80g; Pommes de terre 600g
+= Filet de poulet 600g
+~ Pois chiches (boîte) 600g
+v Shawarma de pois chiches rôtis
+- Mariner le poulet en lanières avec la moitié du yaourt, les épices, l'ail, le jus d'un citron et 2 cuillères d'huile, au moins 30 minutes.
+- Rôtir les pommes de terre en frites 35 minutes à 220 °C.
+- Saisir le poulet à feu vif dans une poêle très chaude jusqu'à ce qu'il soit grillé par endroits.
+- Sauce : tahini, reste du yaourt, jus du second citron et un peu d'eau.
+- Garnir les pitas de poulet, crudités, cornichons et sauce, avec les frites. Version végé : pois chiches marinés et rôtis 25 minutes à 220 °C.
+
+# Soupe harira | 6 | 70 | AH
+r
++ Lentilles vertes 200g; Pois chiches (boîte) 400g; Tomates concassées 500g; Concentré de tomate 1cs; Oignon 1pc; Céleri 150g; Coriandre 1pc; Persil 0.5pc; Ras el hanout 4g; Gingembre 5g; Farine 40g; Oeufs 1pc; Petites pâtes 80g; Citron 2pc; Dattes 120g
+= Épaule d'agneau en morceaux 350g
+~ Petites pâtes 80g
+v Harira végétarienne aux vermicelles
+- Faire revenir l'agneau en petits dés avec l'oignon, le céleri et les épices.
+- Ajouter les tomates, le concentré, les lentilles, la moitié des herbes hachées et 2 litres d'eau ; cuire 40 minutes.
+- Ajouter les pois chiches et les vermicelles ; cuire 8 minutes.
+- Lier la soupe avec la farine délayée dans un peu d'eau (le tadouira) en remuant, puis ajouter l'œuf battu en filet.
+- Servir avec le reste des herbes, des quartiers de citron et des dattes, comme pendant le ramadan. Version végé : sans agneau, avec une ration de vermicelles en plus.
+
+# Aubergines rôties au tahini et boulgour | 4 | 55 | EA
+r
++ Aubergine 1000g; Tahini 80g; Yaourt nature 200g; Boulgour 250g; Menthe 0.5pc; Persil 0.25pc; Citron 1pc; Ail 0.1pc; Cumin 2g; Sumac 3g; Huile d'olive 5cs; Pignons de pin 30g; Oignon 1pc
+= Haché de bœuf 320g
+~ Pois chiches (boîte) 400g
+v Aubergines rôties au tahini, pois chiches et boulgour
+- Couper les aubergines en deux, quadriller la chair, huiler et saler ; rôtir 40 minutes à 210 °C jusqu'à ce qu'elles soient fondantes.
+- Faire revenir l'oignon et la viande avec le cumin jusqu'à ce qu'elle soit croustillante.
+- Préparer le boulgour en pilaf avec un filet d'huile.
+- Sauce : tahini, yaourt, ail, jus de citron et un peu d'eau.
+- Napper les aubergines de sauce, garnir de viande, pignons grillés, menthe, persil et sumac ; servir avec le boulgour. Version végé : pois chiches rôtis aux épices.
+
+# Tajine d'agneau aux pruneaux | 4 | 140 | AH
+r
++ Pruneaux 200g; Oignon 2pc; Ras el hanout 5g; Cannelle 1.5g; Gingembre 10g; Safran 0.1g; Amandes 60g; Miel 2cs; Coriandre 0.5pc; Huile d'olive 3cs; Graines de sésame 1cs; Semoule 300g; Beurre 20g
+= Épaule d'agneau en morceaux 900g
+~ Pois chiches (boîte) 500g; Patate douce 500g
+v Tajine de patate douce et pois chiches aux pruneaux
+- Dorer l'agneau dans l'huile avec les oignons émincés, le gingembre, le ras el hanout, la cannelle et le safran.
+- Couvrir d'eau à hauteur et mijoter 1 h 30 à couvert, jusqu'à ce que la viande soit fondante.
+- Pocher les pruneaux 10 minutes dans un peu de sauce avec le miel et une pincée de cannelle.
+- Faire réduire la sauce à découvert, puis ajouter les pruneaux.
+- Servir avec les amandes grillées, le sésame, la coriandre et la semoule beurrée. Version végé : patate douce en cubes et pois chiches, 30 minutes de cuisson.
+
+# Mjadara (lentilles, riz et oignons frits) | 4 | 55 | T
+r
++ Lentilles vertes 240g; Riz 200g; Oignon 4pc; Cumin 4g; Huile d'olive 100ml; Yaourt nature 300g; Concombre 1pc; Menthe 0.25pc; Ail 0.1pc
+- Cuire les lentilles 15 minutes dans l'eau : elles doivent rester un peu fermes.
+- Émincer les oignons et les faire frire lentement dans l'huile 25 minutes jusqu'à ce qu'ils soient très bruns et croustillants ; égoutter.
+- Faire revenir le cumin dans 2 cuillères de l'huile des oignons, ajouter le riz, les lentilles et 400 ml d'eau salée.
+- Couvrir et cuire 15 minutes à feu doux, puis laisser reposer 5 minutes.
+- Servir couvert d'oignons frits, avec une salade de concombre au yaourt, à la menthe et à l'ail.
+
+# Poulet au citron et aux olives | 4 | 75 | T
+r
++ Citrons confits 100g; Olives vertes 150g; Oignon 2pc; Ail 0.2pc; Ras el hanout 3g; Gingembre 10g; Curcuma 1g; Safran 0.1g; Coriandre 0.5pc; Persil 0.25pc; Huile d'olive 4cs; Semoule 300g
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 600g
+v Tajine de pois chiches au citron et aux olives
+- Frotter le poulet avec l'ail, le gingembre, les épices et l'huile ; laisser mariner 30 minutes si possible.
+- Le dorer avec les oignons émincés, ajouter 300 ml d'eau et les herbes ; couvrir et mijoter 40 minutes.
+- Ajouter les écorces de citrons confits en lanières et les olives ; cuire 15 minutes à découvert.
+- La sauce doit être courte et onctueuse ; rectifier le sel (citrons et olives sont salés).
+- Servir avec la semoule. Version végé : pois chiches, 25 minutes de cuisson.
+
+# Fattouche et halloumi grillé | 4 | 30 | PE
+r
++ Salade romaine 1pc; Tomates 400g; Concombre 1pc; Radis 12pc; Oignons nouveaux 3pc; Pain pita 4pc; Menthe 0.5pc; Persil 0.5pc; Citron 2pc; Sumac 4g; Huile d'olive 7cs; Halloumi 400g; Ail 0.1pc
+- Couper les pitas en morceaux, les arroser d'huile et les griller 8 minutes au four à 200 °C jusqu'à ce qu'ils soient croustillants.
+- Couper la romaine, les tomates, le concombre, les radis et les oignons nouveaux.
+- Vinaigrette : jus de citron, ail écrasé, sumac, huile d'olive et sel.
+- Griller le halloumi en tranches 2 minutes par face à la poêle sèche.
+- Mélanger la salade, les herbes, la vinaigrette et les pitas au dernier moment, poser le halloumi et saupoudrer de sumac.
+
+# Boulgour aux légumes et merguez | 4 | 40 | T
+r
++ Boulgour 280g; Courgettes 400g; Poivron 2pc; Oignon 1pc; Tomates concassées 300g; Ras el hanout 3g; Harissa 20g; Bouillon de légumes 600ml; Coriandre 0.25pc; Huile d'olive 3cs; Yaourt nature 150g
+= Merguez 8pc
+~ Pois chiches (boîte) 500g
+v Boulgour aux légumes et pois chiches
+- Griller les merguez à la poêle et réserver ; garder un peu de leur graisse.
+- Faire revenir l'oignon, le poivron et les courgettes en dés 8 minutes.
+- Ajouter le ras el hanout, la harissa, les tomates et le boulgour, puis le bouillon chaud.
+- Couvrir et cuire 15 minutes à feu doux, puis laisser reposer 5 minutes.
+- Servir avec les merguez, la coriandre et un peu de yaourt. Version végé : pois chiches mijotés avec le boulgour.
+
+# Couscous royal | 6 | 100 | T
+r
++ Semoule 500g; Carottes 500g; Courgettes 500g; Navets 400g; Pois chiches (boîte) 400g; Ras el hanout 8g; Tomates concassées 400g; Oignon 2pc; Raisins secs 60g; Harissa 30g; Beurre 40g; Huile d'olive 4cs
+= Merguez 6pc; Cuisse de poulet 3pc; Épaule d'agneau en morceaux 500g
+~ Pois chiches (boîte) 400g
+v Couscous aux légumes et pois chiches
+- Dorer l'agneau et le poulet avec les oignons dans l'huile, ajouter le ras el hanout et les tomates.
+- Mouiller d'1,5 litre d'eau, ajouter carottes et navets ; cuire 45 minutes.
+- Ajouter les courgettes et les pois chiches ; cuire 20 minutes.
+- Gonfler les raisins dans un peu de bouillon ; préparer la semoule beurrée.
+- Griller les merguez au dernier moment et servir le tout avec la harissa délayée dans le bouillon. Version végé : double ration de pois chiches.
+
+# Tajine de kefta aux œufs | 4 | 45 | T
+r
++ Tomates concassées 700g; Oignon 1pc; Ail 0.2pc; Oeufs 4pc; Cumin 4g; Paprika 2cc; Cannelle 0.5g; Coriandre 0.5pc; Persil 0.5pc; Piment 0.5pc; Huile d'olive 3cs; Pain de campagne 1pc
+= Haché de bœuf 500g
+~ Lentilles corail 200g; Pois chiches (boîte) 250g
+v Tajine de boulettes de lentilles aux œufs
+- Mélanger la viande avec la moitié des herbes hachées, la moitié du cumin et du paprika, la cannelle, sel et poivre ; former de petites boulettes.
+- Faire revenir l'oignon et l'ail, ajouter les tomates, le reste des épices et le piment ; cuire 10 minutes.
+- Ajouter les boulettes et mijoter 15 minutes à couvert.
+- Casser les œufs entre les boulettes, couvrir et cuire 6 minutes.
+- Parsemer du reste des herbes et servir dans le plat avec le pain pour saucer. Version végé : boulettes de lentilles cuites et pois chiches écrasés, poêlées avant d'aller en sauce.
+
+# Pastilla au poulet | 6 | 120 | AH
+r
++ Pâte filo 300g; Oignon 3pc; Amandes 150g; Cannelle 4g; Gingembre 10g; Safran 0.2g; Ras el hanout 3g; Oeufs 5pc; Sucre 40g; Sucre glace 20g; Coriandre 0.5pc; Persil 0.5pc; Beurre 120g; Salade verte 1pc; Pain pita 3pc
+= Cuisse de poulet 6pc
+~ Pois chiches (boîte) 600g; Carottes 400g
+v Pastilla de pois chiches et carottes
+- Mijoter le poulet 50 minutes avec les oignons émincés, le gingembre, le safran, le ras el hanout, 2 g de cannelle, 40 g de beurre et un peu d'eau ; l'effilocher.
+- Réduire la sauce, y cuire les œufs battus en remuant pour les brouiller, et ajouter les herbes hachées.
+- Griller les amandes, les concasser avec le sucre et le reste de la cannelle.
+- Beurrer les feuilles de filo, en tapisser un moule en laissant déborder ; superposer amandes, poulet et œufs, puis rabattre et couvrir de feuilles beurrées.
+- Cuire 30 minutes à 180 °C, saupoudrer de sucre glace et de cannelle en croisillons ; servir avec la salade et les pitas. Version végé : pois chiches et carottes mijotés avec les mêmes épices.
+
+# Imam bayildi (aubergines farcies) | 4 | 80 | E
+r
++ Aubergine 1000g; Tomates 500g; Oignon 3pc; Ail 0.3pc; Persil 0.5pc; Cannelle 0.5g; Sucre 1cc; Huile d'olive 120ml; Boulgour 250g; Yaourt nature 200g; Citron 0.5pc
+- Peler les aubergines en zébrures, les fendre sur la longueur sans les ouvrir complètement et les faire dorer de tous côtés dans la moitié de l'huile.
+- Faire fondre lentement les oignons émincés et l'ail dans le reste de l'huile 15 minutes, ajouter les tomates en dés, la cannelle, le sucre et le persil.
+- Ouvrir les aubergines et les farcir généreusement de cette compotée.
+- Les ranger serrées dans un plat, arroser du jus de citron et de 150 ml d'eau ; cuire 45 minutes à 170 °C.
+- Servir tiède ou froid avec le boulgour en pilaf et le yaourt.
+
+# Koshari | 4 | 60 | T
+r
++ Riz 160g; Lentilles vertes 160g; Petites pâtes 160g; Pois chiches (boîte) 400g; Tomates concassées 500g; Oignon 3pc; Ail 0.2pc; Cumin 4g; Piment 0.5pc; Vinaigre 3cs; Huile d'olive 6cs; Cannelle 0.5g
+- Cuire les lentilles 20 minutes, puis les mélanger au riz cuit ; cuire les petites pâtes à part.
+- Faire frire 2 oignons émincés dans l'huile jusqu'à ce qu'ils soient bruns et croustillants.
+- Sauce : le dernier oignon et l'ail revenus, les tomates, le cumin, la cannelle et le piment ; cuire 15 minutes et finir avec le vinaigre.
+- Réchauffer les pois chiches.
+- Dresser en couches riz-lentilles, pâtes, pois chiches, sauce tomate vinaigrée et oignons frits, comme au Caire.
+
+# Lahmacun et salade | 4 | 45 | T
+r
++ Pâte à pizza 2pc; Tomates 300g; Concentré de tomate 2cs; Oignon 1pc; Poivron 1pc; Persil 1pc; Paprika 2cc; Cumin 2g; Ail 0.1pc; Citron 2pc; Salade verte 1pc; Oignon rouge 1pc; Sumac 3g; Huile d'olive 3cs
+= Haché de bœuf 400g
+~ Lentilles corail 200g
+v Lahmacun aux lentilles
+- Mixer grossièrement les tomates, l'oignon, le poivron, l'ail et la moitié du persil, puis mélanger avec la viande crue, le concentré et les épices.
+- Diviser la pâte en 8 et l'étaler en disques très fins.
+- Étaler une fine couche de garniture jusqu'au bord.
+- Cuire 8 minutes à 250 °C sur une plaque très chaude.
+- Servir avec l'oignon rouge au sumac, le reste du persil, la salade et le citron, à rouler. Version végé : lentilles corail cuites et bien sèches mêlées au hachis de légumes.
