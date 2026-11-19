@@ -526,7 +526,7 @@ v Soupe de légumes au safran et pois chiches
 # Lapin à la moutarde | 4 | 80 | AH
 r
 + Moutarde 4cs; Crème liquide 200ml; Vin blanc 200ml; Échalote 2pc; Beurre 30g; Thym 0.25pc; Pâtes 400g
-= Cuisse de lapin 4pc
+= Cuisse de lapin 1000g
 ~ Champignons de Paris 500g; Pois chiches (boîte) 300g
 v Champignons et pois chiches à la moutarde
 - Badigeonner les cuisses de lapin d'une partie de la moutarde, saler et poivrer.
