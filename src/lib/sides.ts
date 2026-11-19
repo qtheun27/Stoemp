@@ -68,3 +68,31 @@ export function slotRecipe(recipes: Map<string, Recipe>, slot: Pick<Slot, "recip
   const r = recipes.get(slot.recipeId);
   return r && slot.side ? withSide(r, recipes.get(slot.side), idx) : r;
 }
+
+/** Nom de l'accompagnement d'origine du plat (« pommes de terre », « riz »…), pour l'afficher quand rien n'est choisi. */
+export function defaultSideLabel(r: Recipe, idx: ItemIndex): string | null {
+  const s = swappableStarch(r, idx);
+  if (!s) return null;
+  const names = [...s.ids].map((id) => idx.get(id)?.name.toLowerCase()).filter(Boolean);
+  return names.length ? names.join(" et ") : null;
+}
+
+/**
+ * Accompagnements proposés d'office pour la semaine : un par plat où il est interchangeable,
+ * varié (pas deux fois le même), même cuisine d'abord ; le plat garde sinon celui de sa recette.
+ */
+export function assignSides<T extends Pick<Slot, "recipeId" | "side" | "fromLeftovers">>(slots: T[], recipes: Map<string, Recipe>, idx: ItemIndex, rand = Math.random): T[] {
+  const used = new Set<string>();
+  const all = [...recipes.values()];
+  return slots.map((sl) => {
+    const r = recipes.get(sl.recipeId);
+    if (!r || sl.fromLeftovers || sl.side !== undefined) return sl;
+    const opts = sideOptions(r, all, idx).filter((x) => !used.has(x.id));
+    const same = opts.filter((x) => x.cuisine === r.cuisine);
+    const pool = (same.length ? same : opts).slice(0, 5);
+    if (!pool.length) return sl;
+    const pick = pool[Math.floor(rand() * pool.length)];
+    used.add(pick.id);
+    return { ...sl, side: pick.id };
+  });
+}
