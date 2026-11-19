@@ -317,7 +317,9 @@ v Pâté gaumais aux champignons et lentilles
 - Servir tiède avec la salade verte à la vinaigrette.
 - Version végé : faire revenir les champignons émincés, les mélanger aux lentilles cuites et aux aromates de la marinade, puis garnir le pâté de la même façon.
 
-# Cabillaud à la flamande et pommes de terre | 4 | 45 | T
+# Cabillaud à la flamande | 4 | 45 | T
+o Cabillaud à la flamande et pommes de terre
+s pommes de terre
 + Pommes de terre 1000g; Oeufs 2pc; Beurre 120g; Persil 0.5pc; Citron 1pc; Moutarde 1cs; Vin blanc 200ml; Oignon 1pc; Feuille de laurier 0.2g; Thym 0.1pc
 = Dos de cabillaud 700g
 ~ Oeufs 4pc
@@ -329,7 +331,9 @@ v Œufs mollets à la flamande et pommes de terre
 - Faire fondre le beurre, ajouter la moutarde, le jus de citron, le persil haché et les œufs durs hachés.
 - Napper le poisson de sauce et servir avec les pommes de terre. Version végé : cuire 4 œufs 6 minutes, les écaler et les napper de la même sauce.
 
-# Sole à l'ostendaise et pommes vapeur | 4 | 50 | T
+# Sole à l'ostendaise | 4 | 50 | T
+o Sole à l'ostendaise et pommes vapeur
+s pommes vapeur
 + Pommes de terre 1000g; Champignons de Paris 200g; Échalote 2pc; Vin blanc 200ml; Fumet de poisson 300ml; Crème liquide 200ml; Beurre 50g; Farine 20g; Citron 0.5pc; Persil 0.25pc
 = Filets de sole 600g; Moules 500g; Crevettes grises 100g
 ~ Tofu ferme 400g

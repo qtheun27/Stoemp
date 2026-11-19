@@ -76,7 +76,9 @@ v Dan dan aux champignons
 - Cuire les nouilles et le pak choï.
 - Mettre la sauce au fond des bols, ajouter les nouilles, le pak choï, la viande et les cacahuètes. Version végé : champignons hachés bien dorés.
 
-# Saumon au miso et riz | 4 | 270 | T
+# Saumon au miso | 4 | 270 | T
+o Saumon au miso et riz
+s riz
 + Pâte miso 60g; Mirin 3cs; Sucre 2cs; Sauce soja 1cs; Riz 300g; Pak choï 400g; Graines de sésame 1cs
 = Pavé de saumon 600g
 ~ Aubergine 600g
@@ -191,7 +193,9 @@ v Aubergine parmesan et spaghetti
 - Les poser dans un plat, napper d'un peu de sauce tomate, couvrir de mozzarella et du reste de parmesan ; gratiner 15 minutes à 200 °C.
 - Servir avec les spaghetti au reste de sauce tomate et au basilic. Version végé : tranches d'aubergine panées.
 
-# Salisbury steak et purée | 4 | 45 | T
+# Salisbury steak | 4 | 45 | T
+o Salisbury steak et purée
+s purée
 + Oignon 2pc; Chapelure 40g; Oeufs 1pc; Champignons de Paris 250g; Bouillon de bœuf 400ml; Farine 2cs; Moutarde 1cs; Pommes de terre 1000g; Lait 200ml; Beurre 50g; Petits pois 300g
 = Haché de bœuf 600g
 ~ Lentilles vertes 250g
@@ -211,7 +215,9 @@ v Œufs à la king
 - Ajouter le poulet et les petits pois ; mijoter 5 minutes.
 - Servir sur le riz (ou dans des vol-au-vent). Version végé : œufs durs en quartiers.
 
-# Blackened salmon et riz | 4 | 25 | T
+# Blackened salmon | 4 | 25 | T
+o Blackened salmon et riz
+s riz
 + Paprika 2cc; Cumin 0.5cc; Origan 1cc; Thym 0.1pc; Ail 0.1pc; Piment 0.5pc; Beurre 30g; Riz 300g; Maïs (boîte) 300g; Citron 1pc
 = Pavé de saumon 600g
 ~ Halloumi 400g

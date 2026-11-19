@@ -2,7 +2,9 @@
 
 @belge
 ## plat
-# Poisson pané maison et purée d'épinards | 4 | 40 | T
+# Poisson pané maison | 4 | 40 | T
+o Poisson pané maison et purée d'épinards
+s purée d'épinards
 + Farine 50g; Oeufs 2pc; Chapelure 120g; Citron 1pc; Pommes de terre 800g; Épinards hachés surgelés 400g; Lait 150ml; Beurre 60g; Muscade 0.25cc
 = Dos de cabillaud 600g
 ~ Oeufs 4pc
@@ -12,7 +14,9 @@ v Œufs durs et purée d'épinards
 - Cuire les pommes de terre, les écraser avec le lait, le reste du beurre, la muscade et les épinards réchauffés.
 - Servir avec le citron. Version végé : œufs durs en quartiers sur la purée.
 
-# Poulet au curry à la belge et riz | 4 | 40 | T
+# Poulet curry-pommes à la belge | 4 | 40 | T
+o Poulet au curry à la belge et riz
+s riz
 + Oignon 1pc; Pommes 200g; Curry en poudre 2cc; Farine 2cs; Bouillon de volaille 400ml; Crème liquide 150ml; Beurre 30g; Riz 300g
 = Filet de poulet 600g
 ~ Pois chiches (boîte) 400g
@@ -24,7 +28,9 @@ v Curry de pois chiches à la belge et riz
 
 @francaise
 ## plat
-# Steak haché, haricots et pommes de terre sautées | 4 | 35 | T
+# Steak haché et haricots verts | 4 | 35 | T
+o Steak haché, haricots et pommes de terre sautées
+s pommes de terre sautées
 + Haricots verts 500g; Pommes de terre 800g; Beurre 40g; Échalote 1pc; Persil 0.25pc
 = Haché de bœuf 500g
 ~ Galettes végétales 4pc
@@ -92,7 +98,9 @@ v Pois chiches et halloumi rôtis au paprika
 
 @orientale
 ## plat
-# Poulet rôti au ras el hanout et semoule | 4 | 70 | AH
+# Poulet rôti au ras el hanout | 4 | 70 | AH
+o Poulet rôti au ras el hanout et semoule
+s semoule
 + Ras el hanout 2cc; Miel 1cs; Citron 1pc; Carottes 400g; Oignon rouge 2pc; Courgettes 300g; Semoule 300g; Coriandre 0.5pc; Raisins secs 40g
 = Cuisse de poulet 4pc
 ~ Pois chiches (boîte) 400g

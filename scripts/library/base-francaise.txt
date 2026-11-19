@@ -47,7 +47,9 @@ r
 - Ajouter les pommes de terre et laisser prendre à feu doux : l'omelette doit rester baveuse au centre.
 - Plier et servir avec la salade.
 
-# Cabillaud et purée aux herbes | 4 | 40 | P
+# Cabillaud poêlé au citron | 4 | 40 | P
+o Cabillaud et purée aux herbes
+s purée aux herbes
 r
 + Pommes de terre 800g; Lait 200ml; Beurre 80g; Persil 0.5pc; Ciboulette 0.25pc; Citron 1pc; Haricots verts 400g
 = Dos de cabillaud 600g
@@ -59,7 +61,9 @@ v Œufs pochés et purée aux herbes
 - Arroser du jus de citron et du beurre de cuisson.
 - Servir avec la purée et les haricots. Version végé : œufs pochés 3 minutes.
 
-# Ratatouille, semoule et poulet rôti | 4 | 70 | E
+# Ratatouille et poulet rôti | 4 | 70 | E
+o Ratatouille, semoule et poulet rôti
+s semoule
 r
 + Courgettes 400g; Aubergine 400g; Poivron 2pc; Tomates 600g; Oignon 1pc; Ail 0.2pc; Herbes de Provence 1cc; Basilic 0.25pc; Semoule 280g; Huile d'olive 5cs
 = Cuisse de poulet 4pc
@@ -71,7 +75,9 @@ v Ratatouille, semoule et pois chiches
 - Préparer la semoule avec son volume d'eau bouillante salée et un filet d'huile.
 - Servir avec le poulet et le basilic. Version végé : pois chiches ajoutés à la ratatouille.
 
-# Tian de légumes, côtelettes d'agneau et grenailles | 4 | 70 | E
+# Côtelettes d'agneau et tian de légumes | 4 | 70 | E
+o Tian de légumes, côtelettes d'agneau et grenailles
+s grenailles
 r
 + Courgettes 400g; Tomates 400g; Aubergine 300g; Oignon 1pc; Ail 0.1pc; Herbes de Provence 1cc; Huile d'olive 4cs; Pommes de terre grenaille 700g
 = Côtelettes d'agneau 8pc
@@ -175,7 +181,9 @@ v Croque-monsieur à la tomate
 - Cuire 10 minutes à 220 °C jusqu'à ce que le dessus soit doré et bouillonnant.
 - Servir avec la salade à la vinaigrette moutardée. Version végé : tranches de tomate.
 
-# Saumon, riz et brocoli | 4 | 30 | T
+# Saumon et brocoli | 4 | 30 | T
+o Saumon, riz et brocoli
+s riz
 r
 + Riz basmati 300g; Brocoli 600g; Citron 1pc; Sauce soja 2cs; Miel 1cs; Graines de sésame 1cs; Beurre 20g
 = Pavé de saumon 600g
@@ -337,7 +345,9 @@ v Pot-au-feu de légumes aux pois chiches
 - Cuire les pommes de terre dans une louche de bouillon les 25 dernières minutes.
 - Servir la viande et les légumes avec la moutarde, les cornichons et un bol de bouillon. Version végé : légumes et pois chiches dans le bouillon de légumes.
 
-# Endives au saumon et purée de céleri | 4 | 50 | AH
+# Endives au saumon | 4 | 50 | AH
+o Endives au saumon et purée de céleri
+s purée de céleri
 r
 + Chicons 8pc; Beurre 50g; Sucre 1cc; Céleri-rave 600g; Pommes de terre 300g; Lait 150ml; Crème liquide 100ml; Citron 0.5pc
 = Pavé de saumon 600g
@@ -358,7 +368,9 @@ r
 - Cuire 25 minutes à 210 °C jusqu'à ce que la pâte soit dorée et croustillante.
 - Servir avec une salade verte.
 
-# Poulet à la moutarde et riz | 4 | 40 | T
+# Poulet à la moutarde | 4 | 40 | T
+o Poulet à la moutarde et riz
+s riz
 r
 + Moutarde 3cs; Crème liquide 250ml; Échalote 2pc; Vin blanc 100ml; Beurre 30g; Thym 0.1pc; Riz 300g; Haricots verts 400g
 = Filet de poulet 600g
@@ -439,7 +451,9 @@ v Champignons et lentilles au vin
 - Couvrir et mijoter 1 h 30 ; ajouter les champignons poêlés 15 minutes avant la fin.
 - Servir avec les pommes de terre. Version végé : champignons et lentilles mijotés 45 minutes dans le vin et le bouillon.
 
-# Poulet rôti du dimanche et pommes de terre | 4 | 100 | T
+# Poulet rôti du dimanche | 4 | 100 | T
+o Poulet rôti du dimanche et pommes de terre
+s pommes de terre rôties
 r
 + Beurre 50g; Ail 0.5pc; Thym 0.25pc; Citron 1pc; Pommes de terre 1200g; Salade verte 1pc
 = Poulet entier 1600g
@@ -499,7 +513,9 @@ v Daube de pois chiches et champignons
 - Ajouter les olives 15 minutes avant la fin.
 - Servir avec les pâtes (traditionnellement des macaronis à la sauce de la daube). Version végé : pois chiches et champignons mijotés 45 minutes.
 
-# Gratin de courgettes et riz | 4 | 60 | E
+# Gratin de courgettes | 4 | 60 | E
+o Gratin de courgettes et riz
+s riz
 r
 + Courgettes 1000g; Oignon 1pc; Ail 0.1pc; Oeufs 3pc; Crème liquide 200ml; Gruyère râpé 120g; Riz 250g; Thym 0.1pc
 = Haché de bœuf 300g

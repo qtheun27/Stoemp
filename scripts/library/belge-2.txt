@@ -107,7 +107,9 @@ v Galette végétale, haricots et croquettes
 - Cuire les haricots 8 minutes à l'eau salée, les faire revenir avec l'échalote et un peu de beurre ; cuire les croquettes au four ou à la friteuse.
 - Servir le rôti tranché avec la sauce, les haricots et les croquettes. Version végé : galettes végétales dorées à la poêle.
 
-# Saucisse, compote et purée | 4 | 40 | AH
+# Saucisse compote | 4 | 40 | AH
+o Saucisse, compote et purée
+s purée
 + Pommes de terre 1000g; Lait 200ml; Beurre 60g; Muscade 0.25cc; Compote de pommes 400g
 = Saucisse 4pc
 ~ Galettes végétales 4pc
@@ -128,7 +130,9 @@ v Champignons et lentilles à la bière, stoemp aux carottes
 - Stoemp : cuire les pommes de terre et les carottes ensemble 25 minutes, les écraser avec le reste du beurre.
 - Servir les joues nappées de sauce avec le stoemp. Version végé : champignons et lentilles mijotés 40 minutes dans la même sauce.
 
-# Cabillaud sauce aux crevettes grises et purée | 4 | 45 | T
+# Cabillaud sauce aux crevettes grises | 4 | 45 | T
+o Cabillaud sauce aux crevettes grises et purée
+s purée
 + Pommes de terre 1000g; Lait 200ml; Beurre 80g; Farine 30g; Crème liquide 150ml; Citron 0.5pc; Persil 0.25pc; Muscade 0.25cc
 = Dos de cabillaud 700g; Crevettes grises 150g; Fumet de poisson 300ml
 ~ Oeufs 4pc; Bouillon de légumes 300ml

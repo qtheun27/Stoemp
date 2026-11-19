@@ -2,7 +2,9 @@
 @francaise
 
 ## plat
-# Poulet à l'estragon et riz | 4 | 50 | PE
+# Poulet à l'estragon | 4 | 50 | PE
+o Poulet à l'estragon et riz
+s riz
 + Échalote 2pc; Vin blanc 150ml; Crème fraîche 200ml; Estragon 1pc; Beurre 30g; Riz 300g
 = Cuisse de poulet 4pc
 ~ Champignons de Paris 500g; Oeufs 4pc
@@ -12,7 +14,9 @@ v Champignons à l'estragon, œuf mollet et riz
 - Retirer le poulet, ajouter la crème et réduire jusqu'à ce que la sauce nappe ; ajouter les feuilles d'estragon hachées.
 - Servir avec le riz. Version végé : champignons sautés et œufs mollets nappés de la même sauce.
 
-# Saumon à l'oseille et riz | 4 | 35 | PE
+# Saumon à l'oseille | 4 | 35 | PE
+o Saumon à l'oseille et riz
+s riz
 + Oseille 100g; Échalote 2pc; Vin blanc 100ml; Crème liquide 250ml; Beurre 20g; Citron 0.5pc; Riz 300g
 = Pavé de saumon 600g
 ~ Oeufs 4pc
@@ -43,7 +47,9 @@ v Chou farci au riz, champignons et fromage
 - Cuire 1 h 30 dans le bouillon avec les carottes, à couvert, à feu doux ; ajouter les pommes de terre la dernière demi-heure.
 - Version végé : farce de riz cuit, champignons et fromage.
 
-# Cordon bleu et purée | 4 | 45 | T
+# Cordon bleu | 4 | 45 | T
+o Cordon bleu et purée
+s purée
 + Emmental 120g; Farine 50g; Oeufs 2pc; Chapelure 150g; Beurre 80g; Pommes de terre 1000g; Lait 200ml; Salade verte 1pc
 = Filet de poulet 600g; Jambon 4pc
 ~ Courgettes 500g; Mozzarella 125g

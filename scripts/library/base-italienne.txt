@@ -128,7 +128,9 @@ r
 - Cuire les pâtes al dente et les mélanger à la sauce.
 - Servir avec le reste des aubergines, la ricotta émiettée et le basilic.
 
-# Saltimbocca, polenta et épinards | 4 | 35 | T
+# Saltimbocca aux épinards | 4 | 35 | T
+o Saltimbocca, polenta et épinards
+s polenta
 r
 + Polenta 280g; Épinards frais 400g; Parmesan 60g; Beurre 50g; Vin blanc 120ml; Ail 0.1pc; Sauge 1pc
 = Escalope de veau 560g; Jambon cru 4pc
@@ -314,7 +316,9 @@ v Pâtes tomate et pois chiches
 - Cuire les pâtes al dente et les mélanger à la sauce.
 - Parsemer de persil et servir. Version végé : pois chiches.
 
-# Osso buco et polenta | 4 | 130 | AH
+# Osso buco | 4 | 130 | AH
+o Osso buco et polenta
+s polenta
 r
 + Tomates concassées 500g; Carottes 200g; Céleri 150g; Oignon 1pc; Ail 0.2pc; Vin blanc 200ml; Bouillon de légumes 300ml; Farine 2cs; Citron 1pc; Persil 0.5pc; Beurre 30g; Polenta 280g; Parmesan 50g
 = Jarret de veau 1000g

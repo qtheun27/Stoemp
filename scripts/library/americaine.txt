@@ -235,7 +235,9 @@ v Gumbo aux haricots rouges
 - Ajouter la saucisse en rondelles pour 15 minutes, puis les scampis 3 minutes ; effilocher le poulet.
 - Servir sur le riz. Version végé : haricots rouges et champignons à la place des viandes.
 
-# Poulet frit et purée | 4 | 270 | T
+# Poulet frit | 4 | 270 | T
+o Poulet frit et purée
+s purée
 + Babeurre 500ml; Farine 250g; Paprika 2cc; Sauce piquante 1cs; Huile de tournesol 1500ml; Pommes de terre 1000g; Lait 200ml; Beurre 60g
 = Cuisse de poulet 8pc
 ~ Chou-fleur 800g

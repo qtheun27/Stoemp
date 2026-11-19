@@ -171,7 +171,9 @@ v Adobo de tofu et œufs
 - Retirer le poulet, le dorer à la poêle, puis réduire la sauce avec le sucre jusqu'à ce qu'elle nappe.
 - Remettre le poulet et servir avec le riz. Version végé : tofu doré et œufs durs mijotés dans la sauce.
 
-# Char siu et riz | 4 | 300 | T
+# Char siu | 4 | 300 | T
+o Char siu et riz
+s riz
 + Sauce huître 2cs; Sauce soja 3cs; Miel 4cs; Vin de riz chinois (Shaoxing) 2cs; Ail 0.2pc; Riz 300g; Pak choï 400g
 = Filet de porc 800g
 ~ Tofu ferme 500g

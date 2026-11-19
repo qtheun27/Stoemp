@@ -15,9 +15,9 @@ const FAMILY: [SideFamily, RegExp][] = [
   // Pains servis à côté (pas le pain d'épices d'une carbonnade, ni le pain de mie d'un croque).
   ["pain", /^pain( de campagne| gris| pita)?$|^baguette|^pistolets?$|^naan|^chapati/],
 ];
-/** Plats dont le féculent EST le plat (on ne le remplace pas). */
-// Un plat qui nomme son accompagnement (« moules-frites », « … et purée ») le garde.
-const CORE = /frites|puree|pommes vapeur|pommes de terre|grenailles|semoule|polenta|pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado/;
+/** Plats dont le féculent EST le plat (moules-frites, fish and chips, pâtes, risotto…) : on ne le remplace pas.
+ *  Les autres ne nomment pas leur accompagnement : il s'affiche à côté du nom et se choisit dans la semaine. */
+const CORE = /frites|puree|pommes vapeur|pommes de terre|grenailles|semoule|polenta|pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin (dauphinois|savoyard|de pates|de macaroni)|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado/;
 
 const familyOf = (name: string): SideFamily | null => FAMILY.find(([, re]) => re.test(norm(name)))?.[0] ?? null;
 
@@ -74,6 +74,7 @@ export function slotRecipe(recipes: Map<string, Recipe>, slot: Pick<Slot, "recip
 export function defaultSideLabel(r: Recipe, idx: ItemIndex): string | null {
   const s = swappableStarch(r, idx);
   if (!s) return null;
+  if (r.sideLabel) return r.sideLabel;
   const names = [...s.ids].map((id) => idx.get(id)?.name.toLowerCase()).filter(Boolean);
   return names.length ? names.join(" et ") : null;
 }

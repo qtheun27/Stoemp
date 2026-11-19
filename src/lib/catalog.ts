@@ -108,11 +108,11 @@ export const mains = (recipes: Iterable<Recipe>) => cookable(recipes).filter((r)
 /** Fiche compacte de la bibliothèque (document « library ») → recette sans étapes. */
 /** Ingrédient d'une fiche : [article, quantité par personne] ou [article, cuillères par personne, "cs" | "cc"]. */
 type LibIng = [string, number] | [string, number, "cs" | "cc"];
-export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: Course; lt?: 1; g: LibIng[]; m: LibIng[]; w: LibIng[] }
+export interface LibEntry { i: string; n: string; v: string | null; t: number; s: string; c: Cuisine; k?: Course; lt?: 1; sd?: string; g: LibIng[]; m: LibIng[]; w: LibIng[] }
 export function libRecipe(e: LibEntry): Recipe {
   const ing = (l: LibIng[]) => (l || []).map(([itemId, qtyPerPerson, spoon]) => ({ itemId, qtyPerPerson, ...(spoon ? { spoon } : {}) }));
   return { id: e.i, name: e.n, vegName: e.v, prepMin: e.t, seasons: (e.s || "PEAH").split("") as Season[], ingredients: ing(e.g), meat: ing(e.m), vegSwap: ing(e.w),
-    steps: [], source: "base", cuisine: e.c, course: e.k || "plat", lib: true, ...(e.lt ? { light: true } : {}) };
+    steps: [], source: "base", cuisine: e.c, course: e.k || "plat", lib: true, ...(e.lt ? { light: true } : {}), ...(e.sd ? { sideLabel: e.sd } : {}) };
 }
 export const ingredientsOf = (r: Recipe, veg: boolean): Ingredient[] =>
   r.ingredients.concat(isVegRecipe(r) ? [] : veg ? r.vegSwap : r.meat);

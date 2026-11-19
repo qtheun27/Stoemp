@@ -34,7 +34,9 @@ v Poireaux gratinés aux œufs
 - Napper de béchamel, parsemer du reste de fromage et gratiner 20 minutes à 200 °C ; servir avec des pommes de terre vapeur.
 - Version végé : poireaux sans jambon, avec des œufs durs en quartiers.
 
-# Poulet, petits pois-carottes et pommes de terre | 4 | 40 | T
+# Poulet aux petits pois-carottes | 4 | 40 | T
+o Poulet, petits pois-carottes et pommes de terre
+s pommes de terre
 + Petits pois 400g; Carottes 400g; Oignon 1pc; Beurre 50g; Sucre 1cc; Persil 0.25pc; Pommes de terre 1000g
 = Filet de poulet 600g
 ~ Oeufs 4pc
@@ -44,7 +46,9 @@ v Œufs miroir, petits pois-carottes et pommes de terre
 - Dorer les filets de poulet dans le reste du beurre 6 minutes par face et déglacer d'un peu d'eau pour un jus.
 - Servir avec les légumes persillés. Version végé : œufs au plat.
 
-# Côtelettes de porc, haricots et pommes de terre | 4 | 40 | EA
+# Côtelettes de porc aux haricots | 4 | 40 | EA
+o Côtelettes de porc, haricots et pommes de terre
+s pommes de terre
 + Haricots verts 600g; Beurre 50g; Échalote 1pc; Pommes de terre 1000g; Moutarde 1cs
 = Côtelettes de porc 800g
 ~ Galettes végétales 4pc

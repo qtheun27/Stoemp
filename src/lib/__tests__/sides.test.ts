@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { BASE_INDEX, BASE_RECIPES } from "../catalog";
 import { loadLibrary } from "../../../scripts/library/format";
 import { mealNeeds } from "../shopping";
-import { sideOptions, slotRecipe, swappableStarch, withSide } from "../sides";
+import { defaultSideLabel, sideOptions, slotRecipe, swappableStarch, withSide } from "../sides";
 import type { Recipe } from "../types";
 
 const lib = loadLibrary().recipes.map((r) => ({ ...r, source: "base" as const, lib: true })) as unknown as Recipe[];
@@ -43,5 +43,18 @@ describe("accompagnement proposé d'office", () => {
     expect(slots[0].side).not.toBe(slots[1].side);
     expect(slots[2].side).toBeUndefined();
     expect(defaultSideLabel(carbo, BASE_INDEX)).toBe("pommes de terre");
+  });
+});
+
+describe("plats renommés sans leur accompagnement", () => {
+  it("gardent leur fiche, proposent leur accompagnement d'origine et peuvent en changer", async () => {
+    const { loadLibrary } = await import("../../../scripts/library/format");
+    const { recipes } = loadLibrary();
+    const r = recipes.find((x) => x.name === "Boulettes sauce tomate")!;
+    expect(r.id).toBe("lib-boulettes-sauce-tomate-et-puree");
+    expect(r.replaces).toBeTruthy();
+    const rec = { ...r, source: "base" as const, sideLabel: r.sideLabel };
+    expect(defaultSideLabel(rec as never, BASE_INDEX)).toBe("purée");
+    expect(recipes.filter((x) => x.course === "plat" && / et (frites|purée|riz)$/.test(x.name))).toEqual([]);
   });
 });

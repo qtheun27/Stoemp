@@ -240,7 +240,9 @@ v Poêlée de champignons, œuf et pommes sarladaises
 - Ajouter l'ail et le persil hachés en fin de cuisson.
 - Servir avec la salade. Version végé : champignons poêlés et un œuf au plat.
 
-# Porc au cidre et pommes de terre | 4 | 90 | AH
+# Porc au cidre | 4 | 90 | AH
+o Porc au cidre et pommes de terre
+s pommes de terre
 + Cidre 500ml; Oignon 2pc; Pommes 400g; Crème fraîche 150ml; Moutarde 1cs; Thym 0.1pc; Beurre 30g; Pommes de terre 1000g
 = Rôti de porc 1000g
 ~ Champignons de Paris 600g; Haricots blancs (boîte) 400g
