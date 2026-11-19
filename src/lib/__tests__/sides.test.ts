@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { BASE_INDEX, BASE_RECIPES } from "../catalog";
 import { loadLibrary } from "../../../scripts/library/format";
 import { mealNeeds } from "../shopping";
-import { defaultSideLabel, sideOptions, slotRecipe, swappableStarch, withSide } from "../sides";
+import { assignSides, defaultSideLabel, sideOptions, slotRecipe, swappableStarch, withSide } from "../sides";
 import type { Recipe } from "../types";
 
 const lib = loadLibrary().recipes.map((r) => ({ ...r, source: "base" as const, lib: true })) as unknown as Recipe[];
@@ -56,5 +56,27 @@ describe("plats renommés sans leur accompagnement", () => {
     const rec = { ...r, source: "base" as const, sideLabel: r.sideLabel };
     expect(defaultSideLabel(rec as never, BASE_INDEX)).toBe("purée");
     expect(recipes.filter((x) => x.course === "plat" && / et (frites|purée|riz)$/.test(x.name))).toEqual([]);
+  });
+});
+
+describe("étapes qui suivent l'accompagnement choisi", () => {
+  const find = (n: string) => lib.find((r) => r.name === n)!;
+  it("la purée disparaît des étapes quand on prend des frites", () => {
+    const w = withSide(find("Boulettes sauce tomate"), find("Frites belges maison"), BASE_INDEX);
+    const plat = w.steps.slice(0, w.steps.indexOf("Accompagnement — Frites belges maison :"));
+    expect(plat.some((s) => /pur[ée]e/i.test(s))).toBe(false);
+    expect(plat.some((s) => s.includes("l'accompagnement (frites belges maison)"))).toBe(true);
+    expect(w.steps).toContain("Accompagnement — Frites belges maison :");
+  });
+  it("un légume cuit avec le riz reste, sans le riz", () => {
+    const side = lib.find((r) => r.course === "accompagnement" && /^Riz/.test(r.name))!;
+    const w = withSide(find("Saumon et brocoli"), side, BASE_INDEX);
+    expect(w.steps[0]).toMatch(/^Cuire le brocoli/);
+  });
+  it("retient l'accord du foyer pour ce plat", () => {
+    const r = find("Boulettes sauce tomate"), fr = find("Frites belges maison");
+    const recipes = new Map(lib.map((x) => [x.id, x]));
+    const [sl] = assignSides([{ recipeId: r.id, fromLeftovers: false } as never], recipes, BASE_INDEX, Math.random, { [r.id]: fr.id });
+    expect((sl as { side: string }).side).toBe(fr.id);
   });
 });

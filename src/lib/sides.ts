@@ -58,10 +58,36 @@ export function withSide(r: Recipe, side: Recipe | null | undefined, idx: ItemIn
   return {
     ...r,
     ingredients: [...r.ingredients.filter((i) => !s.ids.has(i.itemId)), ...side.ingredients],
-    steps: [...r.steps, ...steps],
+    steps: [...adaptSteps(r, s.ids, side, idx), ...steps],
     prepMin: Math.max(r.prepMin, side.prepMin),
     sideName: side.name,
   };
+}
+
+// Féculent d'origine cité dans les étapes (« la purée », « les pommes de terre », « le riz »…).
+const STARCH_WORDS = /\b(?:(?:la|une|de la|des|les|le|du) )?(?:pur[ée]e(?: (?:de pommes de terre|maison|au beurre|aux herbes))?|pommes de terre(?: (?:vapeur|sautées|rôties|grenaille))?|pommes vapeur|grenailles|frites(?: maison)?|riz(?: basmati| blanc)?|semoule|polenta|boulgour)\b/gi;
+const PREP_VERB = /^(préparer|cuire|faire cuire|précuire|éplucher|écraser|rôtir|frire|faire gonfler)\b/i;
+const NEUTRAL = /beurre|lait|crème|muscade|sel|poivre|huile|eau|bouillon/i;
+/** Étapes du plat quand on change d'accompagnement : la préparation du féculent d'origine disparaît, ses mentions renvoient au nouvel accompagnement. */
+export function adaptSteps(r: Recipe, removed: Set<string>, side: Recipe, idx: ItemIndex): string[] {
+  const others = [...r.ingredients, ...r.meat].filter((i) => !removed.has(i.itemId)).map((i) => idx.get(i.itemId)?.name || "")
+    .filter((n) => n && !NEUTRAL.test(n)).map((n) => norm(n).split(" ")[0]).filter((w) => w.length > 3);
+  const label = `l'accompagnement (${side.name.toLowerCase()})`;
+  const tidy = (x: string) => x.replace(/\s{2,}/g, " ").replace(/\s+([,.;])/g, "$1").replace(/^(\S+)\s+(et|,)\s+/i, "$1 ");
+  return r.steps.flatMap((raw) => {
+    const st = raw.replace(/\s*\([^)]*au choix\)/gi, "");
+    STARCH_WORDS.lastIndex = 0;
+    if (!STARCH_WORDS.test(st)) return [st];
+    const rest = norm(st.replace(STARCH_WORDS, ""));
+    if (PREP_VERB.test(st.trim())) {
+      // Préparation du seul féculent : supprimée ; préparée avec autre chose : on n'en garde que l'autre chose.
+      if (!others.some((w) => rest.includes(w))) return [];
+      const s2 = tidy(st.replace(new RegExp(STARCH_WORDS.source + "\\s*(et|,)?\\s*", "gi"), ""));
+      return [s2.charAt(0).toUpperCase() + s2.slice(1)];
+    }
+    let first = true;
+    return [tidy(st.replace(STARCH_WORDS, () => (first ? ((first = false), label) : "")).replace(/\s+(et|,)\s*(?=[,.;]|et\b)/g, ""))];
+  });
 }
 
 /** Recette effective d'un créneau de la semaine (plat + accompagnement choisi). */
@@ -80,15 +106,20 @@ export function defaultSideLabel(r: Recipe, idx: ItemIndex): string | null {
 }
 
 /**
- * Accompagnements proposés d'office pour la semaine : un par plat où il est interchangeable,
- * varié (pas deux fois le même), même cuisine d'abord ; le plat garde sinon celui de sa recette.
+ * Accompagnements proposés d'office pour la semaine : d'abord l'accord retenu par le foyer pour ce plat
+ * (« boulettes sauce tomate → frites »), sinon un par plat où il est interchangeable, varié, même cuisine d'abord.
  */
-export function assignSides<T extends Pick<Slot, "recipeId" | "side" | "fromLeftovers">>(slots: T[], recipes: Map<string, Recipe>, idx: ItemIndex, rand = Math.random): T[] {
+export function assignSides<T extends Pick<Slot, "recipeId" | "side" | "fromLeftovers">>(slots: T[], recipes: Map<string, Recipe>, idx: ItemIndex, rand = Math.random, remembered: Record<string, string | null> = {}): T[] {
   const used = new Set<string>();
   const all = [...recipes.values()];
   return slots.map((sl) => {
     const r = recipes.get(sl.recipeId);
     if (!r || sl.fromLeftovers || sl.side !== undefined) return sl;
+    if (r.id in remembered) {
+      const m = remembered[r.id];
+      if (m === null) return { ...sl, side: null };
+      if (m && sideOptions(r, all, idx).some((x) => x.id === m)) { used.add(m); return { ...sl, side: m }; }
+    }
     const opts = sideOptions(r, all, idx).filter((x) => !used.has(x.id));
     const same = opts.filter((x) => x.cuisine === r.cuisine);
     const pool = (same.length ? same : opts).slice(0, 5);

@@ -9,6 +9,9 @@ const find = (name: string) => BASE_RECIPES.find((r) => r.name === name)!;
 const person = (patch: Partial<Person>): Person => ({ ...newPerson("x"), ...patch });
 const T = (people: Person[], ratings: Tastes["ratings"] = {}): Tastes => ({ people, ratings });
 
+// Tirage reproductible : le test ne dépend pas du hasard.
+const seeded = (n: number) => () => ((n = (n * 16807) % 2147483647) / 2147483647);
+
 describe("goûts du foyer", () => {
   const moules = find("Moules-frites"), carbonara = find("Pâtes carbonara");
   it("reconnaît les groupes d'ingrédients", () => {
@@ -40,7 +43,7 @@ describe("goûts du foyer", () => {
   it("le planificateur évite les « jamais » et applique les allergies de chacun", () => {
     const people = [person({ id: "a", never: ["champignons"] }), person({ id: "b", allergens: ["gl"] })];
     const settings = { ...DEFAULT_SETTINGS, options: { ...DEFAULT_SETTINGS.options, seasonal: false } };
-    const ctx = { idx: BASE_INDEX, settings, favorites: [], stock: new Map(), now: new Date(2026, 10, 14), rand: Math.random, tastes: T(people),
+    const ctx = { idx: BASE_INDEX, settings, favorites: [], stock: new Map(), now: new Date(2026, 10, 14), rand: seeded(7), tastes: T(people),
       cost: { idx: BASE_INDEX, book: emptyBook(), stores: settings.stores, pref: "cheapest" as const, organic: false } };
     let mush = 0;
     for (let k = 0; k < 10; k++) {

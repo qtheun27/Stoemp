@@ -119,7 +119,7 @@ export async function generateWeek(s: StoreState): Promise<string | undefined> {
   const res = planWeek([...pool, ...fresh], planCtx(s), fresh, cookable(s.recipes.values()));
   if (!res.slots.length) throw new Error(res.warning);
   // Un accompagnement proposé d'office pour chaque plat où il est interchangeable (modifiable dans la fiche).
-  const slots = assignSides(res.slots, s.recipes, s.idx);
+  const slots = assignSides(res.slots, s.recipes, s.idx, Math.random, s.prefs.sides);
   await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots, persons: portionsOf(eatersOf(s.settings)), warning: res.warning || null, generatedAt: Date.now() });
   return note || res.warning;
 }
@@ -144,7 +144,9 @@ export async function swapSlot(s: StoreState, k: number, useAi: boolean) {
   if (useAi && !sl.light && sl.meal !== "matin" && s.online && s.app.features.ai) { try { r = (await aiRecipes(s, 1))[0] || null; } catch { r = null; } }
   if (!r) r = pickOne(poolFor(sl, cookable(s.recipes.values())), planCtx(s), new Set(slots.map((x) => x.recipeId)));
   if (!r) throw new Error("Aucun autre repas possible avec ces options.");
-  slots[k] = { ...slots[k], recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false };
+  const { side: _side, ...rest } = slots[k];
+  slots[k] = { ...rest, recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false };
+  slots[k] = assignSides([slots[k]], s.recipes, s.idx, Math.random, s.prefs.sides)[0];
   await saveSlots(s, slots);
 }
 
@@ -161,7 +163,7 @@ export async function setSlotLight(s: StoreState, k: number, light: boolean) {
   if (!r) throw new Error(light ? "Aucun repas léger possible avec ces options." : "Aucun repas complet possible avec ces options.");
   const { side: _side, ...rest } = sl;
   slots[k] = { ...rest, light, recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false, leftovers: false };
-  await saveSlots(s, assignSides(slots, s.recipes, s.idx).map((x, i) => (i === k ? x : slots[i])));
+  await saveSlots(s, assignSides(slots, s.recipes, s.idx, Math.random, s.prefs.sides).map((x, i) => (i === k ? x : slots[i])));
   const key = `${sl.day}-${sl.meal}`, cur = new Set(s.settings.lightSlots || []);
   if (light) cur.add(key); else cur.delete(key);
   await saveSettings(s.hid!, { lightSlots: [...cur] });
@@ -478,8 +480,10 @@ export const rateRecipe = (s: StoreState, personId: string, recipeId: string, ra
   setDoc(hh(s.hid!, "meta", "tastes"), { ratings: { [personId]: { [recipeId]: rating } } }, { merge: true });
 
 /** Accompagnement d'un repas de la semaine (null = celui d'origine du plat). */
+/** Choisit l'accompagnement d'un repas et retient l'accord pour ce plat (proposé d'office les semaines suivantes). */
 export async function setSide(s: StoreState, k: number, side: string | null) {
   const slots = [...(s.week?.slots || [])];
   slots[k] = { ...slots[k], side };
   await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots }, { merge: true });
+  await setDoc(hh(s.hid!, "meta", "prefs"), { sides: { [slots[k].recipeId]: side } }, { merge: true });
 }
