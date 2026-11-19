@@ -120,6 +120,7 @@ v Œufs cocotte aux champignons
 
 ## accompagnement
 # Gratin dauphinois | 6 | 90 | AH
+n
 + Pommes de terre 1200g; Lait 500ml; Crème liquide 300ml; Ail 0.1pc; Beurre 20g; Muscade 0.25cc
 - Éplucher les pommes de terre et les couper en fines rondelles, sans les laver.
 - Les cuire 10 minutes dans le lait et la crème avec l'ail écrasé, la muscade, sel et poivre, en remuant doucement.
@@ -161,6 +162,7 @@ n
 - Ajouter le basilic ciselé au moment de servir ; elle est encore meilleure le lendemain.
 
 # Pommes de terre boulangère | 6 | 80 | AH
+n
 + Pommes de terre 1200g; Oignon 2pc; Bouillon de légumes 400ml; Thym 0.25pc; Beurre 40g
 - Éplucher les pommes de terre et les couper en fines rondelles ; émincer les oignons.
 - Faire fondre les oignons 10 minutes dans la moitié du beurre.

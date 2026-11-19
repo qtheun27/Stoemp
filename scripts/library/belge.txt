@@ -105,6 +105,7 @@ v Soupe aux pois cassés et tofu fumé
 
 ## accompagnement
 # Frites belges maison | 4 | 60 | T
+n
 + Pommes de terre 1200g; Huile de tournesol 2000ml
 - Éplucher des pommes de terre farineuses (bintje) et les couper en bâtonnets d'1 cm.
 - Les rincer à l'eau froide pour retirer l'amidon, puis les sécher soigneusement dans un essuie.
@@ -149,6 +150,7 @@ n
 - Découvrir et laisser réduire jusqu'à ce que les carottes soient glacées ; parsemer de persil haché.
 
 # Purée de pommes de terre maison | 4 | 35 | T
+n
 + Pommes de terre 1000g; Lait 250ml; Beurre 60g; Muscade 0.25cc
 - Cuire les pommes de terre farineuses épluchées en morceaux 20 minutes à l'eau salée.
 - Égoutter et les sécher 1 minute sur le feu.

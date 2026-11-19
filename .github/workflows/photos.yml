@@ -1,0 +1,44 @@
+name: Photos des plats
+# Rattrapage automatique des photos : toutes les 2 heures, un lot de 300 au plus (une photo à la fois, pause entre chaque).
+# S'arrête de lui-même quand tous les plats ont leur photo (rien n'est alors facturé) ; plafond mensuel PHOTOS_MAX_MOIS.
+on:
+  schedule:
+    - cron: "17 */2 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+  actions: read
+concurrency:
+  group: photos
+  cancel-in-progress: false
+env:
+  WIF_PROVIDER: projects/187935869834/locations/global/workloadIdentityPools/github/providers/github
+  WIF_SA: stoemp-ci@stoemp-app.iam.gserviceaccount.com
+jobs:
+  # Pas deux générations en même temps (un lot lancé à la main par Maintenance) : on passe son tour.
+  libre:
+    runs-on: ubuntu-latest
+    outputs:
+      busy: ${{ steps.busy.outputs.busy }}
+    steps:
+      - id: busy
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          n=$(gh run list -R "${{ github.repository }}" --workflow maintenance.yml --status in_progress --json databaseId --jq length)
+          echo "busy=$([ "$n" -gt 0 ] && echo 1 || echo 0)" >> "$GITHUB_OUTPUT"
+  lot:
+    needs: libre
+    if: needs.libre.outputs.busy == '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm --prefix functions ci
+      - uses: google-github-actions/auth@v2
+        with: { workload_identity_provider: "${{ env.WIF_PROVIDER }}", service_account: "${{ env.WIF_SA }}" }
+      - name: Lot de photos
+        run: COUNT=300 PHOTOS_MAX_MOIS=1100 npx tsx scripts/maintenance/images.mts
