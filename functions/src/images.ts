@@ -38,11 +38,17 @@ export function dishPrompt(r: RecipeLike, nameOf: (id: string) => string | undef
 }
 
 let auth: GoogleAuth | null = null;
-/** Une image générée (JPEG ou PNG), en 4:3, via l'appel generateContent de Gemini sur Vertex AI (point d'accès « global »). */
-export async function generateImage(prompt: string, project = process.env.GCLOUD_PROJECT || process.env.GOOGLE_CLOUD_PROJECT || "stoemp-app", model = IMAGE_MODEL): Promise<Buffer> {
+/**
+ * Points d'accès essayés tour à tour : la capacité de ce modèle est partagée et souvent saturée sur un seul point d'accès.
+ * Une région qui ne propose pas le modèle est retirée de la liste ; « quota » = on passe simplement à la suivante.
+ */
+export const IMAGE_LOCATIONS = (process.env.DISH_IMAGE_LOCATIONS || "global,europe-west1,europe-west4,us-central1,us-east4").split(",").map((x) => x.trim()).filter(Boolean);
+const host = (loc: string) => (loc === "global" ? "aiplatform.googleapis.com" : `${loc}-aiplatform.googleapis.com`);
+/** Une image générée (JPEG ou PNG), en 4:3, via l'appel generateContent de Gemini sur Vertex AI. */
+export async function generateImage(prompt: string, project = process.env.GCLOUD_PROJECT || process.env.GOOGLE_CLOUD_PROJECT || "stoemp-app", model = IMAGE_MODEL, location = "global"): Promise<Buffer> {
   auth ??= new GoogleAuth({ scopes: ["https://www.googleapis.com/auth/cloud-platform"] });
   const client = await auth.getClient();
-  const url = `https://aiplatform.googleapis.com/v1/projects/${project}/locations/global/publishers/google/models/${model}:generateContent`;
+  const url = `https://${host(location)}/v1/projects/${project}/locations/${location}/publishers/google/models/${model}:generateContent`;
   type Part = { text?: string; inlineData?: { mimeType: string; data: string } };
   const res = await client.request<{ candidates?: { content?: { parts?: Part[] }; finishReason?: string }[]; promptFeedback?: { blockReason?: string } }>({
     url, method: "POST",
@@ -55,20 +61,20 @@ export async function generateImage(prompt: string, project = process.env.GCLOUD
 }
 
 /** Génère, compresse et enregistre la photo d'un plat ; renvoie la taille des deux versions. */
-export async function makeDishImage(id: string, r: RecipeLike, nameOf: (id: string) => string | undefined, db = getFirestore()) {
+export async function makeDishImage(id: string, r: RecipeLike, nameOf: (id: string) => string | undefined, db = getFirestore(), location = "global") {
   const prompt = dishPrompt(r, nameOf);
   const t0 = Date.now();
   try {
-    const raw = await generateImage(prompt);
+    const raw = await generateImage(prompt, undefined, IMAGE_MODEL, location);
     const full = await sharp(raw).resize(640, 480, { fit: "cover" }).webp({ quality: 70 }).toBuffer();
     const thumb = await sharp(raw).resize(160, 120, { fit: "cover" }).webp({ quality: 62 }).toBuffer();
     const at = Date.now();
     await db.collection("dishImages").doc(id).set({ d: `data:image/webp;base64,${full.toString("base64")}`, model: IMAGE_MODEL, prompt, at });
     await db.collection("dishThumbs").doc(id).set({ d: `data:image/webp;base64,${thumb.toString("base64")}`, at });
-    db.collection("aiLogs").add({ task: "dishImage", model: IMAGE_MODEL, ms: Date.now() - t0, at, cost: IMAGE_COST, recipeId: id }).catch(() => {});
+    db.collection("aiLogs").add({ task: "dishImage", model: IMAGE_MODEL, ms: Date.now() - t0, at, cost: IMAGE_COST, recipeId: id, location }).catch(() => {});
     return { full: full.length, thumb: thumb.length };
   } catch (e) {
-    db.collection("aiLogs").add({ task: "dishImage", model: IMAGE_MODEL, ms: Date.now() - t0, at: Date.now(), cost: 0, error: String((e as Error).message || e).slice(0, 300), recipeId: id }).catch(() => {});
+    db.collection("aiLogs").add({ task: "dishImage", model: IMAGE_MODEL, ms: Date.now() - t0, at: Date.now(), cost: 0, error: String((e as Error).message || e).slice(0, 300), recipeId: id, location }).catch(() => {});
     throw e;
   }
 }

@@ -10,6 +10,7 @@ import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
+import { parseGeneric } from "./readers/generic";
 import { HOUSEHOLD, isBabyFood, isBabyItem, isNonFood, isNonFoodPage } from "./readers/nonfood";
 import { aliasFits, matchItem, proteinClash, similarItem, similarity } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
@@ -391,10 +392,10 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
   await pruneCaptures().catch(() => {});
   let items = await loadItems();
 
-  // 1. Lecture sans IA quand on connaît le format de l'enseigne.
-  const parsed: ShopProduct[] = d.store === "colruyt" ? parseColruyt(d.text) : [];
+  // 1. Lecture sans IA : lecteur Colruyt, sinon lecteur générique (prix d'abord comme Renmans, ou nom d'abord).
+  const parsed: ShopProduct[] = d.store === "colruyt" ? parseColruyt(d.text) : parseGeneric(d.text);
   if (parsed.length >= 3) {
-    const shop = colruytShop(d.text);
+    const shop = d.store === "colruyt" ? colruytShop(d.text) : null;
     const rows: Row[] = [];
     const unmatched: ShopProduct[] = [];
     // Deux mondes qui ne se mélangent jamais : la nourriture, et « Hygiène & entretien » (animaux, nettoyage, beauté).
