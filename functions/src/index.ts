@@ -10,6 +10,7 @@ import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
+import { HOUSEHOLD, isNonFood, isNonFoodPage } from "./readers/nonfood";
 import { aliasFits, matchItem, similarItem, similarity } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
 import { rebuildPriceBook } from "./pricebook";
@@ -396,8 +397,12 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     const shop = colruytShop(d.text);
     const rows: Row[] = [];
     const unmatched: ShopProduct[] = [];
+    // Deux mondes qui ne se mélangent jamais : la nourriture, et « Hygiène & entretien » (animaux, nettoyage, beauté).
+    const pageNonFood = isNonFoodPage(d.url);
+    const nonFood = (p: ShopProduct) => pageNonFood || isNonFood(p.name);
+    const world = (nf: boolean) => items.filter((i) => (i.category === HOUSEHOLD) === nf);
     for (const p of parsed) {
-      const m = matchItem(p.name, p.packSize, p.packUnit, items);
+      const m = matchItem(p.name, p.packSize, p.packUnit, world(nonFood(p)));
       if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
       else unmatched.push(p);
     }
@@ -411,10 +416,14 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
         for (const c of r.items) {
           const p = batch[c.index];
           if (!p || !c.keep) continue;
+          // Non alimentaire (repéré par son nom, sa page ou par l'IA) : rangé dans « Hygiène & entretien », jamais près d'un aliment.
+          const nf = nonFood(p) || c.category === HOUSEHOLD;
+          if (nf) c.category = HOUSEHOLD as typeof c.category;
           const before = items.length;
-          // Un article très proche existe déjà : on le réutilise (le nom du produit devient un alias).
-          const twin = similarItem(c.name, c.unit, c.category, items);
+          // Un article très proche existe déjà dans le même monde : on le réutilise (le nom du produit devient un alias).
+          const twin = similarItem(c.name, c.unit, c.category, world(nf));
           const it = twin || (await createItem(c, p.name));
+          if ((it.category === HOUSEHOLD) !== nf) continue;
           // Article déjà connu : on retient le nom exact du produit (plus besoin de l'IA la prochaine fois),
           // et le nom générique proposé seulement s'il convient vraiment (sinon « Saucisses de poulet » finirait en « Filet de poulet »).
           const known = items.some((x) => x.id === it.id);
@@ -451,7 +460,8 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
       });
       for (const x of m.matches) {
         const p = usable[x.index], item = x.itemId ? items.find((it) => it.id === x.itemId) : undefined;
-        if (p && item && item.unit === p.packUnit) rows.push({ itemId: item.id, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), size: p.packSize!, unit: item.unit, price: p.price, promo: p.promo });
+        const nf = isNonFoodPage(d.url) || isNonFood([p?.brand, p?.name].filter(Boolean).join(" "));
+        if (p && item && item.unit === p.packUnit && (item.category === HOUSEHOLD) === nf) rows.push({ itemId: item.id, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), size: p.packSize!, unit: item.unit, price: p.price, promo: p.promo });
       }
     }));
     res.filter((r) => r.status === "rejected").forEach((r) => logger.warn("Morceau illisible", (r as PromiseRejectedResult).reason));
@@ -476,7 +486,9 @@ export const readReceipt = onCall({ ...ai, memory: "1GiB" }, async (req) => {
   const items = await loadItems();
   const lines = r.lines.map((l) => {
     const item = findItem(items, l.name) || findItem(items, l.label);
-    return { ...l, itemId: item?.id || null };
+    // Un produit pour animaux ou d'entretien n'est jamais relié à un aliment (et l'inverse).
+    const nf = isNonFood(l.name) || isNonFood(l.label);
+    return { ...l, itemId: item && (item.category === HOUSEHOLD) === nf ? item.id : null };
   });
   return { store: r.store, date: r.date, lines };
 });

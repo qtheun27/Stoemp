@@ -7,7 +7,7 @@ on:
         description: "Tâche"
         required: true
         type: choice
-        options: [seed, library, rebuild-pricebook, oneoff, images-setup, images-test, images]
+        options: [seed, library, rebuild-pricebook, oneoff, images-setup, images-test, images, tri-prix, tri-prix-appliquer]
       count:
         description: "Nombre de photos (tâche images)"
         required: false
@@ -39,4 +39,6 @@ jobs:
             images-setup) npx tsx scripts/maintenance/images-setup.mts ;;
             images-test) TEST=1 npx tsx scripts/maintenance/images.mts ;;
             images) COUNT="${{ inputs.count }}" npx tsx scripts/maintenance/images.mts ;;
+            tri-prix) npx tsx scripts/maintenance/tri-prix.mts ;;
+            tri-prix-appliquer) APPLY=1 npx tsx scripts/maintenance/tri-prix.mts ;;
           esac
