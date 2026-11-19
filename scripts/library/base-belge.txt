@@ -130,7 +130,7 @@ v Vol-au-vent aux champignons et pois chiches
 # Lapin à la bière et aux pruneaux | 4 | 120 | AH
 r
 + Bière brune 500ml; Oignon 2pc; Beurre 40g; Farine 1cs; Pruneaux 160g; Moutarde 2cs; Pain d'épices 2pc; Thym 0.25pc; Feuille de laurier 0.4g; Cassonade 1cs; Pommes de terre 800g
-= Cuisse de lapin 4pc
+= Cuisse de lapin 1000g
 ~ Haricots blancs (boîte) 600g; Champignons de Paris 400g
 v Mijoté de haricots blancs à la bière et aux pruneaux
 - Saler et poivrer les cuisses de lapin, les fariner et les dorer dans le beurre en cocotte ; réserver.

@@ -263,7 +263,7 @@ Croquettes pour chat|dr|g|2000|7.99||||nourriture chat|
 Chorizo|vi|g|200|3.29|P|30||chorizo doux|
 Bacon|vi|g|150|2.29|P|10|||
 Crevettes grises|vi|g|100|5.99|LP|3|cr|crevettes de la mer du nord|
-Cuisse de lapin|vi|pc|1|3.49|LP|4||lapin|
+Cuisse de lapin|vi|g|250|3.49|LP|4||lapin|
 Filet de truite|vi|g|250|5.49|LP|3|po|truite|
 Escalope de veau|vi|g|300|6.99|LP|3||veau|
 Rôti de porc|vi|g|800|7.99|LP|4||roti de porc|
