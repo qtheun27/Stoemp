@@ -9,6 +9,8 @@
 //   v Carbonnade de seitan et frites                   ← nom de la version végé
 //   l                                                  ← repas léger / déjà complet (plat sans féculent, voulu)
 //   r                                                  ← remplace le plat de base du même nom (version détaillée)
+//   o Ancien nom                                       ← plat renommé : garde la fiche, la photo et les semaines déjà prévues
+//   s purée                                            ← accompagnement d'origine, affiché tant qu'on n'en choisit pas un autre
 //   - Étape 1 …                                        ← étapes, dans l'ordre
 //
 // Aucune quantité « par personne » à calculer à la main : l'import divise par le nombre de parts.
@@ -24,7 +26,7 @@ import { similarity } from "../../functions/src/readers/match";
 export interface LibIng { itemId: string; qtyPerPerson: number; spoon?: "cs" | "cc" }
 export interface HandRecipe {
   id: string; name: string; vegName: string | null; servings: number; prepMin: number; seasons: Season[];
-  cuisine: Cuisine; course: Course; light: boolean; replaces?: string; ingredients: LibIng[]; meat: LibIng[]; vegSwap: LibIng[]; steps: string[]; file: string; line: number;
+  cuisine: Cuisine; course: Course; light: boolean; replaces?: string; oldName?: string; sideLabel?: string; wantsReplace?: boolean; ingredients: LibIng[]; meat: LibIng[]; vegSwap: LibIng[]; steps: string[]; file: string; line: number;
 }
 
 export const LIB_DIR = new URL(".", import.meta.url).pathname;
@@ -48,6 +50,10 @@ export function parseLibrary(text: string, file: string, idx: ItemIndex = BASE_I
   const close = () => {
     if (!cur) return;
     const r = cur;
+    const key = r.oldName || r.name;
+    if (r.oldName) r.id = `lib-${slug(r.oldName)}`.slice(0, 120);
+    if (r.wantsReplace) { const base = BASE_RECIPES.find((b) => norm(b.name) === norm(key)); if (base) r.replaces = base.id; else err(r.line, `« r » : aucun plat de base nommé « ${key} »`); }
+    delete r.wantsReplace;
     r.ingredients = ings(r.raw.g, r.line, r.servings); r.meat = ings(r.raw.m, r.line, r.servings); r.vegSwap = ings(r.raw.w, r.line, r.servings);
     const { raw: _raw, ...clean } = r;
     recipes.push(clean);
@@ -78,10 +84,9 @@ export function parseLibrary(text: string, file: string, idx: ItemIndex = BASE_I
     else if (tag === "~") c.raw.w += ";" + rest;
     else if (tag === "v") c.vegName = rest;
     else if (tag === "l" && !rest) c.light = true;
-    else if (tag === "r" && !rest) {
-      const base = BASE_RECIPES.find((b) => norm(b.name) === norm(c.name));
-      if (base) c.replaces = base.id; else err(n, `« r » : aucun plat de base nommé « ${c.name} »`);
-    }
+    else if (tag === "r" && !rest) c.wantsReplace = true;
+    else if (tag === "o" && rest) c.oldName = rest;
+    else if (tag === "s" && rest) c.sideLabel = rest;
     else if (tag === "-") c.steps.push(rest);
     else err(n, `ligne inconnue : ${line}`);
   });

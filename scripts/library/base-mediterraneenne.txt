@@ -96,7 +96,9 @@ v Salade niçoise aux pois chiches
 - Disposer la salade, les tomates en quartiers, les légumes, l'oignon émincé, les olives, le thon et les anchois.
 - Arroser de vinaigrette, poser les œufs et le basilic. Version végé : pois chiches.
 
-# Gambas à l'ail, riz au citron | 4 | 30 | T
+# Gambas à l'ail | 4 | 30 | T
+o Gambas à l'ail, riz au citron
+s riz au citron
 r
 + Riz 300g; Ail 0.4pc; Persil 0.5pc; Citron 2pc; Paprika 1cc; Piment 0.5pc; Huile d'olive 100ml; Vin blanc 60ml
 = Scampis 600g
@@ -141,7 +143,9 @@ v Gaspacho et tartines au chèvre
 - Griller des tranches de pain, les frotter d'ail et d'un filet d'huile, et les couvrir de jambon cru.
 - Servir le gaspacho glacé avec les tartines. Version végé : tartines de chèvre.
 
-# Boulettes à la grecque (keftedes) et riz | 4 | 50 | T
+# Boulettes à la grecque (keftedes) | 4 | 50 | T
+o Boulettes à la grecque (keftedes) et riz
+s riz
 r
 + Riz 300g; Yaourt grec 250g; Menthe 0.5pc; Persil 0.25pc; Oignon 1pc; Ail 0.1pc; Pain de mie 2pc; Oeufs 1pc; Origan 2g; Tomates 400g; Concombre 1pc; Citron 1pc; Huile d'olive 5cs
 = Haché de bœuf 550g
@@ -174,7 +178,9 @@ r
 - Ajouter la feta émiettée et les herbes ciselées.
 - Servir à température ambiante avec les pitas grillées.
 
-# Sardines grillées et salade de pommes de terre | 4 | 35 | E
+# Sardines grillées | 4 | 35 | E
+o Sardines grillées et salade de pommes de terre
+s salade de pommes de terre
 r
 + Pommes de terre grenaille 800g; Oignon rouge 1pc; Persil 0.5pc; Citron 2pc; Huile d'olive 5cs; Vinaigre 1cs; Salade verte 1pc; Ail 0.1pc
 = Sardines fraîches 800g

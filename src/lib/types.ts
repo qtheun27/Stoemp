@@ -64,6 +64,8 @@ export interface Recipe {
   createdAt?: number;
   /** Nom de l'accompagnement choisi (recette effective d'un repas, voir sides.ts). */
   sideName?: string;
+  /** Accompagnement d'origine (« purée », « frites »…), affiché tant qu'on n'en choisit pas un autre. */
+  sideLabel?: string | null;
 }
 
 /** Gamme de produits du foyer : premier prix, marque du magasin, ou grandes marques. */

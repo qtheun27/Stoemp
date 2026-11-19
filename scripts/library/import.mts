@@ -50,7 +50,7 @@ async function main() {
     const prev = byId.get(r.id);
     const doc = {
       name: r.name, vegName: r.vegName, prepMin: r.prepMin, seasons: r.seasons, ingredients: r.ingredients, meat: r.meat, vegSwap: r.vegSwap, steps: r.steps,
-      cuisine: r.cuisine, course: r.course, servings: r.servings, ...(r.light ? { light: true } : {}), source: "base", lib: true, householdId: null,
+      cuisine: r.cuisine, course: r.course, servings: r.servings, ...(r.light ? { light: true } : {}), sideLabel: r.sideLabel || null, source: "base", lib: true, householdId: null,
       deleted: prev ? !!prev.get("deleted") : false, createdAt: prev?.get("createdAt") || Date.now(), author: "chef",
     };
     b.set(db.collection("recipes").doc(r.id), clean(doc));
@@ -66,7 +66,7 @@ async function main() {
   for (const d of all.sort((a, z) => (a.get("createdAt") || 0) - (z.get("createdAt") || 0))) {
     const r = d.data(), c = r.cuisine as string;
     if (!byCuisine.has(c)) byCuisine.set(c, []);
-    byCuisine.get(c)!.push({ i: d.id, n: r.name, v: r.vegName ?? null, t: r.prepMin, s: (r.seasons || []).join(""), c, k: r.course || "plat", ...(r.light ? { lt: 1 } : {}),
+    byCuisine.get(c)!.push({ i: d.id, n: r.name, v: r.vegName ?? null, t: r.prepMin, s: (r.seasons || []).join(""), c, k: r.course || "plat", ...(r.light ? { lt: 1 } : {}), ...(r.sideLabel ? { sd: r.sideLabel } : {}),
       g: t(r.ingredients), m: t(r.meat), w: t(r.vegSwap) });
   }
   const chunks = new Map<string, unknown[]>();

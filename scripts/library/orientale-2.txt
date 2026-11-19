@@ -103,7 +103,9 @@ v Rfissa aux pois chiches
 - Réchauffer les lanières de msemen à la vapeur, les dresser sur un grand plat et les arroser généreusement de bouillon.
 - Disposer le poulet et les lentilles dessus. Version végé : pois chiches mijotés dans le bouillon épicé à la place du poulet.
 
-# Kafta au tahini et pommes de terre | 4 | 60 | T
+# Kafta au tahini | 4 | 60 | T
+o Kafta au tahini et pommes de terre
+s pommes de terre
 + Pommes de terre 600g; Oignon 1pc; Persil 0.5pc; Tahini 100g; Citron 1pc; Ail 0.1pc; Cannelle 0.5cc; Pignons de pin 20g
 = Haché de bœuf 600g
 ~ Pois chiches (boîte) 400g; Chapelure 40g

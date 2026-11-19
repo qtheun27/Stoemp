@@ -22,7 +22,9 @@ v Plaki de haricots et feta
 - Poser le poisson, couvrir du reste de sauce et de rondelles de citron.
 - Cuire encore 20 minutes. Version végé : haricots et feta à la place du poisson.
 
-# Bifteki et frites | 4 | 45 | E
+# Bifteki | 4 | 45 | E
+o Bifteki et frites
+s frites
 + Oignon 1pc; Pain de mie 2pc; Origan 1cc; Menthe 0.25pc; Feta 120g; Pommes de terre 1000g; Huile de tournesol 2000ml; Yaourt grec 150g; Concombre 0.5pc
 = Haché porc et bœuf 600g
 ~ Pois chiches (boîte) 400g; Chapelure 40g

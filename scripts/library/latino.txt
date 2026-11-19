@@ -206,7 +206,9 @@ v Pibil de tofu
 - Faire mariner les oignons émincés dans le vinaigre, le jus de l'autre citron vert et du sel au moins 30 minutes.
 - Servir dans les tortillas chaudes avec les oignons. Version végé : tofu émietté mariné 2 h et cuit 30 minutes dans la sauce.
 
-# Bavette sauce chimichurri et pommes de terre | 4 | 50 | EA
+# Bavette sauce chimichurri | 4 | 50 | EA
+o Bavette sauce chimichurri et pommes de terre
+s pommes de terre
 + Pommes de terre 1000g; Persil 1pc; Origan 1cc; Ail 0.3pc; Piment 1pc; Vinaigre 3cs; Huile d'olive 120ml; Salade verte 1pc
 = Bavette de bœuf 800g
 ~ Provolone 400g

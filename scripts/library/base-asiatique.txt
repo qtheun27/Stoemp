@@ -74,7 +74,9 @@ v Ramen au tofu fumé
 - Cuire les nouilles à part et les répartir dans de grands bols.
 - Verser le bouillon, poser le porc rôti en tranches, l'œuf coupé en deux, les oignons nouveaux et un filet d'huile de sésame. Version végé : bouillon de légumes et tofu fumé.
 
-# Poulet teriyaki, riz et légumes | 4 | 30 | T
+# Poulet teriyaki aux légumes | 4 | 30 | T
+o Poulet teriyaki, riz et légumes
+s riz
 r
 + Riz 300g; Sauce soja 5cs; Mirin 4cs; Miel 2cs; Gingembre 15g; Pois mange-tout 300g; Carottes 150g; Graines de sésame 1cs; Huile de tournesol 1cs
 = Cuisse de poulet 4pc
@@ -122,7 +124,9 @@ v Riz sauté au tofu fumé
 - Ajouter le riz et le sauter à feu vif en l'égrenant 4 minutes.
 - Remettre les scampis, assaisonner de soja et finir avec les oignons nouveaux. Version végé : tofu fumé.
 
-# Saumon laqué, riz et chou chinois | 4 | 30 | T
+# Saumon laqué au chou chinois | 4 | 30 | T
+o Saumon laqué, riz et chou chinois
+s riz
 r
 + Riz 300g; Sauce soja 4cs; Miel 2cs; Mirin 2cs; Chou chinois 600g; Gingembre 20g; Ail 0.1pc; Graines de sésame 1cs; Huile de sésame 1cs
 = Pavé de saumon 600g
@@ -143,7 +147,9 @@ r
 - Hors du feu, délayer le miso dans une louche de bouillon et le reverser (il ne doit pas bouillir), ajouter le soja et les épinards.
 - Verser sur les nouilles et garnir d'oignons nouveaux et de nori émietté.
 
-# Porc au caramel et riz | 4 | 50 | T
+# Porc au caramel | 4 | 50 | T
+o Porc au caramel et riz
+s riz
 r
 + Riz 300g; Cassonade 80g; Nuoc-mâm 4cs; Sauce soja 1cs; Oignon 1pc; Ail 0.2pc; Gingembre 15g; Haricots verts 400g; Oignons nouveaux 2pc
 = Filet de porc 600g
@@ -275,7 +281,9 @@ v Mapo tofu aux champignons
 - Ajouter le tofu délicatement, mijoter 5 minutes, puis lier avec la fécule délayée.
 - Parsemer d'oignons nouveaux et du poivre de Sichuan torréfié et moulu et servir avec le riz. Version végé : champignons hachés et bouillon de légumes.
 
-# Bulgogi de bœuf et riz | 4 | 40 | T
+# Bulgogi de bœuf | 4 | 40 | T
+o Bulgogi de bœuf et riz
+s riz
 r
 + Sauce soja 5cs; Cassonade 2cs; Ail 0.3pc; Gingembre 10g; Huile de sésame 2cs; Poires 200g; Oignon 1pc; Oignons nouveaux 3pc; Riz 300g; Concombre 1pc; Kimchi 200g; Graines de sésame 1cs; Salade verte 1pc
 = Steak de bœuf 550g
@@ -311,7 +319,9 @@ v Nasi goreng au tofu
 - Ajouter le riz, le kecap manis et le soja ; sauter 4 minutes à feu vif.
 - Servir avec un œuf au plat, des tranches de concombre et de tomate. Version végé : tofu fumé.
 
-# Poulet satay et riz | 4 | 45 | T
+# Poulet satay | 4 | 45 | T
+o Poulet satay et riz
+s riz
 r
 + Beurre de cacahuète 120g; Lait de coco 250ml; Sauce soja 3cs; Curry en poudre 2cc; Cassonade 1cs; Citron vert 1pc; Ail 0.1pc; Riz 300g; Concombre 1pc; Cacahuètes 40g; Vinaigre de riz 2cs
 = Filet de poulet 600g

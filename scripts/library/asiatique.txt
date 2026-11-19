@@ -252,7 +252,9 @@ v Kimchi jjigae aux champignons
 - Ajouter le tofu en tranches et cuire 5 minutes.
 - Servir bouillant avec l'oignon nouveau et le riz. Version végé : champignons à la place du porc.
 
-# Karaage et riz | 4 | 150 | T
+# Karaage | 4 | 150 | T
+o Karaage et riz
+s riz
 + Sauce soja 3cs; Mirin 1cs; Gingembre 15g; Ail 0.2pc; Fécule de maïs 80g; Huile de tournesol 1000ml; Citron 1pc; Mayonnaise 3cs; Riz 300g; Chou chinois 300g
 = Cuisse de poulet 6pc
 ~ Tofu ferme 500g

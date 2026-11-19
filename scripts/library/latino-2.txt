@@ -160,7 +160,9 @@ v Provoleta en pain
 - Ouvrir les pains et les griller légèrement.
 - Garnir de chorizo, de chimichurri et d'une salade tomate-oignon. Version végé : tranches de provolone grillées.
 
-# Milanesa a la napolitana et purée | 4 | 45 | T
+# Milanesa a la napolitana | 4 | 45 | T
+o Milanesa a la napolitana et purée
+s purée
 + Oeufs 2pc; Chapelure 150g; Farine 50g; Sauce tomate 200ml; Mozzarella 200g; Jambon 4pc; Origan 1cc; Pommes de terre 1000g; Lait 200ml; Beurre 50g
 = Escalope de veau 600g
 ~ Aubergine 600g

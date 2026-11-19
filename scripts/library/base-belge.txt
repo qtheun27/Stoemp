@@ -3,6 +3,7 @@
 
 ## plat
 # Carbonnade flamande | 4 | 200 | AH
+s frites
 r
 + Oignon 3pc; Beurre 40g; Farine 2cs; Bière brune 750ml; Bouillon de bœuf 250ml; Cassonade 2cs; Pain d'épices 2pc; Moutarde 2cs; Thym 0.25pc; Feuille de laurier 0.4g; Vinaigre 1cs; Pommes de terre 1200g
 = Bœuf à braiser 1000g
@@ -91,7 +92,9 @@ v Soupe poireaux et croque tomate
 - Croques : garnir le pain de jambon et d'emmental, beurrer l'extérieur et dorer 3 minutes par face à la poêle.
 - Servir la soupe bien chaude avec les croques coupés en deux. Version végé : tranches de tomate à la place du jambon.
 
-# Boulets à la liégeoise et frites | 4 | 75 | T
+# Boulets à la liégeoise | 4 | 75 | T
+o Boulets à la liégeoise et frites
+s frites
 r
 + Pain de mie 2pc; Lait 100ml; Oeufs 1pc; Oignon 3pc; Beurre 40g; Sirop de Liège 4cs; Bouillon de bœuf 400ml; Vinaigre 2cs; Cassonade 1cs; Thym 0.25pc; Feuille de laurier 0.4g; Pommes de terre 1200g; Huile de tournesol 2000ml; Salade verte 1pc
 = Haché porc et bœuf 700g
@@ -115,7 +118,9 @@ v Poêlée champignons-pois chiches et frites
 - Pendant ce temps, cuire les frites en deux bains (160 °C puis 180 °C).
 - Parsemer les moules de persil et servir dans la marmite avec les frites et la mayonnaise. Version végé : poêlée de champignons et de pois chiches au céleri et au vin blanc.
 
-# Vol-au-vent et frites | 4 | 60 | T
+# Vol-au-vent | 4 | 60 | T
+o Vol-au-vent et frites
+s frites
 r
 + Champignons de Paris 300g; Beurre 50g; Farine 50g; Bouillon de volaille 600ml; Crème liquide 150ml; Oeufs 1pc; Citron 0.5pc; Pâte feuilletée 2pc; Pommes de terre 1200g; Huile de tournesol 2000ml
 = Filet de poulet 500g; Boulettes 200g
@@ -151,7 +156,9 @@ v Tomates farcies aux œufs mimosa
 - Garnir généreusement les tomates, reposer le chapeau et parsemer de persil.
 - Servir bien frais sur un lit de salade avec du pain gris beurré. Version végé : œufs durs écrasés à la mayonnaise.
 
-# Filet américain et frites | 4 | 50 | T
+# Filet américain | 4 | 50 | T
+o Filet américain et frites
+s frites
 r
 + Oignon rouge 1pc; Câpres 20g; Cornichons 40g; Persil 0.25pc; Pommes de terre 1200g; Huile de tournesol 2000ml; Salade verte 1pc; Mayonnaise 4cs
 = Américain préparé 600g
@@ -175,7 +182,9 @@ v Hochepot aux haricots blancs
 - Servir la viande et les légumes sur un grand plat, un bol de bouillon à côté et la moutarde.
 - Version végé : légumes cuits 50 minutes dans le bouillon de légumes, haricots blancs ajoutés à la fin.
 
-# Chicons braisés, jambon et purée | 4 | 50 | AH
+# Chicons braisés au jambon | 4 | 50 | AH
+o Chicons braisés, jambon et purée
+s purée
 r
 + Chicons 8pc; Beurre 70g; Cassonade 1cc; Citron 0.5pc; Pommes de terre 800g; Lait 200ml; Muscade 0.25cc
 = Jambon 8pc
@@ -187,7 +196,9 @@ v Chicons braisés, œufs mollets et purée
 - Réchauffer le jambon quelques instants dans la sauteuse avec les chicons.
 - Servir les chicons avec le jambon et la purée. Version végé : œufs mollets (6 minutes) à la place du jambon.
 
-# Steak sauce poivre et frites | 4 | 45 | T
+# Steak sauce poivre | 4 | 45 | T
+o Steak sauce poivre et frites
+s frites
 r
 + Poivre 2cc; Échalote 2pc; Beurre 30g; Crème liquide 200ml; Bouillon de bœuf 100ml; Pommes de terre 1200g; Huile de tournesol 2000ml; Salade verte 1pc
 = Steak de bœuf 800g
@@ -211,7 +222,9 @@ v Stoemp aux poireaux et œufs au plat
 - Écraser les pommes de terre avec le reste du beurre, le lait chaud et la muscade, puis incorporer les poireaux.
 - Servir le stoemp avec les saucisses et leur jus. Version végé : deux œufs au plat par personne.
 
-# Paupiettes de dinde, chicons et pommes de terre | 4 | 60 | AH
+# Paupiettes de dinde aux chicons | 4 | 60 | AH
+o Paupiettes de dinde, chicons et pommes de terre
+s pommes de terre
 r
 + Chicons 4pc; Beurre 40g; Sucre 1cc; Crème liquide 200ml; Moutarde 2cs; Vin blanc 100ml; Échalote 2pc; Pommes de terre grenaille 800g
 = Filet de dinde 600g; Lardons 100g
@@ -259,7 +272,9 @@ v Waterzooi de légumes aux pois chiches
 - Lier hors du feu avec les jaunes battus avec la crème, sans laisser bouillir ; citronner.
 - Servir en assiette creuse avec les crevettes, le persil et les pommes de terre. Version végé : bouillon de légumes et pois chiches.
 
-# Boulettes sauce tomate et purée | 4 | 60 | T
+# Boulettes sauce tomate | 4 | 60 | T
+o Boulettes sauce tomate et purée
+s purée
 r
 + Pain de mie 2pc; Lait 300ml; Oeufs 1pc; Oignon 2pc; Ail 0.1pc; Tomates concassées 800g; Concentré de tomate 1cs; Thym 0.25pc; Sucre 1cc; Beurre 50g; Pommes de terre 1000g; Muscade 0.25cc
 = Haché porc et bœuf 600g
@@ -271,7 +286,9 @@ v Boulettes de lentilles sauce tomate et purée
 - Préparer une purée avec les pommes de terre, le reste du beurre, le lait chaud et la muscade.
 - Servir les boulettes en sauce avec la purée. Version végé : boulettes de lentilles cuites écrasées, liées à l'œuf et à la chapelure.
 
-# Pain de viande, purée de carottes | 6 | 90 | AH
+# Pain de viande | 6 | 90 | AH
+o Pain de viande, purée de carottes
+s purée de carottes
 r
 + Pain de mie 3pc; Lait 300ml; Oeufs 2pc; Oignon 1pc; Persil 0.5pc; Moutarde 1cs; Carottes 800g; Pommes de terre 600g; Beurre 50g; Muscade 0.25cc
 = Haché porc et bœuf 900g
@@ -295,7 +312,9 @@ v Salade liégeoise aux œufs
 - Déglacer la poêle avec le vinaigre (c'est ce qui fait la salade liégeoise) et verser aussitôt sur les haricots et les pommes de terre.
 - Mélanger, poivrer, parsemer de persil et servir tiède. Version végé : œufs durs en quartiers et un peu de beurre pour déglacer.
 
-# Poulet, compote et frites | 4 | 60 | T
+# Poulet compote | 4 | 60 | T
+o Poulet, compote et frites
+s frites
 r
 + Beurre 40g; Thym 0.25pc; Pommes 1000g; Sucre 60g; Cannelle 0.25cc; Pommes de terre 1200g; Huile de tournesol 2000ml; Salade verte 1pc
 = Cuisse de poulet 4pc
@@ -307,7 +326,9 @@ v Galette végétale, compote et frites
 - Servir le poulet doré avec la compote tiède ou froide, les frites et la salade.
 - Version végé : galettes végétales dorées à la poêle.
 
-# Nids d'oiseau, purée et petits pois | 4 | 60 | AH
+# Nids d'oiseau et petits pois | 4 | 60 | AH
+o Nids d'oiseau, purée et petits pois
+s purée
 r
 + Oeufs 5pc; Pain de mie 2pc; Lait 300ml; Chapelure 60g; Beurre 50g; Pommes de terre 1000g; Petits pois 400g; Sauce tomate 300ml; Muscade 0.25cc
 = Haché porc et bœuf 600g
@@ -319,7 +340,9 @@ v Nids de lentilles à l'œuf, purée et petits pois
 - Préparer une purée et cuire les petits pois 6 minutes ; réchauffer la sauce tomate.
 - Couper les nids en deux et servir avec la purée, les petits pois et la sauce. Version végé : lentilles cuites écrasées autour de l'œuf.
 
-# Choux de Bruxelles, saucisse et purée | 4 | 50 | AH
+# Saucisse et choux de Bruxelles | 4 | 50 | AH
+o Choux de Bruxelles, saucisse et purée
+s purée
 r
 + Choux de Bruxelles 800g; Beurre 50g; Muscade 0.25cc; Pommes de terre 1000g; Lait 200ml
 = Saucisse 4pc
@@ -331,7 +354,9 @@ v Choux de Bruxelles, œufs et purée
 - Déglacer la poêle des saucisses avec un peu d'eau pour un jus.
 - Servir ensemble. Version végé : œufs au plat ou mollets.
 
-# Oiseaux sans tête et purée | 4 | 100 | AH
+# Oiseaux sans tête | 4 | 100 | AH
+o Oiseaux sans tête et purée
+s purée
 r
 + Oignon 2pc; Beurre 50g; Bière brune 330ml; Moutarde 2cs; Thym 0.25pc; Feuille de laurier 0.4g; Carottes 300g; Pommes de terre 1000g; Lait 200ml
 = Steak de bœuf 500g; Haché porc et bœuf 300g
@@ -355,7 +380,9 @@ v Fricassée aux champignons
 - Battre les œufs, les verser sur le tout et remuer doucement jusqu'à ce qu'ils soient juste pris.
 - Parsemer de persil et servir avec une salade. Version végé : champignons poêlés à la place des lardons.
 
-# Truite à l'ardennaise et pommes vapeur | 4 | 35 | T
+# Truite à l'ardennaise | 4 | 35 | T
+o Truite à l'ardennaise et pommes vapeur
+s pommes vapeur
 r
 + Farine 40g; Beurre 80g; Citron 1pc; Persil 0.5pc; Pommes de terre 800g
 = Filet de truite 600g; Lardons 150g
@@ -379,7 +406,9 @@ v Tofu fumé au sirop de Liège et pommes
 - Rôtir les grenailles 30 minutes au four avec un peu de beurre.
 - Servir le filet tranché avec les pommes, la sauce et les grenailles. Version végé : tranches de tofu fumé dorées, même sauce.
 
-# Scampis à l'ail et pain | 4 | 25 | T
+# Scampis en sauce crème-ail | 4 | 25 | T
+o Scampis à l'ail et pain
+s pain
 r
 + Ail 0.5pc; Beurre 50g; Vin blanc 100ml; Crème liquide 200ml; Piment 0.5pc; Persil 0.5pc; Citron 0.5pc; Baguette 1pc; Salade verte 1pc
 = Scampis 600g

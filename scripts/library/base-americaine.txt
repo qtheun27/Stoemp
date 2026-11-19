@@ -123,7 +123,9 @@ v Burger de haricots BBQ et coleslaw
 - Coleslaw : chou et carottes râpés à la mayonnaise ; rôtir les pommes de terre en quartiers 35 minutes à 220 °C.
 - Garnir les pains toastés de viande et de coleslaw ; servir avec les potatoes. Version végé : haricots rouges et champignons émincés mijotés 20 minutes dans la sauce BBQ.
 
-# Poulet cajun, maïs et patates douces | 4 | 50 | T
+# Poulet cajun et maïs grillé | 4 | 50 | T
+o Poulet cajun, maïs et patates douces
+s patates douces rôties
 r
 + Patate douce 1000g; Maïs (boîte) 300g; Paprika 3cc; Cumin 3g; Origan 1g; Thym 0.1pc; Piment 0.5pc; Ail 0.2pc; Crème fraîche 150ml; Citron vert 1pc; Huile de tournesol 3cs; Beurre 20g
 = Filet de poulet 600g
@@ -183,7 +185,9 @@ v Jambalaya aux haricots rouges
 - Couvrir et cuire 20 minutes à feu doux, ajouter les scampis pour les 5 dernières minutes.
 - Laisser reposer 5 minutes et servir avec les oignons nouveaux. Version végé : haricots rouges et bouillon de légumes.
 
-# Meatloaf et purée | 6 | 90 | AH
+# Meatloaf | 6 | 90 | AH
+o Meatloaf et purée
+s purée
 r
 + Oignon 1pc; Oeufs 2pc; Chapelure 60g; Lait 300ml; Ketchup 6cs; Cassonade 1cs; Moutarde 1cc; Thym 0.1pc; Pommes de terre 1300g; Beurre 60g; Haricots verts 500g
 = Haché porc et bœuf 900g

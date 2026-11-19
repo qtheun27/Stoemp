@@ -65,7 +65,9 @@ r
 - Réchauffer les falafels 10 minutes au four à 200 °C pour qu'ils recroustillent.
 - Servir avec le houmous arrosé d'huile, la sauce tahini, le taboulé et les pitas chaudes.
 
-# Kefta, semoule et sauce yaourt | 4 | 40 | T
+# Kefta sauce yaourt | 4 | 40 | T
+o Kefta, semoule et sauce yaourt
+s semoule
 r
 + Semoule 300g; Yaourt nature 250g; Oignon 1pc; Cumin 4g; Paprika 1cc; Cannelle 0.5g; Coriandre 0.5pc; Persil 0.5pc; Menthe 0.25pc; Ail 0.1pc; Tomates 300g; Citron 1pc; Huile d'olive 3cs
 = Haché de bœuf 550g
@@ -101,7 +103,9 @@ v Harira végétarienne aux vermicelles
 - Lier la soupe avec la farine délayée dans un peu d'eau (le tadouira) en remuant, puis ajouter l'œuf battu en filet.
 - Servir avec le reste des herbes, des quartiers de citron et des dattes, comme pendant le ramadan. Version végé : sans agneau, avec une ration de vermicelles en plus.
 
-# Aubergines rôties au tahini et boulgour | 4 | 55 | EA
+# Aubergines rôties au tahini | 4 | 55 | EA
+o Aubergines rôties au tahini et boulgour
+s boulgour
 r
 + Aubergine 1000g; Tahini 80g; Yaourt nature 200g; Boulgour 250g; Menthe 0.5pc; Persil 0.25pc; Citron 1pc; Ail 0.1pc; Cumin 2g; Sumac 3g; Huile d'olive 5cs; Pignons de pin 30g; Oignon 1pc
 = Haché de bœuf 320g

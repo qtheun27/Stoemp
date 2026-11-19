@@ -116,7 +116,9 @@ v Empanadas aux lentilles
 - Dorer au jaune d'œuf battu et cuire 25 minutes à 200 °C.
 - Servir chaud ou tiède avec la salade. Version végé : lentilles cuites et bien égouttées.
 
-# Ceviche de cabillaud et riz | 4 | 40 | E
+# Ceviche de cabillaud | 4 | 40 | E
+o Ceviche de cabillaud et riz
+s riz
 r
 + Citron vert 6pc; Oignon rouge 1pc; Coriandre 0.5pc; Piment 0.5pc; Avocat 2pc; Riz 240g; Maïs (boîte) 150g; Patate douce 400g; Huile d'olive 2cs
 = Dos de cabillaud 500g
@@ -233,7 +235,9 @@ v Nachos gratinés au maïs
 - Guacamole : avocats écrasés, jus de citron vert, oignon rouge, coriandre, piment et sel ; salsa de tomates en dés.
 - Servir le plat au centre de la table avec le guacamole, la salsa et la crème. Version végé : maïs.
 
-# Picadillo et riz | 4 | 45 | T
+# Picadillo | 4 | 45 | T
+o Picadillo et riz
+s riz
 r
 + Pommes de terre 400g; Tomates concassées 400g; Oignon 1pc; Ail 0.2pc; Poivron 1pc; Olives vertes 80g; Raisins secs 40g; Cumin 2g; Origan 1g; Vin blanc 80ml; Riz 240g; Huile d'olive 3cs
 = Haché de bœuf 500g

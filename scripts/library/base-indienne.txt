@@ -14,7 +14,9 @@ v Curry de patate douce et pois chiches
 - Incorporer les épinards jusqu'à ce qu'ils tombent et finir avec le jus de citron vert.
 - Servir sur le riz basmati, parsemé de coriandre. Version végé : pois chiches ajoutés avec la patate douce.
 
-# Butter chicken et riz basmati | 4 | 60 | T
+# Butter chicken | 4 | 60 | T
+o Butter chicken et riz basmati
+s riz basmati
 r
 + Tomates concassées 500g; Concentré de tomate 2cs; Crème liquide 200ml; Beurre 60g; Garam masala 6g; Paprika 2cc; Gingembre 20g; Ail 0.2pc; Yaourt nature 150g; Citron 0.5pc; Miel 1cs; Cardamome 0.5g; Riz basmati 300g; Coriandre 0.25pc
 = Filet de poulet 600g
@@ -101,7 +103,9 @@ r
 - Ajouter les pois chiches et le garam masala, cuire à découvert 5 minutes pour que les légumes dorent.
 - Parsemer de coriandre et servir avec le yaourt.
 
-# Poulet tandoori et riz | 4 | 160 | T
+# Poulet tandoori | 4 | 160 | T
+o Poulet tandoori et riz
+s riz
 r
 + Yaourt nature 300g; Garam masala 6g; Paprika 3cc; Cumin 3g; Ail 0.2pc; Gingembre 20g; Citron 2pc; Riz basmati 300g; Concombre 1pc; Menthe 0.25pc; Oignon rouge 1pc; Huile de tournesol 2cs
 = Cuisse de poulet 4pc
@@ -146,7 +150,9 @@ v Keema de lentilles aux petits pois
 - Ajouter les petits pois et cuire 5 minutes.
 - Servir avec le riz et la coriandre. Version végé : lentilles corail cuites dans la sauce avec 400 ml d'eau.
 
-# Poulet vindaloo et riz | 4 | 120 | T
+# Poulet vindaloo | 4 | 120 | T
+o Poulet vindaloo et riz
+s riz
 r
 + Tomates concassées 300g; Oignon 2pc; Vinaigre 4cs; Garam masala 6g; Paprika 3cc; Cumin 3g; Cannelle 0.5g; Clous de girofle 0.3g; Piment 1.5pc; Ail 0.3pc; Gingembre 20g; Cassonade 1cs; Pommes de terre 500g; Huile de tournesol 3cs; Riz basmati 280g
 = Cuisse de poulet 4pc

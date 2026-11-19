@@ -228,7 +228,9 @@ v Musakhan au chou-fleur
 - Ajouter les courgettes, les pois chiches et le citron confit ; cuire encore 15 minutes.
 - Préparer la semoule et servir avec le tajine parsemé de coriandre.
 
-# Shish taouk et riz | 4 | 270 | EA
+# Shish taouk | 4 | 270 | EA
+o Shish taouk et riz
+s riz
 + Yaourt grec 150g; Citron 1pc; Ail 0.2pc; Paprika 1cc; Concentré de tomate 1cs; Riz basmati 300g; Tomates 300g; Pain pita 4pc
 = Filet de poulet 800g
 ~ Halloumi 400g
