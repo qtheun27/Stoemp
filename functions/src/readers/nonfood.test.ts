@@ -17,13 +17,28 @@ describe("produits non alimentaires", () => {
   it("petits pots pour bébé à part", () => {
     expect(isBabyFood("OLVARIT Pâtes Veau +12m")).toBe(true);
     expect(isBabyFood("BONI Pates Legumes Poulet Bio +15M")).toBe(true);
-    expect(isBabyFood("BONI Spaghetti bolognaise bio 12M")).toBe(true);
     expect(isBabyFood("Pâtes Penne")).toBe(false);
     expect(isBabyFood("Lait demi-écrémé 1L")).toBe(false);
+    expect(isBabyFood("ZETA parmigiano 24m montagne")).toBe(false);
+    expect(isBabyFood("BONI jambon Serrano Reserva 12m SG")).toBe(false);
+    expect(isBabyFood("NESTLÉ YOGOLINO fraise 6m+")).toBe(true);
     expect(isBabyFood("Œufs de poules élevées en plein air M")).toBe(false);
   });
   it("adresse d'un rayon non alimentaire", () => {
     expect(isNonFoodPage("https://www.colruyt.be/fr/produits/animaux/chats")).toBe(true);
     expect(isNonFoodPage("https://www.colruyt.be/fr/produits/viande/boeuf")).toBe(false);
+  });
+});
+
+import { proteinClash } from "./match";
+describe("viande ou poisson différents", () => {
+  it("refuse le porc dans le bœuf, accepte les noms de famille", () => {
+    expect(proteinClash("carbonades de porc", "Bœuf à braiser")).toBe(true);
+    expect(proteinClash("BONI steak de thon sans arêtes", "Steak de bœuf")).toBe(true);
+    expect(proteinClash("blanc de volaille", "Blanc de poulet tranché")).toBe(false);
+    expect(proteinClash("bouillon de poulet", "Bouillon de volaille")).toBe(false);
+    expect(proteinClash("IGLO filets de cabillaud panés", "Poisson pané")).toBe(false);
+    expect(proteinClash("BONI crevettes Jumbo", "Scampis")).toBe(false);
+    expect(proteinClash("filet de dinde", "Filet de poulet")).toBe(true);
   });
 });

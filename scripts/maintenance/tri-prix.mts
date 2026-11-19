@@ -5,7 +5,7 @@
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { HOUSEHOLD, isBabyFood, isBabyItem, isNonFood } from "../../functions/src/readers/nonfood";
-import { proteinClash } from "../../functions/src/readers/match";
+import { headFits, proteinClash } from "../../functions/src/readers/match";
 import { rebuildPriceBook } from "../../functions/src/pricebook";
 import { imagesThisMonth } from "../../functions/src/images";
 
@@ -59,6 +59,18 @@ for (const d of prices.docs) {
   console.log(`PRIX nettoyé : ${name} @ ${p.store} — retirés : ${(gone.length ? gone : [p.productName]).slice(0, 3).join(" · ")}${gone.length > 3 ? ` (+${gone.length - 3})` : ""} → garde « ${best.name} »`);
   if (APPLY) w.set(d.ref, { offers: keep, productName: best.name, packSize: best.size, packPrice: best.price, pricePerUnit: best.ppu, promo: best.promo ?? null }, { merge: true });
 }
+
+// 2 bis. À vérifier (rien n'est retiré) : produit dont le mot principal ne figure ni dans l'article ni dans ses alias.
+const suspects: string[] = [];
+for (const d of prices.docs) {
+  const p = d.data(), it = items.find((i) => i.id === p.itemId);
+  if (!it || it.category === HOUSEHOLD || p.organic && d.id.endsWith("_bio")) continue;
+  for (const o of (p.offers || []) as { name: string }[]) {
+    if (isNonFood(o.name) || isBabyFood(o.name) || proteinClash(o.name, it.name)) continue;
+    if (![it.name, ...it.aliases].some((n) => headFits(o.name, n))) suspects.push(`${it.name} ← ${o.name}`);
+  }
+}
+console.log(`\nÀ VÉRIFIER (${suspects.length}, rien n'est retiré) :\n  ${[...new Set(suspects)].slice(0, 150).join("\n  ")}`);
 
 // 3. Historique des prix.
 const hist = await db.collection("priceHistory").get();
