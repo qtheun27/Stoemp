@@ -51,11 +51,11 @@ v Paëlla de légumes aux pois chiches
 r
 l
 + Aubergine 1200g; Tomates concassées 500g; Oignon 2pc; Ail 0.2pc; Cannelle 1g; Vin rouge 100ml; Béchamel 500ml; Oeufs 1pc; Feta 120g; Huile d'olive 6cs; Origan 1g
-= Haché de bœuf 700g
+= Haché d'agneau 700g
 ~ Lentilles vertes 400g
 v Moussaka aux lentilles
 - Couper les aubergines en tranches, les badigeonner d'huile et les rôtir 25 minutes à 200 °C.
-- Faire revenir oignon et ail, ajouter la viande (idéalement d'agneau) et la colorer, déglacer au vin.
+- Faire revenir oignon et ail, ajouter le haché d'agneau et la colorer, déglacer au vin.
 - Ajouter tomates, cannelle et origan ; mijoter 30 minutes jusqu'à ce que la sauce soit épaisse.
 - Monter en couches : aubergines, viande, aubergines ; napper de béchamel liée à l'œuf et parsemer de feta.
 - Cuire 45 minutes à 180 °C et laisser reposer 20 minutes avant de couper. Version végé : lentilles cuites 25 minutes dans la sauce tomate.
@@ -155,13 +155,13 @@ v Boulettes de lentilles-feta et riz
 
 # Patatas bravas et œufs | 4 | 50 | T
 r
-+ Pommes de terre 1000g; Tomates concassées 300g; Paprika 2cc; Piment 0.5pc; Ail 0.2pc; Mayonnaise 4cs; Oeufs 8pc; Huile d'olive 6cs; Salade verte 1pc
++ Pommes de terre 1000g; Tomates concassées 300g; Paprika fumé 4g; Piment 0.5pc; Ail 0.2pc; Mayonnaise 4cs; Oeufs 8pc; Huile d'olive 6cs; Salade verte 1pc
 = Chorizo 120g
 ~ Pois chiches (boîte) 300g
 v Patatas bravas, pois chiches et œufs
 - Couper les pommes de terre en cubes, les précuire 6 minutes à l'eau salée et les sécher.
 - Les rôtir 30 minutes à 220 °C avec l'huile jusqu'à ce qu'elles soient croustillantes.
-- Sauce brava : faire revenir l'ail, le paprika (idéalement fumé) et le piment, ajouter les tomates et réduire 10 minutes, puis mixer.
+- Sauce brava : faire revenir l'ail, le paprika fumé et le piment, ajouter les tomates et réduire 10 minutes, puis mixer.
 - Faire dorer le chorizo en rondelles et cuire les œufs au plat.
 - Servir les pommes de terre nappées de sauce brava et de mayonnaise aillée, avec chorizo et œufs. Version végé : pois chiches rôtis avec les pommes de terre.
 
@@ -177,12 +177,12 @@ r
 # Sardines grillées et salade de pommes de terre | 4 | 35 | E
 r
 + Pommes de terre grenaille 800g; Oignon rouge 1pc; Persil 0.5pc; Citron 2pc; Huile d'olive 5cs; Vinaigre 1cs; Salade verte 1pc; Ail 0.1pc
-= Sardines (boîte) 400g
+= Sardines fraîches 800g
 ~ Oeufs 8pc
 v Salade de pommes de terre aux œufs
 - Cuire les grenailles 20 minutes et les couper en deux encore chaudes.
 - Les assaisonner d'huile, de vinaigre, d'oignon rouge émincé, de persil, sel et poivre.
-- Griller les sardines (fraîches de préférence, sinon en boîte égouttées) 2 à 3 minutes par face sur une plaque très chaude.
+- Vider et écailler les sardines, les saler au gros sel et les griller 2 à 3 minutes par face sur une plaque très chaude.
 - Les arroser d'huile à l'ail et de jus de citron.
 - Servir avec la salade de pommes de terre et la salade verte. Version végé : œufs mollets.
 
@@ -201,10 +201,10 @@ v Brochettes halloumi-courgette et taboulé
 # Bacalhau à brás | 4 | 40 | T
 r
 + Pommes de terre 600g; Huile de tournesol 500ml; Oeufs 6pc; Oignon 2pc; Ail 0.1pc; Olives noires 80g; Persil 0.5pc; Huile d'olive 3cs; Salade verte 1pc
-= Dos de cabillaud 450g
+= Morue salée 450g
 ~ Pois chiches (boîte) 400g
 v Brás aux pois chiches
-- Pocher le cabillaud (idéalement de la morue dessalée) 8 minutes et l'effeuiller.
+- Faire dessaler la morue la veille dans l'eau froide en changeant l'eau trois fois, puis la pocher 8 minutes et l'effeuiller.
 - Couper les pommes de terre en très fines allumettes et les frire jusqu'à ce qu'elles soient dorées.
 - Faire fondre lentement les oignons émincés et l'ail dans l'huile d'olive.
 - Ajouter le poisson et les allumettes, puis les œufs battus ; remuer à feu doux jusqu'à ce qu'ils soient crémeux.

@@ -77,11 +77,11 @@ v Spaghetti bolognaise aux lentilles
 # Pâtes carbonara | 4 | 20 | T
 r
 + Spaghetti 400g; Oeufs 4pc; Pecorino 60g; Parmesan 40g; Poivre 2g
-= Lardons 200g
+= Guanciale 200g
 ~ Champignons de Paris 400g; Petits pois 150g
 v Carbonara champignons et petits pois
 - Cuire les pâtes dans une grande eau salée.
-- Faire rissoler les lardons (idéalement du guanciale) à sec jusqu'à ce qu'ils soient croustillants ; couper le feu.
+- Faire rissoler le guanciale en lardons à sec jusqu'à ce qu'ils soient croustillants ; couper le feu.
 - Battre 2 œufs entiers et 2 jaunes avec les fromages râpés et beaucoup de poivre.
 - Verser les pâtes égouttées dans la poêle hors du feu, ajouter le mélange œufs-fromage et une louche d'eau de cuisson.
 - Remuer vivement jusqu'à obtenir une sauce crémeuse, sans jamais faire cuire l'œuf, et servir aussitôt. Version végé : champignons poêlés et petits pois.
@@ -126,15 +126,15 @@ r
 - Les frire dans l'huile d'olive jusqu'à ce qu'elles soient bien dorées.
 - Faire revenir l'ail et le piment, ajouter les tomates et cuire 15 minutes ; ajouter la moitié des aubergines.
 - Cuire les pâtes al dente et les mélanger à la sauce.
-- Servir avec le reste des aubergines, la ricotta émiettée (idéalement salée) et le basilic.
+- Servir avec le reste des aubergines, la ricotta émiettée et le basilic.
 
 # Saltimbocca, polenta et épinards | 4 | 35 | T
 r
-+ Polenta 280g; Épinards frais 400g; Parmesan 60g; Beurre 50g; Vin blanc 120ml; Ail 0.1pc
++ Polenta 280g; Épinards frais 400g; Parmesan 60g; Beurre 50g; Vin blanc 120ml; Ail 0.1pc; Sauge 1pc
 = Escalope de veau 560g; Jambon cru 4pc
 ~ Mozzarella 300g; Aubergine 400g
 v Aubergine grillée à la mozzarella, polenta et épinards
-- Aplatir les escalopes, poser sur chacune une tranche de jambon cru (et une feuille de sauge si possible) et fixer d'un pique.
+- Aplatir les escalopes, poser sur chacune une tranche de jambon cru et une feuille de sauge et fixer d'un pique.
 - Cuire la polenta dans 1,1 l d'eau salée en remuant, puis la lier avec 20 g de beurre et le parmesan.
 - Faire tomber les épinards avec l'ail dans un peu de beurre.
 - Cuire les escalopes 1 à 2 minutes par face dans le reste du beurre, côté jambon d'abord ; déglacer au vin blanc et réduire.
@@ -364,9 +364,9 @@ r
 
 # Ribollita (soupe toscane) | 6 | 70 | AH
 r
-+ Haricots blancs (boîte) 800g; Chou vert 600g; Carottes 250g; Céleri 200g; Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Bouillon de légumes 1500ml; Pain de campagne 1pc; Parmesan 80g; Huile d'olive 5cs
++ Haricots blancs (boîte) 800g; Chou kale 600g; Carottes 250g; Céleri 200g; Oignon 1pc; Ail 0.2pc; Tomates concassées 400g; Bouillon de légumes 1500ml; Pain de campagne 1pc; Parmesan 80g; Huile d'olive 5cs
 - Faire revenir oignon, carotte et céleri dans l'huile 10 minutes, puis l'ail.
-- Ajouter les tomates, le chou émincé (idéalement du cavolo nero), le bouillon et la moitié des haricots ; cuire 30 minutes.
+- Ajouter les tomates, le chou kale émincé, le bouillon et la moitié des haricots ; cuire 30 minutes.
 - Écraser le reste des haricots et l'ajouter pour épaissir.
 - Disposer des tranches de pain rassis dans les bols et verser la soupe épaisse par-dessus.
 - Arroser d'huile d'olive et servir avec le parmesan. Elle est encore meilleure réchauffée le lendemain.

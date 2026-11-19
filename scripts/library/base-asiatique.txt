@@ -28,19 +28,19 @@ v Riz cantonais au tofu fumé
 
 # Pad thaï | 4 | 35 | T
 r
-+ Nouilles de riz 300g; Oeufs 3pc; Germes de soja 200g; Cacahuètes 60g; Citron vert 2pc; Oignons nouveaux 3pc; Ail 0.1pc; Nuoc-mâm 3cs; Cassonade 2cs; Concentré de tomate 1cs; Sauce soja 1cs; Piment 0.5pc; Coriandre 0.25pc; Huile de tournesol 3cs
++ Nouilles de riz 300g; Oeufs 3pc; Germes de soja 200g; Cacahuètes 60g; Citron vert 2pc; Oignons nouveaux 3pc; Ail 0.1pc; Nuoc-mâm 3cs; Cassonade 2cs; Pâte de tamarin 40g; Sauce soja 1cs; Piment 0.5pc; Coriandre 0.25pc; Huile de tournesol 3cs
 = Scampis 400g
 ~ Tofu ferme 450g
 v Pad thaï au tofu
 - Faire tremper les nouilles 20 minutes dans l'eau tiède, puis les égoutter.
-- Sauce : nuoc-mâm, cassonade, concentré (à défaut de tamarin), jus d'un citron vert et soja.
+- Sauce : nuoc-mâm, cassonade, pâte de tamarin délayée dans 3 cuillères d'eau chaude, jus d'un citron vert et soja.
 - Saisir l'ail et les scampis au wok 2 minutes, pousser sur le côté et brouiller les œufs.
 - Ajouter les nouilles et la sauce, sauter 3 minutes jusqu'à ce qu'elles soient tendres, puis les germes et les oignons nouveaux.
 - Servir avec les cacahuètes concassées, le piment, la coriandre et des quartiers de citron vert. Version végé : tofu doré et sauce soja à la place du nuoc-mâm.
 
 # Curry rouge thaï | 4 | 35 | T
 r
-+ Pâte de curry rouge 60g; Lait de coco 500ml; Poivron 2pc; Courgettes 300g; Nuoc-mâm 2cs; Cassonade 1cs; Citron vert 1pc; Basilic 0.5pc; Riz basmati 300g; Huile de tournesol 1cs
++ Pâte de curry rouge 60g; Lait de coco 500ml; Poivron 2pc; Courgettes 300g; Nuoc-mâm 2cs; Cassonade 1cs; Citron vert 1pc; Basilic thaï 1pc; Riz basmati 300g; Huile de tournesol 1cs
 = Filet de poulet 550g
 ~ Tofu ferme 450g; Pois chiches (boîte) 250g
 v Curry rouge au tofu et pois chiches
@@ -48,7 +48,7 @@ v Curry rouge au tofu et pois chiches
 - Ajouter le poulet en lanières et l'enrober 2 minutes.
 - Verser le reste du lait de coco, le nuoc-mâm et la cassonade, puis les poivrons et courgettes ; cuire 10 minutes.
 - Cuire le riz à l'eau salée ou au cuiseur.
-- Finir avec le jus de citron vert et le basilic (idéalement thaï) et servir sur le riz. Version végé : tofu et pois chiches, soja à la place du nuoc-mâm.
+- Finir avec le jus de citron vert et le basilic thaï et servir sur le riz. Version végé : tofu et pois chiches, soja à la place du nuoc-mâm.
 
 # Bœuf sauté aux brocolis | 4 | 30 | T
 r
@@ -181,14 +181,14 @@ v Tofu aux noix de cajou
 
 # Porc aigre-doux | 4 | 40 | T
 r
-+ Poivron 2pc; Oignon 1pc; Ketchup 4cs; Vinaigre de riz 4cs; Sucre 40g; Sauce soja 2cs; Fécule de maïs 60g; Oeufs 1pc; Huile de tournesol 500ml; Riz 300g
++ Poivron 2pc; Oignon 1pc; Ananas 1pc; Ketchup 4cs; Vinaigre de riz 4cs; Sucre 40g; Sauce soja 2cs; Fécule de maïs 60g; Oeufs 1pc; Huile de tournesol 500ml; Riz 300g
 = Filet de porc 550g
 ~ Tofu ferme 500g
 v Tofu aigre-doux
 - Couper le porc en cubes, les tremper dans l'œuf battu puis dans la fécule.
 - Les frire 4 minutes à 175 °C jusqu'à ce qu'ils soient croustillants ; égoutter.
 - Sauce : ketchup, vinaigre, sucre, soja et 100 ml d'eau, épaissie d'1 cuillère à café de fécule.
-- Sauter le poivron et l'oignon en carrés 3 minutes, verser la sauce et laisser épaissir.
+- Sauter le poivron, l'oignon et l'ananas en carrés 3 minutes, verser la sauce et laisser épaissir.
 - Ajouter le porc au dernier moment pour qu'il reste croustillant ; servir avec le riz. Version végé : tofu enrobé et frit.
 
 # Soupe thaï coco-poulet | 4 | 30 | AH
@@ -265,15 +265,15 @@ v Tofu général Tao
 
 # Mapo tofu | 4 | 30 | T
 r
-+ Tofu ferme 600g; Sauce soja 2cs; Ail 0.2pc; Gingembre 15g; Piment 1pc; Oignons nouveaux 3pc; Concentré de tomate 1cs; Fécule de maïs 2cc; Bouillon de volaille 300ml; Huile de tournesol 2cs; Riz 300g
++ Tofu ferme 600g; Sauce soja 2cs; Ail 0.2pc; Gingembre 15g; Piment 1pc; Oignons nouveaux 3pc; Doubanjiang 40g; Poivre de Sichuan 2g; Fécule de maïs 2cc; Bouillon de volaille 300ml; Huile de tournesol 2cs; Riz 300g
 = Haché porc et bœuf 250g
 ~ Champignons de Paris 350g
 v Mapo tofu aux champignons
 - Couper le tofu en dés et le pocher 2 minutes dans de l'eau salée frémissante pour le raffermir.
 - Faire revenir la viande hachée jusqu'à ce qu'elle soit croustillante.
-- Ajouter l'ail, le gingembre, le piment et le concentré (à défaut de doubanjiang), puis le bouillon et le soja.
+- Ajouter l'ail, le gingembre, le piment et le doubanjiang, puis le bouillon et le soja.
 - Ajouter le tofu délicatement, mijoter 5 minutes, puis lier avec la fécule délayée.
-- Parsemer d'oignons nouveaux (et de poivre de Sichuan si possible) et servir avec le riz. Version végé : champignons hachés et bouillon de légumes.
+- Parsemer d'oignons nouveaux et du poivre de Sichuan torréfié et moulu et servir avec le riz. Version végé : champignons hachés et bouillon de légumes.
 
 # Bulgogi de bœuf et riz | 4 | 40 | T
 r
@@ -289,26 +289,26 @@ v Bulgogi de tofu et riz
 
 # Phở au bœuf | 4 | 60 | AH
 r
-+ Nouilles de riz 300g; Bouillon de bœuf 2000ml; Gingembre 40g; Cannelle 1g; Clous de girofle 0.5g; Oignon 2pc; Germes de soja 200g; Citron vert 2pc; Coriandre 0.5pc; Menthe 0.25pc; Nuoc-mâm 3cs; Piment 1pc
++ Nouilles de riz 300g; Bouillon de bœuf 2000ml; Gingembre 40g; Cannelle 1g; Badiane 2g; Clous de girofle 0.5g; Oignon 2pc; Germes de soja 200g; Citron vert 2pc; Coriandre 0.5pc; Menthe 0.25pc; Nuoc-mâm 3cs; Piment 1pc
 = Steak de bœuf 400g
 ~ Tofu ferme 450g
 v Phở au tofu
 - Faire noircir les oignons coupés en deux et le gingembre à sec dans une poêle.
-- Les mettre dans le bouillon avec la cannelle et le girofle (et une étoile de badiane si possible) ; infuser 40 minutes à frémissement.
+- Les mettre dans le bouillon avec la cannelle, la badiane et le girofle ; infuser 40 minutes à frémissement.
 - Filtrer et assaisonner de nuoc-mâm.
 - Cuire les nouilles et les répartir dans des bols avec le bœuf cru tranché très finement.
 - Verser le bouillon bouillant qui cuit la viande ; servir avec germes, herbes, citron vert et piment. Version végé : bouillon de légumes, tofu et soja.
 
 # Nasi goreng | 4 | 30 | T
 r
-+ Riz 320g; Oeufs 4pc; Oignon 1pc; Échalote 2pc; Ail 0.2pc; Sauce soja 4cs; Miel 1cs; Carottes 150g; Concombre 1pc; Piment 1pc; Tomates 250g; Huile de tournesol 3cs
++ Riz 320g; Oeufs 4pc; Oignon 1pc; Échalote 2pc; Ail 0.2pc; Kecap manis 4cs; Sauce soja 1cs; Carottes 150g; Concombre 1pc; Piment 1pc; Tomates 250g; Huile de tournesol 3cs
 = Filet de poulet 350g; Scampis 200g
 ~ Tofu fumé 450g
 v Nasi goreng au tofu
 - Utiliser un riz cuit et refroidi.
 - Mixer échalotes, ail et piment en pâte et la faire revenir 2 minutes dans l'huile.
 - Saisir le poulet en dés et les scampis, puis l'oignon et les carottes.
-- Ajouter le riz, le soja et le miel (à défaut de kecap manis) ; sauter 4 minutes à feu vif.
+- Ajouter le riz, le kecap manis et le soja ; sauter 4 minutes à feu vif.
 - Servir avec un œuf au plat, des tranches de concombre et de tomate. Version végé : tofu fumé.
 
 # Poulet satay et riz | 4 | 45 | T
@@ -325,12 +325,12 @@ v Satay de tofu et riz
 
 # Tonkatsu et chou | 4 | 35 | T
 r
-+ Farine 60g; Oeufs 2pc; Chapelure 150g; Chou chinois 400g; Riz 300g; Ketchup 4cs; Sauce soja 2cs; Miel 1cs; Moutarde 1cc; Huile de tournesol 500ml; Citron 1pc
++ Farine 60g; Oeufs 2pc; Panko 150g; Chou chinois 400g; Riz 300g; Ketchup 4cs; Sauce soja 2cs; Miel 1cs; Moutarde 1cc; Huile de tournesol 500ml; Citron 1pc
 = Filet de porc 600g
 ~ Tofu ferme 600g
 v Tofu katsu et chou
 - Couper le porc en tranches épaisses d'1,5 cm, les aplatir légèrement et les saler.
-- Les passer dans la farine, l'œuf battu puis la chapelure (idéalement du panko) en pressant bien.
+- Les passer dans la farine, l'œuf battu puis le panko en pressant bien.
 - Frire 5 minutes à 170 °C jusqu'à ce qu'elles soient dorées, égoutter et trancher.
 - Sauce tonkatsu : ketchup, soja, miel et moutarde.
 - Servir avec le chou cru très finement émincé, le riz, la sauce et le citron. Version végé : tranches épaisses de tofu pressé, panées de la même façon.

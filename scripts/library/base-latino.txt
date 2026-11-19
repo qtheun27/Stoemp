@@ -175,14 +175,14 @@ v Tacos haricots-avocat et chou croquant
 
 # Feijoada | 6 | 120 | AH
 r
-+ Haricots noirs (boîte) 1200g; Oignon 2pc; Ail 0.3pc; Feuille de laurier 0.4g; Riz 400g; Oranges 300g; Chou vert 400g; Huile d'olive 3cs; Chapelure 60g; Beurre 30g
++ Haricots noirs (boîte) 1200g; Oignon 2pc; Ail 0.3pc; Feuille de laurier 0.4g; Riz 400g; Oranges 300g; Chou vert 400g; Huile d'olive 3cs; Farine de manioc 120g; Beurre 30g
 = Saucisse fumée 3pc; Lardons 200g; Filet de porc 500g
 ~ Tofu fumé 600g
 v Feijoada au tofu fumé
 - Faire rissoler les lardons, puis dorer le porc en cubes et la saucisse en tronçons.
 - Ajouter oignons et ail, puis les haricots noirs avec leur jus, le laurier et 500 ml d'eau ; mijoter 1 h 15 à couvert.
 - Écraser une louche de haricots pour épaissir la sauce.
-- Faire sauter le chou en très fines lanières à l'ail et préparer la farofa (chapelure dorée au beurre, à défaut de farine de manioc).
+- Faire sauter le chou en très fines lanières à l'ail et préparer la farofa (farine de manioc dorée au beurre).
 - Servir avec le riz, le chou, la farofa et des quartiers d'orange, comme au Brésil. Version végé : tofu fumé, 30 minutes de mijotage.
 
 # Lomo saltado | 4 | 40 | T
@@ -199,27 +199,27 @@ v Saltado de tofu
 
 # Tinga de poulet et tostadas | 4 | 50 | T
 r
-+ Tortillas 8pc; Tomates concassées 500g; Oignon 2pc; Ail 0.2pc; Épices chili 10g; Origan 1g; Haricots rouges (boîte) 400g; Crème fraîche 120ml; Avocat 2pc; Salade verte 1pc; Feta 80g; Huile de tournesol 4cs
++ Tortillas 8pc; Tomates concassées 500g; Oignon 2pc; Ail 0.2pc; Piment chipotle 60g; Origan 1g; Haricots rouges (boîte) 400g; Crème fraîche 120ml; Avocat 2pc; Salade verte 1pc; Feta 80g; Huile de tournesol 4cs
 = Filet de poulet 550g
 ~ Patate douce 600g
 v Tinga de patate douce
 - Pocher le poulet 15 minutes et l'effilocher.
-- Faire fondre les oignons émincés, ajouter l'ail, les épices (idéalement du chipotle) et l'origan, puis les tomates ; cuire 10 minutes et mixer à moitié.
+- Faire fondre les oignons émincés, ajouter l'ail, le piment chipotle haché et l'origan, puis les tomates ; cuire 10 minutes et mixer à moitié.
 - Ajouter le poulet et mijoter 10 minutes jusqu'à ce que ce soit nappé.
 - Frire ou cuire au four les tortillas jusqu'à ce qu'elles soient croustillantes (tostadas) ; réchauffer et écraser les haricots.
 - Tartiner les tostadas de haricots, garnir de tinga, de salade, d'avocat, de crème et de feta. Version végé : patate douce rôtie en cubes.
 
 # Tacos al pastor | 4 | 45 | T
 r
-+ Tortillas 12pc; Oignon rouge 1pc; Coriandre 0.5pc; Citron vert 2pc; Épices fajitas 15g; Oranges 150g; Ail 0.2pc; Vinaigre 2cs; Concentré de tomate 1cs; Origan 1g; Mangue 1pc; Huile de tournesol 2cs; Riz 200g
++ Tortillas 12pc; Oignon rouge 1pc; Coriandre 0.5pc; Citron vert 2pc; Épices fajitas 15g; Oranges 150g; Ail 0.2pc; Vinaigre 2cs; Concentré de tomate 1cs; Origan 1g; Ananas 1pc; Huile de tournesol 2cs; Riz 200g
 = Filet de porc 600g
 ~ Tofu ferme 500g; Champignons de Paris 250g
 v Tacos al pastor au tofu et champignons
 - Marinade : jus d'orange, ail, vinaigre, concentré de tomate, épices et origan.
 - Trancher le porc très finement et le mariner au moins 30 minutes.
 - Le saisir par petites quantités dans une poêle très chaude jusqu'à ce qu'il caramélise, puis le hacher grossièrement.
-- Faire griller la mangue en dés (à la place de l'ananas) et cuire le riz.
-- Garnir les tortillas chaudes de porc, mangue, oignon rouge, coriandre et citron vert. Version végé : tofu et champignons émincés, même marinade.
+- Faire griller l'ananas en tranches puis le couper en dés et cuire le riz.
+- Garnir les tortillas chaudes de porc, ananas, oignon rouge, coriandre et citron vert. Version végé : tofu et champignons émincés, même marinade.
 
 # Nachos gratinés et guacamole | 4 | 30 | T
 r

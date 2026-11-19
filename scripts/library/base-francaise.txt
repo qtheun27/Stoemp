@@ -213,13 +213,13 @@ v Blanquette de légumes aux pois chiches
 
 # Poulet basquaise | 4 | 70 | EA
 r
-+ Poivron 4pc; Tomates 800g; Oignon 2pc; Ail 0.2pc; Paprika 2cc; Vin blanc 100ml; Thym 0.1pc; Huile d'olive 4cs; Riz 300g
++ Poivron 4pc; Tomates 800g; Oignon 2pc; Ail 0.2pc; Piment d'Espelette 3g; Vin blanc 100ml; Thym 0.1pc; Huile d'olive 4cs; Riz 300g
 = Cuisse de poulet 4pc; Jambon cru 4pc
 ~ Pois chiches (boîte) 500g
 v Piperade aux pois chiches et riz
 - Dorer les cuisses à l'huile d'olive, les réserver.
 - Faire revenir l'oignon, l'ail et les poivrons en lanières 10 minutes, puis le jambon en lanières.
-- Ajouter les tomates pelées et concassées, le paprika (idéalement du piment d'Espelette), le vin et le thym.
+- Ajouter les tomates pelées et concassées, le piment d'Espelette, le vin et le thym.
 - Remettre le poulet, couvrir et mijoter 40 minutes.
 - Servir avec le riz. Version végé : pois chiches mijotés 20 minutes dans la piperade.
 
@@ -315,11 +315,11 @@ r
 
 # Galettes complètes | 4 | 60 | T
 r
-+ Farine 250g; Oeufs 6pc; Lait 300ml; Beurre 40g; Gruyère râpé 150g; Salade verte 1pc
++ Farine de sarrasin 250g; Oeufs 6pc; Lait 300ml; Beurre 40g; Gruyère râpé 150g; Salade verte 1pc
 = Jambon 4pc
 ~ Champignons de Paris 300g
 v Galettes aux champignons
-- Fouetter la farine (idéalement de sarrasin) avec 2 œufs, le lait, 300 ml d'eau et une pincée de sel ; reposer 30 minutes.
+- Fouetter la farine de sarrasin avec 2 œufs, le lait, 300 ml d'eau et une pincée de sel ; reposer 30 minutes.
 - Cuire une galette fine dans une poêle beurrée bien chaude.
 - La retourner, poser le fromage, le jambon et casser un œuf au centre.
 - Replier les bords en carré et cuire jusqu'à ce que le blanc soit pris.
@@ -384,11 +384,11 @@ v Gratin de macaronis aux champignons
 
 # Salade lyonnaise | 4 | 25 | PA
 r
-+ Salade verte 2pc; Oeufs 4pc; Croûtons 100g; Vinaigre 3cs; Moutarde 1cs; Échalote 1pc; Huile de tournesol 4cs
++ Salade frisée 2pc; Oeufs 4pc; Croûtons 100g; Vinaigre 3cs; Moutarde 1cs; Échalote 1pc; Huile de tournesol 4cs
 = Lardons 250g
 ~ Fromage de chèvre 150g
 v Salade lyonnaise au chèvre
-- Laver la salade (idéalement de la frisée) et la sécher.
+- Laver la frisée et la sécher.
 - Vinaigrette : moutarde, 2 cuillères de vinaigre, échalote hachée, huile, sel et poivre.
 - Faire rissoler les lardons, déglacer avec le reste du vinaigre et verser chaud sur la salade avec les croûtons.
 - Pocher les œufs 3 minutes dans l'eau frémissante vinaigrée.
@@ -466,10 +466,10 @@ v Choucroute aux tofu fumé
 # Petit salé aux lentilles | 4 | 75 | AH
 r
 + Lentilles vertes 400g; Carottes 300g; Oignon 1pc; Clous de girofle 0.5g; Thym 0.1pc; Feuille de laurier 0.2g; Moutarde 2cs; Persil 0.25pc
-= Lardons 300g; Saucisse fumée 4pc
+= Poitrine de porc demi-sel 600g; Saucisse fumée 4pc
 ~ Tofu fumé 300g
 v Lentilles mijotées au tofu fumé
-- Faire revenir les lardons (idéalement de la poitrine demi-sel en morceaux) dans une cocotte.
+- Faire revenir la poitrine demi-sel coupée en gros morceaux, préalablement blanchie 10 minutes dans une cocotte.
 - Ajouter les lentilles rincées, les carottes en rondelles, l'oignon piqué de girofle, le thym, le laurier et 1,2 litre d'eau.
 - Cuire 30 minutes, ajouter les saucisses fumées et cuire encore 15 minutes.
 - Saler en fin de cuisson seulement, ajouter la moutarde et le persil.
