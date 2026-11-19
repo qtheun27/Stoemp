@@ -1,0 +1,536 @@
+// Plats de base français réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@francaise
+## plat
+
+# Quiche épinards et saumon fumé | 6 | 60 | P
+r
++ Pâte brisée 1pc; Épinards frais 400g; Beurre 20g; Oeufs 3pc; Crème fraîche 200ml; Lait 100ml; Muscade 0.25cc; Salade verte 1pc
+= Saumon fumé 150g
+~ Fromage de chèvre 150g
+v Quiche épinards et chèvre
+- Foncer un moule de 26 cm avec la pâte, la piquer et la précuire 10 minutes à 190 °C.
+- Faire tomber les épinards dans le beurre 3 minutes, les presser fortement et les hacher grossièrement.
+- Battre les œufs avec la crème, le lait, la muscade, sel et poivre.
+- Répartir les épinards et le saumon fumé en lanières sur le fond, verser l'appareil.
+- Cuire 30 minutes à 180 °C et servir tiède avec la salade. Version végé : chèvre en rondelles à la place du saumon.
+
+# Navarin d'agneau printanier | 4 | 110 | P
+r
++ Oignon 1pc; Ail 0.1pc; Farine 1cs; Concentré de tomate 1cs; Bouillon de légumes 600ml; Thym 0.25pc; Feuille de laurier 0.4g; Carottes 400g; Navets 300g; Pommes de terre grenaille 600g; Petits pois 250g; Beurre 30g
+= Épaule d'agneau en morceaux 800g
+~ Pois chiches (boîte) 500g
+v Navarin de légumes printaniers aux pois chiches
+- Dorer l'agneau en morceaux dans le beurre en cocotte, saupoudrer de farine et laisser colorer 2 minutes.
+- Ajouter l'oignon émincé, l'ail et le concentré, puis le bouillon, le thym et le laurier ; couvrir et mijoter 50 minutes.
+- Ajouter les carottes en tronçons, les navets et les grenailles ; cuire 25 minutes.
+- Ajouter les petits pois 8 minutes avant la fin.
+- Servir en cocotte, la sauce juste nappante. Version végé : légumes cuits 30 minutes dans le bouillon, pois chiches ajoutés avec les petits pois.
+
+# Salade de pâtes, radis et poulet | 4 | 25 | PE
+r
++ Pâtes courtes 320g; Radis 15pc; Petits pois 200g; Ciboulette 0.5pc; Yaourt nature 200g; Moutarde 1cc; Citron 0.5pc
+= Filet de poulet 450g
+~ Feta 200g
+v Salade de pâtes, radis et feta
+- Cuire les pâtes al dente, les rincer à l'eau froide et les égoutter ; cuire les petits pois 5 minutes.
+- Poêler le poulet en lanières 6 minutes, saler, poivrer et laisser tiédir.
+- Couper les radis en fines rondelles.
+- Sauce : yaourt, moutarde, jus de citron, ciboulette ciselée, sel et poivre.
+- Mélanger le tout et servir frais. Version végé : feta en dés.
+
+# Omelette aux herbes et pommes de terre | 4 | 30 | P
+r
++ Oeufs 8pc; Pommes de terre 600g; Beurre 30g; Ciboulette 0.5pc; Persil 0.25pc; Salade verte 1pc
+- Cuire les pommes de terre en robe des champs, les éplucher et les couper en rondelles ; les faire dorer dans la moitié du beurre.
+- Battre les œufs avec les herbes ciselées, sel et poivre.
+- Faire mousser le reste du beurre dans une poêle, verser les œufs et remuer à la spatule 1 minute.
+- Ajouter les pommes de terre et laisser prendre à feu doux : l'omelette doit rester baveuse au centre.
+- Plier et servir avec la salade.
+
+# Cabillaud et purée aux herbes | 4 | 40 | P
+r
++ Pommes de terre 800g; Lait 200ml; Beurre 80g; Persil 0.5pc; Ciboulette 0.25pc; Citron 1pc; Haricots verts 400g
+= Dos de cabillaud 600g
+~ Oeufs 8pc
+v Œufs pochés et purée aux herbes
+- Cuire les pommes de terre et les haricots verts à l'eau salée.
+- Écraser les pommes de terre avec 50 g de beurre et le lait chaud, puis ajouter les herbes hachées.
+- Saler le cabillaud et le cuire 4 minutes côté peau puis 2 minutes de l'autre dans le reste du beurre moussant.
+- Arroser du jus de citron et du beurre de cuisson.
+- Servir avec la purée et les haricots. Version végé : œufs pochés 3 minutes.
+
+# Ratatouille, semoule et poulet rôti | 4 | 70 | E
+r
++ Courgettes 400g; Aubergine 400g; Poivron 2pc; Tomates 600g; Oignon 1pc; Ail 0.2pc; Herbes de Provence 1cc; Basilic 0.25pc; Semoule 280g; Huile d'olive 5cs
+= Cuisse de poulet 4pc
+~ Pois chiches (boîte) 400g
+v Ratatouille, semoule et pois chiches
+- Frotter les cuisses d'huile et d'herbes de Provence, saler et les rôtir 45 minutes à 200 °C.
+- Faire revenir séparément à l'huile d'olive l'aubergine, les courgettes et les poivrons en cubes.
+- Faire fondre l'oignon et l'ail, ajouter les tomates, puis tous les légumes ; mijoter 30 minutes.
+- Préparer la semoule avec son volume d'eau bouillante salée et un filet d'huile.
+- Servir avec le poulet et le basilic. Version végé : pois chiches ajoutés à la ratatouille.
+
+# Tian de légumes, côtelettes d'agneau et grenailles | 4 | 70 | E
+r
++ Courgettes 400g; Tomates 400g; Aubergine 300g; Oignon 1pc; Ail 0.1pc; Herbes de Provence 1cc; Huile d'olive 4cs; Pommes de terre grenaille 700g
+= Côtelettes d'agneau 8pc
+~ Fromage de chèvre 200g
+v Tian de légumes au chèvre et grenailles
+- Couper les légumes en rondelles fines et les ranger serrés en alternance dans un plat, sur l'oignon émincé.
+- Arroser d'huile, parsemer d'ail et d'herbes, saler ; cuire 50 minutes à 190 °C.
+- Rôtir les grenailles 35 minutes dans le même four avec un filet d'huile.
+- Griller les côtelettes 2 minutes par face à feu vif.
+- Servir les côtelettes avec le tian et les grenailles. Version végé : rondelles de chèvre posées sur le tian pour les 10 dernières minutes.
+
+# Tomates farcies | 4 | 70 | E
+r
++ Grosses tomates 8pc; Riz 200g; Oignon 1pc; Ail 0.1pc; Persil 0.5pc; Pain de mie 1pc; Lait 50ml; Oeufs 1pc; Herbes de Provence 0.5cc
+= Haché porc et bœuf 400g
+~ Lentilles vertes 150g; Champignons de Paris 200g
+v Tomates farcies aux lentilles et champignons
+- Couper un chapeau aux tomates, les évider, saler l'intérieur et les retourner ; garder la pulpe.
+- Mélanger le haché avec l'oignon, l'ail et le persil hachés, le pain trempé dans le lait, l'œuf et les herbes.
+- Farcir les tomates et reposer les chapeaux.
+- Mettre le riz cru au fond du plat avec la pulpe et 300 ml d'eau ; poser les tomates dessus.
+- Cuire 45 minutes à 180 °C : le riz cuit dans le jus des tomates. Version végé : farce de lentilles cuites et champignons hachés.
+
+# Velouté de potiron et croque-monsieur | 4 | 40 | A
+r
++ Potiron 1000g; Oignon 1pc; Beurre 30g; Bouillon de légumes 800ml; Crème fraîche 100ml; Muscade 0.25cc; Pain de mie 8pc; Emmental 120g
+= Jambon 4pc
+~ Tomates 200g
+v Velouté de potiron et croque tomate
+- Faire fondre l'oignon dans le beurre, ajouter le potiron en cubes et le bouillon ; cuire 25 minutes.
+- Mixer finement, ajouter la crème et la muscade.
+- Garnir le pain de jambon et d'emmental, beurrer l'extérieur.
+- Dorer les croques 3 minutes par face à la poêle.
+- Servir le velouté avec les croques en triangles. Version végé : tranches de tomate.
+
+# Gratin de chou-fleur au jambon et pommes de terre | 4 | 60 | A
+r
++ Chou-fleur 1000g; Pommes de terre 700g; Beurre 50g; Farine 40g; Lait 600ml; Emmental 150g; Muscade 0.25cc
+= Jambon 6pc
+~ Oeufs 4pc
+v Gratin de chou-fleur aux œufs et pommes de terre
+- Cuire le chou-fleur en bouquets 8 minutes et les pommes de terre en rondelles 12 minutes à l'eau salée.
+- Béchamel : beurre, farine, lait chaud ; cuire 5 minutes, ajouter la moitié du fromage et la muscade.
+- Ranger pommes de terre, chou-fleur et jambon en lanières dans un plat beurré.
+- Napper de béchamel et parsemer du reste du fromage.
+- Gratiner 25 minutes à 200 °C. Version végé : œufs durs en quartiers.
+
+# Poêlée champignons, pommes de terre et saucisse | 4 | 40 | A
+r
++ Pommes de terre 800g; Champignons de Paris 500g; Échalote 2pc; Ail 0.1pc; Beurre 40g; Persil 0.5pc; Thym 0.1pc
+= Saucisse 4pc
+~ Oeufs 8pc
+v Poêlée champignons, pommes de terre et œufs
+- Cuire les pommes de terre en dés 8 minutes à l'eau salée et bien les sécher.
+- Cuire les saucisses doucement à la poêle 20 minutes, puis les couper en tronçons.
+- Faire dorer les pommes de terre 15 minutes dans la moitié du beurre.
+- Faire sauter les champignons à feu vif avec l'échalote, l'ail et le thym.
+- Réunir le tout, parsemer de persil et servir. Version végé : œufs au plat.
+
+# Hachis parmentier | 6 | 75 | AH
+r
++ Pommes de terre 1200g; Lait 250ml; Beurre 80g; Oignon 2pc; Ail 0.1pc; Carottes 150g; Concentré de tomate 1cs; Thym 0.1pc; Emmental 100g; Muscade 0.25cc
+= Haché de bœuf 700g
+~ Lentilles vertes 300g; Champignons de Paris 300g
+v Parmentier de lentilles et champignons
+- Cuire les pommes de terre et les écraser avec 60 g de beurre, le lait chaud et la muscade.
+- Faire revenir les oignons, l'ail et la carotte râpée, ajouter la viande et la faire dorer en l'émiettant.
+- Ajouter le concentré, le thym, sel et poivre ; cuire 10 minutes.
+- Étaler la viande dans un plat, couvrir de purée, rayer à la fourchette et parsemer de fromage et de noisettes de beurre.
+- Gratiner 25 minutes à 200 °C. Version végé : lentilles cuites et champignons à la place de la viande.
+
+# Soupe à l'oignon gratinée | 4 | 70 | H
+r
++ Oignon 6pc; Beurre 50g; Farine 1cs; Vin blanc 150ml; Bouillon de bœuf 1200ml; Thym 0.1pc; Baguette 1pc; Gruyère râpé 200g
+- Émincer finement les oignons et les faire fondre 30 minutes à feu doux dans le beurre, jusqu'à ce qu'ils soient bien caramélisés.
+- Saupoudrer de farine, mélanger 1 minute, puis déglacer au vin blanc.
+- Ajouter le bouillon et le thym ; cuire 20 minutes.
+- Répartir dans des bols allant au four, couvrir de tranches de baguette grillées et de fromage.
+- Gratiner 5 minutes sous le gril jusqu'à ce que le fromage bouillonne.
+
+# Tartiflette | 4 | 60 | H
+r
++ Pommes de terre 1200g; Reblochon 1pc; Oignon 2pc; Vin blanc 100ml; Crème fraîche 150ml; Salade verte 1pc
+= Lardons 250g
+~ Champignons de Paris 300g
+v Tartiflette aux champignons
+- Cuire les pommes de terre en robe des champs 20 minutes, les éplucher et les couper en rondelles.
+- Faire rissoler les lardons et les oignons émincés, déglacer au vin blanc.
+- Dans un plat, alterner pommes de terre, lardons et oignons, crème.
+- Couper le reblochon en deux dans l'épaisseur et le poser croûte vers le haut.
+- Cuire 25 minutes à 200 °C et servir avec la salade. Version végé : champignons poêlés à la place des lardons.
+
+# Croque-monsieur et salade | 4 | 20 | T
+r
++ Pain de mie 8pc; Beurre 40g; Béchamel 200ml; Emmental 200g; Salade verte 1pc; Moutarde 1cc; Vinaigre 1cs
+= Jambon 4pc
+~ Tomates 200g
+v Croque-monsieur à la tomate
+- Tartiner 4 tranches de pain d'un peu de béchamel, poser le jambon et une partie du fromage.
+- Refermer, tartiner le dessus du reste de béchamel et parsemer du reste du fromage.
+- Cuire 10 minutes à 220 °C jusqu'à ce que le dessus soit doré et bouillonnant.
+- Servir avec la salade à la vinaigrette moutardée. Version végé : tranches de tomate.
+
+# Saumon, riz et brocoli | 4 | 30 | T
+r
++ Riz basmati 300g; Brocoli 600g; Citron 1pc; Sauce soja 2cs; Miel 1cs; Graines de sésame 1cs; Beurre 20g
+= Pavé de saumon 600g
+~ Tofu ferme 500g
+v Tofu laqué, riz et brocoli
+- Cuire le riz et le brocoli en bouquets à la vapeur 6 minutes.
+- Mélanger la sauce soja, le miel et le jus d'un demi-citron.
+- Cuire le saumon 4 minutes côté peau puis 2 minutes de l'autre, et le laquer de sauce la dernière minute.
+- Parsemer de sésame et servir avec le riz, le brocoli au beurre et le reste du citron.
+- Version végé : tofu en tranches doré et laqué.
+
+# Bœuf bourguignon | 6 | 210 | AH
+r
++ Vin rouge 750ml; Carottes 400g; Champignons de Paris 300g; Oignon 2pc; Ail 0.2pc; Farine 2cs; Beurre 40g; Thym 0.25pc; Feuille de laurier 0.4g; Pommes de terre 1200g
+= Bœuf à braiser 1300g; Lardons 200g
+~ Champignons de Paris 600g; Lentilles vertes 250g; Bouillon de légumes 300ml
+v Bourguignon de champignons et lentilles
+- La veille si possible, faire mariner le bœuf en gros cubes dans le vin avec l'oignon, la carotte, le thym et le laurier.
+- Égoutter la viande, la sécher et la dorer en plusieurs fois dans le beurre ; faire rissoler les lardons.
+- Saupoudrer de farine, ajouter l'ail, verser le vin de la marinade et porter à ébullition.
+- Couvrir et mijoter 2 h 30 à feu très doux ; ajouter les champignons poêlés 20 minutes avant la fin.
+- Servir avec les pommes de terre. Version végé : champignons et lentilles mijotés 45 minutes dans le vin et le bouillon.
+
+# Blanquette de veau | 4 | 120 | AH
+r
++ Carottes 300g; Oignon 1pc; Clous de girofle 0.5g; Thym 0.1pc; Feuille de laurier 0.2g; Champignons de Paris 250g; Beurre 50g; Farine 40g; Crème liquide 200ml; Oeufs 1pc; Citron 0.5pc; Riz 300g
+= Sauté de veau 900g
+~ Pois chiches (boîte) 500g; Bouillon de légumes 1000ml
+v Blanquette de légumes aux pois chiches
+- Couvrir le veau d'eau froide, porter à ébullition, écumer, puis ajouter les carottes, l'oignon piqué de girofle, le thym et le laurier ; cuire 1 h 15 à frémissement.
+- Faire sauter les champignons dans un peu de beurre.
+- Roux blanc avec le reste du beurre et la farine, mouiller avec 600 ml de bouillon de cuisson filtré ; cuire 10 minutes.
+- Hors du feu, lier avec le jaune d'œuf battu avec la crème et le jus de citron ; ajouter la viande, les carottes et les champignons.
+- Servir avec le riz. Version végé : légumes et pois chiches dans le bouillon de légumes, même sauce.
+
+# Poulet basquaise | 4 | 70 | EA
+r
++ Poivron 4pc; Tomates 800g; Oignon 2pc; Ail 0.2pc; Paprika 2cc; Vin blanc 100ml; Thym 0.1pc; Huile d'olive 4cs; Riz 300g
+= Cuisse de poulet 4pc; Jambon cru 4pc
+~ Pois chiches (boîte) 500g
+v Piperade aux pois chiches et riz
+- Dorer les cuisses à l'huile d'olive, les réserver.
+- Faire revenir l'oignon, l'ail et les poivrons en lanières 10 minutes, puis le jambon en lanières.
+- Ajouter les tomates pelées et concassées, le paprika (idéalement du piment d'Espelette), le vin et le thym.
+- Remettre le poulet, couvrir et mijoter 40 minutes.
+- Servir avec le riz. Version végé : pois chiches mijotés 20 minutes dans la piperade.
+
+# Gratin dauphinois et rôti de porc | 6 | 100 | AH
+r
++ Pommes de terre 1500g; Lait 600ml; Crème liquide 300ml; Ail 0.2pc; Muscade 0.25cc; Beurre 30g; Thym 0.1pc; Salade verte 1pc
+= Rôti de porc 1000g
+~ Oeufs 6pc
+v Gratin dauphinois et œufs mollets
+- Couper les pommes de terre en fines rondelles sans les laver et les cuire 10 minutes dans le lait et la crème avec l'ail, la muscade, sel et poivre.
+- Verser dans un plat frotté d'ail et beurré ; cuire 1 heure à 160 °C.
+- Frotter le rôti de thym, sel et poivre, le saisir de tous côtés puis le rôtir 50 minutes dans le même four.
+- Laisser reposer le rôti 10 minutes avant de le trancher.
+- Servir avec le gratin et la salade. Version végé : œufs mollets.
+
+# Parmentier de poulet | 4 | 80 | AH
+r
++ Pommes de terre 1000g; Lait 200ml; Beurre 60g; Oignon 1pc; Carottes 150g; Crème liquide 100ml; Thym 0.1pc; Gruyère râpé 100g; Muscade 0.25cc
+= Cuisse de poulet 4pc
+~ Champignons de Paris 400g; Pois chiches (boîte) 300g
+v Parmentier de champignons et pois chiches
+- Rôtir les cuisses 40 minutes à 200 °C (ou utiliser un reste de poulet), puis les effilocher.
+- Faire fondre l'oignon et la carotte râpée, ajouter le poulet, la crème et le thym.
+- Préparer une purée avec les pommes de terre, le beurre, le lait chaud et la muscade.
+- Étaler le poulet dans un plat, couvrir de purée et de fromage.
+- Gratiner 25 minutes à 200 °C. Version végé : champignons et pois chiches.
+
+# Quiche lorraine et salade | 6 | 60 | T
+r
++ Pâte brisée 1pc; Oeufs 4pc; Crème liquide 250ml; Lait 150ml; Gruyère râpé 80g; Muscade 0.25cc; Salade verte 1pc
+= Lardons 200g
+~ Poireaux 300g
+v Quiche aux poireaux
+- Foncer un moule de 26 cm avec la pâte et la piquer ; précuire 10 minutes à 190 °C.
+- Faire rissoler les lardons à sec et les égoutter.
+- Battre les œufs avec la crème, le lait, la muscade et du poivre.
+- Répartir les lardons et le fromage sur le fond, verser l'appareil.
+- Cuire 30 minutes à 180 °C et servir avec la salade. Version végé : poireaux fondus.
+
+# Croque-madame et salade | 4 | 25 | T
+r
++ Pain de mie 8pc; Beurre 40g; Béchamel 200ml; Gruyère râpé 200g; Oeufs 4pc; Salade verte 1pc
+= Jambon 4pc
+~ Tomates 200g
+v Croque-madame à la tomate
+- Monter les croques : pain, un peu de béchamel, jambon et fromage, pain.
+- Napper le dessus de béchamel et de fromage.
+- Cuire 10 minutes à 220 °C.
+- Cuire les œufs au plat dans le beurre et en poser un sur chaque croque.
+- Servir avec la salade. Version végé : tranches de tomate.
+
+# Cassoulet express | 4 | 60 | AH
+r
++ Haricots blancs (boîte) 800g; Tomates concassées 400g; Oignon 1pc; Ail 0.2pc; Carottes 200g; Thym 0.25pc; Feuille de laurier 0.4g; Bouillon de légumes 300ml; Chapelure 40g
+= Saucisse 4pc; Lardons 150g; Cuisses de canard confites 2pc
+~ Tofu fumé 300g
+v Cassoulet végétarien au tofu fumé
+- Dorer les saucisses et les lardons en cocotte, puis les cuisses de canard pour en faire fondre la graisse.
+- Faire revenir l'oignon, l'ail et les carottes en dés, ajouter les tomates, le thym, le laurier et le bouillon.
+- Ajouter les haricots égouttés et les viandes ; mijoter 20 minutes.
+- Verser dans un plat en terre, parsemer de chapelure et gratiner 20 minutes à 190 °C.
+- Version végé : tofu fumé en dés doré à la place des viandes.
+
+# Saumon à la fondue de poireaux | 4 | 40 | AH
+r
++ Poireaux 600g; Beurre 40g; Vin blanc 100ml; Crème liquide 200ml; Citron 0.5pc; Riz 300g
+= Pavé de saumon 600g
+~ Oeufs 8pc
+v Œufs mollets à la fondue de poireaux
+- Émincer finement les poireaux et les faire fondre 20 minutes dans le beurre à couvert.
+- Déglacer au vin blanc, ajouter la crème et laisser réduire 5 minutes ; citronner.
+- Cuire le riz à l'eau salée selon le paquet.
+- Cuire le saumon 4 minutes côté peau puis 2 minutes de l'autre.
+- Servir le saumon sur la fondue de poireaux avec le riz. Version végé : œufs mollets.
+
+# Ratatouille et œufs au plat | 4 | 75 | E
+r
++ Courgettes 400g; Aubergine 400g; Poivron 2pc; Tomates 600g; Oignon 1pc; Ail 0.2pc; Herbes de Provence 1cc; Basilic 0.25pc; Huile d'olive 5cs; Oeufs 8pc; Pain de campagne 0.5pc
+- Couper tous les légumes en cubes.
+- Faire revenir séparément à l'huile d'olive l'aubergine, les courgettes et les poivrons pour qu'ils dorent.
+- Faire fondre l'oignon et l'ail, ajouter les tomates et les herbes, puis tous les légumes ; mijoter 40 minutes.
+- Creuser des puits dans la ratatouille et y cuire les œufs à couvert 5 minutes.
+- Parsemer de basilic et servir avec du pain grillé.
+
+# Soupe au pistou | 6 | 70 | E
+r
++ Haricots verts 250g; Courgettes 300g; Carottes 200g; Pommes de terre 300g; Tomates 300g; Haricots blancs (boîte) 400g; Petites pâtes 120g; Basilic 1pc; Ail 0.3pc; Parmesan 80g; Huile d'olive 6cs
+- Couper tous les légumes en petits dés.
+- Les cuire 30 minutes dans 2 litres d'eau salée avec les tomates.
+- Ajouter les haricots blancs et les petites pâtes ; cuire 10 minutes.
+- Pistou : piler ou mixer le basilic, l'ail, le parmesan et l'huile d'olive.
+- Servir la soupe bien chaude, une cuillère de pistou dans chaque bol.
+
+# Galettes complètes | 4 | 60 | T
+r
++ Farine 250g; Oeufs 6pc; Lait 300ml; Beurre 40g; Gruyère râpé 150g; Salade verte 1pc
+= Jambon 4pc
+~ Champignons de Paris 300g
+v Galettes aux champignons
+- Fouetter la farine (idéalement de sarrasin) avec 2 œufs, le lait, 300 ml d'eau et une pincée de sel ; reposer 30 minutes.
+- Cuire une galette fine dans une poêle beurrée bien chaude.
+- La retourner, poser le fromage, le jambon et casser un œuf au centre.
+- Replier les bords en carré et cuire jusqu'à ce que le blanc soit pris.
+- Servir aussitôt avec la salade. Version végé : champignons poêlés.
+
+# Pot-au-feu | 6 | 240 | H
+r
++ Carottes 600g; Poireaux 500g; Navets 400g; Céleri-rave 300g; Oignon 1pc; Clous de girofle 1g; Thym 0.25pc; Feuille de laurier 0.4g; Pommes de terre 900g; Moutarde 3cs; Cornichons 100g
+= Bœuf à braiser 1500g
+~ Pois chiches (boîte) 800g; Bouillon de légumes 2500ml
+v Pot-au-feu de légumes aux pois chiches
+- Mettre la viande (paleron, plat de côtes, gîte) dans une grande marmite d'eau froide, porter à ébullition et écumer soigneusement.
+- Ajouter l'oignon piqué de girofle, le thym, le laurier et du gros sel ; cuire 2 heures à petit frémissement.
+- Ajouter les carottes, les poireaux ficelés, les navets et le céleri ; cuire 45 minutes.
+- Cuire les pommes de terre dans une louche de bouillon les 25 dernières minutes.
+- Servir la viande et les légumes avec la moutarde, les cornichons et un bol de bouillon. Version végé : légumes et pois chiches dans le bouillon de légumes.
+
+# Endives au saumon et purée de céleri | 4 | 50 | AH
+r
++ Chicons 8pc; Beurre 50g; Sucre 1cc; Céleri-rave 600g; Pommes de terre 300g; Lait 150ml; Crème liquide 100ml; Citron 0.5pc
+= Pavé de saumon 600g
+~ Oeufs 8pc
+v Endives braisées, œufs mollets et purée de céleri
+- Braiser les chicons coupés en deux 25 minutes avec 20 g de beurre, le sucre et le jus de citron.
+- Cuire le céleri et les pommes de terre 20 minutes, les écraser avec le lait, 20 g de beurre et la crème.
+- Cuire le saumon 4 minutes côté peau puis 2 minutes de l'autre.
+- Déglacer la poêle des chicons d'un trait de crème.
+- Servir ensemble. Version végé : œufs mollets.
+
+# Tarte fine tomates, moutarde et chèvre | 4 | 40 | E
+r
++ Pâte feuilletée 1pc; Tomates 600g; Moutarde 2cs; Fromage de chèvre 200g; Herbes de Provence 1cc; Huile d'olive 2cs; Salade verte 1pc
+- Dérouler la pâte sur une plaque et la piquer.
+- La tartiner de moutarde en laissant un bord.
+- Disposer les tomates en fines rondelles et les rondelles de chèvre, arroser d'huile et parsemer d'herbes.
+- Cuire 25 minutes à 210 °C jusqu'à ce que la pâte soit dorée et croustillante.
+- Servir avec une salade verte.
+
+# Poulet à la moutarde et riz | 4 | 40 | T
+r
++ Moutarde 3cs; Crème liquide 250ml; Échalote 2pc; Vin blanc 100ml; Beurre 30g; Thym 0.1pc; Riz 300g; Haricots verts 400g
+= Filet de poulet 600g
+~ Champignons de Paris 400g; Pois chiches (boîte) 300g
+v Champignons et pois chiches à la moutarde
+- Dorer le poulet en morceaux dans le beurre, le réserver.
+- Faire fondre les échalotes, déglacer au vin blanc et réduire.
+- Ajouter la crème, la moutarde et le thym, remettre le poulet et mijoter 10 minutes.
+- Cuire le riz et les haricots verts.
+- Servir le poulet nappé de sauce. Version végé : champignons et pois chiches dans la même sauce.
+
+# Gratin de macaronis au jambon | 4 | 45 | AH
+r
++ Pâtes courtes 400g; Beurre 40g; Farine 40g; Lait 700ml; Gruyère râpé 200g; Muscade 0.25cc; Salade verte 1pc
+= Dés de jambon 250g
+~ Champignons de Paris 300g
+v Gratin de macaronis aux champignons
+- Cuire les macaronis 2 minutes de moins que le temps indiqué.
+- Béchamel : beurre, farine, lait chaud ; cuire 5 minutes, ajouter la moitié du fromage et la muscade.
+- Mélanger les pâtes, la béchamel et le jambon.
+- Verser dans un plat, parsemer du reste du fromage et gratiner 20 minutes à 200 °C.
+- Servir avec la salade. Version végé : champignons poêlés.
+
+# Salade lyonnaise | 4 | 25 | PA
+r
++ Salade verte 2pc; Oeufs 4pc; Croûtons 100g; Vinaigre 3cs; Moutarde 1cs; Échalote 1pc; Huile de tournesol 4cs
+= Lardons 250g
+~ Fromage de chèvre 150g
+v Salade lyonnaise au chèvre
+- Laver la salade (idéalement de la frisée) et la sécher.
+- Vinaigrette : moutarde, 2 cuillères de vinaigre, échalote hachée, huile, sel et poivre.
+- Faire rissoler les lardons, déglacer avec le reste du vinaigre et verser chaud sur la salade avec les croûtons.
+- Pocher les œufs 3 minutes dans l'eau frémissante vinaigrée.
+- Poser un œuf poché sur chaque assiette et servir aussitôt. Version végé : chèvre chaud.
+
+# Brandade de cabillaud | 4 | 60 | AH
+r
++ Pommes de terre 800g; Lait 400ml; Ail 0.2pc; Feuille de laurier 0.2g; Huile d'olive 100ml; Persil 0.25pc; Chapelure 30g; Salade verte 1pc
+= Dos de cabillaud 600g
+~ Haricots blancs (boîte) 500g
+v Brandade de haricots blancs
+- Pocher le cabillaud 8 minutes dans le lait avec l'ail et le laurier, puis l'effeuiller ; garder le lait.
+- Cuire les pommes de terre et les écraser.
+- Mélanger le poisson et les pommes de terre en ajoutant l'huile d'olive et un peu de lait chaud, jusqu'à obtenir une brandade souple.
+- Verser dans un plat, parsemer de chapelure et gratiner 15 minutes à 200 °C.
+- Servir avec le persil et la salade. Version végé : haricots blancs écrasés à la place du poisson.
+
+# Tarte aux poireaux et salade | 6 | 65 | AH
+r
++ Pâte brisée 1pc; Poireaux 800g; Beurre 30g; Oeufs 3pc; Crème liquide 200ml; Gruyère râpé 80g; Muscade 0.25cc; Salade verte 1pc
+= Saumon fumé 150g
+~ Fromage de chèvre 150g
+v Tarte aux poireaux et chèvre
+- Foncer et piquer la pâte, la précuire 10 minutes à 190 °C.
+- Faire fondre les poireaux émincés 20 minutes dans le beurre.
+- Battre les œufs avec la crème, la muscade, sel et poivre.
+- Garnir de poireaux et de saumon en lanières, verser l'appareil et parsemer de fromage.
+- Cuire 30 minutes à 180 °C et servir avec la salade. Version végé : chèvre.
+
+# Velouté de potiron et tartines au fromage | 4 | 45 | AH
+r
++ Potiron 1000g; Pommes de terre 300g; Oignon 1pc; Beurre 30g; Bouillon de légumes 1000ml; Crème liquide 100ml; Muscade 0.25cc; Pain de campagne 0.5pc; Comté 160g
+- Faire fondre l'oignon dans le beurre, ajouter le potiron et les pommes de terre en cubes.
+- Couvrir de bouillon et cuire 25 minutes.
+- Mixer finement, ajouter la crème et la muscade.
+- Couvrir les tranches de pain de comté et les passer 5 minutes sous le gril.
+- Servir le velouté avec les tartines.
+
+# Coq au vin | 6 | 180 | AH
+r
++ Vin rouge 750ml; Champignons de Paris 300g; Oignon 2pc; Carottes 300g; Ail 0.2pc; Farine 2cs; Beurre 40g; Thym 0.25pc; Feuille de laurier 0.4g; Pommes de terre 1200g
+= Cuisse de poulet 6pc; Lardons 200g
+~ Champignons de Paris 500g; Lentilles vertes 250g; Bouillon de légumes 300ml
+v Champignons et lentilles au vin
+- Faire mariner les cuisses de poulet (idéalement un coq) une nuit dans le vin avec les carottes, l'oignon, le thym et le laurier.
+- Égoutter, sécher et dorer les morceaux dans le beurre avec les lardons.
+- Saupoudrer de farine, ajouter l'ail, verser la marinade et porter à ébullition.
+- Couvrir et mijoter 1 h 30 ; ajouter les champignons poêlés 15 minutes avant la fin.
+- Servir avec les pommes de terre. Version végé : champignons et lentilles mijotés 45 minutes dans le vin et le bouillon.
+
+# Poulet rôti du dimanche et pommes de terre | 4 | 100 | T
+r
++ Beurre 50g; Ail 0.5pc; Thym 0.25pc; Citron 1pc; Pommes de terre 1200g; Salade verte 1pc
+= Poulet entier 1600g
+~ Chou-fleur 1000g
+v Chou-fleur rôti du dimanche et pommes de terre
+- Sortir le poulet 30 minutes avant ; le saler dedans et dehors, glisser le citron et le thym à l'intérieur.
+- Le badigeonner de beurre mou et le poser dans un plat entouré des pommes de terre en quartiers et des gousses d'ail en chemise.
+- Rôtir 1 h 15 à 200 °C en arrosant toutes les 20 minutes avec le jus.
+- Laisser reposer 10 minutes sous une feuille d'aluminium avant de découper.
+- Servir avec les pommes de terre et le jus déglacé d'un peu d'eau. Version végé : chou-fleur entier rôti 1 heure.
+
+# Choucroute garnie | 6 | 120 | AH
+r
++ Choucroute 1500g; Oignon 2pc; Vin blanc 300ml; Feuille de laurier 0.4g; Clous de girofle 1g; Pommes de terre 1200g; Moutarde 3cs
+= Saucisse fumée 6pc; Lardons 300g; Saucisse 6pc
+~ Tofu fumé 500g
+v Choucroute aux tofu fumé
+- Rincer la choucroute crue et bien l'essorer.
+- Faire revenir les oignons émincés et les lardons dans une grande cocotte.
+- Ajouter la choucroute, le vin blanc, le laurier et le girofle ; couvrir et cuire 1 heure à feu doux.
+- Ajouter les saucisses et les pommes de terre épluchées ; cuire encore 30 minutes.
+- Servir avec la moutarde. Version végé : tofu fumé en tranches à la place des charcuteries.
+
+# Petit salé aux lentilles | 4 | 75 | AH
+r
++ Lentilles vertes 400g; Carottes 300g; Oignon 1pc; Clous de girofle 0.5g; Thym 0.1pc; Feuille de laurier 0.2g; Moutarde 2cs; Persil 0.25pc
+= Lardons 300g; Saucisse fumée 4pc
+~ Tofu fumé 300g
+v Lentilles mijotées au tofu fumé
+- Faire revenir les lardons (idéalement de la poitrine demi-sel en morceaux) dans une cocotte.
+- Ajouter les lentilles rincées, les carottes en rondelles, l'oignon piqué de girofle, le thym, le laurier et 1,2 litre d'eau.
+- Cuire 30 minutes, ajouter les saucisses fumées et cuire encore 15 minutes.
+- Saler en fin de cuisson seulement, ajouter la moutarde et le persil.
+- Servir bien chaud. Version végé : tofu fumé en dés ajouté à la fin.
+
+# Truite aux amandes et haricots verts | 4 | 35 | T
+r
++ Farine 40g; Beurre 80g; Amandes 80g; Citron 1pc; Persil 0.25pc; Haricots verts 500g; Pommes de terre grenaille 600g
+= Filet de truite 600g
+~ Oeufs 8pc
+v Œufs mollets aux amandes et haricots verts
+- Cuire les grenailles 20 minutes et les haricots verts 8 minutes à l'eau salée.
+- Fariner légèrement les filets de truite.
+- Les cuire 3 minutes côté peau puis 1 minute de l'autre dans la moitié du beurre ; réserver.
+- Faire blondir les amandes effilées dans le reste du beurre, ajouter le jus de citron et le persil.
+- Napper les truites et servir avec les légumes. Version végé : œufs mollets.
+
+# Daube provençale | 6 | 240 | AH
+r
++ Vin rouge 750ml; Carottes 400g; Oignon 2pc; Ail 0.3pc; Tomates concassées 400g; Olives noires 100g; Oranges 100g; Herbes de Provence 1cc; Feuille de laurier 0.4g; Farine 1cs; Pâtes 500g
+= Bœuf à braiser 1300g; Lardons 150g
+~ Pois chiches (boîte) 600g; Champignons de Paris 400g
+v Daube de pois chiches et champignons
+- La veille, faire mariner le bœuf en gros cubes dans le vin avec les carottes, l'oignon, l'ail, le zeste d'orange et les herbes.
+- Égoutter, sécher et dorer la viande avec les lardons, saupoudrer de farine.
+- Ajouter la marinade et les tomates, couvrir et mijoter 3 heures à feu très doux.
+- Ajouter les olives 15 minutes avant la fin.
+- Servir avec les pâtes (traditionnellement des macaronis à la sauce de la daube). Version végé : pois chiches et champignons mijotés 45 minutes.
+
+# Gratin de courgettes et riz | 4 | 60 | E
+r
++ Courgettes 1000g; Oignon 1pc; Ail 0.1pc; Oeufs 3pc; Crème liquide 200ml; Gruyère râpé 120g; Riz 250g; Thym 0.1pc
+= Haché de bœuf 300g
+~ Feta 150g
+v Gratin de courgettes à la feta et riz
+- Couper les courgettes en rondelles et les faire revenir 10 minutes avec l'oignon et l'ail.
+- Faire dorer la viande hachée avec le thym, saler et poivrer.
+- Battre les œufs avec la crème et la moitié du fromage.
+- Mélanger courgettes et viande dans un plat, verser l'appareil, parsemer du reste du fromage et gratiner 25 minutes à 190 °C.
+- Servir avec le riz. Version végé : feta émiettée.
+
+# Soupe de poisson et croûtons | 4 | 70 | AH
+r
++ Tomates concassées 400g; Oignon 1pc; Poireaux 200g; Fenouil 1pc; Ail 0.3pc; Safran 0.1g; Oranges 50g; Pommes de terre 300g; Fumet de poisson 1200ml; Croûtons 100g; Gruyère râpé 100g; Mayonnaise 4cs; Piment 0.5pc
+= Dos de cabillaud 400g; Scampis 200g
+~ Pois chiches (boîte) 400g
+v Soupe de légumes au safran et pois chiches
+- Faire revenir l'oignon, le poireau et le fenouil émincés à l'huile d'olive, ajouter l'ail, les tomates et le zeste d'orange.
+- Ajouter le fumet, le safran et les pommes de terre ; cuire 30 minutes.
+- Ajouter le poisson et les scampis, cuire 5 minutes, puis mixer et passer au chinois en pressant bien.
+- Rouille : mayonnaise, ail écrasé, piment et une pincée de safran.
+- Servir avec les croûtons tartinés de rouille et le fromage râpé. Version végé : pois chiches mixés avec les légumes.
+
+# Lapin à la moutarde | 4 | 80 | AH
+r
++ Moutarde 4cs; Crème liquide 200ml; Vin blanc 200ml; Échalote 2pc; Beurre 30g; Thym 0.25pc; Pâtes 400g
+= Cuisse de lapin 4pc
+~ Champignons de Paris 500g; Pois chiches (boîte) 300g
+v Champignons et pois chiches à la moutarde
+- Badigeonner les cuisses de lapin d'une partie de la moutarde, saler et poivrer.
+- Les dorer dans le beurre en cocotte, ajouter les échalotes hachées.
+- Déglacer au vin blanc, ajouter le thym, couvrir et cuire 45 minutes à feu doux.
+- Ajouter la crème et le reste de la moutarde, laisser réduire 5 minutes sans bouillir.
+- Servir avec les pâtes (tagliatelles). Version végé : champignons et pois chiches dans la même sauce.
