@@ -87,9 +87,16 @@ export function matchItem(productName: string, size: number, unit: "g" | "ml" | 
 }
 
 /** Viande ou poisson différents (« carbonades de porc » ≠ « Bœuf à braiser ») : jamais le même article. */
+// Familles : « volaille » couvre poulet, dinde, canard ; « poisson » couvre cabillaud, saumon… ; crevettes = scampis.
+const FAMILY_OF: Record<string, string> = { poulet: "volaille", dinde: "volaille", canard: "volaille", volaille: "volaille",
+  thon: "poisson", saumon: "poisson", cabillaud: "poisson", colin: "poisson", truite: "poisson", poisson: "poisson", crevette: "crustace", scampi: "crustace" };
+const GENERIC = new Set(["volaille", "poisson"]);
 export function proteinClash(productName: string, itemName: string): boolean {
   const pt = tokens(productName).filter((w) => PROTEIN.has(w)), it = tokens(itemName).filter((w) => PROTEIN.has(w));
-  return pt.length > 0 && it.length > 0 && !pt.some((w) => it.includes(w));
+  if (!pt.length || !it.length || pt.some((w) => it.includes(w))) return false;
+  // Même famille, et l'un des deux est le nom générique (« blanc de volaille » = « blanc de poulet »), ou crevette = scampi.
+  const same = (a: string, b: string) => FAMILY_OF[a] && FAMILY_OF[a] === FAMILY_OF[b] && (GENERIC.has(a) || GENERIC.has(b) || FAMILY_OF[a] === "crustace");
+  return !pt.some((a) => it.some((b) => same(a, b)));
 }
 
 /** Racine des mots (« apéritif » et « apéritives » → « aperit », « saucisse » ≠ « saucisson »). */

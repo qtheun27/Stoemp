@@ -15,7 +15,7 @@ const HYGIENE = [
   "lait corporel", "lait demaquillant", "lait solaire", "lait hydratant", "lait pour le corps", "lotion", "demaquill", "mascara", "rouge a levres", "vernis", "maquillage", "fond de teint",
   "parfum", "eau de toilette", "eau de parfum", "rasoir", "rasoirs", "lames de rasoir", "mousse a raser", "gel a raser", "coton-tiges", "cotons", "disques demaquillants", "lingettes",
   "nivea", "garnier", "l'oreal", "colgate", "sanex", "palmolive", "rexona", "gillette", "pampers", "head & shoulders",
-  "serviettes hygieniques", "tampons", "protege-slips", "couches", "laque", "gel coiffant", "coloration", "baume a levres", "serum", "masque visage", "masque cheveux", "exfoliant", "gommage", "soin du visage", "huile de massage", "huile pour le corps", "huile de soin", "huile de bain", "bio-oil", "micellaire", "dch",
+  "serviettes hygieniques", "tampons", "protege-slips", "couches", "laque", "gel coiffant", "coloration", "baume a levres", "serum", "masque visage", "masque cheveux", "exfoliant", "gommage", "soin du visage", "huile de massage", "huile pour le corps", "huile de soin", "huile de bain", "johnson's", "huile bebe", "baby huile", "baby oil", "bio-oil", "micellaire", "dch",
 ];
 const CLEANING = [
   "nettoy", "a recurer", "creme a recurer", "dreft", "ariel", "mr propre", "cif", "ajax", "dettol", "glorix", "frosch", "ecover", "vanish", "finish", "regenerant", "sel regenerant", "sel lave-vaisselle",
@@ -31,9 +31,11 @@ const RE = new RegExp(`(^|[^a-z0-9])(${words.map((w) => w.replace(/[.*+?^${}()|[
 export const isNonFood = (name: string) => RE.test(fold(name));
 
 /** Alimentation pour bébé (petits pots « +12m », laits de croissance) : jamais rangée avec les ingrédients de cuisine. */
-export const isBabyFood = (name: string) => /\+\s?\d{1,2}\s?m(ois)?\b|\b\d{1,2}\s?m\+?(?![a-z0-9])|\bolvarit\b|\bnutrilon\b|\bbambix\b|\bbebe\b|petits? pots?\b|des \d+ mois|lait de (suite|croissance)|nourrisson|premier age/.test(fold(name));
+// « +12m », « 6m+ », « 6-36m » ou une marque pour bébé ; pas « parmigiano 24m » ni « serrano 12m » (affinage).
+export const isBabyFood = (name: string) =>
+  /\+\s?\d{1,2}\s?m(ois)?\b|\b\d{1,2}\s?m\s?\+|\b\d{1,2}\s?-\s?\d{1,2}\s?m\b|\bolvarit\b|\bnutrilon\b|\bbambix\b|\byogolino\b|\bcerelac\b|hero baby|ella'?s kitchen|\bbetterfood\b|\bdixap\b|\bbabybio\b|nan optipro|\bbaby\b|\bbebe\b|petits? pots?\b|des \d+ mois|lait de (suite|croissance)|lait croissance|nourrisson|premier age/.test(fold(name));
 /** Article destiné aux bébés et jeunes enfants : il garde ses produits pour bébé. */
-export const isBabyItem = (name: string) => /infantile|nourrisson|bebe|enfant|premier age|croissance|petits? pots?/.test(fold(name));
+export const isBabyItem = (name: string) => /infantile|nourrisson|bebe|enfant|premier age|croissance|lait de suite|petits? pots?/.test(fold(name));
 
 /** Page d'un rayon non alimentaire (adresse de la page capturée). */
 export const isNonFoodPage = (url: string) =>
