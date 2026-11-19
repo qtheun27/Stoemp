@@ -131,6 +131,7 @@ v Ajiaco aux pois chiches
 
 ## plat
 # Pollo a la brasa | 4 | 330 | T
+g Salade verte
 + Ail 0.3pc; Citron vert 2pc; Cumin 2cc; Paprika 2cc; Origan 1cc; Sauce soja 3cs; Pommes de terre 1000g; Huile de tournesol 2000ml; Salade verte 1pc; Mayonnaise 4cs; Coriandre 0.5pc
 = Poulet entier 1600g
 ~ Chou-fleur 1000g

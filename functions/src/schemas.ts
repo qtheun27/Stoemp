@@ -39,6 +39,8 @@ export const AiRecipe = z.object({
   meat: z.array(AiIngredient),
   vegSwap: z.array(AiIngredient),
   steps: z.array(z.string()),
+  sideLabel: z.string().nullable().describe("Accompagnement féculent servi À CÔTÉ (« frites », « purée », « riz », « pommes vapeur »…), qui ne figure PAS dans le nom ; null si le féculent fait le plat (pâtes, risotto, gratin dauphinois, stoemp) ou s'il n'y en a pas"),
+  vegSide: z.array(z.string()).describe("Noms exacts, tels que dans les ingrédients, des légumes SERVIS À CÔTÉ et remplaçables (salade verte, haricots verts, petits pois…). Vide si les légumes cuisent dans le plat (ragoût, curry, waterzooi, gratin…) ou en font l'identité"),
   cuisine: z.enum(CUISINES).describe("Cuisine du plat : belge, francaise, italienne, mediterraneenne (grecque, espagnole), orientale (Maghreb, Moyen-Orient), asiatique, indienne, latino (Mexique, Amérique latine), americaine (et anglaise)"),
 });
 export const AiRecipes = z.object({ recipes: z.array(AiRecipe) });

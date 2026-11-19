@@ -2,7 +2,10 @@
 @italienne
 
 ## plat
-# Pollo alla diavola e patate | 4 | 260 | E
+# Pollo alla diavola | 4 | 260 | E
+o Pollo alla diavola e patate
+s pommes de terre rôties
+g Salade verte
 + Citron 2pc; Piment 2pc; Ail 0.2pc; Romarin 0.25pc; Huile d'olive 5cs; Pommes de terre 1000g; Salade verte 1pc
 = Poulet entier 1600g
 ~ Halloumi 400g; Courgettes 400g

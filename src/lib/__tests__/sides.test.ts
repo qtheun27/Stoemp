@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { BASE_INDEX, BASE_RECIPES } from "../catalog";
 import { loadLibrary } from "../../../scripts/library/format";
 import { mealNeeds } from "../shopping";
-import { assignSides, defaultSideLabel, sideOptions, slotRecipe, swappableStarch, withSide } from "../sides";
+import { assignSides, defaultSideLabel, sideOptions, slotRecipe, swappableStarch, vegOptions, withSide, withVegSide } from "../sides";
 import type { Recipe } from "../types";
 
 const lib = loadLibrary().recipes.map((r) => ({ ...r, source: "base" as const, lib: true })) as unknown as Recipe[];
@@ -78,5 +78,33 @@ describe("étapes qui suivent l'accompagnement choisi", () => {
     const recipes = new Map(lib.map((x) => [x.id, x]));
     const [sl] = assignSides([{ recipeId: r.id, fromLeftovers: false } as never], recipes, BASE_INDEX, Math.random, { [r.id]: fr.id });
     expect((sl as { side: string }).side).toBe(fr.id);
+  });
+});
+
+describe("légume servi à côté, accordé comme un chef", () => {
+  const find = (n: string) => lib.find((r) => r.name === n)!;
+  const nov = new Date(2026, 10, 19);
+  const names = (n: string, veg = false) => vegOptions(find(n), lib, BASE_INDEX, veg, nov).map((x) => x.name);
+  it("ne touche pas aux plats où le légume est cuit dans le plat", () => {
+    for (const n of ["Waterzooi de poulet", "Chicons braisés au jambon", "Navarin d'agneau printanier", "Ratatouille et poulet rôti"]) expect(names(n)).toEqual([]);
+  });
+  it("une quiche en hiver : chicons braisés possibles, pas de plats d'une autre cuisine ni de compote", () => {
+    const q = names("Quiche lorraine");
+    expect(q).toContain("Chicons braisés");
+    expect(q.some((x) => /mushy|coleslaw|casserole|compote|lardons/i.test(x))).toBe(false);
+    expect(q.length).toBeLessThanOrEqual(8);
+  });
+  it("de saison, sans viande pour un poisson ou un repas végé", () => {
+    expect(names("Cabillaud poêlé au citron").some((x) => /lardons|courgettes|tomates/i.test(x))).toBe(false);
+    expect(names("Steak sauce poivre", true).some((x) => /lardons/i.test(x))).toBe(false);
+  });
+  it("la recette suit : salade retirée, légumes ajoutés, étapes adaptées", () => {
+    const r = find("Quiche lorraine"), side = find("Chicons braisés");
+    const w = withVegSide(r, side, BASE_INDEX);
+    const salade = BASE_INDEX.find("Salade verte")!.id;
+    expect(w.ingredients.some((i) => i.itemId === salade)).toBe(false);
+    expect(w.ingredients.length).toBe(r.ingredients.length - 1 + side.ingredients.length);
+    expect(w.steps.join(" ")).toContain("l'accompagnement de légumes (chicons braisés)");
+    expect(w.steps).toContain("Légumes — Chicons braisés :");
   });
 });

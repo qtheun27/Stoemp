@@ -258,6 +258,7 @@ v Poke bowl au tofu
 - Parsemer de sésame et d'oignons nouveaux. Version végé : tofu mariné et doré, et maïs.
 
 # Poulet général Tao | 4 | 40 | T
+g Brocoli
 r
 + Riz 300g; Sauce soja 4cs; Miel 3cs; Vinaigre de riz 2cs; Ketchup 1cs; Gingembre 15g; Ail 0.2pc; Fécule de maïs 80g; Oeufs 1pc; Piment 1pc; Brocoli 400g; Graines de sésame 1cs; Huile de tournesol 500ml
 = Filet de poulet 600g

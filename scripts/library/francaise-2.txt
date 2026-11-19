@@ -105,6 +105,8 @@ v Garbure au tofu fumé
 - Cuire 17 minutes à feu doux (ou au four à 180 °C), puis égrainer à la fourchette.
 
 # Tomates provençales | 4 | 40 | E
+p viande volaille poisson vege
+n
 + Grosses tomates 4pc; Ail 0.2pc; Persil 0.5pc; Chapelure 30g; Huile d'olive 3cs; Herbes de Provence 0.5cc
 - Couper les tomates en deux, les saler et les retourner 10 minutes pour qu'elles rendent leur eau.
 - Mélanger l'ail et le persil hachés avec la chapelure et les herbes.
@@ -230,7 +232,10 @@ v Cocotte de légumes et haricots blancs au thym
 - Ajouter les pommes de terre la dernière heure.
 - Servir à la cuillère, la viande se défait. Version végé : légumes cuits 1 heure dans la sauce, haricots ajoutés à la fin.
 
-# Confit de canard et pommes sarladaises | 4 | 60 | AH
+# Confit de canard | 4 | 60 | AH
+o Confit de canard et pommes sarladaises
+s pommes sarladaises
+g Salade verte
 + Pommes de terre 1000g; Ail 0.2pc; Persil 0.5pc; Salade verte 1pc
 = Cuisses de canard confites 4pc
 ~ Champignons de Paris 500g; Oeufs 4pc

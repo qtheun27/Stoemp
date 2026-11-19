@@ -48,6 +48,7 @@ v Chou farci au riz, champignons et fromage
 - Version végé : farce de riz cuit, champignons et fromage.
 
 # Cordon bleu | 4 | 45 | T
+g Salade verte
 o Cordon bleu et purée
 s purée
 + Emmental 120g; Farine 50g; Oeufs 2pc; Chapelure 150g; Beurre 80g; Pommes de terre 1000g; Lait 200ml; Salade verte 1pc

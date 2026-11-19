@@ -72,7 +72,9 @@ v Souvlaki d'halloumi, tzatziki et pita
 - Griller les brochettes 10 minutes et les pitas 1 minute.
 - Garnir les pitas de viande, tzatziki, tomates et oignon rouge, avec les frites au four. Version végé : halloumi grillé.
 
-# Tortilla espagnole et salade | 4 | 50 | T
+# Tortilla espagnole | 4 | 50 | T
+o Tortilla espagnole et salade
+g Salade verte
 r
 + Pommes de terre 800g; Oignon 2pc; Oeufs 8pc; Huile d'olive 200ml; Salade verte 1pc; Vinaigre 1cs
 = Chorizo 120g
@@ -111,6 +113,7 @@ v Pois chiches à l'ail et au paprika, riz citronné
 - Servir grésillant avec le riz et l'autre citron en quartiers (gambas al ajillo). Version végé : pois chiches dorés dans l'huile à l'ail.
 
 # Spanakopita (feuilleté épinards-feta) | 6 | 75 | T
+g Salade verte
 r
 + Pâte filo 400g; Épinards frais 1000g; Feta 400g; Oeufs 3pc; Oignons nouveaux 4pc; Aneth 0.5pc; Menthe 0.25pc; Beurre 100g; Muscade 0.25cc; Salade verte 1pc; Pain pita 3pc
 - Faire tomber les épinards, les presser très fortement et les hacher.
@@ -120,6 +123,7 @@ r
 - Cuire 45 minutes à 180 °C jusqu'à ce qu'il soit doré, et servir tiède avec la salade et les pitas.
 
 # Poulet au citron et pommes de terre grecques | 4 | 75 | T
+g Salade verte
 r
 + Pommes de terre 1000g; Citron 2pc; Ail 0.3pc; Origan 3g; Huile d'olive 6cs; Bouillon de volaille 250ml; Feta 80g; Salade verte 1pc
 = Cuisse de poulet 4pc
@@ -179,6 +183,7 @@ r
 - Servir à température ambiante avec les pitas grillées.
 
 # Sardines grillées | 4 | 35 | E
+g Salade verte
 o Sardines grillées et salade de pommes de terre
 s salade de pommes de terre
 r
@@ -205,6 +210,7 @@ v Brochettes halloumi-courgette et taboulé
 - Griller les brochettes 10 minutes et servir avec le taboulé et le reste du yaourt. Version végé : halloumi et courgettes en cubes.
 
 # Bacalhau à brás | 4 | 40 | T
+g Salade verte
 r
 + Pommes de terre 600g; Huile de tournesol 500ml; Oeufs 6pc; Oignon 2pc; Ail 0.1pc; Olives noires 80g; Persil 0.5pc; Huile d'olive 3cs; Salade verte 1pc
 = Morue salée 450g

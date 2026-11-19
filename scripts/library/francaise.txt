@@ -134,12 +134,16 @@ v Œufs cocotte aux champignons
 - Ajouter l'ail et le persil hachés en fin de cuisson, saler et poivrer.
 
 # Haricots verts persillés | 4 | 20 | E
+p viande volaille poisson vege
+n
 + Haricots verts 600g; Beurre 30g; Ail 0.1pc; Persil 0.25pc
 - Équeuter les haricots et les cuire 8 minutes à l'eau bouillante très salée.
 - Les plonger dans l'eau glacée pour garder leur couleur, puis les égoutter.
 - Les faire sauter 3 minutes dans le beurre avec l'ail et le persil hachés.
 
 # Petits pois à la française | 4 | 30 | PE
+p viande volaille poisson
+n
 + Petits pois 600g; Salade verte 1pc; Oignons nouveaux 4pc; Beurre 40g; Sucre 1cc
 - Émincer la laitue en lanières et couper les oignons nouveaux.
 - Faire fondre le beurre, ajouter les oignons, les petits pois, la laitue, le sucre, une pincée de sel et 100 ml d'eau.
@@ -147,6 +151,8 @@ v Œufs cocotte aux champignons
 - Lier avec une noisette de beurre au moment de servir.
 
 # Ratatouille | 6 | 90 | E
+p viande volaille poisson vege
+n
 + Aubergine 400g; Courgettes 400g; Poivron 2pc; Tomates 600g; Oignon 2pc; Ail 0.2pc; Herbes de Provence 1cc; Basilic 0.25pc
 - Couper tous les légumes en cubes de 2 cm.
 - Faire revenir séparément à l'huile d'olive l'aubergine, la courgette, puis les poivrons, pour qu'ils dorent sans bouillir.
@@ -311,6 +317,7 @@ v Raclette aux champignons et œufs
 - Version végé : servir des champignons émincés à faire griller sur l'appareil et des œufs à cuire dans les poêlons.
 
 # Fondue savoyarde | 4 | 30 | AH
+g Salade verte
 + Beaufort 400g; Comté 400g; Vin blanc 300ml; Ail 0.1pc; Fécule de maïs 10g; Pain de campagne 1pc; Salade verte 1pc
 - Couper le pain en cubes la veille ou quelques heures avant, pour qu'il sèche un peu.
 - Frotter le caquelon avec la gousse d'ail coupée et râper ou couper les fromages en petits dés.
@@ -342,7 +349,10 @@ v Ragoût Marengo aux pois chiches et tagliatelles
 - Cuire les tagliatelles et servir avec le veau, parsemé de persil.
 - Version végé : faire mijoter la sauce 30 minutes avec les champignons, puis ajouter les pois chiches 10 minutes.
 
-# Magret de canard et pommes sarladaises | 4 | 50 | AH
+# Magret de canard | 4 | 50 | AH
+o Magret de canard et pommes sarladaises
+s pommes sarladaises
+g Salade verte
 + Pommes de terre 1000g; Graisse de canard 40g; Ail 0.2pc; Persil 0.5pc; Salade verte 1pc
 = Magret de canard 800g
 ~ Oeufs 8pc

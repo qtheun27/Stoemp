@@ -79,6 +79,19 @@ async function resolveIngredients(list: AiIng[], items: ItemDoc[]) {
   return out;
 }
 
+/** Légumes servis à côté : identifiants des ingrédients que l'IA désigne par leur nom (les autres légumes restent dans le plat). */
+function vegSideIds(names: string[] | undefined, ingredients: { itemId: string }[], items: ItemDoc[]) {
+  const want = new Set((names || []).map(norm));
+  if (!want.size) return [];
+  return ingredients.map((i) => i.itemId).filter((id) => { const it = items.find((x) => x.id === id); return !!it && it.category === "fl" && (want.has(norm(it.name)) || want.has(norm(id))); });
+}
+/** Accompagnement d'origine, et nom du plat sans lui (« Boulettes sauce tomate et purée » → « Boulettes sauce tomate »). */
+function sideFields(name: string, sideLabel: string | null | undefined) {
+  const label = (sideLabel || "").trim();
+  const clean = label ? name.replace(new RegExp(`\\s*(,| et| avec)\\s+(des |de la |du |une |un )?${label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`, "i"), "") : name;
+  return { name: clean || name, ...(label ? { sideLabel: label } : {}) };
+}
+
 /** Fiche d'un nouvel article à partir de ce que la recette en dit (valeurs prudentes pour le reste). */
 function newItemFrom(name: string, category: string, unit: string, allergens: string[]): z.infer<typeof ClassifiedItem> {
   const perishable = ["fl", "vi", "fr"].includes(category);
@@ -92,6 +105,8 @@ Rayons (newCategory) : fl fruits-légumes, vi boucherie-poisson-charcuterie, fr 
 Quantités POUR 1 PERSONNE dans l'unité du catalogue (g, ml ou pièces ; une cuillère à soupe ≈ 15 g ou ml). Pas de sel, poivre ni huile.
 La protéine animale va dans "meat" et son remplacement végétarien dans "vegSwap" avec un nom végé "vegName" : même base (sauce, accompagnements), et "vegSwap" contient TOUJOURS une protéine végétale (lentilles, pois chiches, haricots, tofu, œufs ou fromage), pour qu'un foyer mixte cuisine un seul plat. Plat déjà végétarien : "meat" et "vegSwap" vides, "vegName" null.
 3 à 5 étapes courtes. Saisons : P printemps, E été, A automne, H hiver.
+Le NOM ne contient jamais l'accompagnement servi à côté (« Boulettes sauce tomate », pas « … et purée ») : mets-le dans "sideLabel" et ses ingrédients dans la recette. Seule exception : le féculent qui fait le plat (moules-frites, pâtes, risotto).
+"vegSide" : les légumes servis À CÔTÉ (une salade, des haricots verts…), jamais ceux qui cuisent dans le plat.
 Catalogue (itemId | nom | unité) :
 ${catalog}`;
 
@@ -140,10 +155,12 @@ N'utilise AUCUN de ces plats déjà connus : ${d.knownNames.join(" ; ")}.`,
     const ingredients = await resolveIngredients(r.ingredients, items);
     if (!ingredients.length) continue;
     const meat = await resolveIngredients(r.meat, items);
+    const vs = vegSideIds(r.vegSide, ingredients, items);
     const recipe = {
-      name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: r.prepMin,
+      ...sideFields(r.name, r.sideLabel), vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: r.prepMin,
       seasons: r.seasons.length ? r.seasons : [d.season], ingredients, meat,
       vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps, cuisine: r.cuisine,
+      ...(vs.length ? { vegSide: vs } : {}),
       source: "ia", householdId: d.householdId, deleted: false, createdAt: Date.now(),
     };
     const ref = db().collection("recipes").doc(`ia-${slug(r.name)}-${randomBytes(3).toString("hex")}`);
@@ -226,9 +243,13 @@ Garde fidèlement les ingrédients et étapes donnés (reformule à peine) et co
   const r = res.recipes[0];
   if (!r) throw new HttpsError("internal", "L'IA n'a pas réussi à structurer ce plat.");
   const meat = await resolveIngredients(r.meat, items);
+  const ingredients = await resolveIngredients(r.ingredients, items);
+  const vs = vegSideIds(r.vegSide, ingredients, items);
   const recipe = {
-    name: d.name, vegName: meat.length ? r.vegName || `${d.name} (végé)` : null, prepMin: d.minutes,
-    seasons: ["P", "E", "A", "H"], ingredients: await resolveIngredients(r.ingredients, items), meat,
+    // Le nom donné par la personne est gardé tel quel ; l'accompagnement et les légumes servis à côté sont notés pour pouvoir les changer.
+    name: d.name, ...(r.sideLabel ? { sideLabel: r.sideLabel } : {}), ...(vs.length ? { vegSide: vs } : {}),
+    vegName: meat.length ? r.vegName || `${d.name} (végé)` : null, prepMin: d.minutes,
+    seasons: ["P", "E", "A", "H"], ingredients, meat,
     vegSwap: meat.length ? await resolveIngredients(r.vegSwap, items) : [], steps: r.steps, cuisine: r.cuisine,
     source: "perso", householdId: d.householdId, deleted: false, createdAt: Date.now(),
   };
@@ -571,7 +592,7 @@ async function growLibrary(cuisine: string, course: string, n: number): Promise<
       system: `Tu es un grand chef et historien de la cuisine ${CUISINE_LABEL[cuisine]}. Tu dresses la liste des vrais plats d'une cuisine, pour un livre de recettes familial belge.`,
       content: `Liste 60 ${LIB_COURSE[course]} RÉELS et distincts de cuisine ${CUISINE_LABEL[cuisine]}, que des familles cuisinent vraiment à la maison : d'abord les grands classiques que tout le monde connaît, puis des recettes populaires du quotidien. Uniquement des plats qui existent sous ce nom ; aucune variante déguisée d'un même plat.
 Évite les préparations de chef ou de pâtissier professionnel, les spécialités très locales et peu connues, et celles dont les ingrédients principaux sont introuvables en supermarché belge.
-Un même plat sous un autre nom ou dans une autre langue est un DOUBLON (ex. « stoofvlees » = « carbonnade flamande », « boulets » = « boulettes à la liégeoise ») : ne le propose pas.${course === "plat" ? "\nCe sont des repas : quand le plat se sert avec un accompagnement habituel, donne-le avec (ex. « Boulets à la liégeoise et frites », « Blanquette de veau et riz ») ; un plat qui forme déjà un repas ou un repas léger reste tel quel (moussaka, salade composée)." : ""}
+Un même plat sous un autre nom ou dans une autre langue est un DOUBLON (ex. « stoofvlees » = « carbonnade flamande », « boulets » = « boulettes à la liégeoise ») : ne le propose pas.${course === "plat" ? "\nCe sont des repas : quand le plat se sert avec un accompagnement habituel, mets-le dans la recette mais PAS dans le nom (« Boulets à la liégeoise », sideLabel « frites ») ; un plat qui forme déjà un repas ou un repas léger reste tel quel (moussaka, salade composée)." : ""}
 Pour chacun, « keys » : les ingrédients indispensables, la technique qui fait le plat et la durée totale réelle (ex. « bœuf, bière brune, oignons, pain d'épices moutardé ; mijoté ; 2 h 30 »).
 Exclus ceux-ci (déjà présents) : ${[...names, ...plan.map((d) => d.n)].slice(-500).join(" ; ") || "—"}.`,
     });
@@ -629,10 +650,10 @@ Un plat principal est un REPAS : s'il se sert traditionnellement avec un accompa
     system: `Tu es un chef critique exigeant, spécialiste de la cuisine ${CUISINE_LABEL[cuisine]}. On te soumet des recettes pour une appli familiale belge.
 Refuse (ok = false) : un plat qui n'existe pas vraiment sous ce nom, une invention ou une « fusion », une recette qui trahit le plat (ingrédient clé absent, ingrédient incongru), des quantités irréalistes pour le nombre de parts indiqué, des étapes fausses ou dangereuses, un « ${LIB_COURSE[course]} » qui n'en est pas un.
 Format de l'appli, à NE PAS reprocher : quantités pour toute la recette (nombre de parts indiqué), sel, poivre et huile volontairement absents de la liste, étapes concises si elles sont justes. « pièce(s) » d'un bouquet d'herbes = fraction du bouquet.
-${course === "plat" ? `Repas : refuse un plat consistant à qui il manque son accompagnement habituel, et refuse aussi un féculent ajouté qui n'a rien à faire là. Un plat marqué « repas léger / déjà complet » est accepté s'il l'est vraiment (salade composée, omelette, moussaka, viande et sa garniture).\n` : ""}Refuse aussi un DOUBLON d'un plat déjà présent (même plat sous un autre nom ou dans une autre langue). Déjà présents : ${names.slice(-400).join(" ; ")}.
+${course === "plat" ? `Repas : refuse un plat consistant à qui il manque son accompagnement habituel, et refuse aussi un féculent ajouté qui n'a rien à faire là. Un plat marqué « repas léger / déjà complet » est accepté s'il l'est vraiment (salade composée, omelette, moussaka, viande et sa garniture). Refuse un nom qui contient son accompagnement (« … et frites ») et des « légumes à côté » qui cuisent en réalité dans le plat.\n` : ""}Refuse aussi un DOUBLON d'un plat déjà présent (même plat sous un autre nom ou dans une autre langue). Déjà présents : ${names.slice(-400).join(" ; ")}.
 Accepte les adaptations raisonnables aux supermarchés belges.
 Décide APRÈS ton analyse : ok = false seulement pour un défaut GRAVE (plat inventé ou confondu, ingrédient clé absent ou faux, quantités ou cuisson qui feraient rater la recette, étape dangereuse). Un écart de tradition mineur ou une imprécision → ok = true.`,
-    content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.servings} parts, ${r.prepMin} min${r.light ? ", repas léger / déjà complet" : ""})
+    content: candidates.map(({ r }, i) => `${i}. ${r.name} (${r.servings} parts, ${r.prepMin} min${r.light ? ", repas léger / déjà complet" : ""}${r.sideLabel ? `, servi avec : ${r.sideLabel}` : ""}${r.vegSide?.length ? `, légumes à côté : ${r.vegSide.join(", ")}` : ""})
 Ingrédients : ${[...r.ingredients, ...r.meat].map(line).join(", ")}${r.vegSwap.length ? `
 Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
 Étapes : ${r.steps.join(" / ")}`).join("\n\n"),
@@ -655,14 +676,17 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
     const meat = await resolveIngredients(per(r.meat), items);
     const vegSwap = meat.length ? await resolveIngredients(per(r.vegSwap), items) : [];
     const id = `lib-${slug(r.name)}`.slice(0, 120);
+    const vs = course === "plat" ? vegSideIds(r.vegSide, ingredients, items) : [];
+    const sf = sideFields(r.name, course === "plat" ? r.sideLabel : null);
     const recipe = {
-      name: r.name, vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: Math.max(5, r.prepMin),
+      ...sf, ...(vs.length ? { vegSide: vs } : {}), vegName: meat.length ? r.vegName || `${r.name} (végé)` : null, prepMin: Math.max(5, r.prepMin),
       seasons: r.seasons.length ? r.seasons : ["P", "E", "A", "H"], ingredients, meat, vegSwap, steps: r.steps.slice(0, 8),
       cuisine, course, servings: r.servings, ...(r.light ? { light: true } : {}), source: "base", lib: true, householdId: null, deleted: false, createdAt: Date.now(),
     };
     batch.set(db().collection("recipes").doc(id), recipe);
     // Fiche compacte (sans les étapes) pour l'appli : chargée une fois, gardée hors ligne.
     metas.push({ i: id, n: recipe.name, v: recipe.vegName, t: recipe.prepMin, s: recipe.seasons.join(""), c: cuisine, k: course, ...(r.light ? { lt: 1 } : {}),
+      ...(sf.sideLabel ? { sd: sf.sideLabel } : {}), ...(vs.length ? { vs } : {}),
       g: ingredients.map((x) => [x.itemId, x.qtyPerPerson]), m: meat.map((x) => [x.itemId, x.qtyPerPerson]), w: vegSwap.map((x) => [x.itemId, x.qtyPerPerson]) });
     known.add(key);
   }

@@ -66,6 +66,12 @@ export interface Recipe {
   sideName?: string;
   /** Accompagnement d'origine (« purée », « frites »…), affiché tant qu'on n'en choisit pas un autre. */
   sideLabel?: string | null;
+  /** Légume servi à côté, remplaçable (articles) ; jamais un légume cuit dans le plat. */
+  vegSide?: string[];
+  /** Accompagnement de légumes : avec quoi il s'accorde, et s'il va avec toute cuisine européenne. */
+  pairs?: string[];
+  neutral?: boolean;
+  vegSideName?: string;
 }
 
 /** Gamme de produits du foyer : premier prix, marque du magasin, ou grandes marques. */
@@ -156,6 +162,8 @@ export interface Slot {
   prevRecipeId?: string | null;
   /** Accompagnement choisi (recette « accompagnement ») à la place du féculent d'origine du plat. */
   side?: string | null;
+  /** Accompagnement de légumes choisi à la place du légume servi à côté (salade, haricots…). */
+  vegSide?: string | null;
 }
 
 export interface StockEntry {

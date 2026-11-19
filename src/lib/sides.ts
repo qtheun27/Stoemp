@@ -1,4 +1,6 @@
 import type { ItemIndex } from "./catalog";
+import { profile } from "./balance";
+import { currentSeason } from "./season";
 import { norm } from "./text";
 import type { Recipe, Slot } from "./types";
 
@@ -17,20 +19,29 @@ const FAMILY: [SideFamily, RegExp][] = [
 ];
 /** Plats dont le féculent EST le plat (moules-frites, fish and chips, pâtes, risotto…) : on ne le remplace pas.
  *  Les autres ne nomment pas leur accompagnement : il s'affiche à côté du nom et se choisit dans la semaine. */
-const CORE = /frites|puree|pommes vapeur|pommes de terre|grenailles|semoule|polenta|pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin (savoyard|de pates|de macaroni)|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado/;
+const CORE = /frites|puree|pommes vapeur|pommes de terre|grenailles|semoule|polenta|pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin (savoyard|de pates|de macaroni)|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado|fish and chips|chowder|grits|brandade|bacalhau|bouillabaisse|marmitako|caldo verde|minestrone|velout|waterzooi|navarin|curry japonais|massaman|malai kofta|vispannetje|escondidinho|tajine de poisson|tajine de legumes|psari plaki|fasolakia|lentejas|patate|spezzatino|pommes de terre grecques|aji de gallina|tomates farcies|gemista|taboul|koshari|bibimbap|khao man gai|boulgour aux|rfissa|mercimek|fattouche|musakhan|choripan|philly|hot-dog|tartine|saltado|arancini|sushi|maki|onigiri/;
 
 const familyOf = (name: string): SideFamily | null => FAMILY.find(([, re]) => re.test(norm(name)))?.[0] ?? null;
 
 /** Ingrédients « accompagnement » du plat (remplaçables) et leur famille ; aucun si le féculent est le plat. */
 export function swappableStarch(r: Recipe, idx: ItemIndex): { ids: Set<string>; family: SideFamily } | null {
   if ((r.course || "plat") !== "plat" || r.source === "pret" || CORE.test(norm(r.name))) return null;
-  const ids = new Set<string>();
-  let family: SideFamily | null = null;
+  // Féculents du plat, par famille. La patate douce n'est l'accompagnement que si la recette le dit.
+  const label = norm(r.sideLabel || "");
+  const byFam = new Map<SideFamily, string[]>();
   for (const i of r.ingredients) {
-    const f = familyOf(idx.get(i.itemId)?.name || "");
-    if (f) { ids.add(i.itemId); family ??= f; }
+    const n = norm(idx.get(i.itemId)?.name || "");
+    if (/patate douce/.test(n) && !/patate/.test(label)) continue;
+    const f = familyOf(n);
+    if (f) byFam.set(f, [...(byFam.get(f) || []), i.itemId]);
   }
-  return family ? { ids, family } : null;
+  if (!byFam.size) return null;
+  // L'accompagnement d'origine décide ; sinon le riz servi à côté d'un plat qui contient des pommes de terre,
+  // et le pain seulement s'il est le seul féculent.
+  const fromLabel = label ? familyOf(label) : null;
+  const order: SideFamily[] = ["riz", "grain", "pdt", "pain"];
+  const family = fromLabel && byFam.has(fromLabel) ? fromLabel : order.find((f) => byFam.has(f))!;
+  return { ids: new Set(byFam.get(family)), family };
 }
 
 /** Famille d'un accompagnement (recette « accompagnement » qui contient un féculent). */
@@ -58,6 +69,7 @@ export function withSide(r: Recipe, side: Recipe | null | undefined, idx: ItemIn
   return {
     ...r,
     ingredients: [...r.ingredients.filter((i) => !s.ids.has(i.itemId)), ...side.ingredients],
+    meat: [...r.meat, ...side.meat], vegSwap: [...r.vegSwap, ...side.vegSwap],
     steps: [...adaptSteps(r, s.ids, side, idx), ...steps],
     prepMin: Math.max(r.prepMin, side.prepMin),
     sideName: side.name,
@@ -91,9 +103,85 @@ export function adaptSteps(r: Recipe, removed: Set<string>, side: Recipe, idx: I
 }
 
 /** Recette effective d'un créneau de la semaine (plat + accompagnement choisi). */
-export function slotRecipe(recipes: Map<string, Recipe>, slot: Pick<Slot, "recipeId" | "side">, idx: ItemIndex): Recipe | undefined {
+export function slotRecipe(recipes: Map<string, Recipe>, slot: Pick<Slot, "recipeId" | "side" | "vegSide">, idx: ItemIndex): Recipe | undefined {
   const r = recipes.get(slot.recipeId);
-  return r && slot.side ? withSide(r, recipes.get(slot.side), idx) : r;
+  if (!r) return r;
+  const a = slot.side ? withSide(r, recipes.get(slot.side), idx) : r;
+  return slot.vegSide ? withVegSide(a, recipes.get(slot.vegSide), idx) : a;
+}
+
+// ---------------- Légumes servis à côté ----------------
+// Familles de cuisines qui se marient ; un accompagnement « neutre » va avec toute la cuisine européenne (et américaine).
+const GROUP: Record<string, string> = { belge: "eu", francaise: "eu", americaine: "us", italienne: "med", mediterraneenne: "med", asiatique: "as", indienne: "in", orientale: "or", latino: "la" };
+const EURO = new Set(["eu", "med", "us"]);
+// Aromates et condiments : ils ne font pas « le légume » d'un plat.
+const AROMATIC = /^(ail|oignon|oignon rouge|oignons nouveaux|echalote|piment|persil|ciboulette|coriandre|basilic|menthe|thym|romarin|aneth|estragon|sauge|gingembre|citron|citron vert|citronnelle|laurier|feuille de laurier|cerfeuil|origan)$/;
+const mainVegs = (r: Recipe, idx: ItemIndex, skip: Set<string> = new Set()) =>
+  [...r.ingredients, ...r.meat].map((i) => i.itemId).filter((id) => !skip.has(id) && idx.get(id)?.category === "fl" && !AROMATIC.test(norm(idx.get(id)!.name)));
+const PORK = /porc|saucisse|boudin|jambon|lard|cotelette|travers|chipolata|filet mignon|carbonnade de porc|cordon/;
+const POULTRY = /poulet|dinde|canard|pintade|volaille|lapin|caille|coq|magret|chicken|pollo/;
+
+/** Légume d'origine servi à côté (« salade verte », « haricots verts »), ou null s'il n'y en a pas de remplaçable. */
+export const defaultVegLabel = (r: Recipe, idx: ItemIndex) =>
+  r.vegSide?.length ? r.vegSide.map((id) => idx.get(id)?.name.toLowerCase()).filter(Boolean).join(" et ") : null;
+
+/**
+ * Accompagnements de légumes qu'un chef accepterait à la place du légume servi à côté :
+ * de saison, de la même famille de cuisine (ou neutre), accordés à la protéine (« p » : viande, porc, volaille, poisson, vege),
+ * sans viande pour un repas végé, sans doublon (légume ou lardons déjà dans le plat). Les 8 plus justes, salades d'abord si l'origine est une salade.
+ */
+export function vegOptions(r: Recipe, all: Iterable<Recipe>, idx: ItemIndex, veg = false, now = new Date()): Recipe[] {
+  if (!r.vegSide?.length || (r.course || "plat") !== "plat") return [];
+  const season = currentSeason(now);
+  const p = profile(r, veg, idx).protein, name = norm(r.name);
+  const want = p === "poisson" ? ["poisson"] : p === "viande" ? (POULTRY.test(name) ? ["volaille", "viande"] : PORK.test(name) ? ["porc", "viande"] : ["viande"]) : ["vege"];
+  const g = GROUP[r.cuisine || "belge"];
+  const original = new Set(r.vegSide);
+  const inDish = new Set(mainVegs(r, idx, original));
+  const dishMeat = new Set([...r.ingredients, ...r.meat].map((i) => i.itemId).filter((id) => idx.get(id)?.category === "vi"));
+  const rawSalad = r.vegSide.some((id) => /salade|roquette|concombre/.test(norm(idx.get(id)?.name || "")));
+  const isSalad = (x: Recipe) => /salade|slaw|concombre/.test(norm(x.name));
+  return [...all].filter((x) => {
+    if (x.course !== "accompagnement" || x.deleted || !x.pairs?.length || sideFamily(x, idx)) return false;
+    if (!want.some((w) => x.pairs!.includes(w))) return false;
+    if (!x.seasons.includes(season)) return false;
+    const xg = GROUP[x.cuisine || "belge"];
+    if (xg !== g && !(x.neutral && EURO.has(g))) return false;
+    const vegs = mainVegs(x, idx);
+    if (vegs.some((id) => inDish.has(id))) return false;
+    if (vegs.length && vegs.every((id) => original.has(id))) return false; // même légume que celui d'origine
+    const meat = [...x.ingredients, ...x.meat].filter((i) => idx.get(i.itemId)?.category === "vi").map((i) => i.itemId);
+    if (meat.length && (p !== "viande" && !veg || meat.some((id) => dishMeat.has(id)))) return false;
+    if (veg && x.ingredients.some((i) => idx.get(i.itemId)?.category === "vi")) return false; // végé : seulement si sa viande a une version végé
+    return true;
+  }).map((x) => ({ x, k: (x.cuisine === r.cuisine ? 4 : GROUP[x.cuisine || "belge"] === g ? 3 : 0) + (x.seasons.length < 4 ? 2 : 0) + (rawSalad && isSalad(x) ? 1 : 0) }))
+    .sort((a, b) => b.k - a.k || a.x.prepMin - b.x.prepMin).map((o) => o.x)
+    .slice(0, 8);
+}
+
+const VEG_PREP = /^(cuire|faire cuire|blanchir|laver|préparer|assaisonner|égoutter)\b/i;
+/** Recette du repas avec un autre accompagnement de légumes : légume d'origine retiré, étapes adaptées, étapes de l'accompagnement à la suite. */
+export function withVegSide(r: Recipe, side: Recipe | null | undefined, idx: ItemIndex): Recipe {
+  if (!side || !r.vegSide?.length) return r;
+  const removed = new Set(r.vegSide);
+  const names = r.vegSide.map((id) => idx.get(id)?.name || "").filter(Boolean);
+  // « la salade verte », « une salade », « les haricots verts »…
+  const alt = names.flatMap((n) => [n, n.split(" ")[0]]).map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const re = new RegExp(`\\b(?:(?:la|une|de la|des|les|le|du|d'une|sa) )?(?:${alt.join("|")})s?\\b`, "gi");
+  const label = `l'accompagnement de légumes (${side.name.toLowerCase()})`;
+  const steps = r.steps.flatMap((st) => {
+    re.lastIndex = 0;
+    if (!re.test(st)) return [st];
+    re.lastIndex = 0;
+    const rest = st.replace(re, "").replace(/[\s,.;:]+/g, " ").trim();
+    if (VEG_PREP.test(st.trim()) && rest.split(" ").length <= 6) return [];
+    let first = true;
+    re.lastIndex = 0;
+    return [st.replace(re, () => (first ? ((first = false), label) : "")).replace(/\s{2,}/g, " ").replace(/\s+([,.;])/g, "$1").replace(/\s+(et|,)\s*(?=[,.;])/g, "")];
+  });
+  const extra = side.steps.length ? [`Légumes — ${side.name} :`, ...side.steps] : [`Légumes : ${side.name}.`];
+  return { ...r, ingredients: [...r.ingredients.filter((i) => !removed.has(i.itemId)), ...side.ingredients],
+    meat: [...r.meat, ...side.meat], vegSwap: [...r.vegSwap, ...side.vegSwap], steps: [...steps, ...extra], vegSideName: side.name };
 }
 
 /** Nom de l'accompagnement d'origine du plat (« pommes de terre », « riz »…), pour l'afficher quand rien n'est choisi. */
@@ -109,9 +197,18 @@ export function defaultSideLabel(r: Recipe, idx: ItemIndex): string | null {
  * Accompagnements proposés d'office pour la semaine : d'abord l'accord retenu par le foyer pour ce plat
  * (« boulettes sauce tomate → frites »), sinon un par plat où il est interchangeable, varié, même cuisine d'abord.
  */
-export function assignSides<T extends Pick<Slot, "recipeId" | "side" | "fromLeftovers">>(slots: T[], recipes: Map<string, Recipe>, idx: ItemIndex, rand = Math.random, remembered: Record<string, string | null> = {}): T[] {
-  const used = new Set<string>();
+export function assignSides<T extends Pick<Slot, "recipeId" | "side" | "fromLeftovers" | "vegSide">>(slots: T[], recipes: Map<string, Recipe>, idx: ItemIndex, rand = Math.random,
+  remembered: Record<string, string | null> = {}, rememberedVeg: Record<string, string | null> = {}): T[] {
   const all = [...recipes.values()];
+  // Légume servi à côté : seulement l'accord retenu par le foyer (sinon celui de la recette, la version classique).
+  const withVeg = slots.map((sl) => {
+    const r = recipes.get(sl.recipeId), m = r ? rememberedVeg[r.id] : undefined;
+    return r && m && sl.vegSide === undefined && !sl.fromLeftovers && vegOptions(r, all, idx).some((x) => x.id === m) ? { ...sl, vegSide: m } : sl;
+  });
+  return assignStarch(withVeg, recipes, idx, rand, remembered, all);
+}
+function assignStarch<T extends Pick<Slot, "recipeId" | "side" | "fromLeftovers">>(slots: T[], recipes: Map<string, Recipe>, idx: ItemIndex, rand: () => number, remembered: Record<string, string | null>, all: Recipe[]): T[] {
+  const used = new Set<string>();
   return slots.map((sl) => {
     const r = recipes.get(sl.recipeId);
     if (!r || sl.fromLeftovers || sl.side !== undefined) return sl;

@@ -17,6 +17,7 @@
 - Les rouler dans le beurre fondu et le persil haché ; servir aussitôt.
 
 # Compote de pommes maison | 6 | 30 | AH
+p porc volaille
 + Pommes 1500g; Sucre 80g; Cannelle 0.5cc; Citron 0.5pc
 - Éplucher les pommes (un mélange de variétés acidulées et sucrées) et les couper en morceaux.
 - Les cuire 20 minutes à couvert avec le sucre, la cannelle, le jus de citron et 100 ml d'eau, en remuant de temps en temps.
@@ -24,6 +25,8 @@
 - Servir tiède ou froide, avec le boudin, la saucisse ou le poulet.
 
 # Chicons braisés | 4 | 45 | AH
+p viande volaille poisson vege
+n
 + Chicons 8pc; Beurre 40g; Sucre 1cc; Citron 0.5pc; Muscade 0.25cc
 - Retirer le cône amer des chicons.
 - Les ranger dans une sauteuse avec le beurre, le sucre, le jus de citron, du sel et 100 ml d'eau.
@@ -96,7 +99,10 @@ v Matoufet aux champignons
 - Parsemer de ciboulette et servir avec du pain gris. Version végé : champignons poêlés à la place des lardons.
 
 ## plat
-# Rôti de bœuf, haricots et croquettes | 6 | 70 | T
+# Rôti de bœuf | 6 | 70 | T
+o Rôti de bœuf, haricots et croquettes
+s croquettes
+g Haricots verts
 + Haricots verts 800g; Beurre 60g; Échalote 2pc; Croquettes de pommes de terre 900g; Moutarde 1cs
 = Rôti de bœuf 1000g; Bouillon de bœuf 200ml
 ~ Galettes végétales 6pc

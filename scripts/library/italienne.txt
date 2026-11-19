@@ -88,6 +88,8 @@ v Carpaccio de courgettes au parmesan
 
 ## accompagnement
 # Peperonata | 4 | 50 | E
+p viande volaille vege
+n
 + Poivron 4pc; Oignon 2pc; Tomates 400g; Ail 0.1pc; Basilic 0.25pc
 - Couper les poivrons en lanières et les oignons en lamelles.
 - Les faire fondre 15 minutes à l'huile d'olive dans une grande poêle.
@@ -101,12 +103,15 @@ v Carpaccio de courgettes au parmesan
 - Cuire 45 minutes à 200 °C en les retournant à mi-cuisson, jusqu'à ce qu'elles soient dorées et croustillantes.
 
 # Funghi trifolati | 4 | 20 | A
+p viande volaille vege
+n
 + Champignons de Paris 600g; Ail 0.1pc; Persil 0.5pc; Huile d'olive 3cs
 - Nettoyer les champignons et les couper en lamelles.
 - Les faire sauter à feu vif dans l'huile avec l'ail écrasé jusqu'à ce que leur eau soit évaporée et qu'ils dorent.
 - Saler, poivrer et ajouter le persil haché en fin de cuisson.
 
 # Zucchine alla scapece | 4 | 160 | E
+p viande volaille poisson vege
 + Courgettes 800g; Vinaigre 3cs; Menthe 0.5pc; Ail 0.1pc; Huile de tournesol 500ml
 - Couper les courgettes en rondelles fines et les laisser sécher 15 minutes sur un essuie.
 - Les frire en plusieurs fois jusqu'à ce qu'elles soient dorées, puis les égoutter.

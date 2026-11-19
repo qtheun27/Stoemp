@@ -26,7 +26,9 @@ v Burger végétal et potatoes
 - Saisir les steaks 3 minutes par face dans une poêle très chaude, poser le cheddar la dernière minute et couvrir pour qu'il fonde ; toaster les pains.
 - Monter : pain, sauce, salade, steak, tomate, oignon rouge ; servir avec les potatoes. Version végé : galettes végétales poêlées.
 
-# Mac and cheese et salade | 4 | 40 | T
+# Mac and cheese | 4 | 40 | T
+o Mac and cheese et salade
+g Salade verte
 r
 + Pâtes courtes 360g; Cheddar 250g; Lait 600ml; Beurre 50g; Farine 40g; Moutarde 1cc; Paprika 1cc; Chapelure 40g; Salade verte 1pc
 = Bacon 150g
@@ -38,7 +40,9 @@ v Mac and cheese au brocoli
 - Mélanger avec les pâtes et le bacon grillé émietté, verser dans un plat, couvrir du reste de fromage et de chapelure.
 - Gratiner 15 minutes à 200 °C et servir avec la salade. Version végé : bouquets de brocoli blanchis.
 
-# Fish and chips et petits pois | 4 | 45 | T
+# Fish and chips | 4 | 45 | T
+o Fish and chips et petits pois
+g Petits pois
 r
 + Pommes de terre 1000g; Farine 200g; Bière blonde 250ml; Petits pois 400g; Beurre 20g; Menthe 0.25pc; Citron 1pc; Huile de tournesol 1000ml; Mayonnaise 3cs; Cornichons 40g; Câpres 10g
 = Dos de cabillaud 600g
@@ -75,6 +79,7 @@ v Shepherd's pie aux lentilles
 - Étaler la viande dans un plat, couvrir de purée, rayer à la fourchette, parsemer de cheddar et cuire 30 minutes à 200 °C. Version végé : lentilles cuites dans le bouillon de légumes.
 
 # Pommes de terre farcies au chili | 4 | 90 | AH
+g Salade verte
 r
 + Pommes de terre 1400g; Haricots rouges (boîte) 400g; Tomates concassées 300g; Oignon 1pc; Ail 0.1pc; Cheddar 150g; Crème fraîche 150ml; Épices chili 8g; Oignons nouveaux 2pc; Huile de tournesol 2cs; Salade verte 1pc
 = Haché de bœuf 400g
@@ -186,6 +191,7 @@ v Jambalaya aux haricots rouges
 - Laisser reposer 5 minutes et servir avec les oignons nouveaux. Version végé : haricots rouges et bouillon de légumes.
 
 # Meatloaf | 6 | 90 | AH
+g Haricots verts
 o Meatloaf et purée
 s purée
 r
@@ -224,6 +230,7 @@ v Pot pie aux légumes et pois chiches
 - Cuire 30 minutes à 200 °C jusqu'à ce que la pâte soit gonflée et dorée. Version végé : pois chiches et bouillon de légumes.
 
 # Philly cheesesteak | 4 | 35 | T
+g Salade verte
 r
 + Baguette 2pc; Oignon 2pc; Poivron 2pc; Cheddar 200g; Salade verte 1pc; Beurre 20g; Huile de tournesol 2cs; Pommes de terre 800g; Paprika 1cc
 = Steak de bœuf 550g

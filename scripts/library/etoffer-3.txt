@@ -163,6 +163,8 @@ v Caldo gallego au tofu fumé
 - Servir les pommes de terre avec le mojo, comme aux Canaries.
 
 # Asperges vertes à la plancha | 4 | 15 | P
+p viande volaille poisson vege
+n
 + Asperges vertes 500g; Huile d'olive 3cs; Citron 0.5pc; Sel 1cc
 - Couper le bout ligneux des asperges.
 - Les griller 6 à 8 minutes à la plancha ou dans une poêle-gril très chaude avec l'huile, en les retournant.
@@ -215,6 +217,7 @@ v Sambousek au fromage
 - Arroser du reste de chermoula à la sortie du four.
 
 # Carottes rôties au tahini | 4 | 40 | AH
+p viande volaille poisson vege
 + Carottes 700g; Miel 1cs; Cumin 1cc; Tahini 3cs; Citron 1pc; Ail 0.1pc; Pistaches 30g; Huile d'olive 3cs
 - Couper les carottes en deux dans la longueur, les mélanger avec l'huile, le miel, le cumin et du sel.
 - Les rôtir 30 minutes à 210 °C.

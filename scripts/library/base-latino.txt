@@ -39,6 +39,7 @@ v Fajitas aux haricots rouges
 - Servir grésillant avec les tortillas chaudes, la crème, le guacamole et le fromage râpé. Version végé : haricots rouges sautés avec les poivrons.
 
 # Quesadillas jambon-fromage | 4 | 25 | T
+g Salade verte
 r
 + Tortillas 8pc; Cheddar 200g; Tomates 300g; Oignon rouge 1pc; Citron vert 1pc; Coriandre 0.25pc; Crème fraîche 100ml; Salade verte 1pc; Piment 0.25pc
 = Jambon 4pc
@@ -63,6 +64,7 @@ v Tacos aux haricots rouges
 - Garnir de viande, chou, salsa, avocat en tranches et crème ; servir avec le riz et des quartiers de citron vert. Version végé : haricots rouges écrasés aux épices.
 
 # Burritos au chili sin carne | 4 | 40 | T
+g Salade verte
 r
 + Tortillas 8pc; Haricots rouges (boîte) 500g; Riz 200g; Maïs (boîte) 150g; Tomates concassées 300g; Oignon 1pc; Poivron 1pc; Ail 0.1pc; Cheddar 120g; Épices chili 10g; Crème fraîche 100ml; Citron vert 1pc; Salade verte 1pc
 - Cuire le riz et l'assaisonner du zeste et du jus de citron vert.
@@ -72,6 +74,7 @@ r
 - Servir avec la salade.
 
 # Enchiladas au poulet | 4 | 50 | T
+g Salade verte
 r
 + Tortillas 8pc; Sauce tomate 500ml; Haricots rouges (boîte) 250g; Cheddar 160g; Épices chili 10g; Crème fraîche 100ml; Oignon 1pc; Ail 0.1pc; Coriandre 0.25pc; Huile de tournesol 1cs; Salade verte 1pc
 = Filet de poulet 500g
@@ -104,7 +107,9 @@ r
 - Cuire le riz à l'eau salée selon le paquet.
 - Servir avec la crème, la coriandre et un trait de citron vert.
 
-# Empanadas et salade | 4 | 70 | T
+# Empanadas | 4 | 70 | T
+o Empanadas et salade
+g Salade verte
 r
 + Pâte brisée 2pc; Oignon 2pc; Poivron 1pc; Olives vertes 60g; Oeufs 3pc; Paprika 2cc; Cumin 2g; Raisins secs 30g; Salade verte 1pc; Huile de tournesol 2cs
 = Haché de bœuf 400g

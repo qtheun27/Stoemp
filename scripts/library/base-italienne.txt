@@ -15,6 +15,7 @@ v Risotto asperges et petits pois
 - Hors du feu, lier avec le beurre froid et le parmesan, ajouter pointes et lardons, couvrir 2 minutes et servir. Version végé : petits pois ajoutés 5 minutes avant la fin.
 
 # Tartines ricotta, asperges et jambon cru | 4 | 20 | P
+g Roquette
 r
 + Pain de campagne 8pc; Ricotta 250g; Asperges vertes 400g; Roquette 80g; Citron 0.5pc; Huile d'olive 3cs; Parmesan 30g
 = Jambon cru 8pc
@@ -108,6 +109,7 @@ v Cacciatore aux haricots blancs
 - Servir avec les pâtes. Version végé : haricots blancs mijotés 20 minutes dans la sauce.
 
 # Pizza maison jambon-champignons | 4 | 40 | T
+g Salade verte
 r
 + Pâte à pizza 2pc; Sauce tomate 250ml; Mozzarella 250g; Champignons de Paris 250g; Origan 1g; Huile d'olive 2cs; Salade verte 1pc
 = Jambon 4pc
@@ -220,7 +222,9 @@ v Tagliatelles petits pois et ricotta citronnée
 - Mélanger les pâtes avec la sauce et un trait de jus de citron.
 - Parsemer de ciboulette et servir. Version végé : petits pois dans la crème et ricotta citronnée.
 
-# Arancini et salade de roquette | 4 | 90 | T
+# Arancini | 4 | 90 | T
+o Arancini et salade de roquette
+g Roquette
 r
 + Riz arborio 320g; Bouillon de légumes 1000ml; Safran 0.1g; Parmesan 60g; Mozzarella 150g; Farine 60g; Oeufs 2pc; Chapelure 150g; Huile de tournesol 1000ml; Roquette 150g; Sauce tomate 250ml
 = Haché de bœuf 250g
@@ -280,7 +284,9 @@ v Pâtes champignons-crème, lentilles et cajou
 - Cuire les pâtes al dente et les mélanger à la sauce avec un peu d'eau de cuisson.
 - Servir avec le persil et le parmesan. Version végé : lentilles corail cuites et noix de cajou grillées.
 
-# Calzone et salade | 4 | 45 | T
+# Calzone | 4 | 45 | T
+o Calzone et salade
+g Salade verte
 r
 + Pâte à pizza 2pc; Sauce tomate 250ml; Mozzarella 250g; Ricotta 150g; Origan 1g; Huile d'olive 2cs; Salade verte 1pc
 = Jambon 4pc
@@ -358,6 +364,7 @@ r
 - Cuire 40 minutes à 180 °C, laisser reposer 15 minutes et servir avec le pain.
 
 # Pizza margherita maison | 4 | 35 | T
+g Roquette
 r
 + Pâte à pizza 2pc; Sauce tomate 250ml; Mozzarella 320g; Basilic 0.5pc; Huile d'olive 3cs; Roquette 120g
 - Préchauffer le four au plus chaud avec la plaque à l'intérieur.
@@ -375,7 +382,9 @@ r
 - Disposer des tranches de pain rassis dans les bols et verser la soupe épaisse par-dessus.
 - Arroser d'huile d'olive et servir avec le parmesan. Elle est encore meilleure réchauffée le lendemain.
 
-# Frittata de courgettes et salade | 4 | 30 | PE
+# Frittata de courgettes | 4 | 30 | PE
+o Frittata de courgettes et salade
+g Salade verte
 r
 l
 + Oeufs 10pc; Courgettes 500g; Oignon 1pc; Parmesan 80g; Basilic 0.25pc; Huile d'olive 3cs; Salade verte 1pc

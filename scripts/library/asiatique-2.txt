@@ -64,12 +64,14 @@ v Soto au tofu
 
 ## accompagnement
 # Namul d'épinards | 4 | 10 | T
+p viande volaille poisson vege
 + Épinards frais 500g; Ail 0.1pc; Sauce soja 1cs; Huile de sésame 1cs; Graines de sésame 1cs
 - Blanchir les épinards 30 secondes, les rafraîchir et les presser.
 - Les mélanger avec l'ail râpé, la sauce soja, l'huile et le sésame grillé.
 - Servir froid ou à température ambiante.
 
 # Germes de soja sautés | 4 | 10 | T
+p viande volaille poisson vege
 + Germes de soja 400g; Oignons nouveaux 2pc; Ail 0.1pc; Sauce soja 1cs; Huile de tournesol 2cs
 - Faire sauter l'ail dans l'huile très chaude.
 - Ajouter les germes de soja et sauter 1 à 2 minutes : ils doivent rester croquants.
