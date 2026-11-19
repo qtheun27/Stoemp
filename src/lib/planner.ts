@@ -126,8 +126,15 @@ export function mealDays(s: MealSettings) {
 }
 
 /** Repas léger possible : soupe, ou plat de type salade-repas, tartine, omelette, quiche, bowl… */
-const LIGHT_RE = /salade|soupe|velout|potage|tartine|croque|omelette|frittata|tortilla espagnole|quiche|tarte fine|flamiche|wrap|bowl|poke|toast|bruschetta|gaspacho|gazpacho|tabboul|taboul|fattouche|bo bun|galette|quesadilla|bagel|sandwich|club|pan bagnat|shakshuka|chakchouka|huevos/i;
-export const isLightMeal = (r: Recipe) => r.source !== "pret" && ((r.course || "plat") === "soupe" || ((r.course || "plat") === "plat" && LIGHT_RE.test(r.name)));
+const LIGHT_RE = /salade|soupe|velout|potage|tartine|croque-|omelette|frittata|tortilla espagnole|quiche|tarte fine|flamiche|wrap|bowl|poke|toast|bruschetta|gaspacho|gazpacho|tabboul|taboul|fattouche|bo bun|galette|quesadilla|bagel|sandwich|club|pan bagnat|shakshuka|chakchouka|huevos/i;
+// La salade servie à côté (« Mac and cheese et salade ») ne fait pas un repas léger : seul le plat compte.
+const SIDE_SALAD = /\s*(,| et| avec)\s+(une\s+)?(petite\s+)?salade\b.*$/i;
+const HEAVY_RE = /mac and cheese|lasagne|gratin|tartiflette|raclette|fondue|cassoulet|choucroute|moussaka|parmigiana|frites/i;
+export const isLightMeal = (r: Recipe) => {
+  if (r.source === "pret") return false;
+  const course = r.course || "plat", dish = r.name.replace(SIDE_SALAD, "");
+  return course === "soupe" || (course === "plat" && LIGHT_RE.test(dish) && !HEAVY_RE.test(dish));
+};
 export const isBreakfast = (r: Recipe) => r.source !== "pret" && r.course === "petitdej";
 /** Recettes possibles pour un créneau : déjeuner du matin, repas léger ou repas complet. */
 export const poolFor = (sl: Pick<Slot, "meal" | "light">, all: Recipe[]) =>

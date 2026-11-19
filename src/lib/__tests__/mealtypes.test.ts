@@ -39,6 +39,7 @@ describe("types de repas", () => {
     const light = poolFor({ meal: "midi", light: true }, [...BASE_RECIPES, ...extra]);
     expect(light.some((r) => r.course === "soupe")).toBe(true);
     expect(light.some((r) => /salade/i.test(r.name))).toBe(true);
-    expect(light.some((r) => /bourguignon|carbonnade/i.test(r.name))).toBe(false);
+    expect(light.some((r) => /bourguignon|carbonnade|mac and cheese|arancini/i.test(r.name))).toBe(false);
+    expect(light.some((r) => /^croque/i.test(r.name))).toBe(true);
   });
 });

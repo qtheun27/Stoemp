@@ -231,12 +231,14 @@ v Piperade aux pois chiches et riz
 - Remettre le poulet, couvrir et mijoter 40 minutes.
 - Servir avec le riz. Version végé : pois chiches mijotés 20 minutes dans la piperade.
 
-# Gratin dauphinois et rôti de porc | 6 | 100 | AH
+# Rôti de porc au thym | 6 | 100 | AH
+o Gratin dauphinois et rôti de porc
+s gratin dauphinois
 r
 + Pommes de terre 1500g; Lait 600ml; Crème liquide 300ml; Ail 0.2pc; Muscade 0.25cc; Beurre 30g; Thym 0.1pc; Salade verte 1pc
 = Rôti de porc 1000g
 ~ Oeufs 6pc
-v Gratin dauphinois et œufs mollets
+v Œufs mollets et gratin dauphinois
 - Couper les pommes de terre en fines rondelles sans les laver et les cuire 10 minutes dans le lait et la crème avec l'ail, la muscade, sel et poivre.
 - Verser dans un plat frotté d'ail et beurré ; cuire 1 heure à 160 °C.
 - Frotter le rôti de thym, sel et poivre, le saisir de tous côtés puis le rôtir 50 minutes dans le même four.

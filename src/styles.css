@@ -180,6 +180,7 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .meal .slot { font-size: 11px; font-weight: 700; color: var(--ac); text-transform: uppercase; letter-spacing: .05em; }
 .meal .name { display: block; font-weight: 700; line-height: 1.22; font-size: 16px; }
 .meal .meta { font-size: 13px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px; }
+.meal .meta > * { min-width: 0; overflow-wrap: anywhere; }
 .hero { padding: 6px 2px 4px; }
 .hero .season { font-size: clamp(40px, 11vw, 64px); font-weight: 800; line-height: .95; letter-spacing: -.035em; color: var(--ac); margin: 0; }
 .hero p { margin: 8px 0 0; color: var(--muted); }

@@ -7,7 +7,7 @@ import type { StoreId } from "../lib/types";
 import { createHousehold, createInvite, leaveHousehold, removeMember, renameHousehold, saveSettings, setRole, switchHousehold } from "../state/actions";
 import { useStore } from "../state/store";
 import { TastesCard } from "./Tastes";
-import { copyText, run, Switch, toast, TopBar } from "../ui";
+import { copyText, run, toast, TopBar } from "../ui";
 
 export const appUrl = () => location.origin + location.pathname;
 /**
@@ -99,7 +99,7 @@ export default function Settings() {
           <div className="stack">
             <TastesCard />
             <div className="card">
-              <h3>Foyer</h3>
+              <h3>🏠 Foyer</h3>
               <p>{admin ? "Tu es admin : tu gères les membres et les réglages." : "Tu es membre de ce foyer."}</p>
               {admin && <input className="input" defaultValue={s.household?.name} onBlur={(e) => e.target.value.trim() && run(() => renameHousehold(s.hid!, e.target.value.trim()))} aria-label="Nom du foyer" />}
               <label className="field">Membres</label>
@@ -123,7 +123,7 @@ export default function Settings() {
             </div>
 
             <div className="card">
-              <h3>Magasins fréquentés</h3>
+              <h3>🛒 Magasins fréquentés</h3>
               <p>Les prix et la vue par magasin se basent sur ces enseignes.{!admin && " (Réglage réservé à l'admin.)"}</p>
               <div className="chips">{STORE_ORDER.map((k) => <button key={k} className="chip" disabled={!admin} aria-pressed={st.stores.includes(k)} onClick={() => toggleStore(k)}>{STORES[k].label}</button>)}</div>
               <label className="field">Prix utilisés pour les coûts des repas</label>
@@ -162,21 +162,21 @@ export default function Settings() {
             </div>}
 
             <div className="card">
-              <h3>Apparence</h3>
+              <h3>🎨 Apparence</h3>
               <div className="chips">{(["auto", "light", "dark"] as Theme[]).map((t) => <button key={t} className="chip" aria-pressed={theme === t} onClick={() => { setTheme(t); applyTheme(t); }}>{t === "auto" ? "Automatique" : t === "light" ? "Clair" : "Sombre"}</button>)}</div>
               {install && <button className="btn" style={{ marginTop: 12 }} onClick={() => install.prompt()}>Installer l'appli</button>}
               <p className="small muted" style={{ marginTop: 10 }}>Sur iPhone : Partager → « Sur l'écran d'accueil ». L'appli marche ensuite hors ligne avec les dernières données.</p>
             </div>
 
             <div className="card">
-              <h3>Compte</h3>
+              <h3>👤 Compte</h3>
               <p>{u.isAnonymous ? "Mode démo : relie ton compte Google pour retrouver tes données partout." : `${u.displayName || ""} · ${u.email || ""}`}</p>
               <div className="row wrap">
                 {u.isAnonymous && <button className="btn" onClick={() => run(() => linkWithPopup(u, new GoogleAuthProvider()), "Compte Google relié")}>Relier mon compte Google</button>}
                 <button className="btn ghost" onClick={() => signOut(auth)}><LogOut size={18} />Se déconnecter</button>
               </div>
             </div>
-            <div className="row between small muted" style={{ padding: "0 4px" }}><span>Stoemp · {s.online ? "en ligne" : "hors ligne"}</span><span>Notifications : <Switch checked={false} onChange={() => toast("Les rappels arrivent dans une prochaine version")} label="Notifications" /></span></div>
+            <div className="row between small muted" style={{ padding: "0 4px" }}><span>Stoemp · {s.online ? "en ligne" : "hors ligne"}</span></div>
           </div>
         </div>
       </div>
