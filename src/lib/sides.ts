@@ -19,7 +19,7 @@ const FAMILY: [SideFamily, RegExp][] = [
 ];
 /** Plats dont le féculent EST le plat (moules-frites, fish and chips, pâtes, risotto…) : on ne le remplace pas.
  *  Les autres ne nomment pas leur accompagnement : il s'affiche à côté du nom et se choisit dans la semaine. */
-const CORE = /frites|puree|pommes vapeur|pommes de terre|grenailles|semoule|polenta|pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin (savoyard|de pates|de macaroni)|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado|fish and chips|chowder|grits|brandade|bacalhau|bouillabaisse|marmitako|caldo verde|minestrone|velout|waterzooi|navarin|curry japonais|massaman|malai kofta|vispannetje|escondidinho|tajine de poisson|tajine de legumes|psari plaki|fasolakia|lentejas|patate|spezzatino|pommes de terre grecques|aji de gallina|tomates farcies|gemista|taboul|koshari|bibimbap|khao man gai|boulgour aux|rfissa|mercimek|fattouche|musakhan|choripan|philly|hot-dog|tartine|saltado|arancini|sushi|maki|onigiri/;
+const CORE = /frites|puree|pommes vapeur|pommes de terre|grenailles|semoule|polenta|pates|spaghetti|lasagne|cannelloni|tagliatelle|gnocchi|risotto|paella|paëlla|riz |nasi|biryani|pulao|pilaf|kabsa|jambalaya|arroz|fideu|couscous|hachis|parmentier|stoemp|gratin (savoyard|de pates|de macaroni)|tartiflette|raclette|fondue|tortilla|tacos|wrap|burrito|quesadilla|fajitas|enchilada|sandwich|burger|croque|pizza|calzone|quiche|tarte|tourte|pie|wellington|pastilla|empanada|galette|crepe|pide|bowl|salade|soupe|ramen|nouilles|pad |udon|okonomiyaki|bao|banh|pita|kedgeree|risi|congee|frittata|omelette|choucroute|pot-au-feu|potee|hochepot|cocido|garbure|irish stew|pot roast|poule au pot|patatas|papas|aloo|pav bhaji|dum |batata|huevos|chilaquiles|gado|fish and chips|chowder|grits|brandade|bacalhau|bouillabaisse|marmitako|caldo verde|minestrone|velout|waterzooi|navarin|curry japonais|massaman|malai kofta|vispannetje|escondidinho|tajine de poisson|tajine de legumes|psari plaki|fasolakia|lentejas|patate|spezzatino|pommes de terre grecques|aji de gallina|tomates farcies|gemista|taboul|koshari|bibimbap|khao man gai|boulgour aux|rfissa|mercimek|fattouche|musakhan|choripan|philly|hot-dog|tartine|saltado|arancini|sushi|maki|onigiri|oyakodon|gyudon|katsudon|donburi|chirashi|poke|kedgeree|riz cantonais|riz saute|nasi goreng/;
 
 const familyOf = (name: string): SideFamily | null => FAMILY.find(([, re]) => re.test(norm(name)))?.[0] ?? null;
 
@@ -56,7 +56,10 @@ export function sideOptions(r: Recipe, all: Iterable<Recipe>, idx: ItemIndex): R
   const s = swappableStarch(r, idx);
   if (!s) return [];
   const ok = (f: SideFamily | null) => f === s.family || (s.family === "riz" && f === "pain" && r.cuisine === "indienne") || (s.family === "grain" && f === "riz");
-  return [...all].filter((x) => ok(sideFamily(x, idx)))
+  // Comme un chef : un accompagnement de la même famille de cuisine, ou un classique « neutre » (purée, frites, riz pilaf…) pour la cuisine européenne.
+  const g = GROUP[r.cuisine || "belge"];
+  const fits = (x: Recipe) => GROUP[x.cuisine || "belge"] === g || (!!x.neutral && EURO.has(g));
+  return [...all].filter((x) => !x.deleted && ok(sideFamily(x, idx)) && fits(x))
     .sort((a, b) => Number(b.cuisine === r.cuisine) - Number(a.cuisine === r.cuisine) || a.prepMin - b.prepMin);
 }
 

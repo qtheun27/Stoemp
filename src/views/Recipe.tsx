@@ -9,7 +9,7 @@ import { allergensOf } from "../lib/planner";
 import { eur } from "../lib/text";
 import type { Allergen, Item, Recipe } from "../lib/types";
 import { fmtIngredient } from "../lib/units";
-import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, setSide, setSlotLight, setVegSide, toggleFavorite, toggleLeftovers } from "../state/actions";
+import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, moveSlot, setSide, setSlotLight, setVegSide, toggleFavorite, toggleLeftovers } from "../state/actions";
 import { eatersOf, headcount, slotPortions } from "../lib/household";
 import { drinkFor } from "../lib/drinks";
 import { mealParts, vegPortions } from "../lib/mixed";
@@ -62,6 +62,8 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
   const base = basePortions(s);
   const persons = slot ? Math.max(slotPortions(slot, base), base) : base;
   const [reception, setReception] = useState(false);
+  const [moving, setMoving] = useState(false);
+  const [moveMeal, setMoveMeal] = useState<"matin" | "midi" | "soir">(slot?.meal || "soir");
   const [ready, setReady] = useState(false);
   const pret = recipe.source === "pret";
   const drink = drinkFor(recipe, veg, s.idx, !!s.settings.options.noAlcohol);
@@ -113,12 +115,23 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
           {slot && <button className="btn ghost sm" aria-pressed={slot.cooked} onClick={() => run(() => setCooked(s, slotIndex!, !slot.cooked), slot.cooked ? "Annulé : stock rétabli" : "Bon appétit ! Stock mis à jour")}><ChefHat size={16} />{slot.cooked ? "Pas cuisiné" : "Cuisiné ✓"}</button>}
           <button className="btn ghost sm" aria-pressed={fav} onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, recipe.id))}><Heart size={16} fill={fav ? "currentColor" : "none"} />Favori</button>
           {slot && !isVegRecipe(recipe) && !pret && <button className="btn ghost sm" aria-pressed={veg} onClick={toggleVeg}><Leaf size={16} />{veg ? "Version classique" : "Tout en végé"}</button>}
+          {slot && !slot.fromLeftovers && !slot.leftovers && <button className="btn ghost sm" aria-pressed={moving} onClick={() => setMoving(!moving)}>📅 Déplacer</button>}
           {slot && slot.meal !== "matin" && !slot.fromLeftovers && !slot.guests && <button className="btn ghost sm" aria-pressed={!!slot.light} onClick={async () => { await run(() => setSlotLight(s, slotIndex!, !slot.light), slot.light ? "Repas complet proposé" : "Repas léger proposé"); onClose(); }}>{slot.light ? "🍲 Repas complet" : "🥗 Repas léger"}</button>}
           {slot && slot.meal === "soir" && !slot.fromLeftovers && <button className="btn ghost sm" aria-pressed={!!slot.leftovers} onClick={() => run(() => toggleLeftovers(s, slotIndex!, !slot.leftovers), slot.leftovers ? "Restes annulés" : "Portion doublée : demain midi = restes 🍱")}>🍱 {slot.leftovers ? "Sans restes" : "Restes demain"}</button>}
           {slot && !slot.fromLeftovers && !slot.guests && s.app.features.ai && !pret && <button className="btn ghost sm" onClick={() => setReception(true)}>🎉 Je reçois</button>}
           {slot && !slot.fromLeftovers && !slot.guests && !pret && <button className="btn ghost sm" onClick={() => setReady(true)}>🥡 Plat préparé</button>}
         </div>
       </div>
+      {moving && slot && <div className="card" style={{ margin: "0 0 12px", background: "var(--bg)" }}>
+        <h3 style={{ marginTop: 0 }}>📅 Déplacer ce repas</h3>
+        <div className="small muted" style={{ marginBottom: 6 }}>S'il y a déjà un repas à ce moment, les deux s'échangent.</div>
+        <div className="chips" style={{ marginBottom: 8 }}>{(["matin", "midi", "soir"] as const).filter((m) => m !== "matin" || slot.meal === "matin").map((m) =>
+          <button key={m} className="chip" aria-pressed={moveMeal === m} onClick={() => setMoveMeal(m)}>{m === "matin" ? "☕ déjeuner" : m}</button>)}</div>
+        <div className="chips">{DAYS.map((label, d) => { const here = d === slot.day && moveMeal === slot.meal;
+          const other = s.week?.slots.find((x) => x.day === d && x.meal === moveMeal && !(x.day === slot.day && x.meal === slot.meal));
+          return <button key={d} className="chip" disabled={here} aria-pressed={here} aria-label={`${label} ${moveMeal}${other ? " : échanger avec " + (s.recipes.get(other.recipeId)?.name || "un repas") : ""}`}
+            onClick={async () => { await run(() => moveSlot(s, slotIndex!, d, moveMeal), `Déplacé ${label.toLowerCase()} ${moveMeal === "matin" ? "matin" : moveMeal}`); onClose(); }}>{label.slice(0, 3)}{other ? " ⇄" : ""}</button>; })}</div>
+      </div>}
       {slot?.guests && <div className="card" style={{ margin: "0 0 12px", background: "var(--bg)" }}>
         <h3>🎉 Réception · {headcount(eatersOf(s.settings)) + slot.guests.adults + slot.guests.kids} personnes</h3>
         {(slot.courses || []).map((c) => { const r = s.recipes.get(c.recipeId); return r ? <p key={c.recipeId} style={{ margin: "2px 0" }}><b>{COURSE[c.type]}</b> : {r.name} <span className="muted small">⏱ {r.prepMin} min</span></p> : null; })}

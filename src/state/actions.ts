@@ -12,7 +12,7 @@ import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
 import type { Cat, Consumption, ConsumptionEvent, EventType, Ingredient, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
 import { mealParts, vegPortions } from "../lib/mixed";
-import { assignSides, slotRecipe } from "../lib/sides";
+import { assignSides, sideOptions, slotRecipe, vegOptions } from "../lib/sides";
 import { eatersFromPeople, TASTE_GROUPS, type Person, type Rating } from "../lib/tastes";
 import { isoWeek } from "../lib/season";
 import { baseQty } from "../lib/units";
@@ -480,6 +480,35 @@ export const rateRecipe = (s: StoreState, personId: string, recipeId: string, ra
   setDoc(hh(s.hid!, "meta", "tastes"), { ratings: { [personId]: { [recipeId]: rating } } }, { merge: true });
 
 /** Accompagnement d'un repas de la semaine (null = celui d'origine du plat). */
+/** Semaines déjà prévues : retire un accompagnement qui ne s'accorde plus au plat (règles de chef mises à jour) et en propose un juste. */
+export async function fixSides(s: StoreState) {
+  const slots = s.week?.slots || [];
+  const all = [...s.recipes.values()];
+  let changed = false;
+  const cleaned = slots.map((sl) => {
+    const r = s.recipes.get(sl.recipeId);
+    if (!r || sl.cooked) return sl;
+    const out = { ...sl };
+    if (sl.side && !sideOptions(r, all, s.idx).some((x) => x.id === sl.side)) { delete out.side; changed = true; }
+    if (sl.vegSide && !vegOptions(r, all, s.idx, sl.veg).some((x) => x.id === sl.vegSide)) { delete out.vegSide; changed = true; }
+    return out;
+  });
+  if (changed) await saveSlots(s, assignSides(cleaned, s.recipes, s.idx, Math.random, s.prefs.sides, s.prefs.vegSides));
+}
+
+/** Déplace un repas vers un autre jour / moment ; s'il y a déjà un repas, les deux s'échangent. */
+export async function moveSlot(s: StoreState, k: number, day: number, meal: Slot["meal"]) {
+  const slots = [...(s.week?.slots || [])];
+  const sl = slots[k];
+  if (!sl) return;
+  if (sl.fromLeftovers || sl.leftovers) throw new Error("Annule d'abord les restes de ce repas pour le déplacer.");
+  const j = slots.findIndex((x, i) => i !== k && x.day === day && x.meal === meal);
+  if (j >= 0 && (slots[j].fromLeftovers || slots[j].leftovers)) throw new Error("Ce moment contient des restes : choisis-en un autre.");
+  if (j >= 0) slots[j] = { ...slots[j], day: sl.day, meal: sl.meal };
+  slots[k] = { ...sl, day, meal };
+  await saveSlots(s, sortSlots(slots));
+}
+
 /** Choisit le légume servi à côté d'un repas (ou celui de la recette) et retient l'accord pour ce plat. */
 export async function setVegSide(s: StoreState, k: number, vegSide: string | null) {
   const slots = [...(s.week?.slots || [])];

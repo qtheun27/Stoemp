@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ChefHat, ChevronLeft, ChevronRight, Heart, Leaf, RefreshCw, SlidersHorizontal, Sparkles, Check as CheckIcon } from "lucide-react";
 import { cookable, isVegRecipe, nameOf } from "../lib/catalog";
 import { CUISINES, DAYS, SEASONS } from "../lib/constants";
@@ -10,7 +10,7 @@ import { YesterdayRating } from "./Tastes";
 import { defaultSideLabel, slotRecipe } from "../lib/sides";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
-import { placeRecipe, vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
+import { fixSides, moveSlot, placeRecipe, vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
 import { coursePortions, eatersLabel, eatersOf, headcount, slotPortions } from "../lib/household";
 import { profile, PROTEIN_LABEL, type Protein } from "../lib/balance";
 import { drinkFor } from "../lib/drinks";
@@ -48,6 +48,12 @@ export default function Week() {
     slots.forEach((sl) => { const r = slotRecipe(s.recipes, sl, s.idx); if (r && !sl.fromLeftovers) { const p = profile(r, sl.veg, s.idx).protein; c[p] = (c[p] || 0) + 1; } });
     return c;
   }, [slots, s.recipes]);
+  // Semaines déjà prévues : accompagnements remis d'accord avec les règles actuelles (une fois par semaine affichée).
+  const fixed = useRef("");
+  useEffect(() => { if (s.week?.slots.length && s.recipes.size > 300 && fixed.current !== s.weekKey) { fixed.current = s.weekKey; fixSides(s).catch(() => {}); } }, [s.weekKey, s.week, s.recipes.size]);
+  // Ordinateur : glisser un repas sur un autre jour (même moment de la journée ; échange s'il y en a déjà un).
+  const [drag, setDrag] = useState<number | null>(null);
+  const dropOn = (d: number) => { if (drag == null) return; const sl = slots[drag]; setDrag(null); if (sl && sl.day !== d) run(() => moveSlot(s, drag, d, sl.meal), `Déplacé ${DAYS[d].toLowerCase()}`); };
   const [fridge, setFridge] = useState(false);
   const [ready, setReady] = useState(false);
   // Bouton « Nouvelle semaine » réduit à l'icône dès qu'on fait défiler la liste.
@@ -127,14 +133,14 @@ export default function Week() {
                 const list = slots.map((x, k) => ({ ...x, k })).filter((x) => x.day === d);
                 if (!list.length) return null;
                 return (
-                  <section key={d} className={`day${d === todayIdx ? " today" : ""}`}>
+                  <section key={d} className={`day${d === todayIdx ? " today" : ""}`} onDragOver={(e) => drag != null && e.preventDefault()} onDrop={() => dropOn(d)}>
                     <h3>{day}{d === todayIdx ? " · aujourd'hui" : ""}</h3>
                     {list.map((x) => {
                       const r = s.recipes.get(x.recipeId);
                       if (!r) return <div className="meal" key={x.k}><span className="grow muted">Recette indisponible</span><button className="ib" onClick={() => swap(x.k)}><RefreshCw size={18} /></button></div>;
                       const fav = s.prefs.favorites.includes(r.id);
                       return (
-                        <div className={`meal${x.cooked ? " cooked" : ""}`} key={x.k}>
+                        <div className={`meal${x.cooked ? " cooked" : ""}`} key={x.k} draggable={!x.fromLeftovers && !x.leftovers} onDragStart={() => setDrag(x.k)} onDragEnd={() => setDrag(null)}>
                           <button className="info" onClick={() => setOpen({ r, k: x.k })}>
                             <span className="slot">{x.meal === "matin" ? "☕ déjeuner" : `${x.meal} · ${x.light ? "🥗 léger" : "🍲 complet"}`}</span>
                             <span className="name">{nameOf(r, x.veg)}{(() => { const side = x.side ? s.recipes.get(x.side)?.name.toLowerCase() : defaultSideLabel(r, s.idx); const vg = x.vegSide ? s.recipes.get(x.vegSide)?.name.toLowerCase() : null; return side || vg ? <span className="muted"> · {[side, vg].filter(Boolean).join(", ")}</span> : null; })()}</span>

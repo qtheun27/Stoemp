@@ -2,7 +2,7 @@
 // TEST=1 : 5 plats variés choisis à la main pour juger la qualité avant de tout générer.
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import { IMAGE_COST, makeDishImage } from "../../functions/src/images";
+import { IMAGE_COST, imagesThisMonth, makeDishImage } from "../../functions/src/images";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
 const count = Math.max(1, Math.min(300, Number(process.env.COUNT) || 5));
@@ -15,7 +15,11 @@ let todo = (await db.collection("recipes").where("householdId", "==", null).get(
 if (process.env.TEST === "1") todo = TEST.map((id) => todo.find((d) => d.id === id)).filter((d): d is NonNullable<typeof d> => !!d);
 // Plats principaux d'abord (ceux que le planificateur propose), puis le reste.
 todo.sort((a, b) => Number((a.get("course") || "plat") !== "plat") - Number((b.get("course") || "plat") !== "plat"));
-todo = todo.slice(0, count);
+// Plafond du mois (photos facturées, créations automatiques comprises) : jamais de dérapage de coût.
+const maxMonth = Number(process.env.PHOTOS_MAX_MOIS) || Infinity;
+const left = Math.max(0, maxMonth - (await imagesThisMonth(db)));
+todo = todo.slice(0, Math.min(count, left));
+if (!todo.length) { console.log(left ? "Tous les plats ont leur photo : rien à faire." : `Plafond du mois atteint (${maxMonth} photos) : reprise le mois prochain.`); process.exit(0); }
 console.log(`${todo.length} photo(s) à générer (${done.size} déjà faites), environ ${(todo.length * IMAGE_COST).toFixed(2)} $.`);
 
 // Une photo à la fois, avec une pause : le quota de Vertex AI est compté à la minute. Un refus « quota » n'est pas facturé :

@@ -108,3 +108,13 @@ describe("légume servi à côté, accordé comme un chef", () => {
     expect(w.steps).toContain("Légumes — Chicons braisés :");
   });
 });
+
+describe("féculent accordé à la cuisine du plat", () => {
+  const find = (n: string) => lib.find((r) => r.name === n)!;
+  it("pas de riz d'une autre cuisine, pas de riz avec une saucisse compote", () => {
+    const k = sideOptions(find("Boulettes à la grecque (keftedes)"), lib, BASE_INDEX).map((x) => x.cuisine);
+    expect(k.every((c) => ["mediterraneenne", "italienne", "francaise", "belge", "americaine"].includes(c!))).toBe(true);
+    expect(sideOptions(find("Saucisse compote"), lib, BASE_INDEX).some((x) => /riz|sinangag/i.test(x.name))).toBe(false);
+    expect(sideOptions(find("Butter chicken"), lib, BASE_INDEX).every((x) => x.cuisine === "indienne")).toBe(true);
+  });
+});
