@@ -50,16 +50,16 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
         <div><div className="small muted">Enfants (3-10 ans)</div><Stepper value={e.kids} min={0} max={8} onChange={(v) => setEaters({ ...e, kids: v })} /></div>
       </div>
       <div style={{ marginBottom: 8 }}>
-        <div className="small muted">Déjeuner du matin (une recette : pancakes, œufs, cramique…) · {days.breakfast.length} / 7</div>
-        <div className="chips">{DAYS.map((label, d) => <button key={d} className="chip" aria-pressed={days.breakfast.includes(d)} aria-label={`${label} déjeuner`} onClick={() => toggleBreakfast(d)}>{label.slice(0, 3)}</button>)}</div>
+        <div className="small muted">☕ Déjeuner du matin (une recette : pancakes, œufs, cramique…) · {days.breakfast.length} / 7</div>
+        <div className="chips">{DAYS.map((label, d) => <button key={d} className="chip" aria-pressed={days.breakfast.includes(d)} aria-label={`${label} déjeuner`} onClick={() => toggleBreakfast(d)}>{label.slice(0, 3)}{days.breakfast.includes(d) ? " ☕" : ""}</button>)}</div>
       </div>
       {(["lunch", "dinner"] as const).map((meal) => <div key={meal} style={{ marginBottom: 8 }}>
         <div className="small muted">{meal === "lunch" ? "Repas de midi" : "Repas du soir"} · {days[meal].length} / 7</div>
         <div className="chips">{DAYS.map((label, d) => { const on = days[meal].includes(d), lt = on && light.has(`${d}-${meal === "lunch" ? "midi" : "soir"}`);
           return <button key={d} className="chip" aria-pressed={on} aria-label={`${label} ${meal === "lunch" ? "midi" : "soir"} : ${!on ? "pas de repas" : lt ? "léger" : "complet"}`}
-            onClick={() => cycleDay(meal, d)}>{label.slice(0, 3)}{lt ? " 🥗" : ""}</button>; })}</div>
+            onClick={() => cycleDay(meal, d)}>{label.slice(0, 3)}{on ? (lt ? " 🥗" : " 🍲") : ""}</button>; })}</div>
       </div>)}
-      <div className="small muted" style={{ margin: "-2px 0 10px" }}>Touche un jour : repas complet, puis 🥗 léger (salade-repas, soupe, tartines, omelette…), puis pas de repas. En semaine, le déjeuner habituel (pain, lait, céréales…) est prévu par le stock.</div>
+      <div className="small muted" style={{ margin: "-2px 0 10px" }}>Touche un jour : 🍲 repas complet, puis 🥗 léger (salade-repas, soupe, tartines, omelette…), puis pas de repas. En semaine, le déjeuner habituel (pain, lait, céréales…) est prévu par le stock.</div>
       <Opt o={o} set={set} k="seasonal" title="De saison" desc="Mois courant, ou saison choisie">
         <div className="chips">
           <button className="chip" aria-pressed={o.season === "auto"} onClick={() => set({ season: "auto" })}>Mois courant</button>
