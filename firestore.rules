@@ -18,6 +18,8 @@ service cloud.firestore {
     match /priceBook/{id} { allow read: if signedIn(); allow write: if false; }
     match /priceBookDirty/{id} { allow read, write: if false; }
     match /library/{id} { allow read: if signedIn(); allow write: if false; }
+    match /dishThumbs/{id} { allow read: if signedIn(); allow write: if false; }
+    match /dishImages/{id} { allow read: if signedIn(); allow write: if false; }
     match /libraryJobs/{id} { allow read: if isSuper(); allow write: if false; }
     match /libraryPlan/{id} { allow read: if isSuper(); allow write: if false; }
     match /captures/{id} { allow read, delete: if isSuper(); allow create, update: if false; }

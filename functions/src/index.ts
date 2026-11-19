@@ -13,6 +13,7 @@ import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { aliasFits, matchItem, similarItem, similarity } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
 import { rebuildPriceBook } from "./pricebook";
+import { imagesThisMonth, makeDishImage } from "./images";
 
 initializeApp();
 setGlobalOptions({ region: "europe-west1", maxInstances: 5 });
@@ -684,6 +685,20 @@ Version végé « ${r.vegName} » : ${r.vegSwap.map(line).join(", ")}` : ""}
 export const onPriceBookDirty = onDocumentWritten({ document: "priceBookDirty/{store}", timeoutSeconds: 300 }, async (event) => {
   if (!event.data?.after.exists) return;
   await rebuildPriceBook([event.params.store]);
+});
+
+/** Photo d'un nouveau plat (bibliothèque, IA, plat perso) dès sa création ; au plus 300 par mois. */
+export const onRecipeCreated = onDocumentCreated({ document: "recipes/{id}", timeoutSeconds: 120, memory: "512MiB" }, async (event) => {
+  const r = event.data?.data();
+  if (!r || r.source === "pret" || r.deleted) return;
+  const app = (await db().collection("config").doc("app").get()).data();
+  if (app?.dishImages === false) return;
+  if ((await db().collection("dishThumbs").doc(event.params.id).get()).exists) return;
+  if ((await imagesThisMonth()) >= 300) return;
+  const items = await loadItems();
+  const names = new Map(items.map((i) => [i.id, i.name]));
+  try { await makeDishImage(event.params.id, r as never, (id) => names.get(id)); }
+  catch (e) { logger.warn("Photo du plat non générée", { id: event.params.id, error: String(e) }); }
 });
 
 export * from "./admin";

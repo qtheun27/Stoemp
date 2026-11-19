@@ -7,7 +7,7 @@ import type { Allergen, Recipe } from "../lib/types";
 import { rateRecipe, savePeople } from "../state/actions";
 import { useStore } from "../state/store";
 import { run, Sheet, toast } from "../ui";
-import { DishArt } from "./DishArt";
+import { DishImage } from "./DishImage";
 
 const toggle = <T,>(list: T[], x: T) => (list.includes(x) ? list.filter((y) => y !== x) : [...list, x]);
 const GROUP_KEYS = Object.keys(TASTE_GROUPS);
@@ -75,7 +75,7 @@ function DishCard({ r }: { r: Recipe }) {
   const s = useStore();
   const main = ingredientsOf(r, false).map((i) => s.idx.get(i.itemId)).filter((it) => it && !it.staple && it.category !== "ep").slice(0, 5).map((it) => it!.name);
   return <div className="card" style={{ textAlign: "center", padding: "12px 12px 16px" }}>
-    <DishArt recipe={r} idx={s.idx} height={170} />
+    <DishImage recipe={r} idx={s.idx} height={200} />
     <h3 style={{ margin: "10px 0 4px" }}>{r.name}</h3>
     <p className="small muted">{r.cuisine ? CUISINES[r.cuisine].label : ""} · {r.prepMin} min</p>
     <p className="small">{main.join(" · ")}</p>
