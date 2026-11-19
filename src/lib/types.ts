@@ -62,6 +62,8 @@ export interface Recipe {
   householdId?: string;
   deleted?: boolean;
   createdAt?: number;
+  /** Nom de l'accompagnement choisi (recette effective d'un repas, voir sides.ts). */
+  sideName?: string;
 }
 
 /** Gamme de produits du foyer : premier prix, marque du magasin, ou grandes marques. */
@@ -143,6 +145,8 @@ export interface Slot {
   addedForLeftovers?: boolean;
   /** Plat prévu avant d'être remplacé par les restes (rétabli si on annule). */
   prevRecipeId?: string | null;
+  /** Accompagnement choisi (recette « accompagnement ») à la place du féculent d'origine du plat. */
+  side?: string | null;
 }
 
 export interface StockEntry {

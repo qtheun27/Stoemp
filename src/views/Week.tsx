@@ -7,6 +7,7 @@ import { mealParts, vegPortions } from "../lib/mixed";
 import { daysToExpiry, mealCounts, planSeason, recipesUsing } from "../lib/planner";
 import { mondayOf, shiftWeek, isoWeek } from "../lib/season";
 import { YesterdayRating } from "./Tastes";
+import { slotRecipe } from "../lib/sides";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
 import { placeRecipe, vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
@@ -38,13 +39,13 @@ export default function Week() {
   // Coût par portion de chaque plat, et coût total de chaque créneau (invités, restes, entrée/dessert compris).
   // Foyer mixte : parts avec viande et parts végé du même plat.
   const vegP = (sl: (typeof slots)[number]) => vegPortions(sl, vegCfg(s), persons);
-  const slotTotals = useMemo(() => slots.map((sl) => { const r = s.recipes.get(sl.recipeId); return (r ? partsCost(mealParts(r, sl.veg, slotPortions(sl, persons), vegP(sl), o.allergens), ctx.cost) : 0)
+  const slotTotals = useMemo(() => slots.map((sl) => { const r = slotRecipe(s.recipes, sl, s.idx); return (r ? partsCost(mealParts(r, sl.veg, slotPortions(sl, persons), vegP(sl), o.allergens), ctx.cost) : 0)
     + (sl.courses || []).reduce((a, c) => { const r = s.recipes.get(c.recipeId); return a + (r ? mealCostPerPerson(r, false, ctx.cost) * coursePortions(sl, persons) : 0); }, 0); }), [slots, persons, s.recipes, s.book, s.settings]);
   const total = slotTotals.reduce((a, b) => a + b, 0);
   const eatenPortions = slots.reduce((a, sl) => a + (sl.fromLeftovers ? persons : slotPortions(sl, persons) - (sl.leftovers ? persons : 0)), 0);
   const balance = useMemo(() => {
     const c: Record<string, number> = {};
-    slots.forEach((sl) => { const r = s.recipes.get(sl.recipeId); if (r && !sl.fromLeftovers) { const p = profile(r, sl.veg, s.idx).protein; c[p] = (c[p] || 0) + 1; } });
+    slots.forEach((sl) => { const r = slotRecipe(s.recipes, sl, s.idx); if (r && !sl.fromLeftovers) { const p = profile(r, sl.veg, s.idx).protein; c[p] = (c[p] || 0) + 1; } });
     return c;
   }, [slots, s.recipes]);
   const [fridge, setFridge] = useState(false);
@@ -136,7 +137,7 @@ export default function Week() {
                         <div className={`meal${x.cooked ? " cooked" : ""}`} key={x.k}>
                           <button className="info" onClick={() => setOpen({ r, k: x.k })}>
                             {list.length > 1 || mealCounts(s.settings).lunches > 0 ? <span className="slot">{x.meal}</span> : null}
-                            <span className="name">{nameOf(r, x.veg)}</span>
+                            <span className="name">{nameOf(r, x.veg)}{x.side && s.recipes.get(x.side) ? <span className="muted"> · {s.recipes.get(x.side)!.name.toLowerCase()}</span> : null}</span>
                             {x.guests && <span className="tag ac" style={{ marginBottom: 4 }}>🎉 réception · {headcount(eaters) + x.guests.adults + x.guests.kids} pers.{x.courses?.length ? ` · ${x.courses.length + 1} services` : ""}</span>}
                             <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}{!x.fromLeftovers && r.source !== "pret" && !isVegRecipe(r) && vegP(x) > 0 && <span>🌱 {vegP(x)} part{vegP(x) > 1 ? "s" : ""} végé</span>}
                             {o.drinks !== false && !x.fromLeftovers && <span>{x.drinks?.length ? `🍷 ${x.drinks[0]}` : `🍷 ${drinkFor(r, x.veg, s.idx, !!o.noAlcohol).adult}`}</span>}{(isVegRecipe(r) || (x.veg && r.source !== "pret")) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}{x.cooked && <span>✅ cuisiné</span>}</span>

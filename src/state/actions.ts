@@ -12,6 +12,7 @@ import { addDays, today, ymd } from "../lib/season";
 import { keyOf, slug } from "../lib/text";
 import type { Cat, Consumption, ConsumptionEvent, EventType, Ingredient, Item, Location, Recipe, Settings, ShoppingDoc, Slot, StockEntry, StoreId } from "../lib/types";
 import { mealParts, vegPortions } from "../lib/mixed";
+import { slotRecipe } from "../lib/sides";
 import { eatersFromPeople, TASTE_GROUPS, type Person, type Rating } from "../lib/tastes";
 import { isoWeek } from "../lib/season";
 import { baseQty } from "../lib/units";
@@ -177,7 +178,7 @@ const generateMenuFn = call<unknown, { courses: MenuRecipe[]; drinks: string[] }
 export async function receive(s: StoreState, k: number, cfg: { adults: number; kids: number; courses: ("aperitif" | "entree" | "dessert")[]; newMain: boolean; budgetPerHead: number | null }) {
   const slots = [...(s.week?.slots || [])];
   const sl = slots[k];
-  const main = s.recipes.get(sl.recipeId);
+  const main = slotRecipe(s.recipes, sl, s.idx);
   const o = s.settings.options;
   const e = eatersOf(s.settings);
   const res = await generateMenuFn({
@@ -236,7 +237,7 @@ function stockAfter(s: StoreState, item: Item, delta: number, patch: Partial<Sto
 export async function setCooked(s: StoreState, k: number, cooked: boolean) {
   const slots = [...(s.week?.slots || [])];
   const slot = slots[k];
-  const r = s.recipes.get(slot.recipeId);
+  const r = slotRecipe(s.recipes, slot, s.idx);
   slots[k] = { ...slot, cooked };
   const b = writeBatch(db);
   b.set(hh(s.hid!, "weeks", s.weekKey), { slots }, { merge: true });
@@ -456,3 +457,10 @@ export async function savePeople(s: StoreState, people: Person[]) {
 /** Avis d'un membre sur un plat (jeu « Ça te tente ? » ou note du lendemain). */
 export const rateRecipe = (s: StoreState, personId: string, recipeId: string, rating: Rating) =>
   setDoc(hh(s.hid!, "meta", "tastes"), { ratings: { [personId]: { [recipeId]: rating } } }, { merge: true });
+
+/** Accompagnement d'un repas de la semaine (null = celui d'origine du plat). */
+export async function setSide(s: StoreState, k: number, side: string | null) {
+  const slots = [...(s.week?.slots || [])];
+  slots[k] = { ...slots[k], side };
+  await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots }, { merge: true });
+}

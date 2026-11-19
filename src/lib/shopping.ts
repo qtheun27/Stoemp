@@ -1,3 +1,4 @@
+import { slotRecipe } from "./sides";
 import { ingredientsOf, type ItemIndex } from "./catalog";
 import { predict, shouldAutoAdd } from "./predict";
 import type { Cat, Consumption, Reason, Recipe, ShoppingDoc, Slot, StockEntry, Unit } from "./types";
@@ -51,7 +52,7 @@ export function mealNeeds(slots: Slot[], recipes: Map<string, Recipe>, persons: 
   };
   for (const s of slots) {
     if (s.cooked) continue;
-    const r = recipes.get(s.recipeId);
+    const r = slotRecipe(recipes, s, idx);
     // Plat (+ invités, + restes du lendemain) ; foyer mixte : parts avec viande et parts végé du même plat.
     if (r) { const P = slotPortions(s, persons); for (const p of mealParts(r, s.veg, P, vegPortions(s, { vegEaters }, persons), allergens)) add(p.ings, p.portions); }
     for (const c of s.courses || []) { const cr = recipes.get(c.recipeId); if (cr) add(ingredientsOf(cr, false), coursePortions(s, persons)); } // apéritif, entrée, dessert
