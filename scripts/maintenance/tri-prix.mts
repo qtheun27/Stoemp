@@ -1,9 +1,11 @@
 // Tri des prix : retire des aliments les produits pour animaux, d'entretien, d'hygiène et de beauté rangés par erreur.
 // Par défaut, ESSAI À BLANC : liste seulement ce qui serait retiré. APPLY=1 pour écrire (workflow Maintenance → tri-prix-appliquer).
+// Aussi : petits pots pour bébé hors des articles pour bébé, viande ou poisson différents (porc rangé dans du bœuf).
 // Touche : variantes et résumé des prix (prices), alias appris (items), historique (priceHistory) ; articles non alimentaires mal rangés → « Hygiène & entretien ».
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
-import { HOUSEHOLD, isBabyFood, isNonFood } from "../../functions/src/readers/nonfood";
+import { HOUSEHOLD, isBabyFood, isBabyItem, isNonFood } from "../../functions/src/readers/nonfood";
+import { proteinClash } from "../../functions/src/readers/match";
 import { rebuildPriceBook } from "../../functions/src/pricebook";
 import { imagesThisMonth } from "../../functions/src/images";
 
@@ -23,7 +25,7 @@ for (const it of items) {
     if (APPLY) { await it.ref.set({ category: HOUSEHOLD }, { merge: true }); cat.set(it.id, HOUSEHOLD); }
     continue;
   }
-  const bad = it.aliases.filter((a) => isNonFood(a) || (isBabyFood(a) && !isBabyFood(it.name)));
+  const bad = it.aliases.filter((a) => isNonFood(a) || (isBabyFood(a) && !isBabyItem(it.name)) || proteinClash(a, it.name));
   if (bad.length) {
     nAlias += bad.length; console.log(`ALIAS retirés de « ${it.name} » : ${bad.join(" · ")}`);
     if (APPLY) await it.ref.update({ aliases: FieldValue.arrayRemove(...bad) });
@@ -41,7 +43,7 @@ for (const d of prices.docs) {
   const offers = (p.offers || []) as { name: string; organic: boolean; size: number; price: number; ppu: number; promo?: string | null }[];
   // Hors sujet pour cet aliment : non alimentaire, ou petit pot pour bébé rangé dans un ingrédient de cuisine.
   const itemName = items.find((i) => i.id === p.itemId)?.name || "";
-  const wrong = (n: string) => isNonFood(n) || (isBabyFood(n) && !isBabyFood(itemName));
+  const wrong = (n: string) => isNonFood(n) || (isBabyFood(n) && !isBabyItem(itemName)) || proteinClash(n, itemName);
   const keep = offers.filter((o) => !wrong(o.name));
   const summaryBad = wrong(p.productName || "");
   if (keep.length === offers.length && !summaryBad) continue;
@@ -64,7 +66,7 @@ let nHist = 0;
 for (const d of hist.docs) {
   const c = cat.get(d.get("itemId"));
   const pn = d.get("productName") || "", inm = items.find((i) => i.id === d.get("itemId"))?.name || "";
-  if (c && c !== HOUSEHOLD && (isNonFood(pn) || (isBabyFood(pn) && !isBabyFood(inm)))) { nHist++; if (APPLY) w.delete(d.ref); }
+  if (c && c !== HOUSEHOLD && (isNonFood(pn) || (isBabyFood(pn) && !isBabyItem(inm)) || proteinClash(pn, inm))) { nHist++; if (APPLY) w.delete(d.ref); }
 }
 await w.close();
 

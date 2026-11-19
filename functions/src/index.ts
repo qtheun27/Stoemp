@@ -10,8 +10,8 @@ import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
-import { HOUSEHOLD, isBabyFood, isNonFood, isNonFoodPage } from "./readers/nonfood";
-import { aliasFits, matchItem, similarItem, similarity } from "./readers/match";
+import { HOUSEHOLD, isBabyFood, isBabyItem, isNonFood, isNonFoodPage } from "./readers/nonfood";
+import { aliasFits, matchItem, proteinClash, similarItem, similarity } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
 import { rebuildPriceBook } from "./pricebook";
 import { imagesThisMonth, makeDishImage } from "./images";
@@ -403,7 +403,7 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     const world = (nf: boolean) => items.filter((i) => (i.category === HOUSEHOLD) === nf);
     for (const p of parsed) {
       // Petits pots pour bébé : jamais rangés avec les ingrédients de cuisine (« Pâtes », « Veau »).
-      const m = isBabyFood(p.name) ? null : matchItem(p.name, p.packSize, p.packUnit, world(nonFood(p)));
+      const m = matchItem(p.name, p.packSize, p.packUnit, world(nonFood(p)).filter((i) => !isBabyFood(p.name) || isBabyItem(i.name)));
       if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
       else unmatched.push(p);
     }
@@ -424,7 +424,7 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
           // Un article très proche existe déjà dans le même monde : on le réutilise (le nom du produit devient un alias).
           const twin = similarItem(c.name, c.unit, c.category, world(nf));
           const it = twin || (await createItem(c, p.name));
-          if ((it.category === HOUSEHOLD) !== nf) continue;
+          if ((it.category === HOUSEHOLD) !== nf || proteinClash(p.name, it.name) || (isBabyFood(p.name) && !isBabyItem(it.name))) continue;
           // Article déjà connu : on retient le nom exact du produit (plus besoin de l'IA la prochaine fois),
           // et le nom générique proposé seulement s'il convient vraiment (sinon « Saucisses de poulet » finirait en « Filet de poulet »).
           const known = items.some((x) => x.id === it.id);
@@ -462,7 +462,7 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
       for (const x of m.matches) {
         const p = usable[x.index], item = x.itemId ? items.find((it) => it.id === x.itemId) : undefined;
         const nf = isNonFoodPage(d.url) || isNonFood([p?.brand, p?.name].filter(Boolean).join(" "));
-        const baby = isBabyFood([p?.brand, p?.name].filter(Boolean).join(" ")) && !/bebe/.test(norm(item?.name || ""));
+        const baby = isBabyFood([p?.brand, p?.name].filter(Boolean).join(" ")) && !isBabyItem(item?.name || "");
         if (p && item && !baby && item.unit === p.packUnit && (item.category === HOUSEHOLD) === nf) rows.push({ itemId: item.id, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), size: p.packSize!, unit: item.unit, price: p.price, promo: p.promo });
       }
     }));
