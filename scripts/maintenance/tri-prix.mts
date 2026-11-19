@@ -10,6 +10,11 @@ import { rebuildPriceBook } from "../../functions/src/pricebook";
 import { imagesThisMonth } from "../../functions/src/images";
 
 const APPLY = process.env.APPLY === "1";
+// Erreurs repérées à la relecture de la liste « à vérifier » (produits rangés par l'IA dans le mauvais article).
+const MANUAL: [string, RegExp][] = [
+  ["Ail", /raclette/i], ["Sel", /croky|chips/i], ["Huile d'olive", /\bogx\b|argan|grenade|soin/i],
+  ["Fraises", /actimel|fiordifrutta|confiture|yaourt|yogurt/i], ["Maïs (boîte)", /popcorn|puf/i],
+];
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
 console.log(APPLY ? "=== TRI APPLIQUÉ ===" : "=== ESSAI À BLANC (rien n'est modifié) ===");
@@ -43,7 +48,7 @@ for (const d of prices.docs) {
   const offers = (p.offers || []) as { name: string; organic: boolean; size: number; price: number; ppu: number; promo?: string | null }[];
   // Hors sujet pour cet aliment : non alimentaire, ou petit pot pour bébé rangé dans un ingrédient de cuisine.
   const itemName = items.find((i) => i.id === p.itemId)?.name || "";
-  const wrong = (n: string) => isNonFood(n) || (isBabyFood(n) && !isBabyItem(itemName)) || proteinClash(n, itemName);
+  const wrong = (n: string) => isNonFood(n) || (isBabyFood(n) && !isBabyItem(itemName)) || proteinClash(n, itemName) || MANUAL.some(([i, re]) => i === itemName && re.test(n));
   const keep = offers.filter((o) => !wrong(o.name));
   const summaryBad = wrong(p.productName || "");
   if (keep.length === offers.length && !summaryBad) continue;
