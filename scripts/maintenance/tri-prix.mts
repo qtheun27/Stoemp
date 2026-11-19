@@ -3,7 +3,7 @@
 // Touche : variantes et résumé des prix (prices), alias appris (items), historique (priceHistory) ; articles non alimentaires mal rangés → « Hygiène & entretien ».
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
-import { HOUSEHOLD, isNonFood } from "../../functions/src/readers/nonfood";
+import { HOUSEHOLD, isBabyFood, isNonFood } from "../../functions/src/readers/nonfood";
 import { rebuildPriceBook } from "../../functions/src/pricebook";
 import { imagesThisMonth } from "../../functions/src/images";
 
@@ -23,7 +23,7 @@ for (const it of items) {
     if (APPLY) { await it.ref.set({ category: HOUSEHOLD }, { merge: true }); cat.set(it.id, HOUSEHOLD); }
     continue;
   }
-  const bad = it.aliases.filter(isNonFood);
+  const bad = it.aliases.filter((a) => isNonFood(a) || (isBabyFood(a) && !isBabyFood(it.name)));
   if (bad.length) {
     nAlias += bad.length; console.log(`ALIAS retirés de « ${it.name} » : ${bad.join(" · ")}`);
     if (APPLY) await it.ref.update({ aliases: FieldValue.arrayRemove(...bad) });
@@ -39,10 +39,13 @@ for (const d of prices.docs) {
   const p = d.data(), c = cat.get(p.itemId);
   if (!c || c === HOUSEHOLD) continue;
   const offers = (p.offers || []) as { name: string; organic: boolean; size: number; price: number; ppu: number; promo?: string | null }[];
-  const keep = offers.filter((o) => !isNonFood(o.name));
-  const summaryBad = isNonFood(p.productName || "");
+  // Hors sujet pour cet aliment : non alimentaire, ou petit pot pour bébé rangé dans un ingrédient de cuisine.
+  const itemName = items.find((i) => i.id === p.itemId)?.name || "";
+  const wrong = (n: string) => isNonFood(n) || (isBabyFood(n) && !isBabyFood(itemName));
+  const keep = offers.filter((o) => !wrong(o.name));
+  const summaryBad = wrong(p.productName || "");
   if (keep.length === offers.length && !summaryBad) continue;
-  const gone = offers.filter((o) => isNonFood(o.name)).map((o) => o.name);
+  const gone = offers.filter((o) => wrong(o.name)).map((o) => o.name);
   nOffers += gone.length; nDocs++; stores.add(p.store);
   const name = items.find((i) => i.id === p.itemId)?.name || p.itemId;
   if (!keep.length) {
@@ -60,7 +63,8 @@ const hist = await db.collection("priceHistory").get();
 let nHist = 0;
 for (const d of hist.docs) {
   const c = cat.get(d.get("itemId"));
-  if (c && c !== HOUSEHOLD && isNonFood(d.get("productName") || "")) { nHist++; if (APPLY) w.delete(d.ref); }
+  const pn = d.get("productName") || "", inm = items.find((i) => i.id === d.get("itemId"))?.name || "";
+  if (c && c !== HOUSEHOLD && (isNonFood(pn) || (isBabyFood(pn) && !isBabyFood(inm)))) { nHist++; if (APPLY) w.delete(d.ref); }
 }
 await w.close();
 

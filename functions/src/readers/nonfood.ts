@@ -4,18 +4,21 @@
 const fold = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "oe");
 
 const PETS = [
-  "chat", "chats", "chaton", "chatons", "chien", "chiens", "chiot", "chiots", "animal", "animaux", "oiseau", "oiseaux", "rongeur", "rongeurs", "lapin nain",
+  // « oiseau » seul est un mot de cuisine (oiseaux sans tête, langues d'oiseau) : seulement « pour oiseaux ».
+  "chat", "chats", "chaton", "chatons", "chien", "chiens", "chiot", "chiots", "animal", "animaux", "pour oiseaux", "graines pour oiseaux", "rongeur", "rongeurs", "lapin nain",
   "patee", "litiere", "friandise pour", "friandises pour", "os a macher", "batonnets a macher", "a macher",
-  "whiskas", "felix", "sheba", "pedigree", "purina", "royal canin", "friskies", "kitekat", "dreamies", "dentastix", "perfect fit", "brekkies", "vitakraft", "catisfaction", "ultima", "gourmet gold", "cesar",
+  "whiskas", "felix", "sheba", "pedigree", "purina", "royal canin", "friskies", "kitekat", "dreamies", "dentastix", "perfect fit", "brekkies", "vitakraft", "catisfaction", "ultima", "gourmet gold", "frolic", "catmilk", "hill's", "pro plan", "josera", "applaws", "animonda", "catessy", "schesir", "butcher's",
 ];
 const HYGIENE = [
   "shampooing", "shampoing", "apres-shampooing", "apres shampooing", "gel douche", "creme douche", "douche", "deodorant", "anti-transpirant", "dentifrice", "brosse a dents", "bain de bouche",
   "savon", "creme de jour", "creme de nuit", "creme visage", "creme mains", "creme pour les mains", "creme corps", "creme pour le corps", "creme solaire", "creme hydratante", "creme a raser", "anti-age", "anti-rides",
   "lait corporel", "lait demaquillant", "lait solaire", "lait hydratant", "lait pour le corps", "lotion", "demaquill", "mascara", "rouge a levres", "vernis", "maquillage", "fond de teint",
   "parfum", "eau de toilette", "eau de parfum", "rasoir", "rasoirs", "lames de rasoir", "mousse a raser", "gel a raser", "coton-tiges", "cotons", "disques demaquillants", "lingettes",
+  "nivea", "garnier", "l'oreal", "colgate", "sanex", "palmolive", "rexona", "gillette", "pampers", "head & shoulders",
   "serviettes hygieniques", "tampons", "protege-slips", "couches", "laque", "gel coiffant", "coloration", "baume a levres", "serum", "masque visage", "masque cheveux", "exfoliant", "gommage", "soin du visage", "huile de massage", "huile pour le corps",
 ];
 const CLEANING = [
+  "nettoy", "a recurer", "creme a recurer", "dreft", "ariel", "mr propre", "cif", "ajax", "dettol", "glorix", "frosch", "ecover", "vanish", "finish",
   "nettoyant", "detergent", "lessive", "assouplissant", "adoucissant", "javel", "desinfect", "degraiss", "detartr", "anticalcaire", "anti-calcaire", "liquide vaisselle", "lave-vaisselle", "vaisselle",
   "eponge", "eponges", "serpillere", "essuie-tout", "papier toilette", "mouchoirs", "sac poubelle", "sacs poubelle", "desodorisant", "parfum d'ambiance", "insecticide", "cirage", "bloc wc", "gel wc", "vitres",
   "allume-feu", "bougie", "piles", "ampoule", "papier aluminium", "film etirable", "sacs congelation", "sacs de congelation", "papier cuisson",
@@ -26,6 +29,9 @@ const RE = new RegExp(`(^|[^a-z0-9])(${words.map((w) => w.replace(/[.*+?^${}()|[
 
 /** Le produit n'est pas de la nourriture (ni une boisson) : animaux, entretien, hygiène, beauté. */
 export const isNonFood = (name: string) => RE.test(fold(name));
+
+/** Alimentation pour bébé (petits pots « +12m », laits de croissance) : jamais rangée avec les ingrédients de cuisine. */
+export const isBabyFood = (name: string) => /\+\s?\d{1,2}\s?m(ois)?\b|\bolvarit\b|\bnutrilon\b|\bbebe\b|petits? pots?\b|des \d+ mois|lait de (suite|croissance)/.test(fold(name));
 
 /** Page d'un rayon non alimentaire (adresse de la page capturée). */
 export const isNonFoodPage = (url: string) =>

@@ -10,7 +10,7 @@ import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
 import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
-import { HOUSEHOLD, isNonFood, isNonFoodPage } from "./readers/nonfood";
+import { HOUSEHOLD, isBabyFood, isNonFood, isNonFoodPage } from "./readers/nonfood";
 import { aliasFits, matchItem, similarItem, similarity } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
 import { rebuildPriceBook } from "./pricebook";
@@ -402,7 +402,8 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     const nonFood = (p: ShopProduct) => pageNonFood || isNonFood(p.name);
     const world = (nf: boolean) => items.filter((i) => (i.category === HOUSEHOLD) === nf);
     for (const p of parsed) {
-      const m = matchItem(p.name, p.packSize, p.packUnit, world(nonFood(p)));
+      // Petits pots pour bébé : jamais rangés avec les ingrédients de cuisine (« Pâtes », « Veau »).
+      const m = isBabyFood(p.name) ? null : matchItem(p.name, p.packSize, p.packUnit, world(nonFood(p)));
       if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
       else unmatched.push(p);
     }
@@ -461,7 +462,8 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
       for (const x of m.matches) {
         const p = usable[x.index], item = x.itemId ? items.find((it) => it.id === x.itemId) : undefined;
         const nf = isNonFoodPage(d.url) || isNonFood([p?.brand, p?.name].filter(Boolean).join(" "));
-        if (p && item && item.unit === p.packUnit && (item.category === HOUSEHOLD) === nf) rows.push({ itemId: item.id, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), size: p.packSize!, unit: item.unit, price: p.price, promo: p.promo });
+        const baby = isBabyFood([p?.brand, p?.name].filter(Boolean).join(" ")) && !/bebe/.test(norm(item?.name || ""));
+        if (p && item && !baby && item.unit === p.packUnit && (item.category === HOUSEHOLD) === nf) rows.push({ itemId: item.id, organic: p.organic, productName: [p.brand, p.name].filter(Boolean).join(" "), size: p.packSize!, unit: item.unit, price: p.price, promo: p.promo });
       }
     }));
     res.filter((r) => r.status === "rejected").forEach((r) => logger.warn("Morceau illisible", (r as PromiseRejectedResult).reason));
