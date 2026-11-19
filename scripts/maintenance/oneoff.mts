@@ -34,6 +34,10 @@ console.log(`\n=== Photos (48 h) : ${ok.length} réussies (durée moyenne ${avg}
 const byErr = new Map<string, number>();
 for (const x of ko) { const k = String(x.error).slice(0, 80); byErr.set(k, (byErr.get(k) || 0) + 1); }
 for (const [k, n] of [...byErr].sort((a, b) => b[1] - a[1]).slice(0, 5)) console.log(`  ${n} × ${k}`);
+const recent = img.filter((x) => x.at >= Date.now() - 20 * 60_000);
+const locs = new Map<string, [number, number]>();
+for (const x of recent) { const k = x.location || "global"; const v = locs.get(k) || [0, 0]; v[x.error ? 1 : 0]++; locs.set(k, v); }
+console.log(`  20 dernières minutes : ${recent.filter((x) => !x.error).length} photos, ${recent.filter((x) => x.error).length} refus — par point d'accès : ${[...locs].map(([k, [o, e]]) => `${k} ${o} ok / ${e} refus`).join(", ")}`);
 for (let h = 5; h >= 0; h--) {
   const a = Date.now() - (h + 1) * 3600_000, b = Date.now() - h * 3600_000;
   console.log(`  il y a ${h + 1}-${h} h : ${ok.filter((x) => x.at >= a && x.at < b).length} photos, ${ko.filter((x) => x.at >= a && x.at < b).length} refus`);
