@@ -14,7 +14,9 @@ import type { Cat, Consumption, Item, PaidPrice, Price, Recipe, Settings, Shoppi
 
 export interface Household { id: string; name: string; members: Record<string, "admin" | "member">; memberNames?: Record<string, string> }
 export interface HistoryEntry { name: string; count: number; itemId?: string | null; category: Cat }
-export interface Prefs { favorites: string[]; learnedCategories: Record<string, Cat>; history: Record<string, HistoryEntry> }
+export interface Prefs { favorites: string[]; learnedCategories: Record<string, Cat>; history: Record<string, HistoryEntry>;
+  /** Accords retenus : accompagnement choisi pour un plat (null = celui de la recette). */
+  sides?: Record<string, string | null> }
 export interface UserDoc { households: string[]; current?: string | null }
 export interface WeekDoc { slots: Slot[]; persons?: number; warning?: string | null }
 
