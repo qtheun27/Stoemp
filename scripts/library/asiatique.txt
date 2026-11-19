@@ -88,6 +88,7 @@ v Soupe wonton au tofu
 
 ## accompagnement
 # Pak choï à l'ail | 4 | 15 | T
+p viande volaille poisson vege
 + Pak choï 600g; Ail 0.2pc; Sauce huître 2cs; Huile de tournesol 2cs
 - Couper les pak choï en deux ou en quatre dans la longueur et bien les rincer.
 - Les blanchir 1 minute à l'eau bouillante et les égoutter.
@@ -95,12 +96,14 @@ v Soupe wonton au tofu
 - Arroser de sauce huître et servir aussitôt.
 
 # Haricots verts sautés à la sichuanaise | 4 | 25 | E
+p viande volaille vege
 + Haricots verts 500g; Ail 0.2pc; Gingembre 10g; Piment 1pc; Poivre du Sichuan 0.5cc; Sauce soja 2cs; Sucre 1cc; Huile de tournesol 4cs
 - Faire sauter les haricots équeutés et bien secs à feu vif dans l'huile 6 à 8 minutes, jusqu'à ce que la peau se ride et dore.
 - Les retirer, puis faire revenir l'ail, le gingembre, le piment et le poivre du Sichuan 30 secondes.
 - Remettre les haricots, ajouter la sauce soja et le sucre, sauter 1 minute et servir.
 
 # Aubergines yu xiang | 4 | 30 | E
+p viande volaille vege
 + Aubergine 600g; Ail 0.2pc; Gingembre 10g; Doubanjiang 1cs; Sauce soja 2cs; Vinaigre de riz 2cs; Sucre 1cs; Fécule de maïs 1cc; Oignons nouveaux 2pc; Huile de tournesol 6cs
 - Couper les aubergines en bâtonnets et les faire dorer dans l'huile chaude jusqu'à ce qu'elles soient fondantes ; les égoutter.
 - Faire revenir l'ail, le gingembre et le doubanjiang 1 minute.

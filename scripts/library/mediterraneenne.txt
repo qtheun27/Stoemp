@@ -107,6 +107,7 @@ v Croquetas de champiñones
 - Retirer l'aluminium et cuire encore 30 minutes pour que les légumes dorent.
 
 # Pisto manchego | 4 | 60 | E
+p viande volaille poisson vege
 + Courgettes 500g; Poivron 2pc; Oignon 2pc; Tomates 600g; Ail 0.1pc; Huile d'olive 4cs
 - Faire fondre l'oignon émincé 10 minutes dans l'huile, ajouter l'ail et les poivrons en dés.
 - Après 10 minutes, ajouter les courgettes en dés et cuire 10 minutes.

@@ -18,6 +18,7 @@ v Carbonnade de champignons et lentilles
 - Servir avec les pommes de terre (frites, purée ou vapeur au choix). Version végé : faire dorer les champignons à la place de la viande, ajouter les lentilles rincées et le bouillon de légumes, et mijoter 45 minutes seulement.
 
 # Flamiche aux poireaux et lardons | 6 | 70 | AH
+g Salade verte
 r
 + Pâte feuilletée 1pc; Poireaux 800g; Beurre 40g; Oeufs 3pc; Crème fraîche 200ml; Muscade 0.25cc; Salade verte 1pc
 = Lardons 200g
@@ -93,6 +94,7 @@ v Soupe poireaux et croque tomate
 - Servir la soupe bien chaude avec les croques coupés en deux. Version végé : tranches de tomate à la place du jambon.
 
 # Boulets à la liégeoise | 4 | 75 | T
+g Salade verte
 o Boulets à la liégeoise et frites
 s frites
 r
@@ -145,6 +147,7 @@ v Mijoté de haricots blancs à la bière et aux pruneaux
 - Servir avec les pommes de terre (frites, purée ou vapeur). Version végé : champignons dorés et haricots blancs mijotés 30 minutes dans la même sauce.
 
 # Tomates-crevettes | 4 | 25 | PE
+g Salade verte
 r
 + Grosses tomates 8pc; Mayonnaise 8cs; Citron 0.5pc; Ketchup 1cs; Persil 0.25pc; Salade verte 1pc; Pain gris 0.5pc
 = Crevettes grises 400g
@@ -157,6 +160,7 @@ v Tomates farcies aux œufs mimosa
 - Servir bien frais sur un lit de salade avec du pain gris beurré. Version végé : œufs durs écrasés à la mayonnaise.
 
 # Filet américain | 4 | 50 | T
+g Salade verte
 o Filet américain et frites
 s frites
 r
@@ -197,6 +201,7 @@ v Chicons braisés, œufs mollets et purée
 - Servir les chicons avec le jambon et la purée. Version végé : œufs mollets (6 minutes) à la place du jambon.
 
 # Steak sauce poivre | 4 | 45 | T
+g Salade verte
 o Steak sauce poivre et frites
 s frites
 r
@@ -236,7 +241,9 @@ v Chicons, tofu fumé à la moutarde et grenailles
 - Cuire les grenailles à l'eau ou à la vapeur 20 minutes.
 - Lier le jus des paupiettes avec la crème et la moutarde et servir avec les chicons et les grenailles. Version végé : tranches de tofu fumé dorées, même sauce.
 
-# Croquettes de crevettes et salade | 4 | 240 | T
+# Croquettes de crevettes | 4 | 240 | T
+o Croquettes de crevettes et salade
+g Salade verte
 r
 + Beurre 80g; Farine 140g; Lait 300ml; Fumet de poisson 200ml; Oeufs 3pc; Chapelure 150g; Huile de tournesol 1000ml; Citron 1pc; Persil 0.5pc; Salade verte 1pc
 = Crevettes grises 300g
@@ -313,6 +320,7 @@ v Salade liégeoise aux œufs
 - Mélanger, poivrer, parsemer de persil et servir tiède. Version végé : œufs durs en quartiers et un peu de beurre pour déglacer.
 
 # Poulet compote | 4 | 60 | T
+g Salade verte
 o Poulet, compote et frites
 s frites
 r
@@ -326,7 +334,8 @@ v Galette végétale, compote et frites
 - Servir le poulet doré avec la compote tiède ou froide, les frites et la salade.
 - Version végé : galettes végétales dorées à la poêle.
 
-# Nids d'oiseau et petits pois | 4 | 60 | AH
+# Nids d'oiseau | 4 | 60 | AH
+g Petits pois
 o Nids d'oiseau, purée et petits pois
 s purée
 r
@@ -369,6 +378,7 @@ v Roulés de champignons et lentilles à la bière
 - Servir les oiseaux sans tête déficelés avec la sauce et la purée. Version végé : champignons et lentilles mijotés 30 minutes dans la même sauce.
 
 # Fricassée ardennaise | 4 | 35 | AH
+g Salade verte
 r
 + Pommes de terre 1000g; Oeufs 6pc; Oignon 2pc; Beurre 40g; Persil 0.5pc; Salade verte 1pc
 = Lardons 250g
@@ -407,6 +417,7 @@ v Tofu fumé au sirop de Liège et pommes
 - Servir le filet tranché avec les pommes, la sauce et les grenailles. Version végé : tranches de tofu fumé dorées, même sauce.
 
 # Scampis en sauce crème-ail | 4 | 25 | T
+g Salade verte
 o Scampis à l'ail et pain
 s pain
 r

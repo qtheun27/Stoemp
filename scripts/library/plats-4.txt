@@ -28,7 +28,8 @@ v Curry de pois chiches à la belge et riz
 
 @francaise
 ## plat
-# Steak haché et haricots verts | 4 | 35 | T
+# Steak haché | 4 | 35 | T
+g Haricots verts
 o Steak haché, haricots et pommes de terre sautées
 s pommes de terre sautées
 + Haricots verts 500g; Pommes de terre 800g; Beurre 40g; Échalote 1pc; Persil 0.25pc
@@ -40,7 +41,9 @@ v Galette végétale, haricots et pommes de terre sautées
 - Former 4 steaks hachés et les cuire 3 minutes par face dans le reste du beurre.
 - Parsemer de persil et servir. Version végé : galettes végétales.
 
-# Omelette aux champignons et salade | 4 | 20 | T
+# Omelette aux champignons | 4 | 20 | T
+o Omelette aux champignons et salade
+g Salade verte
 + Oeufs 8pc; Champignons de Paris 300g; Beurre 30g; Ciboulette 0.25pc; Gruyère râpé 60g; Salade verte 1pc; Moutarde 1cc; Vinaigre 1cs
 l
 - Faire sauter les champignons émincés dans la moitié du beurre jusqu'à ce qu'ils soient dorés.
@@ -124,7 +127,9 @@ v Tacos aux haricots noirs et maïs
 
 @americaine
 ## plat
-# Fishcakes et petits pois | 4 | 45 | T
+# Fishcakes | 4 | 45 | T
+o Fishcakes et petits pois
+g Petits pois
 + Pommes de terre 600g; Persil 0.5pc; Citron 1pc; Oeufs 1pc; Farine 40g; Chapelure 100g; Petits pois 400g; Beurre 30g; Mayonnaise 4cs; Cornichons 40g
 = Dos de cabillaud 400g; Saumon fumé 100g
 ~ Maïs (boîte) 200g; Cheddar 100g

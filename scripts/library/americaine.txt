@@ -89,6 +89,7 @@ v Noodle soup aux pois chiches
 
 ## accompagnement
 # Coleslaw | 6 | 20 | T
+p viande volaille poisson
 + Chou blanc 500g; Carottes 150g; Mayonnaise 6cs; Vinaigre 1cs; Sucre 1cc; Moutarde 1cc
 - Émincer très finement le chou et râper les carottes.
 - Mélanger la mayonnaise, le vinaigre, le sucre et la moutarde ; saler et poivrer.

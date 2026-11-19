@@ -3,6 +3,7 @@
 ## plat
 
 # Quiche épinards et saumon fumé | 6 | 60 | P
+g Salade verte
 r
 + Pâte brisée 1pc; Épinards frais 400g; Beurre 20g; Oeufs 3pc; Crème fraîche 200ml; Lait 100ml; Muscade 0.25cc; Salade verte 1pc
 = Saumon fumé 150g
@@ -39,6 +40,7 @@ v Salade de pâtes, radis et feta
 - Mélanger le tout et servir frais. Version végé : feta en dés.
 
 # Omelette aux herbes et pommes de terre | 4 | 30 | P
+g Salade verte
 r
 + Oeufs 8pc; Pommes de terre 600g; Beurre 30g; Ciboulette 0.5pc; Persil 0.25pc; Salade verte 1pc
 - Cuire les pommes de terre en robe des champs, les éplucher et les couper en rondelles ; les faire dorer dans la moitié du beurre.
@@ -48,6 +50,7 @@ r
 - Plier et servir avec la salade.
 
 # Cabillaud poêlé au citron | 4 | 40 | P
+g Haricots verts
 o Cabillaud et purée aux herbes
 s purée aux herbes
 r
@@ -159,6 +162,7 @@ r
 - Gratiner 5 minutes sous le gril jusqu'à ce que le fromage bouillonne.
 
 # Tartiflette | 4 | 60 | H
+g Salade verte
 r
 + Pommes de terre 1200g; Reblochon 1pc; Oignon 2pc; Vin blanc 100ml; Crème fraîche 150ml; Salade verte 1pc
 = Lardons 250g
@@ -170,7 +174,9 @@ v Tartiflette aux champignons
 - Couper le reblochon en deux dans l'épaisseur et le poser croûte vers le haut.
 - Cuire 25 minutes à 200 °C et servir avec la salade. Version végé : champignons poêlés à la place des lardons.
 
-# Croque-monsieur et salade | 4 | 20 | T
+# Croque-monsieur gratiné | 4 | 20 | T
+o Croque-monsieur et salade
+g Salade verte
 r
 + Pain de mie 8pc; Beurre 40g; Béchamel 200ml; Emmental 200g; Salade verte 1pc; Moutarde 1cc; Vinaigre 1cs
 = Jambon 4pc
@@ -232,6 +238,7 @@ v Piperade aux pois chiches et riz
 - Servir avec le riz. Version végé : pois chiches mijotés 20 minutes dans la piperade.
 
 # Rôti de porc au thym | 6 | 100 | AH
+g Salade verte
 o Gratin dauphinois et rôti de porc
 s gratin dauphinois
 r
@@ -257,7 +264,9 @@ v Parmentier de champignons et pois chiches
 - Étaler le poulet dans un plat, couvrir de purée et de fromage.
 - Gratiner 25 minutes à 200 °C. Version végé : champignons et pois chiches.
 
-# Quiche lorraine et salade | 6 | 60 | T
+# Quiche lorraine | 6 | 60 | T
+o Quiche lorraine et salade
+g Salade verte
 r
 + Pâte brisée 1pc; Oeufs 4pc; Crème liquide 250ml; Lait 150ml; Gruyère râpé 80g; Muscade 0.25cc; Salade verte 1pc
 = Lardons 200g
@@ -269,7 +278,9 @@ v Quiche aux poireaux
 - Répartir les lardons et le fromage sur le fond, verser l'appareil.
 - Cuire 30 minutes à 180 °C et servir avec la salade. Version végé : poireaux fondus.
 
-# Croque-madame et salade | 4 | 25 | T
+# Croque-madame | 4 | 25 | T
+o Croque-madame et salade
+g Salade verte
 r
 + Pain de mie 8pc; Beurre 40g; Béchamel 200ml; Gruyère râpé 200g; Oeufs 4pc; Salade verte 1pc
 = Jambon 4pc
@@ -324,6 +335,7 @@ r
 - Servir la soupe bien chaude, une cuillère de pistou dans chaque bol.
 
 # Galettes complètes | 4 | 60 | T
+g Salade verte
 r
 + Farine de sarrasin 250g; Oeufs 6pc; Lait 300ml; Beurre 40g; Gruyère râpé 150g; Salade verte 1pc
 = Jambon 4pc
@@ -362,6 +374,7 @@ v Endives braisées, œufs mollets et purée de céleri
 - Servir ensemble. Version végé : œufs mollets.
 
 # Tarte fine tomates, moutarde et chèvre | 4 | 40 | E
+g Salade verte
 r
 + Pâte feuilletée 1pc; Tomates 600g; Moutarde 2cs; Fromage de chèvre 200g; Herbes de Provence 1cc; Huile d'olive 2cs; Salade verte 1pc
 - Dérouler la pâte sur une plaque et la piquer.
@@ -385,6 +398,7 @@ v Champignons et pois chiches à la moutarde
 - Servir le poulet nappé de sauce. Version végé : champignons et pois chiches dans la même sauce.
 
 # Gratin de macaronis au jambon | 4 | 45 | AH
+g Salade verte
 r
 + Pâtes courtes 400g; Beurre 40g; Farine 40g; Lait 700ml; Gruyère râpé 200g; Muscade 0.25cc; Salade verte 1pc
 = Dés de jambon 250g
@@ -409,6 +423,7 @@ v Salade lyonnaise au chèvre
 - Poser un œuf poché sur chaque assiette et servir aussitôt. Version végé : chèvre chaud.
 
 # Brandade de cabillaud | 4 | 60 | AH
+g Salade verte
 r
 + Pommes de terre 800g; Lait 400ml; Ail 0.2pc; Feuille de laurier 0.2g; Huile d'olive 100ml; Persil 0.25pc; Chapelure 30g; Salade verte 1pc
 = Dos de cabillaud 600g
@@ -420,7 +435,9 @@ v Brandade de haricots blancs
 - Verser dans un plat, parsemer de chapelure et gratiner 15 minutes à 200 °C.
 - Servir avec le persil et la salade. Version végé : haricots blancs écrasés à la place du poisson.
 
-# Tarte aux poireaux et salade | 6 | 65 | AH
+# Tarte aux poireaux | 6 | 65 | AH
+o Tarte aux poireaux et salade
+g Salade verte
 r
 + Pâte brisée 1pc; Poireaux 800g; Beurre 30g; Oeufs 3pc; Crème liquide 200ml; Gruyère râpé 80g; Muscade 0.25cc; Salade verte 1pc
 = Saumon fumé 150g

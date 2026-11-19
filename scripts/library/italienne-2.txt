@@ -88,6 +88,8 @@ v Tortellini au bouillon de légumes
 - Ajouter les tomates, couvrir et laisser mijoter 30 minutes ; finir avec le basilic.
 
 # Melanzane a funghetto | 4 | 30 | E
+p viande volaille poisson vege
+n
 + Aubergine 600g; Tomates cerises 200g; Ail 0.1pc; Basilic 0.25pc; Huile d'olive 5cs
 - Couper les aubergines en dés.
 - Les faire dorer à feu vif dans l'huile avec l'ail, comme des champignons.
@@ -156,6 +158,7 @@ v Tortellini au bouillon de légumes
 - Hors du feu, ajouter le parmesan et le provolone en dés qui fondent.
 
 # Gnocchi alla romana | 4 | 90 | AH
+g Salade verte
 + Semoule 250g; Lait 1000ml; Beurre 80g; Parmesan 100g; Oeufs 2pc; Muscade 0.25cc; Salade verte 1pc
 - Porter le lait à ébullition avec la muscade et du sel, verser la semoule en pluie et cuire 5 minutes en remuant.
 - Hors du feu, ajouter 30 g de beurre, la moitié du parmesan et les jaunes.

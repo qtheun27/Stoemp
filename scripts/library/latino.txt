@@ -86,6 +86,7 @@ v Causa limeña à l'œuf
 - La purée doit être épaisse et crémeuse ; servir parsemée de feta.
 
 # Elote asado | 4 | 25 | E
+p viande volaille
 + Épis de maïs 4pc; Mayonnaise 3cs; Feta 60g; Paprika 1cc; Citron vert 1pc
 - Griller les épis 10 à 15 minutes au barbecue ou à la poêle-gril en les retournant, jusqu'à ce qu'ils soient tachés de brun.
 - Les badigeonner de mayonnaise.
@@ -207,6 +208,7 @@ v Pibil de tofu
 - Servir dans les tortillas chaudes avec les oignons. Version végé : tofu émietté mariné 2 h et cuit 30 minutes dans la sauce.
 
 # Bavette sauce chimichurri | 4 | 50 | EA
+g Salade verte
 o Bavette sauce chimichurri et pommes de terre
 s pommes de terre
 + Pommes de terre 1000g; Persil 1pc; Origan 1cc; Ail 0.3pc; Piment 1pc; Vinaigre 3cs; Huile d'olive 120ml; Salade verte 1pc

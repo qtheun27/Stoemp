@@ -50,6 +50,7 @@ v Chowder de pommes de terre au maïs
 
 ## accompagnement
 # Green bean casserole | 6 | 50 | AH
+p viande volaille
 + Haricots verts 600g; Champignons de Paris 250g; Beurre 30g; Farine 30g; Lait 300ml; Crème liquide 100ml; Oignon 2pc; Huile de tournesol 300ml
 - Blanchir les haricots 5 minutes.
 - Faire revenir les champignons dans le beurre, ajouter la farine, puis le lait et la crème en sauce.
@@ -57,6 +58,8 @@ v Chowder de pommes de terre au maïs
 - Couvrir d'oignons émincés farinés et frits et cuire 20 minutes à 180 °C.
 
 # Épinards à la crème | 4 | 20 | T
+p viande volaille poisson vege
+n
 + Épinards frais 800g; Beurre 30g; Échalote 1pc; Crème liquide 150ml; Muscade 0.25cc; Parmesan 30g
 - Faire tomber les épinards et les presser ; les hacher grossièrement.
 - Faire fondre l'échalote dans le beurre, ajouter la crème et réduire de moitié.
@@ -70,6 +73,7 @@ v Chowder de pommes de terre au maïs
 - Rôtir 45 minutes à 220 °C en les retournant, avec l'ail et le romarin : elles deviennent très croustillantes.
 
 # Mushy peas | 4 | 20 | T
+p poisson viande vege
 + Petits pois 500g; Beurre 30g; Menthe 0.25pc; Citron 0.25pc
 - Cuire les petits pois 5 minutes à l'eau salée.
 - Les égoutter et les écraser grossièrement avec le beurre, la menthe et un trait de citron.
@@ -155,6 +159,7 @@ v Bagels au concombre et avocat
 
 ## plat
 # Steak and ale pie | 6 | 210 | AH
+g Petits pois
 + Oignon 2pc; Carottes 200g; Farine 30g; Bière brune 500ml; Bouillon de bœuf 300ml; Thym 0.25pc; Pâte feuilletée 1pc; Oeufs 1pc; Pommes de terre 1000g; Petits pois 400g
 = Bœuf à braiser 1000g
 ~ Champignons de Paris 600g; Lentilles vertes 200g
@@ -165,6 +170,7 @@ v Tourte aux champignons et lentilles à la bière
 - Cuire 30 minutes à 200 °C ; servir avec une purée et les petits pois. Version végé : champignons et lentilles mijotés 40 minutes.
 
 # Beef Wellington | 6 | 120 | H
+g Haricots verts
 + Champignons de Paris 500g; Échalote 2pc; Moutarde 2cs; Pâte feuilletée 2pc; Oeufs 1pc; Pommes de terre 1000g; Haricots verts 500g
 = Rôti de bœuf 1000g; Jambon cru 8pc
 ~ Champignons de Paris 300g; Lentilles vertes 200g; Châtaignes 200g

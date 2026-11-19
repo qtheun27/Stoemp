@@ -31,6 +31,7 @@ v Chorba aux pois chiches
 
 ## accompagnement
 # Taktouka | 4 | 45 | E
+p viande volaille poisson vege
 + Poivron 3pc; Tomates 600g; Ail 0.2pc; Paprika 1cc; Cumin 1cc; Persil 0.25pc; Coriandre 0.25pc; Huile d'olive 4cs
 - Griller les poivrons, les peler et les couper en lanières.
 - Faire cuire les tomates pelées et concassées avec l'ail, l'huile et les épices 15 minutes.
@@ -45,6 +46,7 @@ v Chorba aux pois chiches
 - Laisser reposer 10 minutes sous un torchon avant d'égrainer.
 
 # Haricots verts à l'huile d'olive | 4 | 50 | E
+p viande volaille poisson vege
 + Haricots verts 600g; Oignon 1pc; Tomates 400g; Sucre 1cc; Huile d'olive 6cs
 - Faire fondre l'oignon émincé dans l'huile.
 - Ajouter les haricots équeutés, les tomates râpées, le sucre, du sel et 100 ml d'eau.
@@ -207,6 +209,7 @@ v Palta rellena à l'œuf
 
 ## accompagnement
 # Curtido | 6 | 1460 | T
+p viande volaille
 + Chou blanc 500g; Carottes 150g; Oignon rouge 0.5pc; Vinaigre 150ml; Origan 1cc; Piment 1pc
 - Émincer très finement le chou, râper la carotte et émincer l'oignon.
 - Les ébouillanter 1 minute et égoutter.

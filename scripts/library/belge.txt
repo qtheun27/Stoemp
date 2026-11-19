@@ -113,6 +113,7 @@ v Soupe aux pois cassés et tofu fumé
 - Égoutter, saler aussitôt et servir.
 
 # Chou rouge à la flamande | 6 | 90 | AH
+p porc volaille viande
 + Chou rouge 1000g; Pommes 400g; Oignon 1pc; Beurre 40g; Cassonade 2cs; Vinaigre 50ml; Feuille de laurier 0.4g; Clous de girofle 1g; Cannelle 0.5cc
 - Émincer finement le chou rouge en retirant le trognon ; éplucher les pommes et les couper en quartiers.
 - Faire fondre l'oignon émincé dans le beurre dans une cocotte.
@@ -121,6 +122,7 @@ v Soupe aux pois cassés et tofu fumé
 - Découvrir en fin de cuisson pour réduire le jus, retirer le laurier et les clous de girofle.
 
 # Choux de Bruxelles aux lardons | 4 | 30 | AH
+p viande volaille
 + Choux de Bruxelles 800g; Beurre 30g; Échalote 1pc; Muscade 0.25cc
 = Lardons 150g
 ~ Cerneaux de noix 60g
@@ -138,6 +140,8 @@ v Choux de Bruxelles aux noix
 - Frire 3 minutes à 180 °C jusqu'à ce qu'elles soient dorées, égoutter et servir aussitôt.
 
 # Carottes à la flamande | 4 | 35 | T
+p viande volaille poisson vege
+n
 + Carottes 800g; Oignon 1pc; Beurre 30g; Sucre 1cc; Persil 0.25pc
 - Éplucher les carottes et les couper en rondelles.
 - Faire fondre l'oignon émincé dans le beurre, ajouter les carottes, le sucre, du sel et 100 ml d'eau.
@@ -305,7 +309,9 @@ v Œufs au plat, tomates poêlées et pain gris
 - Cuire 35 minutes à 180 °C ; laisser refroidir avant de trancher.
 
 ## plat
-# Pâté gaumais et salade | 6 | 800 | AH
+# Pâté gaumais | 6 | 800 | AH
+o Pâté gaumais et salade
+g Salade verte
 + Pâte brisée 2pc; Vin blanc 250ml; Échalote 3pc; Persil 0.5pc; Ail 0.1pc; Thym 0.25pc; Feuille de laurier 0.4g; Oeufs 1pc; Salade verte 1pc
 = Filet de porc 900g
 ~ Champignons de Paris 600g; Lentilles vertes 200g

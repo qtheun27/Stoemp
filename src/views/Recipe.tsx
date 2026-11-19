@@ -9,7 +9,7 @@ import { allergensOf } from "../lib/planner";
 import { eur } from "../lib/text";
 import type { Allergen, Item, Recipe } from "../lib/types";
 import { fmtIngredient } from "../lib/units";
-import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, setSide, setSlotLight, toggleFavorite, toggleLeftovers } from "../state/actions";
+import { addManual, placeRecipe, vegCfg, basePortions, cancelReception, planCtx, saveSlots, setCooked, setSide, setSlotLight, setVegSide, toggleFavorite, toggleLeftovers } from "../state/actions";
 import { eatersOf, headcount, slotPortions } from "../lib/household";
 import { drinkFor } from "../lib/drinks";
 import { mealParts, vegPortions } from "../lib/mixed";
@@ -21,7 +21,7 @@ const fmtPortions = (p: number) => `${Number.isInteger(p) ? p : p.toLocaleString
 import { useStore } from "../state/store";
 import { run, Sheet, toast } from "../ui";
 import { DishImage } from "./DishImage";
-import { defaultSideLabel, sideOptions, withSide } from "../lib/sides";
+import { defaultSideLabel, defaultVegLabel, sideOptions, vegOptions, withSide, withVegSide } from "../lib/sides";
 
 /** Substitutions locales simples proposées avec l'option « Produits de la région ». */
 const LOCAL_SWAPS: Record<string, string> = {
@@ -52,8 +52,12 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
   const sideRecipe = slot?.side ? s.recipes.get(slot.side) : undefined;
   const fullSide = useFullRecipe(sideRecipe || initial);
   const baseRecipe = useFullRecipe(initial);
-  const recipe = withSide(baseRecipe, sideRecipe ? fullSide : null, s.idx);
+  // Légume servi à côté, remplacé par un accompagnement de légumes accordé au plat.
+  const vegRecipe = slot?.vegSide ? s.recipes.get(slot.vegSide) : undefined;
+  const fullVeg = useFullRecipe(vegRecipe || initial);
+  const recipe = withVegSide(withSide(baseRecipe, sideRecipe ? fullSide : null, s.idx), vegRecipe ? fullVeg : null, s.idx);
   const sides = useMemo(() => (slot && !slot.fromLeftovers ? sideOptions(initial, s.recipes.values(), s.idx).slice(0, 10) : []), [initial.id, slot?.fromLeftovers, s.recipes]);
+  const vegs = useMemo(() => (slot && !slot.fromLeftovers ? vegOptions(initial, s.recipes.values(), s.idx, !!slot.veg) : []), [initial.id, slot?.fromLeftovers, slot?.veg, s.recipes]);
   const veg = slot ? slot.veg : s.settings.options.veg && !isVegRecipe(recipe);
   const base = basePortions(s);
   const persons = slot ? Math.max(slotPortions(slot, base), base) : base;
@@ -90,6 +94,13 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
         <div className="chips">
           <button className="chip" aria-pressed={!slot?.side} onClick={() => run(() => setSide(s, slotIndex!, null))}>Celui de la recette</button>
           {sides.map((x) => <button key={x.id} className="chip" aria-pressed={slot?.side === x.id} onClick={() => run(() => setSide(s, slotIndex!, x.id), `Avec : ${x.name}`)}>{x.name}</button>)}
+        </div>
+      </div>}
+      {vegs.length > 0 && <div style={{ margin: "0 0 10px" }}>
+        <div className="small muted" style={{ marginBottom: 4 }}>Légumes{!slot?.vegSide && defaultVegLabel(initial, s.idx) ? ` : ${defaultVegLabel(initial, s.idx)} (ceux de la recette)` : ""}</div>
+        <div className="chips">
+          <button className="chip" aria-pressed={!slot?.vegSide} onClick={() => run(() => setVegSide(s, slotIndex!, null))}>Ceux de la recette</button>
+          {vegs.map((x) => <button key={x.id} className="chip" aria-pressed={slot?.vegSide === x.id} onClick={() => run(() => setVegSide(s, slotIndex!, x.id), `Avec : ${x.name}`)}>{x.name}</button>)}
         </div>
       </div>}
       {!!al.length && <div className="chips" style={{ margin: "4px 0 10px" }}>{al.map((a) => <span key={a} className="tag warn">Contient : {ALLERGENS[a]}</span>)}</div>}

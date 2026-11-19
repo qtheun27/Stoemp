@@ -1,0 +1,108 @@
+// Accompagnements de légumes simples, de toutes saisons, pour remplacer un légume servi à côté d'un plat.
+// « p » : avec quoi ils s'accordent ; « n » : neutres, ils vont avec toute cuisine européenne.
+@belge
+## accompagnement
+
+# Salade verte à la vinaigrette | 4 | 10 | T
+p viande volaille poisson vege
+n
++ Salade verte 1pc; Moutarde 1cc; Vinaigre 1cs; Huile de tournesol 3cs; Échalote 1pc
+- Laver la salade, l'essorer soigneusement et la déchirer en morceaux.
+- Fouetter la moutarde avec le vinaigre, le sel et le poivre, puis ajouter l'huile en filet et l'échalote finement hachée.
+- Assaisonner la salade au dernier moment pour qu'elle reste croquante.
+
+# Poireaux fondus à la crème | 4 | 30 | AH
+p viande volaille poisson vege
+n
++ Poireaux 800g; Beurre 30g; Crème liquide 100ml; Muscade 0.25cc
+- Couper les poireaux en fines rondelles et les laver soigneusement.
+- Les faire fondre 20 minutes dans le beurre à couvert et à feu doux, sans coloration.
+- Ajouter la crème et la muscade, saler, poivrer et laisser réduire 5 minutes.
+
+# Petits pois et carottes au beurre | 4 | 25 | T
+p viande volaille poisson vege
+n
++ Petits pois 400g; Carottes 300g; Beurre 30g; Échalote 1pc; Sucre 1cc
+- Couper les carottes en petits dés et faire fondre l'échalote dans le beurre.
+- Ajouter les carottes, le sucre et 100 ml d'eau ; cuire 12 minutes à couvert.
+- Ajouter les petits pois et cuire encore 6 minutes à découvert, jusqu'à ce que le jus soit évaporé et brillant.
+
+@francaise
+## accompagnement
+
+# Brocoli vapeur au beurre citronné | 4 | 15 | T
+p viande volaille poisson vege
+n
++ Brocoli 600g; Beurre 30g; Citron 0.5pc
+- Détailler le brocoli en bouquets et éplucher la tige pour la couper en rondelles.
+- Cuire 5 à 6 minutes à la vapeur : il doit rester vert vif et un peu ferme.
+- Arroser de beurre fondu et de jus de citron, saler et poivrer.
+
+# Poêlée de champignons persillés | 4 | 20 | AH
+p viande volaille vege
+n
++ Champignons de Paris 600g; Beurre 30g; Ail 0.1pc; Persil 0.5pc; Échalote 1pc
+- Émincer les champignons et les saisir à feu vif dans une grande poêle, sans les remuer d'abord, pour qu'ils dorent.
+- Ajouter le beurre, l'échalote et l'ail hachés, faire sauter 2 minutes.
+- Saler en fin de cuisson et parsemer de persil ciselé.
+
+# Épinards au beurre et à l'ail | 4 | 15 | T
+p viande volaille poisson vege
+n
++ Épinards frais 800g; Beurre 30g; Ail 0.1pc; Muscade 0.25cc
+- Laver les épinards et retirer les grosses tiges.
+- Faire mousser le beurre avec l'ail écrasé, ajouter les épinards et les faire tomber 2 minutes en remuant.
+- Égoutter l'excès d'eau, saler, poivrer et râper un peu de muscade.
+
+# Salade de tomates à l'échalote | 4 | 10 | E
+p viande volaille poisson vege
+n
++ Tomates 800g; Échalote 1pc; Huile d'olive 3cs; Vinaigre 1cs; Persil 0.25pc
+- Couper les tomates en tranches et les disposer sur un plat.
+- Parsemer d'échalote finement ciselée et de persil.
+- Arroser de vinaigre et d'huile d'olive, saler à la fleur de sel et poivrer au moment de servir.
+
+# Courgettes sautées au thym | 4 | 15 | E
+p viande volaille poisson vege
+n
++ Courgettes 800g; Huile d'olive 3cs; Ail 0.1pc; Thym 0.1pc
+- Couper les courgettes en demi-rondelles épaisses.
+- Les faire sauter à feu vif dans l'huile d'olive 6 à 8 minutes pour qu'elles dorent sans ramollir.
+- Ajouter l'ail et le thym la dernière minute, saler et poivrer.
+
+# Céleri-rave rôti au thym | 4 | 45 | AH
+p viande volaille vege
+n
++ Céleri-rave 800g; Huile d'olive 3cs; Thym 0.1pc; Miel 1cs
+- Éplucher le céleri-rave et le couper en gros cubes.
+- Les enrober d'huile, de thym, de sel et de poivre ; rôtir 35 minutes à 200 °C en les retournant à mi-cuisson.
+- Les laquer de miel 5 minutes avant la fin.
+
+@italienne
+## accompagnement
+
+# Fenouil braisé à l'orange | 4 | 35 | AH
+p poisson volaille vege
+n
++ Fenouil 3pc; Oranges 150g; Huile d'olive 3cs; Bouillon de légumes 150ml
+- Couper les bulbes de fenouil en quartiers en gardant un peu de base pour qu'ils se tiennent.
+- Les dorer à l'huile d'olive sur les faces coupées.
+- Ajouter le bouillon et le jus d'orange, couvrir et braiser 20 minutes jusqu'à ce qu'ils soient fondants, puis laisser réduire le jus.
+
+# Brocolis à l'ail et au piment | 4 | 15 | AH
+p viande volaille poisson vege
+n
++ Brocoli 600g; Huile d'olive 3cs; Ail 0.2pc; Piment 0.25pc
+- Blanchir les bouquets de brocoli 2 minutes dans l'eau bouillante salée et les égoutter.
+- Faire revenir l'ail émincé et le piment dans l'huile d'olive sans les brûler.
+- Faire sauter les brocolis 3 minutes dans cette huile parfumée.
+
+@mediterraneenne
+## accompagnement
+
+# Salade de concombre à l'aneth | 4 | 10 | PE
+p poisson volaille viande vege
++ Concombre 1pc; Yaourt nature 150g; Aneth 0.25pc; Citron 0.5pc
+- Couper le concombre en fines rondelles, le saler et le laisser dégorger 10 minutes.
+- L'égoutter et le mélanger au yaourt, à l'aneth ciselé et au jus de citron.
+- Servir bien frais.

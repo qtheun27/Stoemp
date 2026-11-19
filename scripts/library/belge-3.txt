@@ -13,7 +13,10 @@ v Gratin de poireaux et œufs sous purée
 - Dans un plat, disposer les poissons crus en cubes, les poireaux et les crevettes, napper de sauce, couvrir de purée et de fromage.
 - Gratiner 25 minutes à 200 °C ; parsemer de persil. Version végé : œufs durs en quartiers à la place des poissons.
 
-# Filet mignon de porc sauce champignons et croquettes | 4 | 45 | T
+# Filet mignon de porc sauce champignons | 4 | 45 | T
+o Filet mignon de porc sauce champignons et croquettes
+s croquettes
+g Haricots verts
 + Champignons de Paris 300g; Échalote 2pc; Crème liquide 200ml; Vin blanc 100ml; Beurre 30g; Croquettes de pommes de terre 800g; Haricots verts 400g
 = Filet de porc 700g
 ~ Galettes végétales 4pc

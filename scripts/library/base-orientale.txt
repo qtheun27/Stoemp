@@ -196,6 +196,7 @@ v Tajine de boulettes de lentilles aux œufs
 - Parsemer du reste des herbes et servir dans le plat avec le pain pour saucer. Version végé : boulettes de lentilles cuites et pois chiches écrasés, poêlées avant d'aller en sauce.
 
 # Pastilla au poulet | 6 | 120 | AH
+g Salade verte
 r
 + Pâte filo 300g; Oignon 3pc; Amandes 150g; Cannelle 4g; Gingembre 10g; Safran 0.2g; Ras el hanout 3g; Oeufs 5pc; Sucre 40g; Sucre glace 20g; Coriandre 0.5pc; Persil 0.5pc; Beurre 120g; Salade verte 1pc; Pain pita 3pc
 = Cuisse de poulet 6pc
@@ -225,7 +226,9 @@ r
 - Réchauffer les pois chiches.
 - Dresser en couches riz-lentilles, pâtes, pois chiches, sauce tomate vinaigrée et oignons frits, comme au Caire.
 
-# Lahmacun et salade | 4 | 45 | T
+# Lahmacun | 4 | 45 | T
+o Lahmacun et salade
+g Salade verte
 r
 + Pâte à pizza 2pc; Tomates 300g; Concentré de tomate 2cs; Oignon 1pc; Poivron 1pc; Persil 1pc; Paprika 2cc; Cumin 2g; Ail 0.1pc; Citron 2pc; Salade verte 1pc; Oignon rouge 1pc; Sumac 3g; Huile d'olive 3cs
 = Haché de bœuf 400g
