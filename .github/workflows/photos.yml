@@ -8,7 +8,7 @@ on:
 permissions:
   contents: read
   id-token: write
-  actions: read
+  actions: write
 concurrency:
   group: photos
   cancel-in-progress: false
@@ -41,4 +41,12 @@ jobs:
       - uses: google-github-actions/auth@v2
         with: { workload_identity_provider: "${{ env.WIF_PROVIDER }}", service_account: "${{ env.WIF_SA }}" }
       - name: Lot de photos
+        id: lot
         run: COUNT=300 PHOTOS_MAX_MOIS=1100 npx tsx scripts/maintenance/images.mts
+      # Enchaînement : s'il reste des plats sans photo (et de la marge sur le plafond du mois), le lot suivant est lancé tout de suite.
+      - name: Lot suivant
+        if: steps.lot.outputs.remaining != '' && steps.lot.outputs.remaining != '0'
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          echo "Reste ${{ steps.lot.outputs.remaining }} photo(s) : lot suivant."
+          gh workflow run photos.yml -R "${{ github.repository }}" --ref "${{ github.ref_name }}"

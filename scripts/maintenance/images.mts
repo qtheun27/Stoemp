@@ -1,5 +1,6 @@
 // Génère les photos des plats qui n'en ont pas encore (workflow « Maintenance », tâche images, nombre dans COUNT).
 // TEST=1 : 5 plats variés choisis à la main pour juger la qualité avant de tout générer.
+import { appendFileSync } from "node:fs";
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import { IMAGE_COST, IMAGE_LOCATIONS, imagesThisMonth, makeDishImage } from "../../functions/src/images";
@@ -18,8 +19,9 @@ todo.sort((a, b) => Number((a.get("course") || "plat") !== "plat") - Number((b.g
 // Plafond du mois (photos facturées, créations automatiques comprises) : jamais de dérapage de coût.
 const maxMonth = Number(process.env.PHOTOS_MAX_MOIS) || Infinity;
 const left = Math.max(0, maxMonth - (await imagesThisMonth(db)));
+const all = [...todo];
 todo = todo.slice(0, Math.min(count, left));
-if (!todo.length) { console.log(left ? "Tous les plats ont leur photo : rien à faire." : `Plafond du mois atteint (${maxMonth} photos) : reprise le mois prochain.`); process.exit(0); }
+if (!todo.length) { if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, "remaining=0\n"); console.log(left ? "Tous les plats ont leur photo : rien à faire." : `Plafond du mois atteint (${maxMonth} photos) : reprise le mois prochain.`); process.exit(0); }
 console.log(`${todo.length} photo(s) à générer (${done.size} déjà faites), environ ${(todo.length * IMAGE_COST).toFixed(2)} $.`);
 
 // Une photo à la fois. Refus « quota » (non facturé) : on passe tout de suite au point d'accès suivant (régions de Google) ;
@@ -50,4 +52,7 @@ for (const d of todo) {
   if (!locs.length) { console.log("Aucun point d'accès ne propose ce modèle : arrêt."); break; }
   await pause(1_000);
 }
+// Pour l'enchaînement automatique (photos.yml) : reste-t-il des plats sans photo, et le plafond du mois le permet-il ?
+const remaining = Math.max(0, all.length - ok);
+if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `remaining=${streak >= 30 || !locs.length ? 0 : Math.min(remaining, Math.max(0, left - ok))}\n`);
 console.log(`Terminé : ${ok} photo(s), ${fail} échec(s), environ ${(ok * IMAGE_COST).toFixed(2)} $. Par point d'accès : ${[...byLoc].map(([k, v]) => `${k} ${v}`).join(", ") || "—"}.`);
