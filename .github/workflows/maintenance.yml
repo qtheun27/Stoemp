@@ -7,7 +7,11 @@ on:
         description: "Tâche"
         required: true
         type: choice
-        options: [seed, library, rebuild-pricebook, oneoff]
+        options: [seed, library, rebuild-pricebook, oneoff, images-setup, images-test, images]
+      count:
+        description: "Nombre de photos (tâche images)"
+        required: false
+        default: "5"
 permissions:
   contents: read
   id-token: write
@@ -32,4 +36,7 @@ jobs:
             library) npx tsx scripts/seed.ts && npx tsx scripts/library/import.mts ;;
             rebuild-pricebook) npx tsx scripts/rebuild-pricebook.mts ;;
             oneoff) npx tsx scripts/maintenance/oneoff.mts ;;
+            images-setup) npx tsx scripts/maintenance/images-setup.mts ;;
+            images-test) TEST=1 npx tsx scripts/maintenance/images.mts ;;
+            images) COUNT="${{ inputs.count }}" npx tsx scripts/maintenance/images.mts ;;
           esac
