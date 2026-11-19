@@ -35,8 +35,17 @@ async function main() {
   const flush = async () => { if (n && !dry) await b.commit(); b = db.batch(); n = 0; };
   for (const id of missing) { const { id: _id, ...it } = BASE_INDEX.get(id)!; b.set(db.collection("items").doc(id), clean(it)); n++; }
   const skipped: string[] = [];
+  // Versions détaillées des plats de base : la photo déjà générée suit, puis l'ancienne fiche est masquée.
+  let replaced = 0;
+  for (const r of recipes.filter((x) => x.replaces)) {
+    for (const col of ["dishThumbs", "dishImages"]) {
+      const [from, to] = await db.getAll(db.collection(col).doc(r.replaces!), db.collection(col).doc(r.id));
+      if (from.exists && !to.exists && !dry) await db.collection(col).doc(r.id).set(from.data()!);
+    }
+    b.set(db.collection("recipes").doc(r.replaces!), { deleted: true }, { merge: true }); n++; replaced++;
+  }
   for (const r of recipes) {
-    const twin = others.find((d) => d.id !== r.id && (d.get("course") || "plat") === r.course && sameDish(d.get("name"), r.name));
+    const twin = others.find((d) => d.id !== r.id && d.id !== r.replaces && (d.get("course") || "plat") === r.course && sameDish(d.get("name"), r.name));
     if (twin && !byId.has(r.id)) { skipped.push(`${r.name} (déjà là : ${twin.get("name")})`); continue; }
     const prev = byId.get(r.id);
     const doc = {
@@ -69,7 +78,7 @@ async function main() {
     await flush();
   }
   if (skipped.length) console.log(`Déjà présents, ignorés (${skipped.length}) :\n  ${skipped.join("\n  ")}`);
-  console.log(`${dry ? "[essai] " : ""}${recipes.length} recettes écrites à la main : ${added} ajoutées, ${updated} mises à jour, ${skipped.length} ignorées ; ${missing.length} articles créés.`);
+  console.log(`${dry ? "[essai] " : ""}${recipes.length} recettes écrites à la main : ${added} ajoutées, ${updated} mises à jour, ${skipped.length} ignorées, ${replaced} plats de base remplacés ; ${missing.length} articles créés.`);
   if (!dry) console.log(`Bibliothèque : ${all.length} recettes dans ${chunks.size} fiches compactes.`);
 }
 main().catch((e) => { console.error(e); process.exit(1); });

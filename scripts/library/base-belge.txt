@@ -1,0 +1,17 @@
+// Plats de base réécrits en version détaillée (« r » : remplace le plat de base du même nom).
+@belge
+
+## plat
+# Carbonnade flamande | 4 | 200 | AH
+r
++ Oignon 3pc; Beurre 40g; Farine 2cs; Bière brune 750ml; Bouillon de bœuf 250ml; Cassonade 2cs; Pain d'épices 2pc; Moutarde 2cs; Thym 0.25pc; Feuille de laurier 0.4g; Vinaigre 1cs; Pommes de terre 1200g
+= Bœuf à braiser 1000g
+~ Champignons de Paris 600g; Lentilles vertes 200g; Bouillon de légumes 250ml
+v Carbonnade de champignons et lentilles
+- Couper le bœuf (idéalement de la joue ou du paleron) en gros cubes de 5 cm, les sécher dans un essuie, saler et poivrer.
+- Faire fondre la moitié du beurre dans une cocotte en fonte et saisir la viande en plusieurs fois à feu vif, 3 à 4 minutes par fournée, pour bien la colorer sans qu'elle bouille ; réserver.
+- Dans la même cocotte, faire fondre le reste du beurre et les oignons émincés 15 minutes à feu moyen en raclant les sucs, jusqu'à ce qu'ils soient bien dorés ; ajouter la cassonade et laisser caraméliser 2 minutes.
+- Remettre la viande, saupoudrer de farine et mélanger 1 minute, puis verser la bière brune (Chimay bleue, Westmalle double…) et le bouillon ; ajouter le thym et le laurier.
+- Tartiner généreusement de moutarde les tranches de pain d'épices et les poser sur le dessus, moutarde contre la sauce : elles fondent et lient la carbonnade.
+- Couvrir et laisser mijoter 2 h 30 à feu très doux (ou au four à 150 °C), en remuant de temps en temps : la viande doit se défaire à la fourchette ; rectifier avec le vinaigre, le sel et le poivre.
+- Servir avec les pommes de terre (frites, purée ou vapeur au choix). Version végé : faire dorer les champignons à la place de la viande, ajouter les lentilles rincées et le bouillon de légumes, et mijoter 45 minutes seulement.
