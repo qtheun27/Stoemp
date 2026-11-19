@@ -211,7 +211,7 @@ v Tinga de patate douce
 
 # Tacos al pastor | 4 | 45 | T
 r
-+ Tortillas 12pc; Oignon rouge 1pc; Coriandre 0.5pc; Citron vert 2pc; Épices fajitas 15g; Oranges 150g; Ail 0.2pc; Vinaigre 2cs; Concentré de tomate 1cs; Origan 1g; Ananas 1pc; Huile de tournesol 2cs; Riz 200g
++ Tortillas 12pc; Oignon rouge 1pc; Coriandre 0.5pc; Citron vert 2pc; Épices fajitas 15g; Oranges 150g; Ail 0.2pc; Vinaigre 2cs; Concentré de tomate 1cs; Origan 1g; Ananas 500g; Huile de tournesol 2cs; Riz 200g
 = Filet de porc 600g
 ~ Tofu ferme 500g; Champignons de Paris 250g
 v Tacos al pastor au tofu et champignons

@@ -453,7 +453,7 @@ Morue salée|vi|g|500|11.99|S|60|po|morue,bacalhau|
 Haché d'agneau|vi|g|500|8.99|P|2||agneau haché|
 Sardines fraîches|vi|g|500|6.99|P|2|po||5-9
 Basilic thaï|fl|pc|1|1.99|P|5||horapha|
-Ananas|fl|pc|1|2.49|P|7||ananas frais|
+Ananas|fl|g|1000|2.49|P|7||ananas frais|
 Paprika fumé|ep|g|40|1.89|S|||pimentón,paprika fumé|
 Sauge|fl|pc|1|1.29|P|7||sauge fraîche|
 `;

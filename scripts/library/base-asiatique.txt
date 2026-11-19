@@ -181,7 +181,7 @@ v Tofu aux noix de cajou
 
 # Porc aigre-doux | 4 | 40 | T
 r
-+ Poivron 2pc; Oignon 1pc; Ananas 1pc; Ketchup 4cs; Vinaigre de riz 4cs; Sucre 40g; Sauce soja 2cs; Fécule de maïs 60g; Oeufs 1pc; Huile de tournesol 500ml; Riz 300g
++ Poivron 2pc; Oignon 1pc; Ananas 500g; Ketchup 4cs; Vinaigre de riz 4cs; Sucre 40g; Sauce soja 2cs; Fécule de maïs 60g; Oeufs 1pc; Huile de tournesol 500ml; Riz 300g
 = Filet de porc 550g
 ~ Tofu ferme 500g
 v Tofu aigre-doux
