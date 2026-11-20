@@ -42,3 +42,16 @@ describe("viande ou poisson différents", () => {
     expect(proteinClash("filet de dinde", "Filet de poulet")).toBe(true);
   });
 });
+
+describe("viandes : mêmes animaux pour le même article", () => {
+  it("haché de porc ≠ haché porc et bœuf, même par un alias appris ; volaille = poulet", async () => {
+    const { sameProteins, matchItem, similarItem } = await import("./match");
+    expect(sameProteins("Haché porc", "Haché porc et bœuf")).toBe(false);
+    expect(sameProteins("Haché de veau", "Haché de porc et veau")).toBe(false);
+    expect(sameProteins("Blanc de volaille", "Filet de poulet")).toBe(true);
+    expect(sameProteins("Haché porc/bœuf", "Haché porc et bœuf")).toBe(true);
+    const items = [{ id: "hpb", name: "Haché porc et bœuf", category: "vi", unit: "g", aliases: ["Haché porc"] }] as never[];
+    expect(matchItem("Haché porc", 1000, "g", items)).toBeNull();
+    expect(similarItem("Haché de porc", "g", "vi", items)).toBeNull();
+  });
+});

@@ -69,6 +69,8 @@ export function matchItem(productName: string, size: number, unit: "g" | "ml" | 
     else if (unit === "pc" && it.unit === "g" && PIECE_G[it.id]) s = size * PIECE_G[it.id];
     if (s == null || s <= 0) continue;
     const nameT = tokens(it.name);
+    // Jamais une viande pour une autre, même par un alias appris (« Haché porc » n'est pas « Haché porc et bœuf »).
+    if (!sameProteins(productName, it.name)) continue;
     for (const n of [it.name, ...(it.aliases || [])]) {
       const t = tokens(n);
       // Raccourci pour les recettes (« poulet » pour « Filet de poulet ») : trop vague pour un produit de magasin,
@@ -99,6 +101,18 @@ export function proteinClash(productName: string, itemName: string): boolean {
   return !pt.some((a) => it.some((b) => same(a, b)));
 }
 
+/**
+ * Viandes et poissons : deux noms ne désignent le même article que s'ils contiennent exactement les mêmes animaux
+ * (« Haché de porc » ≠ « Haché porc et bœuf », « Haché de veau » ≠ « Haché de porc et veau ») ; sans animal nommé, pas d'avis.
+ */
+export function sameProteins(a: string, b: string): boolean {
+  const A = new Set(tokens(a).filter((w) => PROTEIN.has(w))), B = new Set(tokens(b).filter((w) => PROTEIN.has(w)));
+  if (!A.size || !B.size) return true;
+  if (A.size === B.size && [...A].every((w) => B.has(w))) return true;
+  // Un seul animal de chaque côté, de la même famille avec un nom générique (« volaille » = « poulet »).
+  return A.size === 1 && B.size === 1 && !proteinClash(a, b);
+}
+
 /** Racine des mots (« apéritif » et « apéritives » → « aperit », « saucisse » ≠ « saucisson »). */
 const stems = (s: string) => new Set(tokens(s).map((w) => w.replace(/(ive|if|ee|e)$/, "")));
 
@@ -118,7 +132,7 @@ export function similarItem(name: string, unit: string, category: string, items:
   let best: ItemDoc | null = null, score = 0;
   for (const it of items) {
     if (it.unit !== unit || it.category !== category) continue;
-    if (!headFits(name, it.name)) continue;
+    if (!headFits(name, it.name) || !sameProteins(name, it.name)) continue;
     // Plus précis que l'article existant (« Vin rouge Pomerol » face à « Vin rouge ») : c'est un autre article.
     const A = stems(name), B = stems(it.name);
     if ([...B].every((w) => A.has(w)) && A.size > B.size) continue;
