@@ -390,7 +390,7 @@ const ENRICH_NOW = 120, ENRICH_STEP = 200;
  * Produits inconnus d'une enseigne → articles génériques (classés par l'IA par paquets de 40, avec le catalogue existant).
  * Renvoie les lignes de prix à enregistrer et les noms des articles créés.
  */
-async function enrichProducts(u: string, unmatched: ShopProduct[], pageNonFood: boolean): Promise<{ rows: Row[]; created: string[] }> {
+async function enrichProducts(u: string, unmatched: ShopProduct[], pageNonFood: boolean): Promise<{ rows: Row[]; created: string[]; left: ShopProduct[] }> {
   let items = await loadItems();
   const rows: Row[] = [];
   const nonFood = (p: ShopProduct) => pageNonFood || isNonFood(p.name);
@@ -431,9 +431,14 @@ async function enrichProducts(u: string, unmatched: ShopProduct[], pageNonFood: 
         const m = matchItem(p.name, p.packSize, p.packUnit, [it]) || (it.unit === p.packUnit ? { item: it, size: p.packSize } : null);
         if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
       }
-    } catch (e) { logger.warn("Enrichissement partiel", e); }
+    } catch (e) {
+      // Budget IA du mois atteint ou IA coupée : on s'arrête là, les produits restants attendent (jamais sautés).
+      const code = (e as { code?: string }).code;
+      if (code === "resource-exhausted" || code === "failed-precondition") { logger.warn("Classement en pause", (e as Error).message); return { rows, created: [...created], left: unmatched.slice(i) }; }
+      logger.warn("Enrichissement partiel", e);
+    }
   }
-  return { rows, created: [...created] };
+  return { rows, created: [...created], left: [] };
 }
 
 export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (req) => {
@@ -466,9 +471,10 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     const e = await enrichProducts(u, now300, pageNonFood);
     rows.push(...e.rows);
     const created = new Set(e.created);
-    if (later.length) await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: later.slice(0, 5000), pos: 0, at: Date.now() });
+    const queue = [...e.left, ...later].slice(0, 5000);
+    if (queue.length) await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), ...(e.left.length ? { paused: "budget" } : {}) });
     const saved = await savePrices(d.store, d.url, shop, rows);
-    return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA", queued: later.length };
+    return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA", queued: queue.length, paused: e.left.length > 0 };
   }
 
   // 3. Enseigne au format inconnu : lecture par l'IA, morceau par morceau (un morceau en échec n'arrête pas les autres).
@@ -505,16 +511,26 @@ export const onEnrichJob = onDocumentWritten({ document: "enrichJobs/{id}", ...a
   const job = event.data?.after.data();
   if (!job) return;
   const before = event.data?.before.data();
-  if (before && before.pos === job.pos) return; // seul l'avancement relance un lot
+  // Seul l'avancement (ou une relance) déclenche un lot ; une file en pause attend la relance.
+  if (before && before.pos === job.pos && before.kick === job.kick) return;
+  if (job.paused) return;
   const products = job.products as ShopProduct[];
   if (job.pos >= products.length) { await event.data!.after.ref.delete(); return; }
   const batch = products.slice(job.pos, job.pos + ENRICH_STEP);
+  let done = batch.length, paused: string | null = null;
   try {
     const e = await enrichProducts(job.uid, batch, !!job.pageNonFood);
     if (e.rows.length) await savePrices(job.store, job.url, job.shop || null, e.rows);
-    logger.info("Produits classés en arrière-plan", { magasin: job.store, lot: batch.length, prix: e.rows.length, créés: e.created.length, reste: products.length - job.pos - batch.length });
+    if (e.left.length) { done = batch.length - e.left.length; paused = "budget"; }
+    logger.info("Produits classés en arrière-plan", { magasin: job.store, lot: batch.length, prix: e.rows.length, créés: e.created.length, reste: products.length - job.pos - done });
   } catch (err) { logger.error("enrichJobs", err); }
-  await event.data!.after.ref.update({ pos: job.pos + batch.length });
+  await event.data!.after.ref.update({ pos: job.pos + done, ...(paused ? { paused } : {}) });
+});
+
+/** Budget ou réglages IA modifiés dans la console : les files en pause reprennent. */
+export const onAiConfigChanged = onDocumentWritten({ document: "config/ai", timeoutSeconds: 60 }, async () => {
+  const paused = await db().collection("enrichJobs").where("paused", "==", "budget").get();
+  await Promise.all(paused.docs.map((d) => d.ref.update({ paused: FieldValue.delete(), kick: Date.now() })));
 });
 
 // ---------- readReceipt : photo du ticket de caisse ----------

@@ -11,7 +11,7 @@ const HOSTS: [RegExp, StoreId][] = [[/colruyt\.be|collectandgo\.be/, "colruyt"],
 /** Page ouverte par le favori « Envoyer à Stoemp » : reçoit le texte de la page du magasin et en extrait les prix. */
 export default function Capture() {
   const s = useStore();
-  const [state, setState] = useState<{ phase: "wait" | "busy" | "done" | "error"; msg?: string; store?: StoreId; saved?: { itemId: string; productName: string; packPrice: number }[]; found?: number; created?: string[]; shop?: string | null; reader?: string; queued?: number }>({ phase: "wait" });
+  const [state, setState] = useState<{ phase: "wait" | "busy" | "done" | "error"; msg?: string; store?: StoreId; saved?: { itemId: string; productName: string; packPrice: number }[]; found?: number; created?: string[]; shop?: string | null; reader?: string; queued?: number; paused?: boolean }>({ phase: "wait" });
   // Sites qui coupent le lien entre onglets : le favori a aussi copié la page, on propose de la coller.
   const [pasteOffer, setPasteOffer] = useState(false);
   const handler = useRef<(d: unknown) => void>(() => {});
@@ -39,7 +39,7 @@ export default function Capture() {
       setState({ phase: "busy", store });
       try {
         const r = await extractPricesFn({ store, url: String(d.url).slice(0, 500), text: d.text.slice(0, 1000000) });
-        setState({ phase: "done", store, saved: r.saved, found: r.found, created: r.created, shop: r.shop, reader: r.reader, queued: r.queued });
+        setState({ phase: "done", store, saved: r.saved, found: r.found, created: r.created, shop: r.shop, reader: r.reader, queued: r.queued, paused: r.paused });
       } catch (err) { setState({ phase: "error", msg: (err as Error).message }); }
     };
     handler.current = (d: unknown) => onMsg({ data: d } as MessageEvent);
@@ -62,7 +62,8 @@ export default function Capture() {
       {state.phase === "error" && <Empty icon="⚠️">{state.msg}</Empty>}
       {state.phase === "done" && <>
         <div className="notice">{state.found} produits lus{state.shop ? ` chez ${state.shop}` : ""}, {state.saved!.length} prix enregistrés{state.created?.length ? `, ${state.created.length} nouveaux articles ajoutés au catalogue` : ""}{state.reader ? ` · lecture ${state.reader}` : ""}.</div>
-        {state.queued ? <div className="notice">⏳ {state.queued} autres produits inconnus sont classés en arrière-plan (environ {Math.max(1, Math.ceil(state.queued / 200) * 3)} min) : leurs prix arriveront tout seuls, tu peux fermer cette page.</div> : null}
+        {state.queued && state.paused ? <div className="notice">⏸ Budget IA du mois atteint : {state.queued} produits inconnus attendent. Ils seront classés tout seuls dès que le budget est relevé (console → IA), sans rien renvoyer.</div>
+        : state.queued ? <div className="notice">⏳ {state.queued} autres produits inconnus sont classés en arrière-plan (environ {Math.max(1, Math.ceil(state.queued / 200) * 3)} min) : leurs prix arriveront tout seuls, tu peux fermer cette page.</div> : null}
         {!!state.created?.length && <p className="small muted">Nouveaux articles : {state.created.join(", ")}</p>}
         <div className="list">{state.saved!.map((p) => <div key={p.itemId} className="li"><span className="main-t"><span className="name">{s.idx.get(p.itemId)?.name || p.itemId}</span><span className="meta">{p.productName}</span></span><b className="num">{eur(p.packPrice)}</b></div>)}</div>
         <button className="btn block" style={{ marginTop: 14 }} onClick={() => window.close()}>Fermer et revenir au magasin</button>
