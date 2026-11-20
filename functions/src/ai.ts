@@ -16,8 +16,9 @@ type Content = Anthropic.MessageParam["content"];
 async function monthSpend(): Promise<number> {
   const d = new Date();
   const start = new Date(d.getFullYear(), d.getMonth(), 1).getTime();
-  const snap = await getFirestore().collection("aiLogs").where("at", ">=", start).select("cost").get();
-  return snap.docs.reduce((s, x) => s + (x.get("cost") || 0), 0);
+  const snap = await getFirestore().collection("aiLogs").where("at", ">=", start).select("cost", "task").get();
+  // Budget IA = appels à Claude seulement : les photos des plats (Google) ont leur propre plafond (images.ts, PHOTOS_MAX_MOIS).
+  return snap.docs.reduce((s, x) => s + (x.get("task") === "dishImage" ? 0 : x.get("cost") || 0), 0);
 }
 let spendCache: { at: number; v: number } | null = null;
 
