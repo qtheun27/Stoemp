@@ -27,27 +27,58 @@ const b=document.createElement("div");
 b.style.cssText="position:fixed;z-index:2147483647;top:12px;right:12px;background:#1d2a22;color:#fff;padding:12px 16px;border-radius:14px;font:600 14px system-ui;box-shadow:0 6px 24px rgba(0,0,0,.3);max-width:320px";
 document.body.appendChild(b);
 b.textContent="Stoemp : chargement des produits…";
-const re=/^(voir plus|afficher plus|plus de produits|plus de résultats|charger plus|meer laden|toon meer|meer producten|meer resultaten|load more|show more)/i;
-const cnt=()=>document.links.length+document.images.length;
-let last=cnt(),n=0;
-for(;n<150;n++){
-const btn=[...document.querySelectorAll("button,a,[role=button]")].find(e=>e.offsetParent&&re.test((e.innerText||"").trim()));
-if(!btn)break;
+const re=/^(voir plus|afficher plus|plus de (produits|résultats|articles)|charger plus|meer laden|toon meer|meer (producten|resultaten|tonen)|load more|show more)|^(voir|afficher|montrer|charger|toon|bekijk|laad|show|load|view) .{0,30}(plus|more|meer|suivant|volgend)/i;
+const pz=/produit|product|résultat|resultat|article|artikel/i;
+const cnt=()=>document.querySelectorAll("a,img").length;
+const tried=new Set();
+let last=cnt(),n=0,miss=0;
+for(let k=0;k<200&&miss<4;k++){
+const cands=[...document.querySelectorAll("button,a,[role=button]")].filter(e=>{const x=(e.innerText||"").trim();return e.offsetParent&&!tried.has(e)&&x.length<60&&re.test(x)});
+if(!cands.length)break;
+const y=e=>e.getBoundingClientRect().top+scrollY;
+cands.sort((a,c)=>(pz.test(c.innerText)?1:0)-(pz.test(a.innerText)?1:0)||y(c)-y(a));
+const btn=cands[0];
 b.textContent="Stoemp : chargement des produits… ("+(n+1)+") — garde cet onglet ouvert";
 btn.scrollIntoView({block:"center"});btn.click();
 let grew=false;for(let i=0;i<60;i++){await z(250);if(cnt()>last){grew=true;break}}
-if(!grew)break;
+if(!grew){tried.add(btn);miss++;continue}
+miss=0;n++;
 let c=cnt(),still=0;for(let i=0;i<40&&still<4;i++){await z(250);const c2=cnt();if(c2===c)still++;else{c=c2;still=0}}
 last=c;
 }
 const colruyt=/colruyt[.]be|collectandgo[.]be/.test(location.hostname);
-if(!colruyt){let h=0;for(let i=0;i<30;i++){scrollTo(0,document.body.scrollHeight);await z(900);const nh=document.body.scrollHeight;if(nh===h)break;h=nh;b.textContent="Stoemp : défilement de la page… ("+(i+1)+")";}scrollTo(0,0);}
-let text=document.body.innerText;
 if(!colruyt){
+const pz2=/€ ?[0-9]+[,.][0-9]{2}|[0-9]+[,.][0-9]{2} ?€|€ ?[0-9]+/;
+const lastPrice=()=>{const els=[...document.querySelectorAll("body *")].filter(e=>e.children.length<3&&e.offsetParent&&(e.textContent||"").length<30&&pz2.test(e.textContent||""));return els[els.length-1]};
+let c=cnt(),idle=0;
+for(let i=0;i<1500&&idle<20;i++){
+const bottom=innerHeight+scrollY>=document.documentElement.scrollHeight-8;
+if(!bottom)scrollBy(0,Math.round(innerHeight*0.8));
+else if(idle%3===1){const lp=lastPrice();if(lp)lp.scrollIntoView({block:"center"})}
+else scrollTo(0,document.documentElement.scrollHeight);
+await z(bottom?400:200);
+const c2=cnt();if(c2>c){c=c2;idle=0}else if(bottom)idle++;
+if(i%10===0)b.textContent="Stoemp : défilement de la page… ("+c+" éléments) — garde cet onglet ouvert";
+}
+scrollTo(0,0);}
+let text=document.body.innerText,pages=1;
 const pr=/€ ?[0-9]+[,.][0-9]{2}|[0-9]+[,.][0-9]{2} ?€/;
-const els=[...document.querySelectorAll("body *")].filter(e=>e.children.length<5&&e.offsetParent&&(e.textContent||"").length<50&&pr.test(e.textContent||""));
-if(els.length>=3){let a=els[0];while(a&&a!==document.body&&els.filter(e=>a.contains(e)).length<els.length*0.7)a=a.parentElement;
-const h1=document.querySelector("h1");text=(h1?h1.innerText:document.title)+NL+(a||document.body).innerText;}
+const zone=(doc,head)=>{const els=[...doc.querySelectorAll("body *")].filter(e=>e.children.length<5&&e.offsetParent&&(e.textContent||"").length<50&&pr.test(e.textContent||""));
+if(els.length<3)return head?doc.body.innerText:"";let a=els[0];while(a&&a!==doc.body&&els.filter(e=>a.contains(e)).length<els.length*0.7)a=a.parentElement;
+const h1=doc.querySelector("h1");return (head?(h1?h1.innerText:doc.title)+NL:"")+(a||doc.body).innerText;};
+const nextOf=doc=>{const ls=[...doc.querySelectorAll("a[href]")].filter(a=>{try{return new URL(a.href).origin===location.origin}catch(e){return false}});
+const l=ls.find(a=>a.rel==="next")||ls.find(a=>/^(»|›|>|suivant|page suivante|volgende|next)$/i.test((a.innerText||"").trim())||/^(page suivante|suivant|volgende|next)/i.test(a.getAttribute("aria-label")||a.title||""));
+return l?l.href.split("#")[0]:null;};
+if(!colruyt){
+text=zone(document,true);
+const seen=new Set([location.href.split("#")[0]]);let nx=nextOf(document);
+for(let k=0;k<40&&nx&&!seen.has(nx);k++){
+seen.add(nx);b.textContent="Stoemp : lecture de la page "+(k+2)+"… — garde cet onglet ouvert";
+const f=document.createElement("iframe");f.style.cssText="position:fixed;left:-9999px;top:0;width:1280px;height:2400px";f.src=nx;document.body.appendChild(f);
+let d=null;for(let i=0;i<40;i++){await z(500);try{d=f.contentDocument}catch(e){d=null;break}if(i>3&&d&&d.readyState==="complete"&&pr.test(d.body.innerText))break}
+const part=d?zone(d,false):"";const nn=d?nextOf(d):null;f.remove();
+if(!part)break;text+=NL+part;pages++;nx=nn;
+}
 }
 if(colruyt){
 const u=new URL(location.href);let p=Number(u.searchParams.get("page")||"1");
@@ -62,7 +93,7 @@ const m=t.match(/[0-9]+,[0-9]{2,3}[/](kg|pce|l)/g);if(!m)break;text+=NL+t;
 }
 const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:text.slice(0,1000000)};
 b.innerHTML="";
-const t=document.createElement("div");t.textContent="Stoemp : tout est chargé ("+n+" « Voir plus »)"+(text.length>1000000?" — page très longue : envoie plutôt par sous-catégorie.":".");
+const t=document.createElement("div");t.textContent="Stoemp : tout est chargé ("+n+" « Voir plus »"+(pages>1?", "+pages+" pages":"")+")"+(text.length>1000000?" — page très longue : envoie plutôt par sous-catégorie.":".");
 const go=document.createElement("button");go.textContent="📥 Envoyer à Stoemp";
 go.style.cssText="margin-top:10px;width:100%;padding:10px;border:0;border-radius:10px;background:#68a83c;color:#fff;font:700 15px system-ui;cursor:pointer";
 b.append(t,go);
