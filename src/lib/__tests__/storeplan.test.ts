@@ -21,7 +21,8 @@ describe("répartition entre magasins", () => {
   it("rayon à part, mais ce que le spécialiste ne vend pas reste au magasin principal", () => {
     const plan = { main: "colruyt" as StoreId, cats: { vi: "renmans" as StoreId } };
     expect(storeOf(lines[0], plan, stores, ctx)).toEqual({ store: "renmans", why: "rayon" });
-    expect(storeOf(lines[1], plan, stores, ctx).store).toBe("colruyt"); // pas de prix de poisson chez Renmans
+    expect(storeOf(lines[1], plan, stores, ctx).store).toBe("colruyt"); // poisson : pas chez le boucher
+    expect(storeOf(L(id("Épaule d'agneau en morceaux"), 1000), plan, stores, ctx).store).toBe("renmans"); // viande sans prix relevé : chez le boucher quand même
     expect(storeOf(lines[2], { ...plan, items: { [lait]: "carrefour" } }, stores, ctx)).toEqual({ store: "carrefour", why: "article" });
   });
   it("listes par magasin, magasin principal d'abord, avec leur total", () => {

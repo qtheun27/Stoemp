@@ -14,15 +14,16 @@ export const mainStore = (plan: StorePlan | undefined, stores: StoreId[]): Store
   plan?.main && stores.includes(plan.main) ? plan.main : stores[0] || "colruyt";
 
 /**
- * Un magasin spécialisé (Renmans : boucherie) ne vend que son rayon, et seulement les articles dont on connaît le prix chez lui
- * (le poisson du rayon « Boucherie & poisson » reste au magasin principal).
+ * Un magasin spécialisé (Renmans : boucherie) ne vend que son rayon, sans poisson ni fruits de mer
+ * (sauf si on y a relevé un prix pour l'article) ; les autres magasins vendent tout.
  */
 export function sells(item: Item | undefined, cat: Cat, store: StoreId, ctx: PlanCtx): boolean {
   const only = STORES[store].only;
   if (!only) return true;
   if (!only.includes(cat) || !item) return false;
   const p = priceAt(item, store, ctx.book, ctx.organic);
-  return !!p && p.source !== "estimation";
+  if (p && p.source !== "estimation") return true;
+  return !item.allergens.some((a) => a === "po" || a === "cr");
 }
 
 /** Magasin d'une ligne : article à part, sinon rayon à part, sinon magasin principal (si le magasin choisi ne vend pas l'article : principal). */
