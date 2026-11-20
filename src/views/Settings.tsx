@@ -7,6 +7,7 @@ import type { StoreId } from "../lib/types";
 import { createHousehold, createInvite, leaveHousehold, removeMember, renameHousehold, saveSettings, setRole, switchHousehold } from "../state/actions";
 import { useStore } from "../state/store";
 import { TastesCard } from "./Tastes";
+import { RemindersCard } from "./Reminders";
 import { copyText, run, toast, TopBar } from "../ui";
 
 export const appUrl = () => location.origin + location.pathname;
@@ -178,6 +179,7 @@ export default function Settings() {
               <p className="small muted">Autres sources : photo des tickets de caisse (onglet Courses ou Stock) et robot Colruyt sur ton ordinateur, chaque dimanche. Les prix ne sont jamais publiés.</p>
             </div>}
 
+            <RemindersCard />
             <div className="card">
               <h3>🎨 Apparence</h3>
               <div className="chips">{(["auto", "light", "dark"] as Theme[]).map((t) => <button key={t} className="chip" aria-pressed={theme === t} onClick={() => { setTheme(t); applyTheme(t); }}>{t === "auto" ? "Automatique" : t === "light" ? "Clair" : "Sombre"}</button>)}</div>

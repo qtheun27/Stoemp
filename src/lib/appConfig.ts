@@ -9,6 +9,8 @@ export interface AppConfig {
   aiWeekShare: number;
   /** Un prix est « récent » pendant ce nombre de jours. */
   freshDays: number;
+  /** Clé publique « Certificats push Web » (Firebase → Cloud Messaging) : active les rappels sur les téléphones. */
+  vapidKey: string;
   /** Réglages de départ d'un nouveau foyer. */
   defaults: Pick<Settings, "persons" | "lunches" | "dinners" | "stores" | "shoppingDays" | "mineN">;
 }
@@ -19,6 +21,7 @@ export const DEFAULT_APP_CONFIG: AppConfig = {
   banner: { text: "", tone: "info" },
   aiWeekShare: 0.15, // une ou deux surprises par semaine : le reste vient du catalogue, relu et gratuit
   freshDays: 14,
+  vapidKey: "",
   defaults: { persons: 2, lunches: 0, dinners: 7, stores: ["colruyt", "renmans"], shoppingDays: [6], mineN: 2 },
 };
 

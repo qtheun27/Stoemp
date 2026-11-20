@@ -36,6 +36,10 @@ export default function AppSettings() {
     </div>
     <div className="stack">
       <div className="card"><h3>Génération des repas</h3>
+        <label className="field">Rappels sur les téléphones : clé publique « Certificats push Web »</label>
+        <input className="input" defaultValue={app.vapidKey} placeholder="Firebase → Paramètres du projet → Cloud Messaging → Certificats push Web → Paire de clés"
+          onBlur={(e) => e.target.value.trim() !== app.vapidKey && save({ vapidKey: e.target.value.trim() })} aria-label="Clé push Web" />
+        <p className="small muted">{app.vapidKey ? "✓ Rappels activables dans Réglages → Rappels." : "Sans cette clé, les rappels ne peuvent pas être activés."}</p>
         <label className="field">Part de la semaine inventée par l'IA (option cochée) : {Math.round(app.aiWeekShare * 100)} %</label>
         <input type="range" min={0} max={1} step={0.05} defaultValue={app.aiWeekShare} onChange={(e) => save({ aiWeekShare: Number(e.target.value) })} style={{ width: "100%", accentColor: "var(--ac)" }} />
         <label className="field">Un prix reste « récent » pendant</label>

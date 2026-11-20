@@ -41,6 +41,8 @@ service cloud.firestore {
     }
 
     match /users/{uid} { allow read: if isSuper() || (signedIn() && request.auth.uid == uid); allow write: if signedIn() && request.auth.uid == uid; }
+    // Téléphones inscrits aux rappels : chacun ne voit et ne modifie que les siens.
+    match /users/{uid}/devices/{device} { allow read, write: if signedIn() && request.auth.uid == uid; }
 
     match /households/{hid} {
       allow read: if isMember(hid) || isSuper();
