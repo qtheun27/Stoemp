@@ -25,7 +25,7 @@
   --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .3); --shadow-lg: 0 12px 40px rgb(0 0 0 / .5); }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--sat) + 66px); }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--sat) + 80px); }
 body { margin: 0; overflow-x: hidden; background: var(--bg); color: var(--ink); font-family: "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 16px; line-height: 1.45; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -44,7 +44,8 @@ h1, h2, h3 { letter-spacing: -.015em; line-height: 1.15; }
 
 /* Barre du haut : verre flouté qui passe sous l'encoche */
 /* Barre du haut : fond plein (sans flou : sur iPhone, Safari rendait le titre flou), compacte sous l'îlot. */
-.topbar { position: sticky; top: 0; z-index: 20; padding: calc(var(--sat) + 6px) max(16px, var(--sar)) 8px max(16px, var(--sal));
+/* iPhone : l'en-tête est opaque (le flou du système disparaît) et le titre descend sous la zone floutée de la barre d'état. */
+.topbar { position: sticky; top: 0; z-index: 20; padding: calc(var(--sat) + 18px) max(16px, var(--sar)) 10px max(16px, var(--sal));
   background: var(--bg); border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
   -webkit-font-smoothing: antialiased; }
 .topbar-in { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 10px; min-height: 40px; }
@@ -196,12 +197,12 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 @media (max-width: 560px) { .ings { grid-template-columns: 1fr; } }
 
 /* Toast */
-.toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); top: calc(var(--sat) + 70px);
+.toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); top: calc(var(--sat) + 82px);
   background: var(--ink); color: var(--bg); padding: 11px 16px; border-radius: 14px; font-size: 14px; max-width: min(92vw, 480px); text-align: center; box-shadow: var(--shadow-lg); animation: up .2s; }
 
 
 /* Mode cuisine */
-.cook { position: fixed; inset: 0 0 auto 0; height: var(--app-h); z-index: 70; background: var(--bg); display: flex; flex-direction: column; padding: calc(var(--sat) + 12px) max(20px, var(--sar)) calc(var(--sab) + 20px) max(20px, var(--sal)); }
+.cook { position: fixed; inset: 0 0 auto 0; height: var(--app-h); z-index: 70; background: var(--bg); display: flex; flex-direction: column; padding: calc(var(--sat) + 18px) max(20px, var(--sar)) calc(var(--sab) + 20px) max(20px, var(--sal)); }
 .cook .step { flex: 1; display: flex; align-items: center; font-size: clamp(22px, 5vw, 36px); font-weight: 600; line-height: 1.3; max-width: 900px; margin: 0 auto; }
 
 /* Grilles responsives */
@@ -255,7 +256,7 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .task-card { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--bg); }
 .task-card + .task-card { margin-top: 10px; }
-.admin-tabs { position: sticky; top: calc(var(--sat) + 55px); z-index: 15; background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); padding: 8px 0; margin: 0 -16px 8px; padding-inline: 16px; }
+.admin-tabs { position: sticky; top: calc(var(--sat) + 67px); z-index: 15; background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); padding: 8px 0; margin: 0 -16px 8px; padding-inline: 16px; }
 
 /* Semaine : 4 actions rapides en grille 2 × 2 sur téléphone, en ligne sur grand écran ; options actives sur leur propre ligne. */
 .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -292,7 +293,7 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .dchip:disabled { opacity: .45; cursor: default; }
 .weekline { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 14px; color: var(--muted); margin: 2px 2px 8px; }
 .weekline b { color: var(--ink); font-weight: 800; }
-.day { scroll-margin-top: calc(var(--sat) + 64px); }
+.day { scroll-margin-top: calc(var(--sat) + 78px); }
 .meal .thumb { flex: none; width: 64px; border: 0; padding: 0; background: none; cursor: pointer; }
 .meal { padding-left: 8px; }
 .meal .ib { width: 44px; height: 44px; }
