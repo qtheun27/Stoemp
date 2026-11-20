@@ -582,16 +582,17 @@ type Off = { name: string; size: number; ppu: number; organic: boolean; price: n
  * Relecture après un envoi : chaque article touché est montré à l'IA avec tous ses produits côte à côte ;
  * les intrus sont retirés (offre et nom appris), puis reclassés ailleurs, jamais dans l'article d'où ils sortent.
  */
-async function reviewStore(u: string, store: (typeof STORES)[number], url: string, since: string) {
+async function reviewStore(u: string, store: (typeof STORES)[number], url: string, since: string, startAfter = "") {
   const t0 = Date.now();
   const byId = new Map((await loadItems()).map((i) => [i.id, i]));
   const docs = (await db().collection("prices").where("store", "==", store).get()).docs
-    .filter((d) => !d.id.endsWith("_bio") && String(d.get("fetchedAt")) >= since && ((d.get("offers") || []) as Off[]).length >= 2 && byId.has(d.get("itemId")));
+    .filter((d) => !d.id.endsWith("_bio") && d.id > startAfter && String(d.get("fetchedAt")) >= since && ((d.get("offers") || []) as Off[]).length >= 2 && byId.has(d.get("itemId")))
+    .sort((a, b) => (a.id < b.id ? -1 : 1));
   const moved: ShopProduct[] = [], from = new Map<string, string>();
   const groups: (typeof docs)[] = [];
   for (let i = 0; i < docs.length; i += 12) groups.push(docs.slice(i, i + 12));
-  let stop = false;
-  for (let g = 0; g < groups.length && !stop && Date.now() - t0 < 380_000; g += 4) {
+  let stop = false, g = 0;
+  for (; g < groups.length && !stop && Date.now() - t0 < 360_000; g += 4) {
     await Promise.all(groups.slice(g, g + 4).map(async (group) => {
       const content = group.map((d, k) => `Article ${k} : ${byId.get(d.get("itemId"))!.name}\n` +
         ((d.get("offers") || []) as Off[]).slice(0, 60).map((o, j) => `  ${j}. ${o.name}`).join("\n")).join("\n\n");
@@ -629,8 +630,10 @@ async function reviewStore(u: string, store: (typeof STORES)[number], url: strin
     const rows = e.rows.filter((r) => from.get(r.productName) !== r.itemId);
     if (rows.length) placed = (await savePrices(store, url, null, rows)).length;
   } else await rebuildPriceBook([store]).catch(() => {});
-  logger.info("Relecture terminée", { magasin: store, articles: docs.length, retirés: moved.length, replacés: placed });
-  return { reviewed: docs.length, moved: moved.length, placed };
+  // Pas le temps de tout relire (grand catalogue) : on reprendra après le dernier article relu.
+  const next = !stop && g < groups.length ? groups[g - 1]?.[groups[g - 1].length - 1]?.id || null : null;
+  logger.info("Relecture", { magasin: store, articles: docs.length, retirés: moved.length, replacés: placed, suite: next });
+  return { reviewed: docs.length, moved: moved.length, placed, next };
 }
 
 /** Relecture lancée à la fin d'un envoi (`reviewJobs/{id}`). */
@@ -639,8 +642,9 @@ export const onReviewJob = onDocumentCreated({ document: "reviewJobs/{id}", ...a
   if (!r) return;
   if (r.progressId) await progress(r.progressId, { review: "en cours" });
   try {
-    const res = await reviewStore(r.uid, r.store, r.url, r.since);
-    if (r.progressId) await progress(r.progressId, { review: "fini", moved: res.moved, placed: res.placed });
+    const res = await reviewStore(r.uid, r.store, r.url, r.since, r.startAfter || "");
+    if (res.next) { await db().collection("reviewJobs").add({ ...r, startAfter: res.next, movedBefore: (r.movedBefore || 0) + res.moved, at: Date.now() }); return; }
+    if (r.progressId) await progress(r.progressId, { review: "fini", moved: (r.movedBefore || 0) + res.moved, placed: res.placed });
     await event.data!.ref.set({ ...res, doneAt: Date.now() }, { merge: true });
   } catch (e) { logger.error("reviewJobs", e); if (r.progressId) await progress(r.progressId, { review: "fini" }); }
 });
