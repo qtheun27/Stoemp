@@ -1,6 +1,6 @@
 import { arrayUnion, deleteDoc, deleteField, doc, setDoc, updateDoc, writeBatch, collection } from "firebase/firestore";
 import { auth, call, db } from "../firebase";
-import { cookable, ingredientsOf, isVegRecipe, mains, type ItemIndex } from "../lib/catalog";
+import { cookable, ingredientsOf, isVegRecipe, mains } from "../lib/catalog";
 import { guessCategory } from "../lib/classify";
 import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { parseLine } from "../lib/parse";

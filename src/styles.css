@@ -77,7 +77,6 @@ h1, h2, h3 { letter-spacing: -.015em; line-height: 1.15; }
   .sidenav a:hover { background: var(--soft); }
   .sidenav a[aria-current="page"] { background: var(--ac); color: var(--ac-ink); }
   .sidenav .grow { flex: 1; }
-  .fab { top: calc(var(--app-h) - var(--sab) - 24px) !important; }
 }
 @media (min-width: 1100px) {
   .sidenav { width: 232px; padding-inline: 14px; }
@@ -86,12 +85,6 @@ h1, h2, h3 { letter-spacing: -.015em; line-height: 1.15; }
   .sidenav a { flex-direction: row; gap: 12px; font-size: 15px; padding: 11px 14px; }
 }
 
-/* Bouton d'action flottant */
-.fab { position: fixed; z-index: 29; right: max(16px, var(--sar)); top: calc(var(--app-h) - max(var(--sab) - 8px, 10px) - var(--tabbar-h) - 14px); transform: translateY(-100%);
-  height: 56px; min-width: 56px; padding: 0 20px; border: 0; border-radius: 28px; background: var(--ac); color: var(--ac-ink);
-  font-weight: 700; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-lg); transition: transform .15s; }
-.fab:active { transform: translateY(-100%) scale(.96); }
-.fab:disabled { opacity: .7; }
 
 /* ---------- Éléments ---------- */
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; box-shadow: var(--shadow); }
@@ -181,13 +174,6 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .meal .name { display: block; font-weight: 700; line-height: 1.22; font-size: 16px; }
 .meal .meta { font-size: 13px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px; }
 .meal .meta > * { min-width: 0; overflow-wrap: anywhere; }
-.hero { padding: 6px 2px 4px; }
-.hero .season { font-size: clamp(40px, 11vw, 64px); font-weight: 800; line-height: .95; letter-spacing: -.035em; color: var(--ac); margin: 0; }
-.hero p { margin: 8px 0 0; color: var(--muted); }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
-.stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
-.stat b { display: block; font-size: 19px; font-weight: 800; }
-.stat span { font-size: 12px; color: var(--muted); }
 
 /* Feuille (bas sur mobile, fenêtre centrée sur ordinateur) */
 .sheet-bg { position: fixed; inset: 0 0 auto 0; height: var(--app-h); z-index: 50; background: rgb(0 0 0 / .42); display: flex; align-items: flex-end; justify-content: center; animation: fade .2s; }
@@ -272,17 +258,11 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .admin-tabs { position: sticky; top: calc(var(--sat) + 55px); z-index: 15; background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); padding: 8px 0; margin: 0 -16px 8px; padding-inline: 16px; }
 
 /* Semaine : 4 actions rapides en grille 2 × 2 sur téléphone, en ligne sur grand écran ; options actives sur leur propre ligne. */
-.quick { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 8px; }
-.quick .btn { justify-content: center; min-height: 46px; padding-inline: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
-@media (min-width: 760px) { .quick { display: flex; flex-wrap: wrap; } .quick .btn { flex: none; } }
-.tags-line { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; }
 .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .acts .btn { justify-content: center; min-height: 42px; }
 .acts .btn[aria-pressed="true"] { border-color: var(--ac); color: var(--ac); }
 @media (min-width: 760px) { .acts { display: flex; flex-wrap: wrap; } }
 /* Bouton d'action : se réduit à son icône pendant le défilement, pour ne pas cacher les boutons des repas. */
-.fab.mini { padding: 0; width: 56px; justify-content: center; }
-.fab.mini .lbl { display: none; }
 
 /* ---------- Semaine : mise en page pensée pour le pouce ---------- */
 .season-line { display: block; width: 100%; text-align: left; border: 0; background: none; color: var(--muted); padding: 2px 2px 10px; font: inherit; font-size: 14px;
