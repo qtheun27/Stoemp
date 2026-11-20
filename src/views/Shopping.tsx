@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Camera, ClipboardCopy, ExternalLink, Pencil, Plus, Share2, Store, Trash2, Check as CheckIcon } from "lucide-react";
 import { CAT_ORDER, CATS, STORES } from "../lib/constants";
 import { bestPair, storeTotals } from "../lib/cost";
-import { costAt, mainStore, oneStoreTotal, planGroups, planTips, sells, storeOf, type PlanLine } from "../lib/storeplan";
+import { costAt, mainStore, oneStoreTotal, planGroups, planTips, storeOf, type PlanLine } from "../lib/storeplan";
 import { bestPrice, lineCost, priceAt } from "../lib/pricing";
 import { frDate, nextShoppingDate, today } from "../lib/season";
 import { buildShopping, shareText, type ShopLine } from "../lib/shopping";
@@ -239,7 +239,7 @@ function StorePick({ line, stores, main, onClose }: { line: ShopLine; stores: St
     onClose();
   };
   return <Sheet title={`Où acheter ${line.name} ?`} sub={cur.why === "article" ? "Choisi pour cet article" : cur.why === "rayon" ? `Comme tout le rayon ${CATS[line.category].label}` : "Magasin principal"} onClose={onClose}>
-    <div className="list">{stores.filter((st) => sells(it, line.category, st, ctx)).map((st) => { const c = costAt(line, st, ctx); return <button key={st} className="store-row" style={{ width: "100%", textAlign: "left", background: "none", border: 0, font: "inherit", color: "inherit", cursor: "pointer" }} onClick={() => choose(st)} aria-pressed={cur.store === st}>
+    <div className="list">{stores.map((st) => { const c = costAt(line, st, ctx); return <button key={st} className="store-row" style={{ width: "100%", textAlign: "left", background: "none", border: 0, font: "inherit", color: "inherit", cursor: "pointer" }} onClick={() => choose(st)} aria-pressed={cur.store === st}>
       <span className="store-dot" style={{ background: STORES[st].color }} />
       <div className="grow"><b>{STORES[st].label}</b>{cur.store === st && <span className="small muted"> · actuel</span>}{st === main && <span className="small muted"> · principal</span>}</div>
       <b className="num">{c ? `${c.estimated ? "≈ " : ""}${eur(c.cost)}` : "—"}</b></button>; })}</div>
