@@ -1,3 +1,4 @@
+import type { StorePlan } from "../lib/storeplan";
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
@@ -18,7 +19,9 @@ export interface Prefs { favorites: string[]; learnedCategories: Record<string, 
   /** Accords retenus : accompagnement choisi pour un plat (null = celui de la recette). */
   sides?: Record<string, string | null>;
   /** Accords retenus pour le légume servi à côté (null = celui de la recette). */
-  vegSides?: Record<string, string | null> }
+  vegSides?: Record<string, string | null>;
+  /** Répartition des courses entre magasins (src/lib/storeplan.ts). */
+  storePlan?: StorePlan }
 export interface UserDoc { households: string[]; current?: string | null }
 export interface WeekDoc { slots: Slot[]; persons?: number; warning?: string | null }
 

@@ -524,3 +524,14 @@ export async function setSide(s: StoreState, k: number, side: string | null) {
   await setDoc(hh(s.hid!, "weeks", s.weekKey), { slots }, { merge: true });
   await setDoc(hh(s.hid!, "meta", "prefs"), { sides: { [slots[k].recipeId]: side } }, { merge: true });
 }
+
+/**
+ * Répartition des courses entre magasins (retenue pour les semaines suivantes) :
+ * magasin principal, rayon à part (« vi » → Renmans) ou article à part (null = retour à la règle générale).
+ */
+export async function setStoreRule(s: StoreState, rule: { main: StoreId } | { cat: Cat; store: StoreId | null } | { itemId: string; store: StoreId | null }) {
+  const ref = hh(s.hid!, "meta", "prefs");
+  if ("main" in rule) return setDoc(ref, { storePlan: { main: rule.main } }, { merge: true });
+  if ("cat" in rule) return updateDoc(ref, { [`storePlan.cats.${rule.cat}`]: rule.store ?? deleteField() });
+  return updateDoc(ref, { [`storePlan.items.${rule.itemId}`]: rule.store ?? deleteField() });
+}
