@@ -285,8 +285,10 @@ describe("foyer, réception, restes, boissons, équilibre", () => {
   });
   it("la semaine équilibrée contient du poisson", () => {
     let fish = 0;
+    // Tirages fixés (graine par semaine) : le test donne toujours le même résultat.
+    const seeded = (a: number) => () => { a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
     for (let i = 0; i < 20; i++) {
-      const w = planWeek(BASE_RECIPES, { idx: BASE_INDEX, settings: { ...DEFAULT_SETTINGS, options: { ...DEFAULT_SETTINGS.options, seasonal: false } }, favorites: [], stock: new Map(), cost: ctxCost, rand: Math.random });
+      const w = planWeek(BASE_RECIPES, { idx: BASE_INDEX, settings: { ...DEFAULT_SETTINGS, options: { ...DEFAULT_SETTINGS.options, seasonal: false } }, favorites: [], stock: new Map(), cost: ctxCost, rand: seeded(i + 1) });
       if (w.slots.some((s) => profile(recipes.get(s.recipeId)!, s.veg, BASE_INDEX).protein === "poisson")) fish++;
     }
     expect(fish).toBeGreaterThanOrEqual(17); // au moins 85 % des semaines
