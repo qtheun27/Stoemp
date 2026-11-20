@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ChefHat, ChevronLeft, ChevronRight, Heart, Leaf, RefreshCw, SlidersHorizontal, Sparkles, Check as CheckIcon } from "lucide-react";
+import { ChefHat, ChevronLeft, ChevronRight, RefreshCw, SlidersHorizontal, Sparkles, Check as CheckIcon } from "lucide-react";
 import { cookable, isVegRecipe, nameOf } from "../lib/catalog";
 import { CUISINES, DAYS, SEASONS } from "../lib/constants";
 import { mealCostPerPerson, partsCost } from "../lib/cost";
@@ -10,14 +10,14 @@ import { YesterdayRating } from "./Tastes";
 import { defaultSideLabel, slotRecipe } from "../lib/sides";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
-import { fixSides, moveSlot, placeRecipe, vegCfg, basePortions, generateWeek, planCtx, saveSlots, setCooked, swapSlot, toggleFavorite } from "../state/actions";
+import { fixSides, moveSlot, placeRecipe, vegCfg, basePortions, generateWeek, planCtx, setCooked, swapSlot } from "../state/actions";
 import { coursePortions, eatersLabel, eatersOf, headcount, slotPortions } from "../lib/household";
 import { profile, PROTEIN_LABEL, type Protein } from "../lib/balance";
-import { drinkFor } from "../lib/drinks";
 import FridgeSheet from "./Fridge";
 import ReadySheet from "./Ready";
 import { useStore } from "../state/store";
-import { Empty, run, toast, TopBar } from "../ui";
+import { Empty, run, Sheet, toast, TopBar } from "../ui";
+import { DishImage } from "./DishImage";
 import OptionsSheet from "./Options";
 import RecipeSheet from "./Recipe";
 
@@ -25,7 +25,8 @@ import RecipeSheet from "./Recipe";
 export default function Week() {
   const s = useStore();
   const [busy, setBusy] = useState<"gen" | number | null>(null);
-  const [open, setOpen] = useState<{ r: Recipe; k: number | null } | null>(null);
+  const [open, setOpen] = useState<{ r: Recipe; k: number | null; cook?: boolean } | null>(null);
+  const [confirmNew, setConfirmNew] = useState(false);
   const [opts, setOpts] = useState(false);
   const o = s.settings.options;
   const season = planSeason(o);
@@ -56,15 +57,26 @@ export default function Week() {
   const dropOn = (d: number) => { if (drag == null) return; const sl = slots[drag]; setDrag(null); if (sl && sl.day !== d) run(() => moveSlot(s, drag, d, sl.meal), `Déplacé ${DAYS[d].toLowerCase()}`); };
   const [fridge, setFridge] = useState(false);
   const [ready, setReady] = useState(false);
-  // Bouton « Nouvelle semaine » réduit à l'icône dès qu'on fait défiler la liste.
-  const [mini, setMini] = useState(false);
-  useEffect(() => { const f = () => setMini(scrollY > 160); f(); addEventListener("scroll", f, { passive: true }); return () => removeEventListener("scroll", f); }, []);
   const cooked = slots.filter((x) => x.cooked).length;
 
   // Bientôt périmé : suggestion de repas pour l'utiliser.
   const expiring = [...s.stock.entries()].filter(([, e]) => e.qty > 0 && daysToExpiry(e) <= 3).map(([id, e]) => ({ id, e, item: s.idx.get(id) })).filter((x) => x.item).slice(0, 3);
   const suggestFor = (itemId: string) => recipesUsing(cookable(s.recipes.values()), itemId).find((r) => !slots.some((x) => x.recipeId === r.id));
 
+  // Prochain repas à préparer (à partir de maintenant) : mis en avant en haut de l'écran.
+  const RANK = { matin: 0, midi: 1, soir: 2 } as const;
+  const nowRank = new Date().getHours() < 10 ? 0 : new Date().getHours() < 15 ? 1 : 2;
+  const next = todayIdx < 0 ? undefined : slots.map((x, k) => ({ ...x, k })).filter((x) => !x.cooked && (x.day > todayIdx || (x.day === todayIdx && RANK[x.meal] >= nowRank)))
+    .sort((a, b) => a.day - b.day || RANK[a.meal] - RANK[b.meal])[0];
+  const nextLabel = (x: { day: number; meal: keyof typeof RANK }) => x.day === todayIdx ? { matin: "Ce matin", midi: "Ce midi", soir: "Ce soir" }[x.meal]
+    : x.day === todayIdx + 1 ? `Demain ${x.meal === "matin" ? "matin" : x.meal}` : `${DAYS[x.day]} ${x.meal}`;
+  const sideText = (x: (typeof slots)[number], r: Recipe) => {
+    const side = x.side ? s.recipes.get(x.side)?.name.toLowerCase() : defaultSideLabel(r, s.idx);
+    const vg = x.vegSide ? s.recipes.get(x.vegSide)?.name.toLowerCase() : null;
+    return [side, vg].filter(Boolean).join(", ");
+  };
+  // Petit retour tactile quand on coche (téléphones qui le permettent).
+  const buzz = () => { try { navigator.vibrate?.(10); } catch { /* ignoré */ } };
   const generate = async () => {
     setBusy("gen");
     if (o.ai) toast("✨ L'IA invente de nouveaux plats…");
@@ -85,23 +97,21 @@ export default function Week() {
       <TopBar title={`Semaine ${Number(s.weekKey.split("-W")[1])}`} sub={range}>
         <button className="ib" onClick={() => s.setWeekKey(shiftWeek(s.weekKey, -1))} aria-label="Semaine précédente"><ChevronLeft size={20} /></button>
         <button className="ib" onClick={() => s.setWeekKey(shiftWeek(s.weekKey, 1))} aria-label="Semaine suivante"><ChevronRight size={20} /></button>
+        {!!slots.length && <button className="ib" onClick={() => setConfirmNew(true)} disabled={busy === "gen"} aria-label="Nouvelle semaine"><Sparkles size={20} className={busy === "gen" ? "spin" : ""} /></button>}
         <button className="ib" onClick={() => setOpts(true)} aria-label="Options"><SlidersHorizontal size={20} /></button>
       </TopBar>
       <div className="content wide">
-        <div className="hero">
-          <p className="season">{SEASONS[season].label}</p>
-          <p>De saison : {SEASONS[season].produce}</p>
-        </div>
-        <div className="quick">
-          <button className="btn ghost" onClick={() => setOpts(true)} aria-label="Composition du foyer">👨‍👩‍👧 {eatersLabel(eaters)}{vegCfg(s).vegEaters ? ` · ${vegCfg(s).vegEaters} 🌱` : ""}</button>
-          <button className="btn ghost" onClick={() => setOpts(true)}><SlidersHorizontal size={18} />Options</button>
-          <button className="btn ghost" onClick={() => setFridge(true)}>🧊 Frigo vide</button>
-          <button className="btn ghost" onClick={() => setReady(true)}>🥡 Sans cuisiner</button>
-        </div>
+        {/* Saison en une ligne, puis raccourcis à faire défiler du pouce. */}
+        <button className="season-line" onClick={() => setOpts(true)}>{SEASONS[season].icon} <b>{SEASONS[season].label}</b> · {SEASONS[season].produce}</button>
         {(() => {
           const tags = [o.seasonal && "De saison", o.local && "Région", o.organic && "Bio", o.veg && "Végé", o.budgetOn && `≤ ${eur(o.budget)}`, o.timeOn && `≤ ${o.maxTime} min`,
             o.ai && "✨ IA", o.useStock && "Écouler le stock", ...(o.cuisines || []).map((c) => `${CUISINES[c].icon} ${CUISINES[c].label}`)].filter(Boolean) as string[];
-          return tags.length ? <button className="chips tags-line" onClick={() => setOpts(true)} aria-label="Options actives">{tags.map((t) => <span key={t} className="tag ac">{t}</span>)}</button> : null;
+          return <div className="scroller" role="toolbar" aria-label="Raccourcis">
+            <button className="chip big" onClick={() => setOpts(true)} aria-label="Composition du foyer et options">👨‍👩‍👧 {eatersLabel(eaters)}{vegCfg(s).vegEaters ? ` · ${vegCfg(s).vegEaters} 🌱` : ""}</button>
+            <button className="chip big" onClick={() => setOpts(true)}><SlidersHorizontal size={16} />Options{tags.length ? ` · ${tags.length}` : ""}</button>
+            <button className="chip big" onClick={() => setFridge(true)}>🧊 Frigo vide</button>
+            <button className="chip big" onClick={() => setReady(true)}>🥡 Sans cuisiner</button>
+          </div>;
         })()}
 
         {expiring.map(({ id, e, item }) => {
@@ -119,12 +129,34 @@ export default function Week() {
           </Empty>
         ) : (
           <>
-            <div className="stats">
-              <div className="stat"><b className="num">{eur(total)}</b><span>la semaine</span></div>
-              <div className="stat"><b className="num">{eur(total / Math.max(1, eatenPortions))}</b><span>par repas et portion</span></div>
-              <div className="stat"><b className="num">{cooked}/{slots.length}</b><span>cuisinés</span></div>
+            {next && (() => {
+              const base = s.recipes.get(next.recipeId), r = slotRecipe(s.recipes, next, s.idx);
+              if (!base || !r) return null;
+              return <div className="next-meal">
+                <button className="next-img" onClick={() => setOpen({ r: base, k: next.k })} aria-label={`Voir la recette : ${base.name}`}><DishImage recipe={base} idx={s.idx} height={168} rounded={0} /></button>
+                <div className="next-body">
+                  <span className="slot">{nextLabel(next)}</span>
+                  <button className="next-name" onClick={() => setOpen({ r: base, k: next.k })}>{nameOf(base, next.veg)}{sideText(next, base) && <span className="muted"> · {sideText(next, base)}</span>}</button>
+                  <span className="meta"><span>⏱ {r.prepMin} min</span>{!next.fromLeftovers && <span className="num">{eur(slotTotals[next.k])}</span>}{next.fromLeftovers && <span>restes 🍱</span>}</span>
+                  <div className="next-acts">
+                    {r.source !== "pret" && !next.fromLeftovers && <button className="btn" onClick={() => setOpen({ r: base, k: next.k, cook: true })}><ChefHat size={18} />Cuisiner</button>}
+                    <button className="btn ghost" onClick={() => { buzz(); run(() => setCooked(s, next.k, true), "Bon appétit ! Stock mis à jour"); }}><CheckIcon size={18} />C'est fait</button>
+                  </div>
+                </div>
+              </div>;
+            })()}
+            <div className="daystrip" role="tablist" aria-label="Jours de la semaine">
+              {DAYS.map((label, d) => {
+                const list = slots.filter((x) => x.day === d), done = list.length > 0 && list.every((x) => x.cooked);
+                return <button key={d} className={`dchip${d === todayIdx ? " today" : ""}${done ? " done" : ""}`} disabled={!list.length} aria-label={`${label}${list.length ? `, ${list.length} repas` : ", aucun repas"}`}
+                  onClick={() => document.getElementById(`day-${d}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>
+                  <span>{label.slice(0, 2)}</span><b>{new Date(mon.getTime() + d * 864e5).getDate()}</b><i aria-hidden>{done ? "✓" : list.length ? "•".repeat(Math.min(3, list.length)) : ""}</i></button>;
+              })}
             </div>
-            {o.balance !== false && <div className="chips" style={{ margin: "-4px 0 12px" }} aria-label="Équilibre de la semaine">
+            <div className="weekline">
+              <span><b className="num">{eur(total)}</b> la semaine</span><span><b className="num">{eur(total / Math.max(1, eatenPortions))}</b> / portion</span><span><b>{cooked}/{slots.length}</b> cuisinés</span>
+            </div>
+            {o.balance !== false && <div className="chips" style={{ margin: "0 0 12px" }} aria-label="Équilibre de la semaine">
               {(Object.keys(PROTEIN_LABEL) as Protein[]).filter((k) => balance[k]).map((k) => <span key={k} className="tag">{PROTEIN_LABEL[k]} × {balance[k]}</span>)}
               {!balance.poisson && !o.veg && !o.allergens.includes("po") && <span className="tag warn">pas de poisson cette semaine</span>}
             </div>}
@@ -133,25 +165,24 @@ export default function Week() {
                 const list = slots.map((x, k) => ({ ...x, k })).filter((x) => x.day === d);
                 if (!list.length) return null;
                 return (
-                  <section key={d} className={`day${d === todayIdx ? " today" : ""}`} onDragOver={(e) => drag != null && e.preventDefault()} onDrop={() => dropOn(d)}>
+                  <section key={d} id={`day-${d}`} className={`day${d === todayIdx ? " today" : ""}`} onDragOver={(e) => drag != null && e.preventDefault()} onDrop={() => dropOn(d)}>
                     <h3>{day}{d === todayIdx ? " · aujourd'hui" : ""}</h3>
                     {list.map((x) => {
                       const r = s.recipes.get(x.recipeId);
                       if (!r) return <div className="meal" key={x.k}><span className="grow muted">Recette indisponible</span><button className="ib" onClick={() => swap(x.k)}><RefreshCw size={18} /></button></div>;
-                      const fav = s.prefs.favorites.includes(r.id);
                       return (
                         <div className={`meal${x.cooked ? " cooked" : ""}`} key={x.k} draggable={!x.fromLeftovers && !x.leftovers} onDragStart={() => setDrag(x.k)} onDragEnd={() => setDrag(null)}>
+                          <button className="thumb" tabIndex={-1} aria-hidden onClick={() => setOpen({ r, k: x.k })}><DishImage recipe={r} idx={s.idx} height={64} rounded={12} thumb /></button>
                           <button className="info" onClick={() => setOpen({ r, k: x.k })}>
                             <span className="slot">{x.meal === "matin" ? "☕ déjeuner" : `${x.meal} · ${x.light ? "🥗 léger" : "🍲 complet"}`}</span>
-                            <span className="name">{nameOf(r, x.veg)}{(() => { const side = x.side ? s.recipes.get(x.side)?.name.toLowerCase() : defaultSideLabel(r, s.idx); const vg = x.vegSide ? s.recipes.get(x.vegSide)?.name.toLowerCase() : null; return side || vg ? <span className="muted"> · {[side, vg].filter(Boolean).join(", ")}</span> : null; })()}</span>
+                            <span className="name">{nameOf(r, x.veg)}{sideText(x, r) && <span className="muted"> · {sideText(x, r)}</span>}</span>
                             {x.guests && <span className="tag ac" style={{ marginBottom: 4 }}>🎉 réception · {headcount(eaters) + x.guests.adults + x.guests.kids} pers.{x.courses?.length ? ` · ${x.courses.length + 1} services` : ""}</span>}
-                            <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}{!x.fromLeftovers && r.source !== "pret" && !isVegRecipe(r) && vegP(x) > 0 && <span>🌱 {vegP(x)} part{vegP(x) > 1 ? "s" : ""} végé</span>}
-                            {o.drinks !== false && !x.fromLeftovers && <span>{x.drinks?.length ? `🍷 ${x.drinks[0]}` : `🍷 ${drinkFor(r, x.veg, s.idx, !!o.noAlcohol).adult}`}</span>}{(isVegRecipe(r) || (x.veg && r.source !== "pret")) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}{x.cooked && <span>✅ cuisiné</span>}</span>
+                            <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}{!x.fromLeftovers && r.source !== "pret" && !isVegRecipe(r) && vegP(x) > 0 && <span>🌱 {vegP(x)} végé</span>}
+                              {(isVegRecipe(r) || (x.veg && r.source !== "pret")) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}</span>
                           </button>
-                          {!isVegRecipe(r) && r.source !== "pret" && <button className="ib" aria-pressed={x.veg} aria-label="Version végétarienne" onClick={() => { const sl = [...slots]; sl[x.k] = { ...x, veg: !x.veg }; delete (sl[x.k] as { k?: number }).k; run(() => saveSlots(s, sl)); }}><Leaf size={18} /></button>}
-                          <button className="ib" aria-label="Remplacer ce repas" disabled={busy === x.k} onClick={() => swap(x.k)}><RefreshCw size={18} className={busy === x.k ? "spin" : ""} /></button>
-                          <button className="ib hide-xs" aria-label="Favori" aria-pressed={fav} onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, r.id))}><Heart size={18} fill={fav ? "currentColor" : "none"} /></button>
-                          <button className="ib" aria-label="Cuisiné" aria-pressed={x.cooked} onClick={() => run(() => setCooked(s, x.k, !x.cooked), x.cooked ? "Stock rétabli" : "Cuisiné : stock mis à jour")}>{x.cooked ? <CheckIcon size={18} /> : <ChefHat size={18} />}</button>
+                          <button className="ib" aria-label={`Remplacer ${r.name}`} disabled={busy === x.k} onClick={() => swap(x.k)}><RefreshCw size={19} className={busy === x.k ? "spin" : ""} /></button>
+                          <button className={`ib done${x.cooked ? " on" : ""}`} aria-label={x.cooked ? "Annuler « cuisiné »" : "Marquer comme cuisiné"} aria-pressed={x.cooked}
+                            onClick={() => { buzz(); run(() => setCooked(s, x.k, !x.cooked), x.cooked ? "Stock rétabli" : "Cuisiné : stock mis à jour"); }}><CheckIcon size={19} /></button>
                         </div>
                       );
                     })}
@@ -162,8 +193,15 @@ export default function Week() {
           </>
         )}
       </div>
-      {!!slots.length && <button className={`fab${mini && busy !== "gen" ? " mini" : ""}`} disabled={busy === "gen"} onClick={generate} aria-label="Nouvelle semaine"><Sparkles size={20} /><span className="lbl">{busy === "gen" ? "Je cuisine…" : "Nouvelle semaine"}</span></button>}
-      {open && <RecipeSheet recipe={open.r} slotIndex={open.k} onClose={() => setOpen(null)} />}
+      {confirmNew && <Sheet title="Nouvelle semaine ?" onClose={() => setConfirmNew(false)}>
+        <p>Tous les repas de la semaine {Number(s.weekKey.split("-W")[1])} seront remplacés par une nouvelle proposition{cooked ? ` (dont ${cooked} déjà cuisiné${cooked > 1 ? "s" : ""})` : ""}. Tes favoris, tes goûts et tes accords d'accompagnement restent.</p>
+        <p className="small muted">Pour changer un seul repas, touche plutôt 🔄 sur sa carte.</p>
+        <div className="stack" style={{ gap: 8, marginTop: 12 }}>
+          <button className="btn block" onClick={() => { setConfirmNew(false); generate(); }}><Sparkles size={18} />Remplacer toute la semaine</button>
+          <button className="btn ghost block" onClick={() => setConfirmNew(false)}>Garder ma semaine</button>
+        </div>
+      </Sheet>}
+      {open && <RecipeSheet recipe={open.r} slotIndex={open.k} startCook={open.cook} onClose={() => setOpen(null)} />}
       {opts && <OptionsSheet onClose={() => setOpts(false)} />}
       {ready && <ReadySheet onClose={() => setReady(false)} onPick={(r) => { placeIn(r); setReady(false); }} />}
       {fridge && <FridgeSheet onClose={() => setFridge(false)} onPlace={(r) => { placeIn(r); setFridge(false); }} />}
