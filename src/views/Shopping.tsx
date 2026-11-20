@@ -155,7 +155,7 @@ function ByStore({ lines, stores, onEdit }: { lines: ShopLine[]; stores: StoreId
   const asLine = (pl: PlanLine) => lines.find((l) => l.id === pl.id)!;
   const main = mainStore(plan, stores);
   return <>
-    {stores.length > 1 && (!plan?.main || setup) ? <StoreSetup stores={stores} onDone={() => setSetup(false)} /> : null}
+    {stores.length > 1 && (!plan?.main || setup) ? <StoreSetup stores={stores} onMain={() => setSetup(true)} onDone={() => setSetup(false)} /> : null}
     {stores.length > 1 && todo.length > 0 && <div className="card" style={{ marginBottom: 12 }}>
       <div className="row between"><h3 style={{ margin: 0 }}>Ta répartition</h3>{plan?.main && !setup && <button className="btn soft sm" onClick={() => setSetup(true)}><Store size={16} />Magasins</button>}</div>
       <p style={{ margin: "6px 0" }}><b className="num">≈ {eur(planTotal)}</b> <span className="muted small">pour ce qu'il reste à acheter</span></p>
@@ -200,7 +200,7 @@ function Compare({ todo, stores, planTotal }: { todo: ShopLine[]; stores: StoreI
 }
 
 /** « Où fais-tu tes courses ? » : magasin principal, puis les rayons achetés ailleurs. */
-function StoreSetup({ stores, onDone }: { stores: StoreId[]; onDone: () => void }) {
+function StoreSetup({ stores, onMain, onDone }: { stores: StoreId[]; onMain: () => void; onDone: () => void }) {
   const s = useStore();
   const plan = s.prefs.storePlan;
   const main = mainStore(plan, stores);
@@ -208,7 +208,7 @@ function StoreSetup({ stores, onDone }: { stores: StoreId[]; onDone: () => void 
     <h3>Où fais-tu tes courses ?</h3>
     <p className="small muted">Ton magasin principal, puis les rayons que tu prends ailleurs. Tu pourras changer un article d'un geste dans la liste : Stoemp retient tout.</p>
     <label className="field">Magasin principal</label>
-    <div className="chips">{stores.filter((st) => !STORES[st].only).map((st) => <button key={st} className="chip" aria-pressed={plan?.main === st} onClick={() => run(() => setStoreRule(s, { main: st }))}>{STORES[st].label}</button>)}</div>
+    <div className="chips">{stores.filter((st) => !STORES[st].only).map((st) => <button key={st} className="chip" aria-pressed={plan?.main === st} onClick={() => { onMain(); run(() => setStoreRule(s, { main: st })); }}>{STORES[st].label}</button>)}</div>
     {plan?.main && <>
       <label className="field">Rayons pris ailleurs</label>
       <div className="list">{CAT_ORDER.map((c) => <div key={c} className="row between" style={{ padding: "4px 0", gap: 8 }}>
@@ -218,6 +218,7 @@ function StoreSetup({ stores, onDone }: { stores: StoreId[]; onDone: () => void 
           {stores.filter((st) => st !== main && (!STORES[st].only || STORES[st].only!.includes(c))).map((st) => <option key={st} value={st}>{STORES[st].label}</option>)}
         </select>
       </div>)}</div>
+      {stores.some((st) => STORES[st].only) && <p className="small muted" style={{ marginTop: 8 }}>{stores.filter((st) => STORES[st].only).map((st) => STORES[st].label).join(", ")} : seulement les articles qu'on y trouve (prix relevés) ; le reste du rayon reste chez {STORES[main].label}.</p>}
       <button className="btn block" style={{ marginTop: 10 }} onClick={onDone}>C'est bon</button>
     </>}
   </div>;
