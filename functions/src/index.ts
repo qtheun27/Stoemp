@@ -741,3 +741,4 @@ export const onRecipeCreated = onDocumentCreated({ document: "recipes/{id}", tim
 });
 
 export * from "./admin";
+export * from "./reminders";

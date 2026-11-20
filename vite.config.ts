@@ -47,9 +47,11 @@ export default defineConfig({
         skipWaiting: true,
         clientsClaim: true,
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        // Rappels : réception et affichage des notifications push (public/push-sw.js).
+        importScripts: ["push-sw.js"],
       },
     }),
   ],
-  build: { rollupOptions: { output: { manualChunks: { firebase: ["firebase/app", "firebase/auth", "firebase/firestore", "firebase/functions"], react: ["react", "react-dom"] } } } },
+  build: { rollupOptions: { output: { manualChunks: { firebase: ["firebase/app", "firebase/auth", "firebase/firestore", "firebase/functions"], messaging: ["firebase/messaging"], react: ["react", "react-dom"] } } } },
   test: { include: ["src/**/*.test.ts"] },
 });
