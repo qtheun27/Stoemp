@@ -5,7 +5,7 @@ import { STORES } from "../lib/constants";
 import type { StoreId } from "../lib/types";
 import { useStore } from "../state/store";
 
-interface Progress { id: string; store: StoreId; page?: string; pos: number; total: number; prices?: number; paused?: string | null; at: number; doneAt?: number | null }
+interface Progress { id: string; store: StoreId; page?: string; pos: number; total: number; prices?: number; paused?: string | null; at: number; doneAt?: number | null; review?: string; moved?: number; placed?: number }
 
 /** Avancement en direct du classement en arrière-plan des produits inconnus envoyés par le capteur (fiches `enrichProgress`). */
 export function CaptureProgress() {
@@ -25,7 +25,7 @@ export function CaptureProgress() {
     return <div key={p.id} className="notice" style={{ display: "block" }}>
       <div className="row between"><b>{p.doneAt ? "✓" : p.paused ? "⏸" : "⏳"} {STORES[p.store]?.label || p.store}{p.page ? ` · ${p.page}` : ""}</b><span className="small num">{Math.min(p.pos, p.total)} / {p.total} produits classés · envoyé à {new Date(p.at).toLocaleTimeString("fr-BE", { hour: "2-digit", minute: "2-digit" })}</span></div>
       <div className="progress" style={{ margin: "6px 0" }}><i style={{ width: `${pct}%` }} /></div>
-      <div className="small muted">{p.doneAt ? `Terminé : ${p.prices || 0} prix ajoutés en arrière-plan.`
+      <div className="small muted">{p.doneAt ? `Terminé : ${p.prices || 0} prix ajoutés en arrière-plan${p.review === "fini" ? ` · vérifié${p.moved ? ` : ${p.moved} produit${p.moved > 1 ? "s" : ""} mal rangé${p.moved > 1 ? "s" : ""} déplacé${p.moved > 1 ? "s" : ""}` : ", rien à corriger"}` : " · vérification en cours…"}.`
         : p.paused ? "En pause : budget IA du mois atteint. Reprise automatique dès qu'il est relevé (console → IA)."
         : `Encore environ ${Math.max(1, Math.ceil(left / 200) * 2)} min · ${p.prices || 0} prix ajoutés pour l'instant. Tu peux fermer l'appli.`}</div>
     </div>;

@@ -93,6 +93,15 @@ export const PageMatches = z.object({
   matches: z.array(z.object({ index: z.number().int(), itemId: z.string().nullable().describe("Identifiant exact d'un article du catalogue, ou null") })),
 });
 
+/** Relecture d'articles : produits rangés par erreur (numéro de l'article, du produit, nom recopié pour contrôle). */
+export const ReviewWrong = z.object({
+  wrong: z.array(z.object({
+    item: z.number().int(),
+    product: z.number().int(),
+    name: z.string().describe("Nom du produit signalé, recopié tel quel"),
+  })),
+});
+
 /** Classement par lots des produits inconnus en articles génériques (enrichissement du catalogue). */
 export const NewItems = z.object({
   items: z.array(z.object({
