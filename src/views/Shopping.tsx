@@ -2,13 +2,14 @@ import { useMemo, useState } from "react";
 import { Camera, ClipboardCopy, ExternalLink, Pencil, Plus, Share2, Store, Trash2, Check as CheckIcon } from "lucide-react";
 import { CAT_ORDER, CATS, STORES } from "../lib/constants";
 import { bestPair, storeTotals } from "../lib/cost";
+import { costAt, mainStore, oneStoreTotal, planGroups, planTips, sells, storeOf, type PlanLine } from "../lib/storeplan";
 import { bestPrice, lineCost, priceAt } from "../lib/pricing";
 import { frDate, nextShoppingDate, today } from "../lib/season";
 import { buildShopping, shareText, type ShopLine } from "../lib/shopping";
 import { eur } from "../lib/text";
 import type { Cat, StoreId } from "../lib/types";
 import { fmtQty } from "../lib/units";
-import { addManual, vegCfg, checkLine, finishShopping, priceSel, removeLine, restoreLine, setCategory, setPricePaid } from "../state/actions";
+import { addManual, vegCfg, checkLine, setStoreRule, finishShopping, priceSel, removeLine, restoreLine, setCategory, setPricePaid } from "../state/actions";
 import { useStore, type StoreState } from "../state/store";
 import { Check, copyText, Empty, run, Sheet, toast, TopBar } from "../ui";
 import ReceiptSheet from "./Receipt";
@@ -87,7 +88,7 @@ export default function Shopping() {
                 <span className="small muted num">{done}/{lines.length} · ≈ {eur(total)}</span>
               </div>
               <div className="progress"><i style={{ width: `${(done / lines.length) * 100}%` }} /></div>
-              {view === "rayon" ? <ByCategory lines={lines} priceOf={priceOf} onEdit={setEdit} /> : <ByStore lines={lines} stores={stores} />}
+              {view === "rayon" ? <ByCategory lines={lines} priceOf={priceOf} onEdit={setEdit} /> : <ByStore lines={lines} stores={stores} onEdit={setEdit} />}
               <div className="row wrap" style={{ marginTop: 18 }}>
                 {s.app.features.receipt && <button className="btn ghost" onClick={() => setReceipt(true)}><Camera size={18} />Scanner le ticket</button>}
                 {done > 0 && <button className="btn ghost" onClick={() => run(() => finishShopping(s), "Courses terminées")}><CheckIcon size={18} />Terminer les courses</button>}
@@ -118,25 +119,134 @@ function ByCategory({ lines, priceOf, onEdit }: { lines: ShopLine[]; priceOf: (l
     return <section key={key}>
       <div className="cat-h"><span>{icon}</span>{label}<span className="muted">{L.filter((l) => !l.checked).length}</span></div>
       {/* En magasin : toucher la ligne la coche (grande cible) ; les articles cochés descendent ; ✎ pour modifier ou retirer. */}
-      <div className="list">{[...L].sort((a, b) => Number(a.checked) - Number(b.checked)).map((l) => {
-        const pc = priceOf(l);
-        const tick = (v: boolean) => { try { navigator.vibrate?.(10); } catch { /* ignoré */ } run(() => checkLine(s, l, v)); };
-        return <div key={l.id} className={`li${l.checked ? " done" : ""}`}>
-          <Check checked={l.checked} onChange={tick} label={l.name} />
-          <button className="main-t" onClick={() => tick(!l.checked)} aria-pressed={l.checked}>
-            <span className="name">{l.name}</span>
-            <span className="meta"><span className="num">{lineQty(l)}</span>
-              <span className={`tag${l.reason === "stock" ? " warn" : l.reason === "manuel" ? "" : " ac"}`}>{l.reason === "repas" ? "repas" : l.reason === "stock" ? (l.detail || "stock bas") : "manuel"}</span>
-              {l.pricePaid ? <span className="num">payé {eur(l.pricePaid)}</span> : pc ? <span className="num">≈ {eur(pc.cost)}</span> : null}</span>
-          </button>
-          <button className="ib plain" aria-label={`Modifier ${l.name}`} onClick={() => onEdit(l)}><Pencil size={18} /></button>
-        </div>;
-      })}</div>
+      <div className="list">{[...L].sort((a, b) => Number(a.checked) - Number(b.checked)).map((l) => <ShopRow key={l.id} line={l} cost={priceOf(l)?.cost ?? null} onEdit={onEdit} />)}</div>
     </section>;
   })}</>;
 }
 
-function ByStore({ lines, stores }: { lines: ShopLine[]; stores: StoreId[] }) {
+/** Une ligne de la liste : toucher la ligne la coche (grande cible), ✎ pour modifier ou retirer ; `extra` = pastille du magasin. */
+function ShopRow({ line: l, cost, onEdit, extra }: { line: ShopLine; cost: number | null; onEdit: (l: ShopLine) => void; extra?: React.ReactNode }) {
+  const s = useStore();
+  const tick = (v: boolean) => { try { navigator.vibrate?.(10); } catch { /* ignoré */ } run(() => checkLine(s, l, v)); };
+  return <div className={`li${l.checked ? " done" : ""}`}>
+    <Check checked={l.checked} onChange={tick} label={l.name} />
+    <button className="main-t" onClick={() => tick(!l.checked)} aria-pressed={l.checked}>
+      <span className="name">{l.name}</span>
+      <span className="meta"><span className="num">{lineQty(l)}</span>
+        <span className={`tag${l.reason === "stock" ? " warn" : l.reason === "manuel" ? "" : " ac"}`}>{l.reason === "repas" ? "repas" : l.reason === "stock" ? (l.detail || "stock bas") : "manuel"}</span>
+        {l.pricePaid ? <span className="num">payé {eur(l.pricePaid)}</span> : cost != null ? <span className="num">≈ {eur(cost)}</span> : null}</span>
+    </button>
+    {extra}
+    <button className="ib plain" aria-label={`Modifier ${l.name}`} onClick={() => onEdit(l)}><Pencil size={18} /></button>
+  </div>;
+}
+
+function ByStore({ lines, stores, onEdit }: { lines: ShopLine[]; stores: StoreId[]; onEdit: (l: ShopLine) => void }) {
+  const s = useStore();
+  const ctx = { idx: s.idx, book: s.book, organic: priceSel(s) };
+  const plan = s.prefs.storePlan;
+  const [pick, setPick] = useState<ShopLine | null>(null);
+  const [setup, setSetup] = useState(false);
+  const todo = lines.filter((l) => !l.checked);
+  const groups = planGroups(lines, plan, stores, ctx);
+  const planTotal = planGroups(todo, plan, stores, ctx).reduce((a, g) => a + g.total, 0);
+  const tips = planTips(todo, plan, stores, ctx);
+  const isReady = (l: ShopLine) => !!(l.itemId && s.idx.get(l.itemId)?.ready);
+  const asLine = (pl: PlanLine) => lines.find((l) => l.id === pl.id)!;
+  const main = mainStore(plan, stores);
+  return <>
+    {stores.length > 1 && (!plan?.main || setup) ? <StoreSetup stores={stores} onDone={() => setSetup(false)} /> : null}
+    {stores.length > 1 && todo.length > 0 && <div className="card" style={{ marginBottom: 12 }}>
+      <div className="row between"><h3 style={{ margin: 0 }}>Ta répartition</h3>{plan?.main && !setup && <button className="btn soft sm" onClick={() => setSetup(true)}><Store size={16} />Magasins</button>}</div>
+      <p style={{ margin: "6px 0" }}><b className="num">≈ {eur(planTotal)}</b> <span className="muted small">pour ce qu'il reste à acheter</span></p>
+      <Compare todo={todo} stores={stores} planTotal={planTotal} />
+      {tips.map((t) => { const l = asLine(t.line); return <div key={t.line.id} className="row between" style={{ padding: "6px 0", borderTop: "1px solid var(--line)", gap: 8 }}>
+        <span className="grow small">💡 <b>{l.name}</b> : {eur(t.save)} de moins chez {STORES[t.to].label}</span>
+        <button className="btn soft sm" onClick={() => run(() => setStoreRule(s, { itemId: t.line.itemId!, store: t.to }), `${l.name} : chez ${STORES[t.to].label}`)}>Y acheter</button>
+      </div>; })}
+    </div>}
+    {groups.map((g) => {
+      const left = g.lines.filter((l) => !asLine(l).checked);
+      return <details key={g.store} className="store-list" open={left.length > 0}>
+        <summary><span className="store-dot" style={{ background: STORES[g.store].color }} /><b className="grow">{STORES[g.store].label}</b>
+          <span className="small muted num">{left.length ? `${left.length} à prendre` : "✓ tout est pris"}{g.total ? ` · ≈ ${eur(g.total)}` : ""}</span></summary>
+        {[{ key: "pret", icon: "🥡", label: "Plats préparés", ok: (l: ShopLine) => isReady(l) }, ...CAT_ORDER.map((c) => ({ key: c, icon: CATS[c].icon, label: CATS[c].label, ok: (l: ShopLine) => l.category === c && !isReady(l) }))].map(({ key, icon, label, ok }) => {
+          const L = g.lines.map(asLine).filter(ok).sort((a, b) => Number(a.checked) - Number(b.checked) || a.name.localeCompare(b.name, "fr"));
+          if (!L.length) return null;
+          return <section key={key}>
+            <div className="cat-h"><span>{icon}</span>{label}<span className="muted">{L.filter((l) => !l.checked).length}</span></div>
+            <div className="list">{L.map((l) => <ShopRow key={l.id} line={l} cost={costAt(l, g.store, ctx)?.cost ?? null} onEdit={onEdit}
+              extra={stores.length > 1 && <button className="store-pill" onClick={() => setPick(l)} aria-label={`Changer de magasin pour ${l.name}`}
+                style={{ borderColor: STORES[g.store].color }}>{STORES[g.store].label}</button>} />)}</div>
+          </section>;
+        })}
+      </details>;
+    })}
+    {stores.length > 1 && <details className="card" style={{ marginTop: 14 }}><summary><b>Comparer les enseignes</b> <span className="small muted">tout le panier dans chaque magasin</span></summary><ByStoreTotals lines={lines} stores={stores} /></details>}
+    {pick && <StorePick line={pick} stores={stores} main={main} onClose={() => setPick(null)} />}
+  </>;
+}
+
+/** Combien coûterait le panier tout dans un seul magasin, comparé à ta répartition (seulement les magasins avec des prix relevés). */
+function Compare({ todo, stores, planTotal }: { todo: ShopLine[]; stores: StoreId[]; planTotal: number }) {
+  const s = useStore();
+  const ctx = { idx: s.idx, book: s.book, organic: priceSel(s) };
+  const real = storeTotals(todo.map((l) => ({ itemId: l.itemId, qty: l.qty, unit: l.unit })), stores, ctx).filter((t) => t.known > 0 && !STORES[t.store].only);
+  if (!real.length) return null;
+  return <div className="chips" style={{ margin: "4px 0 8px" }}>{real.map((t) => {
+    const d = oneStoreTotal(todo, t.store, stores, ctx) - planTotal;
+    return <span key={t.store} className="chip small">Tout chez {STORES[t.store].label} : <b className="num">{Math.abs(d) < 0.5 ? "pareil" : `${d > 0 ? "+" : "−"}${eur(Math.abs(d))}`}</b></span>;
+  })}</div>;
+}
+
+/** « Où fais-tu tes courses ? » : magasin principal, puis les rayons achetés ailleurs. */
+function StoreSetup({ stores, onDone }: { stores: StoreId[]; onDone: () => void }) {
+  const s = useStore();
+  const plan = s.prefs.storePlan;
+  const main = mainStore(plan, stores);
+  return <div className="card" style={{ marginBottom: 12 }}>
+    <h3>Où fais-tu tes courses ?</h3>
+    <p className="small muted">Ton magasin principal, puis les rayons que tu prends ailleurs. Tu pourras changer un article d'un geste dans la liste : Stoemp retient tout.</p>
+    <label className="field">Magasin principal</label>
+    <div className="chips">{stores.filter((st) => !STORES[st].only).map((st) => <button key={st} className="chip" aria-pressed={plan?.main === st} onClick={() => run(() => setStoreRule(s, { main: st }))}>{STORES[st].label}</button>)}</div>
+    {plan?.main && <>
+      <label className="field">Rayons pris ailleurs</label>
+      <div className="list">{CAT_ORDER.map((c) => <div key={c} className="row between" style={{ padding: "4px 0", gap: 8 }}>
+        <span className="grow">{CATS[c].icon} {CATS[c].label}</span>
+        <select className="input" style={{ width: "auto", minHeight: 40 }} value={plan.cats?.[c] || ""} onChange={(e) => run(() => setStoreRule(s, { cat: c, store: (e.target.value || null) as StoreId | null }))}>
+          <option value="">{STORES[main].label}</option>
+          {stores.filter((st) => st !== main && (!STORES[st].only || STORES[st].only!.includes(c))).map((st) => <option key={st} value={st}>{STORES[st].label}</option>)}
+        </select>
+      </div>)}</div>
+      <button className="btn block" style={{ marginTop: 10 }} onClick={onDone}>C'est bon</button>
+    </>}
+  </div>;
+}
+
+/** Changer le magasin d'un article : seulement lui, ou tout son rayon (retenu pour les semaines suivantes). */
+function StorePick({ line, stores, main, onClose }: { line: ShopLine; stores: StoreId[]; main: StoreId; onClose: () => void }) {
+  const s = useStore();
+  const ctx = { idx: s.idx, book: s.book, organic: priceSel(s) };
+  const plan = s.prefs.storePlan;
+  const [whole, setWhole] = useState(false);
+  const it = line.itemId ? s.idx.get(line.itemId) : undefined;
+  const cur = storeOf(line, plan, stores, ctx);
+  const choose = (st: StoreId) => {
+    const r = whole ? { cat: line.category, store: st === main ? null : st } : line.itemId ? { itemId: line.itemId, store: st } : { cat: line.category, store: st === main ? null : st };
+    run(() => setStoreRule(s, r), whole || !line.itemId ? `${CATS[line.category].label} : chez ${STORES[st].label}` : `${line.name} : chez ${STORES[st].label}`);
+    onClose();
+  };
+  return <Sheet title={`Où acheter ${line.name} ?`} sub={cur.why === "article" ? "Choisi pour cet article" : cur.why === "rayon" ? `Comme tout le rayon ${CATS[line.category].label}` : "Magasin principal"} onClose={onClose}>
+    <div className="list">{stores.filter((st) => sells(it, line.category, st, ctx)).map((st) => { const c = costAt(line, st, ctx); return <button key={st} className="store-row" style={{ width: "100%", textAlign: "left", background: "none", border: 0, font: "inherit", color: "inherit", cursor: "pointer" }} onClick={() => choose(st)} aria-pressed={cur.store === st}>
+      <span className="store-dot" style={{ background: STORES[st].color }} />
+      <div className="grow"><b>{STORES[st].label}</b>{cur.store === st && <span className="small muted"> · actuel</span>}{st === main && <span className="small muted"> · principal</span>}</div>
+      <b className="num">{c ? `${c.estimated ? "≈ " : ""}${eur(c.cost)}` : "—"}</b></button>; })}</div>
+    <label className="row" style={{ marginTop: 12, gap: 10, cursor: "pointer" }}><Check checked={whole} onChange={setWhole} label="Tout le rayon" /><span>Tout le rayon {CATS[line.category].icon} {CATS[line.category].label}</span></label>
+    {cur.why === "article" && line.itemId && <button className="btn ghost block" style={{ marginTop: 10 }} onClick={() => { run(() => setStoreRule(s, { itemId: line.itemId!, store: null })); onClose(); }}>Revenir au réglage du rayon</button>}
+  </Sheet>;
+}
+
+function ByStoreTotals({ lines, stores }: { lines: ShopLine[]; stores: StoreId[] }) {
   const s = useStore();
   const buy = lines.filter((l) => !l.checked).map((l) => ({ itemId: l.itemId, qty: l.qty, unit: l.unit }));
   const ctx = { idx: s.idx, book: s.book, organic: priceSel(s) };
