@@ -42,6 +42,8 @@ export default function AppSettings() {
         <p className="small muted">{app.vapidKey ? "✓ Rappels activables dans Réglages → Rappels." : "Sans cette clé, les rappels ne peuvent pas être activés."}</p>
         <label className="field">Part de la semaine inventée par l'IA (option cochée) : {Math.round(app.aiWeekShare * 100)} %</label>
         <input type="range" min={0} max={1} step={0.05} defaultValue={app.aiWeekShare} onChange={(e) => save({ aiWeekShare: Number(e.target.value) })} style={{ width: "100%", accentColor: "var(--ac)" }} />
+        <div className="opt" style={{ marginTop: 10 }}><div className="t"><b>Relecture des rangements après chaque envoi</b><div className="d">L'IA (Sonnet) relit chaque article touché par une page envoyée et déplace les produits mal rangés. Environ 0,30 $ par page (0,75 $ pour un très gros rayon), dans le budget IA du mois.</div></div>
+          <Switch checked={app.priceReview} onChange={(v) => save({ priceReview: v })} label="Relecture des rangements" /></div>
         <label className="field">Un prix reste « récent » pendant</label>
         <Stepper value={app.freshDays} min={3} max={60} onChange={(v) => save({ freshDays: v })} fmt={(v) => `${v} jours`} />
       </div>

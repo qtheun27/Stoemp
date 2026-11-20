@@ -99,6 +99,7 @@ export const ReviewWrong = z.object({
     item: z.number().int(),
     product: z.number().int(),
     name: z.string().describe("Nom du produit signalé, recopié tel quel"),
+    belongs: z.string().describe("Article générique où ce produit devrait aller (ex. « Lessive en capsules » pour une lessive rangée dans « Persil »)"),
   })),
 });
 
