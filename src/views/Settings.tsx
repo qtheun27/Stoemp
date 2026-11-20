@@ -48,12 +48,24 @@ last=c;
 }
 const colruyt=/colruyt[.]be|collectandgo[.]be/.test(location.hostname);
 if(!colruyt){let h=0;for(let i=0;i<30;i++){scrollTo(0,document.body.scrollHeight);await z(900);const nh=document.body.scrollHeight;if(nh===h)break;h=nh;b.textContent="Stoemp : défilement de la page… ("+(i+1)+")";}scrollTo(0,0);}
-let text=document.body.innerText;
-if(!colruyt){
+let text=document.body.innerText,pages=1;
 const pr=/€ ?[0-9]+[,.][0-9]{2}|[0-9]+[,.][0-9]{2} ?€/;
-const els=[...document.querySelectorAll("body *")].filter(e=>e.children.length<5&&e.offsetParent&&(e.textContent||"").length<50&&pr.test(e.textContent||""));
-if(els.length>=3){let a=els[0];while(a&&a!==document.body&&els.filter(e=>a.contains(e)).length<els.length*0.7)a=a.parentElement;
-const h1=document.querySelector("h1");text=(h1?h1.innerText:document.title)+NL+(a||document.body).innerText;}
+const zone=(doc,head)=>{const els=[...doc.querySelectorAll("body *")].filter(e=>e.children.length<5&&e.offsetParent&&(e.textContent||"").length<50&&pr.test(e.textContent||""));
+if(els.length<3)return head?doc.body.innerText:"";let a=els[0];while(a&&a!==doc.body&&els.filter(e=>a.contains(e)).length<els.length*0.7)a=a.parentElement;
+const h1=doc.querySelector("h1");return (head?(h1?h1.innerText:doc.title)+NL:"")+(a||doc.body).innerText;};
+const nextOf=doc=>{const ls=[...doc.querySelectorAll("a[href]")].filter(a=>{try{return new URL(a.href).origin===location.origin}catch(e){return false}});
+const l=ls.find(a=>a.rel==="next")||ls.find(a=>/^(»|›|>|suivant|page suivante|volgende|next)$/i.test((a.innerText||"").trim())||/^(page suivante|suivant|volgende|next)/i.test(a.getAttribute("aria-label")||a.title||""));
+return l?l.href.split("#")[0]:null;};
+if(!colruyt){
+text=zone(document,true);
+const seen=new Set([location.href.split("#")[0]]);let nx=nextOf(document);
+for(let k=0;k<40&&nx&&!seen.has(nx);k++){
+seen.add(nx);b.textContent="Stoemp : lecture de la page "+(k+2)+"… — garde cet onglet ouvert";
+const f=document.createElement("iframe");f.style.cssText="position:fixed;left:-9999px;top:0;width:1280px;height:2400px";f.src=nx;document.body.appendChild(f);
+let d=null;for(let i=0;i<40;i++){await z(500);try{d=f.contentDocument}catch(e){d=null;break}if(i>3&&d&&d.readyState==="complete"&&pr.test(d.body.innerText))break}
+const part=d?zone(d,false):"";const nn=d?nextOf(d):null;f.remove();
+if(!part)break;text+=NL+part;pages++;nx=nn;
+}
 }
 if(colruyt){
 const u=new URL(location.href);let p=Number(u.searchParams.get("page")||"1");
@@ -68,7 +80,7 @@ const m=t.match(/[0-9]+,[0-9]{2,3}[/](kg|pce|l)/g);if(!m)break;text+=NL+t;
 }
 const d={type:"stoemp-capture",host:location.hostname,url:location.href,text:text.slice(0,1000000)};
 b.innerHTML="";
-const t=document.createElement("div");t.textContent="Stoemp : tout est chargé ("+n+" « Voir plus »)"+(text.length>1000000?" — page très longue : envoie plutôt par sous-catégorie.":".");
+const t=document.createElement("div");t.textContent="Stoemp : tout est chargé ("+n+" « Voir plus »"+(pages>1?", "+pages+" pages":"")+")"+(text.length>1000000?" — page très longue : envoie plutôt par sous-catégorie.":".");
 const go=document.createElement("button");go.textContent="📥 Envoyer à Stoemp";
 go.style.cssText="margin-top:10px;width:100%;padding:10px;border:0;border-radius:10px;background:#68a83c;color:#fff;font:700 15px system-ui;cursor:pointer";
 b.append(t,go);
