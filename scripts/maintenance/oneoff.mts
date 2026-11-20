@@ -1,18 +1,13 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : arrête la file d'attente Carrefour et retire les prix Carrefour
-// capturés aujourd'hui (noms décalés d'une carte : chaque prix était rattaché au produit suivant). Les articles créés
-// et les alias appris (noms de produits justes) sont gardés. Aucun prix affiché dans le journal.
-import { initializeApp, applicationDefault } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
-initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
-const db = getFirestore();
-const jobs = (await db.collection("enrichJobs").get()).docs.filter((d) => d.get("store") === "carrefour");
-for (const j of jobs) { console.log(`File arrêtée : ${j.get("pos")}/${(j.get("products") || []).length} produits traités`); await j.ref.delete(); }
-const since = "2026-11-20T00:00:00";
-const prices = (await db.collection("prices").where("store", "==", "carrefour").get()).docs.filter((d) => d.get("source") === "capture" && String(d.get("fetchedAt")) >= since);
-const hist = (await db.collection("priceHistory").where("store", "==", "carrefour").get()).docs.filter((d) => d.get("source") === "capture" && String(d.get("fetchedAt")) >= since);
-const w = db.bulkWriter();
-prices.forEach((d) => w.delete(d.ref)); hist.forEach((d) => w.delete(d.ref));
-await w.close();
-console.log(`Prix Carrefour retirés : ${prices.length} fiches, ${hist.length} lignes d'historique`);
-await db.collection("priceBookDirty").doc("carrefour").set({ at: Date.now() });
-console.log("Carnet de prix Carrefour : reconstruction demandée");
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : EN LECTURE SEULE, journaux de la file d'attente des produits inconnus
+// (onEnrichJob) et des envois (extractPrices) depuis 14 h 00 (UTC 13 h 00). Messages tronqués, chiffres masqués.
+import { execSync } from "node:child_process";
+const mask = (s: string) => s.replace(/\d+[.,]\d{2}/g, "#,##").slice(0, 300);
+for (const fn of ["onenrichjob", "extractprices"]) {
+  const filter = `resource.type="cloud_run_revision" AND resource.labels.service_name="${fn}" AND timestamp>="2026-11-20T13:00:00Z" AND (severity>=WARNING OR textPayload:"classés" OR jsonPayload.message:"classés")`;
+  try {
+    const out = execSync(`gcloud logging read '${filter}' --project stoemp-app --limit 40 --format=json`, { encoding: "utf8", maxBuffer: 20e6 });
+    const rows = JSON.parse(out) as { timestamp: string; severity: string; textPayload?: string; jsonPayload?: Record<string, unknown> }[];
+    console.log(`\n=== ${fn} : ${rows.length} entrées`);
+    for (const r of rows.reverse()) console.log(`${r.timestamp.slice(11, 19)} ${r.severity} ${mask(r.textPayload || JSON.stringify(r.jsonPayload))}`);
+  } catch (e) { console.log(`=== ${fn} : lecture impossible — ${(e as Error).message.slice(0, 300)}`); }
+}
