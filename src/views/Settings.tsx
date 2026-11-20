@@ -47,7 +47,20 @@ let c=cnt(),still=0;for(let i=0;i<40&&still<4;i++){await z(250);const c2=cnt();i
 last=c;
 }
 const colruyt=/colruyt[.]be|collectandgo[.]be/.test(location.hostname);
-if(!colruyt){let h=0;for(let i=0;i<30;i++){scrollTo(0,document.body.scrollHeight);await z(900);const nh=document.body.scrollHeight;if(nh===h)break;h=nh;b.textContent="Stoemp : défilement de la page… ("+(i+1)+")";}scrollTo(0,0);}
+if(!colruyt){
+const pz2=/€ ?[0-9]+[,.][0-9]{2}|[0-9]+[,.][0-9]{2} ?€|€ ?[0-9]+/;
+const lastPrice=()=>{const els=[...document.querySelectorAll("body *")].filter(e=>e.children.length<3&&e.offsetParent&&(e.textContent||"").length<30&&pz2.test(e.textContent||""));return els[els.length-1]};
+let c=cnt(),idle=0;
+for(let i=0;i<1500&&idle<20;i++){
+const bottom=innerHeight+scrollY>=document.documentElement.scrollHeight-8;
+if(!bottom)scrollBy(0,Math.round(innerHeight*0.8));
+else if(idle%3===1){const lp=lastPrice();if(lp)lp.scrollIntoView({block:"center"})}
+else scrollTo(0,document.documentElement.scrollHeight);
+await z(bottom?400:200);
+const c2=cnt();if(c2>c){c=c2;idle=0}else if(bottom)idle++;
+if(i%10===0)b.textContent="Stoemp : défilement de la page… ("+c+" éléments) — garde cet onglet ouvert";
+}
+scrollTo(0,0);}
 let text=document.body.innerText,pages=1;
 const pr=/€ ?[0-9]+[,.][0-9]{2}|[0-9]+[,.][0-9]{2} ?€/;
 const zone=(doc,head)=>{const els=[...doc.querySelectorAll("body *")].filter(e=>e.children.length<5&&e.offsetParent&&(e.textContent||"").length<50&&pr.test(e.textContent||""));
