@@ -1,13 +1,17 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : EN LECTURE SEULE, journaux de la file d'attente des produits inconnus
-// (onEnrichJob) et des envois (extractPrices) depuis 14 h 00 (UTC 13 h 00). Messages tronqués, chiffres masqués.
-import { execSync } from "node:child_process";
-const mask = (s: string) => s.replace(/\d+[.,]\d{2}/g, "#,##").slice(0, 300);
-for (const fn of ["onenrichjob", "extractprices"]) {
-  const filter = `resource.type="cloud_run_revision" AND resource.labels.service_name="${fn}" AND timestamp>="2026-11-20T13:00:00Z" AND (severity>=WARNING OR textPayload:"classés" OR jsonPayload.message:"classés")`;
-  try {
-    const out = execSync(`gcloud logging read '${filter}' --project stoemp-app --limit 40 --format=json`, { encoding: "utf8", maxBuffer: 20e6 });
-    const rows = JSON.parse(out) as { timestamp: string; severity: string; textPayload?: string; jsonPayload?: Record<string, unknown> }[];
-    console.log(`\n=== ${fn} : ${rows.length} entrées`);
-    for (const r of rows.reverse()) console.log(`${r.timestamp.slice(11, 19)} ${r.severity} ${mask(r.textPayload || JSON.stringify(r.jsonPayload))}`);
-  } catch (e) { console.log(`=== ${fn} : lecture impossible — ${(e as Error).message.slice(0, 300)}`); }
-}
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : EN LECTURE SEULE, dépense IA du mois par tâche et plafond fixé.
+import { initializeApp, applicationDefault } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
+const db = getFirestore();
+const cfg = (await db.collection("config").doc("ai").get()).data() || {};
+console.log(`Plafond mensuel : ${cfg.monthlyBudgetUsd ?? "non fixé"} $`);
+const start = new Date(2026, 10, 1).getTime();
+const logs = (await db.collection("aiLogs").where("at", ">=", start).select("cost", "task", "at", "model").get()).docs.map((d) => d.data());
+const by = new Map<string, { n: number; cost: number }>();
+for (const l of logs) { const k = String(l.task); const v = by.get(k) || { n: 0, cost: 0 }; v.n++; v.cost += l.cost || 0; by.set(k, v); }
+const total = logs.reduce((a, l) => a + (l.cost || 0), 0);
+console.log(`Dépense du mois : ${total.toFixed(2)} $ en ${logs.length} appels`);
+for (const [k, v] of [...by].sort((a, b) => b[1].cost - a[1].cost)) console.log(`  ${k.padEnd(16)} ${String(v.n).padStart(6)} appels  ${v.cost.toFixed(2).padStart(8)} $`);
+const days = new Map<string, number>();
+for (const l of logs) { const k = new Date(l.at).toISOString().slice(0, 10); days.set(k, (days.get(k) || 0) + (l.cost || 0)); }
+console.log("Par jour :"); for (const [k, v] of [...days].sort()) console.log(`  ${k} ${v.toFixed(2)} $`);
