@@ -1,3 +1,4 @@
+import { CaptureProgress } from "./CaptureProgress";
 import { useEffect, useRef, useState } from "react";
 import type { StoreId } from "../lib/types";
 import { STORES } from "../lib/constants";
@@ -62,8 +63,7 @@ export default function Capture() {
       {state.phase === "error" && <Empty icon="⚠️">{state.msg}</Empty>}
       {state.phase === "done" && <>
         <div className="notice">{state.found} produits lus{state.shop ? ` chez ${state.shop}` : ""}, {state.saved!.length} prix enregistrés{state.created?.length ? `, ${state.created.length} nouveaux articles ajoutés au catalogue` : ""}{state.reader ? ` · lecture ${state.reader}` : ""}.</div>
-        {state.queued && state.paused ? <div className="notice">⏸ Budget IA du mois atteint : {state.queued} produits inconnus attendent. Ils seront classés tout seuls dès que le budget est relevé (console → IA), sans rien renvoyer.</div>
-        : state.queued ? <div className="notice">⏳ {state.queued} autres produits inconnus sont classés en arrière-plan (environ {Math.max(1, Math.ceil(state.queued / 200) * 3)} min) : leurs prix arriveront tout seuls, tu peux fermer cette page.</div> : null}
+        <CaptureProgress />
         {!!state.created?.length && <p className="small muted">Nouveaux articles : {state.created.join(", ")}</p>}
         <div className="list">{state.saved!.map((p) => <div key={p.itemId} className="li"><span className="main-t"><span className="name">{s.idx.get(p.itemId)?.name || p.itemId}</span><span className="meta">{p.productName}</span></span><b className="num">{eur(p.packPrice)}</b></div>)}</div>
         <button className="btn block" style={{ marginTop: 14 }} onClick={() => window.close()}>Fermer et revenir au magasin</button>

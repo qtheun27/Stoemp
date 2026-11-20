@@ -1,3 +1,4 @@
+import { CaptureProgress } from "./CaptureProgress";
 import { useEffect, useRef, useState } from "react";
 import { GoogleAuthProvider, linkWithPopup, signOut } from "firebase/auth";
 import { Copy, LogOut, Share2, ShieldCheck, UserPlus } from "lucide-react";
@@ -47,7 +48,7 @@ let c=cnt(),still=0;for(let i=0;i<40&&still<4;i++){await z(250);const c2=cnt();i
 last=c;
 }
 const colruyt=/colruyt[.]be|collectandgo[.]be/.test(location.hostname);
-if(!colruyt){
+if(!colruyt&&n===0){
 const pz2=/€ ?[0-9]+[,.][0-9]{2}|[0-9]+[,.][0-9]{2} ?€|€ ?[0-9]+/;
 const lastPrice=()=>{const els=[...document.querySelectorAll("body *")].filter(e=>e.children.length<3&&e.offsetParent&&(e.textContent||"").length<30&&pz2.test(e.textContent||""));return els[els.length-1]};
 let c=cnt(),idle=0;
@@ -197,6 +198,7 @@ export default function Settings() {
             {s.app.features.capture && <div className="card">
               <h3>📥 Capteur de prix</h3>
               <p>Sur le site de Colruyt, Delhaize, Carrefour, Albert Heijn ou Renmans, ouvre une catégorie (ex. Légumes et fruits) ou fais une recherche, puis touche ce favori : il charge lui-même tous les produits (« Voir plus ») et envoie leurs prix à Stoemp. Le robot hebdomadaire s'occupe de Renmans tout seul.</p>
+              <CaptureProgress />
               <div className="row wrap">
                 <a className="btn" ref={bm} href="#" onClick={(e) => { e.preventDefault(); toast("Glisse ce bouton dans ta barre de favoris"); }}>📥 Envoyer à Stoemp</a>
                 <button className="btn ghost" onClick={async () => toast((await copyText(bookmarklet())) ? "Code copié" : "Copie impossible")}><Copy size={18} />Copier le code</button>
