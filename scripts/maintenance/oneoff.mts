@@ -1,39 +1,26 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : EN LECTURE SEULE, contrôle du dernier envoi Carrefour.
-// Aucun prix affiché (journal public) : seulement les noms, l'article relié et la cohérence de la contenance.
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : avancement de la file Carrefour (lecture), puis correction de deux
+// rangements faux : le nom du produit est retiré des alias de l'article et son offre retirée de la fiche de prix Carrefour.
 import { initializeApp, applicationDefault } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, FieldValue } from "firebase-admin/firestore";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
 for (const d of (await db.collection("enrichJobs").get()).docs) console.log(`File d'attente : ${d.get("store")} · ${d.get("pos")}/${(d.get("products") || []).length}${d.get("paused") ? ` · en pause (${d.get("paused")})` : ""}`);
 const since = new Date(Date.now() - 3 * 3600_000).toISOString();
-const prices = (await db.collection("prices").where("store", "==", "carrefour").get()).docs.map((d) => d.data()).filter((p) => String(p.fetchedAt) >= since);
-console.log(`Fiches de prix Carrefour (3 h) : ${prices.length}`);
-const names = new Map((await db.collection("items").select("name").get()).docs.map((d) => [d.id, d.get("name") as string]));
-// Contenance écrite dans le nom (« 6 x 1,5 L », « 33cl », « 500 g ») comparée à celle enregistrée.
-const sizeIn = (n: string) => {
-  const m = n.match(/(?:(\d+)\s?[x×]\s?)?(\d+(?:[.,]\d+)?)\s?(kg|g|gr|l|cl|ml)\b/i);
-  if (!m) return null;
-  const v = Number(m[2].replace(",", ".")) * (m[1] ? Number(m[1]) : 1), u = m[3].toLowerCase();
-  return u === "kg" ? v * 1000 : u === "l" ? v * 1000 : u === "cl" ? v * 10 : v;
-};
-let ok = 0, ko = 0, none = 0; const bad: string[] = [];
-for (const p of prices) for (const o of (p.offers || []) as { name: string; size: number; seenAt: string }[]) {
-  if (o.seenAt < since) continue;
-  const s = sizeIn(o.name);
-  if (!s) { none++; continue; }
-  if (Math.abs(s - o.size) <= s * 0.25) ok++; else { ko++; if (bad.length < 12) bad.push(`${o.name} → ${names.get(p.itemId)} (contenance ${o.size} au lieu de ${s})`); }
-}
-console.log(`Contenance cohérente avec le nom : ${ok} · incohérente : ${ko} · sans contenance dans le nom : ${none}`);
-bad.forEach((b) => console.log("  ✗ " + b));
-console.log("\nÉchantillon (produit → article) :");
-prices.slice(0, 25).forEach((p) => console.log(`  ${p.productName} → ${names.get(p.itemId) || p.itemId}`));
+console.log(`Fiches de prix Carrefour (3 h) : ${(await db.collection("prices").where("store", "==", "carrefour").get()).docs.filter((d) => String(d.get("fetchedAt")) >= since).length}`);
 
-// Noms de produits retenus (alias) sur des articles de boisson : repérer une eau rangée dans une bière, etc.
-console.log("\nAlias des articles de boisson créés ou complétés aujourd'hui :");
-const fam = (s: string) => /\beau\b|source|minérale|spa\b|cristaline|chaudfontaine|vittel|evian|volvic/i.test(s) ? "eau" : /bière|beer|pils|ale\b|stout|lager|jupiler|leffe|hoegaarden|stella|duvel|chimay|westmalle|affligem|grimbergen/i.test(s) ? "bière" : /vin\b|wine|rosé|bordeaux|merlot|chardonnay/i.test(s) ? "vin" : /cola|limonade|soda|tonic|ginger|fanta|sprite|schweppes|pepsi|7up|oasis|ice tea/i.test(s) ? "soda" : /jus|nectar|smoothie/i.test(s) ? "jus" : /café|coffee|espresso|nespresso|dolce gusto/i.test(s) ? "café" : "";
-const items = (await db.collection("items").where("category", "==", "bs").get()).docs;
-for (const d of items) {
-  const f = fam(d.get("name")), al = (d.get("aliases") || []) as string[];
-  const off = al.filter((a) => { const g = fam(a); return f && g && g !== f; });
-  if (off.length) console.log(`  ✗ ${d.get("name")} (${d.id}) : ${off.join(" | ")}`);
+const WRONG: [RegExp, string][] = [[/Cristal Roc Eau de Source/i, "Bière sans alcool"], [/Jacqmotte Café Grains/i, "Biscuits"]];
+const items = (await db.collection("items").get()).docs;
+for (const [re, itemName] of WRONG) {
+  const it = items.find((d) => d.get("name") === itemName);
+  if (!it) { console.log(`Article « ${itemName} » introuvable`); continue; }
+  const bad = ((it.get("aliases") || []) as string[]).filter((a) => re.test(a));
+  if (bad.length) await it.ref.update({ aliases: FieldValue.arrayRemove(...bad) });
+  const pref = db.collection("prices").doc(`${it.id}_carrefour`), p = await pref.get();
+  if (p.exists) {
+    const offers = ((p.get("offers") || []) as { name: string; ppu: number; organic: boolean; price: number; size: number; promo: string | null }[]).filter((o) => !re.test(o.name));
+    if (!offers.length) await pref.delete();
+    else { const best = offers.find((o) => !o.organic) || offers[0]; await pref.update({ offers, productName: best.name, packSize: best.size, packPrice: best.price, pricePerUnit: best.ppu, promo: best.promo }); }
+  }
+  console.log(`« ${itemName} » : ${bad.length} alias retiré(s), offre retirée de la fiche Carrefour`);
 }
+await db.collection("priceBookDirty").doc("carrefour").set({ at: Date.now() });
