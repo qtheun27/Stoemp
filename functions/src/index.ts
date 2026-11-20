@@ -469,13 +469,13 @@ export const onCaptureReplay = onDocumentCreated({ document: "captureReplays/{id
   const c = (await db().collection("captures").doc(r.captureId).get()).data();
   if (!c) { await event.data!.ref.set({ error: "copie introuvable" }, { merge: true }); return; }
   try {
-    const res = await processCapture(c.uid, { store: c.store, url: c.url, text: c.text });
+    const res = await processCapture(c.uid, { store: c.store, url: c.url, text: c.text }, { review: r.review === true });
     await event.data!.ref.set({ found: res.found, saved: res.saved.length, created: res.created.length, queued: (res as { queued?: number }).queued || 0, doneAt: Date.now() }, { merge: true });
   } catch (e) { await event.data!.ref.set({ error: String((e as Error).message).slice(0, 300) }, { merge: true }); }
 });
 
 /** Lecture d'une page de magasin : produits, correspondance au catalogue, classement des inconnus, enregistrement des prix. */
-async function processCapture(u: string, d: { store: (typeof STORES)[number]; url: string; text: string }) {
+async function processCapture(u: string, d: { store: (typeof STORES)[number]; url: string; text: string }, opts: { review?: boolean } = {}) {
   const since = new Date(Date.now() - 60_000).toISOString();
   let items = await loadItems();
 
@@ -503,12 +503,12 @@ async function processCapture(u: string, d: { store: (typeof STORES)[number]; ur
     const created = new Set(e.created);
     const queue = [...e.left, ...later].slice(0, 5000);
     if (queue.length) {
-      const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), since, ...(e.left.length ? { paused: "budget" } : {}) });
+      const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), since, noReview: opts.review === false, ...(e.left.length ? { paused: "budget" } : {}) });
       await progress(ref.id, { uid: u, store: d.store, page: pageLabel(d.url), pos: 0, total: queue.length, prices: 0, paused: e.left.length ? "budget" : null, at: Date.now(), doneAt: null });
     }
     const saved = await savePrices(d.store, d.url, shop, rows);
     // Tout est classé tout de suite : relecture des articles touchés (sinon, à la fin de la file d'attente).
-    if (!queue.length) await db().collection("reviewJobs").add({ uid: u, store: d.store, url: d.url, since, at: Date.now() });
+    if (!queue.length && opts.review !== false) await db().collection("reviewJobs").add({ uid: u, store: d.store, url: d.url, since, at: Date.now() });
     return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA", queued: queue.length, paused: e.left.length > 0 };
   }
 
@@ -555,7 +555,7 @@ export const onEnrichJob = onDocumentWritten({ document: "enrichJobs/{id}", ...a
     await event.data!.after.ref.delete();
     await progress(id, { pos: products.length, paused: null, doneAt: Date.now() });
     // File terminée : relecture des articles touchés par cet envoi.
-    await db().collection("reviewJobs").add({ uid: job.uid, store: job.store, url: job.url, since: job.since || new Date(job.at - 3600_000).toISOString(), progressId: id, at: Date.now() });
+    if (!job.noReview) await db().collection("reviewJobs").add({ uid: job.uid, store: job.store, url: job.url, since: job.since || new Date(job.at - 3600_000).toISOString(), progressId: id, at: Date.now() });
     return;
   }
   const batch = products.slice(job.pos, job.pos + ENRICH_STEP);
@@ -574,8 +574,8 @@ export const onEnrichJob = onDocumentWritten({ document: "enrichJobs/{id}", ...a
 const REVIEW_SYSTEM = `Tu es un chef qui relit le catalogue de courses d'un foyer belge.
 Pour chaque article (numéroté), on te donne les produits d'un magasin qui y sont rangés (numérotés).
 Signale UNIQUEMENT les produits qui ne sont manifestement pas cet article : un autre aliment (un biscuit dans « Pâtes », un soda dans « Lait », du whisky dans « Bière trappiste »), une autre viande ou un autre poisson, un autre rayon.
-Une marque, un format, un conditionnement, une variante de goût ou de recette du même produit restent le même article. En cas de doute, ne signale rien.
-Recopie le nom exact de chaque produit signalé.`;
+Une marque, un format, un conditionnement, une variante de goût, de cépage ou de recette du même produit restent le même article (une Carlsberg reste une « Bière blonde », un merlot de n'importe quel pays reste un « Vin rouge Merlot »). En cas de doute, ne signale rien : la plupart des articles sont justes.
+Pour chaque produit signalé, recopie son nom exact et donne l'article où il devrait aller.`;
 type Off = { name: string; size: number; ppu: number; organic: boolean; price: number; promo: string | null };
 
 /**
@@ -590,18 +590,21 @@ async function reviewStore(u: string, store: (typeof STORES)[number], url: strin
     .sort((a, b) => (a.id < b.id ? -1 : 1));
   const moved: ShopProduct[] = [], from = new Map<string, string>();
   const groups: (typeof docs)[] = [];
-  for (let i = 0; i < docs.length; i += 12) groups.push(docs.slice(i, i + 12));
+  for (let i = 0; i < docs.length; i += 5) groups.push(docs.slice(i, i + 5));
   let stop = false, g = 0;
   for (; g < groups.length && !stop && Date.now() - t0 < 360_000; g += 4) {
     await Promise.all(groups.slice(g, g + 4).map(async (group) => {
       const content = group.map((d, k) => `Article ${k} : ${byId.get(d.get("itemId"))!.name}\n` +
         ((d.get("offers") || []) as Off[]).slice(0, 60).map((o, j) => `  ${j}. ${o.name}`).join("\n")).join("\n\n");
       try {
-        const r = await askJson("classifyItem", { uid: u, schema: ReviewWrong, system: REVIEW_SYSTEM, content, minTokens: 4000 });
+        const r = await askJson("reviewLibrary", { uid: u, schema: ReviewWrong, system: REVIEW_SYSTEM, content, minTokens: 4000 });
         const bad = new Map<number, Set<string>>();
         for (const w of r.wrong) {
           const o = ((group[w.item]?.get("offers") || []) as Off[])[w.product];
           if (!o || (norm(o.name) !== norm(w.name) && similarity(o.name, w.name) < 0.6)) continue; // réponse décalée : ignorée
+          // L'IA se contredit (l'article proposé est celui d'où le produit sort, ou presque) : signalement rejeté.
+          const cur = byId.get(group[w.item].get("itemId"))!.name;
+          if (!w.belongs || norm(w.belongs) === norm(cur) || similarity(w.belongs, cur) >= 0.5) continue;
           if (!bad.has(w.item)) bad.set(w.item, new Set());
           bad.get(w.item)!.add(o.name);
         }
@@ -640,6 +643,8 @@ async function reviewStore(u: string, store: (typeof STORES)[number], url: strin
 export const onReviewJob = onDocumentCreated({ document: "reviewJobs/{id}", ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (event) => {
   const r = event.data?.data();
   if (!r) return;
+  // Relecture payante : seulement si elle est activée dans la console (Réglages de l'appli), ou demandée par la maintenance.
+  if (!r.full && (await db().collection("config").doc("app").get()).get("priceReview") !== true) return;
   if (r.progressId) await progress(r.progressId, { review: "en cours" });
   try {
     const res = await reviewStore(r.uid, r.store, r.url, r.since, r.startAfter || "");

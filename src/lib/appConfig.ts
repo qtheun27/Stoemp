@@ -11,6 +11,8 @@ export interface AppConfig {
   freshDays: number;
   /** Clé publique « Certificats push Web » (Firebase → Cloud Messaging) : active les rappels sur les téléphones. */
   vapidKey: string;
+  /** Relecture des rangements par l'IA (Sonnet) à la fin de chaque envoi du capteur : environ 0,30 $ par page. */
+  priceReview: boolean;
   /** Réglages de départ d'un nouveau foyer. */
   defaults: Pick<Settings, "persons" | "lunches" | "dinners" | "stores" | "shoppingDays" | "mineN">;
 }
@@ -22,6 +24,7 @@ export const DEFAULT_APP_CONFIG: AppConfig = {
   aiWeekShare: 0.15, // une ou deux surprises par semaine : le reste vient du catalogue, relu et gratuit
   freshDays: 14,
   vapidKey: "",
+  priceReview: false,
   defaults: { persons: 2, lunches: 0, dinners: 7, stores: ["colruyt", "renmans"], shoppingDays: [6], mineN: 2 },
 };
 
