@@ -27,3 +27,13 @@ console.log(`Contenance cohérente avec le nom : ${ok} · incohérente : ${ko} �
 bad.forEach((b) => console.log("  ✗ " + b));
 console.log("\nÉchantillon (produit → article) :");
 prices.slice(0, 25).forEach((p) => console.log(`  ${p.productName} → ${names.get(p.itemId) || p.itemId}`));
+
+// Noms de produits retenus (alias) sur des articles de boisson : repérer une eau rangée dans une bière, etc.
+console.log("\nAlias des articles de boisson créés ou complétés aujourd'hui :");
+const fam = (s: string) => /\beau\b|source|minérale|spa\b|cristaline|chaudfontaine|vittel|evian|volvic/i.test(s) ? "eau" : /bière|beer|pils|ale\b|stout|lager|jupiler|leffe|hoegaarden|stella|duvel|chimay|westmalle|affligem|grimbergen/i.test(s) ? "bière" : /vin\b|wine|rosé|bordeaux|merlot|chardonnay/i.test(s) ? "vin" : /cola|limonade|soda|tonic|ginger|fanta|sprite|schweppes|pepsi|7up|oasis|ice tea/i.test(s) ? "soda" : /jus|nectar|smoothie/i.test(s) ? "jus" : /café|coffee|espresso|nespresso|dolce gusto/i.test(s) ? "café" : "";
+const items = (await db.collection("items").where("category", "==", "bs").get()).docs;
+for (const d of items) {
+  const f = fam(d.get("name")), al = (d.get("aliases") || []) as string[];
+  const off = al.filter((a) => { const g = fam(a); return f && g && g !== f; });
+  if (off.length) console.log(`  ✗ ${d.get("name")} (${d.id}) : ${off.join(" | ")}`);
+}
