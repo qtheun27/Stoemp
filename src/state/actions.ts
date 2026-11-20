@@ -465,7 +465,7 @@ export async function saveManualDish(s: StoreState, f: { name: string; persons: 
 export const deleteRecipe = (id: string) => updateDoc(doc(db, "recipes", id), { deleted: true });
 
 // ---------------- Capteur de prix ----------------
-export const extractPricesFn = call<{ store: StoreId; url: string; text: string }, { found: number; saved: { itemId: string; productName: string; packPrice: number }[]; created?: string[]; shop?: string | null; reader?: string }>("extractPrices");
+export const extractPricesFn = call<{ store: StoreId; url: string; text: string }, { found: number; saved: { itemId: string; productName: string; packPrice: number }[]; created?: string[]; shop?: string | null; reader?: string; queued?: number }>("extractPrices");
 
 // ---------- Goûts du foyer ----------
 /** Enregistre la liste des profils et met à jour la composition du foyer (adultes, ados, enfants, végétariens). */

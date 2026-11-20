@@ -384,6 +384,58 @@ const catalogNames = (items: ItemDoc[]) => {
   return [...by].map(([c, n]) => `${c} : ${n.sort().join(" · ")}`).join("\n");
 };
 
+
+const ENRICH_NOW = 300, ENRICH_STEP = 200;
+/**
+ * Produits inconnus d'une enseigne → articles génériques (classés par l'IA par paquets de 40, avec le catalogue existant).
+ * Renvoie les lignes de prix à enregistrer et les noms des articles créés.
+ */
+async function enrichProducts(u: string, unmatched: ShopProduct[], pageNonFood: boolean): Promise<{ rows: Row[]; created: string[] }> {
+  let items = await loadItems();
+  const rows: Row[] = [];
+  const nonFood = (p: ShopProduct) => pageNonFood || isNonFood(p.name);
+  const world = (nf: boolean) => items.filter((i) => (i.category === HOUSEHOLD) === nf);
+  const created = new Set<string>();
+  // Déjà reconnus (articles créés par un lot précédent) : pas besoin de l'IA.
+  unmatched = unmatched.filter((p) => {
+    const m = matchItem(p.name, p.packSize, p.packUnit, world(nonFood(p)).filter((i) => !isBabyFood(p.name) || isBabyItem(i.name)));
+    if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
+    return !m;
+  });
+  for (let i = 0; i < unmatched.length; i += 40) {
+    const batch = unmatched.slice(i, i + 40);
+    try {
+      const r = await askJson("classifyItem", { uid: u, schema: NewItems, system: `${ENRICH_SYSTEM}\n\nCatalogue existant (rayon : noms) :\n${catalogNames(items)}`, minTokens: 16000,
+        content: batch.map((p, k) => `${k}. ${p.name} — vendu ${p.packUnit === "pc" ? "à la pièce" : p.packSize === 1000 ? (p.packUnit === "g" ? "au kg" : "au litre") : `par ${p.packSize} ${p.packUnit}`}`).join("\n") });
+      for (const c of r.items) {
+        const p = batch[c.index];
+        if (!p || !c.keep) continue;
+        // Non alimentaire (repéré par son nom, sa page ou par l'IA) : rangé dans « Hygiène & entretien », jamais près d'un aliment.
+        const nf = nonFood(p) || c.category === HOUSEHOLD;
+        if (nf) c.category = HOUSEHOLD as typeof c.category;
+        const before = items.length;
+        // Un article très proche existe déjà dans le même monde : on le réutilise (le nom du produit devient un alias).
+        const twin = similarItem(c.name, c.unit, c.category, world(nf));
+        const it = twin || (await createItem(c, p.name));
+        if ((it.category === HOUSEHOLD) !== nf || proteinClash(p.name, it.name) || (isBabyFood(p.name) && !isBabyItem(it.name))) continue;
+        // Article déjà connu : on retient le nom exact du produit (plus besoin de l'IA la prochaine fois),
+        // et le nom générique proposé seulement s'il convient vraiment (sinon « Saucisses de poulet » finirait en « Filet de poulet »).
+        const known = items.some((x) => x.id === it.id);
+        const learn = known ? [p.name, ...(aliasFits(c.name, it.name) ? [c.name] : [])].filter((n) => n !== it.name && !(it.aliases || []).includes(n)) : [];
+        if (learn.length) {
+          await db().collection("items").doc(it.id).set({ aliases: FieldValue.arrayUnion(...learn) }, { merge: true });
+          it.aliases = [...(it.aliases || []), ...learn]; // aussi dans le cache, pour la suite de la page
+        }
+        items = await loadItems();
+        if (items.length > before) created.add(it.name);
+        const m = matchItem(p.name, p.packSize, p.packUnit, [it]) || (it.unit === p.packUnit ? { item: it, size: p.packSize } : null);
+        if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
+      }
+    } catch (e) { logger.warn("Enrichissement partiel", e); }
+  }
+  return { rows, created: [...created] };
+}
+
 export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (req) => {
   const u = uid(req);
   const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(1000000) }), req.data);
@@ -409,40 +461,14 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
       else unmatched.push(p);
     }
     // 2. Enrichissement : les produits inconnus deviennent des articles génériques (classés par l'IA, une seule fois).
-    const created = new Set<string>();
-    for (let i = 0; i < Math.min(unmatched.length, 300); i += 40) {
-      const batch = unmatched.slice(i, i + 40);
-      try {
-        const r = await askJson("classifyItem", { uid: u, schema: NewItems, system: `${ENRICH_SYSTEM}\n\nCatalogue existant (rayon : noms) :\n${catalogNames(items)}`, minTokens: 16000,
-          content: batch.map((p, k) => `${k}. ${p.name} — vendu ${p.packUnit === "pc" ? "à la pièce" : p.packSize === 1000 ? (p.packUnit === "g" ? "au kg" : "au litre") : `par ${p.packSize} ${p.packUnit}`}`).join("\n") });
-        for (const c of r.items) {
-          const p = batch[c.index];
-          if (!p || !c.keep) continue;
-          // Non alimentaire (repéré par son nom, sa page ou par l'IA) : rangé dans « Hygiène & entretien », jamais près d'un aliment.
-          const nf = nonFood(p) || c.category === HOUSEHOLD;
-          if (nf) c.category = HOUSEHOLD as typeof c.category;
-          const before = items.length;
-          // Un article très proche existe déjà dans le même monde : on le réutilise (le nom du produit devient un alias).
-          const twin = similarItem(c.name, c.unit, c.category, world(nf));
-          const it = twin || (await createItem(c, p.name));
-          if ((it.category === HOUSEHOLD) !== nf || proteinClash(p.name, it.name) || (isBabyFood(p.name) && !isBabyItem(it.name))) continue;
-          // Article déjà connu : on retient le nom exact du produit (plus besoin de l'IA la prochaine fois),
-          // et le nom générique proposé seulement s'il convient vraiment (sinon « Saucisses de poulet » finirait en « Filet de poulet »).
-          const known = items.some((x) => x.id === it.id);
-          const learn = known ? [p.name, ...(aliasFits(c.name, it.name) ? [c.name] : [])].filter((n) => n !== it.name && !(it.aliases || []).includes(n)) : [];
-          if (learn.length) {
-            await db().collection("items").doc(it.id).set({ aliases: FieldValue.arrayUnion(...learn) }, { merge: true });
-            it.aliases = [...(it.aliases || []), ...learn]; // aussi dans le cache, pour la suite de la page
-          }
-          items = await loadItems();
-          if (items.length > before) created.add(it.name);
-          const m = matchItem(p.name, p.packSize, p.packUnit, [it]) || (it.unit === p.packUnit ? { item: it, size: p.packSize } : null);
-          if (m) rows.push({ itemId: m.item.id, organic: p.organic, productName: p.name, size: m.size, unit: m.item.unit, price: p.price, promo: p.promo });
-        }
-      } catch (e) { logger.warn("Enrichissement partiel", e); }
-    }
+    //    Les 300 premiers tout de suite ; le reste part en file d'attente, classé en arrière-plan par lots (onEnrichJob).
+    const now300 = unmatched.slice(0, ENRICH_NOW), later = unmatched.slice(ENRICH_NOW);
+    const e = await enrichProducts(u, now300, pageNonFood);
+    rows.push(...e.rows);
+    const created = new Set(e.created);
+    if (later.length) await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: later.slice(0, 5000), pos: 0, at: Date.now() });
     const saved = await savePrices(d.store, d.url, shop, rows);
-    return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA" };
+    return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA", queued: later.length };
   }
 
   // 3. Enseigne au format inconnu : lecture par l'IA, morceau par morceau (un morceau en échec n'arrête pas les autres).
@@ -471,6 +497,24 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
   }
   const saved = await savePrices(d.store, d.url, null, rows);
   return { found, saved, created: [], shop: null, reader: "IA" };
+});
+
+
+/** File d'attente des produits inconnus d'un envoi : un lot de 200 à la fois, chaque lot relance le suivant (jamais deux en même temps). */
+export const onEnrichJob = onDocumentWritten({ document: "enrichJobs/{id}", ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (event) => {
+  const job = event.data?.after.data();
+  if (!job) return;
+  const before = event.data?.before.data();
+  if (before && before.pos === job.pos) return; // seul l'avancement relance un lot
+  const products = job.products as ShopProduct[];
+  if (job.pos >= products.length) { await event.data!.after.ref.delete(); return; }
+  const batch = products.slice(job.pos, job.pos + ENRICH_STEP);
+  try {
+    const e = await enrichProducts(job.uid, batch, !!job.pageNonFood);
+    if (e.rows.length) await savePrices(job.store, job.url, job.shop || null, e.rows);
+    logger.info("Produits classés en arrière-plan", { magasin: job.store, lot: batch.length, prix: e.rows.length, créés: e.created.length, reste: products.length - job.pos - batch.length });
+  } catch (err) { logger.error("enrichJobs", err); }
+  await event.data!.after.ref.update({ pos: job.pos + batch.length });
 });
 
 // ---------- readReceipt : photo du ticket de caisse ----------
