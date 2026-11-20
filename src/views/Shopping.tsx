@@ -166,9 +166,10 @@ function ByStore({ lines, stores, onEdit }: { lines: ShopLine[]; stores: StoreId
         <button className="btn soft sm" onClick={() => run(() => setStoreRule(s, { itemId: t.line.itemId!, store: t.to }), `${l.name} : chez ${STORES[t.to].label}`)}>Y acheter</button>
       </div>; })}
     </div>}
+    {/* Plusieurs magasins : listes repliées pour une vue d'ensemble (nombre d'articles et total) ; on ouvre celle du magasin où l'on est. */}
     {groups.map((g) => {
       const left = g.lines.filter((l) => !asLine(l).checked);
-      return <details key={g.store} className="store-list" open={left.length > 0}>
+      return <details key={g.store} className="store-list" open={groups.length === 1 && left.length > 0}>
         <summary><span className="store-dot" style={{ background: STORES[g.store].color }} /><b className="grow">{STORES[g.store].label}</b>
           <span className="small muted num">{left.length ? `${left.length} à prendre` : "✓ tout est pris"}{g.total ? ` · ≈ ${eur(g.total)}` : ""}</span></summary>
         {[{ key: "pret", icon: "🥡", label: "Plats préparés", ok: (l: ShopLine) => isReady(l) }, ...CAT_ORDER.map((c) => ({ key: c, icon: CATS[c].icon, label: CATS[c].label, ok: (l: ShopLine) => l.category === c && !isReady(l) }))].map(({ key, icon, label, ok }) => {
