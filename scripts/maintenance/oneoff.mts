@@ -1,10 +1,9 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : vérification EN LECTURE SEULE des services Google nécessaires aux rappels.
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : liste EN LECTURE SEULE des tâches planifiées (Cloud Scheduler) des rappels.
 import { GoogleAuth } from "google-auth-library";
-const auth = new GoogleAuth({ scopes: ["https://www.googleapis.com/auth/cloud-platform"] });
-const client = await auth.getClient();
-for (const api of ["cloudscheduler.googleapis.com", "fcm.googleapis.com", "fcmregistrations.googleapis.com", "firebaseinstallations.googleapis.com", "pubsub.googleapis.com", "cloudfunctions.googleapis.com", "run.googleapis.com"]) {
-  try {
-    const r = await client.request<{ state?: string }>({ url: `https://serviceusage.googleapis.com/v1/projects/stoemp-app/services/${api}` });
-    console.log(`${api} : ${r.data.state}`);
-  } catch (e) { console.log(`${api} : lecture impossible (${String((e as Error).message).slice(0, 120)})`); }
-}
+const client = await new GoogleAuth({ scopes: ["https://www.googleapis.com/auth/cloud-platform"] }).getClient();
+try {
+  const r = await client.request<{ jobs?: { name: string; schedule: string; timeZone: string; state: string; lastAttemptTime?: string }[] }>({ url: "https://cloudscheduler.googleapis.com/v1/projects/stoemp-app/locations/europe-west1/jobs" });
+  const jobs = r.data.jobs || [];
+  console.log(`${jobs.length} tâche(s) planifiée(s) :`);
+  for (const j of jobs) console.log(`  ${j.name.split("/").pop()} · ${j.schedule} (${j.timeZone}) · ${j.state}`);
+} catch (e) { console.log("Lecture impossible :", String((e as Error).message).slice(0, 200)); }

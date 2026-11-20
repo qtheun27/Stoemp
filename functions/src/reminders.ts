@@ -78,7 +78,7 @@ async function devicesByHousehold() {
   return by;
 }
 
-export const remindMorning = onSchedule({ schedule: "30 8 * * *", timeZone: TZ, region: "europe-west1" }, async () => {
+export const remindMorning = onSchedule({ schedule: "30 8 * * *", timeZone: TZ, region: "europe-west1", retryCount: 1 }, async () => {
   const db = getFirestore(), now = brussels(), out: Parameters<typeof send>[0] = [];
   const names = new Map((await db.collection("items").select("name").get()).docs.map((d) => [d.id, d.get("name") as string]));
   for (const [hid, devs] of await devicesByHousehold()) {
@@ -94,7 +94,7 @@ export const remindMorning = onSchedule({ schedule: "30 8 * * *", timeZone: TZ, 
   await send(out);
 });
 
-export const remindDinner = onSchedule({ schedule: "0 15,17 * * *", timeZone: TZ, region: "europe-west1" }, async () => {
+export const remindDinner = onSchedule({ schedule: "0 15,17 * * *", timeZone: TZ, region: "europe-west1", retryCount: 1 }, async () => {
   const db = getFirestore(), now = brussels();
   const hour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", hour12: false }).format(new Date())) >= 16 ? 17 : 15;
   const out: Parameters<typeof send>[0] = [];
