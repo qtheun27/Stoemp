@@ -5,7 +5,7 @@ import { getFirestore } from "firebase-admin/firestore";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
 const mask = (s: string) => s.replace(/\d/g, "#").slice(0, 100);
-const c = (await db.collection("captures").where("store", "==", "carrefour").orderBy("at", "desc").limit(1).get()).docs[0]?.data();
+const c = (await db.collection("captures").orderBy("at", "desc").limit(10).get()).docs.map((d) => d.data()).find((x) => x.store === "carrefour");
 if (c) {
   const lines = String(c.text).split("\n").map((l) => l.trim()).filter(Boolean);
   console.log(`Capture du ${new Date(c.at).toISOString()} : ${lines.length} lignes`);
