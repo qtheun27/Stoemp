@@ -4,7 +4,7 @@ import { STORES } from "../../lib/constants";
 import { run } from "../../ui";
 import { adminStats, dt, last30, usd, type Stats } from "./api";
 
-const TASK_LABEL: Record<string, string> = { generateRecipes: "Recettes de la semaine", structureMyDish: "Mes plats", readReceipt: "Tickets de caisse", classifyItem: "Rangement par rayon", matchProduct: "Correspondance produit", extractPrices: "Capteur de prix", growLibrary: "Bibliothèque de recettes", reviewLibrary: "Relecture des recettes", planLibrary: "Plan de la bibliothèque" };
+const TASK_LABEL: Record<string, string> = { generateRecipes: "Recettes de la semaine", structureMyDish: "Mes plats", readReceipt: "Tickets de caisse", classifyItem: "Rangement par rayon", matchProduct: "Correspondance produit", extractPrices: "Capteur de prix", growLibrary: "Bibliothèque de recettes", reviewLibrary: "Relecture des recettes", planLibrary: "Plan de la bibliothèque", dishImage: "Photos des plats (Google)" };
 
 export function Bars({ data, label }: { data: number[]; label: (i: number) => string }) {
   const max = Math.max(1, ...data);
@@ -28,7 +28,7 @@ export default function Dashboard() {
       <div className="kpi"><span>Utilisateurs</span><b>{s.users.total}</b><small>{s.users.google} Google · {s.users.anonymous} démo</small></div>
       <div className="kpi"><span>Actifs 7 jours</span><b>{s.users.active7}</b><small>{s.users.active1} aujourd'hui · {s.users.active30} sur 30 j</small></div>
       <div className="kpi"><span>Foyers</span><b>{c.households}</b><small>{c.weeks} semaines planifiées</small></div>
-      <div className="kpi"><span>Coût IA du mois</span><b>{usd(s.ai.monthCost)}</b><small>{usd(s.ai.cost)} sur 30 j</small></div>
+      <div className="kpi"><span>Coût IA du mois</span><b>{usd(s.ai.monthCost)}</b><small>Claude {usd(s.ai.monthClaude ?? s.ai.monthCost)}{s.ai.budget ? ` / ${usd(s.ai.budget)} de budget` : ""} · photos {usd(s.ai.monthCost - (s.ai.monthClaude ?? s.ai.monthCost))}</small></div>
       <div className="kpi"><span>Appels IA (30 j)</span><b>{s.ai.calls}</b><small>{s.ai.errors} erreur{s.ai.errors > 1 ? "s" : ""} · {Math.round((s.ai.inTok + s.ai.outTok) / 1000)} k jetons</small></div>
       <div className="kpi"><span>Prix relevés</span><b>{Object.values(s.prices).reduce((a, p) => a + p.count, 0)}</b><small>{Object.values(s.prices).reduce((a, p) => a + p.fresh, 0)} récents</small></div>
     </div>

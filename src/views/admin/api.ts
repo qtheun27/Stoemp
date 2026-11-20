@@ -5,7 +5,7 @@ export interface AdminUser { uid: string; email: string | null; name: string | n
 export interface Stats {
   users: { total: number; anonymous: number; google: number; disabled: number; active1: number; active7: number; active30: number; signups: Record<string, number>; active: Record<string, number> };
   content: Record<string, number>;
-  ai: { calls: number; errors: number; cost: number; inTok: number; outTok: number; monthCost: number; byDay: Record<string, { calls: number; cost: number }>; byTask: Record<string, { calls: number; cost: number; ms: number; errors: number }>; byModel: Record<string, { calls: number; cost: number }>; recentErrors: { at: number; task: string; model: string; error: string }[] };
+  ai: { calls: number; errors: number; cost: number; inTok: number; outTok: number; monthCost: number; monthClaude?: number; budget?: number; byDay: Record<string, { calls: number; cost: number }>; byTask: Record<string, { calls: number; cost: number; ms: number; errors: number }>; byModel: Record<string, { calls: number; cost: number }>; recentErrors: { at: number; task: string; model: string; error: string }[] };
   prices: Record<string, { count: number; fresh: number }>;
   runs: Record<string, unknown>[];
 }
