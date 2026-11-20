@@ -9,13 +9,16 @@ for (const d of (await db.collection("prices").select("store", "offers").get()).
 console.log("Articles qui avaient atteint la limite de 30 produits :", [...full].map(([s, n]) => `${s} ${n}`).join(", ") || "aucun");
 const caps = (await db.collection("captures").orderBy("at", "desc").limit(30).select("store", "at", "length", "url").get()).docs;
 console.log("Copies de pages gardées :"); caps.forEach((c) => console.log(`  ${c.get("store")} · ${new Date(c.get("at")).toISOString()} · ${c.get("length")} car.`));
-const last = caps.find((c) => c.get("store") === "carrefour");
-if (last) {
-  const ref = await db.collection("captureReplays").add({ captureId: last.id, at: Date.now() });
-  console.log(`Relecture lancée pour la page Carrefour du ${new Date(last.get("at")).toISOString()}`);
-  for (let i = 0; i < 60; i++) {
+// Une relecture par page (la plus récente de chaque adresse), l'une après l'autre (jamais deux en même temps).
+const seen = new Set<string>();
+const todo = caps.filter((c) => { const k = `${c.get("store")}|${c.get("url")}`; if (seen.has(k)) return false; seen.add(k); return true; }).reverse();
+for (const c of todo) {
+  const ref = await db.collection("captureReplays").add({ captureId: c.id, at: Date.now() });
+  let line = "pas de réponse en 9 min";
+  for (let i = 0; i < 54; i++) {
     await new Promise((r) => setTimeout(r, 10_000));
     const r = (await ref.get()).data()!;
-    if (r.doneAt || r.error) { console.log(r.error ? `Erreur : ${r.error}` : `Relecture terminée : ${r.found} produits lus, ${r.saved} articles avec prix, ${r.created} nouveaux articles, ${r.queued} en file d'attente`); break; }
+    if (r.doneAt || r.error) { line = r.error ? `erreur : ${r.error}` : `${r.found} produits lus, ${r.saved} articles avec prix, ${r.created} nouveaux articles, ${r.queued} en file d'attente`; break; }
   }
+  console.log(`Relecture ${c.get("store")} (${new Date(c.get("at")).toISOString().slice(0, 16)}) : ${line}`);
 }
