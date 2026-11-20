@@ -56,10 +56,11 @@ export function Sheet({ title, sub, onClose, children, actions }: { title: React
         <div className="grab" />
         <div className="sheet-head">
           <div className="grow"><h2>{title}</h2>{sub && <div className="muted small">{sub}</div>}</div>
-          {actions}
           <button className="ib" onClick={onClose} aria-label="Fermer"><X size={20} /></button>
         </div>
         {children}
+        {/* Boutons principaux de la feuille : en bas, à portée du pouce. */}
+        {actions && <div className="sheet-foot">{actions}</div>}
       </div>
     </div>
   );
