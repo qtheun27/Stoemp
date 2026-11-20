@@ -12,7 +12,7 @@ import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Ma
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { parseGeneric } from "./readers/generic";
 import { HOUSEHOLD, isBabyFood, isBabyItem, isNonFood, isNonFoodPage } from "./readers/nonfood";
-import { aliasFits, matchItem, sameProteins, similarItem, similarity } from "./readers/match";
+import { aliasFits, matchItem, sameProteins, sharesWord, similarItem, similarity } from "./readers/match";
 import { tagsOf, tierOf } from "./readers/tiers";
 import { rebuildPriceBook } from "./pricebook";
 import { imagesThisMonth, makeDishImage } from "./images";
@@ -423,6 +423,8 @@ async function enrichProducts(u: string, unmatched: ShopProduct[], pageNonFood: 
         // Article déjà connu : on retient le nom exact du produit (plus besoin de l'IA la prochaine fois),
         // et le nom générique proposé seulement s'il convient vraiment (sinon « Saucisses de poulet » finirait en « Filet de poulet »).
         const known = items.some((x) => x.id === it.id);
+        // Article déjà existant choisi par l'IA : au moins un mot en commun, sinon on refuse plutôt que de mal ranger.
+        if (known && !sharesWord(p.name, [it.name, ...(it.aliases || [])])) { logger.info("Rangement refusé (aucun mot commun)", { produit: p.name, article: it.name }); continue; }
         const learn = known ? [p.name, ...(aliasFits(c.name, it.name) ? [c.name] : [])].filter((n) => n !== it.name && !(it.aliases || []).includes(n)) : [];
         if (learn.length) {
           await db().collection("items").doc(it.id).set({ aliases: FieldValue.arrayUnion(...learn) }, { merge: true });
