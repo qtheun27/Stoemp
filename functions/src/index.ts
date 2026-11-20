@@ -420,6 +420,8 @@ async function enrichProducts(u: string, unmatched: ShopProduct[], pageNonFood: 
       for (const c of r.items) {
         const p = batch[c.index];
         if (!p || !c.keep) continue;
+        // Réponse décalée (le nom recopié n'est pas celui du produit à ce numéro) : ignorée plutôt que mal rangée.
+        if (norm(c.product || "") !== norm(p.name) && similarity(c.product || "", p.name) < 0.6) { logger.warn("Réponse décalée ignorée", { attendu: p.name, recopié: c.product }); continue; }
         // Non alimentaire (repéré par son nom, sa page ou par l'IA) : rangé dans « Hygiène & entretien », jamais près d'un aliment.
         const nf = nonFood(p) || c.category === HOUSEHOLD;
         if (nf) c.category = HOUSEHOLD as typeof c.category;

@@ -6,7 +6,7 @@ const norm = (s: string) => s.toLowerCase().replace(/\bp[âa]tes\b/g, "pasta").r
 const SYN: Record<string, string> = { seche: "sec", endive: "chicon", carbonnade: "carbonade", boulet: "boulette", cuite: "cuit", entiere: "entier" };
 /** Pluriel et féminin ramenés à une forme (« fumées » → « fume », « séchée » → « sec »). */
 const stem = (w: string) => { const x = w.replace(/(x|s)$/, "").replace(/ee$/, "e"); return SYN[x] || x; };
-const STOP = new Set(["de", "du", "la", "le", "les", "des", "et", "en", "au", "aux", "a", "d", "l", "avec", "sans", "pour", "boite", "bio", "boni", "colruyt", "everyday", "selection", "extra", "fresh", "frais", "fraiche", "fraiches", "belge", "belges", "pce", "pc", "kg", "g", "ready", "to", "eat", "mur", "mure", "murs", "doux", "douce", "flandria", "papillon", "feuille"]);
+const STOP = new Set(["de", "du", "la", "le", "les", "des", "et", "en", "au", "aux", "a", "d", "l", "avec", "sans", "pour", "boite", "bio", "boni", "colruyt", "everyday", "selection", "extra", "carrefour", "delhaize", "simpl", "classic", "sensation", "fresh", "frais", "fraiche", "fraiches", "belge", "belges", "pce", "pc", "kg", "g", "ready", "to", "eat", "mur", "mure", "murs", "doux", "douce", "flandria", "papillon", "feuille"]);
 export const tokens = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w)).map(stem);
 
 /** Mots qui changent la nature du produit : si le produit les contient et pas l'article, ce n'est pas le même. */
