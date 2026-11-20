@@ -371,7 +371,9 @@ export async function checkLine(s: StoreState, l: LineRef, checked: boolean) {
   if (item) {
     if (checked) { b.set(hh(s.hid!, "stock", item.id), stockAfter(s, item, qty)); pushEvent(s, b, item.id, qty, "achat"); }
     else if (prev?.addedToStock) {
-      b.set(hh(s.hid!, "stock", item.id), stockAfter(s, item, -prev.addedToStock));
+      // Décoché par erreur : l'article ne reste pas « fini » dans le stock s'il n'y était qu'à cause de ce cochage.
+      const after = stockAfter(s, item, -prev.addedToStock);
+      if (after.qty <= 0) b.delete(hh(s.hid!, "stock", item.id)); else b.set(hh(s.hid!, "stock", item.id), after);
       const c = s.consumption.get(item.id);
       if (c) {
         const i = c.events.map((e) => e.type).lastIndexOf("achat");
