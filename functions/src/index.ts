@@ -386,6 +386,14 @@ const catalogNames = (items: ItemDoc[]) => {
 
 
 const ENRICH_NOW = 120, ENRICH_STEP = 200;
+/** Nom lisible du rayon d'après l'adresse de la page (« /fr/boissons » → « Boissons »). */
+export function pageLabel(url: string): string {
+  try {
+    const seg = new URL(url).pathname.split("/").filter((x) => x && !/^(fr|nl|en|shop|c|al|produits|search)$/i.test(x) && !/^v2[A-Z]+$/.test(x)).pop() || "";
+    const t = decodeURIComponent(seg).replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+    return t ? t[0].toUpperCase() + t.slice(1) : "";
+  } catch { return ""; }
+}
 /** Fiche d'avancement légère (`enrichProgress/{id}`), lue en direct par l'appli (la file elle-même est trop lourde). */
 const progress = (id: string, patch: Record<string, unknown>) => db().collection("enrichProgress").doc(id).set(patch, { merge: true }).catch(() => {});
 /**
@@ -493,7 +501,7 @@ async function processCapture(u: string, d: { store: (typeof STORES)[number]; ur
     const queue = [...e.left, ...later].slice(0, 5000);
     if (queue.length) {
       const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), ...(e.left.length ? { paused: "budget" } : {}) });
-      await progress(ref.id, { uid: u, store: d.store, pos: 0, total: queue.length, prices: 0, paused: e.left.length ? "budget" : null, at: Date.now(), doneAt: null });
+      await progress(ref.id, { uid: u, store: d.store, page: pageLabel(d.url), pos: 0, total: queue.length, prices: 0, paused: e.left.length ? "budget" : null, at: Date.now(), doneAt: null });
     }
     const saved = await savePrices(d.store, d.url, shop, rows);
     return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA", queued: queue.length, paused: e.left.length > 0 };
