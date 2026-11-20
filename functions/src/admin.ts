@@ -4,7 +4,7 @@ import { onCall, HttpsError, type CallableRequest } from "firebase-functions/v2/
 import { defineSecret } from "firebase-functions/params";
 import { z } from "zod";
 import { anthropic } from "./ai";
-import { MODEL_PRICES, supportsEffort } from "./config";
+import { aiConfig, MODEL_PRICES, supportsEffort } from "./config";
 import { rebuildPriceBook } from "./pricebook";
 
 // Console d'administration : réservée aux comptes portant la marque superAdmin (posée avec scripts/super-admin.ts).
@@ -67,19 +67,23 @@ export const adminStats = onCall(opts, async (req) => {
   const lastActive = (n: number) => users.filter((u) => Date.parse(u.metadata.lastRefreshTime || u.metadata.lastSignInTime) >= now - n * 86400_000).length;
 
   const logs = (await db().collection("aiLogs").where("at", ">=", d30).get()).docs.map((d) => d.data());
-  const ai = { calls: logs.length, errors: logs.filter((l) => !l.ok).length, cost: 0, inTok: 0, outTok: 0, byDay: {} as Record<string, { calls: number; cost: number }>, byTask: {} as Record<string, { calls: number; cost: number; ms: number; errors: number }>, byModel: {} as Record<string, { calls: number; cost: number }> };
+  // Réussi : champ « ok » des appels à Claude ; les photos des plats n'écrivent qu'« error » en cas d'échec.
+  const ok = (l: FirebaseFirestore.DocumentData) => (l.ok !== undefined ? !!l.ok : !l.error);
+  const ai = { calls: logs.length, errors: logs.filter((l) => !ok(l)).length, cost: 0, inTok: 0, outTok: 0, byDay: {} as Record<string, { calls: number; cost: number }>, byTask: {} as Record<string, { calls: number; cost: number; ms: number; errors: number }>, byModel: {} as Record<string, { calls: number; cost: number }> };
   for (const l of logs) {
     const c = l.cost || 0;
     ai.cost += c; ai.inTok += l.inTok || 0; ai.outTok += l.outTok || 0;
     const k = day(l.at);
     ai.byDay[k] = { calls: (ai.byDay[k]?.calls || 0) + 1, cost: (ai.byDay[k]?.cost || 0) + c };
     const t = (ai.byTask[l.task] ||= { calls: 0, cost: 0, ms: 0, errors: 0 });
-    t.calls++; t.cost += c; t.ms += l.ms || 0; if (!l.ok) t.errors++;
+    t.calls++; t.cost += c; t.ms += l.ms || 0; if (!ok(l)) t.errors++;
     const m = (ai.byModel[l.model] ||= { calls: 0, cost: 0 }); m.calls++; m.cost += c;
   }
   const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
   const monthCost = logs.filter((l) => l.at >= monthStart).reduce((s, l) => s + (l.cost || 0), 0);
-  const recentErrors = logs.filter((l) => !l.ok).sort((a, b) => b.at - a.at).slice(0, 15).map((l) => ({ at: l.at, task: l.task, model: l.model, error: l.error }));
+  // Budget IA = Claude seulement (les photos ont leur propre plafond).
+  const monthClaude = logs.filter((l) => l.at >= monthStart && l.task !== "dishImage").reduce((s, l) => s + (l.cost || 0), 0);
+  const recentErrors = logs.filter((l) => !ok(l)).sort((a, b) => b.at - a.at).slice(0, 15).map((l) => ({ at: l.at, task: l.task, model: l.model, error: l.error }));
 
   const stores = ["colruyt", "renmans", "delhaize", "carrefour", "lidl", "aldi", "intermarche", "ah"];
   const prices: Record<string, { count: number; fresh: number }> = {};
@@ -110,7 +114,7 @@ export const adminStats = onCall(opts, async (req) => {
       aiCache: await count(db().collection("aiCache")),
       matchQueue: await count(db().collection("matchQueue")),
     },
-    ai: { ...ai, monthCost, recentErrors },
+    ai: { ...ai, monthCost, monthClaude, budget: (await aiConfig()).monthlyBudgetUsd, recentErrors },
     prices, runs,
   };
 });
