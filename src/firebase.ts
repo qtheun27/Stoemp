@@ -31,7 +31,7 @@ if (EMU) {
 }
 /** Appel d'une Cloud Function, avec des messages d'erreur lisibles. */
 export const call = <I, O>(name: string) => async (data: I): Promise<O> => {
-  try { return (await httpsCallable<I, O>(functions, name, { timeout: 300_000 })(data)).data; }
+  try { return (await httpsCallable<I, O>(functions, name, { timeout: 540_000 })(data)).data; }
   catch (e) {
     const err = e as { code?: string; message?: string };
     const code = (err.code || "").replace("functions/", "");
