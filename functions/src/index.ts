@@ -386,6 +386,8 @@ const catalogNames = (items: ItemDoc[]) => {
 
 
 const ENRICH_NOW = 120, ENRICH_STEP = 200;
+/** Fiche d'avancement légère (`enrichProgress/{id}`), lue en direct par l'appli (la file elle-même est trop lourde). */
+const progress = (id: string, patch: Record<string, unknown>) => db().collection("enrichProgress").doc(id).set(patch, { merge: true }).catch(() => {});
 /**
  * Produits inconnus d'une enseigne → articles génériques (classés par l'IA par paquets de 40, avec le catalogue existant).
  * Renvoie les lignes de prix à enregistrer et les noms des articles créés.
@@ -472,7 +474,10 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     rows.push(...e.rows);
     const created = new Set(e.created);
     const queue = [...e.left, ...later].slice(0, 5000);
-    if (queue.length) await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), ...(e.left.length ? { paused: "budget" } : {}) });
+    if (queue.length) {
+      const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), ...(e.left.length ? { paused: "budget" } : {}) });
+      await progress(ref.id, { uid: u, store: d.store, pos: 0, total: queue.length, prices: 0, paused: e.left.length ? "budget" : null, at: Date.now(), doneAt: null });
+    }
     const saved = await savePrices(d.store, d.url, shop, rows);
     return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA", queued: queue.length, paused: e.left.length > 0 };
   }
@@ -515,22 +520,24 @@ export const onEnrichJob = onDocumentWritten({ document: "enrichJobs/{id}", ...a
   if (before && before.pos === job.pos && before.kick === job.kick) return;
   if (job.paused) return;
   const products = job.products as ShopProduct[];
-  if (job.pos >= products.length) { await event.data!.after.ref.delete(); return; }
+  const id = event.params.id;
+  if (job.pos >= products.length) { await event.data!.after.ref.delete(); await progress(id, { pos: products.length, paused: null, doneAt: Date.now() }); return; }
   const batch = products.slice(job.pos, job.pos + ENRICH_STEP);
-  let done = batch.length, paused: string | null = null;
+  let done = batch.length, paused: string | null = null, saved = 0;
   try {
     const e = await enrichProducts(job.uid, batch, !!job.pageNonFood);
-    if (e.rows.length) await savePrices(job.store, job.url, job.shop || null, e.rows);
+    if (e.rows.length) saved = (await savePrices(job.store, job.url, job.shop || null, e.rows)).length;
     if (e.left.length) { done = batch.length - e.left.length; paused = "budget"; }
     logger.info("Produits classés en arrière-plan", { magasin: job.store, lot: batch.length, prix: e.rows.length, créés: e.created.length, reste: products.length - job.pos - done });
   } catch (err) { logger.error("enrichJobs", err); }
+  await progress(id, { pos: job.pos + done, paused, prices: FieldValue.increment(saved) });
   await event.data!.after.ref.update({ pos: job.pos + done, ...(paused ? { paused } : {}) });
 });
 
 /** Budget ou réglages IA modifiés dans la console : les files en pause reprennent. */
 export const onAiConfigChanged = onDocumentWritten({ document: "config/ai", timeoutSeconds: 60 }, async () => {
   const paused = await db().collection("enrichJobs").where("paused", "==", "budget").get();
-  await Promise.all(paused.docs.map((d) => d.ref.update({ paused: FieldValue.delete(), kick: Date.now() })));
+  await Promise.all(paused.docs.map(async (d) => { await progress(d.id, { paused: null }); await d.ref.update({ paused: FieldValue.delete(), kick: Date.now() }); }));
 });
 
 // ---------- readReceipt : photo du ticket de caisse ----------
