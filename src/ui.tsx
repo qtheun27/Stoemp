@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, type ReactNode } from "react";
+import { useRef, useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 
 // ---------- Toast ----------
@@ -83,14 +83,32 @@ export function Stepper({ value, onChange, min = 1, max = 12, step = 1, fmt }: {
   );
 }
 
+/**
+ * En-tête. Sur téléphone il est FIXÉ en haut, opaque, dès l'ouverture : l'iPhone (iOS 26) retire alors son flou
+ * sous la barre d'état (avec un en-tête qui ne « colle » qu'en défilant, le flou restait tant qu'on n'avait pas défilé).
+ * Sa hauteur réelle (--topbar-h) réserve la place au-dessus du contenu.
+ */
 export function TopBar({ title, sub, children }: { title: ReactNode; sub?: ReactNode; children?: ReactNode }) {
+  const ref = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const set = () => document.documentElement.style.setProperty("--topbar-h", `${el.offsetHeight}px`);
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
-    <header className="topbar">
-      <div className="topbar-in">
-        <h1>{title}{sub && <span className="sub">{sub}</span>}</h1>
-        {children}
-      </div>
-    </header>
+    <>
+      <header className="topbar" ref={ref}>
+        <div className="topbar-in">
+          <h1>{title}{sub && <span className="sub">{sub}</span>}</h1>
+          {children}
+        </div>
+      </header>
+      <div className="topbar-space" aria-hidden />
+    </>
   );
 }
 
