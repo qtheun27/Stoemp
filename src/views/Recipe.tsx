@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { ChefHat, Heart, Leaf, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, ChefHat, Heart, Leaf, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { ingredientsOf, isVegRecipe, nameOf } from "../lib/catalog";
 import { ALLERGENS, CUISINES, DAYS } from "../lib/constants";
 import { mealCostPerPerson } from "../lib/cost";
@@ -43,9 +43,9 @@ function useFullRecipe(r: Recipe): Recipe {
   return r.lib && !r.steps.length ? { ...r, steps: steps || ["Chargement des étapes…"], servings: servings || undefined } : r;
 }
 
-export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { recipe: Recipe; slotIndex: number | null; onClose: () => void }) {
+export default function RecipeSheet({ recipe: initial, slotIndex, onClose, startCook }: { recipe: Recipe; slotIndex: number | null; onClose: () => void; startCook?: boolean }) {
   const s = useStore();
-  const [cook, setCook] = useState(false);
+  const [cook, setCook] = useState(!!startCook);
   const [other, setOther] = useState<Recipe | null>(null);
   const slot = slotIndex != null ? s.week?.slots[slotIndex] : undefined;
   // Accompagnement choisi pour ce repas : il remplace le féculent d'origine (ingrédients, étapes, coût).
@@ -73,7 +73,7 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
   const parts = mealParts(recipe, veg, persons, slot?.fromLeftovers ? 0 : vegP, s.settings.options.allergens)
     .map((p) => ({ ...p, rows: p.ings.map((i) => ({ ing: i, item: s.idx.get(i.itemId) })).filter((x): x is { ing: typeof x.ing; item: Item } => !!x.item) }));
   const mixed = parts.some((p) => p.label === "vege");
-  const al = allergensOf(recipe, veg, s.idx) as Allergen[];
+  const al = (allergensOf(recipe, veg, s.idx) as Allergen[]).filter((a) => ALLERGENS[a]); // codes inconnus (articles ajoutés par l'IA) ignorés
   const cost = mealCostPerPerson(recipe, veg, planCtx(s).cost);
   const fav = s.prefs.favorites.includes(recipe.id);
   const noBio = s.settings.options.organic ? ings.filter((x) => !x.item.organicAvailable && !x.item.staple) : [];
@@ -106,21 +106,15 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
         </div>
       </div>}
       {!!al.length && <div className="chips" style={{ margin: "4px 0 10px" }}>{al.map((a) => <span key={a} className="tag warn">Contient : {ALLERGENS[a]}</span>)}</div>}
-      {/* Action principale en grand, actions secondaires en grille 2 colonnes (pouce, une main). */}
-      <div className="stack" style={{ gap: 8, margin: "6px 0 14px" }}>
-        {!slot && !!s.week?.slots.length && <button className="btn block" onClick={async () => { const d = await run(() => placeRecipe(s, recipe)); if (d === null) toast("Aucun repas libre cette semaine"); else if (d !== undefined) { toast(`Placé ${DAYS[d].toLowerCase()}`); onClose(); } }}>📅 Placer dans la semaine</button>}
-        {slot && !pret && <button className="btn block" onClick={() => setCook(true)}><ChefHat size={18} />Mode cuisine</button>}
-        <div className="acts">
-          {!slot && !pret && <button className="btn ghost sm" onClick={() => setCook(true)}><ChefHat size={16} />Mode cuisine</button>}
-          {slot && <button className="btn ghost sm" aria-pressed={slot.cooked} onClick={() => run(() => setCooked(s, slotIndex!, !slot.cooked), slot.cooked ? "Annulé : stock rétabli" : "Bon appétit ! Stock mis à jour")}><ChefHat size={16} />{slot.cooked ? "Pas cuisiné" : "Cuisiné ✓"}</button>}
-          <button className="btn ghost sm" aria-pressed={fav} onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, recipe.id))}><Heart size={16} fill={fav ? "currentColor" : "none"} />Favori</button>
-          {slot && !isVegRecipe(recipe) && !pret && <button className="btn ghost sm" aria-pressed={veg} onClick={toggleVeg}><Leaf size={16} />{veg ? "Version classique" : "Tout en végé"}</button>}
-          {slot && !slot.fromLeftovers && !slot.leftovers && <button className="btn ghost sm" aria-pressed={moving} onClick={() => setMoving(!moving)}>📅 Déplacer</button>}
-          {slot && slot.meal !== "matin" && !slot.fromLeftovers && !slot.guests && <button className="btn ghost sm" aria-pressed={!!slot.light} onClick={async () => { await run(() => setSlotLight(s, slotIndex!, !slot.light), slot.light ? "Repas complet proposé" : "Repas léger proposé"); onClose(); }}>{slot.light ? "🍲 Repas complet" : "🥗 Repas léger"}</button>}
-          {slot && slot.meal === "soir" && !slot.fromLeftovers && <button className="btn ghost sm" aria-pressed={!!slot.leftovers} onClick={() => run(() => toggleLeftovers(s, slotIndex!, !slot.leftovers), slot.leftovers ? "Restes annulés" : "Portion doublée : demain midi = restes 🍱")}>🍱 {slot.leftovers ? "Sans restes" : "Restes demain"}</button>}
-          {slot && !slot.fromLeftovers && !slot.guests && s.app.features.ai && !pret && <button className="btn ghost sm" onClick={() => setReception(true)}>🎉 Je reçois</button>}
-          {slot && !slot.fromLeftovers && !slot.guests && !pret && <button className="btn ghost sm" onClick={() => setReady(true)}>🥡 Plat préparé</button>}
-        </div>
+      {/* Actions secondaires en une rangée qu'on fait défiler du pouce ; l'action principale est en bas (barre fixe). */}
+      <div className="scroller" role="toolbar" aria-label="Actions sur ce repas" style={{ marginBottom: 12 }}>
+          <button className="chip big" aria-pressed={fav} onClick={() => run(() => toggleFavorite(s.hid!, s.prefs, recipe.id))}><Heart size={16} fill={fav ? "currentColor" : "none"} />Favori</button>
+          {slot && !isVegRecipe(recipe) && !pret && <button className="chip big" aria-pressed={veg} onClick={toggleVeg}><Leaf size={16} />{veg ? "Version classique" : "Tout en végé"}</button>}
+          {slot && !slot.fromLeftovers && !slot.leftovers && <button className="chip big" aria-pressed={moving} onClick={() => setMoving(!moving)}>📅 Déplacer</button>}
+          {slot && slot.meal !== "matin" && !slot.fromLeftovers && !slot.guests && <button className="chip big" aria-pressed={!!slot.light} onClick={async () => { await run(() => setSlotLight(s, slotIndex!, !slot.light), slot.light ? "Repas complet proposé" : "Repas léger proposé"); onClose(); }}>{slot.light ? "🍲 Repas complet" : "🥗 Repas léger"}</button>}
+          {slot && slot.meal === "soir" && !slot.fromLeftovers && <button className="chip big" aria-pressed={!!slot.leftovers} onClick={() => run(() => toggleLeftovers(s, slotIndex!, !slot.leftovers), slot.leftovers ? "Restes annulés" : "Portion doublée : demain midi = restes 🍱")}>🍱 {slot.leftovers ? "Sans restes" : "Restes demain"}</button>}
+          {slot && !slot.fromLeftovers && !slot.guests && s.app.features.ai && !pret && <button className="chip big" onClick={() => setReception(true)}>🎉 Je reçois</button>}
+          {slot && !slot.fromLeftovers && !slot.guests && !pret && <button className="chip big" onClick={() => setReady(true)}>🥡 Plat préparé</button>}
       </div>
       {moving && slot && <div className="card" style={{ margin: "0 0 12px", background: "var(--bg)" }}>
         <h3 style={{ marginTop: 0 }}>📅 Déplacer ce repas</h3>
@@ -167,6 +161,14 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose }: { r
       <h3 style={{ margin: "16px 0 6px" }}>Préparation</h3>
       {recipe.servings && <p className="small muted" style={{ marginTop: -2 }}>Étapes écrites pour {recipe.servings} parts : les quantités ci-dessus sont déjà calculées pour ton repas.</p>}
       <ol>{recipe.steps.map((st, i) => <li key={i}>{st}</li>)}</ol>
+      {/* Barre du bas, à portée du pouce : cuisiner, et cocher quand c'est fait. */}
+      {(!pret || slot || !!s.week?.slots.length) && <div className="sheet-foot">
+        {!slot && !!s.week?.slots.length && <button className="btn ghost" onClick={async () => { const d = await run(() => placeRecipe(s, recipe)); if (d === null) toast("Aucun repas libre cette semaine"); else if (d !== undefined) { toast(`Placé ${DAYS[d].toLowerCase()}`); onClose(); } }}>📅 Placer</button>}
+        {!pret && <button className="btn" onClick={() => setCook(true)}><ChefHat size={18} />Mode cuisine</button>}
+        {slot && <button className={`btn${slot.cooked ? " ok" : " ghost"}`} aria-pressed={slot.cooked}
+          onClick={() => { try { navigator.vibrate?.(10); } catch { /* ignoré */ } run(() => setCooked(s, slotIndex!, !slot.cooked), slot.cooked ? "Annulé : stock rétabli" : "Bon appétit ! Stock mis à jour"); }}>
+          <Check size={18} />{slot.cooked ? "Cuisiné" : "C'est fait"}</button>}
+      </div>}
     </Sheet>
   );
 }

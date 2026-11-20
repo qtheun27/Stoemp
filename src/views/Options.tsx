@@ -44,22 +44,26 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
   const mine = [...s.recipes.values()].filter((r) => r.source === "perso" && !r.deleted).length;
   return (
     <Sheet title="Options" sub="Elles s'appliquent à la prochaine génération" onClose={onClose}>
-      <div className="row wrap" style={{ gap: 14, margin: "6px 0 10px" }}>
+      {/* Foyer : trois compteurs sur une ligne. */}
+      <div className="eaters">
         <div><div className="small muted">Adultes</div><Stepper value={e.adults} min={1} max={12} onChange={(v) => setEaters({ ...e, adults: v })} /></div>
-        <div><div className="small muted">Ados (11-17 ans)</div><Stepper value={e.teens} min={0} max={8} onChange={(v) => setEaters({ ...e, teens: v })} /></div>
-        <div><div className="small muted">Enfants (3-10 ans)</div><Stepper value={e.kids} min={0} max={8} onChange={(v) => setEaters({ ...e, kids: v })} /></div>
+        <div><div className="small muted">Ados <span className="tiny">11-17</span></div><Stepper value={e.teens} min={0} max={8} onChange={(v) => setEaters({ ...e, teens: v })} /></div>
+        <div><div className="small muted">Enfants <span className="tiny">3-10</span></div><Stepper value={e.kids} min={0} max={8} onChange={(v) => setEaters({ ...e, kids: v })} /></div>
       </div>
-      <div style={{ marginBottom: 8 }}>
-        <div className="small muted">☕ Déjeuner du matin (une recette : pancakes, œufs, cramique…) · {days.breakfast.length} / 7</div>
-        <div className="chips">{DAYS.map((label, d) => <button key={d} className="chip" aria-pressed={days.breakfast.includes(d)} aria-label={`${label} déjeuner`} onClick={() => toggleBreakfast(d)}>{label.slice(0, 3)}{days.breakfast.includes(d) ? " ☕" : ""}</button>)}</div>
+      {/* Repas de la semaine : une grille comme un calendrier. Une touche par case : complet 🍲 → léger 🥗 → rien. */}
+      <div className="mealgrid" role="grid" aria-label="Repas de la semaine">
+        <span />{DAYS.map((label) => <span key={label} className="mg-day">{label.slice(0, 1)}</span>)}
+        <span className="mg-row">☕ Déj.</span>
+        {DAYS.map((label, d) => { const on = days.breakfast.includes(d);
+          return <button key={d} className={`mg-cell${on ? " on" : ""}`} aria-pressed={on} aria-label={`${label} déjeuner du matin : ${on ? "oui" : "non"}`} onClick={() => toggleBreakfast(d)}>{on ? "☕" : ""}</button>; })}
+        {(["lunch", "dinner"] as const).map((meal) => [
+          <span key={meal} className="mg-row">{meal === "lunch" ? "Midi" : "Soir"}</span>,
+          ...DAYS.map((label, d) => { const on = days[meal].includes(d), lt = on && light.has(`${d}-${meal === "lunch" ? "midi" : "soir"}`);
+            return <button key={meal + d} className={`mg-cell${on ? " on" : ""}${lt ? " light" : ""}`} aria-pressed={on}
+              aria-label={`${label} ${meal === "lunch" ? "midi" : "soir"} : ${!on ? "pas de repas" : lt ? "repas léger" : "repas complet"}`} onClick={() => cycleDay(meal, d)}>{on ? (lt ? "🥗" : "🍲") : ""}</button>; }),
+        ])}
       </div>
-      {(["lunch", "dinner"] as const).map((meal) => <div key={meal} style={{ marginBottom: 8 }}>
-        <div className="small muted">{meal === "lunch" ? "Repas de midi" : "Repas du soir"} · {days[meal].length} / 7</div>
-        <div className="chips">{DAYS.map((label, d) => { const on = days[meal].includes(d), lt = on && light.has(`${d}-${meal === "lunch" ? "midi" : "soir"}`);
-          return <button key={d} className="chip" aria-pressed={on} aria-label={`${label} ${meal === "lunch" ? "midi" : "soir"} : ${!on ? "pas de repas" : lt ? "léger" : "complet"}`}
-            onClick={() => cycleDay(meal, d)}>{label.slice(0, 3)}{on ? (lt ? " 🥗" : " 🍲") : ""}</button>; })}</div>
-      </div>)}
-      <div className="small muted" style={{ margin: "-2px 0 10px" }}>Touche un jour : 🍲 repas complet, puis 🥗 léger (salade-repas, soupe, tartines, omelette…), puis pas de repas. En semaine, le déjeuner habituel (pain, lait, céréales…) est prévu par le stock.</div>
+      <div className="small muted" style={{ margin: "6px 0 14px" }}>Une touche par case : 🍲 repas complet → 🥗 léger → rien. ☕ = une recette de déjeuner (conseillé le week-end ; en semaine, le stock prévoit pain, lait…). {days.lunch.length + days.dinner.length} repas{days.breakfast.length ? ` + ${days.breakfast.length} déjeuner${days.breakfast.length > 1 ? "s" : ""}` : ""} par semaine.</div>
       <Opt o={o} set={set} k="seasonal" title="De saison" desc="Mois courant, ou saison choisie">
         <div className="chips">
           <button className="chip" aria-pressed={o.season === "auto"} onClick={() => set({ season: "auto" })}>Mois courant</button>

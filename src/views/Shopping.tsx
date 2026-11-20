@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Camera, ClipboardCopy, ExternalLink, Plus, Share2, Store, Trash2, Check as CheckIcon } from "lucide-react";
+import { Camera, ClipboardCopy, ExternalLink, Pencil, Plus, Share2, Store, Trash2, Check as CheckIcon } from "lucide-react";
 import { CAT_ORDER, CATS, STORES } from "../lib/constants";
 import { bestPair, storeTotals } from "../lib/cost";
 import { bestPrice, lineCost, priceAt } from "../lib/pricing";
@@ -117,17 +117,19 @@ function ByCategory({ lines, priceOf, onEdit }: { lines: ShopLine[]; priceOf: (l
     if (!L.length) return null;
     return <section key={key}>
       <div className="cat-h"><span>{icon}</span>{label}<span className="muted">{L.filter((l) => !l.checked).length}</span></div>
-      <div className="list">{L.map((l) => {
+      {/* En magasin : toucher la ligne la coche (grande cible) ; les articles cochés descendent ; ✎ pour modifier ou retirer. */}
+      <div className="list">{[...L].sort((a, b) => Number(a.checked) - Number(b.checked)).map((l) => {
         const pc = priceOf(l);
+        const tick = (v: boolean) => { try { navigator.vibrate?.(10); } catch { /* ignoré */ } run(() => checkLine(s, l, v)); };
         return <div key={l.id} className={`li${l.checked ? " done" : ""}`}>
-          <Check checked={l.checked} onChange={(v) => run(() => checkLine(s, l, v))} label={l.name} />
-          <button className="main-t" onClick={() => onEdit(l)}>
+          <Check checked={l.checked} onChange={tick} label={l.name} />
+          <button className="main-t" onClick={() => tick(!l.checked)} aria-pressed={l.checked}>
             <span className="name">{l.name}</span>
             <span className="meta"><span className="num">{lineQty(l)}</span>
               <span className={`tag${l.reason === "stock" ? " warn" : l.reason === "manuel" ? "" : " ac"}`}>{l.reason === "repas" ? "repas" : l.reason === "stock" ? (l.detail || "stock bas") : "manuel"}</span>
               {l.pricePaid ? <span className="num">payé {eur(l.pricePaid)}</span> : pc ? <span className="num">≈ {eur(pc.cost)}</span> : null}</span>
           </button>
-          <button className="ib plain" aria-label="Retirer" onClick={() => run(() => removeLine(s, l))}><Trash2 size={18} /></button>
+          <button className="ib plain" aria-label={`Modifier ${l.name}`} onClick={() => onEdit(l)}><Pencil size={18} /></button>
         </div>;
       })}</div>
     </section>;

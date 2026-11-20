@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useRef, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 
 // ---------- Toast ----------
@@ -31,9 +31,28 @@ export function Sheet({ title, sub, onClose, children, actions }: { title: React
     document.body.style.overflow = "hidden";
     return () => { removeEventListener("keydown", k); document.body.style.overflow = o; };
   }, [onClose]);
+  // Glisser vers le bas pour fermer (quand la feuille est tout en haut), comme sur iOS et Android.
+  const ref = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ x: number; y: number; dy: number } | null>(null);
+  const onStart = (e: React.TouchEvent) => { if ((ref.current?.scrollTop || 0) <= 0) drag.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, dy: 0 }; };
+  const onMove = (e: React.TouchEvent) => {
+    const d = drag.current, el = ref.current;
+    if (!d || !el) return;
+    // Geste horizontal (rangée de boutons qu'on fait défiler) : ce n'est pas une fermeture.
+    if (!d.dy && Math.abs(e.touches[0].clientX - d.x) > Math.abs(e.touches[0].clientY - d.y)) { drag.current = null; return; }
+    d.dy = Math.max(0, e.touches[0].clientY - d.y);
+    if (d.dy > 0 && el.scrollTop <= 0) { el.style.transform = `translateY(${d.dy}px)`; el.style.transition = "none"; }
+  };
+  const onEnd = () => {
+    const d = drag.current, el = ref.current;
+    drag.current = null;
+    if (!d || !el) return;
+    el.style.transition = "transform .2s"; el.style.transform = "";
+    if (d.dy > 110) onClose();
+  };
   return (
     <div className="sheet-bg" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="sheet" role="dialog" aria-modal="true">
+      <div className="sheet" role="dialog" aria-modal="true" ref={ref} onTouchStart={onStart} onTouchMove={onMove} onTouchEnd={onEnd} onTouchCancel={onEnd}>
         <div className="grab" />
         <div className="sheet-head">
           <div className="grow"><h2>{title}</h2>{sub && <div className="muted small">{sub}</div>}</div>
