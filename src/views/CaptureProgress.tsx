@@ -5,11 +5,7 @@ import { STORES } from "../lib/constants";
 import type { StoreId } from "../lib/types";
 import { useStore } from "../state/store";
 
-<<<<<<< HEAD
 interface Progress { id: string; store: StoreId; page?: string; pos: number; total: number; prices?: number; paused?: string | null; at: number; doneAt?: number | null; review?: string; moved?: number; placed?: number }
-=======
-interface Progress { id: string; store: StoreId; page?: string; pos: number; total: number; prices?: number; paused?: string | null; at: number; doneAt?: number | null }
->>>>>>> origin/main
 
 /** Avancement en direct du classement en arrière-plan des produits inconnus envoyés par le capteur (fiches `enrichProgress`). */
 export function CaptureProgress() {
