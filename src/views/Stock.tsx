@@ -79,7 +79,8 @@ export default function Stock() {
                       {e.minQty != null && e.qty < e.minQty && <span className="tag warn">sous le minimum</span>}</span>
                   </button>
                   <button className="ib" aria-label="Moins" onClick={() => run(() => adjustStock(s, id, -Math.min(step(it), e.qty), "manuel"))} disabled={e.qty <= 0}><Minus size={18} /></button>
-                  <button className="btn soft sm" onClick={() => run(() => finishItem(s, id, "manuel"), `${it.name} : fini`)} disabled={e.qty <= 0}>Fini</button>
+                  {e.qty > 0 ? <button className="btn soft sm" onClick={() => run(() => finishItem(s, id, "manuel"), `${it.name} : fini`)}>Fini</button>
+                    : <button className="btn soft sm" onClick={() => run(() => deleteStock(s, id), `${it.name} retiré du stock`)}>Retirer</button>}
                 </div>;
               })}</div>}
           </div>
