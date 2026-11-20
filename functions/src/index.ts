@@ -503,7 +503,11 @@ async function processCapture(u: string, d: { store: (typeof STORES)[number]; ur
     const created = new Set(e.created);
     const queue = [...e.left, ...later].slice(0, 5000);
     if (queue.length) {
+<<<<<<< HEAD
       const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), since, ...(e.left.length ? { paused: "budget" } : {}) });
+=======
+      const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), ...(e.left.length ? { paused: "budget" } : {}) });
+>>>>>>> origin/main
       await progress(ref.id, { uid: u, store: d.store, page: pageLabel(d.url), pos: 0, total: queue.length, prices: 0, paused: e.left.length ? "budget" : null, at: Date.now(), doneAt: null });
     }
     const saved = await savePrices(d.store, d.url, shop, rows);
