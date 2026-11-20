@@ -3,7 +3,7 @@
 :root {
   color-scheme: light;
   --bg: #f3f5ef; --bg2: #e9ede4; --card: #ffffff; --ink: #18241c; --muted: #5f6d63; --line: #dde3d7; --soft: #e8ede3;
-  --P: #4f8a2e; --E: #c27c12; --A: #b0561c; --H: #3c6a96; --ac: var(--A); --ac-ink: #fff;
+  --P: #4f8a2e; --E: #c27c12; --A: #b0561c; --H: #3c6a96; --ac: var(--A); --ac2: #9f1d48; --ac3: #e3a21a; --ac-ink: #fff;
   --ok: #2f8a4c; --warn: #c27c12; --bad: #c0392b;
   --glass: color-mix(in srgb, var(--bg) 70%, transparent);
   --shadow: 0 1px 2px rgb(0 0 0 / .04), 0 8px 24px rgb(20 40 25 / .08);
@@ -24,8 +24,26 @@
   --P: #8dc56a; --E: #ebb052; --A: #e08a55; --H: #82a9d6; --ac-ink: #111613;
   --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .3); --shadow-lg: 0 12px 40px rgb(0 0 0 / .5); }
 
+/* Couleurs de la saison (data-season posé par App.tsx) : fond teinté, accent et deux couleurs d'appoint (--ac2, --ac3). */
+/* Printemps : vert pousse, rose cerisier, jonquille */
+:root[data-season="P"] { --bg: #f5f8ef; --bg2: #eaf0e2; --soft: #e9f0e1; --line: #dde6d4; --ac: #217a42; --ac2: #e0609a; --ac3: #f2c230; }
+@media (prefers-color-scheme: dark) { :root[data-season="P"]:not([data-theme="light"]) { --bg: #101712; --bg2: #151e17; --card: #1a241c; --soft: #212c23; --line: #2b382e; --ac: #7fd49b; --ac2: #f28ab8; --ac3: #f5d061; } }
+:root[data-season="P"][data-theme="dark"] { --bg: #101712; --bg2: #151e17; --card: #1a241c; --soft: #212c23; --line: #2b382e; --ac: #7fd49b; --ac2: #f28ab8; --ac3: #f5d061; }
+/* Été : turquoise, corail, soleil */
+:root[data-season="E"] { --bg: #fdf8ec; --bg2: #f6eedb; --soft: #f4ecd9; --line: #ebe1cb; --ac: #0b7f8a; --ac2: #ff7a59; --ac3: #f6b51e; }
+@media (prefers-color-scheme: dark) { :root[data-season="E"]:not([data-theme="light"]) { --bg: #0f1617; --bg2: #141d1e; --card: #192324; --soft: #1f2b2c; --line: #2a3839; --ac: #4fd0d6; --ac2: #ff9478; --ac3: #ffc457; } }
+:root[data-season="E"][data-theme="dark"] { --bg: #0f1617; --bg2: #141d1e; --card: #192324; --soft: #1f2b2c; --line: #2a3839; --ac: #4fd0d6; --ac2: #ff9478; --ac3: #ffc457; }
+/* Automne : citrouille, bordeaux, or */
+:root[data-season="A"] { --bg: #fbf3e9; --bg2: #f4e7d6; --soft: #f3e5d3; --line: #e9d9c4; --ac: #c2410c; --ac2: #9f1d48; --ac3: #e3a21a; }
+@media (prefers-color-scheme: dark) { :root[data-season="A"]:not([data-theme="light"]) { --bg: #18120e; --bg2: #1f1712; --card: #241b15; --soft: #2d221b; --line: #3a2c22; --ac: #ff9b5c; --ac2: #f07aa0; --ac3: #f5c04a; } }
+:root[data-season="A"][data-theme="dark"] { --bg: #18120e; --bg2: #1f1712; --card: #241b15; --soft: #2d221b; --line: #3a2c22; --ac: #ff9b5c; --ac2: #f07aa0; --ac3: #f5c04a; }
+/* Hiver : bleu nuit, baie, givre */
+:root[data-season="H"] { --bg: #f1f4fa; --bg2: #e5eaf3; --soft: #e4e9f2; --line: #d8dfeb; --ac: #2b5fb8; --ac2: #b42357; --ac3: #7fb7d9; }
+@media (prefers-color-scheme: dark) { :root[data-season="H"]:not([data-theme="light"]) { --bg: #0f131b; --bg2: #141924; --card: #19202c; --soft: #202837; --line: #2a3446; --ac: #8cb4ff; --ac2: #f27aa5; --ac3: #b8e1f5; } }
+:root[data-season="H"][data-theme="dark"] { --bg: #0f131b; --bg2: #141924; --card: #19202c; --soft: #202837; --line: #2a3446; --ac: #8cb4ff; --ac2: #f27aa5; --ac3: #b8e1f5; }
+
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--sat) + 80px); }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--sat) + 72px); }
 body { margin: 0; overflow-x: hidden; background: var(--bg); color: var(--ink); font-family: "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 16px; line-height: 1.45; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -46,10 +64,12 @@ h1, h2, h3 { letter-spacing: -.015em; line-height: 1.15; }
 /* Barre du haut : fond plein (sans flou : sur iPhone, Safari rendait le titre flou), compacte sous l'îlot. */
 /* Téléphone : en-tête FIXÉ et opaque dès l'ouverture (l'iPhone retire alors son flou sous la barre d'état) ;
    la place est réservée par .topbar-space (hauteur mesurée --topbar-h). Ordinateur (barre latérale) : en-tête qui colle. */
-.topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 20; padding: calc(var(--sat) * 1.5 + 14px) max(16px, var(--sar)) 10px max(16px, var(--sal));
-  background: var(--bg); border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
-  -webkit-font-smoothing: antialiased; }
-.topbar-space { height: var(--topbar-h, calc(var(--sat) + 66px)); }
+.topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 20; padding: calc(var(--sat) * 1.5 + 6px) max(16px, var(--sar)) 10px max(16px, var(--sal));
+  background: var(--bg); -webkit-font-smoothing: antialiased; }
+/* Filet aux couleurs de la saison sous l'en-tête */
+.topbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
+  background: linear-gradient(90deg, var(--ac), var(--ac3) 55%, var(--ac2)); opacity: .85; }
+.topbar-space { height: var(--topbar-h, calc(var(--sat) + 58px)); }
 @media (min-width: 760px) { .topbar { position: sticky; } .topbar-space { display: none; } }
 .topbar-in { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 10px; min-height: 40px; }
 .topbar h1 { margin: 0; font-size: 22px; font-weight: 800; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -200,12 +220,12 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 @media (max-width: 560px) { .ings { grid-template-columns: 1fr; } }
 
 /* Toast */
-.toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); top: calc(var(--sat) + 82px);
+.toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); top: calc(var(--sat) + 74px);
   background: var(--ink); color: var(--bg); padding: 11px 16px; border-radius: 14px; font-size: 14px; max-width: min(92vw, 480px); text-align: center; box-shadow: var(--shadow-lg); animation: up .2s; }
 
 
 /* Mode cuisine */
-.cook { position: fixed; inset: 0 0 auto 0; height: var(--app-h); z-index: 70; background: var(--bg); display: flex; flex-direction: column; padding: calc(var(--sat) + 18px) max(20px, var(--sar)) calc(var(--sab) + 20px) max(20px, var(--sal)); }
+.cook { position: fixed; inset: 0 0 auto 0; height: var(--app-h); z-index: 70; background: var(--bg); display: flex; flex-direction: column; padding: calc(var(--sat) + 10px) max(20px, var(--sar)) calc(var(--sab) + 20px) max(20px, var(--sal)); }
 .cook .step { flex: 1; display: flex; align-items: center; font-size: clamp(22px, 5vw, 36px); font-weight: 600; line-height: 1.3; max-width: 900px; margin: 0 auto; }
 
 /* Grilles responsives */
@@ -259,7 +279,7 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .task-card { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--bg); }
 .task-card + .task-card { margin-top: 10px; }
-.admin-tabs { position: sticky; top: calc(var(--sat) + 67px); z-index: 15; background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); padding: 8px 0; margin: 0 -16px 8px; padding-inline: 16px; }
+.admin-tabs { position: sticky; top: calc(var(--sat) + 59px); z-index: 15; background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); padding: 8px 0; margin: 0 -16px 8px; padding-inline: 16px; }
 
 /* Semaine : 4 actions rapides en grille 2 × 2 sur téléphone, en ligne sur grand écran ; options actives sur leur propre ligne. */
 .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -276,7 +296,8 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .scroller::-webkit-scrollbar { display: none; }
 .scroller > * { flex: none; scroll-snap-align: start; }
 .chip.big { min-height: 42px; padding: 0 14px; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
-.next-meal { background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); margin: 4px 0 14px; }
+.next-meal { background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); margin: 4px 0 14px;
+  border-top: 4px solid var(--ac3); }
 .next-img { display: block; width: 100%; border: 0; padding: 0; background: none; cursor: pointer; }
 .next-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; }
 .next-body .slot { font-size: 12px; font-weight: 800; color: var(--ac); text-transform: uppercase; letter-spacing: .06em; }
@@ -290,13 +311,13 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .dchip span { font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 700; }
 .dchip b { font-size: 17px; font-weight: 800; line-height: 1.1; }
 .dchip i { font-style: normal; font-size: 11px; color: var(--ac); min-height: 13px; line-height: 13px; }
-.dchip.today { background: var(--ac); border-color: var(--ac); color: var(--ac-ink); }
+.dchip.today { background: linear-gradient(160deg, var(--ac), color-mix(in srgb, var(--ac) 65%, var(--ac2))); border-color: var(--ac); color: var(--ac-ink); }
 .dchip.today span, .dchip.today i { color: #fff; }
 .dchip.done:not(.today) { background: color-mix(in srgb, var(--ok) 14%, var(--card)); }
 .dchip:disabled { opacity: .45; cursor: default; }
 .weekline { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 14px; color: var(--muted); margin: 2px 2px 8px; }
 .weekline b { color: var(--ink); font-weight: 800; }
-.day { scroll-margin-top: calc(var(--sat) + 78px); }
+.day { scroll-margin-top: calc(var(--sat) + 70px); }
 .meal .thumb { flex: none; width: 64px; border: 0; padding: 0; background: none; cursor: pointer; }
 .meal { padding-left: 8px; }
 .meal .ib { width: 44px; height: 44px; }

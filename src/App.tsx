@@ -34,7 +34,19 @@ export default function App() {
   // Couleur d'accent de la saison et couleur de la barre d'état.
   const season = planSeason(s.settings.options);
   useEffect(() => {
-    document.documentElement.style.setProperty("--ac", `var(--${season})`);
+    const root = document.documentElement;
+    root.dataset.season = season;
+    // La barre d'état du téléphone prend la couleur de fond de la saison (clair ou sombre).
+    const paint = () => {
+      const bg = getComputedStyle(root).getPropertyValue("--bg").trim();
+      if (bg) document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute("content", bg));
+    };
+    paint();
+    const mq = matchMedia("(prefers-color-scheme: dark)");
+    const obs = new MutationObserver(paint);
+    obs.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    mq.addEventListener("change", paint);
+    return () => { obs.disconnect(); mq.removeEventListener("change", paint); };
   }, [season]);
 
   if (!s.authReady) return <div className="login"><div className="muted">Chargement…</div></div>;
