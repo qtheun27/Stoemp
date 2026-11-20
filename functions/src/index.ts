@@ -8,7 +8,7 @@ import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { askJson, cached } from "./ai";
 import { catalogPrompt, createItem, findItem, loadItems, slug, type ItemDoc } from "./catalog";
-import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt } from "./schemas";
+import { AiRecipe, AiRecipes, ClassifiedItem, LibPlan, LibRecipes, LibReview, Match, NewItems, PageMatches, PageProducts, Receipt, ReviewWrong } from "./schemas";
 import { colruytShop, parseColruyt, type ShopProduct } from "./readers/colruyt";
 import { parseGeneric } from "./readers/generic";
 import { HOUSEHOLD, isBabyFood, isBabyItem, isNonFood, isNonFoodPage } from "./readers/nonfood";
@@ -476,6 +476,7 @@ export const onCaptureReplay = onDocumentCreated({ document: "captureReplays/{id
 
 /** Lecture d'une page de magasin : produits, correspondance au catalogue, classement des inconnus, enregistrement des prix. */
 async function processCapture(u: string, d: { store: (typeof STORES)[number]; url: string; text: string }) {
+  const since = new Date(Date.now() - 60_000).toISOString();
   let items = await loadItems();
 
   // 1. Lecture sans IA : lecteur Colruyt, sinon lecteur générique (prix d'abord comme Renmans, ou nom d'abord).
@@ -502,10 +503,12 @@ async function processCapture(u: string, d: { store: (typeof STORES)[number]; ur
     const created = new Set(e.created);
     const queue = [...e.left, ...later].slice(0, 5000);
     if (queue.length) {
-      const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), ...(e.left.length ? { paused: "budget" } : {}) });
+      const ref = await db().collection("enrichJobs").add({ uid: u, store: d.store, url: d.url, shop, pageNonFood, products: queue, pos: 0, at: Date.now(), since, ...(e.left.length ? { paused: "budget" } : {}) });
       await progress(ref.id, { uid: u, store: d.store, page: pageLabel(d.url), pos: 0, total: queue.length, prices: 0, paused: e.left.length ? "budget" : null, at: Date.now(), doneAt: null });
     }
     const saved = await savePrices(d.store, d.url, shop, rows);
+    // Tout est classé tout de suite : relecture des articles touchés (sinon, à la fin de la file d'attente).
+    if (!queue.length) await db().collection("reviewJobs").add({ uid: u, store: d.store, url: d.url, since, at: Date.now() });
     return { found: parsed.length, saved, created: [...created], shop, reader: "sans IA", queued: queue.length, paused: e.left.length > 0 };
   }
 
@@ -548,7 +551,13 @@ export const onEnrichJob = onDocumentWritten({ document: "enrichJobs/{id}", ...a
   if (job.paused) return;
   const products = job.products as ShopProduct[];
   const id = event.params.id;
-  if (job.pos >= products.length) { await event.data!.after.ref.delete(); await progress(id, { pos: products.length, paused: null, doneAt: Date.now() }); return; }
+  if (job.pos >= products.length) {
+    await event.data!.after.ref.delete();
+    await progress(id, { pos: products.length, paused: null, doneAt: Date.now() });
+    // File terminée : relecture des articles touchés par cet envoi.
+    await db().collection("reviewJobs").add({ uid: job.uid, store: job.store, url: job.url, since: job.since || new Date(job.at - 3600_000).toISOString(), progressId: id, at: Date.now() });
+    return;
+  }
   const batch = products.slice(job.pos, job.pos + ENRICH_STEP);
   let done = batch.length, paused: string | null = null, saved = 0;
   try {
@@ -559,6 +568,85 @@ export const onEnrichJob = onDocumentWritten({ document: "enrichJobs/{id}", ...a
   } catch (err) { logger.error("enrichJobs", err); }
   await progress(id, { pos: job.pos + done, paused, prices: FieldValue.increment(saved) });
   await event.data!.after.ref.update({ pos: job.pos + done, ...(paused ? { paused } : {}) });
+});
+
+
+const REVIEW_SYSTEM = `Tu es un chef qui relit le catalogue de courses d'un foyer belge.
+Pour chaque article (numéroté), on te donne les produits d'un magasin qui y sont rangés (numérotés).
+Signale UNIQUEMENT les produits qui ne sont manifestement pas cet article : un autre aliment (un biscuit dans « Pâtes », un soda dans « Lait », du whisky dans « Bière trappiste »), une autre viande ou un autre poisson, un autre rayon.
+Une marque, un format, un conditionnement, une variante de goût ou de recette du même produit restent le même article. En cas de doute, ne signale rien.
+Recopie le nom exact de chaque produit signalé.`;
+type Off = { name: string; size: number; ppu: number; organic: boolean; price: number; promo: string | null };
+
+/**
+ * Relecture après un envoi : chaque article touché est montré à l'IA avec tous ses produits côte à côte ;
+ * les intrus sont retirés (offre et nom appris), puis reclassés ailleurs, jamais dans l'article d'où ils sortent.
+ */
+async function reviewStore(u: string, store: (typeof STORES)[number], url: string, since: string, startAfter = "") {
+  const t0 = Date.now();
+  const byId = new Map((await loadItems()).map((i) => [i.id, i]));
+  const docs = (await db().collection("prices").where("store", "==", store).get()).docs
+    .filter((d) => !d.id.endsWith("_bio") && d.id > startAfter && String(d.get("fetchedAt")) >= since && ((d.get("offers") || []) as Off[]).length >= 2 && byId.has(d.get("itemId")))
+    .sort((a, b) => (a.id < b.id ? -1 : 1));
+  const moved: ShopProduct[] = [], from = new Map<string, string>();
+  const groups: (typeof docs)[] = [];
+  for (let i = 0; i < docs.length; i += 12) groups.push(docs.slice(i, i + 12));
+  let stop = false, g = 0;
+  for (; g < groups.length && !stop && Date.now() - t0 < 360_000; g += 4) {
+    await Promise.all(groups.slice(g, g + 4).map(async (group) => {
+      const content = group.map((d, k) => `Article ${k} : ${byId.get(d.get("itemId"))!.name}\n` +
+        ((d.get("offers") || []) as Off[]).slice(0, 60).map((o, j) => `  ${j}. ${o.name}`).join("\n")).join("\n\n");
+      try {
+        const r = await askJson("classifyItem", { uid: u, schema: ReviewWrong, system: REVIEW_SYSTEM, content, minTokens: 4000 });
+        const bad = new Map<number, Set<string>>();
+        for (const w of r.wrong) {
+          const o = ((group[w.item]?.get("offers") || []) as Off[])[w.product];
+          if (!o || (norm(o.name) !== norm(w.name) && similarity(o.name, w.name) < 0.6)) continue; // réponse décalée : ignorée
+          if (!bad.has(w.item)) bad.set(w.item, new Set());
+          bad.get(w.item)!.add(o.name);
+        }
+        for (const [k, names] of bad) {
+          const d = group[k], itemId = d.get("itemId") as string, all = (d.get("offers") || []) as Off[], keep = all.filter((o) => !names.has(o.name));
+          if (keep.length) { const b = keep.find((o) => !o.organic) || keep[0]; await d.ref.update({ offers: keep, productName: b.name, packSize: b.size, packPrice: b.price, pricePerUnit: b.ppu, promo: b.promo }); }
+          else await d.ref.delete();
+          await db().collection("items").doc(itemId).update({ aliases: FieldValue.arrayRemove(...names) }).catch(() => {});
+          const unit = byId.get(itemId)!.unit as "g" | "ml" | "pc";
+          for (const o of all.filter((x) => names.has(x.name))) {
+            moved.push({ name: o.name, price: o.price, packSize: o.size, packUnit: unit, pricePerUnit: o.ppu, promo: o.promo, organic: o.organic });
+            from.set(o.name, itemId);
+          }
+          logger.info("Relecture : produits retirés", { article: byId.get(itemId)!.name, produits: [...names] });
+        }
+      } catch (e) {
+        if ((e as { code?: string }).code === "resource-exhausted") stop = true;
+        else logger.warn("Relecture partielle", e);
+      }
+    }));
+  }
+  // Reclassement des intrus, jamais dans l'article d'où ils sortent.
+  let placed = 0;
+  if (moved.length) {
+    const e = await enrichProducts(u, moved, false);
+    const rows = e.rows.filter((r) => from.get(r.productName) !== r.itemId);
+    if (rows.length) placed = (await savePrices(store, url, null, rows)).length;
+  } else await rebuildPriceBook([store]).catch(() => {});
+  // Pas le temps de tout relire (grand catalogue) : on reprendra après le dernier article relu.
+  const next = !stop && g < groups.length ? groups[g - 1]?.[groups[g - 1].length - 1]?.id || null : null;
+  logger.info("Relecture", { magasin: store, articles: docs.length, retirés: moved.length, replacés: placed, suite: next });
+  return { reviewed: docs.length, moved: moved.length, placed, next };
+}
+
+/** Relecture lancée à la fin d'un envoi (`reviewJobs/{id}`). */
+export const onReviewJob = onDocumentCreated({ document: "reviewJobs/{id}", ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (event) => {
+  const r = event.data?.data();
+  if (!r) return;
+  if (r.progressId) await progress(r.progressId, { review: "en cours" });
+  try {
+    const res = await reviewStore(r.uid, r.store, r.url, r.since, r.startAfter || "");
+    if (res.next) { await db().collection("reviewJobs").add({ ...r, startAfter: res.next, movedBefore: (r.movedBefore || 0) + res.moved, at: Date.now() }); return; }
+    if (r.progressId) await progress(r.progressId, { review: "fini", moved: (r.movedBefore || 0) + res.moved, placed: res.placed });
+    await event.data!.ref.set({ ...res, doneAt: Date.now() }, { merge: true });
+  } catch (e) { logger.error("reviewJobs", e); if (r.progressId) await progress(r.progressId, { review: "fini" }); }
 });
 
 /** Budget ou réglages IA modifiés dans la console : les files en pause reprennent. */
