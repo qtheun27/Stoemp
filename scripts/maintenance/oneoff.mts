@@ -1,9 +1,14 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : liste EN LECTURE SEULE des tâches planifiées (Cloud Scheduler) des rappels.
-import { GoogleAuth } from "google-auth-library";
-const client = await new GoogleAuth({ scopes: ["https://www.googleapis.com/auth/cloud-platform"] }).getClient();
-try {
-  const r = await client.request<{ jobs?: { name: string; schedule: string; timeZone: string; state: string; lastAttemptTime?: string }[] }>({ url: "https://cloudscheduler.googleapis.com/v1/projects/stoemp-app/locations/europe-west1/jobs" });
-  const jobs = r.data.jobs || [];
-  console.log(`${jobs.length} tâche(s) planifiée(s) :`);
-  for (const j of jobs) console.log(`  ${j.name.split("/").pop()} · ${j.schedule} (${j.timeZone}) · ${j.state}`);
-} catch (e) { console.log("Lecture impossible :", String((e as Error).message).slice(0, 200)); }
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : rappels, vérification EN LECTURE SEULE (aucun jeton affiché).
+import { initializeApp, applicationDefault } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
+const db = getFirestore();
+const key = (await db.collection("config").doc("app").get()).get("vapidKey") as string | undefined;
+console.log(`Clé push Web : ${key ? `présente (${key.length} caractères, commence par « ${key[0]} »)` : "absente"}`);
+const devs = (await db.collectionGroup("devices").get()).docs;
+console.log(`Téléphones inscrits : ${devs.length}`);
+for (const d of devs) {
+  const r = d.get("reminders") || {}, ua = String(d.get("ua") || "");
+  const os = /iPhone|iPad/.test(ua) ? "iPhone/iPad" : /Android/.test(ua) ? "Android" : /Mac/.test(ua) ? "Mac" : /Windows/.test(ua) ? "Windows" : "autre";
+  console.log(`  ${os} · foyer ${d.get("hid") ? "relié" : "absent"} · jeton ${d.get("token") ? "présent" : "absent"} · courses ${r.courses ? "oui" : "non"}, péremption ${r.peremption ? "oui" : "non"}, soir ${r.soir ? "oui" : "non"}`);
+}
