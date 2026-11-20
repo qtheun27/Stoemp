@@ -116,15 +116,6 @@ export function sameProteins(a: string, b: string): boolean {
 /** Racine des mots (« apéritif » et « apéritives » → « aperit », « saucisse » ≠ « saucisson »). */
 const stems = (s: string) => new Set(tokens(s).map((w) => w.replace(/(ive|if|ee|e)$/, "")));
 
-/**
- * Un produit rattaché par l'IA à un article déjà existant doit partager au moins un mot avec lui ou l'un de ses noms connus
- * (« Speculoos » n'est pas « Pâtes », « Kinder Bueno » n'est pas « Barre protéinée cacahuète chocolat »).
- */
-export function sharesWord(productName: string, names: string[]): boolean {
-  const P = stems(productName);
-  return names.some((n) => [...stems(n)].some((w) => w.length >= 3 && P.has(w)));
-}
-
 /** Ressemblance entre deux noms d'articles (0 à 1) : mots en commun, en tenant compte des pluriels et des marques. */
 
 export function similarity(a: string, b: string): number {

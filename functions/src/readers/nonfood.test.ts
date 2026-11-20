@@ -56,13 +56,3 @@ describe("viandes : mêmes animaux pour le même article", () => {
   });
 });
 
-describe("rangement par l'IA dans un article existant", () => {
-  it("au moins un mot en commun avec l'article ou un de ses noms", async () => {
-    const { sharesWord } = await import("./match");
-    expect(sharesWord("Carrefour Original Speculoos 500 g", ["Pâtes"])).toBe(false);
-    expect(sharesWord("Kinder Bueno Lait en Noisettes Maxi Pack", ["Barre protéinée cacahuète chocolat"])).toBe(false);
-    expect(sharesWord("Jupiler Bière Blonde Pils 24 x 33 cl", ["Bière blonde"])).toBe(true);
-    expect(sharesWord("Coca-Cola Zero 6 x 33 cl", ["Cola zéro"])).toBe(true);
-    expect(sharesWord("Pepsi Max 1,5 L", ["Cola", "Pepsi Zero Sugar Cola"])).toBe(true);
-  });
-});
