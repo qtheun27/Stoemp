@@ -385,7 +385,7 @@ const catalogNames = (items: ItemDoc[]) => {
 };
 
 
-const ENRICH_NOW = 300, ENRICH_STEP = 200;
+const ENRICH_NOW = 120, ENRICH_STEP = 200;
 /**
  * Produits inconnus d'une enseigne → articles génériques (classés par l'IA par paquets de 40, avec le catalogue existant).
  * Renvoie les lignes de prix à enregistrer et les noms des articles créés.
