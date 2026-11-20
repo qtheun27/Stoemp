@@ -1,26 +1,22 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : avancement de la file Carrefour (lecture), puis correction de deux
-// rangements faux : le nom du produit est retiré des alias de l'article et son offre retirée de la fiche de prix Carrefour.
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : EN LECTURE SEULE, bilan de la file Carrefour (aucun prix affiché).
 import { initializeApp, applicationDefault } from "firebase-admin/app";
-import { getFirestore, FieldValue } from "firebase-admin/firestore";
+import { getFirestore } from "firebase-admin/firestore";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
-for (const d of (await db.collection("enrichJobs").get()).docs) console.log(`File d'attente : ${d.get("store")} · ${d.get("pos")}/${(d.get("products") || []).length}${d.get("paused") ? ` · en pause (${d.get("paused")})` : ""}`);
-const since = new Date(Date.now() - 3 * 3600_000).toISOString();
-console.log(`Fiches de prix Carrefour (3 h) : ${(await db.collection("prices").where("store", "==", "carrefour").get()).docs.filter((d) => String(d.get("fetchedAt")) >= since).length}`);
-
-const WRONG: [RegExp, string][] = [[/Cristal Roc Eau de Source/i, "Bière sans alcool"], [/Jacqmotte Café Grains/i, "Biscuits"]];
-const items = (await db.collection("items").get()).docs;
-for (const [re, itemName] of WRONG) {
-  const it = items.find((d) => d.get("name") === itemName);
-  if (!it) { console.log(`Article « ${itemName} » introuvable`); continue; }
-  const bad = ((it.get("aliases") || []) as string[]).filter((a) => re.test(a));
-  if (bad.length) await it.ref.update({ aliases: FieldValue.arrayRemove(...bad) });
-  const pref = db.collection("prices").doc(`${it.id}_carrefour`), p = await pref.get();
-  if (p.exists) {
-    const offers = ((p.get("offers") || []) as { name: string; ppu: number; organic: boolean; price: number; size: number; promo: string | null }[]).filter((o) => !re.test(o.name));
-    if (!offers.length) await pref.delete();
-    else { const best = offers.find((o) => !o.organic) || offers[0]; await pref.update({ offers, productName: best.name, packSize: best.size, packPrice: best.price, pricePerUnit: best.ppu, promo: best.promo }); }
-  }
-  console.log(`« ${itemName} » : ${bad.length} alias retiré(s), offre retirée de la fiche Carrefour`);
-}
-await db.collection("priceBookDirty").doc("carrefour").set({ at: Date.now() });
+const jobs = (await db.collection("enrichJobs").get()).docs;
+console.log(jobs.length ? jobs.map((d) => `File d'attente : ${d.get("store")} · ${d.get("pos")}/${(d.get("products") || []).length}${d.get("paused") ? ` · en pause (${d.get("paused")})` : ""}`).join("\n") : "File d'attente : vide (tout est classé)");
+const since = new Date(Date.now() - 4 * 3600_000).toISOString();
+const prices = (await db.collection("prices").where("store", "==", "carrefour").get()).docs.map((d) => d.data());
+const fresh = prices.filter((p) => String(p.fetchedAt) >= since);
+console.log(`Fiches de prix Carrefour : ${prices.length} (dont ${fresh.length} de cet envoi), ${fresh.reduce((a, p) => a + (p.offers || []).length, 0)} produits relevés`);
+const sizeIn = (n: string) => {
+  const m = n.match(/(?:(\d+)\s?[x×]\s?)?(\d+(?:[.,]\d+)?)\s?(kg|g|gr|l|cl|ml)\b/i);
+  if (!m) return null;
+  const v = Number(m[2].replace(",", ".")) * (m[1] ? Number(m[1]) : 1), u = m[3].toLowerCase();
+  return u === "kg" || u === "l" ? v * 1000 : u === "cl" ? v * 10 : v;
+};
+let ok = 0, ko = 0;
+for (const p of fresh) for (const o of (p.offers || []) as { name: string; size: number }[]) { const s = sizeIn(o.name); if (s) { if (Math.abs(s - o.size) <= s * 0.25) ok++; else ko++; } }
+console.log(`Contenance cohérente avec le nom : ${ok} · incohérente : ${ko}`);
+const created = await db.collection("items").where("category", "==", "bs").count().get();
+console.log(`Articles du rayon Boissons : ${created.data().count}`);
