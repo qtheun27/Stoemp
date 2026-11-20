@@ -15,9 +15,9 @@ describe("lecteur générique", () => {
     expect(p[0]).toMatchObject({ price: 1, packSize: 500, packUnit: "g" });
     expect(p[1]).toMatchObject({ packSize: 1000, packUnit: "ml" });
   });
-  it("carte prix puis marque et nom (Carrefour), badges de promo ignorés", () => {
-    const p = parseGeneric(["Résultats (3)", "Recommandé", "6,00 €", "0,50 €/l", "Acheter", "La pièce", "Spa", "REINE Eau minérale non pétillante 8x1.5L",
-      "-15% à l'achat de 3", "3,00 €", "2,00 €/kg", "Acheter", "La pièce", "Carrefour", "Spaghetti 1,5 kg", "2ème à -30%", "1,20 €", "Acheter", "La pièce", "Brugse Zot", "Dubbel 33cl"].join("\n"));
+  it("carte marque, nom, prix, prix au litre (Carrefour, ordre du texte de la page), badges ignorés", () => {
+    const p = parseGeneric(["Résultats (3)", "Recommandé", "-15% à l'achat de 3", "Spa", "REINE Eau minérale non pétillante 8x1.5L", "6,00 €", "0,50 €/l", "La pièce", "Acheter",
+      "Recommandé", "2ème à -30%", "Carrefour", "Spaghetti 1,5 kg", "3,00 €", "2,00 €/kg", "La pièce", "Acheter", "Brugse Zot", "Dubbel 33cl", "1,20 €", "3,64 €/l", "La pièce", "Acheter"].join("\n"));
     expect(p.map((x) => x.name)).toEqual(["Spa REINE Eau minérale non pétillante 8x1.5L", "Carrefour Spaghetti 1,5 kg", "Brugse Zot Dubbel 33cl"]);
     expect(p[0]).toMatchObject({ price: 6, packSize: 12000, packUnit: "ml" });
     expect(p[1]).toMatchObject({ price: 3, packSize: 1500, packUnit: "g" });
