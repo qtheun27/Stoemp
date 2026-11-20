@@ -97,6 +97,7 @@ export const PageMatches = z.object({
 export const NewItems = z.object({
   items: z.array(z.object({
     index: z.number().int(),
+    product: z.string().describe("Nom du produit de la liste à ce numéro, recopié tel quel (contrôle : une réponse décalée est ignorée)"),
     keep: z.boolean().describe("false si ce n'est pas un article de courses alimentaire ou ménager utile (ex. décoration)"),
     name: z.string().describe("Nom générique sans marque, en français, comme dans une liste de courses (ex. « Framboises », « Pleurotes »)"),
     category: CAT, unit: UNIT,

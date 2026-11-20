@@ -1,41 +1,41 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : viandes rangées sous l'article d'un autre animal.
-// 1. Retire, partout, les alias et les produits relevés dont les animaux ne sont pas ceux de l'article (sameProteins).
-// 2. « Steak haché nature boeuf » (Renmans) devient un nom du « Haché de bœuf ».
-// 3. Relit la dernière page Renmans : les produits retirés retrouvent un bon article. Aucun prix affiché.
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : nettoyage des rangements faussés.
+// A. Noms retenus faits seulement d'une marque ou d'une gamme (« Carrefour Bio ») : retirés.
+// B. Articles qui avaient un tel nom : leurs produits relevés sont revérifiés (correspondance sans ce nom), les autres retirés.
+// C. « Bière trappiste » : noms et produits qui ne sont pas des bières d'abbaye ou trappistes retirés (réponses décalées de l'IA).
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
-import { sameProteins } from "../../functions/src/readers/match";
+import { matchItem, tokens } from "../../functions/src/readers/match";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
+type Off = { name: string; size: number; ppu: number; organic: boolean; price: number; promo: string | null };
 const items = (await db.collection("items").get()).docs;
-const byId = new Map(items.map((d) => [d.id, d]));
-let aliases = 0, offers = 0;
-for (const d of items) {
-  const bad = ((d.get("aliases") || []) as string[]).filter((a) => !sameProteins(a, d.get("name")));
-  if (bad.length) { await d.ref.update({ aliases: FieldValue.arrayRemove(...bad) }); aliases += bad.length; console.log(`  ${d.get("name")} : alias retirés → ${bad.join(" | ")}`); }
-}
-const dirty = new Set<string>();
-for (const p of (await db.collection("prices").get()).docs) {
-  const it = byId.get(p.get("itemId"));
-  if (!it) continue;
-  const all = (p.get("offers") || []) as { name: string; ppu: number; organic: boolean; price: number; size: number; promo: string | null }[];
-  const keep = all.filter((o) => sameProteins(o.name, it.get("name")));
-  if (keep.length === all.length) continue;
-  offers += all.length - keep.length; dirty.add(p.get("store"));
-  console.log(`  ${it.get("name")} (${p.get("store")}) : produits retirés → ${all.filter((o) => !keep.includes(o)).map((o) => o.name).join(" | ")}`);
-  if (!keep.length) await p.ref.delete();
-  else { const best = keep.find((o) => !o.organic) || keep[0]; await p.ref.update({ offers: keep, productName: best.name, packSize: best.size, packPrice: best.price, pricePerUnit: best.ppu, promo: best.promo }); }
-}
-console.log(`Alias retirés : ${aliases} · produits retirés : ${offers}`);
-const hache = items.find((d) => d.get("name") === "Haché de bœuf");
-if (hache) { await hache.ref.update({ aliases: FieldValue.arrayUnion("Steak haché nature boeuf") }); console.log("« Steak haché nature boeuf » → Haché de bœuf"); }
-for (const st of dirty) await db.collection("priceBookDirty").doc(st).set({ at: Date.now() });
-const cap = (await db.collection("captures").orderBy("at", "desc").limit(30).select("store", "at").get()).docs.find((c) => c.get("store") === "renmans");
-if (cap) {
-  const ref = await db.collection("captureReplays").add({ captureId: cap.id, at: Date.now() });
-  for (let i = 0; i < 54; i++) {
-    await new Promise((r) => setTimeout(r, 10_000));
-    const r = (await ref.get()).data()!;
-    if (r.doneAt || r.error) { console.log(r.error ? `Relecture Renmans : erreur ${r.error}` : `Relecture Renmans : ${r.found} lus, ${r.saved} articles avec prix, ${r.created} nouveaux articles, ${r.queued} en file`); break; }
+const touched = new Set<string>();
+async function filterOffers(itemId: string, keep: (o: Off) => boolean, label: string) {
+  for (const p of (await db.collection("prices").where("itemId", "==", itemId).get()).docs) {
+    const all = (p.get("offers") || []) as Off[], ok = all.filter(keep);
+    if (ok.length === all.length) continue;
+    touched.add(p.get("store"));
+    console.log(`  ${label} (${p.get("store")}) : ${all.length - ok.length} produits retirés — ${all.filter((o) => !ok.includes(o)).slice(0, 8).map((o) => o.name).join(" | ")}${all.length - ok.length > 8 ? " …" : ""}`);
+    if (!ok.length) await p.ref.delete();
+    else { const b = ok.find((o) => !o.organic) || ok[0]; await p.ref.update({ offers: ok, productName: b.name, packSize: b.size, packPrice: b.price, pricePerUnit: b.ppu, promo: b.promo }); }
   }
 }
+for (const d of items) {
+  const al = (d.get("aliases") || []) as string[], vague = al.filter((a) => !tokens(a).length);
+  if (!vague.length) continue;
+  const clean = al.filter((a) => !vague.includes(a));
+  await d.ref.update({ aliases: FieldValue.arrayRemove(...vague) });
+  console.log(`A. ${d.get("name")} : noms vagues retirés → ${vague.join(" | ")}`);
+  const it = { id: d.id, ...(d.data() as object), aliases: clean } as never;
+  await filterOffers(d.id, (o) => !!matchItem(o.name, o.size, (d.get("unit") as "g" | "ml" | "pc"), [it]), `B. ${d.get("name")}`);
+}
+const ABBEY = /trapp|tripel|triple|dubbel|double|quadru|abba|abdij|chimay|westmalle|orval|rochefort|la trappe|karmeliet|feuillien|grimbergen|maredsous|petrus|kasteel|carolus|val-dieu|lupulus|hubertus|ename|delirium|kwak|straffe|curtius|bertinchamps|brugse|paix dieu|lefort|sportzot|waterloo|bière|biere|beer/i;
+const trap = items.find((d) => d.get("name") === "Bière trappiste");
+if (trap) {
+  const bad = ((trap.get("aliases") || []) as string[]).filter((a) => !ABBEY.test(a));
+  if (bad.length) await trap.ref.update({ aliases: FieldValue.arrayRemove(...bad) });
+  console.log(`C. Bière trappiste : noms retirés → ${bad.join(" | ")}`);
+  await filterOffers(trap.id, (o) => ABBEY.test(o.name), "C. Bière trappiste");
+}
+for (const st of touched) await db.collection("priceBookDirty").doc(st).set({ at: Date.now() });
+console.log(`Carnets de prix à reconstruire : ${[...touched].join(", ") || "aucun"}`);

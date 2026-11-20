@@ -55,3 +55,4 @@ describe("viandes : mêmes animaux pour le même article", () => {
     expect(similarItem("Haché de porc", "g", "vi", items)).toBeNull();
   });
 });
+
