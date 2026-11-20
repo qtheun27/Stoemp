@@ -535,3 +535,12 @@ export async function setStoreRule(s: StoreState, rule: { main: StoreId } | { ca
   if ("cat" in rule) return updateDoc(ref, { [`storePlan.cats.${rule.cat}`]: rule.store ?? deleteField() });
   return updateDoc(ref, { [`storePlan.items.${rule.itemId}`]: rule.store ?? deleteField() });
 }
+
+/**
+ * « Je prends celui-ci » : le produit choisi devient le prix de référence de l'article chez ce magasin (prix payés d'abord,
+ * voir `pickOffer`), et l'article passe dans la liste de ce magasin (répartition retenue).
+ */
+export async function chooseProduct(s: StoreState, itemId: string, store: StoreId, o: { name: string; price: number; size: number }) {
+  await setDoc(hh(s.hid!, "paidPrices", `${itemId}_${store}`), { itemId, store, packPrice: o.price, packSize: o.size, pricePerUnit: o.price / o.size, date: ymd(today()), productName: o.name, chosen: true });
+  await setStoreRule(s, { itemId, store });
+}

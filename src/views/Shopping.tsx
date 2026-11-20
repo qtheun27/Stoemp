@@ -13,6 +13,7 @@ import { addManual, vegCfg, checkLine, setStoreRule, finishShopping, priceSel, r
 import { useStore, type StoreState } from "../state/store";
 import { Check, copyText, Empty, run, Sheet, toast, TopBar } from "../ui";
 import ReceiptSheet from "./Receipt";
+import { AllOffers } from "./AllOffers";
 
 export const searchUrl = (store: StoreId, q: string) => {
   const e = encodeURIComponent(q);
@@ -309,6 +310,8 @@ function LineSheet({ line, onClose }: { line: ShopLine; onClose: () => void }) {
       <div className="grow"><b>{STORES[p.store].label}</b> <span className="small muted">{p.productName || ""}</span>
         <div className="small muted">{fmtQty(p.packSize, it!.unit)} · {p.source === "estimation" ? "estimation" : `${p.source}${p.shop ? ` · ${p.shop}` : ""} · ${p.date}`}{p.promo ? ` · 🏷 ${p.promo}` : ""}</div></div>
       <b className="num">{eur(p.packPrice)}</b></div>)}</div>}
+    {it && <details style={{ margin: "4px 0 12px" }}><summary className="small"><b>Voir tous les produits relevés</b> et choisir celui que tu achètes</summary>
+      <div style={{ marginTop: 8 }}><AllOffers item={it} onChosen={onClose} /></div></details>}
     <label className="field">Prix payé</label>
     <div className="row">
       <input className="input" inputMode="decimal" placeholder="2,49" value={price} onChange={(e) => setPrice(e.target.value)} />
