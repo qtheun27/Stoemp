@@ -27,16 +27,22 @@ const b=document.createElement("div");
 b.style.cssText="position:fixed;z-index:2147483647;top:12px;right:12px;background:#1d2a22;color:#fff;padding:12px 16px;border-radius:14px;font:600 14px system-ui;box-shadow:0 6px 24px rgba(0,0,0,.3);max-width:320px";
 document.body.appendChild(b);
 b.textContent="Stoemp : chargement des produits…";
-const re=/^(voir plus|afficher plus|plus de produits|plus de résultats|charger plus|meer laden|toon meer|meer producten|meer resultaten|load more|show more)/i;
-const cnt=()=>document.links.length+document.images.length;
-let last=cnt(),n=0;
-for(;n<150;n++){
-const btn=[...document.querySelectorAll("button,a,[role=button]")].find(e=>e.offsetParent&&re.test((e.innerText||"").trim()));
-if(!btn)break;
+const re=/^(voir plus|afficher plus|plus de (produits|résultats|articles)|charger plus|meer laden|toon meer|meer (producten|resultaten|tonen)|load more|show more)|^(voir|afficher|montrer|charger|toon|bekijk|laad|show|load|view) .{0,30}(plus|more|meer|suivant|volgend)/i;
+const pz=/produit|product|résultat|resultat|article|artikel/i;
+const cnt=()=>document.querySelectorAll("a,img").length;
+const tried=new Set();
+let last=cnt(),n=0,miss=0;
+for(let k=0;k<200&&miss<4;k++){
+const cands=[...document.querySelectorAll("button,a,[role=button]")].filter(e=>{const x=(e.innerText||"").trim();return e.offsetParent&&!tried.has(e)&&x.length<60&&re.test(x)});
+if(!cands.length)break;
+const y=e=>e.getBoundingClientRect().top+scrollY;
+cands.sort((a,c)=>(pz.test(c.innerText)?1:0)-(pz.test(a.innerText)?1:0)||y(c)-y(a));
+const btn=cands[0];
 b.textContent="Stoemp : chargement des produits… ("+(n+1)+") — garde cet onglet ouvert";
 btn.scrollIntoView({block:"center"});btn.click();
 let grew=false;for(let i=0;i<60;i++){await z(250);if(cnt()>last){grew=true;break}}
-if(!grew)break;
+if(!grew){tried.add(btn);miss++;continue}
+miss=0;n++;
 let c=cnt(),still=0;for(let i=0;i<40&&still<4;i++){await z(250);const c2=cnt();if(c2===c)still++;else{c=c2;still=0}}
 last=c;
 }
