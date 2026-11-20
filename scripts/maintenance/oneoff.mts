@@ -1,41 +1,26 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : nettoyage des rangements faussés.
-// A. Noms retenus faits seulement d'une marque ou d'une gamme (« Carrefour Bio ») : retirés.
-// B. Articles qui avaient un tel nom : leurs produits relevés sont revérifiés (correspondance sans ce nom), les autres retirés.
-// C. « Bière trappiste » : noms et produits qui ne sont pas des bières d'abbaye ou trappistes retirés (réponses décalées de l'IA).
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : relecture des pages Carrefour d'aujourd'hui (nouvelles règles de classement),
+// une à la fois, puis attente de la fin des files d'attente. Aucun prix affiché.
 import { initializeApp, applicationDefault } from "firebase-admin/app";
-import { getFirestore, FieldValue } from "firebase-admin/firestore";
-import { matchItem, tokens } from "../../functions/src/readers/match";
+import { getFirestore } from "firebase-admin/firestore";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
-type Off = { name: string; size: number; ppu: number; organic: boolean; price: number; promo: string | null };
-const items = (await db.collection("items").get()).docs;
-const touched = new Set<string>();
-async function filterOffers(itemId: string, keep: (o: Off) => boolean, label: string) {
-  for (const p of (await db.collection("prices").where("itemId", "==", itemId).get()).docs) {
-    const all = (p.get("offers") || []) as Off[], ok = all.filter(keep);
-    if (ok.length === all.length) continue;
-    touched.add(p.get("store"));
-    console.log(`  ${label} (${p.get("store")}) : ${all.length - ok.length} produits retirés — ${all.filter((o) => !ok.includes(o)).slice(0, 8).map((o) => o.name).join(" | ")}${all.length - ok.length > 8 ? " …" : ""}`);
-    if (!ok.length) await p.ref.delete();
-    else { const b = ok.find((o) => !o.organic) || ok[0]; await p.ref.update({ offers: ok, productName: b.name, packSize: b.size, packPrice: b.price, pricePerUnit: b.ppu, promo: b.promo }); }
+const since = new Date("2026-11-20T00:00:00Z").getTime();
+const caps = (await db.collection("captures").orderBy("at", "desc").limit(30).select("store", "at", "url").get()).docs
+  .filter((c) => c.get("store") === "carrefour" && c.get("at") >= since);
+const seen = new Set<string>();
+for (const c of caps.filter((x) => { const u = String(x.get("url")).split("?")[0]; if (seen.has(u)) return false; seen.add(u); return true; }).reverse()) {
+  const ref = await db.collection("captureReplays").add({ captureId: c.id, at: Date.now() });
+  let line = "pas de réponse en 9 min";
+  for (let i = 0; i < 54; i++) {
+    await new Promise((r) => setTimeout(r, 10_000));
+    const r = (await ref.get()).data()!;
+    if (r.doneAt || r.error) { line = r.error ? `erreur : ${r.error}` : `${r.found} lus, ${r.saved} articles avec prix, ${r.created} nouveaux articles, ${r.queued} en file`; break; }
   }
+  console.log(`Relecture ${String(c.get("url")).replace(/^https?:\/\/[^/]+/, "").split("?")[0]} : ${line}`);
 }
-for (const d of items) {
-  const al = (d.get("aliases") || []) as string[], vague = al.filter((a) => !tokens(a).length);
-  if (!vague.length) continue;
-  const clean = al.filter((a) => !vague.includes(a));
-  await d.ref.update({ aliases: FieldValue.arrayRemove(...vague) });
-  console.log(`A. ${d.get("name")} : noms vagues retirés → ${vague.join(" | ")}`);
-  const it = { id: d.id, ...(d.data() as object), aliases: clean } as never;
-  await filterOffers(d.id, (o) => !!matchItem(o.name, o.size, (d.get("unit") as "g" | "ml" | "pc"), [it]), `B. ${d.get("name")}`);
+for (let i = 0; i < 90; i++) {
+  const jobs = (await db.collection("enrichJobs").get()).docs;
+  if (!jobs.length) { console.log("Files d'attente : toutes terminées"); break; }
+  if (i % 6 === 0) console.log("Files : " + jobs.map((j) => `${j.get("pos")}/${(j.get("products") || []).length}${j.get("paused") ? " pause" : ""}`).join(", "));
+  await new Promise((r) => setTimeout(r, 20_000));
 }
-const ABBEY = /trapp|tripel|triple|dubbel|double|quadru|abba|abdij|chimay|westmalle|orval|rochefort|la trappe|karmeliet|feuillien|grimbergen|maredsous|petrus|kasteel|carolus|val-dieu|lupulus|hubertus|ename|delirium|kwak|straffe|curtius|bertinchamps|brugse|paix dieu|lefort|sportzot|waterloo|bière|biere|beer/i;
-const trap = items.find((d) => d.get("name") === "Bière trappiste");
-if (trap) {
-  const bad = ((trap.get("aliases") || []) as string[]).filter((a) => !ABBEY.test(a));
-  if (bad.length) await trap.ref.update({ aliases: FieldValue.arrayRemove(...bad) });
-  console.log(`C. Bière trappiste : noms retirés → ${bad.join(" | ")}`);
-  await filterOffers(trap.id, (o) => ABBEY.test(o.name), "C. Bière trappiste");
-}
-for (const st of touched) await db.collection("priceBookDirty").doc(st).set({ at: Date.now() });
-console.log(`Carnets de prix à reconstruire : ${[...touched].join(", ") || "aucun"}`);
