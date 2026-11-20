@@ -337,7 +337,7 @@ async function savePrices(store: (typeof STORES)[number], url: string, shop: str
       size: r.size, price: r.price, ppu: r.price / r.size, promo: r.promo, seenAt: now }));
     const names = new Set(fresh.map((o) => o.name));
     const offers = [...fresh, ...((prev?.offers as typeof fresh) || []).filter((o) => !names.has(o.name) && (o.seenAt || "") >= keepAfter)]
-      .sort((a, b) => a.ppu - b.ppu).slice(0, 30);
+      .sort((a, b) => a.ppu - b.ppu).slice(0, 400); // tous les produits relevés (l'appli n'en lit que 8 par article, voir pricebook.ts)
     // Résumé : la variante la moins chère (non bio, sinon bio).
     const best = offers.find((o) => !o.organic) || offers[0];
     const unit = list[0].unit;
@@ -446,9 +446,26 @@ async function enrichProducts(u: string, unmatched: ShopProduct[], pageNonFood: 
 export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (req) => {
   const u = uid(req);
   const d = input(z.object({ store: z.enum(STORES), url: z.string().max(500), text: z.string().max(1000000) }), req.data);
-  // Copie du texte brut (lecture réservée à l'administrateur) : sert à écrire des lecteurs d'enseigne sans IA.
+  // Copie du texte brut (lecture réservée à l'administrateur) : sert à écrire des lecteurs d'enseigne sans IA, et à relire une page.
   await db().collection("captures").add({ store: d.store, url: d.url, text: d.text.slice(0, 900000), length: d.text.length, uid: u, at: Date.now() }).catch(() => {});
   await pruneCaptures().catch(() => {});
+  return processCapture(u, d);
+});
+
+/** Relecture d'une page déjà envoyée, depuis sa copie (`captureReplays/{id}` : { captureId }, écrit par la maintenance). */
+export const onCaptureReplay = onDocumentCreated({ document: "captureReplays/{id}", ...ai, timeoutSeconds: 540, memory: "1GiB" }, async (event) => {
+  const r = event.data?.data();
+  if (!r?.captureId) return;
+  const c = (await db().collection("captures").doc(r.captureId).get()).data();
+  if (!c) { await event.data!.ref.set({ error: "copie introuvable" }, { merge: true }); return; }
+  try {
+    const res = await processCapture(c.uid, { store: c.store, url: c.url, text: c.text });
+    await event.data!.ref.set({ found: res.found, saved: res.saved.length, created: res.created.length, queued: (res as { queued?: number }).queued || 0, doneAt: Date.now() }, { merge: true });
+  } catch (e) { await event.data!.ref.set({ error: String((e as Error).message).slice(0, 300) }, { merge: true }); }
+});
+
+/** Lecture d'une page de magasin : produits, correspondance au catalogue, classement des inconnus, enregistrement des prix. */
+async function processCapture(u: string, d: { store: (typeof STORES)[number]; url: string; text: string }) {
   let items = await loadItems();
 
   // 1. Lecture sans IA : lecteur Colruyt, sinon lecteur générique (prix d'abord comme Renmans, ou nom d'abord).
@@ -507,8 +524,8 @@ export const extractPrices = onCall({ ...ai, timeoutSeconds: 540, memory: "1GiB"
     res.filter((r) => r.status === "rejected").forEach((r) => logger.warn("Morceau illisible", (r as PromiseRejectedResult).reason));
   }
   const saved = await savePrices(d.store, d.url, null, rows);
-  return { found, saved, created: [], shop: null, reader: "IA" };
-});
+  return { found, saved, created: [] as string[], shop: null, reader: "IA" };
+}
 
 
 /** File d'attente des produits inconnus d'un envoi : un lot de 200 à la fois, chaque lot relance le suivant (jamais deux en même temps). */
