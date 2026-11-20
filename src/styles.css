@@ -44,10 +44,13 @@ h1, h2, h3 { letter-spacing: -.015em; line-height: 1.15; }
 
 /* Barre du haut : verre flouté qui passe sous l'encoche */
 /* Barre du haut : fond plein (sans flou : sur iPhone, Safari rendait le titre flou), compacte sous l'îlot. */
-/* iPhone : l'en-tête est opaque (le flou du système disparaît) et le titre descend sous la zone floutée de la barre d'état. */
-.topbar { position: sticky; top: 0; z-index: 20; padding: calc(var(--sat) + 18px) max(16px, var(--sar)) 10px max(16px, var(--sal));
+/* Téléphone : en-tête FIXÉ et opaque dès l'ouverture (l'iPhone retire alors son flou sous la barre d'état) ;
+   la place est réservée par .topbar-space (hauteur mesurée --topbar-h). Ordinateur (barre latérale) : en-tête qui colle. */
+.topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 20; padding: calc(var(--sat) + 18px) max(16px, var(--sar)) 10px max(16px, var(--sal));
   background: var(--bg); border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
   -webkit-font-smoothing: antialiased; }
+.topbar-space { height: var(--topbar-h, calc(var(--sat) + 66px)); }
+@media (min-width: 760px) { .topbar { position: sticky; } .topbar-space { display: none; } }
 .topbar-in { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 10px; min-height: 40px; }
 .topbar h1 { margin: 0; font-size: 22px; font-weight: 800; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar .sub { display: block; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
