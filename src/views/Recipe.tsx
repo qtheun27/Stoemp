@@ -21,6 +21,8 @@ const fmtPortions = (p: number) => `${Number.isInteger(p) ? p : p.toLocaleString
 import { useStore } from "../state/store";
 import { run, Sheet, toast } from "../ui";
 import { DishImage } from "./DishImage";
+import { describeDish } from "../lib/describe";
+import { EditDish } from "./EditDish";
 import { defaultSideLabel, defaultVegLabel, sideOptions, vegOptions, withSide, withVegSide } from "../lib/sides";
 
 /** Substitutions locales simples proposées avec l'option « Produits de la région ». */
@@ -46,6 +48,7 @@ function useFullRecipe(r: Recipe): Recipe {
 export default function RecipeSheet({ recipe: initial, slotIndex, onClose, startCook }: { recipe: Recipe; slotIndex: number | null; onClose: () => void; startCook?: boolean }) {
   const s = useStore();
   const [cook, setCook] = useState(!!startCook);
+  const [edit, setEdit] = useState(false);
   const [other, setOther] = useState<Recipe | null>(null);
   const slot = slotIndex != null ? s.week?.slots[slotIndex] : undefined;
   // Accompagnement choisi pour ce repas : il remplace le féculent d'origine (ingrédients, étapes, coût).
@@ -83,6 +86,7 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose, start
   const toggleVeg = () => { if (slotIndex == null || !s.week) return; const sl = [...s.week.slots]; sl[slotIndex] = { ...sl[slotIndex], veg: !veg }; run(() => saveSlots(s, sl)); };
   const putMine = (id: string) => { if (slotIndex == null || !s.week) return; const sl = [...s.week.slots]; sl[slotIndex] = { ...sl[slotIndex], recipeId: id, veg: false, cooked: false }; run(() => saveSlots(s, sl), "Repas remplacé"); onClose(); };
 
+  if (edit) return <EditDish recipe={recipe} onClose={() => setEdit(false)} />;
   if (cook) return <CookMode recipe={recipe} veg={veg} onClose={() => setCook(false)} />;
   if (other) return <RecipeSheet recipe={other} slotIndex={null} onClose={() => setOther(null)} />;
   if (ready && slotIndex != null) return <ReadySheet title="🥡 Plat préparé à la place" onClose={() => setReady(false)} onPick={(r) => putMine(r.id)} />;
@@ -91,6 +95,8 @@ export default function RecipeSheet({ recipe: initial, slotIndex, onClose, start
     <Sheet title={nameOf(recipe, veg)} onClose={onClose}
       sub={<>{pret ? "🥡 plat préparé" : `⏱ ${recipe.prepMin} min`} · {fmtPortions(persons)}{slot?.leftovers ? " (dont demain midi)" : ""} · {eur(cost)} / portion{recipe.cuisine ? ` · ${CUISINES[recipe.cuisine].icon} ${CUISINES[recipe.cuisine].label}` : ""}{recipe.source === "ia" ? " · ✨ IA" : recipe.source === "perso" ? " · 📝 mon plat" : ""}</>}>
       {!pret && <div style={{ margin: "2px 0 10px" }}><DishImage recipe={recipe} idx={s.idx} height={190} /></div>}
+      <p className="dish-desc">{describeDish(recipe, s.idx, veg)}</p>
+      {recipe.source === "perso" && recipe.householdId === s.hid && <button className="btn soft sm" style={{ margin: "-4px 0 12px" }} onClick={() => setEdit(true)}>✏️ Modifier ce plat (quantités, nom…)</button>}
       {sides.length > 0 && <div style={{ margin: "0 0 10px" }}>
         <div className="small muted" style={{ marginBottom: 4 }}>Accompagnement{!slot?.side && defaultSideLabel(initial, s.idx) ? ` : ${defaultSideLabel(initial, s.idx)} (celui de la recette)` : ""}</div>
         <div className="chips">

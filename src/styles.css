@@ -365,6 +365,12 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
 .swipe { position: relative; border-radius: var(--r); overflow: hidden; margin-bottom: 8px; }
 .swipe > .swipe-fg { position: relative; background: var(--bg); }
 .swipe > .swipe-fg > .meal { margin-bottom: 0; }
-.swipe-bg { position: absolute; inset: 0; background: var(--bad); color: #fff; display: flex; align-items: center; justify-content: flex-end; padding-right: 22px; font-weight: 800; border-radius: var(--r); }
+.swipe-bg { position: absolute; inset: 0; display: flex; justify-content: flex-end; border-radius: var(--r); overflow: hidden; background: var(--soft); }
+.swipe-bg.far { background: var(--bad); align-items: center; justify-content: flex-end; padding-right: 22px; color: #fff; font-weight: 800; }
+.swipe-act { width: 88px; border: 0; font: inherit; font-weight: 700; font-size: 14px; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+.swipe-act.change { background: var(--ac); color: var(--ac-ink); }
+.swipe-act.remove { background: var(--bad); }
 .undo-bar { position: fixed; z-index: 40; left: 50%; transform: translateX(-50%); bottom: calc(var(--tabbar-h) + var(--sab) + 22px); width: min(92vw, 420px);
   display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 16px; background: var(--ink); color: var(--bg); border-radius: 14px; box-shadow: var(--shadow-lg); }
+
+.dish-desc { margin: 0 2px 12px; color: var(--muted); font-size: 15px; line-height: 1.4; }

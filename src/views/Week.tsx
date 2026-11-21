@@ -183,7 +183,7 @@ export default function Week() {
                       const r = s.recipes.get(x.recipeId);
                       if (!r) return <div className="meal" key={x.k}><span className="grow muted">Recette indisponible</span><button className="ib" onClick={() => swap(x.k)}><RefreshCw size={18} /></button></div>;
                       return (
-                        <SwipeRemove key={x.k} label={`Retirer ${r.name}`} onRemove={() => remove(x.k)}>
+                        <SwipeActions key={x.k} label={`${r.name} : glisser pour changer ou retirer`} onChange={() => setChoose(x.k)} onRemove={() => remove(x.k)}>
                         <div className={`meal${x.cooked ? " cooked" : ""}`} draggable={!x.fromLeftovers && !x.leftovers} onDragStart={() => setDrag(x.k)} onDragEnd={() => setDrag(null)}>
                           <button className="thumb" tabIndex={-1} aria-hidden onClick={() => setOpen({ r, k: x.k })}><DishImage recipe={r} idx={s.idx} height={64} rounded={12} thumb /></button>
                           <button className="info" onClick={() => setOpen({ r, k: x.k })}>
@@ -193,11 +193,10 @@ export default function Week() {
                             <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}{!x.fromLeftovers && r.source !== "pret" && !isVegRecipe(r) && vegP(x) > 0 && <span>🌱 {vegP(x)} végé</span>}
                               {(isVegRecipe(r) || (x.veg && r.source !== "pret")) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}</span>
                           </button>
-                          <button className="ib" aria-label={`Changer ${r.name}`} disabled={busy === x.k} onClick={() => setChoose(x.k)}><RefreshCw size={19} className={busy === x.k ? "spin" : ""} /></button>
                           <button className={`ib done${x.cooked ? " on" : ""}`} aria-label={x.cooked ? "Annuler « cuisiné »" : "Marquer comme cuisiné"} aria-pressed={x.cooked}
                             onClick={() => { buzz(); run(() => setCooked(s, x.k, !x.cooked), x.cooked ? "Stock rétabli" : "Cuisiné : stock mis à jour"); }}><CheckIcon size={19} /></button>
                         </div>
-                        </SwipeRemove>
+                        </SwipeActions>
                       );
                     })}
                   </section>
@@ -212,7 +211,7 @@ export default function Week() {
         <button className="btn soft sm" onClick={() => { const u = undo; setUndo(null); run(() => restoreSlot(s, u.slot, u.k), "Repas remis"); }}>Annuler</button></div>}
       {confirmNew && <Sheet title="Nouvelle semaine ?" onClose={() => setConfirmNew(false)}>
         <p>Tous les repas de la semaine {weekNo(s.weekKey)} seront remplacés par une nouvelle proposition{cooked ? ` (dont ${cooked} déjà cuisiné${cooked > 1 ? "s" : ""})` : ""}. Tes favoris, tes goûts et tes accords d'accompagnement restent.</p>
-        <p className="small muted">Pour changer un seul repas, touche plutôt 🔄 sur sa carte (choix dans le catalogue) ; pour le retirer, glisse sa carte vers la gauche.</p>
+        <p className="small muted">Pour changer ou retirer un seul repas, glisse plutôt sa carte vers la gauche.</p>
         <div className="stack" style={{ gap: 8, marginTop: 12 }}>
           <button className="btn block" onClick={() => { setConfirmNew(false); generate(); }}><Sparkles size={18} />Remplacer toute la semaine</button>
           <button className="btn ghost block" onClick={() => setConfirmNew(false)}>Garder ma semaine</button>
@@ -226,21 +225,41 @@ export default function Week() {
   );
 }
 
-/** Carte qu'on glisse vers la gauche pour retirer le repas (au-delà de 90 px) ; sinon elle revient en place. */
-function SwipeRemove({ children, onRemove, label }: { children: React.ReactNode; onRemove: () => void; label: string }) {
+/**
+ * Carte qu'on glisse vers la gauche. Lâchée à mi-course : elle reste ouverte sur « Changer » et « Retirer ».
+ * Glissée jusqu'au bout sans lâcher (plus de 60 % de sa largeur) : le repas est retiré. Sinon elle revient en place.
+ */
+const OPEN = 176;
+function SwipeActions({ children, onChange, onRemove, label }: { children: React.ReactNode; onChange: () => void; onRemove: () => void; label: string }) {
   const [dx, setDx] = useState(0);
-  const start = useRef<{ x: number; y: number; on: boolean } | null>(null);
-  return <div className="swipe" aria-label={label}>
-    <div className="swipe-bg" aria-hidden><span>Retirer</span></div>
-    <div className="swipe-fg" style={{ transform: dx ? `translateX(${dx}px)` : undefined, transition: start.current ? "none" : "transform .2s" }}
-      onTouchStart={(e) => { start.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, on: false }; }}
+  const [drag, setDrag] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  const start = useRef<{ x: number; y: number; base: number; on: boolean } | null>(null);
+  const width = () => box.current?.offsetWidth || 360;
+  const far = dx < -width() * 0.6;
+  const close = () => setDx(0);
+  return <div className="swipe" ref={box} aria-label={label}>
+    <div className={`swipe-bg${far ? " far" : ""}`}>
+      {far ? <span className="swipe-far">Relâche pour retirer</span> : <>
+        <button className="swipe-act change" onClick={() => { close(); onChange(); }}><RefreshCw size={18} />Changer</button>
+        <button className="swipe-act remove" onClick={() => { close(); onRemove(); }}>Retirer</button>
+      </>}
+    </div>
+    <div className="swipe-fg" style={{ transform: dx ? `translateX(${dx}px)` : undefined, transition: drag ? "none" : "transform .22s" }}
+      onClickCapture={(e) => { if (dx) { e.stopPropagation(); e.preventDefault(); close(); } }}
+      onTouchStart={(e) => { start.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, base: dx, on: false }; }}
       onTouchMove={(e) => {
         const st = start.current; if (!st) return;
         const mx = e.touches[0].clientX - st.x, my = e.touches[0].clientY - st.y;
-        if (!st.on && Math.abs(mx) > 12 && Math.abs(mx) > Math.abs(my) * 1.5) st.on = true; // geste horizontal seulement (le défilement reste libre)
-        if (st.on) setDx(Math.min(0, mx));
+        if (!st.on && Math.abs(mx) > 10 && Math.abs(mx) > Math.abs(my) * 1.5) { st.on = true; setDrag(true); } // geste horizontal seulement
+        if (st.on) setDx(Math.min(0, st.base + mx));
       }}
-      onTouchEnd={() => { const far = dx < -90; start.current = null; setDx(far ? -400 : 0); if (far) { try { navigator.vibrate?.(15); } catch { /* ignoré */ } setTimeout(() => { setDx(0); onRemove(); }, 180); } }}>
+      onTouchEnd={() => {
+        const st = start.current; start.current = null; setDrag(false);
+        if (!st?.on) return;
+        if (dx < -width() * 0.6) { try { navigator.vibrate?.(15); } catch { /* ignoré */ } setDx(-width() - 20); setTimeout(() => { setDx(0); onRemove(); }, 200); }
+        else setDx(dx < -50 ? -OPEN : 0);
+      }}>
       {children}
     </div>
   </div>;

@@ -487,6 +487,9 @@ export async function saveManualDish(s: StoreState, f: { name: string; persons: 
   return unknown;
 }
 export const deleteRecipe = (id: string) => updateDoc(doc(db, "recipes", id), { deleted: true });
+/** Modifier un plat perso (nom, durée, présentation, ingrédients par personne). */
+export const updateRecipe = (id: string, patch: Partial<Pick<Recipe, "name" | "prepMin" | "meat" | "ingredients">> & { desc?: string | null }) =>
+  updateDoc(doc(db, "recipes", id), { ...patch, desc: patch.desc ?? deleteField(), updatedAt: Date.now() });
 
 // ---------------- Capteur de prix ----------------
 export const extractPricesFn = call<{ store: StoreId; url: string; text: string }, { found: number; saved: { itemId: string; productName: string; packPrice: number }[]; created?: string[]; shop?: string | null; reader?: string; queued?: number; paused?: boolean }>("extractPrices");
