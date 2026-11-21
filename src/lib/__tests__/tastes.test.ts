@@ -65,3 +65,12 @@ describe("goûts du foyer", () => {
     expect(new Set(deck.map((r) => r.cuisine)).size).toBeGreaterThanOrEqual(5);
   });
 });
+
+describe("profils reliés aux comptes", () => {
+  it("le mien d'abord, puis ceux sans compte ; sans lien, tout le monde", async () => {
+    const { newPerson, peopleForDevice } = await import("../tastes");
+    const moi = { ...newPerson("Quentin"), uid: "u1" }, ame = { ...newPerson("Amélie"), uid: "u2" }, kid = newPerson("Léa");
+    expect(peopleForDevice([ame, kid, moi], "u1").map((p) => p.name)).toEqual(["Quentin", "Léa"]);
+    expect(peopleForDevice([ame, kid, moi], "u9").map((p) => p.name)).toEqual(["Amélie", "Léa", "Quentin"]);
+  });
+});
