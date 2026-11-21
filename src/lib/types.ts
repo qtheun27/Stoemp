@@ -60,6 +60,8 @@ export interface Recipe {
   /** Nombre de parts pour lequel les étapes sont écrites (recettes de la bibliothèque). */
   servings?: number;
   householdId?: string;
+  /** Présentation du plat écrite à la main (plats perso) ; sinon `describeDish` la compose. */
+  desc?: string;
   deleted?: boolean;
   createdAt?: number;
   /** Nom de l'accompagnement choisi (recette effective d'un repas, voir sides.ts). */
