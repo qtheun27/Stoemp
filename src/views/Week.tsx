@@ -72,7 +72,7 @@ export default function Week() {
   const RANK = { matin: 0, midi: 1, soir: 2 } as const;
   const nowRank = new Date().getHours() < 10 ? 0 : new Date().getHours() < 15 ? 1 : 2;
   const next = todayIdx < 0 ? undefined : slots.map((x, k) => ({ ...x, k })).filter((x) => !x.cooked && (pos(x.day) > pos(todayIdx) || (x.day === todayIdx && RANK[x.meal] >= nowRank)))
-    .sort((a, b) => a.day - b.day || RANK[a.meal] - RANK[b.meal])[0];
+    .sort((a, b) => pos(a.day) - pos(b.day) || RANK[a.meal] - RANK[b.meal])[0];
   const nextLabel = (x: { day: number; meal: keyof typeof RANK }) => x.day === todayIdx ? { matin: "Ce matin", midi: "Ce midi", soir: "Ce soir" }[x.meal]
     : pos(x.day) === pos(todayIdx) + 1 ? `Demain ${x.meal === "matin" ? "matin" : x.meal}` : `${DAYS[x.day]} ${x.meal}`;
   const sideText = (x: (typeof slots)[number], r: Recipe) => {
