@@ -137,6 +137,8 @@ export interface Settings {
   renmansShop?: string;
   /** jours de courses : 0 = dimanche … 6 = samedi */
   shoppingDays: number[];
+  /** Premier jour de la semaine de repas (0 = lundi) ; à défaut, le premier jour de courses. */
+  weekStart?: number | null;
 }
 
 export interface Slot {

@@ -15,18 +15,34 @@ export function isoWeek(d = new Date()): string {
 }
 /** Lundi de la semaine ISO. */
 export function mondayOf(key: string): Date {
-  const [y, w] = key.split("-W").map(Number);
+  const [, y, w] = (key.match(/^(\d+)-W(\d+)/) || ["", "1970", "1"]).map(Number);
   const jan4 = new Date(y, 0, 4);
   const day = jan4.getDay() || 7;
   const mon = new Date(y, 0, 4 - day + 1);
   mon.setDate(mon.getDate() + (w - 1) * 7);
   return mon;
 }
-export const shiftWeek = (key: string, n: number) => {
-  const d = mondayOf(key);
-  d.setDate(d.getDate() + 7 * n + 3);
-  return isoWeek(d);
-};
+/**
+ * Semaine de repas qui commence le jour `ws` (0 = lundi … 5 = samedi), par ex. le jour des courses.
+ * Clé : « 2026-W47 » si elle commence le lundi (format historique), sinon « 2026-W47-5 » (semaine ISO de son premier jour).
+ * Les créneaux gardent leur jour de la semaine (`slot.day`, 0 = lundi) : seuls l'ordre et les dates changent.
+ */
+export const weekStartDay = (key: string) => Number(key.split("-")[2] || 0);
+export const weekNo = (key: string) => parseInt(key.split("-W")[1], 10);
+export const startOf = (key: string) => addDays(mondayOf(key), weekStartDay(key));
+export function startOfWeek(d: Date, ws: number): Date {
+  const x = new Date(d); x.setHours(0, 0, 0, 0);
+  return addDays(x, -(((x.getDay() + 6) % 7 - ws + 7) % 7));
+}
+export const weekKeyOf = (d: Date, ws: number) => { const s = startOfWeek(d, ws); return ws ? `${isoWeek(s)}-${ws}` : isoWeek(s); };
+/** Rang d'un jour (0 = lundi) dans une semaine qui commence le jour ws. */
+export const dayPos = (day: number, ws: number) => (day - ws + 7) % 7;
+/** Jours de la semaine (0 = lundi) dans l'ordre d'une semaine qui commence le jour ws. */
+export const dayOrder = (ws: number) => Array.from({ length: 7 }, (_, i) => (ws + i) % 7);
+/** Premier jour de la semaine du foyer : choisi, sinon le premier jour de courses, sinon lundi. */
+export const weekStartFor = (s: { weekStart?: number | null; shoppingDays?: number[] }) =>
+  s.weekStart ?? (s.shoppingDays?.length ? (s.shoppingDays[0] + 6) % 7 : 0);
+export const shiftWeek = (key: string, n: number) => weekKeyOf(addDays(startOf(key), 7 * n), weekStartDay(key));
 export const dayMs = 86400000;
 export const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
 export const ymd = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;

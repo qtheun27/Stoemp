@@ -25,3 +25,15 @@ describe("rappels", () => {
     expect(dinnerPush(court, 17, { soir: false })).toBeNull();
   });
 });
+
+describe("semaine du foyer", () => {
+  it("commence le jour des courses (samedi) ou le lundi", async () => {
+    const { weekKeyFor, weekStartOf } = await import("./reminders");
+    expect(weekKeyFor("2026-11-21", 0)).toBe("2026-W47"); // samedi, semaine du lundi
+    expect(weekKeyFor("2026-11-21", 5)).toBe("2026-W47-5"); // samedi : début de la semaine du samedi
+    expect(weekKeyFor("2026-11-23", 5)).toBe("2026-W47-5"); // lundi suivant : même semaine du samedi
+    expect(weekKeyFor("2026-11-28", 5)).toBe("2026-W48-5");
+    expect(weekStartOf({ shoppingDays: [6] })).toBe(5);
+    expect(weekStartOf({ weekStart: 0, shoppingDays: [6] })).toBe(0);
+  });
+});

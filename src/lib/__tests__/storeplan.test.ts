@@ -36,3 +36,16 @@ describe("répartition entre magasins", () => {
     expect(t[0].save).toBeCloseTo(2);
   });
 });
+
+describe("semaine du foyer (jour des courses)", () => {
+  it("clé, début et ordre des jours", async () => {
+    const { weekKeyOf, startOf, shiftWeek, dayOrder, weekStartFor, ymd } = await import("../season");
+    expect(weekKeyOf(new Date(2026, 10, 21), 0)).toBe("2026-W47");
+    expect(weekKeyOf(new Date(2026, 10, 23), 5)).toBe("2026-W47-5");
+    expect(ymd(startOf("2026-W47-5"))).toBe("2026-11-21");
+    expect(shiftWeek("2026-W47-5", 1)).toBe("2026-W48-5");
+    expect(ymd(startOf("2026-W47"))).toBe("2026-11-16");
+    expect(dayOrder(5)).toEqual([5, 6, 0, 1, 2, 3, 4]);
+    expect(weekStartFor({ shoppingDays: [6] })).toBe(5);
+  });
+});

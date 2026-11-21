@@ -191,6 +191,13 @@ export default function Settings() {
               <label className="field">Jours de courses</label>
               <div className="chips">{[1, 2, 3, 4, 5, 6, 0].map((d) => <button key={d} className="chip" disabled={!admin} aria-pressed={st.shoppingDays.includes(d)}
                 onClick={() => save({ shoppingDays: st.shoppingDays.includes(d) ? st.shoppingDays.filter((x) => x !== d) : [...st.shoppingDays, d] })}>{WEEKDAYS_SUN0[d].slice(0, 3)}</button>)}</div>
+              <label className="field">Ma semaine de repas commence le</label>
+              {/* 0 = lundi ; par défaut le premier jour de courses : les repas et la liste suivent le rythme des courses. */}
+              <div className="chips">
+                <button className="chip" disabled={!admin} aria-pressed={st.weekStart == null} onClick={() => save({ weekStart: null })}>Jour des courses</button>
+                {[0, 1, 2, 3, 4, 5, 6].map((d) => <button key={d} className="chip" disabled={!admin} aria-pressed={st.weekStart === d} onClick={() => save({ weekStart: d })}>{WEEKDAYS_SUN0[(d + 1) % 7].slice(0, 3)}</button>)}
+              </div>
+              <p className="small muted">Par défaut, ta semaine commence le jour des courses : les repas et la liste vont d'un jour de courses au suivant.</p>
             </div>
           </div>
 

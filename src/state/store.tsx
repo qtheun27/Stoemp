@@ -7,7 +7,7 @@ import { BASE_ITEMS, BASE_RECIPES, ItemIndex, libRecipe, type LibEntry } from ".
 import { DEFAULT_SETTINGS } from "../lib/defaults";
 import { DEFAULT_APP_CONFIG, mergeAppConfig, type AppConfig } from "../lib/appConfig";
 import { emptyBook, expandBook, priceKey, type BookEntry, type PriceBook } from "../lib/pricing";
-import { isoWeek } from "../lib/season";
+import { isoWeek, weekKeyOf, weekStartFor } from "../lib/season";
 import { norm } from "../lib/text";
 import { readyRecipe } from "../lib/ready";
 import { EMPTY_TASTES, type Tastes } from "../lib/tastes";
@@ -73,6 +73,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [stock, setStock] = useState(new Map<string, StockEntry>());
   const [consumption, setConsumption] = useState(new Map<string, Consumption>());
   const [weekKey, setWeekKey] = useState(isoWeek());
+  const weekStart = weekStartFor(settings);
+  // Semaine affichée : celle qui contient aujourd'hui, au rythme du foyer (ex. du samedi au vendredi si les courses sont le samedi).
+  useEffect(() => { setWeekKey(weekKeyOf(new Date(), weekStart)); }, [weekStart]);
   const [week, setWeek] = useState<WeekDoc | null>(null);
   const [shopping, setShopping] = useState<ShoppingDoc[]>([]);
   const [shared, setShared] = useState(new Map<string, Price>());
