@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ALLERGENS, CUISINES, CUISINE_ORDER, DAYS, SEASONS, SEASON_ORDER } from "../lib/constants";
+import { dayOrder, weekStartDay } from "../lib/season";
 import type { Allergen, GenOptions, Settings } from "../lib/types";
 import { saveSettings } from "../state/actions";
 import { mealDays } from "../lib/planner";
@@ -20,6 +21,7 @@ function Opt({ o, set, k, title, desc, children }: OptProps) {
 /** Écran « Options » : cases à cocher combinables, mémorisées par foyer. */
 export default function OptionsSheet({ onClose }: { onClose: () => void }) {
   const s = useStore();
+  const ORD = dayOrder(weekStartDay(s.weekKey)); // jours dans l'ordre de la semaine du foyer
   const o = s.settings.options;
   const [avoid, setAvoid] = useState("");
   const set = (patch: Partial<GenOptions>) => saveSettings(s.hid!, { options: { ...o, ...patch } });
@@ -50,15 +52,15 @@ export default function OptionsSheet({ onClose }: { onClose: () => void }) {
         <div><div className="small muted">Ados <span className="tiny">11-17</span></div><Stepper value={e.teens} min={0} max={8} onChange={(v) => setEaters({ ...e, teens: v })} /></div>
         <div><div className="small muted">Enfants <span className="tiny">3-10</span></div><Stepper value={e.kids} min={0} max={8} onChange={(v) => setEaters({ ...e, kids: v })} /></div>
       </div>
-      {/* Repas de la semaine : une grille comme un calendrier. Une touche par case : complet 🍲 → léger 🥗 → rien. */}
+      {/* Repas de la semaine : une grille comme un calendrier, dans l'ordre de la semaine du foyer (ex. samedi → vendredi). Une touche par case : complet 🍲 → léger 🥗 → rien. */}
       <div className="mealgrid" role="grid" aria-label="Repas de la semaine">
-        <span />{DAYS.map((label) => <span key={label} className="mg-day">{label.slice(0, 1)}</span>)}
+        <span />{ORD.map((d) => <span key={d} className="mg-day">{DAYS[d].slice(0, 1)}</span>)}
         <span className="mg-row">☕ Déj.</span>
-        {DAYS.map((label, d) => { const on = days.breakfast.includes(d);
+        {ORD.map((d) => { const label = DAYS[d]; const on = days.breakfast.includes(d);
           return <button key={d} className={`mg-cell${on ? " on" : ""}`} aria-pressed={on} aria-label={`${label} déjeuner du matin : ${on ? "oui" : "non"}`} onClick={() => toggleBreakfast(d)}>{on ? "☕" : ""}</button>; })}
         {(["lunch", "dinner"] as const).map((meal) => [
           <span key={meal} className="mg-row">{meal === "lunch" ? "Midi" : "Soir"}</span>,
-          ...DAYS.map((label, d) => { const on = days[meal].includes(d), lt = on && light.has(`${d}-${meal === "lunch" ? "midi" : "soir"}`);
+          ...ORD.map((d) => { const label = DAYS[d]; const on = days[meal].includes(d), lt = on && light.has(`${d}-${meal === "lunch" ? "midi" : "soir"}`);
             return <button key={meal + d} className={`mg-cell${on ? " on" : ""}${lt ? " light" : ""}`} aria-pressed={on}
               aria-label={`${label} ${meal === "lunch" ? "midi" : "soir"} : ${!on ? "pas de repas" : lt ? "repas léger" : "repas complet"}`} onClick={() => cycleDay(meal, d)}>{on ? (lt ? "🥗" : "🍲") : ""}</button>; }),
         ])}
