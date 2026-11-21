@@ -7,15 +7,10 @@ import { toast } from "./ui";
 import { applyTheme } from "./views/Settings";
 import "./styles.css";
 
-// Appli installée sur l'écran d'accueil d'un iPhone : au lancement, iOS calcule parfois un écran trop court
-// (de la hauteur de la barre d'état), et la barre du bas flotte trop haut. On se cale sur la vraie hauteur de l'écran.
+// Hauteur réelle de la fenêtre de l'appli (barre d'état pleine : l'appli commence sous l'heure, elle est donc plus courte que l'écran).
+// L'ancien calage sur la hauteur de l'écran poussait la barre du bas trop bas sur iPhone (menu coupé) : on prend la vraie hauteur.
 function fitHeight() {
-  const ios = (navigator as Navigator & { standalone?: boolean }).standalone === true;
-  const land = innerWidth > innerHeight;
-  const sh = land ? Math.min(screen.width, screen.height) : Math.max(screen.width, screen.height);
-  const sw = land ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
-  // Seulement en plein écran (pas en écran partagé sur iPad) et pour un écart de la taille d'une barre d'état.
-  const h = ios && Math.abs(innerWidth - sw) < 2 && sh > innerHeight && sh - innerHeight <= 80 ? sh : innerHeight;
+  const h = innerHeight;
   document.documentElement.style.setProperty("--app-h", `${h}px`);
 }
 fitHeight();
