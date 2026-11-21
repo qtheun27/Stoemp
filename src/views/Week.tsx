@@ -5,12 +5,14 @@ import { CUISINES, DAYS, SEASONS } from "../lib/constants";
 import { mealCostPerPerson, partsCost } from "../lib/cost";
 import { mealParts, vegPortions } from "../lib/mixed";
 import { daysToExpiry, planSeason, recipesUsing } from "../lib/planner";
-import { mondayOf, shiftWeek, isoWeek } from "../lib/season";
+import { dayOrder, dayPos, shiftWeek, startOf, weekKeyOf, weekNo, weekStartDay } from "../lib/season";
 import { YesterdayRating } from "./Tastes";
 import { defaultSideLabel, slotRecipe } from "../lib/sides";
 import { eur } from "../lib/text";
 import type { Recipe } from "../lib/types";
-import { fixSides, moveSlot, placeRecipe, vegCfg, basePortions, generateWeek, planCtx, setCooked, swapSlot } from "../state/actions";
+import { fixSides, moveSlot, placeRecipe, removeSlot, restoreSlot, vegCfg, basePortions, generateWeek, planCtx, setCooked, swapSlot } from "../state/actions";
+import { ChooseDish } from "./ChooseDish";
+import type { Slot } from "../lib/types";
 import { coursePortions, eatersLabel, eatersOf, headcount, slotPortions } from "../lib/household";
 import { profile, PROTEIN_LABEL, type Protein } from "../lib/balance";
 import FridgeSheet from "./Fridge";
@@ -34,8 +36,11 @@ export default function Week() {
   const persons = basePortions(s);
   const eaters = eatersOf(s.settings);
   const ctx = planCtx(s);
-  const mon = mondayOf(s.weekKey);
-  const todayIdx = s.weekKey === isoWeek() ? (new Date().getDay() + 6) % 7 : -1;
+  // Semaine du foyer : elle peut commencer un autre jour que le lundi (jour des courses). `slot.day` reste le jour de la semaine (0 = lundi).
+  const ws = weekStartDay(s.weekKey), start = startOf(s.weekKey), order = dayOrder(ws);
+  const dateOf = (d: number) => new Date(start.getTime() + dayPos(d, ws) * 864e5);
+  const todayIdx = s.weekKey === weekKeyOf(new Date(), ws) ? (new Date().getDay() + 6) % 7 : -1;
+  const pos = (d: number) => dayPos(d, ws);
 
   // Coût par portion de chaque plat, et coût total de chaque créneau (invités, restes, entrée/dessert compris).
   // Foyer mixte : parts avec viande et parts végé du même plat.
@@ -66,10 +71,10 @@ export default function Week() {
   // Prochain repas à préparer (à partir de maintenant) : mis en avant en haut de l'écran.
   const RANK = { matin: 0, midi: 1, soir: 2 } as const;
   const nowRank = new Date().getHours() < 10 ? 0 : new Date().getHours() < 15 ? 1 : 2;
-  const next = todayIdx < 0 ? undefined : slots.map((x, k) => ({ ...x, k })).filter((x) => !x.cooked && (x.day > todayIdx || (x.day === todayIdx && RANK[x.meal] >= nowRank)))
+  const next = todayIdx < 0 ? undefined : slots.map((x, k) => ({ ...x, k })).filter((x) => !x.cooked && (pos(x.day) > pos(todayIdx) || (x.day === todayIdx && RANK[x.meal] >= nowRank)))
     .sort((a, b) => a.day - b.day || RANK[a.meal] - RANK[b.meal])[0];
   const nextLabel = (x: { day: number; meal: keyof typeof RANK }) => x.day === todayIdx ? { matin: "Ce matin", midi: "Ce midi", soir: "Ce soir" }[x.meal]
-    : x.day === todayIdx + 1 ? `Demain ${x.meal === "matin" ? "matin" : x.meal}` : `${DAYS[x.day]} ${x.meal}`;
+    : pos(x.day) === pos(todayIdx) + 1 ? `Demain ${x.meal === "matin" ? "matin" : x.meal}` : `${DAYS[x.day]} ${x.meal}`;
   const sideText = (x: (typeof slots)[number], r: Recipe) => {
     const side = x.side ? s.recipes.get(x.side)?.name.toLowerCase() : defaultSideLabel(r, s.idx);
     const vg = x.vegSide ? s.recipes.get(x.vegSide)?.name.toLowerCase() : null;
@@ -85,16 +90,23 @@ export default function Week() {
     toast(note || (o.ai ? "Semaine générée avec l'IA ✨" : "Semaine générée"));
   };
   const swap = async (k: number) => { setBusy(k); await run(() => swapSlot(s, k, o.ai)); setBusy(null); };
+  // 🔄 : choisir le nouveau plat dans le catalogue (ou au hasard) ; glisser une carte vers la gauche : retirer le repas (annulable).
+  const [choose, setChoose] = useState<number | null>(null);
+  const [undo, setUndo] = useState<{ slot: Slot; k: number } | null>(null);
+  const remove = async (k: number) => {
+    const slot = await run(() => removeSlot(s, k));
+    if (slot) { setUndo({ slot, k }); setTimeout(() => setUndo((u) => (u?.slot === slot ? null : u)), 6000); }
+  };
   const placeIn = async (r: Recipe) => {
     const d = await run(() => placeRecipe(s, r));
     if (d === null) toast("Aucun repas libre cette semaine : génère d'abord ta semaine");
     else if (d !== undefined) toast(`« ${r.name} » placé ${DAYS[d].toLowerCase()}`);
   };
 
-  const range = `${mon.toLocaleDateString("fr-BE", { day: "numeric", month: "short" })} – ${new Date(mon.getTime() + 6 * 864e5).toLocaleDateString("fr-BE", { day: "numeric", month: "short" })}`;
+  const range = `${start.toLocaleDateString("fr-BE", { weekday: "short", day: "numeric", month: "short" })} – ${new Date(start.getTime() + 6 * 864e5).toLocaleDateString("fr-BE", { day: "numeric", month: "short" })}`;
   return (
     <>
-      <TopBar title={`Semaine ${Number(s.weekKey.split("-W")[1])}`} sub={range}>
+      <TopBar title={`Semaine ${weekNo(s.weekKey)}`} sub={range}>
         <button className="ib" onClick={() => s.setWeekKey(shiftWeek(s.weekKey, -1))} aria-label="Semaine précédente"><ChevronLeft size={20} /></button>
         <button className="ib" onClick={() => s.setWeekKey(shiftWeek(s.weekKey, 1))} aria-label="Semaine suivante"><ChevronRight size={20} /></button>
         {!!slots.length && <button className="ib" onClick={() => setConfirmNew(true)} disabled={busy === "gen"} aria-label="Nouvelle semaine"><Sparkles size={20} className={busy === "gen" ? "spin" : ""} /></button>}
@@ -121,7 +133,7 @@ export default function Week() {
             {r && <button className="btn sm" onClick={() => placeIn(r)}>Placer</button>}</div>;
         })}
         {s.week?.warning && <div className="notice">{s.week.warning}</div>}
-        {todayIdx > 0 && <YesterdayRating recipeIds={slots.filter((x) => x.day === todayIdx - 1 && !x.fromLeftovers).map((x) => x.recipeId)} />}
+        {todayIdx >= 0 && pos(todayIdx) > 0 && <YesterdayRating recipeIds={slots.filter((x) => x.day === (todayIdx + 6) % 7 && !x.fromLeftovers).map((x) => x.recipeId)} />}
 
         {!slots.length ? (
           <Empty icon="🍲">Aucun repas prévu pour cette semaine.<br />Règle les options puis génère ta semaine.
@@ -146,11 +158,11 @@ export default function Week() {
               </div>;
             })()}
             <div className="daystrip" role="tablist" aria-label="Jours de la semaine">
-              {DAYS.map((label, d) => {
-                const list = slots.filter((x) => x.day === d), done = list.length > 0 && list.every((x) => x.cooked);
+              {order.map((d) => {
+                const label = DAYS[d], list = slots.filter((x) => x.day === d), done = list.length > 0 && list.every((x) => x.cooked);
                 return <button key={d} className={`dchip${d === todayIdx ? " today" : ""}${done ? " done" : ""}`} disabled={!list.length} aria-label={`${label}${list.length ? `, ${list.length} repas` : ", aucun repas"}`}
                   onClick={() => document.getElementById(`day-${d}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>
-                  <span>{label.slice(0, 2)}</span><b>{new Date(mon.getTime() + d * 864e5).getDate()}</b><i aria-hidden>{done ? "✓" : list.length ? "•".repeat(Math.min(3, list.length)) : ""}</i></button>;
+                  <span>{label.slice(0, 2)}</span><b>{dateOf(d).getDate()}</b><i aria-hidden>{done ? "✓" : list.length ? "•".repeat(Math.min(3, list.length)) : ""}</i></button>;
               })}
             </div>
             <div className="weekline">
@@ -161,8 +173,8 @@ export default function Week() {
               {!balance.poisson && !o.veg && !o.allergens.includes("po") && <span className="tag warn">pas de poisson cette semaine</span>}
             </div>}
             <div className="days">
-              {DAYS.map((day, d) => {
-                const list = slots.map((x, k) => ({ ...x, k })).filter((x) => x.day === d);
+              {order.map((d) => {
+                const day = DAYS[d], list = slots.map((x, k) => ({ ...x, k })).filter((x) => x.day === d);
                 if (!list.length) return null;
                 return (
                   <section key={d} id={`day-${d}`} className={`day${d === todayIdx ? " today" : ""}`} onDragOver={(e) => drag != null && e.preventDefault()} onDrop={() => dropOn(d)}>
@@ -171,7 +183,8 @@ export default function Week() {
                       const r = s.recipes.get(x.recipeId);
                       if (!r) return <div className="meal" key={x.k}><span className="grow muted">Recette indisponible</span><button className="ib" onClick={() => swap(x.k)}><RefreshCw size={18} /></button></div>;
                       return (
-                        <div className={`meal${x.cooked ? " cooked" : ""}`} key={x.k} draggable={!x.fromLeftovers && !x.leftovers} onDragStart={() => setDrag(x.k)} onDragEnd={() => setDrag(null)}>
+                        <SwipeRemove key={x.k} label={`Retirer ${r.name}`} onRemove={() => remove(x.k)}>
+                        <div className={`meal${x.cooked ? " cooked" : ""}`} draggable={!x.fromLeftovers && !x.leftovers} onDragStart={() => setDrag(x.k)} onDragEnd={() => setDrag(null)}>
                           <button className="thumb" tabIndex={-1} aria-hidden onClick={() => setOpen({ r, k: x.k })}><DishImage recipe={r} idx={s.idx} height={64} rounded={12} thumb /></button>
                           <button className="info" onClick={() => setOpen({ r, k: x.k })}>
                             <span className="slot">{x.meal === "matin" ? "☕ déjeuner" : `${x.meal} · ${x.light ? "🥗 léger" : "🍲 complet"}`}</span>
@@ -180,10 +193,11 @@ export default function Week() {
                             <span className="meta">{r.source === "pret" ? <span>🥡 plat préparé</span> : <span>⏱ {r.prepMin} min</span>}<span className="num">{x.fromLeftovers ? "restes 🍱" : `${eur(slotTotals[x.k])}`}</span>{x.leftovers && <span>🍱 + demain midi</span>}{!x.fromLeftovers && r.source !== "pret" && !isVegRecipe(r) && vegP(x) > 0 && <span>🌱 {vegP(x)} végé</span>}
                               {(isVegRecipe(r) || (x.veg && r.source !== "pret")) && <span>🌱 végé</span>}{r.source === "ia" && <span>✨ IA</span>}{r.source === "perso" && <span>📝 mon plat</span>}</span>
                           </button>
-                          <button className="ib" aria-label={`Remplacer ${r.name}`} disabled={busy === x.k} onClick={() => swap(x.k)}><RefreshCw size={19} className={busy === x.k ? "spin" : ""} /></button>
+                          <button className="ib" aria-label={`Changer ${r.name}`} disabled={busy === x.k} onClick={() => setChoose(x.k)}><RefreshCw size={19} className={busy === x.k ? "spin" : ""} /></button>
                           <button className={`ib done${x.cooked ? " on" : ""}`} aria-label={x.cooked ? "Annuler « cuisiné »" : "Marquer comme cuisiné"} aria-pressed={x.cooked}
                             onClick={() => { buzz(); run(() => setCooked(s, x.k, !x.cooked), x.cooked ? "Stock rétabli" : "Cuisiné : stock mis à jour"); }}><CheckIcon size={19} /></button>
                         </div>
+                        </SwipeRemove>
                       );
                     })}
                   </section>
@@ -193,9 +207,12 @@ export default function Week() {
           </>
         )}
       </div>
+      {choose != null && slots[choose] && <ChooseDish slot={slots[choose]} k={choose} onRandom={() => swap(choose)} onClose={() => setChoose(null)} />}
+      {undo && <div className="undo-bar" role="status"><span className="grow">Repas retiré</span>
+        <button className="btn soft sm" onClick={() => { const u = undo; setUndo(null); run(() => restoreSlot(s, u.slot, u.k), "Repas remis"); }}>Annuler</button></div>}
       {confirmNew && <Sheet title="Nouvelle semaine ?" onClose={() => setConfirmNew(false)}>
-        <p>Tous les repas de la semaine {Number(s.weekKey.split("-W")[1])} seront remplacés par une nouvelle proposition{cooked ? ` (dont ${cooked} déjà cuisiné${cooked > 1 ? "s" : ""})` : ""}. Tes favoris, tes goûts et tes accords d'accompagnement restent.</p>
-        <p className="small muted">Pour changer un seul repas, touche plutôt 🔄 sur sa carte.</p>
+        <p>Tous les repas de la semaine {weekNo(s.weekKey)} seront remplacés par une nouvelle proposition{cooked ? ` (dont ${cooked} déjà cuisiné${cooked > 1 ? "s" : ""})` : ""}. Tes favoris, tes goûts et tes accords d'accompagnement restent.</p>
+        <p className="small muted">Pour changer un seul repas, touche plutôt 🔄 sur sa carte (choix dans le catalogue) ; pour le retirer, glisse sa carte vers la gauche.</p>
         <div className="stack" style={{ gap: 8, marginTop: 12 }}>
           <button className="btn block" onClick={() => { setConfirmNew(false); generate(); }}><Sparkles size={18} />Remplacer toute la semaine</button>
           <button className="btn ghost block" onClick={() => setConfirmNew(false)}>Garder ma semaine</button>
@@ -207,4 +224,24 @@ export default function Week() {
       {fridge && <FridgeSheet onClose={() => setFridge(false)} onPlace={(r) => { placeIn(r); setFridge(false); }} />}
     </>
   );
+}
+
+/** Carte qu'on glisse vers la gauche pour retirer le repas (au-delà de 90 px) ; sinon elle revient en place. */
+function SwipeRemove({ children, onRemove, label }: { children: React.ReactNode; onRemove: () => void; label: string }) {
+  const [dx, setDx] = useState(0);
+  const start = useRef<{ x: number; y: number; on: boolean } | null>(null);
+  return <div className="swipe" aria-label={label}>
+    <div className="swipe-bg" aria-hidden><span>Retirer</span></div>
+    <div className="swipe-fg" style={{ transform: dx ? `translateX(${dx}px)` : undefined, transition: start.current ? "none" : "transform .2s" }}
+      onTouchStart={(e) => { start.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, on: false }; }}
+      onTouchMove={(e) => {
+        const st = start.current; if (!st) return;
+        const mx = e.touches[0].clientX - st.x, my = e.touches[0].clientY - st.y;
+        if (!st.on && Math.abs(mx) > 12 && Math.abs(mx) > Math.abs(my) * 1.5) st.on = true; // geste horizontal seulement (le défilement reste libre)
+        if (st.on) setDx(Math.min(0, mx));
+      }}
+      onTouchEnd={() => { const far = dx < -90; start.current = null; setDx(far ? -400 : 0); if (far) { try { navigator.vibrate?.(15); } catch { /* ignoré */ } setTimeout(() => { setDx(0); onRemove(); }, 180); } }}>
+      {children}
+    </div>
+  </div>;
 }

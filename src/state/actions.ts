@@ -14,7 +14,7 @@ import type { Cat, Consumption, ConsumptionEvent, EventType, Ingredient, Item, L
 import { mealParts, vegPortions } from "../lib/mixed";
 import { assignSides, sideOptions, slotRecipe, vegOptions } from "../lib/sides";
 import { eatersFromPeople, TASTE_GROUPS, type Person, type Rating } from "../lib/tastes";
-import { isoWeek } from "../lib/season";
+import { dayPos, isoWeek, weekKeyOf, weekStartDay } from "../lib/season";
 import { baseQty } from "../lib/units";
 import type { HistoryEntry, Prefs, StoreState } from "./store";
 
@@ -129,8 +129,8 @@ export const saveSlots = (s: StoreState, slots: Slot[]) => setDoc(hh(s.hid!, "we
 /** Place une recette sur le premier repas libre de la semaine (à partir d'aujourd'hui). Renvoie le jour, ou null. */
 export async function placeRecipe(s: StoreState, r: Recipe): Promise<number | null> {
   const slots = [...(s.week?.slots || [])];
-  const todayIdx = s.weekKey === isoWeek() ? (new Date().getDay() + 6) % 7 : -1;
-  const k = slots.findIndex((x) => !x.cooked && !x.fromLeftovers && (todayIdx < 0 || x.day >= todayIdx));
+  const ws = weekStartDay(s.weekKey), todayIdx = s.weekKey === weekKeyOf(new Date(), ws) ? (new Date().getDay() + 6) % 7 : -1;
+  const k = slots.findIndex((x) => !x.cooked && !x.fromLeftovers && (todayIdx < 0 || dayPos(x.day, ws) >= dayPos(todayIdx, ws)));
   if (k < 0) return null;
   slots[k] = { ...slots[k], recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r) && r.source !== "pret", cooked: false };
   await saveSlots(s, slots);
@@ -147,6 +147,28 @@ export async function swapSlot(s: StoreState, k: number, useAi: boolean) {
   const { side: _side, vegSide: _veg, ...rest } = slots[k];
   slots[k] = { ...rest, recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r), cooked: false };
   slots[k] = assignSides([slots[k]], s.recipes, s.idx, Math.random, s.prefs.sides, s.prefs.vegSides)[0];
+  await saveSlots(s, slots);
+}
+
+/** Remplace le plat d'un repas par une recette choisie dans le catalogue (accompagnements remis d'accord). */
+export async function setSlotRecipe(s: StoreState, k: number, r: Recipe) {
+  const slots = [...(s.week?.slots || [])];
+  const { side: _side, vegSide: _veg, ...rest } = slots[k];
+  slots[k] = { ...rest, recipeId: r.id, veg: s.settings.options.veg && !isVegRecipe(r) && r.source !== "pret", cooked: false };
+  slots[k] = assignSides([slots[k]], s.recipes, s.idx, Math.random, s.prefs.sides, s.prefs.vegSides)[0];
+  await saveSlots(s, slots);
+}
+
+/** Retire un repas de la semaine (glisser la carte) ; `restoreSlot` le remet à sa place. */
+export async function removeSlot(s: StoreState, k: number) {
+  const slots = [...(s.week?.slots || [])];
+  const [gone] = slots.splice(k, 1);
+  await saveSlots(s, slots);
+  return gone;
+}
+export async function restoreSlot(s: StoreState, slot: Slot, k: number) {
+  const slots = [...(s.week?.slots || [])];
+  slots.splice(Math.min(k, slots.length), 0, slot);
   await saveSlots(s, slots);
 }
 

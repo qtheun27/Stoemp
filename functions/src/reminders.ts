@@ -25,6 +25,17 @@ export function brussels(now = new Date()) {
   return { ymd: `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`, js, day: (js + 6) % 7, week: `${t.getUTCFullYear()}-W${String(w).padStart(2, "0")}` };
 }
 
+/** Semaine de repas du foyer qui contient ce jour : commence le jour ws (0 = lundi), clé « 2026-W47 » ou « 2026-W47-5 » (comme l'appli). */
+export function weekKeyFor(ymd: string, ws: number): string {
+  const t = new Date(`${ymd}T12:00:00Z`);
+  t.setUTCDate(t.getUTCDate() - (((t.getUTCDay() + 6) % 7 - ws + 7) % 7));
+  const iso = brussels(t).week;
+  return ws ? `${iso}-${ws}` : iso;
+}
+/** Premier jour de la semaine du foyer : choisi, sinon le premier jour de courses (0 = dimanche), sinon lundi. */
+export const weekStartOf = (st: { weekStart?: number | null; shoppingDays?: number[] } | undefined) =>
+  st?.weekStart ?? (st?.shoppingDays?.length ? (st.shoppingDays[0] + 6) % 7 : 0);
+
 const list = (names: string[]) => names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} et ${names[names.length - 1]}`;
 
 /** Rappel du matin : jour des courses (repas prévus) et produits qui périment aujourd'hui ou demain. */
@@ -83,9 +94,11 @@ export const remindMorning = onSchedule({ schedule: "30 8 * * *", timeZone: TZ, 
   const names = new Map((await db.collection("items").select("name").get()).docs.map((d) => [d.id, d.get("name") as string]));
   for (const [hid, devs] of await devicesByHousehold()) {
     const hh = db.collection("households").doc(hid);
-    const [settings, week, stock] = await Promise.all([hh.collection("meta").doc("settings").get(), hh.collection("weeks").doc(now.week).get(), hh.collection("stock").get()]);
+    const settings = await hh.collection("meta").doc("settings").get();
+    const ws = weekStartOf(settings.data() as never);
+    const [week, stock] = await Promise.all([hh.collection("weeks").doc(weekKeyFor(now.ymd, ws)).get(), hh.collection("stock").get()]);
     const shoppingToday = ((settings.get("shoppingDays") as number[] | undefined) || []).includes(now.js);
-    const mealsLeft = ((week.get("slots") as { day: number; cooked?: boolean }[] | undefined) || []).filter((s) => !s.cooked && s.day >= now.day).length;
+    const mealsLeft = ((week.get("slots") as { day: number; cooked?: boolean }[] | undefined) || []).filter((s) => !s.cooked && (s.day - ws + 7) % 7 >= (now.day - ws + 7) % 7).length;
     const expiring = stock.docs.map((d) => ({ id: d.id, qty: d.get("qty") as number, exp: d.get("expiresAt") as string | null }))
       .filter((s) => s.qty > 0 && s.exp && s.exp.slice(0, 10) <= addDays(now.ymd, 1))
       .map((s) => ({ name: names.get(s.id) || s.id, days: s.exp!.slice(0, 10) <= now.ymd ? 0 : 1 }));
@@ -99,7 +112,9 @@ export const remindDinner = onSchedule({ schedule: "0 15,17 * * *", timeZone: TZ
   const hour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", hour12: false }).format(new Date())) >= 16 ? 17 : 15;
   const out: Parameters<typeof send>[0] = [];
   for (const [hid, devs] of await devicesByHousehold()) {
-    const week = await db.collection("households").doc(hid).collection("weeks").doc(now.week).get();
+    const hh = db.collection("households").doc(hid);
+    const ws = weekStartOf((await hh.collection("meta").doc("settings").get()).data() as never);
+    const week = await hh.collection("weeks").doc(weekKeyFor(now.ymd, ws)).get();
     const slot = ((week.get("slots") as { day: number; meal: string; recipeId: string; cooked?: boolean; fromLeftovers?: boolean; veg?: boolean }[] | undefined) || [])
       .find((s) => s.day === now.day && s.meal === "soir" && !s.cooked);
     let meal: { name: string; prepMin: number } | null = null;
