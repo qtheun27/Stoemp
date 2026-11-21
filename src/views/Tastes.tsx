@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { mains, ingredientsOf } from "../lib/catalog";
 import { ALLERGENS, CUISINES, CUISINE_ORDER } from "../lib/constants";
-import { newPerson, tastingDeck, TASTE_GROUPS, type Person, type Rating } from "../lib/tastes";
+import { newPerson, peopleForDevice, tastingDeck, TASTE_GROUPS, type Person, type Rating } from "../lib/tastes";
 import type { Allergen, Recipe } from "../lib/types";
 import { rateRecipe, savePeople } from "../state/actions";
 import { useStore } from "../state/store";
@@ -18,7 +18,7 @@ const RATINGS: { v: Rating; icon: string; label: string }[] = [
 /** Carte « Les goûts du foyer » (Réglages) : un profil par membre, et le jeu pour affiner. */
 export function TastesCard() {
   const s = useStore();
-  const people = s.tastes.people;
+  const people = s.tastes.people, me = s.user?.uid;
   const [edit, setEdit] = useState<Person | null>(null);
   const [game, setGame] = useState(false);
   const rated = (p: Person) => Object.keys(s.tastes.ratings[p.id] || {}).length;
@@ -27,8 +27,11 @@ export function TastesCard() {
     <p className="small muted">Une fiche par personne (même les enfants) : la semaine proposée plaira à toute la table. Rien n'est obligatoire.</p>
     {people.map((p) => <div key={p.id} className="row between" style={{ padding: "8px 0", borderTop: "1px solid var(--line)" }}>
       <span className="grow"><b>{p.name}</b> <span className="small muted">· {p.age}{p.diet !== "tout" ? ` · ${p.diet === "vege" ? "végétarien" : p.diet === "pesco" ? "pescétarien" : "sans porc"}` : ""} · {rated(p)} plat(s) noté(s)</span></span>
+      {p.uid === me ? <span className="tag ac">moi</span> : p.uid ? <span className="tag">connecté·e</span>
+        : !people.some((x) => x.uid === me) && <button className="btn soft sm" onClick={() => run(() => savePeople(s, people.map((x) => (x.id === p.id ? { ...x, uid: me } : x))), `Profil relié : ${p.name}`)}>C'est moi</button>}
       <button className="ib" aria-label={`Modifier ${p.name}`} onClick={() => setEdit(p)}><Pencil size={18} /></button>
     </div>)}
+    {people.length > 0 && !people.some((x) => x.uid === me) && <p className="small muted" style={{ marginTop: 6 }}>Touche « C'est moi » sur ton profil : le jeu et « Le plat d'hier » répondront pour toi sur ce téléphone. Chacun le fait une fois sur le sien.</p>}
     <div className="row wrap" style={{ marginTop: 10 }}>
       <button className="btn ghost" onClick={() => setEdit(newPerson(""))}><Plus size={18} />Ajouter un membre</button>
       {people.length > 0 && <button className="btn" onClick={() => setGame(true)}>🎲 Ça te tente ?</button>}
@@ -55,6 +58,7 @@ function PersonSheet({ person, onClose }: { person: Person; onClose: () => void 
   const Q = ({ t, children }: { t: string; children: React.ReactNode }) => <div style={{ margin: "12px 0" }}><div className="small muted" style={{ marginBottom: 6 }}>{t}</div><div className="chips">{children}</div></div>;
   return <Sheet title={exists ? p.name || "Profil" : "Nouveau membre"} sub="Quelques questions pour mieux le connaître" onClose={onClose}
     actions={<>{exists && <button className="btn ghost" onClick={remove}><Trash2 size={18} />Retirer</button>}<button className="btn" onClick={save}>Enregistrer</button></>}>
+    {p.uid && p.uid === s.user?.uid && <button className="btn ghost sm" style={{ marginBottom: 8 }} onClick={() => set({ uid: null })}>Ce profil n'est pas moi</button>}
     <label className="field">Prénom</label>
     <input className="input" value={p.name} maxLength={30} placeholder="ex. Léa" onChange={(e) => set({ name: e.target.value })} />
     <Q t="Âge">{(["enfant", "ado", "adulte"] as const).map((a) => chip(p.age === a, a === "enfant" ? "Enfant (3-10 ans)" : a === "ado" ? "Ado (11-17 ans)" : "Adulte", () => set({ age: a }), a))}</Q>
@@ -85,14 +89,15 @@ function DishCard({ r }: { r: Recipe }) {
 /** Jeu « Ça te tente ? » : chaque membre note des plats variés en un geste ; le planificateur en tient compte. */
 export function TastingSheet({ onClose }: { onClose: () => void }) {
   const s = useStore();
-  const [pid, setPid] = useState(s.tastes.people[0]?.id);
+  const mine = peopleForDevice(s.tastes.people, s.user?.uid);
+  const [pid, setPid] = useState(mine[0]?.id);
   const person = s.tastes.people.find((p) => p.id === pid);
   const deck = useMemo(() => (person ? tastingDeck(mains(s.recipes.values()).filter((r) => !r.deleted), person, s.tastes) : []), [pid]); // eslint-disable-line react-hooks/exhaustive-deps
   const [i, setI] = useState(0);
   const r = deck[i];
   const vote = (v: Rating) => { if (!person || !r) return; rateRecipe(s, person.id, r.id, v).catch(() => toast("Avis non enregistré (hors ligne ?)")); setI(i + 1); };
   return <Sheet title="🎲 Ça te tente ?" sub="Un geste par plat : l'appli apprend ce que chacun aime" onClose={onClose}>
-    <div className="chips" style={{ marginBottom: 10 }}>{s.tastes.people.map((p) =>
+    <div className="chips" style={{ marginBottom: 10 }}>{mine.map((p) =>
       <button key={p.id} className="chip" aria-pressed={p.id === pid} onClick={() => { setPid(p.id); setI(0); }}>{p.name}</button>)}</div>
     {!person ? <p>Ajoute d'abord un membre du foyer.</p> : !r ? <p>🎉 Merci {person.name} ! {deck.length ? `${deck.length} plats notés.` : "Tous les plats sont déjà notés."} Rejoue quand tu veux.</p> : <>
       <p className="small muted">{person.name} · plat {i + 1} / {deck.length}</p>
@@ -109,7 +114,7 @@ export function TastingSheet({ onClose }: { onClose: () => void }) {
 export function YesterdayRating({ recipeIds }: { recipeIds: string[] }) {
   const s = useStore();
   const [hidden, setHidden] = useState<string[]>([]);
-  const people = s.tastes.people;
+  const people = peopleForDevice(s.tastes.people, s.user?.uid);
   if (!people.length) return null;
   const todo = recipeIds.filter((id, k) => recipeIds.indexOf(id) === k && !hidden.includes(id) && s.recipes.get(id)
     && people.some((p) => s.tastes.ratings[p.id]?.[id] === undefined));

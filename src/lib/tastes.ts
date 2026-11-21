@@ -19,6 +19,8 @@ export interface Person {
   curious: 0 | 1 | 2;
   /** Pour la personne qui cuisine : minutes disponibles en semaine (0 = ne cuisine pas). */
   cookMin?: number;
+  /** Compte relié (« C'est moi ») : le jeu et « Le plat d'hier » répondent pour cette personne sur son téléphone. */
+  uid?: string | null;
 }
 
 /** Avis d'un membre sur un plat : 1 adoré, 0 bof, -1 non merci. */
@@ -129,3 +131,10 @@ export const newPerson = (name: string): Person => ({
   id: `p${Date.now().toString(36)}${Math.floor(Math.random() * 1e4)}`, name, age: "adulte", diet: "tout",
   allergens: [], never: [], loves: [], cuisines: [], spice: 1, curious: 1,
 });
+
+/** Profils à faire noter sur ce téléphone : le mien d'abord, puis ceux qui n'ont pas de compte (enfants…), gérés par les parents. */
+export function peopleForDevice(people: Person[], uid: string | undefined): Person[] {
+  const mine = people.find((p) => uid && p.uid === uid);
+  if (!mine) return people;
+  return [mine, ...people.filter((p) => p !== mine && !p.uid)];
+}
