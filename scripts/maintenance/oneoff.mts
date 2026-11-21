@@ -1,31 +1,33 @@
-// Tâche ponctuelle (workflow « Maintenance », oneoff) : remise en place après la relecture trop sévère.
-// Relit toutes les pages gardées en copie (sans relecture payante), une à la fois, puis attend la fin des files ;
-// contrôle ensuite quelques articles touchés à tort. Aucun prix affiché.
+// Tâche ponctuelle (workflow « Maintenance », oneoff) : reclasse les semaines déjà prévues (lundi → dimanche) dans les semaines
+// du foyer quand elles commencent un autre jour (jour des courses). Chaque repas va dans la semaine de sa date ; un repas déjà
+// présent au même moment n'est jamais écrasé. Les anciennes fiches sont gardées, marquées `migrated`.
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
+import { addDays, mondayOf, weekKeyOf, weekStartFor } from "../../src/lib/season";
 initializeApp({ credential: applicationDefault(), projectId: "stoemp-app" });
 const db = getFirestore();
-const caps = (await db.collection("captures").orderBy("at", "desc").limit(30).select("store", "at", "url").get()).docs;
-const seen = new Set<string>();
-for (const c of caps.filter((x) => { const k = `${x.get("store")}|${String(x.get("url")).split("?")[0]}|${new Date(x.get("at")).toISOString().slice(0, 13)}`; if (seen.has(k)) return false; seen.add(k); return true; }).reverse()) {
-  const ref = await db.collection("captureReplays").add({ captureId: c.id, at: Date.now() });
-  let line = "pas de réponse en 9 min";
-  for (let i = 0; i < 54; i++) {
-    await new Promise((r) => setTimeout(r, 10_000));
-    const r = (await ref.get()).data()!;
-    if (r.doneAt || r.error) { line = r.error ? `erreur : ${r.error}` : `${r.found} lus, ${r.saved} articles avec prix, ${r.created} nouveaux, ${r.queued} en file`; break; }
+type Slot = { day: number; meal: string; [k: string]: unknown };
+for (const hh of (await db.collection("households").get()).docs) {
+  const st = (await hh.ref.collection("meta").doc("settings").get()).data() || {};
+  const ws = weekStartFor(st as never);
+  if (!ws) continue;
+  const weeks = (await hh.ref.collection("weeks").get()).docs.filter((d) => /^\d+-W\d+$/.test(d.id) && !d.get("migrated"));
+  let moved = 0;
+  for (const w of weeks) {
+    const mon = mondayOf(w.id), by = new Map<string, Slot[]>();
+    for (const sl of (w.get("slots") || []) as Slot[]) {
+      const key = weekKeyOf(addDays(mon, sl.day), ws);
+      by.set(key, [...(by.get(key) || []), sl]);
+    }
+    for (const [key, add] of by) {
+      const ref = hh.ref.collection("weeks").doc(key), cur = (await ref.get()).data();
+      const have = (cur?.slots || []) as Slot[];
+      const fresh = add.filter((a) => !have.some((h) => h.day === a.day && h.meal === a.meal));
+      if (!fresh.length) continue;
+      await ref.set({ ...(cur || { persons: w.get("persons") ?? null }), slots: [...have, ...fresh] }, { merge: true });
+      moved += fresh.length;
+    }
+    await w.ref.update({ migrated: true });
   }
-  console.log(`Relecture ${c.get("store")} (${new Date(c.get("at")).toISOString().slice(0, 16)}) : ${line}`);
-}
-for (let i = 0; i < 120; i++) {
-  const jobs = (await db.collection("enrichJobs").get()).docs;
-  if (!jobs.length) { console.log("Files d'attente : toutes terminées"); break; }
-  if (i % 6 === 0) console.log("Files : " + jobs.map((j) => `${j.get("pos")}/${(j.get("products") || []).length}${j.get("paused") ? " pause" : ""}`).join(", "));
-  await new Promise((r) => setTimeout(r, 20_000));
-}
-const items = (await db.collection("items").select("name").get()).docs;
-for (const n of ["Seau", "Vin rouge Merlot", "Bière blonde", "Jus multifruits", "Pizza margherita", "Langue de bœuf", "Gaufrettes", "Brosses à dents", "Pistaches"]) {
-  const it = items.find((d) => d.get("name") === n); if (!it) continue;
-  const offers = (await db.collection("prices").where("itemId", "==", it.id).get()).docs.flatMap((d) => (d.get("offers") || []) as { name: string }[]);
-  console.log(`  ${n} : ${offers.length} produits — ${offers.slice(0, 5).map((o) => o.name).join(" | ")}`);
+  if (weeks.length) console.log(`Foyer ${hh.id.slice(0, 6)}… (semaine dès le jour ${ws}) : ${weeks.length} semaines reprises, ${moved} repas reclassés`);
 }
