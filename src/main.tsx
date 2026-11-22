@@ -7,10 +7,18 @@ import { toast } from "./ui";
 import { applyTheme } from "./views/Settings";
 import "./styles.css";
 
-// Hauteur réelle de la fenêtre de l'appli (barre d'état pleine : l'appli commence sous l'heure, elle est donc plus courte que l'écran).
-// L'ancien calage sur la hauteur de l'écran poussait la barre du bas trop bas sur iPhone (menu coupé) : on prend la vraie hauteur.
+// Hauteur de l'appli installée sur iPhone. Deux cas selon le téléphone :
+//  · l'appli commence sous l'heure (barre d'état pleine, marge du haut nulle) : iOS donne la bonne hauteur → innerHeight ;
+//  · l'appli passe sous l'heure (marge du haut > 0) : iOS annonce parfois une hauteur trop courte → hauteur de l'écran.
+const probe = document.createElement("div");
+probe.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;visibility:hidden;padding-top:env(safe-area-inset-top)";
+document.documentElement.appendChild(probe);
 function fitHeight() {
-  const h = innerHeight;
+  const ios = (navigator as Navigator & { standalone?: boolean }).standalone === true;
+  const underStatusBar = parseFloat(getComputedStyle(probe).paddingTop) > 0;
+  const land = innerWidth > innerHeight;
+  const sh = land ? Math.min(screen.width, screen.height) : Math.max(screen.width, screen.height);
+  const h = ios && underStatusBar && !land && sh > innerHeight && sh - innerHeight <= 80 ? sh : innerHeight;
   document.documentElement.style.setProperty("--app-h", `${h}px`);
 }
 fitHeight();
