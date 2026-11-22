@@ -22,6 +22,12 @@ function fitHeight() {
   document.documentElement.style.setProperty("--app-h", `${h}px`);
 }
 fitHeight();
+// Au lancement, iOS (et certains Android) donnent la hauteur avant d'avoir fini de placer l'appli, puis la corrigent sans
+// prévenir : on remesure pendant les premières secondes, et à chaque changement (retour dans l'appli, rotation, clavier).
+[100, 300, 700, 1500, 3000].forEach((t) => setTimeout(fitHeight, t));
+addEventListener("pageshow", () => setTimeout(fitHeight, 50));
+addEventListener("focus", () => setTimeout(fitHeight, 50));
+window.visualViewport?.addEventListener("resize", fitHeight);
 addEventListener("resize", fitHeight);
 addEventListener("orientationchange", () => setTimeout(fitHeight, 300));
 document.addEventListener("visibilitychange", () => setTimeout(fitHeight, 100));
