@@ -342,7 +342,7 @@ export async function quickSetup(s: StoreState, entries: { itemId: string; level
 }
 
 // ---------------- Courses ----------------
-const classifyFn = call<{ name: string }, { item: Item }>("classifyItem");
+export const classifyFn = call<{ name: string }, { item: Item }>("classifyItem");
 
 /** Ajout en texte libre : dictionnaire du catalogue, puis rayon appris, puis devinette, puis IA si inconnu. */
 export async function addManual(s: StoreState, text: string): Promise<string> {

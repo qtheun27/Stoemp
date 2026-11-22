@@ -4,7 +4,7 @@ import { STORES, STORE_ORDER } from "../lib/constants";
 import { today, ymd } from "../lib/season";
 import { eur } from "../lib/text";
 import type { StoreId } from "../lib/types";
-import { applyReceipt, readReceiptFn, type ReceiptLine } from "../state/actions";
+import { applyReceipt, classifyFn, readReceiptFn, type ReceiptLine } from "../state/actions";
 import { useStore } from "../state/store";
 import { fileToJpegBase64, run, Sheet, toast } from "../ui";
 
@@ -13,6 +13,7 @@ export default function ReceiptSheet({ onClose }: { onClose: () => void }) {
   const s = useStore();
   const [busy, setBusy] = useState(false);
   const [lines, setLines] = useState<ReceiptLine[] | null>(null);
+  const [linking, setLinking] = useState<number | null>(null);
   const [store, setStore] = useState<StoreId>("colruyt");
   const [date, setDate] = useState(ymd(today()));
 
@@ -47,11 +48,21 @@ export default function ReceiptSheet({ onClose }: { onClose: () => void }) {
           <div className="list">{lines.map((l, i) => {
             const it = l.itemId ? s.idx.get(l.itemId) : undefined;
             return <div className="li" key={i}>
-              <input type="checkbox" className="check" checked={!!l.itemId} onChange={(e) => update(i, { itemId: e.target.checked ? s.idx.find(l.name)?.id || null : null })} aria-label="Inclure" />
+              <input type="checkbox" className="check" checked={!!l.itemId} disabled={linking === i} aria-label="Inclure"
+                onChange={async (e) => {
+                  if (!e.target.checked) return update(i, { itemId: null });
+                  const found = s.idx.find(l.name)?.id;
+                  if (found) return update(i, { itemId: found });
+                  // Article inconnu du catalogue : on le crée (classé par l'IA), puis la ligne est reliée.
+                  setLinking(i);
+                  try { const { item } = await classifyFn({ name: l.name }); update(i, { itemId: item.id, name: item.name }); toast(`« ${item.name} » ajouté au catalogue`); }
+                  catch { toast("Impossible d'ajouter cet article pour l'instant (hors ligne ?)"); }
+                  setLinking(null);
+                }} />
               <div className="main-t">
                 <input className="input" style={{ minHeight: 36, padding: "6px 10px" }} defaultValue={it?.name || l.name}
                   onBlur={(e) => update(i, { name: e.target.value, itemId: s.idx.find(e.target.value)?.id || null })} aria-label="Article" />
-                <div className="meta"><span>{l.label}</span><span>× {l.quantity}</span>{!it && <span className="tag bad">non relié</span>}</div>
+                <div className="meta"><span>{l.label}</span><span>× {l.quantity}</span>{!it && <span className="tag bad">{linking === i ? "ajout au catalogue…" : "non relié : coche pour l'ajouter"}</span>}</div>
               </div>
               <b className="num">{eur(l.totalPrice)}</b>
             </div>;
