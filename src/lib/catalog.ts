@@ -61,6 +61,23 @@ export class ItemIndex {
     return best;
   }
   all() { return [...this.byId.values()]; }
+  /**
+   * Articles proches d'un nom libre (ticket de caisse…) : mots en commun, un mot pouvant être le début de l'autre
+   * (« vege » ↔ « végétale », « tige » ↔ « tiges »), les plus de mots communs d'abord.
+   */
+  suggest(text: string, max = 5): Item[] {
+    const words = (s: string) => keyOf(s).split(/[\s-]+/).filter((w) => w.length >= 3);
+    const want = words(text);
+    if (!want.length) return [];
+    const near = (a: string, b: string) => a === b || (Math.min(a.length, b.length) >= 4 && (a.startsWith(b) || b.startsWith(a)));
+    const scored: [Item, number][] = [];
+    for (const i of this.byId.values()) {
+      const have = [i.name, ...i.aliases].flatMap(words);
+      const n = want.filter((w) => have.some((h) => near(w, h))).length;
+      if (n) scored.push([i, n]);
+    }
+    return scored.sort((a, b) => b[1] - a[1] || a[0].name.length - b[0].name.length).slice(0, max).map(([i]) => i);
+  }
 }
 
 const SEASON_CODES: Season[] = ["P", "E", "A", "H"];
