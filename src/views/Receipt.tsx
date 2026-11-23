@@ -28,6 +28,15 @@ export default function ReceiptSheet({ onClose }: { onClose: () => void }) {
     if (r.store !== "autre") setStore(r.store as StoreId);
     if (r.date) setDate(r.date);
   };
+  const [picking, setPicking] = useState<number | null>(null);
+  /** Article inconnu du catalogue : créé (classé par l'IA) puis la ligne est reliée. */
+  const create = async (i: number, name: string) => {
+    if (!s.online) return toast("Il faut une connexion pour ajouter un article");
+    setLinking(i);
+    try { const { item } = await classifyFn({ name }); update(i, { itemId: item.id, name: item.name }); setPicking(null); toast(`« ${item.name} » ajouté au catalogue`); }
+    catch (e) { toast(`Ajout impossible : ${(e as Error).message || "réessaie plus tard"}`); }
+    setLinking(null);
+  };
   const update = (i: number, patch: Partial<ReceiptLine>) => setLines((L) => L!.map((l, j) => (j === i ? { ...l, ...patch } : l)));
   const matched = lines?.filter((l) => l.itemId).length || 0;
 
@@ -44,25 +53,31 @@ export default function ReceiptSheet({ onClose }: { onClose: () => void }) {
             <select className="input" value={store} onChange={(e) => setStore(e.target.value as StoreId)}>{STORE_ORDER.map((k) => <option key={k} value={k}>{STORES[k].label}</option>)}</select>
             <input className="input" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </div>
-          <p className="small muted">{matched}/{lines.length} lignes reconnues. Corrige le nom d'une ligne pour la relier au catalogue ; décoche ce qui ne doit pas entrer dans le stock.</p>
+          <p className="small muted">{matched}/{lines.length} lignes reconnues. Touche « non relié » pour choisir l'article du catalogue (ou en créer un) ; décoche ce qui ne doit pas entrer dans le stock.</p>
           <div className="list">{lines.map((l, i) => {
             const it = l.itemId ? s.idx.get(l.itemId) : undefined;
             return <div className="li" key={i}>
               <input type="checkbox" className="check" checked={!!l.itemId} disabled={linking === i} aria-label="Inclure"
-                onChange={async (e) => {
+                onChange={(e) => {
                   if (!e.target.checked) return update(i, { itemId: null });
                   const found = s.idx.find(l.name)?.id;
                   if (found) return update(i, { itemId: found });
-                  // Article inconnu du catalogue : on le crée (classé par l'IA), puis la ligne est reliée.
-                  setLinking(i);
-                  try { const { item } = await classifyFn({ name: l.name }); update(i, { itemId: item.id, name: item.name }); toast(`« ${item.name} » ajouté au catalogue`); }
-                  catch { toast("Impossible d'ajouter cet article pour l'instant (hors ligne ?)"); }
-                  setLinking(null);
+                  setPicking(i); // pas de correspondance exacte : choisir un article proche ou en créer un
                 }} />
               <div className="main-t">
                 <input className="input" style={{ minHeight: 36, padding: "6px 10px" }} defaultValue={it?.name || l.name}
                   onBlur={(e) => update(i, { name: e.target.value, itemId: s.idx.find(e.target.value)?.id || null })} aria-label="Article" />
-                <div className="meta"><span>{l.label}</span><span>× {l.quantity}</span>{!it && <span className="tag bad">{linking === i ? "ajout au catalogue…" : "non relié : coche pour l'ajouter"}</span>}</div>
+                <div className="meta"><span>{l.label}</span><span>× {l.quantity}</span>{!it && (
+                  <button type="button" className="tag bad" onClick={() => setPicking(picking === i ? null : i)}>{linking === i ? "ajout au catalogue…" : "non relié : toucher pour relier"}</button>
+                )}</div>
+                {picking === i && !it && (
+                  <div className="chips" style={{ marginTop: 6, flexWrap: "wrap" }}>
+                    {s.idx.suggest(l.name).map((c) => (
+                      <button type="button" key={c.id} className="chip" onClick={() => { update(i, { itemId: c.id }); setPicking(null); }}>{c.name}</button>
+                    ))}
+                    <button type="button" className="chip" disabled={linking === i} onClick={() => create(i, l.name)}>➕ Nouvel article « {l.name} »</button>
+                  </div>
+                )}
               </div>
               <b className="num">{eur(l.totalPrice)}</b>
             </div>;

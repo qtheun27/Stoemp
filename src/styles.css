@@ -140,6 +140,7 @@ h1, h2, h3 { letter-spacing: -.015em; line-height: 1.15; }
 .scroll-x::-webkit-scrollbar { display: none; }
 .scroll-x > * { flex: none; }
 .tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; background: var(--soft); font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+button.tag { border: 0; cursor: pointer; font-family: inherit; }
 .tag.ac { background: color-mix(in srgb, var(--ac) 18%, transparent); color: var(--ink); }
 .tag.warn { background: color-mix(in srgb, var(--warn) 22%, transparent); color: var(--ink); }
 .tag.bad { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--ink); }
